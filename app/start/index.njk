@@ -1,7 +1,7 @@
 {% extends "common/templates/layout.njk" %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
-{% set heading = "Status of plan" %}
+{% set heading = "Risk Assessment UI" %}
 
 {% block pageTitle %}
     {{ heading }}
@@ -9,10 +9,10 @@
 
 {% block content %}
     <h1 class="govuk-heading-l">
-        Offender plans:
+        Risk Assessment UI
     </h1>
     {{ govukButton({
         text: 'Continue',
-        href: "/individual-id/" + individualId + "/edit-plan/" + currentPlan.planId
+        href: ""
     }) }}
 {% endblock %}
