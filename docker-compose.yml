@@ -1,0 +1,68 @@
+version: '3.1'
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - hmpps
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: dev
+    tmpfs:
+      - /var/lib/postgresql
+
+  oauth:
+    image: mojdigitalstudio/nomis-oauth2-server:latest
+    networks:
+      - hmpps
+    container_name: oauth
+    ports:
+      - "9090:9090"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/auth/health"]
+    environment:
+      - SERVER_PORT=9090
+      - SPRING_PROFILES_ACTIVE=dev
+
+  offender-assessment-api:
+    image: mojdigitalstudio/offender-assessments-api:latest
+    restart: always
+    networks:
+      - hmpps
+    container_name: offender-assessment-api
+    depends_on:
+    - oauth
+    ports:
+      - "8081:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev
+      - OAUTH_ENDPOINT_URL=http://oauth:9090/auth
+
+  sentence-planning-api:
+    image: mojdigitalstudio/sentence-planning-api:latest
+    networks:
+      - hmpps
+    container_name: sentence-planning-api
+    depends_on:
+    - postgres
+    - oauth
+    - offender-assessment-api
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+    environment:
+      - SERVER_PORT=8080
+      - DATABASE_ENDPOINT=postgres:5432
+      - OAUTH_ROOT_URL=http://oauth:9090/auth
+      - ASSESSMENT_API_URI_ROOT=http://offender-assessment-api:8080
+      - SPRING_PROFILES_ACTIVE=disableauthorisation
+
+networks:
+  hmpps:

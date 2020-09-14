@@ -1,0 +1,82 @@
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% from 'moj/components/header/macro.njk' import mojHeader %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{% extends "govuk/template.njk" %}
+
+{% block bodyStart %}
+  {% include "common/templates/includes/scripts.njk" %}
+{% endblock %}
+{% block header %}
+  {{ mojHeader({
+    organisationLabel: {
+      text: 'HMPPS',
+      href: 'https://www.gov.uk/government/organisations/her-majestys-prison-and-probation-service'
+    },
+    serviceLabel: {
+      text: 'Sentence Planning',
+      href: '#'
+    },
+    navigation: {
+      label: 'Account navigation',
+      items: [{
+        text: username | title,
+        href: '#',
+        active: true
+      }, {
+        text: 'Sign out',
+        href: '/oauth/logout'
+      }]
+    }
+  }) }}
+  <div class="moj-header__container">
+    {{ govukPhaseBanner({
+      tag: {
+        text: "beta"
+      },
+      html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+    }) }}      
+  </div>
+  
+  {% if offenderDetails %}
+    {% include "./partials/offenderDetails.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block pageTitle %}Sentence planning{% endblock %}
+
+{% block headIcons %}
+  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ assetPath | default('') }}/images/favicon.ico" type="image/x-icon" />
+  <link rel="mask-icon" href="{{ assetPath | default('/assets') }}/images/govuk-mask-icon.svg" color="{{ themeColor | default('#0b0c0c') }}"> {# Hardcoded value of $govuk-black #}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-180x180.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-167x167.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon.png">
+{% endblock %}
+
+{% block head %}
+  {% include "common/templates/includes/head.njk" %}
+
+{% endblock %}
+
+{%  block content %}
+  {% if errorSummary %}
+    {% include "./partials/errorSummary.njk" %}
+  {% endif %}
+{% endblock %}
+
+{% block footer %}
+  {{
+    govukFooter({
+      meta: {
+        html: ''
+      }
+    })
+  }}
+{% endblock %}
+
+{% block bodyEnd %}
+  <script>
+    window.initAll()
+  </script>
+{% endblock %}

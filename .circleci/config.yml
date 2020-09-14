@@ -1,0 +1,139 @@
+version: 2.1
+
+orbs:
+  dps: ministryofjustice/dps@1.2.1
+  snyk: snyk/snyk@0.0.10
+
+executors:
+  image-scan:
+    docker:
+      - image: circleci/python:3
+    working_directory: ~/app
+  builder:
+    docker:
+      - image: circleci/node:10.15.3-browsers
+    working_directory: ~/app
+
+jobs:
+  build:
+    executor: builder
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-${CACHE_VERSION}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install Dependencies
+          command: npm ci
+      - save_cache:
+          key: dependency-cache-${CACHE_VERSION}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+            - ~/.cache
+      - run:
+          name: Linter check
+          command: npm run lint
+      - run:
+          command: |
+            npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - node_modules
+            - assets/stylesheets
+            - .cache/Cypress
+
+  test:
+    executor: builder
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-${CACHE_VERSION}-{{ checksum "package-lock.json" }}
+      - run:
+          name: unit tests
+          command: npm run test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results/unit-test-reports.html
+
+  app-scan:
+    executor: builder
+    steps:
+      - checkout
+      - snyk/scan:
+          fail-on-issues: false
+          monitor-on-build: true
+          project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}'
+          organization: 'digital-probation-services'
+
+  image-scan:
+    executor: image-scan
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - snyk/scan:
+          docker-image-name: 'quay.io/hmpps/sentence-planning:latest'
+          target-file: 'Dockerfile'
+          fail-on-issues: false
+          monitor-on-build: true
+          project: '${CIRCLE_PROJECT_REPONAME}/latest'
+          organization: 'digital-probation-services'
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              ignore: /.*/
+      - test:
+          requires:
+            - build
+      - dps/helm_lint:
+          name: helm_lint
+          env: development
+          chart_name: sentence-planning
+      - dps/build_docker:
+          name: build_docker
+          filters:
+            branches:
+              only:
+                - master
+      - dps/deploy_env:
+          name: deploy_dev
+          env: "development"
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - helm_lint
+            - test
+            - build_docker
+      - request-preprod-approval:
+          type: approval
+          requires:
+            - deploy_dev
+      - dps/deploy_env:
+          name: deploy_preprod
+          env: "preprod"
+          context: sentence-planning-preprod
+          requires:
+            - request-preprod-approval
+      - request-prod-approval:
+          type: approval
+          requires:
+            - deploy_preprod
+      - dps/deploy_env:
+          name: deploy_prod
+          env: "prod"
+          slack_notification: true
+          context: sentence-planning-prod
+          requires:
+            - request-prod-approval
+

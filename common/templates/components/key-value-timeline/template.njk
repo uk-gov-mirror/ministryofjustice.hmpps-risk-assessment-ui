@@ -1,0 +1,49 @@
+{%- from "moj/components/timeline/macro.njk" import mojTimeline -%}
+{%- from "govuk/components/summary-list/macro.njk" import govukSummaryList -%}
+
+{% set items = [] %}
+
+{% for item in timelineData %}
+  {% set itemHtml %}
+    <p>{{ item.description }}</p>
+    {% if item.data | length %}
+      {% set itemDataElements = [] %}
+      {% for dataElement in item.data %}
+        {% set itemDataElements = (
+          itemDataElements.push({
+            key: {
+              text: dataElement.key
+            },
+            value: {
+              text: dataElement.value
+            }
+          }), itemDataElements) %}
+      {% endfor %}
+      {{ govukSummaryList({ rows: itemDataElements })}}
+    {% endif %}
+  {% endset %}
+  {% if item.createdBy %}
+    {% set itemCreatedBy = { text: item.createdBy } %}
+  {% else %}
+    {% set itemCreatedBy = '' %}
+  {% endif %}
+  {% if item.created %}
+    {% set itemCreated = { timestamp: item.created, type: "datetime" } %}
+  {% else %}
+    {% set itemCreated = null %}
+  {% endif %}
+  {% set items = (
+    items.push({
+      label: {
+        text: item.type
+      },
+      html: itemHtml,
+      datetime: itemCreated,
+      byline: itemCreatedBy
+    }), items) %}
+{% endfor %}
+
+{{ mojTimeline({
+    items: items
+  })
+}}

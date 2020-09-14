@@ -1,0 +1,139 @@
+{
+  "name": "sentence-planning-ui",
+  "description": "HMPPS UI Service",
+  "repository": "git@github.com:ministryofjustice/xxxUPDATExxx.git",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.18.3",
+    "npm": ">=6.14.5"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "common/**/*.js"
+    ],
+    "testMatch": [
+      "<rootDir>/(common)/**/?(*.)(test).js",
+      "<rootDir>/(app)/**/?(*.)(test).js"
+    ],
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          },
+          "useBuiltIns": "entry",
+          "corejs": 3
+        }
+      ]
+    ]
+  },
+  "resolutions": {
+    "minimist": "^1.2.3"
+  },
+  "scripts": {
+    "preinstall": "npx npm-force-resolutions",
+    "build": "npm run build:copy & npm run build:css & npm run build:js",
+    "clean": "rimraf public",
+    "build:copy": "npm run copy-govuk-assets && npm run copy-assets",
+    "build:css": "npm run compile-sass && npm run cssmin",
+    "build:js": "npm run browserify && npm run babel && npm run concat",
+    "browserify": "browserify -o public/javascripts/browsered.js common/browsered/*.js",
+    "babel": "babel -o public/javascripts/browsered.js public/javascripts/browsered.js",
+    "concat": "concat -o public/javascripts/application.js public/javascripts/browsered.js && rm public/javascripts/browsered.js",
+    "copy-assets": "copyfiles -e \"**/*.test.js\" -e \"**/sass/**/*\" -e \"**/javascripts/**/*\" -u 1 common/assets/**/* public && copyfiles -u 3 common/assets/images/**/* public/images && copyfiles -u 3 common/assets/javascripts/**/* public/javascripts",
+    "copy-govuk-assets": "copyfiles -u 1 node_modules/govuk-frontend/govuk/assets/fonts/**/* -f public/assets/fonts && copyfiles -u 1 node_modules/govuk-frontend/govuk/assets/images/**/* -f public/assets/images",
+    "compile-sass": "node-sass --include-path node_modules/ common/assets/sass -o public/stylesheets",
+    "cssmin": "cleancss -o public/stylesheets/application.min.css public/stylesheets/application.css",
+    "server": "node ./start.js",
+    "start": "npm run clean && npm run build && npm run server",
+    "start:local": "npm run clean && npm run build && LOGGING_LEVEL=debug NODE_ENV=local npm run server & npm run watch",
+    "lint-sass": "./node_modules/.bin/sass-lint -v",
+    "test": "jest",
+    "lint": "eslint . --cache --max-warnings 0",
+    "watch:node-sass": "nodemon -e scss -x \"npm run build:css\"",
+    "watch": "npm run watch:node-sass",
+    "record-build-info": "node ./bin/record-build-info"
+  },
+  "dependencies": {
+    "@ministryofjustice/frontend": "^0.0.16-alpha",
+    "accessible-autocomplete": "^2.0.2",
+    "agentkeepalive": "^4.1.0",
+    "applicationinsights": "^1.7.3",
+    "applicationinsights-native-metrics": "0.0.5",
+    "body-parser": "1.19.0",
+    "cls-hooked": "^4.2.2",
+    "compression": "^1.7.4",
+    "continuation-local-storage": "^3.2.1",
+    "cookie-session": "^1.3.3",
+    "dotenv": "^8.2.0",
+    "express": "4.17.1",
+    "express-validator": "^6.4.0",
+    "govuk-frontend": "^3.8.0",
+    "helmet": "^3.21.2",
+    "lodash": "^4.17.19",
+    "morgan": "1.9.x",
+    "nunjucks": "^3.2.1",
+    "nunjucks-date-filter": "^0.1.1",
+    "serve-favicon": "^2.5.0",
+    "staticify": "^3.3.4",
+    "superagent": "^5.1.0",
+    "throng": "4.0.x",
+    "uuid": "^3.4.0",
+    "winston": "^3.2.1",
+    "winston-azure-application-insights": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "browserify": "^16.5.0",
+    "cheerio": "^1.0.0-rc.3",
+    "chokidar-cli": "latest",
+    "clean-css-cli": "^4.3.0",
+    "concat": "^1.0.3",
+    "copyfiles": "^2.1.1",
+    "envfile": "^3.0.0",
+    "eslint": "6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "husky": "^4.2.5",
+    "jest": "^25.2.1",
+    "lint-staged": "^10.2.11",
+    "minimist": "^1.2.3",
+    "nock": "^12.0.3",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "sass-lint": "^1.2.3",
+    "supertest": "^4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && npm test"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,json,css}": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "package.json"
+    ]
+  }
+}
