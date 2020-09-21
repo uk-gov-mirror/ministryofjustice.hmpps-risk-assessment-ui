@@ -103,14 +103,14 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       - dps/deploy_env:
           name: deploy_dev
           env: "development"
           filters:
             branches:
               only:
-                - master
+                - main
           requires:
             - helm_lint
             - test
