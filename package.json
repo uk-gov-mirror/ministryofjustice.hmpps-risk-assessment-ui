@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">=12.18.3",
+    "node": ">=12.18.4",
     "npm": ">=6.14.5"
   },
   "jest": {
@@ -126,15 +126,10 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "*.{js,json,css}": [
-        "prettier --write",
-        "eslint --fix",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "package.json"
+    "*.{js,json,css}": [
+      "prettier --write",
+      "eslint --cache --fix",
+      "git add"
     ]
   }
 }
