@@ -109,6 +109,7 @@ workflows:
       - hmpps/deploy_env:
           name: deploy_dev
           env: "development"
+          chart_name: hmpps-risk-assessment-ui
           filters:
             branches:
               only:
