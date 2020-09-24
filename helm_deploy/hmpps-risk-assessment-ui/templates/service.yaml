@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "risk-assessment-ui.fullname" . }}
+  labels:
+    app: {{ template "risk-assessment-ui.name" . }}
+    chart: {{ template "risk-assessment-ui.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: {{ .Values.image.port }}
+      name: http
+  selector:
+    app: {{ template "risk-assessment-ui.name" . }}
+    release: {{ .Release.Name }}
