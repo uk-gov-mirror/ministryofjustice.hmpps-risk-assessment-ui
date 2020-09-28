@@ -7,7 +7,7 @@ maxSurge: 100%
 maxUnavailable: 50%
 
 image:
-  repository: quay.io/hmpps/risk-assessment-ui
+  repository: quay.io/hmpps/hmpps-risk-assessment-ui
   tag: latest
   pullPolicy: Always
 
