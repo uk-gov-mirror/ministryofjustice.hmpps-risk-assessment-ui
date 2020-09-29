@@ -11,7 +11,8 @@ spec:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 3000
+      targetPort: {{ .Values.image.port }}
+      name: http
   selector:
     app: {{ template "risk-assessment-ui.name" . }}
     release: {{ .Release.Name }}

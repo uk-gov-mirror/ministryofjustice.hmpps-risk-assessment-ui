@@ -10,6 +10,7 @@ image:
   repository: quay.io/hmpps/hmpps-risk-assessment-ui
   tag: latest
   pullPolicy: Always
+  port: 3000
 
 ingress:
   enabled: true
