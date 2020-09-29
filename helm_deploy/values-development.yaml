@@ -14,7 +14,7 @@ image:
 ingress:
   enabled: true
   enable_allow_list: true
-  host: hmpps-assessments-dev.apps.live-1.cloud-platform.service.justice.gov.uk
+  host: dev.hmpps-assessments.service.justice.gov.uk
   path: /
 
 env:
