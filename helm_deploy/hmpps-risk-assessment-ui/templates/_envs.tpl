@@ -10,7 +10,7 @@ env:
         name: {{ template "risk-assessment-ui.name" . }}
         key: APPINSIGHTS_INSTRUMENTATIONKEY
   - name: OFFENDERASSESSMENT_API_URL
-    value: {{ .Values.env.OFFENDERASSESSMENT_API_URL | quote }}
+    value: {{ .Values.env.ASSESSMENTS_API_URL | quote }}
   - name: INGRESS_URL
     value: 'https://{{ .Values.ingress.host }}'
 
