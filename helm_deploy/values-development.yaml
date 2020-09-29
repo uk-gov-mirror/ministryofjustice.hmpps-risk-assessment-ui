@@ -15,6 +15,7 @@ ingress:
   enabled: true
   enable_allow_list: true
   host: dev.hmpps-assessments.service.justice.gov.uk
+  cert_secret: hmpps-assessments-cert
   path: /
 
 env:
