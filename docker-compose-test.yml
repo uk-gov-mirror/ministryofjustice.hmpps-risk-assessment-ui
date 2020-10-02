@@ -1,0 +1,9 @@
+version: '3.1'
+services:
+  risk-assessment-wiremock:
+    image: rodolpheche/wiremock
+    container_name: risk-assessment-wiremock
+    restart: always
+    ports:
+      - "9191:8080"
+    command: [--verbose]

@@ -1,0 +1,43 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set heading = "Question display" %}
+{% set errorHeading = "Error - " + heading %}
+
+{% block pageTitle %}
+    {% if errors %}
+        {{ errorHeading }}
+    {% else %}
+        {{ heading }}
+    {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+    {{ govukBackLink({
+        href: backurl
+    }) }}
+{% endblock %}
+
+{% block content %}
+    {# include errorSummary partial #}
+    {{ super() }}
+
+    <h1 class="govuk-heading-l">
+        Question group {{ groupId }}
+    </h1>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <p>{{ questions | dump }}</p>
+            <form method="post" novalidate>
+
+            {{ govukButton({
+                text: 'Continue',
+                classes: 'govuk-!-margin-bottom-3'
+            }) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

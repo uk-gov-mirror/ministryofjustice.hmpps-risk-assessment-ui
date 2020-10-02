@@ -1,14 +1,6 @@
 const { getNamespace } = require('cls-hooked')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
-const {
-  ACTION_STATUS_TYPES: { COMPLETED, PARTIALLY_COMPLETED, NOT_STARTED, ABANDONED },
-  STATUS_LIST,
-  OBJECTIVE_TYPES: { ACTIVE, CLOSED, FUTURE },
-} = require('./constants')
-
-const getStatusText = status => STATUS_LIST.find(({ value }) => status === value).text
-const getSimplifiedStatusText = status => STATUS_LIST.find(({ value }) => status === value).simplifiedText
 
 const getYearMonthFromDate = dateString => {
   const date = new Date(dateString)
@@ -95,39 +87,6 @@ const isValidDate = (day, month, year) => {
   }
 }
 
-const hasClosedStatus = status => {
-  const result = [COMPLETED, PARTIALLY_COMPLETED, ABANDONED].includes(status)
-  return result
-}
-
-const getObjectiveType = ({ actions }) => {
-  // objectives default to active if not caught with the other rules below
-  let type = ACTIVE
-  if (actions.every(({ status }) => status === NOT_STARTED)) {
-    type = FUTURE
-  } else if (actions.every(({ status }) => hasClosedStatus(status))) {
-    type = CLOSED
-  }
-  return type
-}
-
-const formatObjectiveActionsForPrintDisplay = (actions, useSimplifiedText = false) => {
-  return actions.map(({ description = '', actionText, status, targetDate }) => {
-    const { monthName, year } = getYearMonthFromDate(targetDate)
-    const statusText = useSimplifiedText ? getSimplifiedStatusText(status) : getStatusText(status)
-    return [
-      { text: actionText || description },
-      { text: `${monthName} ${year}`, format: 'numeric' },
-      { text: statusText, format: 'numeric' },
-    ]
-  })
-}
-
-const getActionText = ({ description = '', intervention }, interventionList) =>
-  intervention && interventionList
-    ? interventionList.find(({ uuid }) => uuid === intervention).shortDescription
-    : description
-
 const getCorrelationId = () => getNamespace(clsNamespace).get('MDC').correlationId || ''
 
 const updateMDC = (mdcDataKey, mdc) => getNamespace(clsNamespace).set(mdcDataKey, mdc)
@@ -141,11 +100,6 @@ const encodeHTML = str => {
 }
 
 module.exports = {
-  formatObjectiveActionsForPrintDisplay,
-  getObjectiveType,
-  hasClosedStatus,
-  getStatusText,
-  getSimplifiedStatusText,
   getYearMonthFromDate,
   isEmptyObject,
   countWords,
@@ -154,7 +108,6 @@ module.exports = {
   groupBy,
   isValidDate,
   catchAndReThrowError,
-  getActionText,
   getCorrelationId,
   updateMDC,
   encodeHTML,

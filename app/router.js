@@ -7,6 +7,7 @@
 
 // pages
 const { startController } = require('./start/get.controller')
+const { displayQuestionGroup } = require('./questiongroup/get.controller')
 
 // Export
 module.exports = app => {
@@ -27,6 +28,8 @@ module.exports = app => {
     res.redirect('/start')
   })
   app.get(`/start`, (req, res) => startController(req, res))
+
+  app.get(`/questiongroup/:groupId`, displayQuestionGroup)
 
   app.get('*', (req, res) => res.render('app/error', { error: '404, Page Not Found' }))
 }

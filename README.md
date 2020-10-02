@@ -17,8 +17,15 @@ To get started clone the repo and run
 $ npm install
 $ npm run start:local
 ```
-
 Then go to [http://localhost:3000/](http://localhost:3000/) to see it in action.
+
+When running in 'local' mode the service will attempt to stub out some API responses in wiremock at startup. It is assumed the wiremock server is running on port 9191. You can start up an instance of wiremock using docker-compose:
+
+```
+docker-compose -f docker-compose-test.yml up
+```
+
+
 
 
 [Express]: https://expressjs.com/
