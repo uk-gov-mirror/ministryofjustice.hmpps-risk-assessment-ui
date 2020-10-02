@@ -21,10 +21,10 @@ function get(name, fallback, options = {}) {
 module.exports = {
   apis: {
     offenderAssessments: {
-      url: get('OFFENDERASSESSMENTSAPI_ENDPOINT_URL', 'http://localhost:9191', true),
+      url: get('OFFENDERASSESSMENT_API_URL', 'http://localhost:9191', true),
       timeout: {
-        response: get('OFFENDERASSESSMENTSAPI_ENDPOINT_TIMEOUT_RESPONSE', 10000, true),
-        deadline: get('OFFENDERASSESSMENTSAPI_TIMEOUT_DEADLINE', 10000, true),
+        response: get('OFFENDERASSESSMENTAPI_ENDPOINT_TIMEOUT_RESPONSE', 10000, true),
+        deadline: get('OFFENDERASSESSMENTAPI_TIMEOUT_DEADLINE', 10000, true),
       },
       agent: {
         maxSockets: 100,
