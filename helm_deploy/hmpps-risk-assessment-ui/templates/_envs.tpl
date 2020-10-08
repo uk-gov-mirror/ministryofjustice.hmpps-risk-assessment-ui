@@ -9,6 +9,16 @@ env:
       secretKeyRef:
         name: {{ template "risk-assessment-ui.name" . }}
         key: APPINSIGHTS_INSTRUMENTATIONKEY
+  - name: API_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "risk-assessment-ui.name" . }}
+        key: API_CLIENT_ID
+  - name: API_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: {{ template "risk-assessment-ui.name" . }}
+        key: API_CLIENT_SECRET
   - name: OFFENDERASSESSMENT_API_URL
     value: {{ .Values.env.ASSESSMENTS_API_URL | quote }}
   - name: INGRESS_URL
