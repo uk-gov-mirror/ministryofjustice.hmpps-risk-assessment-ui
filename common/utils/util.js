@@ -92,6 +92,9 @@ const getCorrelationId = () => getNamespace(clsNamespace).get('MDC').correlation
 const updateMDC = (mdcDataKey, mdc) => getNamespace(clsNamespace).set(mdcDataKey, mdc)
 
 const encodeHTML = str => {
+  if (!str) {
+    return ''
+  }
   return str
     .replace(/>/g, '&gt;')
     .replace(/</g, '&lt;')

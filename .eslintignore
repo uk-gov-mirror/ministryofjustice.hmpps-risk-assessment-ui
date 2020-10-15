@@ -3,3 +3,6 @@ public
 common/assets/javascripts/*.min.js
 package.json
 package-lock.json
+cypress.json
+cypress-reporter-config.json
+integration-tests/mockApis/responses/*

@@ -3,7 +3,7 @@ const questionGroups = require('./responses/questionGroups.json')
 const questionAnswers = require('./responses/questionAnswers.json')
 
 const stubQuestionGroup = groupId => {
-  return stubFor({
+  stubFor({
     request: {
       method: 'GET',
       urlPattern: `/questions/${groupId}`,
@@ -18,7 +18,7 @@ const stubQuestionGroup = groupId => {
   })
 }
 const stubAnswersGroup = groupId => {
-  return stubFor({
+  stubFor({
     request: {
       method: 'GET',
       urlPattern: `/answers/${groupId}`,
@@ -32,11 +32,14 @@ const stubAnswersGroup = groupId => {
     },
   })
 }
+
+const stubQuestions = async () => {
+  await stubQuestionGroup(1234)
+}
+const stubAnswers = async () => {
+  await stubAnswersGroup(1234)
+}
 module.exports = {
-  stubQuestions: () => {
-    stubQuestionGroup(1234)
-  },
-  stubAnswers: () => {
-    stubAnswersGroup(1234)
-  },
+  stubQuestions,
+  stubAnswers,
 }

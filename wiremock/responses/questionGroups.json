@@ -1,41 +1,40 @@
 {
-  "1234": [
-    {
-      "questionGroupId": 1234,
-      "questionGroupTitle": "Effect on the individual",
-      "questions": [
-        {
-          "questionOrder": 1,
-          "questionId": 234,
-          "questionType": "radio",
-          "questionStem": "In the 12 months to now, has alcohol misuse been"
-        },
-        {
-          "questionOrder": 2,
-          "questionId": 665,
-          "questionType": "radio",
-          "questionStem": "Is there a current ACCT?",
-          "questionHint": "(Assessment, care in custody and teamwork)"
-        },
-        {
-          "questionOrder": 3,
-          "questionId": 27,
-          "questionType": "checkbox",
-          "questionStem": "Category of child protection registration"
-        },
-        {
-          "questionOrder": 4,
-          "questionId": 28,
-          "questionType": "text",
-          "questionStem": "Additional notes"
-        },
-        {
-          "questionId": 666,
-          "questionStem": "Give book number",
-          "questionType": "textInput",
-          "showWhen": "question[665].answer === 'Yes'"
-        }
-      ]
-    }
-  ]
+  "1234": {
+    "type": "group",
+    "groupId": "22222222-2222-2222-2222-222222222201",
+    "groupCode": "oasys",
+    "title": "Layer 3",
+    "contents": [
+      {
+        "type": "group",
+        "groupId": "22222222-2222-2222-2222-222222222202",
+        "groupCode": "oasys_case_id",
+        "title": "Case Identification",
+        "displayOrder": "1",
+        "mandatory": "yes",
+        "contents": [
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111201",
+            "questionCode": "surname",
+            "answerType": "freetext",
+            "questionText": "Surname",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": []
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111202",
+            "questionCode": "forename",
+            "answerType": "freetext",
+            "questionText": "Forename",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": []
+          }
+        ]
+      }
+    ]
+  }
 }

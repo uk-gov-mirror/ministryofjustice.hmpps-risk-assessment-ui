@@ -2,8 +2,8 @@
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
 
-{% set heading = "Question display" %}
 {% set errorHeading = "Error - " + heading %}
 
 {% block pageTitle %}
@@ -16,7 +16,7 @@
 
 {% block beforeContent %}
     {{ govukBackLink({
-        href: backurl
+        href: "/start"
     }) }}
 {% endblock %}
 
@@ -25,14 +25,37 @@
     {{ super() }}
 
     <h1 class="govuk-heading-l">
-        Question group {{ groupId }}
+        {{ heading }}
     </h1>
 
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-            <p>{{ questions | dump }}</p>
-            <form method="post" novalidate>
 
+            <form method="post" id="{{ groupId }}" novalidate>
+
+
+{# templates for each question type #}
+
+                {% for question in questions %}
+
+                    {{ govukInput({
+                        id: 'id-' + question.questionId,
+                        name: question.questionCode,
+                        errorMessage: errors.responsibilityOther,
+                        value: question.answerText | encodeHtml | safe,
+                        label: {
+                            text: question.questionText,
+                            isPageHeading: false,
+                            classes: question.questionCode
+                        },
+                        hint: {
+                            text: question.hint
+                        }
+                    }) }}
+                {% endfor %}
+
+
+                <p>{{ questions | dump }}</p>
             {{ govukButton({
                 text: 'Continue',
                 classes: 'govuk-!-margin-bottom-3'

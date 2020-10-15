@@ -5,7 +5,7 @@
     "jest": true,
     "jquery": true
   },
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "extends": ["airbnb-base", "plugin:prettier/recommended","plugin:cypress/recommended"],
   "rules": {
     "no-unused-vars": [
       1,

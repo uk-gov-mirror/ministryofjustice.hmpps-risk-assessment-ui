@@ -5,6 +5,7 @@
 @import "components/accessible-autocomplete";
 @import "components/cookie-message";
 @import "components/task-list";
+@import "pages";
 
 $white-transparent: rgba(255, 255, 255, .25);
 
@@ -95,7 +96,7 @@ p {
 }
 
 @media print
-{    
+{
     .no-print, .no-print * {
         display: none !important;
     }

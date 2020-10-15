@@ -61,6 +61,9 @@ typings/
 govuk_modules/
 public/
 
+# Cypress
+integration-tests/videos
+integration-tests/screenshots
 
 .DS_Store
 .idea/
