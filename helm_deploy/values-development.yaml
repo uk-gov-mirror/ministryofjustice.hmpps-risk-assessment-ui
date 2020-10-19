@@ -21,6 +21,7 @@ ingress:
 
 env:
   ASSESSMENTS_API_URL: http://hmpps-assessments-api.hmpps-assessments-dev.svc.cluster.local
+  OAUTH_ENDPOINT_URL: https://sign-in-dev.hmpps.service.justice.gov.uk/auth/
 
 allow_list:
   office: "217.33.148.210/32"

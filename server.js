@@ -115,7 +115,6 @@ function initialiseGlobalMiddleware(app) {
         'x-auth-family-name',
         'x-auth-email',
         'x-auth-locations',
-        'x-auth-token',
       ]
       logger.info(`Running locally: setting default headers for ${keycloakHeaders}`)
       keycloakHeaders.forEach(headerName => {

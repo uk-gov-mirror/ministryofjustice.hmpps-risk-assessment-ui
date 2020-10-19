@@ -1,14 +1,11 @@
 const superagent = require('superagent')
 const logger = require('../logging/logger')
-const { clientId, clientSecret } = require('../config')
 const { getCorrelationId } = require('../utils/util')
 const {
   apis: {
     offenderAssessments: { timeout, url },
   },
 } = require('../config')
-
-const apiClientCredentials = () => Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
 
 const getQuestionGroup = (groupId, tokens) => {
   const path = `${url}/questions/${groupId}`
@@ -23,7 +20,7 @@ const getData = async (path, { authorisationToken }) => {
   try {
     return await superagent
       .get(path)
-      .auth(apiClientCredentials(), { type: 'bearer' })
+      .auth(authorisationToken, { type: 'bearer' })
       .set('x-correlation-id', getCorrelationId())
       .timeout(timeout)
       .then(response => {

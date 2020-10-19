@@ -32,6 +32,18 @@ module.exports = {
         freeSocketTimeout: 30000,
       },
     },
+    oauth: {
+      url: get('OAUTH_ENDPOINT_URL', 'http://localhost:9191/', true),
+      timeout: {
+        response: get('OAUTH_API_ENDPOINT_TIMEOUT_RESPONSE', 10000, true),
+        deadline: get('OAUTH_API_TIMEOUT_DEADLINE', 10000, true),
+      },
+      agent: {
+        maxSockets: 100,
+        maxFreeSockets: 10,
+        freeSocketTimeout: 30000,
+      },
+    },
   },
   domain: `${get('INGRESS_URL', 'http://localhost:3000', true)}`,
   https: production,
