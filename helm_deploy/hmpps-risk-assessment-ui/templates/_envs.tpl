@@ -24,6 +24,10 @@ env:
 
   - name: OFFENDERASSESSMENT_API_URL
     value: {{ .Values.env.ASSESSMENTS_API_URL | quote }}
+
+  - name: OAUTH_ENDPOINT_URL
+    value: {{ .Values.env.OAUTH_ENDPOINT_URL | quote }}
+
   - name: INGRESS_URL
     value: 'https://{{ .Values.ingress.host }}'
 
