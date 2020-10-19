@@ -10,9 +10,6 @@ module.exports = async (req, res, next) => {
     authorisationToken = await getJwtToken()
   }
 
-  // eslint-disable-next-line no-console
-  console.log(JSON.stringify(authorisationToken, null, 2))
-
   req.tokens = {
     authorisationToken,
   }
