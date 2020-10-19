@@ -1,5 +1,6 @@
 const superagent = require('superagent')
 const logger = require('../logging/logger')
+const { clientId, clientSecret } = require('../config')
 const { getCorrelationId } = require('../utils/util')
 const {
   apis: {
@@ -20,7 +21,7 @@ const getData = async (path, { authorisationToken }) => {
   try {
     return await superagent
       .get(path)
-      .auth(authorisationToken, { type: 'bearer' })
+      .auth(clientId, clientSecret)
       .set('x-correlation-id', getCorrelationId())
       .timeout(timeout)
       .then(response => {

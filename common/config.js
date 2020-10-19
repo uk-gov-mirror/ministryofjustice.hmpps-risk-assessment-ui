@@ -43,4 +43,6 @@ module.exports = {
     disabled: get('APPINSIGHTS_DISABLE', false, { parser: bool }),
     internalLogging: get('APPINSIGHTS_LOGGING', false, { parser: bool }),
   },
+  clientId: get('API_CLIENT_ID', 'clientId'),
+  clientSecret: get('API_CLIENT_SECRET', 'clientSecret'),
 }
