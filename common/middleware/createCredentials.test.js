@@ -1,6 +1,7 @@
 // Local dependencies
 const createCredentials = require('./createCredentials')
 const { getJwtToken } = require('../data/oauth')
+const mockJwtToken = require('./testSupportFiles/mock_jwt_token.json')
 
 jest.mock('../data/oauth')
 
@@ -24,9 +25,9 @@ describe('Put keycloak header information and OASys session key into token objec
   })
 
   test('should set defaults if items are not present in headers or session', async () => {
-    getJwtToken.mockReturnValueOnce({ token: 'mock token' })
+    getJwtToken.mockReturnValueOnce(mockJwtToken)
     req.headers = {}
     await createCredentials(req, res, () => {})
-    expect(req.tokens).toEqual({ authorisationToken: { token: 'mock token' } })
+    expect(req.tokens).toEqual({ authorisationToken: `${mockJwtToken.access_token}` })
   })
 })

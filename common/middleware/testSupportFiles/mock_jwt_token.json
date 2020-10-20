@@ -1,0 +1,9 @@
+{
+  "access_token": "eyJhbGciOiJSUzI1n0.eyJzdWIibm9uZSIsImlzcyI6Imh0dHBzOi8vc2lnbi1pbi1kZXYuaG1wcHMuc2VydmljZS5qdXN0aWNlLmdvdi51ay9hdXRoL2lzcMtYXNzZXNzbWVudC1hcGktY2xpZW50In0.RGmUdq0VX-AUzhgbF7aRf_JfJ7gOGAIqXdlmuofJewhNZBxi4DxdZY50t_cM1K3XqmI2sR-UE9ZVvaMBfXLr0kTqgbn8Mi2OBRsSHTwnR_3nvXcBUBG9zY7OO3Sw",
+  "token_type": "bearer",
+  "expires_in": 3599,
+  "scope": "read",
+  "sub": "hmpps-assessment-api-client",
+  "auth_source": "none",
+  "jti": "lULDdz-sNTrpsJY-M_2jeqPxx2w"
+}

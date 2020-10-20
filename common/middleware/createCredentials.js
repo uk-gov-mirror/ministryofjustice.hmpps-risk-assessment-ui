@@ -7,7 +7,8 @@ module.exports = async (req, res, next) => {
   } = req
 
   if (authorisationToken === '') {
-    authorisationToken = await getJwtToken()
+    const { access_token: accessToken } = await getJwtToken()
+    authorisationToken = accessToken
   }
 
   req.tokens = {

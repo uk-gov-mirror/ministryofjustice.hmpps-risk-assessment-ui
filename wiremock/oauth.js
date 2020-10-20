@@ -1,4 +1,5 @@
 const { stubFor } = require('./wiremock')
+const jwtToken = require('../common/middleware/testSupportFiles/mock_jwt_token.json')
 
 const stubOauth = () => {
   stubFor({
@@ -11,7 +12,7 @@ const stubOauth = () => {
         'Content-Type': 'application/json;charset=UTF-8',
       },
       status: 200,
-      body: '{ token: "mocked token" }',
+      body: JSON.stringify(jwtToken),
     },
   })
 }
