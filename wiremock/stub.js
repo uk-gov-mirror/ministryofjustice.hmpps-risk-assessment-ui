@@ -1,5 +1,5 @@
 const { stubFor, resetStubs } = require('./wiremock')
-const { stubQuestions, stubAnswers } = require('./assessmentApi')
+const { stubForms, stubQuestions, stubAnswers } = require('./assessmentApi')
 const { stubGetToken } = require('./oauth')
 
 async function stub() {
@@ -19,6 +19,7 @@ async function stub() {
     },
   })
 
+  stubForms()
   stubQuestions()
   stubAnswers()
   stubGetToken()

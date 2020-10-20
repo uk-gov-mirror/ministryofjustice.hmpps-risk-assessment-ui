@@ -12,6 +12,11 @@ const getQuestionGroup = (groupId, tokens) => {
   return getData(path, tokens)
 }
 
+const getQuestionList = tokens => {
+  const path = `${url}/questions/list`
+  return getData(path, tokens)
+}
+
 const getData = async (path, { authorisationToken }) => {
   if (authorisationToken === undefined) {
     return logError(`No authorisation token found when calling offenderAssessments API: ${path}`)
@@ -78,4 +83,5 @@ const logError = error => {
 
 module.exports = {
   getQuestionGroup,
+  getQuestionList,
 }

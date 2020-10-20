@@ -1,0 +1,46 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% set heading = "Risk Assessment UI" %}
+
+{% block pageTitle %}
+    {{ heading }}
+{% endblock %}
+
+{% block beforeContent %}
+    {{ govukBackLink({
+        href: "/start"
+    }) }}
+{% endblock %}
+
+{% block content %}
+    {{ super() }}
+
+    <h1 class="govuk-heading-l">
+        Risk Assessment UI
+    </h1>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+            {% for form in forms %}
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-one-half">
+                    <h2 class="gov-heading-3">{{ form.title }}</h2>
+                </div>
+                <div class="govuk-grid-column-one-third">
+                    {{ govukButton({
+                        text: 'Start',
+                        classes: 'govuk-!-margin-bottom-3',
+                        href: form.path
+                    }) }}
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
