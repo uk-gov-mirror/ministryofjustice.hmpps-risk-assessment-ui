@@ -3,6 +3,7 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 
 {% set errorHeading = "Error - " + heading %}
 
@@ -33,33 +34,47 @@
 
             <form method="post" id="{{ groupId }}" novalidate>
 
-
-{# templates for each question type #}
-
+                {# templates for each question type #}
                 {% for question in questions %}
+                    {% switch question.answerType %}
+                    {% case 'freetext' %}
+                        {{ govukInput({
+                            id: 'id-' + question.questionId,
+                            name: question.questionCode,
+                            value: question.answerText | encodeHtml | safe,
+                            label: {
+                                text: question.questionText,
+                                isPageHeading: false,
+                                classes: question.questionCode
+                            },
+                            hint: {
+                                text: question.hint
+                            }
+                        }) }}
+                    {% case 'textarea' %}
+                        {{ govukTextarea({
+                            id: 'id-' + question.questionId,
+                            name: question.questionCode,
+                            value: question.answerText | encodeHtml | safe,
+                            label: {
+                                text: question.questionText,
+                                isPageHeading: false,
+                                classes: question.questionCode
+                            },
+                            hint: {
+                                text: question.hint
+                            }
+                        }) }}
+                    {% default %}
+                        <!-- {{ question.questionId }} - {{ question.answerType }} questions are not currently rendered -->
+                    {% endswitch %}
 
-                    {{ govukInput({
-                        id: 'id-' + question.questionId,
-                        name: question.questionCode,
-                        errorMessage: errors.responsibilityOther,
-                        value: question.answerText | encodeHtml | safe,
-                        label: {
-                            text: question.questionText,
-                            isPageHeading: false,
-                            classes: question.questionCode
-                        },
-                        hint: {
-                            text: question.hint
-                        }
-                    }) }}
                 {% endfor %}
 
-
-                <p>{{ questions | dump }}</p>
-            {{ govukButton({
-                text: 'Continue',
-                classes: 'govuk-!-margin-bottom-3'
-            }) }}
+                {{ govukButton({
+                    text: 'Continue',
+                    classes: 'govuk-!-margin-bottom-3'
+                }) }}
             </form>
         </div>
     </div>
