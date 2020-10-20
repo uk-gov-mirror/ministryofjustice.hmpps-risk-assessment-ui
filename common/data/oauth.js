@@ -9,7 +9,7 @@ const {
 } = require('../config')
 
 const getJwtToken = () => {
-  return postData(`${url}oauth/token?grant_type=client_credentials`)
+  return postData(`${url}/token?grant_type=client_credentials`)
 }
 
 const postData = async path => {
