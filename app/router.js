@@ -9,6 +9,7 @@
 const { startController } = require('./start/get.controller')
 const { displayQuestionList } = require('./questions/get.controller')
 const { displayQuestionGroup } = require('./questiongroup/get.controller')
+const { saveQuestionGroup } = require('./questiongroup/post.controller')
 
 // Export
 module.exports = app => {
@@ -33,6 +34,8 @@ module.exports = app => {
   app.get(`/questions`, displayQuestionList)
 
   app.get(`/questiongroup/:groupId`, displayQuestionGroup)
+
+  app.post(`/questiongroup/:groupId`, saveQuestionGroup)
 
   app.get('*', (req, res) => res.render('app/error', { error: '404, Page Not Found' }))
 }

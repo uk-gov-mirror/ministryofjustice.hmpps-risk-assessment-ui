@@ -40,7 +40,7 @@
                     {% case 'freetext' %}
                         {{ govukInput({
                             id: 'id-' + question.questionId,
-                            name: question.questionCode,
+                            name: 'id-' + question.questionId,
                             value: question.answerText | encodeHtml | safe,
                             label: {
                                 text: question.questionText,
@@ -54,7 +54,7 @@
                     {% case 'textarea' %}
                         {{ govukTextarea({
                             id: 'id-' + question.questionId,
-                            name: question.questionCode,
+                            name: 'id-' + question.questionId,
                             value: question.answerText | encodeHtml | safe,
                             label: {
                                 text: question.questionText,
