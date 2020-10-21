@@ -3,16 +3,23 @@ const { getQuestionGroup, getAnswers } = require('../../common/data/assessmentAp
 
 const devAssessmentId = 'e69a61ff-7395-4a12-b434-b1aa6478aded'
 
-const displayQuestionGroup = async ({ params: { groupId }, tokens }, res) => {
+const displayQuestionGroup = async ({ params: { groupId, subgroup }, tokens }, res) => {
   try {
     const questionGroup = await grabQuestionGroup(groupId, tokens)
+    const subIndex = Number.parseInt(subgroup, 10)
+    if (subIndex === questionGroup.contents.length) {
+      return res.redirect('/questions')
+    }
+
     const { answers } = await grabAnswers(devAssessmentId, 'current', tokens)
 
     return res.render(`${__dirname}/index`, {
-      heading: questionGroup.contents[0].title,
+      heading: questionGroup.title,
+      subheading: questionGroup.contents[subIndex].title,
       groupId,
-      questions: questionGroup.contents[0].contents,
+      questions: questionGroup.contents[subIndex].contents,
       answers,
+      last: subIndex + 1 === questionGroup.contents.length,
     })
   } catch (error) {
     return res.render('app/error', { error })

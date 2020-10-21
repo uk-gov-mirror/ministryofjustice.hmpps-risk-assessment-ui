@@ -10,7 +10,7 @@ const displayQuestionList = async ({ tokens }, res) => {
       .map(form => {
         return {
           ...form,
-          path: `/questionGroup/${form.groupId}`,
+          path: `/questionGroup/${form.groupId}/0`,
         }
       })
 

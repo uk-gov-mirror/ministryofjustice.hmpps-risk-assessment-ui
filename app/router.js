@@ -33,9 +33,9 @@ module.exports = app => {
 
   app.get(`/questions`, displayQuestionList)
 
-  app.get(`/questiongroup/:groupId`, displayQuestionGroup)
+  app.get(`/questiongroup/:groupId/:subgroup`, displayQuestionGroup)
 
-  app.post(`/questiongroup/:groupId`, saveQuestionGroup)
+  app.post(`/questiongroup/:groupId/:subgroup`, saveQuestionGroup)
 
   app.get('*', (req, res) => res.render('app/error', { error: '404, Page Not Found' }))
 }
