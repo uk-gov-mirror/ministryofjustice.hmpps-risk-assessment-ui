@@ -46,7 +46,7 @@
                         {{ govukInput({
                             id: 'id-' + question.questionId,
                             name: 'id-' + question.questionId,
-                            value: answers[question.questionId].freeTextAnswer | encodeHtml | safe,
+                            value: question.answer | encodeHtml | safe,
                             label: {
                                 text: question.questionText,
                                 isPageHeading: false,
@@ -60,7 +60,7 @@
                         {{ govukTextarea({
                             id: 'id-' + question.questionId,
                             name: 'id-' + question.questionId,
-                            value: answers[question.questionId].freeTextAnswer | encodeHtml | safe,
+                            value: question.answer | encodeHtml | safe,
                             label: {
                                 text: question.questionText,
                                 isPageHeading: false,

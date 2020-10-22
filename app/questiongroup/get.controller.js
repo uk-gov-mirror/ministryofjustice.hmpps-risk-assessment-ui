@@ -12,13 +12,13 @@ const displayQuestionGroup = async ({ params: { groupId, subgroup }, tokens }, r
     }
 
     const { answers } = await grabAnswers(devAssessmentId, 'current', tokens)
+    const questions = annotateWithAnswers(questionGroup.contents[subIndex].contents, answers)
 
     return res.render(`${__dirname}/index`, {
       heading: questionGroup.title,
       subheading: questionGroup.contents[subIndex].title,
       groupId,
-      questions: questionGroup.contents[subIndex].contents,
-      answers,
+      questions,
       last: subIndex + 1 === questionGroup.contents.length,
     })
   } catch (error) {
@@ -42,6 +42,23 @@ const grabAnswers = (assessmentId, episodeId, tokens) => {
     logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
     throw error
   }
+}
+
+const annotateWithAnswers = (questions, answers) => {
+  return questions.map(q => {
+    const answer = answers[q.questionId]
+    const answerValue = answer ? answer.freeTextAnswer : null
+    return Object.assign(q, {
+      answer: answerValue,
+      answerSchemas: annotateAnswerSchemas(q.answerSchemas, answerValue),
+    })
+  })
+}
+
+const annotateAnswerSchemas = (answerSchemas, answerValue) => {
+  if (answerValue === null) return answerSchemas
+
+  return answerSchemas.map(as => Object.assign(as, { checked: as.value === answerValue }))
 }
 
 module.exports = { displayQuestionGroup }
