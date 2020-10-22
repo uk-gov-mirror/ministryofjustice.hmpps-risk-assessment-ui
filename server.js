@@ -29,6 +29,7 @@ const createCredentials = require('./common/middleware/createCredentials')
 const { updateCorrelationId } = require('./common/middleware/updateCorrelationId')
 const { applicationInsights } = require('./common/config')
 const { encodeHTML } = require('./common/utils/util')
+const clientSecret = require('./common/config')
 
 // Global constants
 const { static: _static } = express
@@ -100,6 +101,7 @@ function initialiseGlobalMiddleware(app) {
     cookieSession({
       name: 'session',
       keys: ['key1', 'key2'],
+      secret: clientSecret,
 
       // Cookie Options
       maxAge: 24 * 60 * 60 * 1000, // 24 hours

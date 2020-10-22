@@ -2,17 +2,14 @@
 const { getJwtToken } = require('../data/oauth')
 
 module.exports = async (req, res, next) => {
-  let {
-    headers: { 'x-auth-token': authorisationToken = '' },
-  } = req
-
-  if (authorisationToken === '') {
-    const { access_token: accessToken } = await getJwtToken()
-    authorisationToken = accessToken
+  if (!req.session.token || req.session.expires < Date.now()) {
+    const { access_token: accessToken, expires_in: expires } = await getJwtToken()
+    req.session.token = accessToken
+    req.session.expires = Date.now() + expires * 1000
   }
 
   req.tokens = {
-    authorisationToken,
+    authorisationToken: req.session.token,
   }
   next()
 }
