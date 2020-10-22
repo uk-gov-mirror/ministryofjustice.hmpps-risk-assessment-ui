@@ -4,6 +4,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
 
 {% set errorHeading = "Error - " + heading %}
 
@@ -69,6 +70,18 @@
                                 text: question.hint
                             }
                         }) }}
+                    {% case 'radio' %}
+                        {{ govukRadios({
+                            idPrefix: 'id-' + question.questionId,
+                            name: 'id-' + question.questionId,
+                            fieldset: {
+                                legend: {
+                                    text: question.questionText
+                                }
+                            },
+                            items: question.answerSchemas
+                        }) }}
+
                     {% default %}
                         <!-- {{ question.questionId }} - {{ question.answerType }} questions are not currently rendered -->
                     {% endswitch %}
@@ -76,15 +89,15 @@
                 {% endfor %}
 
                 {% if last %}
-                  {{ govukButton({
-                      text: 'Save',
-                      classes: 'govuk-!-margin-bottom-3'
-                  }) }}
+                    {{ govukButton({
+                        text: 'Save',
+                        classes: 'govuk-!-margin-bottom-3'
+                    }) }}
                 {% else %}
-                  {{ govukButton({
-                      text: 'Continue',
-                      classes: 'govuk-!-margin-bottom-3'
-                  }) }}
+                    {{ govukButton({
+                        text: 'Continue',
+                        classes: 'govuk-!-margin-bottom-3'
+                    }) }}
                 {% endif %}
             </form>
         </div>

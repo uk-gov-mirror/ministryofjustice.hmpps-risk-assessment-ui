@@ -35,6 +35,29 @@
           },
           {
             "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111231",
+            "questionCode": "no_fixed_abode",
+            "answerType": "radio",
+            "questionText": "Currently of no fixed abode or in transient accommodation",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "N",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "type": "question",
             "questionId": "11111111-1111-1111-1111-111111111203",
             "questionCode": "s_alias",
             "answerType": "freetext",
