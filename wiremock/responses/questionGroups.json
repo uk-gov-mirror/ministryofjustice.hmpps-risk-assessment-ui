@@ -88,7 +88,7 @@
           },
           {
             "type": "question",
-            "questionId": "11111111-1111-1111-1111-111111111309",
+            "questionId": "11111111-1111-1111-1111-111111111310",
             "questionCode": "add_info",
             "answerType": "textarea",
             "questionText": "Additional information",
@@ -96,6 +96,668 @@
             "mandatory": "no",
             "hint": "Enter any other relevant information",
             "answerSchemas": []
+          }
+        ]
+      }
+    ]
+  },
+  "22222222-2222-2222-2222-222222222203": {
+
+    "type": "group",
+    "groupId": "22222222-2222-2222-2222-222222222203",
+    "groupCode": "bcst",
+    "title": "Brief Form",
+    "subheading": "Basic Custody Screen Tool",
+    "contents": [
+      {
+        "type": "group",
+        "groupId": "22222222-2222-2222-2222-222222222204",
+        "groupCode": "bcst_case_id",
+        "title": "Case Identification",
+        "helpText": "Offender and sentence details",
+        "displayOrder": "1",
+        "mandatory": "yes",
+        "contents": [
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111202",
+            "questionCode": "forename",
+            "answerType": "freetext",
+            "questionText": "Forename",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111201",
+            "questionCode": "surname",
+            "answerType": "freetext",
+            "questionText": "Surname",
+            "displayOrder": "2",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111205",
+            "questionCode": "dob",
+            "answerType": "freetext",
+            "questionText": "Date of Birth",
+            "displayOrder": "3",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111207",
+            "questionCode": "gender",
+            "answerType": "freetext",
+            "questionText": "Gender",
+            "displayOrder": "4",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111231",
+            "questionCode": "no_fixed_abode",
+            "answerType": "radio",
+            "questionText": "Currently of no fixed abode or in transient accommodation",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "N",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111310",
+            "questionCode": "add_info",
+            "answerType": "textarea",
+            "questionText": "Additional information",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "hint": "Enter any other relevant information",
+            "answerSchemas": []
+          }
+        ]
+      }
+    ]
+  },
+  "22222222-2222-2222-2222-222222222201": {
+
+    "type": "group",
+    "groupId": "22222222-2222-2222-2222-222222222201",
+    "groupCode": "oasys",
+    "title": "Long Form",
+    "contents": [
+      {
+        "type": "group",
+        "groupId": "22222222-2222-2222-2222-222222222202",
+        "groupCode": "oasys_case_id",
+        "title": "Case Identification",
+        "displayOrder": "1",
+        "mandatory": "yes",
+        "contents": [
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111202",
+            "questionCode": "forename",
+            "answerType": "freetext",
+            "questionText": "Forename",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111201",
+            "questionCode": "surname",
+            "answerType": "freetext",
+            "questionText": "Surname",
+            "displayOrder": "2",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111204",
+            "questionCode": "f_alias",
+            "answerType": "freetext",
+            "questionText": "Forename Aliases",
+            "displayOrder": "3",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111203",
+            "questionCode": "s_alias",
+            "answerType": "freetext",
+            "questionText": "Surname Aliases",
+            "displayOrder": "4",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111205",
+            "questionCode": "dob",
+            "answerType": "freetext",
+            "questionText": "Date of Birth",
+            "displayOrder": "5",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111206",
+            "questionCode": "dob_alias",
+            "answerType": "freetext",
+            "questionText": "Date of Birth (Aliases)",
+            "displayOrder": "6",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111207",
+            "questionCode": "gender",
+            "answerType": "freetext",
+            "questionText": "Gender",
+            "displayOrder": "7",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111208",
+            "questionCode": "religion",
+            "answerType": "freetext",
+            "questionText": "Religion",
+            "displayOrder": "8",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          }
+        ]
+      },
+      {
+        "type": "group",
+        "groupId": "22222222-2222-2222-2222-222222222230",
+        "groupCode": "oasys_accomodation",
+        "title": "Accommodation",
+        "displayOrder": "2",
+        "mandatory": "yes",
+        "contents": [
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111231",
+            "questionCode": "no_fixed_abode",
+            "answerType": "radio",
+            "questionText": "Currently of no fixed abode or in transient accomodation",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "N",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111232",
+            "questionCode": "accom_suitability",
+            "answerType": "radio",
+            "questionText": "Suitability of accommodation",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111233",
+            "questionCode": "accom_permanence",
+            "answerType": "radio",
+            "questionText": "Permanence of accommodation",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111234",
+            "questionCode": "accom_location",
+            "answerType": "radio",
+            "questionText": "Suitability of location of accommodation",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111235",
+            "questionCode": "accom_issues",
+            "answerType": "textarea",
+            "questionText": "Identify accommodation issues contributing to risk of offending and harm. Please include any positive factors",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": []
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111236",
+            "questionCode": "accom_rosha",
+            "answerType": "radio",
+            "questionText": "Accommodation issues linked to risk of serious harm, risks to the individual & other risks",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "N",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111237",
+            "questionCode": "accom_offending",
+            "answerType": "radio",
+            "questionText": "Accommodation issues linked to offending behaviour",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "N",
+                "text": "No"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "group",
+        "groupId": "22222222-2222-2222-2222-222222222231",
+        "groupCode": "oasys_employment",
+        "title": "Employment, training, employment",
+        "displayOrder": "3",
+        "mandatory": "yes",
+        "contents": [
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111240",
+            "questionCode": "employment",
+            "answerType": "radio",
+            "questionText": "Is the person unemployed, or will be unemployed on release?",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444449",
+                "answerSchemaCode": "employed",
+                "value": "employed",
+                "text": "Employed"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444450",
+                "answerSchemaCode": "unemployed",
+                "value": "unemployed",
+                "text": "Unemployed"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444451",
+                "answerSchemaCode": "unavailable",
+                "value": "unavailable",
+                "text": "Unavailable for work"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111241",
+            "questionCode": "em_history",
+            "answerType": "radio",
+            "questionText": "Employment history",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111242",
+            "questionCode": "em_skills",
+            "answerType": "radio",
+            "questionText": "Work related skills",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111243",
+            "questionCode": "em_attitude",
+            "answerType": "radio",
+            "questionText": "Attitudes to employment",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111244",
+            "questionCode": "em_school",
+            "answerType": "radio",
+            "questionText": "School attendance",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111245",
+            "questionCode": "em_problems",
+            "answerType": "radio",
+            "questionText": "Has problems with reading, writing, or numeracy",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444446",
+                "answerSchemaCode": "no_problems",
+                "value": "no",
+                "text": "No problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444447",
+                "answerSchemaCode": "some_problems",
+                "value": "some",
+                "text": "Some problems"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444448",
+                "answerSchemaCode": "significant_problems",
+                "value": "significant",
+                "text": "Significant problems"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111246",
+            "questionCode": "em_issues",
+            "answerType": "textarea",
+            "questionText": "Identify education, training, and employability issues contributing to risks of offending and harm. Please include any positive factors",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": []
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111247",
+            "questionCode": "em_rosha",
+            "answerType": "radio",
+            "questionText": "Education/training/employability issues linked to risk of serious harm, risks to the individual & other risks",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "N",
+                "text": "No"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111248",
+            "questionCode": "em_offending",
+            "answerType": "radio",
+            "questionText": "Education/training/employability issues linked to offending behaviour",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "N",
+                "text": "No"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "22222222-2222-2222-2222-222222222240" : {
+    "type": "group",
+    "groupId": "22222222-2222-2222-2222-222222222240",
+    "groupCode": "overview",
+    "title": "Overview",
+    "contents": [
+      {
+        "type": "group",
+        "groupId": "22222222-2222-2222-2222-222222222242",
+        "groupCode": "risk_positives",
+        "title": "Risks and Positive Factors",
+        "displayOrder": "1",
+        "mandatory": "yes",
+        "contents": [
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111235",
+            "questionCode": "accom_issues",
+            "answerType": "textarea",
+            "questionText": "Identify accommodation issues contributing to risk of offending and harm. Please include any positive factors",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111246",
+            "questionCode": "em_issues",
+            "answerType": "textarea",
+            "questionText": "Identify education, training, and employability issues contributing to risks of offending and harm. Please include any positive factors",
+            "displayOrder": "2",
+            "mandatory": "no",
+            "answerSchemas": [],
+            "answer": null
           }
         ]
       }

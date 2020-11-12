@@ -1,0 +1,16 @@
+{
+  "episodeId": 99,
+  "episodeUuid": "4511a3f6-7f51-4b96-b603-4e75eac0c839",
+  "assessmentUuid": "e69a61ff-7395-4a12-b434-b1aa6478aded",
+  "reasonForChange": "new episode",
+  "created": "2019-11-14T08:11:53.177108",
+  "answers": {
+    "11111111-1111-1111-1111-111111111111": {
+      "freeTextAnswer": "some free text",
+      "answers": {
+        "04444444-4444-4444-4444-444444444441": "Some free text",
+        "04444444-4444-4444-4444-444444444442": "Some more free text"
+      }
+    }
+  }
+}

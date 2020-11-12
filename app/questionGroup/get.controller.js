@@ -7,10 +7,9 @@ const displayQuestionGroup = async ({ params: { groupId, subgroup }, tokens }, r
   try {
     const questionGroup = await grabQuestionGroup(groupId, tokens)
     const subIndex = Number.parseInt(subgroup, 10)
-    if (subIndex === questionGroup.contents.length) {
-      return res.redirect('/questions')
+    if (subIndex >= questionGroup.contents.length) {
+      return res.redirect('/assessments')
     }
-
     const { answers } = await grabAnswers(devAssessmentId, 'current', tokens)
     const questions = annotateWithAnswers(questionGroup.contents[subIndex].contents, answers)
 

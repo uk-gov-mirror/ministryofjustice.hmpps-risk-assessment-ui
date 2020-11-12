@@ -7,9 +7,9 @@
 
 // pages
 const { startController } = require('./start/get.controller')
-const { displayQuestionList } = require('./questions/get.controller')
-const { displayQuestionGroup } = require('./questiongroup/get.controller')
-const { saveQuestionGroup } = require('./questiongroup/post.controller')
+const { displayAssessmentsList } = require('./assessmentsList/get.controller')
+const { displayQuestionGroup } = require('./questionGroup/get.controller')
+const { saveQuestionGroup } = require('./questionGroup/post.controller')
 
 // Export
 module.exports = app => {
@@ -31,7 +31,7 @@ module.exports = app => {
   })
   app.get(`/start`, (req, res) => startController(req, res))
 
-  app.get(`/questions`, displayQuestionList)
+  app.get(`/assessments`, displayAssessmentsList)
 
   app.get(`/questiongroup/:groupId/:subgroup`, displayQuestionGroup)
 

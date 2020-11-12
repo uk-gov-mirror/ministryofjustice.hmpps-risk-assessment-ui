@@ -2,6 +2,7 @@ const { stubFor } = require('./wiremock')
 const questionGroups = require('./responses/questionGroups.json')
 const questionAnswers = require('./responses/questionAnswers.json')
 const questionList = require('./responses/questionList.json')
+const assessmentEpisodes = require('./responses/assessmentEpisodes.json')
 
 const stubQuestionGroup = groupId => {
   stubFor({
@@ -48,8 +49,39 @@ const stubQuestionsList = () => {
     },
   })
 }
+const stubAssessmentEpisodes = () => {
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/assessments/.+?/episodes/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: assessmentEpisodes,
+    },
+  })
+  stubFor({
+    request: {
+      method: 'POST',
+      urlPattern: `/assessments/.+?/episodes/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: {},
+    },
+  })
+}
 const stubQuestions = async () => {
-  await stubQuestionGroup(1234)
+  await stubQuestionGroup('1234')
+  await stubQuestionGroup('22222222-2222-2222-2222-222222222203')
+  await stubQuestionGroup('22222222-2222-2222-2222-222222222201')
+  await stubQuestionGroup('22222222-2222-2222-2222-222222222240')
 }
 const stubAnswers = async () => {
   await stubAnswersGroup(1234)
@@ -57,9 +89,13 @@ const stubAnswers = async () => {
 const stubForms = async () => {
   await stubQuestionsList()
 }
+const stubEpisodes = async () => {
+  await stubAssessmentEpisodes()
+}
 
 module.exports = {
   stubForms,
   stubQuestions,
   stubAnswers,
+  stubEpisodes,
 }

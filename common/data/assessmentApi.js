@@ -17,7 +17,7 @@ const getAnswers = (assessmentId, episodeId, tokens) => {
   return getData(path, tokens)
 }
 
-const getQuestionList = tokens => {
+const getAssessmentsList = tokens => {
   const path = `${url}/questions/list`
   return getData(path, tokens)
 }
@@ -87,6 +87,6 @@ const logError = error => {
 module.exports = {
   getQuestionGroup,
   getAnswers,
-  getQuestionList,
+  getAssessmentsList,
   postAnswers,
 }

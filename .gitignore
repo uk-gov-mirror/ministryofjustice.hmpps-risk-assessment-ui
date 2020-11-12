@@ -68,3 +68,5 @@ integration-tests/screenshots
 .DS_Store
 .idea/
 .vscode/
+.run/All Tests.run.xml
+.run/start_local.run.xml
