@@ -1,13 +1,8 @@
 const StartPage = require('../../pages/start/startPage')
 
-context('Login functionality', () => {
+context('Start page display', () => {
   before(() => {
-    cy.clearCookies()
-  })
-
-  beforeEach(() => {
-    cy.task('reset')
-    cy.task('stubQuestionResponses')
+    cy.task('stubAssessmentApi')
   })
 
   it('Displays start page', () => {

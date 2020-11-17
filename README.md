@@ -19,13 +19,43 @@ $ npm run start:local
 ```
 Then go to [http://localhost:3000/](http://localhost:3000/) to see it in action.
 
-When running in 'local' mode the service will attempt to stub out some API responses in wiremock at startup. It is assumed the wiremock server is running on port 9191. You can start up an instance of wiremock using docker-compose:
+When running in this 'local' mode the service will attempt to stub out some API responses in wiremock at startup. It is assumed the wiremock server is running on port 9191. You can start up an instance of wiremock using docker-compose:
 
 ```
 docker-compose -f docker-compose-test.yml up
 ```
 
+## Cypress integration tests
 
+The `integration-tests` directory contains a set of Cypress integration tests for the application.
+These tests also use WireMock to stub the application's dependencies on the 'HMPPS Assessment' RESTful API.
+
+### Running the Cypress tests
+
+You need to fire up the wiremock server first:
+```docker-compose -f docker-compose-test.yaml up```
+
+This will give you useful feedback if the app is making requests that you haven't mocked out. You can see
+the request log at `localhost:9191/__admin/requests/` and a JSON representation of the mocks `localhost:9191/__admin/mappings`.
+
+### Starting feature tests node instance
+
+A separate node instance needs to be started for the feature tests. This will run on port 3008. 
+
+```npm run start:cypress```
+
+
+### Running the tests
+
+With the UI:
+```
+npm run int-test-ui
+```
+
+Just on the command line (any console log outputs will not be visible, they appear in the browser the Cypress UI fires up):
+```
+npm run int-test
+```
 
 
 [Express]: https://expressjs.com/

@@ -2,7 +2,7 @@ const page = require('../page')
 
 const startPage = () =>
   page('Risk Assessment UI', {
-    continueButton: () => cy.get('button'),
+    continueButton: () => cy.get('.govuk-button'),
   })
 
 export default {
