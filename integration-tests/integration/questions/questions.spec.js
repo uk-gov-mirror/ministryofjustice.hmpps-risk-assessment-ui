@@ -6,20 +6,32 @@ context('Basic questions display', () => {
     cy.task('stubAssessmentApi')
   })
 
-  it('Displays questions, answer a couple, save and see assessments list', () => {
+  it('Displays questions', () => {
     const questionsPage = QuestionsPage.goTo()
 
     questionsPage
       .questions()
       .eq(0)
       .should('include.text', 'Forename')
+
+    questionsPage
+      .questions()
+      .eq(1)
+      .should('include.text', 'Surname')
+  })
+
+  it('Answer a couple of questions, save and see assessments list', () => {
+    const questionsPage = QuestionsPage.goTo()
+
+    questionsPage
+      .questions()
+      .eq(0)
       .find('input')
       .type('Grant')
 
     questionsPage
       .questions()
       .eq(1)
-      .should('include.text', 'Surname')
       .find('input')
       .type('Hart')
 

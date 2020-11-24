@@ -9,9 +9,11 @@
 {% endblock %}
 
 {% block beforeContent %}
+    <div role="navigation" aria-label="back">
     {{ govukBackLink({
         href: "/start"
     }) }}
+    </div>
 {% endblock %}
 
 {% block content %}

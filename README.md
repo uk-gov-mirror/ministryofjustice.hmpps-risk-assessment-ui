@@ -30,6 +30,8 @@ docker-compose -f docker-compose-test.yml up
 The `integration-tests` directory contains a set of Cypress integration tests for the application.
 These tests also use WireMock to stub the application's dependencies on the 'HMPPS Assessment' RESTful API.
 
+The Cypress tests also run `pa11y` accessibility and Lighthouse 'best practices' checks on each page that a test finishes on. These are triggered by the `afterEach` process in `integration-tests/support/index.js`.
+
 ### Running the Cypress tests
 
 You need to fire up the wiremock server first:
@@ -57,6 +59,11 @@ Just on the command line (any console log outputs will not be visible, they appe
 npm run int-test
 ```
 
+Note that there is also: 
+```
+npm run int-test-ci
+```
+This also runs in a headless browser with a minimal amount of reporting and artifact creation. 
 
 [Express]: https://expressjs.com/
 [Nunjucks]: https://mozilla.github.io/nunjucks/

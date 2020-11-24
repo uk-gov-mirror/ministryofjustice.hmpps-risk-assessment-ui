@@ -17,9 +17,11 @@
 {% endblock %}
 
 {% block beforeContent %}
-    {{ govukBackLink({
-        href: "/assessments"
-    }) }}
+    <div role="navigation" aria-label="back">
+        {{ govukBackLink({
+            href: "/assessments"
+        }) }}
+    </div>
 {% endblock %}
 
 {% block content %}
@@ -30,9 +32,9 @@
         {{ heading }}
     </h1>
 
-    <h3 class="govuk-heading-m">
+    <h2 class="govuk-heading-m">
         {{ subheading }}
-    </h3>
+    </h2>
 
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">

@@ -7,8 +7,13 @@ before(() => {
   cy.task('stubAuth')
 })
 
-beforeEach(() => {
-  // any functionality to happen before ever test
+// any functionality to happen before every test
+beforeEach(() => {})
+
+// any functionality to happen after every test
+afterEach(() => {
+  cy.pa11y()
+  cy.lighthouse({ 'best-practices': 90 })
 })
 
 // There seem to be some uncaught exceptions in Gov UK
