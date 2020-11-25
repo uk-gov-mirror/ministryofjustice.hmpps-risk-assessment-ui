@@ -84,8 +84,8 @@ function initialiseGlobalMiddleware(app) {
     app.use(
       /\/((?!images|public|stylesheets|javascripts).)*/,
       loggingMiddleware(
-        ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" - total time :response-time ms'
-      )
+        ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" - total time :response-time ms',
+      ),
     )
   }
 
@@ -105,7 +105,7 @@ function initialiseGlobalMiddleware(app) {
 
       // Cookie Options
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
-    })
+    }),
   )
 
   if (process.env.NODE_ENV === 'local') {
@@ -169,11 +169,11 @@ function initialiseTemplateEngine(app) {
   // if it's not production we want to re-evaluate the assets on each file change
   nunjucksEnvironment.addGlobal(
     'css_path',
-    NODE_ENV === 'production' ? CSS_PATH : staticify.getVersionedPath('/stylesheets/application.min.css')
+    NODE_ENV === 'production' ? CSS_PATH : staticify.getVersionedPath('/stylesheets/application.min.css'),
   )
   nunjucksEnvironment.addGlobal(
     'js_path',
-    NODE_ENV === 'production' ? JAVASCRIPT_PATH : staticify.getVersionedPath('/javascripts/application.js')
+    NODE_ENV === 'production' ? JAVASCRIPT_PATH : staticify.getVersionedPath('/javascripts/application.js'),
   )
 }
 

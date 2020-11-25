@@ -44,7 +44,7 @@ describe('post answers', () => {
           },
         },
       },
-      tokens
+      tokens,
     )
     expect(res.redirect).toHaveBeenCalledWith('/questionGroup/22222222-2222-2222-2222-222222222203/1')
   })

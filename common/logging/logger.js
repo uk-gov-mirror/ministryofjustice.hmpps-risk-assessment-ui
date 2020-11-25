@@ -46,7 +46,7 @@ exceptionTransports.push(
     stringify: function stringify(obj) {
       return JSON.stringify(obj)
     },
-  })
+  }),
 )
 
 const transports = {

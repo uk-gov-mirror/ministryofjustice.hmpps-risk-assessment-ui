@@ -63,7 +63,7 @@ function onInterrupt() {
  * Keep track of processes, and clean up on SIGINT
  */
 function monitor() {
-  writeFileSync(pidFile, process.pid, fileOptions)
+  writeFileSync(pidFile, process.pid.toString(), fileOptions)
   process.on('SIGINT', onInterrupt)
 }
 
