@@ -5,6 +5,7 @@ ARG GIT_REF
 
 RUN apt-get update && apt-get install -y make python
 RUN apt-get install -y curl
+RUN apt-get install build-essential -y
 
 ENV TZ=Europe/London
 RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
@@ -24,7 +25,7 @@ ADD . .
 RUN curl https://s3.amazonaws.com/rds-downloads/rds-ca-2019-root.pem > /app/root.cert
 RUN curl https://s3.amazonaws.com/rds-downloads/rds-ca-2015-root.pem >> /app/root.cert
 
-RUN npm install && \
+RUN CYPRESS_INSTALL_BINARY=0 npm ci --no-audit && \
     npm run build && \
     export BUILD_NUMBER=${BUILD_NUMBER} && \
     export GIT_REF=${GIT_REF} && \
