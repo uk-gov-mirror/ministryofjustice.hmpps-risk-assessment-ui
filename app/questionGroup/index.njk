@@ -5,6 +5,7 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 
 {% set errorHeading = "Error - " + heading %}
 
@@ -80,6 +81,16 @@
                                 legend: {
                                     text: question.questionText
                                 }
+                            },
+                            items: question.answerSchemas
+                        }) }}
+
+                    {% case 'dropdown' %}
+                        {{ govukSelect({
+                            id: 'id-' + question.questionId,
+                            name: 'id-' + question.questionId,
+                            label: {
+                                text: question.questionText
                             },
                             items: question.answerSchemas
                         }) }}

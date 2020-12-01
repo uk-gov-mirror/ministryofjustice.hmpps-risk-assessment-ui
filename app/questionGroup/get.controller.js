@@ -57,7 +57,12 @@ const annotateWithAnswers = (questions, answers) => {
 const annotateAnswerSchemas = (answerSchemas, answerValue) => {
   if (answerValue === null) return answerSchemas
 
-  return answerSchemas.map(as => Object.assign(as, { checked: as.value === answerValue }))
+  return answerSchemas.map(as =>
+    Object.assign(as, {
+      checked: as.value === answerValue,
+      selected: as.value === answerValue,
+    }),
+  )
 }
 
 module.exports = { displayQuestionGroup }
