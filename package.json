@@ -64,7 +64,7 @@
     "watch": "npm run watch:sass",
     "record-build-info": "node ./bin/record-build-info",
     "setupStubs": "node ./wiremock/stub.js",
-    "int-test": "rm ./integration-tests/reports/*.xml && cypress run --browser chrome --headless",
+    "int-test": "rm ./integration-tests/reports/*.xml && cypress run --config video=false --browser chrome --headless",
     "int-test-ci": "cypress run --config video=false,screenshotOnRunFailure=false --browser chrome --headless",
     "int-test-ui": "cypress open"
   },

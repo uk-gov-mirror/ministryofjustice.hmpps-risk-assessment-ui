@@ -81,6 +81,48 @@ const expected = {
     },
     {
       answer: null,
+      answerSchemas: [
+        {
+          answerSchemaCode: 'SR15.1.2.1',
+          answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+          text: 'Punishment',
+          value: 'punishment',
+        },
+        {
+          answerSchemaCode: 'SR15.1.2.1',
+          answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+          text: 'Public protection',
+          value: 'public_protection',
+        },
+        {
+          answerSchemaCode: 'SR15.1.2.1',
+          answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+          text: 'Crime reduction',
+          value: 'crime_reduction',
+        },
+        {
+          answerSchemaCode: 'SR15.1.2.1',
+          answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+          text: 'Reparation',
+          value: 'reparation',
+        },
+        {
+          answerSchemaCode: 'SR15.1.2.1',
+          answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+          text: 'Reform or rehabilitation',
+          value: 'reform_or_rehabilitation',
+        },
+      ],
+      answerType: 'dropdown',
+      displayOrder: '1',
+      mandatory: 'no',
+      questionCode: 'sentencing_purpose',
+      questionId: '11111111-1111-1111-1111-111114111231',
+      questionText: 'Sentencing purpose',
+      type: 'question',
+    },
+    {
+      answer: null,
       answerSchemas: [],
       answerType: 'textarea',
       displayOrder: '1',
@@ -114,7 +156,7 @@ describe('display question group and answers', () => {
     getAnswers.mockReset()
   })
 
-  it('should render the page with the correct object structure', async () => {
+  it('should render the page with the correct structure', async () => {
     getQuestionGroup.mockReturnValueOnce(questionGroup)
     getAnswers.mockReturnValueOnce({
       answers: {},

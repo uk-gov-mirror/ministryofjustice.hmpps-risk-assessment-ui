@@ -4,6 +4,7 @@ import './commands'
 before(() => {
   cy.clearCookies()
   cy.task('reset')
+  cy.task('stubAssessmentApi')
   cy.task('stubAuth')
 })
 

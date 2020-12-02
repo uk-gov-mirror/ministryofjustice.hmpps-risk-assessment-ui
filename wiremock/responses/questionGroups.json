@@ -187,6 +187,47 @@
           },
           {
             "type": "question",
+            "questionId": "11111111-1111-1111-1111-111114111231",
+            "questionCode": "sentencing_purpose",
+            "answerType": "dropdown",
+            "questionText": "Sentencing purpose",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "punishment",
+                "text": "Punishment"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "public_protection",
+                "text": "Public protection"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "crime_reduction",
+                "text": "Crime reduction"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "reparation",
+                "text": "Reparation"
+              },
+              {
+                "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "reform_or_rehabilitation",
+                "text": "Reform or rehabilitation"
+              }
+            ]
+          },
+          {
+            "type": "question",
             "questionId": "11111111-1111-1111-1111-111111111310",
             "questionCode": "add_info",
             "answerType": "textarea",
