@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { lighthouse, pa11y, prepareAudit } = require('cypress-audit')
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cucumber = require('cypress-cucumber-preprocessor').default
 const { resetStubs } = require('../../wiremock/wiremock')
 const { stubForms, stubQuestions, stubAnswers, stubEpisodes } = require('../../wiremock/assessmentApi')
 const oauthApi = require('../../wiremock/oauth')
@@ -9,6 +11,8 @@ module.exports = on => {
   on('before:browser:launch', (browser = {}, launchOptions) => {
     prepareAudit(launchOptions)
   })
+
+  on('file:preprocessor', cucumber())
 
   on('task', {
     lighthouse: lighthouse(),
