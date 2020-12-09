@@ -144,7 +144,7 @@
             "type": "question",
             "questionId": "11111111-1111-1111-1111-111111111205",
             "questionCode": "dob",
-            "answerType": "freetext",
+            "answerType": "date",
             "questionText": "Date of Birth",
             "displayOrder": "3",
             "mandatory": "no",

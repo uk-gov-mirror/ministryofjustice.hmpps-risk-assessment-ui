@@ -6,6 +6,7 @@
 {% from "govuk/components/textarea/macro.njk" import govukTextarea %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
 
 {% set errorHeading = "Error - " + heading %}
 
@@ -93,6 +94,48 @@
                                 text: question.questionText
                             },
                             items: question.answerSchemas
+                        }) }}
+
+                    {% case 'date' %}
+                        {% if question.answer.length > 0 %}
+                            {% set answerDay = question.answer | date("DD") %}
+                            {% set answerMonth = question.answer | date("MM") %}
+                            {% set answerYear = question.answer | date("YYYY") %}
+                        {% else %}
+                            {% set answerDay = '' %}
+                            {% set answerMonth = '' %}
+                            {% set answerYear = '' %}
+                        {% endif %}
+
+                        {{ govukDateInput({
+                            id: 'id-' + question.questionId,
+                            namePrefix: 'id-' + question.questionId,
+                            fieldset: {
+                                legend: {
+                                    text: question.questionText,
+                                    isPageHeading: false
+                                }
+                            },
+                            hint: {
+                                text: question.hint
+                            },
+                            items: [
+                                {
+                                    classes: "govuk-input--width-2",
+                                    name: "day",
+                                    value: answerDay
+                                },
+                                {
+                                    classes: "govuk-input--width-2",
+                                    name: "month",
+                                    value: answerMonth
+                                },
+                                {
+                                    classes: "govuk-input--width-4",
+                                    name: "year",
+                                    value: answerYear
+                                }
+                            ]
                         }) }}
 
                     {% default %}

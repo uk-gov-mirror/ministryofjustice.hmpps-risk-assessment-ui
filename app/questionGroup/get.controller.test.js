@@ -36,7 +36,7 @@ const expected = {
     {
       answer: null,
       answerSchemas: [],
-      answerType: 'freetext',
+      answerType: 'date',
       displayOrder: '3',
       mandatory: 'no',
       questionCode: 'dob',

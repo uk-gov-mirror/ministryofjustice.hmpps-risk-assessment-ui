@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 const { logger } = require('../../common/logging/logger')
 const { postAnswers } = require('../../common/data/assessmentApi')
 
@@ -6,6 +7,22 @@ const episodeId = '4511a3f6-7f51-4b96-b603-4e75eac0c839'
 
 const saveQuestionGroup = async ({ params: { groupId, subgroup }, body, tokens }, res) => {
   try {
+    const dateKeys = findDateAnswerKeys(body)
+
+    dateKeys.forEach(key => {
+      const dateKey = key.replace(/-day$/, '')
+      let constructedDate = ''
+      if (body[`${dateKey}-year`] && body[`${dateKey}-month`] && body[`${dateKey}-day`]) {
+        constructedDate = new Date(
+          `${body[`${dateKey}-year`]}-${body[`${dateKey}-month`]}-${body[`${dateKey}-day`]}`,
+        ).toISOString()
+      }
+
+      body[dateKey] = constructedDate
+      delete body[`${dateKey}-year`]
+      delete body[`${dateKey}-month`]
+      delete body[`${dateKey}-day`]
+    })
     const answers = extractAnswers(body)
 
     await postAnswers(devAssessmentId, episodeId, answers, tokens)
@@ -16,6 +33,14 @@ const saveQuestionGroup = async ({ params: { groupId, subgroup }, body, tokens }
     logger.error(`Could not save to assessment ${devAssessmentId}, episode ${episodeId}, error: ${error}`)
     return res.render('app/error', { error })
   }
+}
+
+function findDateAnswerKeys(body) {
+  // find keys of all the dates in the body
+  const pattern = /-day$/
+  return Object.keys(body).filter(key => {
+    return pattern.test(key)
+  })
 }
 
 function extractAnswers(body) {
