@@ -8,31 +8,13 @@
   {% include "common/templates/includes/scripts.njk" %}
 {% endblock %}
 {% block header %}
-  {{ mojHeader({
-    organisationLabel: {
-      text: 'HMPPS',
-      href: 'https://www.gov.uk/government/organisations/her-majestys-prison-and-probation-service'
-    },
-    serviceLabel: {
-      text: 'Risk Assessment',
-      href: '#'
-    }
-  }) }}
-  <div class="moj-header__container" role="complementary" aria-label="Software phase banner">
-    {{ govukPhaseBanner({
-      tag: {
-        text: "beta"
-      },
-      html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
-    }) }}      
-  </div>
-  
-  {% if offenderDetails %}
-    {% include "./partials/offenderDetails.njk" %}
-  {% endif %}
+  {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
-{% block pageTitle %}Sentence planning{% endblock %}
+{# default title - can override in pages#}
+{% block pageTitle %}
+  Assess risks and needs PSR
+{% endblock %}
 
 {% block headIcons %}
   <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ assetPath | default('') }}/images/favicon.ico" type="image/x-icon" />
