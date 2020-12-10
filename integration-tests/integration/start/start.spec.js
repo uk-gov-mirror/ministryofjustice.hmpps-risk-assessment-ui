@@ -12,6 +12,11 @@ context('Start page display', () => {
     cy.get('h1').should('contain.text', 'Risk Assessment UI')
   })
 
+  it('Displays the user name', () => {
+    cy.visit('/start')
+    cy.get('.moj-header__navigation-item').should('contain.text', 'Test x-auth-name')
+  })
+
   it('Root (/) redirects to the start page', () => {
     cy.visit('/')
     cy.url().should('include', 'start')
