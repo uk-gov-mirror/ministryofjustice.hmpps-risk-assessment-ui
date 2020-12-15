@@ -24,6 +24,7 @@ p {
   background-color: govuk-colour("blue");
   padding-bottom: govuk-spacing(2);
   padding-top: 5px;
+  min-height: 81px;
 }
 
 .moj-context-header dt, .moj-context-header dd {
@@ -49,13 +50,13 @@ p {
 }
 
 .moj-context-header__block dt {
-  border-left: 1px solid $white-transparent;
+  border-left: 1px solid govuk-colour("white");;
 }
 
 .moj-context-header__block {
   @extend .govuk-width-container;
   padding-bottom: govuk-spacing(1);
-  border-top: 1px solid $white-transparent;
+  border-top: 1px solid govuk-colour("white");;
 }
 
 .moj-context-header__top-block {
@@ -66,6 +67,7 @@ p {
 .no_left_border {
   border-left: 0 !important;
 }
+
 
 .extra-error {
   margin-top: -18px;

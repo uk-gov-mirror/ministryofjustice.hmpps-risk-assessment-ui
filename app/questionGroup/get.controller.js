@@ -1,7 +1,8 @@
 const { logger } = require('../../common/logging/logger')
 const { getQuestionGroup, getAnswers } = require('../../common/data/assessmentApi')
-
-const devAssessmentId = 'e69a61ff-7395-4a12-b434-b1aa6478aded'
+const {
+  dev: { devAssessmentId },
+} = require('../../common/config')
 
 const displayQuestionGroup = async ({ params: { groupId, subgroup }, tokens }, res) => {
   try {
