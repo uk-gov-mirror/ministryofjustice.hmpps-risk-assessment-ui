@@ -13,6 +13,8 @@ const { startController } = require('./start/get.controller')
 const { displayAssessmentsList } = require('./assessmentsList/get.controller')
 const { displayQuestionGroup } = require('./questionGroup/get.controller')
 const { saveQuestionGroup } = require('./questionGroup/post.controller')
+const { psrFromCourt } = require('./psrFromCourt/get.controller')
+const { startPsrFromCourt } = require('./psrFromCourt/post.controller')
 
 // Export
 module.exports = app => {
@@ -35,13 +37,15 @@ module.exports = app => {
   app.get(`/`, (req, res) => {
     res.redirect('/start')
   })
-  app.get(`/start`, (req, res) => startController(req, res))
+  app.get(`/start`, startController)
 
-  app.get(`/assessments`, displayAssessmentsList)
+  app.get(`/:assessmentId/assessments`, displayAssessmentsList)
 
-  app.get(`/questiongroup/:groupId/:subgroup`, displayQuestionGroup)
+  app.get(`/:assessmentId/questiongroup/:groupId/:subgroup`, displayQuestionGroup)
+  app.post(`/:assessmentId/questiongroup/:groupId/:subgroup`, saveQuestionGroup)
 
-  app.post(`/questiongroup/:groupId/:subgroup`, saveQuestionGroup)
+  app.get('/psr-from-court', psrFromCourt)
+  app.post('/psr-from-court', startPsrFromCourt)
 
   app.get('*', (req, res) => res.render('app/error', { error: '404, Page Not Found' }))
 }

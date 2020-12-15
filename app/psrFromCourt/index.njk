@@ -1,0 +1,28 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+
+{% block content %}
+    <h1 class="govuk-heading-l">
+        Pre-Sentence Report
+    </h1>
+
+    <form method="post" novalidate>
+      {{ govukInput({
+          id: 'courtCode',
+          name: 'courtCode',
+          label: { text: 'Court Code', isPageHeading: false },
+          classes: 'govuk-input--width-20'
+      }) }}
+      {{ govukInput({
+          id: 'caseNumber',
+          name: 'caseNumber',
+          label: { text: 'Case Number', isPageHeading: false },
+          classes: 'govuk-input--width-20'
+      }) }}
+      {{ govukButton({
+          text: 'Start'
+      }) }}
+    </form>
+{% endblock %}

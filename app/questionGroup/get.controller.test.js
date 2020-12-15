@@ -7,6 +7,7 @@ jest.mock('../../common/data/assessmentApi')
 const tokens = { authorisationToken: 'mytoken' }
 
 const expected = {
+  assessmentId: 'test-assessment-id',
   groupId: '22222222-2222-2222-2222-222222222203',
   heading: 'Brief Form',
   last: true,
@@ -141,6 +142,7 @@ describe('display question group and answers', () => {
   const req = {
     tokens,
     params: {
+      assessmentId: 'test-assessment-id',
       groupId: '22222222-2222-2222-2222-222222222203',
       subgroup: 0,
     },
@@ -209,6 +211,6 @@ describe('display question group and answers', () => {
     req.params.subgroup = 3
     getQuestionGroup.mockReturnValueOnce(questionGroup)
     await displayQuestionGroup(req, res)
-    expect(res.redirect).toHaveBeenCalledWith('/assessments')
+    expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/assessments')
   })
 })

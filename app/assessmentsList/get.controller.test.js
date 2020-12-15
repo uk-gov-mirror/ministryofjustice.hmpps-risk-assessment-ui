@@ -8,6 +8,9 @@ const tokens = { authorisationToken: 'mytoken' }
 
 describe('getFormsList', () => {
   const req = {
+    params: {
+      assessmentId: 'test-assessment-id',
+    },
     tokens,
   }
   const res = {
@@ -27,7 +30,7 @@ describe('getFormsList', () => {
           contentCount: 1,
           groupCount: 0,
           questionCount: 0,
-          path: '/questionGroup/22222222-2222-2222-2222-222222222203/0',
+          path: '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222203/0',
         },
         {
           groupId: '22222222-2222-2222-2222-222222222201',
@@ -35,7 +38,7 @@ describe('getFormsList', () => {
           contentCount: 3,
           groupCount: 0,
           questionCount: 0,
-          path: '/questionGroup/22222222-2222-2222-2222-222222222201/0',
+          path: '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222201/0',
         },
         {
           groupId: '22222222-2222-2222-2222-222222222240',
@@ -43,7 +46,7 @@ describe('getFormsList', () => {
           contentCount: 1,
           groupCount: 0,
           questionCount: 0,
-          path: '/questionGroup/22222222-2222-2222-2222-222222222240/0',
+          path: '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222240/0',
         },
       ],
     }

@@ -9,6 +9,7 @@ const tokens = { authorisationToken: 'mytoken' }
 beforeEach(() => {
   req = {
     params: {
+      assessmentId: 'test-assessment-id',
       groupId: '22222222-2222-2222-2222-222222222203',
       subgroup: 0,
     },
@@ -30,7 +31,7 @@ describe('post answers', () => {
     }
     await saveQuestionGroup(req, res)
     expect(postAnswers).toHaveBeenCalledWith(
-      'e69a61ff-7395-4a12-b434-b1aa6478aded',
+      'test-assessment-id',
       '4511a3f6-7f51-4b96-b603-4e75eac0c839',
       {
         answers: {
@@ -46,7 +47,9 @@ describe('post answers', () => {
       },
       tokens,
     )
-    expect(res.redirect).toHaveBeenCalledWith('/questionGroup/22222222-2222-2222-2222-222222222203/1')
+    expect(res.redirect).toHaveBeenCalledWith(
+      '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222203/1',
+    )
   })
 
   it('should save the answers correctly when there are dates in the body', async () => {
@@ -65,7 +68,7 @@ describe('post answers', () => {
     }
     await saveQuestionGroup(req, res)
     expect(postAnswers).toHaveBeenCalledWith(
-      'e69a61ff-7395-4a12-b434-b1aa6478aded',
+      'test-assessment-id',
       '4511a3f6-7f51-4b96-b603-4e75eac0c839',
       {
         answers: {
@@ -93,7 +96,9 @@ describe('post answers', () => {
       },
       tokens,
     )
-    expect(res.redirect).toHaveBeenCalledWith('/questionGroup/22222222-2222-2222-2222-222222222203/1')
+    expect(res.redirect).toHaveBeenCalledWith(
+      '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222203/1',
+    )
   })
 
   it('should display an error if answer saving fails', async () => {

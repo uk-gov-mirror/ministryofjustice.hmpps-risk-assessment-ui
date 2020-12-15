@@ -1,4 +1,7 @@
 const page = require('../page')
+const {
+  dev: { devAssessmentId },
+} = require('../../../common/config')
 
 const assessmentsPage = () =>
   page('Available assessments', {
@@ -8,7 +11,7 @@ const assessmentsPage = () =>
 export default {
   verifyOnPage: assessmentsPage,
   goTo: () => {
-    cy.visit(`/assessments`)
+    cy.visit(`/${devAssessmentId}/assessments`)
     return assessmentsPage()
   },
 }

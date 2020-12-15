@@ -2,7 +2,7 @@ const { logger } = require('../../common/logging/logger')
 const { getAssessmentsList } = require('../../common/data/assessmentApi')
 const { sortObject } = require('../../common/utils/util')
 
-const displayAssessmentsList = async ({ tokens }, res) => {
+const displayAssessmentsList = async ({ params: { assessmentId }, tokens }, res) => {
   try {
     const questionsList = await getAssessmentsList(tokens)
 
@@ -11,7 +11,7 @@ const displayAssessmentsList = async ({ tokens }, res) => {
       .map(form => {
         return {
           ...form,
-          path: `/questionGroup/${form.groupId}/0`,
+          path: `/${assessmentId}/questionGroup/${form.groupId}/0`,
         }
       })
 

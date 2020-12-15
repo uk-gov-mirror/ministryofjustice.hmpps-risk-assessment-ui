@@ -7,6 +7,11 @@ const {
   },
 } = require('../config')
 
+const assessmentSupervision = (assessmentDto, tokens) => {
+  const path = `${url}/assessments/supervision`
+  return postData(path, tokens, assessmentDto)
+}
+
 const getOffenderData = (uuid, tokens) => {
   const path = `${url}/assessment/{uuid}/subject`
   return getData(path, tokens)
@@ -90,6 +95,7 @@ const logError = error => {
 }
 
 module.exports = {
+  assessmentSupervision,
   getOffenderData,
   getQuestionGroup,
   getAnswers,
