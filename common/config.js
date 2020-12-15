@@ -57,4 +57,7 @@ module.exports = {
   },
   clientId: get('API_CLIENT_ID', 'clientId'),
   clientSecret: get('API_CLIENT_SECRET', 'clientSecret'),
+  dev: {
+    devAssessmentId: get('DEV_ASSESSMENT_ID', 'e69a61ff-7395-4a12-b434-b1aa6478aded'),
+  },
 }

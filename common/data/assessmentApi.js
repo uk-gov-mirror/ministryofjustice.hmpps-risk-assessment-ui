@@ -7,6 +7,11 @@ const {
   },
 } = require('../config')
 
+const getOffenderData = (uuid, tokens) => {
+  const path = `${url}/assessment/{uuid}/subject`
+  return getData(path, tokens)
+}
+
 const getQuestionGroup = (groupId, tokens) => {
   const path = `${url}/questions/${groupId}`
   return getData(path, tokens)
@@ -85,6 +90,7 @@ const logError = error => {
 }
 
 module.exports = {
+  getOffenderData,
   getQuestionGroup,
   getAnswers,
   getAssessmentsList,

@@ -5,6 +5,9 @@
 //   apis: { offenderAssessments },
 // } = require('../common/config')
 
+// middleware
+const getOffenderDetails = require('../common/middleware/getOffenderDetails')
+
 // pages
 const { startController } = require('./start/get.controller')
 const { displayAssessmentsList } = require('./assessmentsList/get.controller')
@@ -26,6 +29,9 @@ module.exports = app => {
   //     return result
   //   })
   // })
+
+  app.use(getOffenderDetails)
+
   app.get(`/`, (req, res) => {
     res.redirect('/start')
   })
