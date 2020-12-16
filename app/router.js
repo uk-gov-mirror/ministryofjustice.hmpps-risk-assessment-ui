@@ -32,17 +32,15 @@ module.exports = app => {
   //   })
   // })
 
-  app.use(getOffenderDetails)
-
   app.get(`/`, (req, res) => {
     res.redirect('/start')
   })
   app.get(`/start`, startController)
 
-  app.get(`/:assessmentId/assessments`, displayAssessmentsList)
+  app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 
-  app.get(`/:assessmentId/questiongroup/:groupId/:subgroup`, displayQuestionGroup)
-  app.post(`/:assessmentId/questiongroup/:groupId/:subgroup`, saveQuestionGroup)
+  app.get(`/:assessmentId/questiongroup/:groupId/:subgroup`, getOffenderDetails, displayQuestionGroup)
+  app.post(`/:assessmentId/questiongroup/:groupId/:subgroup`, getOffenderDetails, saveQuestionGroup)
 
   app.get('/psr-from-court', psrFromCourt)
   app.post('/psr-from-court', startPsrFromCourt)
