@@ -2,8 +2,6 @@
 const { logger } = require('../../common/logging/logger')
 const { postAnswers } = require('../../common/data/assessmentApi')
 
-const episodeId = '4511a3f6-7f51-4b96-b603-4e75eac0c839'
-
 const saveQuestionGroup = async ({ params: { assessmentId, groupId, subgroup }, body, tokens }, res) => {
   try {
     const dateKeys = findDateAnswerKeys(body)
@@ -24,12 +22,12 @@ const saveQuestionGroup = async ({ params: { assessmentId, groupId, subgroup }, 
     })
     const answers = extractAnswers(body)
 
-    await postAnswers(assessmentId, episodeId, answers, tokens)
+    await postAnswers(assessmentId, 'current', answers, tokens)
 
     const subIndex = Number.parseInt(subgroup, 10)
     return res.redirect(`/${assessmentId}/questionGroup/${groupId}/${subIndex + 1}`)
   } catch (error) {
-    logger.error(`Could not save to assessment ${assessmentId}, episode ${episodeId}, error: ${error}`)
+    logger.error(`Could not save to assessment ${assessmentId}, current episode, error: ${error}`)
     return res.render('app/error', { error })
   }
 }

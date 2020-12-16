@@ -32,7 +32,7 @@ describe('post answers', () => {
     await saveQuestionGroup(req, res)
     expect(postAnswers).toHaveBeenCalledWith(
       'test-assessment-id',
-      '4511a3f6-7f51-4b96-b603-4e75eac0c839',
+      'current',
       {
         answers: {
           '11111111-1111-1111-1111-111111111201': {
@@ -69,7 +69,7 @@ describe('post answers', () => {
     await saveQuestionGroup(req, res)
     expect(postAnswers).toHaveBeenCalledWith(
       'test-assessment-id',
-      '4511a3f6-7f51-4b96-b603-4e75eac0c839',
+      'current',
       {
         answers: {
           '11111111-1111-1111-1111-111111111201': {

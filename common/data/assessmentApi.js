@@ -13,7 +13,7 @@ const assessmentSupervision = (assessmentDto, tokens) => {
 }
 
 const getOffenderData = (uuid, tokens) => {
-  const path = `${url}/assessment/{uuid}/subject`
+  const path = `${url}/assessments/${uuid}/subject`
   return getData(path, tokens)
 }
 
