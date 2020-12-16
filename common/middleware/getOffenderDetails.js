@@ -1,12 +1,9 @@
 const logger = require('../logging/logger')
 const { getOffenderData } = require('../data/assessmentApi')
-const {
-  dev: { devAssessmentId },
-} = require('../config')
 
-module.exports = async ({ tokens }, res, next) => {
+module.exports = async ({ params: { assessmentId }, tokens }, res, next) => {
   try {
-    const { name, pnc = null, crn = null, dob, age } = await getOffenderData(devAssessmentId, tokens)
+    const { name, pnc = null, crn = null, dob, age } = await getOffenderData(assessmentId, tokens)
     if (!name) throw new Error('Required offender details could not be found')
     res.locals.offenderDetails = {
       name,

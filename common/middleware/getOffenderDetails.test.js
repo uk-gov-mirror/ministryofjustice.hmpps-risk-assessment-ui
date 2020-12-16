@@ -15,7 +15,12 @@ describe('getOffenderDetails middleware', () => {
   const render = jest.fn()
   const tokens = {}
   beforeEach(() => {
-    req = { tokens }
+    req = {
+      params: {
+        assessmentId: devAssessmentId,
+      },
+      tokens,
+    }
     res = { render, locals: {} }
     getOffenderData.mockResolvedValue(offenderData)
   })
