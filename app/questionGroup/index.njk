@@ -2,11 +2,8 @@
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-{% from "govuk/components/input/macro.njk" import govukInput %}
-{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
-{% from "govuk/components/radios/macro.njk" import govukRadios %}
-{% from "govuk/components/select/macro.njk" import govukSelect %}
-{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+
 
 {% set errorHeading = "Error - " + heading %}
 
@@ -43,105 +40,8 @@
 
             <form method="post" id="{{ groupId }}" novalidate>
 
-                {# templates for each question type #}
                 {% for question in questions %}
-                    {% switch question.answerType %}
-                    {% case 'freetext' %}
-                        {{ govukInput({
-                            id: 'id-' + question.questionId,
-                            name: 'id-' + question.questionId,
-                            value: question.answer | encodeHtml | safe,
-                            label: {
-                                text: question.questionText,
-                                isPageHeading: false,
-                                classes: question.questionCode
-                            },
-                            hint: {
-                                text: question.hint
-                            }
-                        }) }}
-                    {% case 'textarea' %}
-                        {{ govukTextarea({
-                            id: 'id-' + question.questionId,
-                            name: 'id-' + question.questionId,
-                            value: question.answer | encodeHtml | safe,
-                            label: {
-                                text: question.questionText,
-                                isPageHeading: false,
-                                classes: question.questionCode
-                            },
-                            hint: {
-                                text: question.hint
-                            }
-                        }) }}
-                    {% case 'radio' %}
-                        {{ govukRadios({
-                            idPrefix: 'id-' + question.questionId,
-                            name: 'id-' + question.questionId,
-                            fieldset: {
-                                legend: {
-                                    text: question.questionText
-                                }
-                            },
-                            items: question.answerSchemas
-                        }) }}
-
-                    {% case 'dropdown' %}
-                        {{ govukSelect({
-                            id: 'id-' + question.questionId,
-                            name: 'id-' + question.questionId,
-                            label: {
-                                text: question.questionText
-                            },
-                            items: question.answerSchemas
-                        }) }}
-
-                    {% case 'date' %}
-                        {% if question.answer.length > 0 %}
-                            {% set answerDay = question.answer | date("DD") %}
-                            {% set answerMonth = question.answer | date("MM") %}
-                            {% set answerYear = question.answer | date("YYYY") %}
-                        {% else %}
-                            {% set answerDay = '' %}
-                            {% set answerMonth = '' %}
-                            {% set answerYear = '' %}
-                        {% endif %}
-
-                        {{ govukDateInput({
-                            id: 'id-' + question.questionId,
-                            namePrefix: 'id-' + question.questionId,
-                            fieldset: {
-                                legend: {
-                                    text: question.questionText,
-                                    isPageHeading: false
-                                }
-                            },
-                            hint: {
-                                text: question.hint
-                            },
-                            items: [
-                                {
-                                    classes: "govuk-input--width-2",
-                                    name: "day",
-                                    value: answerDay
-                                },
-                                {
-                                    classes: "govuk-input--width-2",
-                                    name: "month",
-                                    value: answerMonth
-                                },
-                                {
-                                    classes: "govuk-input--width-4",
-                                    name: "year",
-                                    value: answerYear
-                                }
-                            ]
-                        }) }}
-
-                    {% default %}
-                        <!-- {{ question.questionId }} - {{ question.answerType }} questions are not currently rendered -->
-                    {% endswitch %}
-
+                    {{ renderQuestion(question) }}
                 {% endfor %}
 
                 {% if last %}

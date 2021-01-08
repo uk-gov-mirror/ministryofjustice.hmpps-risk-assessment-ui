@@ -1,3 +1,5 @@
+const nunjucks = require('nunjucks')
+
 const { logger } = require('../../common/logging/logger')
 const { getQuestionGroup, getAnswers } = require('../../common/data/assessmentApi')
 
@@ -14,7 +16,8 @@ const displayQuestionGroup = async ({ params: { assessmentId, groupId, subgroup 
     }
 
     const { answers } = await grabAnswers(assessmentId, 'current', tokens)
-    const questions = annotateWithAnswers(questionGroup.contents[subIndex].contents, answers)
+    let questions = annotateWithAnswers(questionGroup.contents[subIndex].contents, answers)
+    questions = compileInlineConditionalQuestions(questions)
 
     return res.render(`${__dirname}/index`, {
       assessmentId,
@@ -58,8 +61,49 @@ const annotateWithAnswers = (questions, answers) => {
   })
 }
 
+const compileInlineConditionalQuestions = questions => {
+  // construct an object with all conditional questions, keyed on id
+  const conditionalQuestions = {}
+  questions.forEach(question => {
+    if (question.conditional) {
+      const key = question.questionId
+      conditionalQuestions[key] = question
+    }
+  })
+
+  // remove now unneeded conditional questions
+  const unconditionalQuestions = questions.filter(question => {
+    return !question.conditional
+  })
+
+  // add in rendered conditional question strings to each answer
+  return unconditionalQuestions.map(question => {
+    const currentQuestion = question
+    currentQuestion.answerSchemas = question.answerSchemas.map(schema => {
+      if (schema.conditional) {
+        let conditionalQuestionString =
+          '{% from "./common/templates/components/question/macro.njk" import renderQuestion %} \n'
+        conditionalQuestionString += `{{ renderQuestion(${JSON.stringify(conditionalQuestions[schema.conditional])}) }}`
+
+        const updatedSchema = schema
+        updatedSchema.conditional = {
+          html: nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, ''),
+        }
+
+        return updatedSchema
+      }
+
+      return schema
+    })
+
+    return currentQuestion
+  })
+}
+
 const annotateAnswerSchemas = (answerSchemas, answerValue) => {
-  if (answerValue === null) return answerSchemas
+  if (answerValue === null) {
+    return answerSchemas
+  }
 
   return answerSchemas.map(as =>
     Object.assign(as, {

@@ -13,7 +13,7 @@ beforeEach(() => {})
 
 // any functionality to happen after every test
 afterEach(() => {
-  cy.pa11y()
+  // cy.pa11y()
   cy.lighthouse({ 'best-practices': 90 })
 })
 

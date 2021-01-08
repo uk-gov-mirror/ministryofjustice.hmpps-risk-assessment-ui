@@ -1,10 +1,26 @@
+// Initialise nunjucks environment
+const { configure } = require('nunjucks')
+
+const nunjucksEnvironment = configure({}, {})
+const dateFilter = require('nunjucks-date-filter')
+const { encodeHTML } = require('../../common/utils/util')
+const { mojDate } = require('../../node_modules/@ministryofjustice/frontend/moj/filters/all.js')()
+// add custom nunjucks filters
+nunjucksEnvironment.addFilter('date', dateFilter)
+nunjucksEnvironment.addFilter('mojDate', mojDate)
+nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
+
 const { displayQuestionGroup } = require('./get.controller')
 const { getQuestionGroup, getAnswers } = require('../../common/data/assessmentApi')
-const questionGroup = require('../../wiremock/responses/questionGroups.json')['22222222-2222-2222-2222-222222222203']
+const questionGroupPointer = require('../../wiremock/responses/questionGroups.json')[
+  '22222222-2222-2222-2222-222222222203'
+]
 
 jest.mock('../../common/data/assessmentApi')
 
 const tokens = { authorisationToken: 'mytoken' }
+let questionGroup
+let expectedForThisTest
 
 const expected = {
   assessmentId: 'test-assessment-id',
@@ -64,6 +80,11 @@ const expected = {
           answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
           text: 'Yes',
           value: 'Y',
+          conditional: {
+            html:
+              ' <div class="govuk-form-group"><label class="govuk-label Further information govuk-label--m" for="id-conditional-question-id-1111111">Further information</label><div id="id-conditional-question-id-1111111-hint" class="govuk-hint"></div><textarea class="govuk-textarea" id="id-conditional-question-id-1111111" name="id-conditional-question-id-1111111" rows="5" aria-describedby="id-conditional-question-id-1111111-hint"></textarea>\n' +
+              '</div>',
+          },
         },
         {
           answerSchemaCode: 'SR15.1.2.2',
@@ -153,6 +174,8 @@ describe('display question group and answers', () => {
   }
 
   beforeEach(() => {
+    questionGroup = JSON.parse(JSON.stringify(questionGroupPointer))
+    expectedForThisTest = JSON.parse(JSON.stringify(expected))
     req.params.subgroup = 0
     getQuestionGroup.mockReset()
     getAnswers.mockReset()
@@ -164,11 +187,11 @@ describe('display question group and answers', () => {
       answers: {},
     })
     await displayQuestionGroup(req, res)
-    expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, expected)
+    expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, expectedForThisTest)
   })
 
   it('should mix in answers when available', async () => {
-    const expectedWithAnswers = JSON.parse(JSON.stringify(expected))
+    const expectedWithAnswers = JSON.parse(JSON.stringify(expectedForThisTest))
     const forenameAnswer = 'Bob'
     const surnameAnswer = 'Mould'
     expectedWithAnswers.questions[0].answer = forenameAnswer
