@@ -14,7 +14,7 @@ const { displayAssessmentsList } = require('./assessmentsList/get.controller')
 const { displayQuestionGroup } = require('./questionGroup/get.controller')
 const { saveQuestionGroup } = require('./questionGroup/post.controller')
 const { psrFromCourt } = require('./psrFromCourt/get.controller')
-const { startPsrFromCourt } = require('./psrFromCourt/post.controller')
+const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.controller')
 
 // Export
 module.exports = app => {
@@ -43,7 +43,8 @@ module.exports = app => {
   app.post(`/:assessmentId/questiongroup/:groupId/:subgroup`, getOffenderDetails, saveQuestionGroup)
 
   app.get('/psr-from-court', psrFromCourt)
-  app.post('/psr-from-court', startPsrFromCourt)
+  app.post('/psr-from-court', startPsrFromForm)
+  app.post('/psr-from-court/:courtCode/case/:caseNumber', startPsrFromCourt)
 
   app.get('*', (req, res) => res.render('app/error', { error: '404, Page Not Found' }))
 }
