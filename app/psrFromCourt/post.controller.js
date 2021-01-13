@@ -15,7 +15,7 @@ const startPsr = async (courtCode, caseNumber, tokens, res) => {
   try {
     const assessment = await assessmentSupervision({ courtCode, caseNumber }, tokens)
 
-    return res.redirect(`/${assessment.assessmentUuid}/questionGroup/pre_sentence_report/0`)
+    return res.redirect(`/${assessment.assessmentUuid}/questionGroup/pre_sentence_assessment/0`)
   } catch (error) {
     return res.render('app/error', { error })
   }
