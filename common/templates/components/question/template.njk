@@ -5,12 +5,15 @@
 {%- from "node_modules/govuk-frontend/govuk/components/date-input/macro.njk" import govukDateInput -%}
 
 {# templates for each question type #}
+{% set questionAnswer = bodyAnswer or question.answer or '' %}
+{% set errorMessage = thisErrorMessage or errors['id-' + question.questionId] %}
+
 {% switch question.answerType %}
   {% case 'freetext' %}
     {{ govukInput({
       id: 'id-' + question.questionId,
       name: 'id-' + question.questionId,
-      value: question.answer | encodeHtml | safe,
+      value: questionAnswer | encodeHtml | safe,
       label: {
         text: question.questionText,
         isPageHeading: false,
@@ -18,13 +21,15 @@
       },
       hint: {
         text: question.hint
-      }
+      },
+      errorMessage: errorMessage
+
     }) }}
   {% case 'textarea' %}
     {{ govukTextarea({
       id: 'id-' + question.questionId,
       name: 'id-' + question.questionId,
-      value: question.answer | encodeHtml | safe,
+      value: questionAnswer | encodeHtml | safe,
       label: {
         text: question.questionText,
         isPageHeading: false,
@@ -32,7 +37,8 @@
       },
       hint: {
         text: question.hint
-      }
+      },
+      errorMessage: errorMessage
     }) }}
   {% case 'radio' %}
     {{ govukRadios({
@@ -44,7 +50,8 @@
           classes: question.questionCode + ' govuk-label--m'
         }
       },
-      items: question.answerSchemas
+      items: question.answerSchemas,
+      errorMessage: errorMessage
     }) }}
 
   {% case 'dropdown' %}
@@ -55,7 +62,8 @@
         text: question.questionText,
         classes: question.questionCode + ' govuk-label--m'
       },
-      items: question.answerSchemas
+      items: question.answerSchemas,
+      errorMessage: errorMessage
     }) }}
 
   {% case 'date' %}
@@ -98,7 +106,8 @@
           name: "year",
           value: answerYear
         }
-      ]
+      ],
+      errorMessage: errorMessage
     }) }}
 
   {% default %}

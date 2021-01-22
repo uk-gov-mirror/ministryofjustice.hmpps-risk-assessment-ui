@@ -48,6 +48,14 @@ describe('getFormsList', () => {
           questionCount: 0,
           path: '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222240/0',
         },
+        {
+          contentCount: 12,
+          groupCount: 0,
+          groupId: 'b7e505fa-0de8-47ee-a207-c23f65782cb4',
+          path: '/test-assessment-id/questionGroup/b7e505fa-0de8-47ee-a207-c23f65782cb4/0',
+          questionCount: 0,
+          title: 'Short pre sentence assessment',
+        },
       ],
     }
     getAssessmentsList.mockReturnValueOnce(questionList)

@@ -1,26 +1,106 @@
 /* eslint-disable no-param-reassign */
+const { body } = require('express-validator')
 const { logger } = require('../../common/logging/logger')
+const { displayQuestionGroup, grabQuestionGroup } = require('./get.controller')
 const { postAnswers } = require('../../common/data/assessmentApi')
+const { dynamicMiddleware } = require('../../common/utils/util')
 
-const saveQuestionGroup = async ({ params: { assessmentId, groupId, subgroup }, body, tokens }, res) => {
+const constructValidationRule = (questionId, validationType, validationSettings) => {
+  switch (validationType) {
+    case 'mandatory':
+      return body(questionId)
+        .isLength({ min: 1 })
+        .withMessage({ error: validationSettings.errorMessage, errorSummary: validationSettings.errorSummary })
+    default:
+      return ''
+  }
+}
+
+const validationRules = async (req, res, next) => {
+  const {
+    params: { groupId, subgroup },
+    tokens,
+    body: reqBody,
+  } = req
+  const questionGroup = await grabQuestionGroup(groupId, tokens)
+  const subIndex = Number.parseInt(subgroup, 10)
+  const currentQuestions = questionGroup.contents[subIndex].contents
+
+  const validatorsToSend = []
+
+  currentQuestions.forEach(question => {
+    let addThisValidation = true
+    if (question.validation) {
+      // check if this is a conditional question with a parent
+      if (question.conditional) {
+        let conditionalParentAnswer = ''
+        const conditionalQuestionToFind = question.questionId
+        const parentQuestion = currentQuestions.filter(thisQuestion => {
+          let foundParent = false
+          thisQuestion.answerSchemas.forEach(schema => {
+            if (schema.conditional === conditionalQuestionToFind) {
+              foundParent = true
+              conditionalParentAnswer = schema.value
+            }
+          })
+          return foundParent
+        })
+
+        if (parentQuestion[0]) {
+          // if parent question answer submitted does not match the triggering answer, skip this validation
+          const answerId = `id-${parentQuestion[0].questionId}`
+          if (reqBody[answerId] !== conditionalParentAnswer) {
+            addThisValidation = false
+          }
+        } else {
+          logger.error(`No parent question found for conditional question ${question.questionId}`)
+          addThisValidation = false
+        }
+      }
+
+      if (addThisValidation) {
+        const validation = JSON.parse(question.validation)
+        if (validation) {
+          Object.entries(validation).forEach(([validationType, feedback]) => {
+            validatorsToSend.push(constructValidationRule(`id-${question.questionId}`, validationType, feedback))
+          })
+        }
+      }
+    }
+  })
+
+  await dynamicMiddleware(validatorsToSend, req, res, next)
+}
+
+const saveQuestionGroup = async (req, res) => {
+  const {
+    params: { assessmentId, groupId, subgroup },
+    body: reqBody,
+    tokens,
+    errors,
+  } = req
+  if (errors) {
+    return displayQuestionGroup(req, res)
+  }
+
   try {
-    const dateKeys = findDateAnswerKeys(body)
+    const dateKeys = findDateAnswerKeys(reqBody)
 
     dateKeys.forEach(key => {
       const dateKey = key.replace(/-day$/, '')
       let constructedDate = ''
-      if (body[`${dateKey}-year`] && body[`${dateKey}-month`] && body[`${dateKey}-day`]) {
+      if (reqBody[`${dateKey}-year`] && reqBody[`${dateKey}-month`] && reqBody[`${dateKey}-day`]) {
         constructedDate = new Date(
-          `${body[`${dateKey}-year`]}-${body[`${dateKey}-month`]}-${body[`${dateKey}-day`]}`,
+          `${reqBody[`${dateKey}-year`]}-${reqBody[`${dateKey}-month`]}-${reqBody[`${dateKey}-day`]}`,
         ).toISOString()
       }
 
-      body[dateKey] = constructedDate
-      delete body[`${dateKey}-year`]
-      delete body[`${dateKey}-month`]
-      delete body[`${dateKey}-day`]
+      reqBody[dateKey] = constructedDate
+      delete reqBody[`${dateKey}-year`]
+      delete reqBody[`${dateKey}-month`]
+      delete reqBody[`${dateKey}-day`]
     })
-    const answers = extractAnswers(body)
+    const answers = extractAnswers(reqBody)
 
     await postAnswers(assessmentId, 'current', answers, tokens)
 
@@ -32,16 +112,16 @@ const saveQuestionGroup = async ({ params: { assessmentId, groupId, subgroup }, 
   }
 }
 
-function findDateAnswerKeys(body) {
+function findDateAnswerKeys(postBody) {
   // find keys of all the dates in the body
   const pattern = /-day$/
-  return Object.keys(body).filter(key => {
+  return Object.keys(postBody).filter(key => {
     return pattern.test(key)
   })
 }
 
-function extractAnswers(body) {
-  const shapedAnswers = Object.entries(body).reduce((answers, [key, value]) => {
+function extractAnswers(postBody) {
+  const shapedAnswers = Object.entries(postBody).reduce((answers, [key, value]) => {
     const trimmedKey = key.replace(/^id-/, '')
 
     const answerValue = { freeTextAnswer: value, answers: {} }
@@ -52,4 +132,4 @@ function extractAnswers(body) {
   return { answers: shapedAnswers }
 }
 
-module.exports = { saveQuestionGroup }
+module.exports = { saveQuestionGroup, questionGroupValidationRules: validationRules }

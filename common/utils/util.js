@@ -1,3 +1,4 @@
+const async = require('async')
 const { getNamespace } = require('cls-hooked')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
@@ -102,6 +103,23 @@ const encodeHTML = str => {
     .replace(/'/g, '&#039;')
 }
 
+// This function executes middleware in series
+const dynamicMiddleware = async (validators, req, res, next) => {
+  async.eachSeries(
+    validators,
+    (middleware, doneMiddleware) => {
+      middleware.bind(null, req, res, doneMiddleware)()
+    },
+    error => {
+      if (error) {
+        logger.error('Problem executing dynamic middleware')
+        throw error
+      }
+      return next(error)
+    },
+  )
+}
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -114,4 +132,5 @@ module.exports = {
   getCorrelationId,
   updateMDC,
   encodeHTML,
+  dynamicMiddleware,
 }

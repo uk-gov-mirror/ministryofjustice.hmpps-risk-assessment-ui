@@ -4,6 +4,7 @@ const { isEmptyObject } = require('../utils/util')
 
 const validate = (req, res, next) => {
   const { errors } = validationResult(req)
+
   if (isEmptyObject(errors)) {
     return next()
   }

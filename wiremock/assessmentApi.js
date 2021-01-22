@@ -116,6 +116,7 @@ const stubQuestions = async () => {
   await stubQuestionGroup('22222222-2222-2222-2222-222222222203')
   await stubQuestionGroup('22222222-2222-2222-2222-222222222201')
   await stubQuestionGroup('22222222-2222-2222-2222-222222222240')
+  await stubQuestionGroup('b7e505fa-0de8-47ee-a207-c23f65782cb4') // short psr
 }
 const stubAnswers = async () => {
   await stubAnswersGroup(1234)

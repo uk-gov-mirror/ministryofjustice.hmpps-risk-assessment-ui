@@ -41,7 +41,7 @@
             <form method="post" id="{{ groupId }}" novalidate>
 
                 {% for question in questions %}
-                    {{ renderQuestion(question) }}
+                    {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId]) }}
                 {% endfor %}
 
                 {% if last %}

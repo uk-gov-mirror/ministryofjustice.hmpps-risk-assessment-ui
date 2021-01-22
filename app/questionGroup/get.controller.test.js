@@ -24,6 +24,8 @@ let expectedForThisTest
 
 const expected = {
   assessmentId: 'test-assessment-id',
+  bodyAnswers: {},
+  errors: {},
   groupId: '22222222-2222-2222-2222-222222222203',
   heading: 'Brief Form',
   last: true,
@@ -33,22 +35,24 @@ const expected = {
       answerSchemas: [],
       answerType: 'freetext',
       displayOrder: '1',
-      mandatory: 'no',
+      mandatory: 'yes',
       questionCode: 'forename',
       questionId: '11111111-1111-1111-1111-111111111202',
       questionText: 'Forename',
       type: 'question',
+      validation: '{"mandatory":{"errorMessage":"Enter the forename","errorSummary":"You must enter a forename"}}',
     },
     {
       answer: null,
       answerSchemas: [],
       answerType: 'freetext',
       displayOrder: '2',
-      mandatory: 'no',
+      mandatory: 'yes',
       questionCode: 'surname',
       questionId: '11111111-1111-1111-1111-111111111201',
       questionText: 'Surname',
       type: 'question',
+      validation: '{"mandatory":{"errorMessage":"Enter the surname","errorSummary":"You must enter a surname"}}',
     },
     {
       answer: null,
@@ -100,6 +104,7 @@ const expected = {
       questionId: '11111111-1111-1111-1111-111111111231',
       questionText: 'Currently of no fixed abode or in transient accommodation',
       type: 'question',
+      validation: '{"mandatory":{"errorMessage":"Select an option","errorSummary":"Select an accommodation status"}}',
     },
     {
       answer: null,
@@ -161,6 +166,7 @@ const expected = {
 
 describe('display question group and answers', () => {
   const req = {
+    body: {},
     tokens,
     params: {
       assessmentId: 'test-assessment-id',

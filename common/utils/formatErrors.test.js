@@ -9,8 +9,14 @@ const errors = [
   },
   {
     value: 'My field value',
-    msg: 'Error message',
+    msg: { error: 'The error message', errorSummary: 'The error summary message' },
     param: 'needtoknow',
+    location: 'body',
+  },
+  {
+    value: 'My other field value',
+    msg: { error: 'A single error message' },
+    param: 'firstname',
     location: 'body',
   },
 ]
@@ -43,7 +49,10 @@ describe('should format errors into correct form for rendering in templates', ()
         text: 'Record how you will take account of diversity factors',
       },
       needtoknow: {
-        text: 'Error message',
+        text: 'The error message',
+      },
+      firstname: {
+        text: 'A single error message',
       },
     }
     expect(formatErrors(errors)).toEqual(expected)
@@ -59,7 +68,11 @@ describe('should format errors into correct form for rendering in template error
       },
       {
         href: '#needtoknow-error',
-        text: 'Error message',
+        text: 'The error summary message',
+      },
+      {
+        href: '#firstname-error',
+        text: 'A single error message',
       },
     ]
     expect(formatErrorSummary(errors)).toEqual(expected)

@@ -3,7 +3,10 @@ const nunjucks = require('nunjucks')
 const { logger } = require('../../common/logging/logger')
 const { getQuestionGroup, getAnswers } = require('../../common/data/assessmentApi')
 
-const displayQuestionGroup = async ({ params: { assessmentId, groupId, subgroup }, tokens }, res) => {
+const displayQuestionGroup = async (
+  { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary, tokens },
+  res,
+) => {
   try {
     const questionGroup = await grabQuestionGroup(groupId, tokens)
     const subIndex = Number.parseInt(subgroup, 10)
@@ -16,16 +19,19 @@ const displayQuestionGroup = async ({ params: { assessmentId, groupId, subgroup 
     }
 
     const { answers } = await grabAnswers(assessmentId, 'current', tokens)
-    let questions = annotateWithAnswers(questionGroup.contents[subIndex].contents, answers)
-    questions = compileInlineConditionalQuestions(questions)
+    let questions = annotateWithAnswers(questionGroup.contents[subIndex].contents, answers, body)
+    questions = compileInlineConditionalQuestions(questions, errors)
 
     return res.render(`${__dirname}/index`, {
+      bodyAnswers: { ...body },
       assessmentId,
       heading: questionGroup.title,
       subheading: questionGroup.contents[subIndex].title,
       groupId,
       questions,
       last: subIndex + 1 === questionGroup.contents.length,
+      errors,
+      errorSummary,
     })
   } catch (error) {
     return res.render('app/error', { error })
@@ -50,10 +56,10 @@ const grabAnswers = (assessmentId, episodeId, tokens) => {
   }
 }
 
-const annotateWithAnswers = (questions, answers) => {
+const annotateWithAnswers = (questions, answers, body) => {
   return questions.map(q => {
     const answer = answers[q.questionId]
-    const answerValue = answer ? answer.freeTextAnswer : null
+    const answerValue = body[`id-${q.questionId}`] || (answer ? answer.freeTextAnswer : null)
     return Object.assign(q, {
       answer: answerValue,
       answerSchemas: annotateAnswerSchemas(q.answerSchemas, answerValue),
@@ -61,7 +67,7 @@ const annotateWithAnswers = (questions, answers) => {
   })
 }
 
-const compileInlineConditionalQuestions = questions => {
+const compileInlineConditionalQuestions = (questions, errors) => {
   // construct an object with all conditional questions, keyed on id
   const conditionalQuestions = {}
   questions.forEach(question => {
@@ -81,10 +87,18 @@ const compileInlineConditionalQuestions = questions => {
     const currentQuestion = question
     currentQuestion.answerSchemas = question.answerSchemas.map(schema => {
       if (schema.conditional) {
+        let thisError
+        const errorString = errors[`id-${conditionalQuestions[schema.conditional].questionId}`]?.text
+
+        if (errorString) {
+          thisError = `{text:'${errorString}'}`
+        }
         let conditionalQuestionString =
           '{% from "./common/templates/components/question/macro.njk" import renderQuestion %} \n'
-        conditionalQuestionString += `{{ renderQuestion(${JSON.stringify(conditionalQuestions[schema.conditional])}) }}`
 
+        conditionalQuestionString += `{{ renderQuestion(${JSON.stringify(
+          conditionalQuestions[schema.conditional],
+        )},'','',${thisError}) }}`
         const updatedSchema = schema
         updatedSchema.conditional = {
           html: nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, ''),
@@ -113,4 +127,4 @@ const annotateAnswerSchemas = (answerSchemas, answerValue) => {
   )
 }
 
-module.exports = { displayQuestionGroup }
+module.exports = { displayQuestionGroup, grabQuestionGroup }
