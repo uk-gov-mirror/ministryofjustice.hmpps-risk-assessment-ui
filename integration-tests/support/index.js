@@ -17,14 +17,9 @@ beforeEach(() => {})
 // Will be able to remove once this is fixed in the templates.
 afterEach(() => {
   cy.pa11y({
-    hideElements: 'input[aria-expanded]',
+    standard: 'WCAG2AA',
+    hideElements: '.govuk-footer__copyright-logo, input[aria-expanded]',
+    includeWarnings: true,
   })
   cy.lighthouse({ 'best-practices': 90 })
-})
-
-// There seem to be some uncaught exceptions in Gov UK
-Cypress.on('uncaught:exception', (err, runnable) => {
-  // returning false here prevents Cypress from
-  // failing the test
-  return false
 })

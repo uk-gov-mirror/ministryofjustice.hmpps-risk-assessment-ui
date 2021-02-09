@@ -1,10 +1,11 @@
+// @ts-check
 const nunjucks = require('nunjucks')
 
 const { logger } = require('../../common/logging/logger')
 const { getQuestionGroup, getAnswers } = require('../../common/data/assessmentApi')
 
 const displayQuestionGroup = async (
-  { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary, tokens },
+  { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary = null, tokens },
   res,
 ) => {
   try {
@@ -77,41 +78,77 @@ const compileInlineConditionalQuestions = (questions, errors) => {
     }
   })
 
-  // remove now unneeded conditional questions
-  const unconditionalQuestions = questions.filter(question => {
-    return !question.conditional
-  })
+  const conditionalQuestionsToRemove = []
+  const outOfLineConditionalQuestions = []
 
-  // add in rendered conditional question strings to each answer
-  return unconditionalQuestions.map(question => {
+  // add in rendered conditional question strings to each answer when displayed inline
+  // add appropriate classes to hide questions to be displayed out-of-line
+  const compiledQuestions = questions.map(question => {
     const currentQuestion = question
-    currentQuestion.answerSchemas = question.answerSchemas.map(schema => {
-      if (schema.conditional) {
-        let thisError
-        const errorString = errors[`id-${conditionalQuestions[schema.conditional].questionId}`]?.text
+    currentQuestion.answerSchemas = question.answerSchemas.map(schemaLine => {
+      const updatedSchemaLine = schemaLine
+      if (schemaLine.conditional) {
+        const subjectId = schemaLine.conditional
+        if (schemaLine.displayInline) {
+          // if to be displayed inline then compile HTML string and add to parent question answer
+          let thisError
 
-        if (errorString) {
-          thisError = `{text:'${errorString}'}`
+          const errorString = errors[`id-${conditionalQuestions[subjectId].questionId}`]?.text
+
+          if (errorString) {
+            thisError = `{text:'${errorString}'}`
+          }
+          let conditionalQuestionString =
+            '{% from "./common/templates/components/question/macro.njk" import renderQuestion %} \n'
+
+          conditionalQuestionString += `{{ renderQuestion(${JSON.stringify(
+            conditionalQuestions[subjectId],
+          )},'','',${thisError}) }}`
+
+          updatedSchemaLine.conditional = {
+            html: nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, ''),
+          }
+
+          // mark the target question to be deleted later
+          conditionalQuestionsToRemove.push(subjectId)
+        } else {
+          updatedSchemaLine.attributes = [
+            ['data-conditional', `${subjectId}`],
+            ['data-aria-controls', `conditional-id-form-${subjectId}`],
+            ['aria-expanded', `false`],
+          ]
+          currentQuestion.isConditional = true
+          currentQuestion.attributes = [['data-contains-conditional', 'true']]
         }
-        let conditionalQuestionString =
-          '{% from "./common/templates/components/question/macro.njk" import renderQuestion %} \n'
-
-        conditionalQuestionString += `{{ renderQuestion(${JSON.stringify(
-          conditionalQuestions[schema.conditional],
-        )},'','',${thisError}) }}`
-        const updatedSchema = schema
-        updatedSchema.conditional = {
-          html: nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, ''),
-        }
-
-        return updatedSchema
+        return updatedSchemaLine
       }
-
-      return schema
+      return schemaLine
     })
-
     return currentQuestion
   })
+
+  return compiledQuestions
+    .filter(question => {
+      // remove questions that have been rendered inline
+      return (
+        !conditionalQuestionsToRemove.includes(question.questionId) ||
+        outOfLineConditionalQuestions.includes(question.questionId)
+      )
+    })
+    .map(question => {
+      // add css to hide questions to be displayed out of line
+      const questionObject = question
+      if (questionObject.conditional) {
+        questionObject.formClasses =
+          'govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden'
+        questionObject.isConditional = true
+        questionObject.attributes = [
+          ['data-outofline', 'true'],
+          ['data-base-id', `${questionObject.questionId}`],
+        ]
+      }
+      return questionObject
+    })
 }
 
 const annotateAnswerSchemas = (answerSchemas, answerValue) => {

@@ -53,6 +53,32 @@ context('Basic questions display', () => {
     AssessmentsPage.verifyOnPage()
   })
 
+  it('Show out of line conditional question', () => {
+    const questionsPage = QuestionsPage.goTo()
+
+    cy.get('#conditional-id-form-conditional-question-id-9911111').should('not.be.visible')
+
+    // show it
+    cy.get('#id-99111111-1111-1111-1111-111111111231[type="radio"]')
+      .first()
+      .check()
+
+    cy.get('#conditional-id-form-conditional-question-id-9911111').should('be.visible')
+
+    cy.pa11y({
+      hideElements: 'input[aria-expanded]',
+    })
+
+    // hide it
+    questionsPage
+      .questions()
+      .get('#id-99111111-1111-1111-1111-111111111231-2[type="radio"]')
+      .first()
+      .check()
+
+    cy.get('#conditional-id-form-conditional-question-id-9911111').should('not.be.visible')
+  })
+
   it('Post and see error summary and question error', () => {
     const questionsPage = QuestionsPage.goTo()
 

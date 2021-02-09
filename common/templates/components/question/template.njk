@@ -14,6 +14,9 @@
       id: 'id-' + question.questionId,
       name: 'id-' + question.questionId,
       value: questionAnswer | encodeHtml | safe,
+      formGroup : {
+        classes: question.formClasses
+      },
       label: {
         text: question.questionText,
         isPageHeading: false,
@@ -30,6 +33,9 @@
       id: 'id-' + question.questionId,
       name: 'id-' + question.questionId,
       value: questionAnswer | encodeHtml | safe,
+      formGroup : {
+        classes: question.formClasses
+      },
       label: {
         text: question.questionText,
         isPageHeading: false,
@@ -44,6 +50,10 @@
     {{ govukRadios({
       idPrefix: 'id-' + question.questionId,
       name: 'id-' + question.questionId,
+      formGroup : {
+        classes: question.formClasses
+      },
+      attributes: question.attributes,
       fieldset: {
         legend: {
           text: question.questionText,
@@ -51,19 +61,24 @@
         }
       },
       items: question.answerSchemas,
-      errorMessage: errorMessage
+      errorMessage: errorMessage,
+      isConditional: question.isConditional
     }) }}
 
   {% case 'dropdown' %}
     {{ govukSelect({
       id: 'id-' + question.questionId,
       name: 'id-' + question.questionId,
+      formGroup : {
+        classes: question.formClasses
+      },
       label: {
         text: question.questionText,
         classes: question.questionCode + ' govuk-label--m'
       },
       items: question.answerSchemas,
-      errorMessage: errorMessage
+      errorMessage: errorMessage,
+      isConditional: question.isConditional
     }) }}
 
   {% case 'date' %}

@@ -25,6 +25,7 @@ let expectedForThisTest
 const expected = {
   assessmentId: 'test-assessment-id',
   bodyAnswers: {},
+  errorSummary: null,
   errors: {},
   groupId: '22222222-2222-2222-2222-222222222203',
   heading: 'Brief Form',
@@ -82,13 +83,13 @@ const expected = {
         {
           answerSchemaCode: 'SR15.1.2.1',
           answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
-          text: 'Yes',
-          value: 'Y',
           conditional: {
             html:
-              ' <div class="govuk-form-group"><label class="govuk-label Further information govuk-label--m" for="id-conditional-question-id-1111111">Further information</label><div id="id-conditional-question-id-1111111-hint" class="govuk-hint"></div><textarea class="govuk-textarea" id="id-conditional-question-id-1111111" name="id-conditional-question-id-1111111" rows="5" aria-describedby="id-conditional-question-id-1111111-hint"></textarea>\n' +
-              '</div>',
+              ' <div class="govuk-form-group"><label class="govuk-label Further information govuk-label--m" for="id-conditional-question-id-1111111">Further information</label><div id="id-conditional-question-id-1111111-hint" class="govuk-hint"></div><textarea class="govuk-textarea" id="id-conditional-question-id-1111111" name="id-conditional-question-id-1111111" rows="5" aria-describedby="id-conditional-question-id-1111111-hint"></textarea>\n</div>',
           },
+          displayInline: true,
+          text: 'Yes',
+          value: 'Y',
         },
         {
           answerSchemaCode: 'SR15.1.2.2',
@@ -105,6 +106,78 @@ const expected = {
       questionText: 'Currently of no fixed abode or in transient accommodation',
       type: 'question',
       validation: '{"mandatory":{"errorMessage":"Select an option","errorSummary":"Select an accommodation status"}}',
+    },
+    {
+      answer: null,
+      answerSchemas: [
+        {
+          answerSchemaCode: 'SR15.1.2.1',
+          answerSchemaUuid: '99444444-4444-4444-4444-444444444444',
+          attributes: [
+            ['data-conditional', 'conditional-question-id-9911111'],
+            ['data-aria-controls', 'conditional-id-form-conditional-question-id-9911111'],
+            ['aria-expanded', 'false'],
+          ],
+          conditional: 'conditional-question-id-9911111',
+          displayInline: false,
+          text: 'Yes',
+          value: 'Y',
+        },
+        {
+          answerSchemaCode: 'SR15.1.2.2',
+          answerSchemaUuid: '99444444-4444-4444-4444-444444444445',
+          text: 'No',
+          value: 'N',
+        },
+      ],
+      answerType: 'radio',
+      attributes: [['data-contains-conditional', 'true']],
+      displayOrder: '1',
+      isConditional: true,
+      mandatory: 'no',
+      questionCode: 'no_fixed_abode',
+      questionId: '99111111-1111-1111-1111-111111111231',
+      questionText: 'Test question for displaying conditional out of line...',
+      type: 'question',
+    },
+    {
+      answer: null,
+      answerSchemas: [
+        {
+          answerSchemaCode: 'tenant_owner_occupied',
+          answerSchemaUuid: 'a26b1af8-d590-4a87-a347-a78347fa08c9',
+          text: 'Tenant owner / occupied',
+          value: 'tenant owner / occupied',
+        },
+        {
+          answerSchemaCode: 'living_with_stable_',
+          answerSchemaUuid: '34d227ab-437f-40b6-8a66-93a6486e9d6b',
+          text: 'Living with (stable)',
+          value: 'living with (stable)',
+        },
+        {
+          answerSchemaCode: 'living_with_unstable_',
+          answerSchemaUuid: 'd976f515-bfbe-4646-9d68-f0575c10ee96',
+          text: 'Living with (unstable)',
+          value: 'living with (unstable)',
+        },
+      ],
+      answerType: 'radio',
+      attributes: [
+        ['data-outofline', 'true'],
+        ['data-base-id', 'conditional-question-id-9911111'],
+      ],
+      conditional: true,
+      displayOrder: 4,
+      formClasses: 'govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden',
+      isConditional: true,
+      mandatory: true,
+      questionCode: '78.1',
+      questionId: 'conditional-question-id-9911111',
+      questionText: 'Accommodation type',
+      type: 'question',
+      validation:
+        '{"mandatory":{"errorMessage":"Select the accommodation type","errorSummary":"Select the accommodation type"}}',
     },
     {
       answer: null,
