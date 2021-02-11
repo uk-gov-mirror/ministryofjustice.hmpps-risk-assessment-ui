@@ -23,8 +23,8 @@ module.exports = {
     offenderAssessments: {
       url: get('OFFENDERASSESSMENT_API_URL', 'http://localhost:9191', true),
       timeout: {
-        response: get('OFFENDERASSESSMENTAPI_ENDPOINT_TIMEOUT_RESPONSE', 10000, true),
-        deadline: get('OFFENDERASSESSMENTAPI_TIMEOUT_DEADLINE', 10000, true),
+        response: get('OFFENDERASSESSMENTAPI_ENDPOINT_TIMEOUT_RESPONSE', 20000, true),
+        deadline: get('OFFENDERASSESSMENTAPI_TIMEOUT_DEADLINE', 20000, true),
       },
       agent: {
         maxSockets: 100,
