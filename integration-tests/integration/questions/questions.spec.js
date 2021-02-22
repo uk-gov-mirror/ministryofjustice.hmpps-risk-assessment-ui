@@ -65,9 +65,7 @@ context('Basic questions display', () => {
 
     cy.get('#conditional-id-form-conditional-question-id-9911111').should('be.visible')
 
-    cy.pa11y({
-      hideElements: 'input[aria-expanded]',
-    })
+    cy.checkA11y()
 
     // hide it
     questionsPage
@@ -107,9 +105,7 @@ context('Basic questions display', () => {
       .find('.govuk-error-message')
       .contains('Select an option')
 
-    cy.pa11y({
-      hideElements: 'input[aria-expanded]',
-    })
+    cy.checkA11y()
 
     questionsPage
       .questions()
@@ -144,5 +140,25 @@ context('Basic questions display', () => {
 
     questionsPage.save().click()
     AssessmentsPage.verifyOnPage()
+  })
+
+  it('Reveals multiple conditional questions', () => {
+    const questionsPage = QuestionsPage.goTo()
+
+    // check to see conditional questions
+    cy.get('#id-4077c218-3a16-4b92-9f98-bdd33cee476b').check()
+
+    // check conditional questions are showing
+    cy.get('#id-ef018645-b846-4022-b290-1e7d3d380b4d').should('be.visible')
+    cy.get('#conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64').should('be.visible')
+    cy.get('#conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
+
+    questionsPage.save().click()
+    cy.get('#id-4077c218-3a16-4b92-9f98-bdd33cee476b').should('be.checked')
+
+    // check they auto show after save and redisplay of page
+    cy.get('#id-ef018645-b846-4022-b290-1e7d3d380b4d').should('be.visible')
+    cy.get('#conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64').should('be.visible')
+    cy.get('#conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
   })
 })

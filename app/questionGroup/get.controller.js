@@ -87,9 +87,11 @@ const compileInlineConditionalQuestions = (questions, errors) => {
     const currentQuestion = question
     currentQuestion.answerSchemas = question.answerSchemas.map(schemaLine => {
       const updatedSchemaLine = schemaLine
-      if (schemaLine.conditional) {
-        const subjectId = schemaLine.conditional
-        if (schemaLine.displayInline) {
+      const outOfLineConditionalsForThisAnswer = []
+
+      schemaLine.conditionals?.forEach(conditionalDisplay => {
+        const subjectId = conditionalDisplay.conditional
+        if (conditionalDisplay.displayInline) {
           // if to be displayed inline then compile HTML string and add to parent question answer
           let thisError
 
@@ -112,16 +114,23 @@ const compileInlineConditionalQuestions = (questions, errors) => {
           // mark the target question to be deleted later
           conditionalQuestionsToRemove.push(subjectId)
         } else {
+          outOfLineConditionalsForThisAnswer.push(subjectId)
+        }
+
+        if (outOfLineConditionalsForThisAnswer?.length) {
+          const pre = 'conditional-id-form-'
+          const ariaControls = outOfLineConditionalsForThisAnswer.map(i => pre + i).join(' ')
           updatedSchemaLine.attributes = [
-            ['data-conditional', `${subjectId}`],
-            ['data-aria-controls', `conditional-id-form-${subjectId}`],
+            ['data-conditional', outOfLineConditionalsForThisAnswer.join(' ')],
+            ['data-aria-controls', ariaControls],
             ['aria-expanded', `false`],
           ]
           currentQuestion.isConditional = true
           currentQuestion.attributes = [['data-contains-conditional', 'true']]
         }
+
         return updatedSchemaLine
-      }
+      })
       return schemaLine
     })
     return currentQuestion

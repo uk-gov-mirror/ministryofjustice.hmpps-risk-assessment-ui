@@ -13,29 +13,40 @@ function nodeListForEach(nodes, callback) {
   }
 }
 
-window.GOVUKFrontend.Radios.handleConditionalRadioClick = function(event) {
-  var $clickedInput = event.target
-  var $radioGroup = $clickedInput.closest('.govuk-radios').querySelectorAll('input[type="radio"]')
+window.GOVUKFrontend.syncConditionals = function($nodeList) {
+  nodeListForEach($nodeList, function($currentNode) {
+    var $elementsToToggle = $currentNode.getAttribute('data-conditional')
+    if ($elementsToToggle) {
+      var inputIsChecked = $currentNode.checked
+      var $elementArray = $elementsToToggle.split(' ')
+      $elementArray.forEach(function($element) {
+        var $target = document.querySelector('#conditional-id-form-' + $element)
+        if ($target) {
+          $target.classList.toggle('govuk-radios__conditional--hidden', !inputIsChecked)
+        }
+      })
 
-  nodeListForEach($radioGroup, function($radio) {
-    var $elementToToggle = $radio.getAttribute('data-conditional')
-    if ($elementToToggle) {
-      var inputIsChecked = $radio.checked
-      var $target = document.querySelector('#conditional-id-form-' + $elementToToggle)
-      $radio.setAttribute('aria-expanded', inputIsChecked)
-      $target.classList.toggle('govuk-radios__conditional--hidden', !inputIsChecked)
+      $currentNode.setAttribute('aria-expanded', inputIsChecked)
     }
   })
 }
 
+window.GOVUKFrontend.Radios.handleConditionalRadioClick = function(event) {
+  var $clickedInput = event.target
+  var $radioGroup = $clickedInput.closest('.govuk-radios').querySelectorAll('input[type="radio"]')
+
+  window.GOVUKFrontend.syncConditionals($radioGroup)
+}
+
 window.outOflineConditionalRadios = function() {
-  var questionsWithConditionals = document.querySelector('[data-contains-conditional]')
-  if (questionsWithConditionals) {
-    var $radios = questionsWithConditionals.querySelectorAll('input[type="radio"]')
+  var $questionsWithConditionals = document.querySelectorAll('[data-contains-conditional]')
+
+  nodeListForEach($questionsWithConditionals, function($question) {
+    var $radios = $question.querySelectorAll('input[type="radio"]')
     nodeListForEach($radios, function($radio) {
       $radio.addEventListener('click', window.GOVUKFrontend.Radios.handleConditionalRadioClick.bind(this))
     })
-  }
+  })
 
   // add id to outofline conditional questions
   var $outofline = document.querySelectorAll('[data-outofline]')
@@ -45,3 +56,15 @@ window.outOflineConditionalRadios = function() {
     questionFormGroup.setAttribute('id', 'conditional-id-form-' + baseId)
   })
 }
+
+window.syncAllOutOflineConditionalRadios = function() {
+  var $questionsWithConditionals = document.querySelectorAll('[data-contains-conditional]')
+  nodeListForEach($questionsWithConditionals, function($question) {
+    var $radios = $question.querySelectorAll('input[type="radio"]')
+    window.GOVUKFrontend.syncConditionals($radios)
+  })
+}
+
+window.addEventListener('load', event => {
+  syncAllOutOflineConditionalRadios()
+})

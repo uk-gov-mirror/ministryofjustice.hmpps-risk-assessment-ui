@@ -38,10 +38,12 @@ const validationRules = async (req, res, next) => {
         const parentQuestion = currentQuestions.filter(thisQuestion => {
           let foundParent = false
           thisQuestion.answerSchemas.forEach(schema => {
-            if (schema.conditional === conditionalQuestionToFind) {
-              foundParent = true
-              conditionalParentAnswer = schema.value
-            }
+            schema.conditionals?.forEach(childQuestion => {
+              if (childQuestion.conditional === conditionalQuestionToFind) {
+                foundParent = true
+                conditionalParentAnswer = schema.value
+              }
+            })
           })
           return foundParent
         })

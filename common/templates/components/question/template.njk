@@ -17,6 +17,7 @@
       formGroup : {
         classes: question.formClasses
       },
+      attributes: question.attributes,
       label: {
         text: question.questionText,
         isPageHeading: false,
@@ -36,6 +37,7 @@
       formGroup : {
         classes: question.formClasses
       },
+      attributes: question.attributes,
       label: {
         text: question.questionText,
         isPageHeading: false,
@@ -76,6 +78,7 @@
         text: question.questionText,
         classes: question.questionCode + ' govuk-label--m'
       },
+      attributes: question.attributes,
       items: question.answerSchemas,
       errorMessage: errorMessage,
       isConditional: question.isConditional
@@ -122,7 +125,8 @@
           value: answerYear
         }
       ],
-      errorMessage: errorMessage
+      errorMessage: errorMessage,
+      attributes: question.attributes
     }) }}
 
   {% default %}
