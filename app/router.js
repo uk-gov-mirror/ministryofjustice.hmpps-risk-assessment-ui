@@ -11,7 +11,7 @@ const getOffenderDetails = require('../common/middleware/getOffenderDetails')
 const { startController } = require('./start/get.controller')
 const { displayAssessmentsList } = require('./assessmentsList/get.controller')
 const { displayQuestionGroup } = require('./questionGroup/get.controller')
-const { saveQuestionGroup, questionGroupValidationRules } = require('./questionGroup/post.controller')
+const { saveQuestionGroup, assembleDates, questionGroupValidationRules } = require('./questionGroup/post.controller')
 const { psrFromCourt } = require('./psrFromCourt/get.controller')
 const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.controller')
 
@@ -48,6 +48,7 @@ module.exports = app => {
   app.post(
     `/:assessmentId/questiongroup/:groupId/:subgroup`,
     getOffenderDetails,
+    assembleDates,
     questionGroupValidationRules,
     validate,
     saveQuestionGroup,

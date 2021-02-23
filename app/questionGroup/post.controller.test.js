@@ -1,4 +1,4 @@
-const { saveQuestionGroup } = require('./post.controller')
+const { saveQuestionGroup, assembleDates } = require('./post.controller')
 const { postAnswers } = require('../../common/data/assessmentApi')
 
 jest.mock('../../common/data/assessmentApi')
@@ -66,6 +66,7 @@ describe('post answers', () => {
       'id-11111111-1111-1111-1111-111111111209-month': '',
       'id-11111111-1111-1111-1111-111111111209-year': '2020',
     }
+    await assembleDates(req, res, () => {})
     await saveQuestionGroup(req, res)
     expect(postAnswers).toHaveBeenCalledWith(
       'test-assessment-id',

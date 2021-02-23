@@ -74,6 +74,29 @@ const validationRules = async (req, res, next) => {
   await dynamicMiddleware(validatorsToSend, req, res, next)
 }
 
+const assembleDates = async (req, res, next) => {
+  const { body: reqBody } = req
+
+  const dateKeys = findDateAnswerKeys(reqBody)
+
+  dateKeys.forEach(key => {
+    const dateKey = key.replace(/-day$/, '')
+    let constructedDate = ''
+    if (reqBody[`${dateKey}-year`] && reqBody[`${dateKey}-month`] && reqBody[`${dateKey}-day`]) {
+      constructedDate = new Date(
+        `${reqBody[`${dateKey}-year`]}-${reqBody[`${dateKey}-month`]}-${reqBody[`${dateKey}-day`]}`,
+      ).toISOString()
+    }
+
+    reqBody[dateKey] = constructedDate
+    delete reqBody[`${dateKey}-year`]
+    delete reqBody[`${dateKey}-month`]
+    delete reqBody[`${dateKey}-day`]
+  })
+
+  return next()
+}
+
 const saveQuestionGroup = async (req, res) => {
   const {
     params: { assessmentId, groupId, subgroup },
@@ -86,22 +109,6 @@ const saveQuestionGroup = async (req, res) => {
   }
 
   try {
-    const dateKeys = findDateAnswerKeys(reqBody)
-
-    dateKeys.forEach(key => {
-      const dateKey = key.replace(/-day$/, '')
-      let constructedDate = ''
-      if (reqBody[`${dateKey}-year`] && reqBody[`${dateKey}-month`] && reqBody[`${dateKey}-day`]) {
-        constructedDate = new Date(
-          `${reqBody[`${dateKey}-year`]}-${reqBody[`${dateKey}-month`]}-${reqBody[`${dateKey}-day`]}`,
-        ).toISOString()
-      }
-
-      reqBody[dateKey] = constructedDate
-      delete reqBody[`${dateKey}-year`]
-      delete reqBody[`${dateKey}-month`]
-      delete reqBody[`${dateKey}-day`]
-    })
     const answers = extractAnswers(reqBody)
 
     await postAnswers(assessmentId, 'current', answers, tokens)
@@ -134,4 +141,4 @@ function extractAnswers(postBody) {
   return { answers: shapedAnswers }
 }
 
-module.exports = { saveQuestionGroup, questionGroupValidationRules: validationRules }
+module.exports = { saveQuestionGroup, assembleDates, questionGroupValidationRules: validationRules }
