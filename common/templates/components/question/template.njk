@@ -1,12 +1,24 @@
 {%- from "node_modules/govuk-frontend/govuk/components/input/macro.njk" import govukInput -%}
 {%- from "node_modules/govuk-frontend/govuk/components/textarea/macro.njk" import govukTextarea -%}
 {%- from "node_modules/govuk-frontend/govuk/components/radios/macro.njk" import govukRadios -%}
+{%- from "node_modules/govuk-frontend/govuk/components/checkboxes/macro.njk" import govukCheckboxes -%}
 {%- from "node_modules/govuk-frontend/govuk/components/select/macro.njk" import govukSelect -%}
 {%- from "node_modules/govuk-frontend/govuk/components/date-input/macro.njk" import govukDateInput -%}
 
 {# templates for each question type #}
 {% set questionAnswer = bodyAnswer or question.answer or '' %}
 {% set errorMessage = thisErrorMessage or errors['id-' + question.questionId] %}
+
+{% if question.type == 'group' %}
+  <h2 class="govuk-heading-m">
+    {{ question.title }}
+  </h2>
+
+
+  {% for question in question.contents %}
+      {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId]) }}
+  {% endfor %}
+{% endif %}
 
 {% switch question.answerType %}
   {% case 'freetext' %}
@@ -50,6 +62,24 @@
     }) }}
   {% case 'radio' %}
     {{ govukRadios({
+      idPrefix: 'id-' + question.questionId,
+      name: 'id-' + question.questionId,
+      formGroup : {
+        classes: question.formClasses
+      },
+      attributes: question.attributes,
+      fieldset: {
+        legend: {
+          text: question.questionText,
+          classes: question.questionCode + ' govuk-label--m'
+        }
+      },
+      items: question.answerSchemas,
+      errorMessage: errorMessage,
+      isConditional: question.isConditional
+    }) }}
+  {% case 'checkbox' %}
+    {{ govukCheckboxes({
       idPrefix: 'id-' + question.questionId,
       name: 'id-' + question.questionId,
       formGroup : {

@@ -59,6 +59,12 @@ const grabAnswers = (assessmentId, episodeId, tokens) => {
 
 const annotateWithAnswers = (questions, answers, body) => {
   return questions.map(q => {
+    if (q.type === 'group') {
+      // eslint-disable-next-line no-param-reassign
+      q.contents = annotateWithAnswers(q.contents, answers, body)
+      return q
+    }
+
     const answer = answers[q.questionId]
     const answerValue = body[`id-${q.questionId}`] || (answer ? answer.freeTextAnswer : null)
     return Object.assign(q, {
@@ -84,6 +90,11 @@ const compileInlineConditionalQuestions = (questions, errors) => {
   // add in rendered conditional question strings to each answer when displayed inline
   // add appropriate classes to hide questions to be displayed out-of-line
   const compiledQuestions = questions.map(question => {
+    if (question.type === 'group') {
+      // eslint-disable-next-line no-param-reassign
+      question.contents = compileInlineConditionalQuestions(question.contents, errors)
+      return question
+    }
     const currentQuestion = question
     currentQuestion.answerSchemas = question.answerSchemas.map(schemaLine => {
       const updatedSchemaLine = schemaLine
