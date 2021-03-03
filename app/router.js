@@ -35,6 +35,12 @@ module.exports = app => {
   //   })
   // })
 
+  app.get('/health', (req, res, next) => {
+    res.status(200).send({
+      healthy: true,
+    })
+  })
+
   app.get('/ping', (req, res) => {
     res.status(200).send('pong')
   })
