@@ -11,6 +11,8 @@ const getOffenderDetails = require('../common/middleware/getOffenderDetails')
 const { startController } = require('./start/get.controller')
 const { displayAssessmentsList } = require('./assessmentsList/get.controller')
 const { displayQuestionGroup } = require('./questionGroup/get.controller')
+
+const { displayOverview } = require('./summary/get.controller')
 const { saveQuestionGroup, assembleDates, questionGroupValidationRules } = require('./questionGroup/post.controller')
 const { psrFromCourt } = require('./psrFromCourt/get.controller')
 const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.controller')
@@ -44,6 +46,8 @@ module.exports = app => {
 
   app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 
+  app.get(`/:assessmentId/questiongroup/:groupId/summary`, getOffenderDetails, displayOverview)
+
   app.get(`/:assessmentId/questiongroup/:groupId/:subgroup`, getOffenderDetails, displayQuestionGroup)
   app.post(
     `/:assessmentId/questiongroup/:groupId/:subgroup`,
@@ -58,5 +62,5 @@ module.exports = app => {
   app.post('/psr-from-court', startPsrFromForm)
   app.post('/psr-from-court/:courtCode/case/:caseNumber', startPsrFromCourt)
 
-  app.get('*', (req, res) => res.render('app/error', { error: '404, Page Not Found' }))
+  app.get('*', (req, res) => res.status(404).render('app/error', { error: '404, Page Not Found' }))
 }

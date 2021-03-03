@@ -28,18 +28,18 @@
 
             {% for form in forms %}
 
-            <div class="govuk-grid-row assessment-row">
-                <div class="govuk-grid-column-one-half">
-                    <h2 class="govuk-heading-m">{{ form.title }}</h2>
+                <div class="govuk-grid-row assessment-row">
+                    <div class="govuk-grid-column-one-half">
+                        <h2 class="govuk-heading-m">{{ form.title }}</h2>
+                    </div>
+                    <div class="govuk-grid-column-one-third">
+                        {{ govukButton({
+                            text: 'Start',
+                            classes: 'govuk-!-margin-bottom-3',
+                            href: form.path
+                        }) }}
+                    </div>
                 </div>
-                <div class="govuk-grid-column-one-third">
-                    {{ govukButton({
-                        text: 'Start',
-                        classes: 'govuk-!-margin-bottom-3',
-                        href: form.path
-                    }) }}
-                </div>
-            </div>
 
             {% endfor %}
 

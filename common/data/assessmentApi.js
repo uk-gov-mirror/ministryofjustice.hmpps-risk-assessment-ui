@@ -22,6 +22,11 @@ const getQuestionGroup = (groupId, tokens) => {
   return getData(path, tokens)
 }
 
+const getQuestionGroupSummary = (groupId, tokens) => {
+  const path = `${url}/questions/${groupId}/summary`
+  return getData(path, tokens)
+}
+
 const getAnswers = (assessmentId, episodeId, tokens) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
   return getData(path, tokens)
@@ -101,4 +106,5 @@ module.exports = {
   getAnswers,
   getAssessmentsList,
   postAnswers,
+  getQuestionGroupSummary,
 }

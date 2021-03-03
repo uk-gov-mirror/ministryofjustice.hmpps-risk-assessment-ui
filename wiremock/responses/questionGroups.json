@@ -333,8 +333,6 @@
                 "answerSchemaCode": "yes",
                 "value": "y",
                 "text": "Yes",
-                "conditional": "ef018645-b846-4022-b290-1e7d3d380b4d",
-                "displayInline": true,
                 "conditionals": [
                   {
                     "conditional": "ef018645-b846-4022-b290-1e7d3d380b4d",

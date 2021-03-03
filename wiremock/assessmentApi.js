@@ -1,6 +1,7 @@
 const { stubFor } = require('./wiremock')
 const questionGroups = require('./responses/questionGroups.json')
 const questionAnswers = require('./responses/questionAnswers.json')
+const questionGroupSummaries = require('./responses/questionGroupSummary.json')
 const questionList = require('./responses/questionList.json')
 const assessmentEpisodes = require('./responses/assessmentEpisodes.json')
 const offenderDetails = require('./responses/offenderDetails.json')
@@ -50,6 +51,21 @@ const stubQuestionGroup = groupId => {
       },
       status: 200,
       jsonBody: questionGroups[groupId],
+    },
+  })
+}
+const stubQuestionGroupSummary = groupId => {
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/questions/${groupId}/summary`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: questionGroupSummaries[groupId],
     },
   })
 }
@@ -118,6 +134,10 @@ const stubQuestions = async () => {
   await stubQuestionGroup('22222222-2222-2222-2222-222222222240')
   await stubQuestionGroup('7a6836c1-2caf-4a0d-8e5c-5d13482a868f') // short psr
 }
+
+const stubQuestionSummaries = async () => {
+  await stubQuestionGroupSummary('7a6836c1-2caf-4a0d-8e5c-5d13482a868f') // short psr
+}
 const stubAnswers = async () => {
   await stubAnswersGroup(1234)
 }
@@ -138,4 +158,5 @@ module.exports = {
   stubEpisodes,
   stubSupervision,
   stubOffenderDetails,
+  stubQuestionSummaries,
 }

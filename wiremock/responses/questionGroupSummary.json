@@ -1,0 +1,219 @@
+{
+  "7a6836c1-2caf-4a0d-8e5c-5d13482a868f": {
+    "groupId": "7a6836c1-2caf-4a0d-8e5c-5d13482a868f",
+    "groupCode": "pre_sentence_assessment",
+    "title": "Pre-Sentence Assessment",
+    "contents": [
+      {
+        "groupId": "d2215d25-7664-4d24-9efe-23ea65a6aa70",
+        "groupCode": "offending_information_the_individual_",
+        "title": "Offending Information (The individual)",
+        "contents": [],
+        "status": "completed"
+      },
+      {
+        "groupId": "c1a3c565-f4c3-4a84-af5d-e4159cce679b",
+        "groupCode": "assessment_details_psr_metadata_",
+        "title": "Assessment Details (PSR metadata)",
+        "contents": [],
+        "status": "incomplete"
+      },
+      {
+        "groupId": "e98de578-f851-48da-ae54-f864af7eb4d4",
+        "groupCode": "information_sources",
+        "title": "Information sources",
+        "contents": [],
+        "status": "not started"
+      },
+      {
+        "groupId": "8df81bd9-29e7-484b-b301-557dd8885b8e",
+        "groupCode": "the_offences",
+        "title": "The offences",
+        "contents": []
+      },
+      {
+        "groupId": "ebf96a74-c140-47d8-b37f-62cff68f41c0",
+        "groupCode": "needs",
+        "title": "Needs",
+        "contents": []
+      },
+      {
+        "groupId": "75e71232-90cf-4bba-8616-8e4f76f04a0e",
+        "groupCode": "risk_of_serious_harm_screening",
+        "title": "Risk of serious harm screening",
+        "contents": [
+          {
+            "groupId": "1d1c9787-1029-4701-a0e1-6d2b7e8f96d7",
+            "groupCode": "has_offender_been_convicted_of_any_of_the_following_offences:",
+            "title": "Has offender been convicted of any of the following offences:"
+          },
+          {
+            "groupId": "47e38d62-b825-4ce1-aa2d-b4209b725eb0",
+            "groupCode": "on_the_information_available_to_you_has_the_offender",
+            "title": "On the information available to you has the offender"
+          }
+        ]
+      },
+      {
+        "groupId": "18241334-da0e-4388-947d-1fd3efd1cb95",
+        "groupCode": "risk_to_the_individual_screening",
+        "title": "Risk to the individual screening",
+        "contents": [
+          {
+            "groupId": "faf161fc-66d1-4b0e-a00b-19a8ee9056f0",
+            "groupCode": "from_what_you_know_about_this_offender_have_there_been_or_are_there_currently_any_concerns_in_relation_to",
+            "title": "From what you know about this offender have there been or are there currently any concerns in relation to"
+          }
+        ]
+      },
+      {
+        "groupId": "3aefd016-34b6-4ca6-b238-efe2a24bd346",
+        "groupCode": "other_risks_screening",
+        "title": "Other risks screening",
+        "contents": [
+          {
+            "groupId": "9a01e106-a626-492d-b5e9-9c236a86751b",
+            "groupCode": "from_what_you_know_about_this_offender_have_there_been_or_are_there_currently_any_concerns_in_relation_to~",
+            "title": "From what you know about this offender have there been or are there currently any concerns in relation to~"
+          }
+        ]
+      },
+      {
+        "groupId": "0895c08b-c82f-4733-9bf0-159b0354533b",
+        "groupCode": "risk_of_serious_harm_to_others_full_analysis_current_behaviour_",
+        "title": "Risk of serious harm to others. Full analysis. Current behaviour.",
+        "contents": [
+          {
+            "groupId": "b19d18c5-501c-4518-bf46-18028c8c3dae",
+            "groupCode": "most_recent_behaviour_offence_indicative_of_risk_of_serious_harm",
+            "title": "Most recent behaviour / offence indicative of risk of serious harm"
+          }
+        ]
+      },
+      {
+        "groupId": "e15d1405-0f37-4533-b449-62d4838aae15",
+        "groupCode": "risk_of_serious_harm_to_others_full_analysis_previous_behaviour_",
+        "title": "Risk of serious harm to others. Full analysis. Previous behaviour.",
+        "contents": [
+          {
+            "groupId": "9b8a4a56-f8e6-4b21-902d-c36fbac863a0",
+            "groupCode": "previous_behaviour_offence_indicative_of_risk_of_serious_harm",
+            "title": "Previous behaviour / offence indicative of risk of serious harm"
+          }
+        ]
+      },
+      {
+        "groupId": "a14e358f-949e-4cb9-a1d0-f03ab8fa4696",
+        "groupCode": "risk_of_serious_harm_to_children_whse_identity_is_known_full_analysis_",
+        "title": "Risk of serious harm to children whse identity is known. Full analysis. ",
+        "contents": [
+          {
+            "groupId": "7ba83cd1-64fa-48cc-988b-04fc0ba8c41d",
+            "groupCode": "is_this_section_being_completed_because_the_individual:_",
+            "title": "Is this section being completed because the individual: "
+          }
+        ]
+      },
+      {
+        "groupId": "02445b70-00a4-4513-868c-7653e8e041cf",
+        "groupCode": "details_of_children_at_risk_of_serious_harm_",
+        "title": "Details of children at risk of serious harm.",
+        "contents": [
+          {
+            "groupId": "9a68deed-5b3d-43ae-a883-90ffe170397e",
+            "groupCode": "child_at_risk_of_serious_harm:",
+            "title": "Child at Risk of Serious Harm:"
+          }
+        ]
+      },
+      {
+        "groupId": "682bf8a6-6401-4a0e-a18f-c39c1e25c9c8",
+        "groupCode": "risk_of_serious_harm_full_analysis_suicide_and_self_harm_",
+        "title": "Risk of serious harm. Full analysis. Suicide and self-harm.",
+        "contents": []
+      },
+      {
+        "groupId": "ce6170a9-1f7b-4963-a8e3-08574e4c83d0",
+        "groupCode": "coping_in_custody_or_a_hostel_setting_",
+        "title": "Coping in custody or a hostel setting.",
+        "contents": []
+      },
+      {
+        "groupId": "b5334e5f-b793-4400-8ea1-67c316b2d44f",
+        "groupCode": "vulnerability",
+        "title": "Vulnerability",
+        "contents": []
+      },
+      {
+        "groupId": "3c70d53a-08c5-4f30-a144-12e5c6e14205",
+        "groupCode": "escape_and_abscond",
+        "title": "Escape and abscond",
+        "contents": []
+      },
+      {
+        "groupId": "22be9048-33a7-4e56-a8f4-8c4e2a62524c",
+        "groupCode": "control_issues_or_disruptive_behaviour",
+        "title": "Control issues or disruptive behaviour",
+        "contents": []
+      },
+      {
+        "groupId": "e807624f-c59e-4b21-b749-2432b08f60f9",
+        "groupCode": "breach_of_trust",
+        "title": "Breach of trust",
+        "contents": []
+      },
+      {
+        "groupId": "121f7277-c0fc-4cdf-a02c-049f73993cbd",
+        "groupCode": "risk_summary",
+        "title": "Risk summary",
+        "contents": []
+      },
+      {
+        "groupId": "5c13bd42-00a8-4b05-83b0-545bb39ceef2",
+        "groupCode": "risk_of_serious_recidivism_rsr_~",
+        "title": "Risk of Serious Recidivism (RSR)~",
+        "contents": []
+      },
+      {
+        "groupId": "df139cfe-12fc-431f-9c1a-c1d9cda1a9c7",
+        "groupCode": "risk_of_serious_harm_score",
+        "title": "Risk of Serious Harm score",
+        "contents": [
+          {
+            "groupId": "6f67d40a-5520-47a9-8cce-e265c3658fa6",
+            "groupCode": "risk_in_the_community_to:",
+            "title": "Risk in the community to:"
+          },
+          {
+            "groupId": "c8f69342-9fbd-43b6-93c1-a8de02ca5ee1",
+            "groupCode": "risk_in_custody_to:",
+            "title": "Risk in custody to:"
+          }
+        ]
+      },
+      {
+        "groupId": "1d69e176-8459-4d30-8410-006828ff8c72",
+        "groupCode": "risk_management_issues",
+        "title": "Risk management issues",
+        "contents": [
+          {
+            "groupId": "8a99831c-6312-477d-a759-c79eab88d3ab",
+            "groupCode": "has_this_case_been_referred_to_multi_agency_public_protection_management_",
+            "title": "Has this case been referred to multi-agency public protection management?"
+          },
+          {
+            "groupId": "6849b5c9-6f1c-4a42-b99b-4680cb915807",
+            "groupCode": "if_not_should_this_case_be_referred_to_multi_agency_public_protection_management_",
+            "title": "If not, should this case be referred to multi-agency public protection management?"
+          }
+        ]
+      },
+      {
+        "groupId": "51c803b3-7056-4f5e-9000-af5ba1341b31",
+        "groupCode": "psr_summary",
+        "title": "PSR summary",
+        "contents": []
+      }
+    ]
+  }
+}

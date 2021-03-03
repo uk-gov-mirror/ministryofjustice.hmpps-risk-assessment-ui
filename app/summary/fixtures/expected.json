@@ -1,0 +1,121 @@
+{
+  "assessmentId": "test-assessment-id",
+  "overview": {
+    "sections": [
+      {
+        "heading": { "text": "Pre-Sentence Assessment" },
+        "items": [
+          {
+            "text": "The individual",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/0"
+          },
+          {
+            "text": "Court information",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/1"
+          },
+          {
+            "text": "PSR metadata",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/2"
+          },
+          {
+            "text": "Probation service details",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/3"
+          },
+          {
+            "text": "The offences",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/4"
+          },
+          {
+            "text": "Offence analysis",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/5"
+          },
+          {
+            "text": "Criminal history",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/6"
+          },
+          { "text": "Order", "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/7" },
+          { "text": "Needs", "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/8" },
+          {
+            "text": "Risk of serious harm screening",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/9"
+          },
+          {
+            "text": "Risk to the individual screening",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/10"
+          },
+          {
+            "text": "Other risks screening",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/11"
+          },
+          {
+            "text": "Risk of serious harm to others. Full analysis. Current behaviour.",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/12"
+          },
+          {
+            "text": "Risk of serious harm to others. Full analysis. Previous behaviour.",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/13"
+          },
+          {
+            "text": "Risk of serious harm to children whse identity is known. Full analysis. ",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/14"
+          },
+          {
+            "text": "Details of children at risk of serious harm.",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/15"
+          },
+          {
+            "text": "Risk of serious harm. Full analysis. Suicide and self-harm.",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/16"
+          },
+          {
+            "text": "Coping in custody or a hostel setting.",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/17"
+          },
+          {
+            "text": "Vulnerability",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/18"
+          },
+          {
+            "text": "Escape and abscond",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/19"
+          },
+          {
+            "text": "Control issues or disruptive behaviour",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/20"
+          },
+          {
+            "text": "Breach of trust",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/21"
+          },
+          {
+            "text": "Risk summary",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/22"
+          },
+          {
+            "text": "Risk of Serious Recidivism (RSR)",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/23"
+          },
+          {
+            "text": "Risk of Serious Harm score",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/24"
+          },
+          {
+            "text": "Risk management issues",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/25"
+          },
+          {
+            "text": "PSR summary",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/26"
+          },
+          { "text": "Proposal", "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/27" },
+          {
+            "text": "Information sources",
+            "href": "/test-assessment-id/questionGroup/7a6836c1-2caf-4a0d-8e5c-5d13482a868f/28"
+          }
+        ]
+      }
+    ]
+  },
+  "subheading": "Pre-Sentence Assessment",
+  "groupId": "7a6836c1-2caf-4a0d-8e5c-5d13482a868f"
+}
