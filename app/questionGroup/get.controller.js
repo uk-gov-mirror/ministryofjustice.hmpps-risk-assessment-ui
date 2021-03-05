@@ -39,9 +39,18 @@ const displayQuestionGroup = async (
   }
 }
 
-const grabQuestionGroup = (groupId, tokens) => {
+const grabQuestionGroup = async (groupId, tokens) => {
   try {
-    return getQuestionGroup(groupId, tokens)
+    const questions = await getQuestionGroup(groupId, tokens)
+    const readOnlyToAttribute = q => {
+      if (q.readOnly) {
+        // eslint-disable-next-line no-param-reassign
+        q.attributes = { readonly: true, disabled: true, ...q.attributes }
+      }
+      q.contents?.forEach(c => readOnlyToAttribute(c))
+    }
+    questions.contents?.forEach(q => readOnlyToAttribute(q))
+    return questions
   } catch (error) {
     logger.error(`Could not retrieve question group for ${groupId}, error: ${error}`)
     throw error
