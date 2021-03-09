@@ -177,3 +177,7 @@ p {
   color: govuk-colour("dark-grey");
   background-color: govuk-colour("light-grey");
 }
+
+.govuk-summary-list--no-bottom-margin {
+  margin-bottom: 0;
+}

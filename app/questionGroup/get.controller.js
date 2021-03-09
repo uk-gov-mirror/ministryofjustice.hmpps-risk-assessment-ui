@@ -74,11 +74,30 @@ const annotateWithAnswers = (questions, answers, body) => {
       return q
     }
 
-    const answer = answers[q.questionId]
-    const answerValue = body[`id-${q.questionId}`] || (answer ? answer.freeTextAnswer : null)
+    let displayAnswer
+    let answerValues
+    if (q.answerType === 'radio' || q.answerType === 'checkbox') {
+      const answer = answers[q.questionId]?.answers
+
+      if (answer) {
+        const answerText = []
+        answerValues = []
+        Object.keys(answer).forEach(ans => {
+          const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.answerSchemaUuid === ans)
+          answerValues.push(thisAnswer?.value)
+          answerText.push(thisAnswer?.text)
+          displayAnswer = answerText.join('<br>')
+        })
+      }
+      answerValues = body[`id-${q.questionId}`] || answerValues
+    } else {
+      const answer = answers[q.questionId]
+      displayAnswer = body[`id-${q.questionId}`] || (answer ? answer.freeTextAnswer : null)
+    }
+
     return Object.assign(q, {
-      answer: answerValue,
-      answerSchemas: annotateAnswerSchemas(q.answerSchemas, answerValue),
+      answer: displayAnswer,
+      answerSchemas: annotateAnswerSchemas(q.answerSchemas, answerValues),
     })
   })
 }
@@ -181,16 +200,16 @@ const compileInlineConditionalQuestions = (questions, errors) => {
 }
 
 const annotateAnswerSchemas = (answerSchemas, answerValue) => {
-  if (answerValue === null) {
+  if (!answerValue) {
     return answerSchemas
   }
 
-  return answerSchemas.map(as =>
-    Object.assign(as, {
-      checked: as.value === answerValue,
-      selected: as.value === answerValue,
-    }),
-  )
+  return answerSchemas.map(as => {
+    return Object.assign(as, {
+      checked: as.value === answerValue || answerValue.includes(as.value),
+      selected: as.value === answerValue || answerValue.includes(as.value),
+    })
+  })
 }
 
 module.exports = { displayQuestionGroup, grabQuestionGroup }

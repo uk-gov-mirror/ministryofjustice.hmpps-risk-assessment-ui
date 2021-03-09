@@ -112,7 +112,7 @@
     "clean-css-cli": "^4.3.0",
     "concat": "^1.0.3",
     "copyfiles": "^2.4.0",
-    "cypress": "^6.1.0",
+    "cypress": "^6.6.0",
     "cypress-audit": "^0.2.3",
     "cypress-file-upload": "^4.0.7",
     "cypress-multi-reporters": "^1.4.0",

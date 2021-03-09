@@ -418,6 +418,106 @@
             "mandatory": true,
             "conditional": true,
             "answerSchemas": []
+          },
+          {
+            "type": "question",
+            "questionId": "11111111-1111-1111-1111-111111111631",
+            "questionCode": "sources_of_information",
+            "answerType": "checkbox",
+            "questionText": "Sources of information",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "hint": "Select all that apply",
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",
+                "answerSchemaCode": "SR15.1.2.1",
+                "value": "bail_information_record",
+                "text": "Bail information record"
+              },
+              {
+                "answerSchemaUuid": "1234444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "basic_custody_screening",
+                "text": "Basic custody screening"
+              },
+              {
+                "answerSchemaUuid": "1334444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "community_payback",
+                "text": "Community payback"
+              },
+              {
+                "answerSchemaUuid": "1434444444-4444-4444-4444-444444444445",
+                "answerSchemaCode": "SR15.1.2.2",
+                "value": "hostel",
+                "text": "Hostel"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "1111",
+            "questionCode": "readonly_radio",
+            "answerType": "radio",
+            "questionText": "Radio readonly question",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "readOnly": true,
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "2222",
+                "value": "Y",
+                "text": "Yes"
+              },
+              {
+                "answerSchemaUuid": "3333",
+                "value": "N",
+                "text": "No"
+              },
+              {
+                "answerSchemaUuid": "4444",
+                "value": "U",
+                "text": "Don't know"
+              }
+            ]
+          },
+          {
+            "type": "question",
+            "questionId": "5555",
+            "questionCode": "readonly_checkbox",
+            "answerType": "checkbox",
+            "questionText": "checkbox readonly question",
+            "displayOrder": "1",
+            "mandatory": "no",
+            "readOnly": true,
+            "answerSchemas": [
+              {
+                "answerSchemaUuid": "6666",
+                "value": "OPT1",
+                "text": "Option 1"
+              },
+              {
+                "answerSchemaUuid": "7777",
+                "value": "OPT2",
+                "text": "Option 2"
+              },
+              {
+                "answerSchemaUuid": "8888",
+                "value": "OPT3",
+                "text": "Option 3"
+              },
+              {
+                "answerSchemaUuid": "9999",
+                "value": "OPT4",
+                "text": "Option 4"
+              },
+              {
+                "answerSchemaUuid": "AAAA",
+                "value": "OPT5",
+                "text": "Option 5"
+              }
+            ]
           }
         ]
       }

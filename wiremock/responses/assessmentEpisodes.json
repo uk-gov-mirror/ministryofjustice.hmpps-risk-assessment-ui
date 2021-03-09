@@ -21,7 +21,20 @@
     },
     "11111111-1111-1111-1111-111111111205": {
       "freeTextAnswer": "1976-03-24",
+      "answers": {}
+    },
+    "1111": {
+      "freeTextAnswer": null,
       "answers": {
+        "4444": null
+      }
+    },
+    "5555": {
+      "freeTextAnswer": null,
+      "answers": {
+        "6666": null,
+        "7777": null,
+        "AAAA": null
       }
     }
   }
