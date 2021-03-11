@@ -1137,7 +1137,7 @@
                 "questionId": "2d6f7515-dd03-4cfc-b365-6739e1251498",
                 "questionCode": "2.1",
                 "answerType": "freetext",
-                "questionText": "First name or names\n",
+                "questionText": "First name or names ",
                 "displayOrder": 3,
                 "mandatory": true,
                 "readOnly": true,
@@ -1475,22 +1475,149 @@
             "contents": [
               {
                 "type": "question",
-                "questionId": "7485b64c-2011-43a0-9245-24248a919d3d",
+                "questionId": "2b93527c-a545-4e41-9fb4-98ee127af393",
                 "questionCode": "298.1",
-                "answerType": "freetext",
+                "answerType": "checkbox",
                 "questionText": "Sources of information",
                 "displayOrder": 1,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select sources of information\",\"errorSummary\":\"Select sources of information\"}}",
                 "readOnly": false,
                 "conditional": false,
-                "answerSchemas": []
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7df28bc1-ae40-42a1-a97a-2ee736827821",
+                    "answerSchemaCode": "bail_information_record",
+                    "value": "bail information record",
+                    "text": "Bail information record"
+                  },
+                  {
+                    "answerSchemaUuid": "fe5edabc-991c-4d82-b14c-d221bb085c61",
+                    "answerSchemaCode": "basic_custody_screening",
+                    "value": "basic custody screening",
+                    "text": "Basic custody screening"
+                  },
+                  {
+                    "answerSchemaUuid": "dfbf95bd-817a-4a6e-8dde-3531c89d2474",
+                    "answerSchemaCode": "community_payback",
+                    "value": "community payback",
+                    "text": "Community payback"
+                  },
+                  {
+                    "answerSchemaUuid": "7a230d9d-7f0f-4a18-bbaa-dba0501305a6",
+                    "answerSchemaCode": "hostel",
+                    "value": "hostel",
+                    "text": "Hostel"
+                  },
+                  {
+                    "answerSchemaUuid": "3f886290-f325-41d4-8232-eba8859ee786",
+                    "answerSchemaCode": "interview",
+                    "value": "interview",
+                    "text": "Interview"
+                  },
+                  {
+                    "answerSchemaUuid": "cd058cc9-055e-462a-83e7-ad9ef7b49445",
+                    "answerSchemaCode": "judge_s_comments",
+                    "value": "judge's comments",
+                    "text": "Judge's comments"
+                  },
+                  {
+                    "answerSchemaUuid": "e63d3c4d-ef61-47d7-8e5f-9a892aa085eb",
+                    "answerSchemaCode": "local_authority",
+                    "value": "local authority",
+                    "text": "Local authority"
+                  },
+                  {
+                    "answerSchemaUuid": "ee808727-9c95-4373-a52c-3947cb375071",
+                    "answerSchemaCode": "medical",
+                    "value": "medical",
+                    "text": "Medical"
+                  },
+                  {
+                    "answerSchemaUuid": "9b7e2b2d-c577-4ff7-92fe-ab641598d4fa",
+                    "answerSchemaCode": "oasys_saq",
+                    "value": "oasys saq",
+                    "text": "OASys SAQ"
+                  },
+                  {
+                    "answerSchemaUuid": "f76194d3-36fc-451b-a3cf-9b1b8bfc428b",
+                    "answerSchemaCode": "police",
+                    "value": "police",
+                    "text": "Police"
+                  },
+                  {
+                    "answerSchemaUuid": "f8f3d113-edeb-483a-9ded-9f19bebca117",
+                    "answerSchemaCode": "post-trial_report",
+                    "value": "post-trial report",
+                    "text": "Post-trial report"
+                  },
+                  {
+                    "answerSchemaUuid": "071980ca-fe56-4b4e-8e00-a18f5a8a21e5",
+                    "answerSchemaCode": "pre-sentence_report",
+                    "value": "pre-sentence report",
+                    "text": "Pre-sentence report"
+                  },
+                  {
+                    "answerSchemaUuid": "bdfbfdbb-cc3c-4120-a42c-84063f538b99",
+                    "answerSchemaCode": "previous_convictions",
+                    "value": "previous convictions",
+                    "text": "Previous convictions"
+                  },
+                  {
+                    "answerSchemaUuid": "f26c5855-f054-4e99-91d8-2da42e68f53b",
+                    "answerSchemaCode": "previous_oasys",
+                    "value": "previous oasys",
+                    "text": "Previous OASys"
+                  },
+                  {
+                    "answerSchemaUuid": "f96d308d-f47b-4d82-b0d8-be0d15fbb8a1",
+                    "answerSchemaCode": "prison_records",
+                    "value": "prison records",
+                    "text": "Prison records"
+                  },
+                  {
+                    "answerSchemaUuid": "472f572e-c563-4ced-a8a4-58fcbb20ed24",
+                    "answerSchemaCode": "prosecutor_inc_cps_",
+                    "value": "prosecutor (inc cps)",
+                    "text": "Prosecutor (inc CPS)"
+                  },
+                  {
+                    "answerSchemaUuid": "fe665f69-6091-41cf-a68f-89f172ee349b",
+                    "answerSchemaCode": "psychiatric",
+                    "value": "psychiatric",
+                    "text": "Psychiatric"
+                  },
+                  {
+                    "answerSchemaUuid": "980ecbef-3a8f-409a-9365-62e540aa6f08",
+                    "answerSchemaCode": "psychology",
+                    "value": "psychology",
+                    "text": "Psychology"
+                  },
+                  {
+                    "answerSchemaUuid": "394de21b-b467-4076-a7ab-74f7c1a6f7a6",
+                    "answerSchemaCode": "request_for_information",
+                    "value": "request for information",
+                    "text": "Request for information"
+                  },
+                  {
+                    "answerSchemaUuid": "67e80ea5-7a9c-49ef-99a2-273d6139ff97",
+                    "answerSchemaCode": "victim_statement",
+                    "value": "victim statement",
+                    "text": "Victim statement"
+                  },
+                  {
+                    "answerSchemaUuid": "56b7134a-4754-4f54-bd23-53abe7fa796a",
+                    "answerSchemaCode": "other",
+                    "value": "other",
+                    "text": "Other"
+                  }
+                ]
               },
               {
                 "type": "question",
                 "questionId": "de5901d9-ee4a-4dae-b7ac-8c8d697f933f",
                 "questionCode": "299.1",
-                "answerType": "freetext",
+                "answerType": "textarea",
                 "questionText": "Give details",
                 "displayOrder": 2,
                 "mandatory": true,
@@ -1559,13 +1686,25 @@
               },
               {
                 "type": "question",
+                "questionId": "f92b71f3-c991-4aa5-80db-4618db0e9f6d",
+                "questionCode": "291",
+                "answerType": "freetext",
+                "questionText": "Date of first sanction",
+                "displayOrder": 4,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter date of first sanction\",\"errorSummary\":\"Enter date of first sanction\"}}",
+                "readOnly": false,
+                "conditional": false,
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
                 "questionId": "48bdcea3-55a6-4916-9040-2ea3770a0331",
                 "questionCode": "45.1",
                 "answerType": "freetext",
                 "questionText": "Age at first conviction, conditional or absolute discharge (record in years)",
-                "displayOrder": 4,
+                "displayOrder": 5,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter age\",\"errorSummary\":\"Enter age\"}}",
                 "readOnly": false,
                 "conditional": false,
                 "answerSchemas": []
@@ -1576,7 +1715,7 @@
                 "questionCode": "46.1",
                 "answerType": "freetext",
                 "questionText": "Number of previous formal cautions, reprimands and final warnings",
-                "displayOrder": 5,
+                "displayOrder": 6,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous formal cautions, reprimands and final warnings\",\"errorSummary\":\"Enter the number of previous formal cautions, reprimands and final warnings\"}}",
                 "readOnly": false,
@@ -1589,7 +1728,7 @@
                 "questionCode": "47.1",
                 "answerType": "freetext",
                 "questionText": "How many of the sum of previous convictions, conditional or absolute discharges, cautions, reprimands or final warnings included any violent offences?",
-                "displayOrder": 6,
+                "displayOrder": 7,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the sum of previous convictions, conditional or absolute discharges, cautions, reprimands or final warnings included any violent offences\",\"errorSummary\":\"Enter the sum of previous convictions, conditional or absolute discharges, cautions, reprimands or final warnings included any violent offences\"}}",
                 "readOnly": false,
@@ -1602,7 +1741,7 @@
                 "questionCode": "48.1",
                 "answerType": "date",
                 "questionText": "Date of current conviction",
-                "displayOrder": 7,
+                "displayOrder": 8,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Add date of current conviction\",\"errorSummary\":\"Add date of current conviction\"}}",
                 "readOnly": false,
@@ -1615,7 +1754,7 @@
                 "questionCode": "59.1",
                 "answerType": "radio",
                 "questionText": "Have they ever committed a sexual or sexually motivated offence?",
-                "displayOrder": 8,
+                "displayOrder": 9,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (sexual or sexually-motivated offence)\"}}",
                 "readOnly": false,
@@ -1641,7 +1780,7 @@
                 "questionCode": "61.1",
                 "answerType": "radio",
                 "questionText": "Does the current sexual offence have a stranger victim?",
-                "displayOrder": 9,
+                "displayOrder": 10,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (contact against a stranger victim)\"}}",
                 "readOnly": false,
@@ -1667,7 +1806,7 @@
                 "questionCode": "62.1",
                 "answerType": "date",
                 "questionText": "Date of most recent sanction involving a sexual or sexually motivated offence",
-                "displayOrder": 10,
+                "displayOrder": 11,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\",\"errorSummary\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\"}}",
                 "readOnly": false,
@@ -1680,7 +1819,7 @@
                 "questionCode": "63.1",
                 "answerType": "freetext",
                 "questionText": "Number of previous or current sanctions involving contact adult sexual or sexually motivated offences",
-                "displayOrder": 11,
+                "displayOrder": 12,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\"}}",
                 "readOnly": false,
@@ -1693,7 +1832,7 @@
                 "questionCode": "64.1",
                 "answerType": "freetext",
                 "questionText": "Number of previous or current sanctions involving contact child sexual or sexually motivated offences",
-                "displayOrder": 12,
+                "displayOrder": 13,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually motivated offences\"}}",
                 "readOnly": false,
@@ -1706,7 +1845,7 @@
                 "questionCode": "65.1",
                 "answerType": "freetext",
                 "questionText": "Number of previous or current sanctions involving indecent child image sexual or sexually motivted offences",
-                "displayOrder": 13,
+                "displayOrder": 14,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\"}}",
                 "readOnly": false,
@@ -1719,7 +1858,7 @@
                 "questionCode": "66.1",
                 "answerType": "freetext",
                 "questionText": "Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences",
-                "displayOrder": 14,
+                "displayOrder": 15,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\",\"errorSummary\":\"Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\"}}",
                 "readOnly": false,
@@ -1732,7 +1871,7 @@
                 "questionCode": "60.1",
                 "answerType": "date",
                 "questionText": "Date of commencement of community sentence or earliest possible release from custody",
-                "displayOrder": 15,
+                "displayOrder": 16,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter a date\",\"errorSummary\":\"Enter a date\"}}",
                 "readOnly": false,
@@ -1745,7 +1884,7 @@
                 "questionCode": "67.1",
                 "answerType": "radio",
                 "questionText": "Have you completed an interview?",
-                "displayOrder": 16,
+                "displayOrder": 17,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (interview completion)\"}}",
                 "readOnly": false,
@@ -1771,7 +1910,7 @@
                 "questionCode": "69.1",
                 "answerType": "radio",
                 "questionText": "Did the offence involve carrying or use of a weapon?",
-                "displayOrder": 17,
+                "displayOrder": 18,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (carrying or using weapon)\"}}",
                 "readOnly": false,
@@ -1797,7 +1936,7 @@
                 "questionCode": "70.1",
                 "answerType": "freetext",
                 "questionText": "Specify which weapon",
-                "displayOrder": 18,
+                "displayOrder": 19,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"\",\"errorSummary\":\"\"}}",
                 "readOnly": false,
@@ -3764,29 +3903,79 @@
               },
               {
                 "type": "question",
-                "questionId": "6d429e85-3b54-4d57-bc5a-e26b3dac7f7f",
+                "questionId": "16b0d3cd-77b7-4ab5-a394-38edb45d7b0f",
                 "questionCode": "210.1",
-                "answerType": "freetext",
+                "answerType": "checkbox",
                 "questionText": "Current category of child protection registration ",
                 "displayOrder": 9,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a currentcategory of child protection registration\",\"errorSummary\":\"Select a current category of child protection registration\"}}",
                 "readOnly": false,
                 "conditional": false,
-                "answerSchemas": []
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "d82a79b2-b6ff-44e8-a4ae-c4ad8312f48d",
+                    "answerSchemaCode": "neglect",
+                    "value": "neglect",
+                    "text": "Neglect"
+                  },
+                  {
+                    "answerSchemaUuid": "74865d30-f744-41ef-a7f2-eec481b2d4c6",
+                    "answerSchemaCode": "physical",
+                    "value": "physical",
+                    "text": "Physical"
+                  },
+                  {
+                    "answerSchemaUuid": "b4a070d2-33b4-40f3-a155-a25912c9c8c5",
+                    "answerSchemaCode": "sexual",
+                    "value": "sexual",
+                    "text": "Sexual"
+                  },
+                  {
+                    "answerSchemaUuid": "4fd4b523-01fc-4ac3-966b-5afcd56dca9b",
+                    "answerSchemaCode": "emotional",
+                    "value": "emotional",
+                    "text": "Emotional"
+                  }
+                ]
               },
               {
                 "type": "question",
-                "questionId": "2d2258d7-7521-45b3-a6a5-9d9c3c1c23c4",
+                "questionId": "9e3d1286-93d6-42a3-9ed1-2d81a1170ce5",
                 "questionCode": "211.1",
-                "answerType": "freetext",
+                "answerType": "checkbox",
                 "questionText": "Previous category of child protection registration ",
                 "displayOrder": 10,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a previous category of child protection registration\",\"errorSummary\":\"Select a previous category of child protection registration\"}}",
                 "readOnly": false,
                 "conditional": false,
-                "answerSchemas": []
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "d82a79b2-b6ff-44e8-a4ae-c4ad8312f48d",
+                    "answerSchemaCode": "neglect",
+                    "value": "neglect",
+                    "text": "Neglect"
+                  },
+                  {
+                    "answerSchemaUuid": "74865d30-f744-41ef-a7f2-eec481b2d4c6",
+                    "answerSchemaCode": "physical",
+                    "value": "physical",
+                    "text": "Physical"
+                  },
+                  {
+                    "answerSchemaUuid": "b4a070d2-33b4-40f3-a155-a25912c9c8c5",
+                    "answerSchemaCode": "sexual",
+                    "value": "sexual",
+                    "text": "Sexual"
+                  },
+                  {
+                    "answerSchemaUuid": "4fd4b523-01fc-4ac3-966b-5afcd56dca9b",
+                    "answerSchemaCode": "emotional",
+                    "value": "emotional",
+                    "text": "Emotional"
+                  }
+                ]
               },
               {
                 "type": "question",
@@ -4655,7 +4844,7 @@
                 "questionId": "944b9da0-9e44-42c2-96e2-75906945729e",
                 "questionCode": "249.1",
                 "answerType": "freetext",
-                "questionText": "When is the risk likely to be greatest?\n\n",
+                "questionText": "When is the risk likely to be greatest?  ",
                 "displayOrder": 2,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say when the risk is likely to be greatest\",\"errorSummary\":\"Say when the risk is likely to be greatest\"}}",
@@ -4668,7 +4857,7 @@
                 "questionId": "82b58db0-7a55-4f0c-b335-f5803052c584",
                 "questionCode": "250.1",
                 "answerType": "freetext",
-                "questionText": "What circumstances are likely to increase risk?\n",
+                "questionText": "What circumstances are likely to increase risk? ",
                 "displayOrder": 3,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say what circumstances are likely to increase risk\",\"errorSummary\":\"Say what circumstances are likely to increase risk\"}}",
@@ -4681,7 +4870,7 @@
                 "questionId": "3798896c-2308-4b98-b1dc-8c0b45dc2a95",
                 "questionCode": "251.1",
                 "answerType": "freetext",
-                "questionText": "What factors are likely to reduce the risk?\n",
+                "questionText": "What factors are likely to reduce the risk? ",
                 "displayOrder": 4,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say what factors are likely to reduce the risk\",\"errorSummary\":\"Say what factors are likely to reduce the risk\"}}",
