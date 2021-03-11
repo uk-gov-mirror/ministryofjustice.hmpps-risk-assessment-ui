@@ -22,6 +22,7 @@ const validationRules = async (req, res, next) => {
     tokens,
     body: reqBody,
   } = req
+
   const questionGroup = await grabQuestionGroup(groupId, tokens)
   const currentQuestions = questionGroup.contents
 
@@ -132,7 +133,16 @@ function extractAnswers(postBody) {
   const shapedAnswers = Object.entries(postBody).reduce((answers, [key, value]) => {
     const trimmedKey = key.replace(/^id-/, '')
 
-    const answerValue = { freeTextAnswer: value, answers: {} }
+    let answerValue
+    if (Array.isArray(value)) {
+      const thisAnswer = {}
+      value.forEach(answer => {
+        thisAnswer[answer] = null
+      })
+      answerValue = { freeTextAnswer: null, answers: thisAnswer }
+    } else {
+      answerValue = { freeTextAnswer: value, answers: {} }
+    }
 
     return Object.assign(answers, { [trimmedKey]: answerValue })
   }, {})

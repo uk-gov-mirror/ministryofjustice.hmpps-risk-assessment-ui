@@ -23,6 +23,7 @@ const displayQuestionGroup = async (
     const { answers } = await grabAnswers(assessmentId, 'current', tokens)
     let questions = annotateWithAnswers(questionGroup.contents, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
+    questions = copyUUIDtoValue(questions)
 
     return res.render(`${__dirname}/index`, {
       bodyAnswers: { ...body },
@@ -65,6 +66,18 @@ const grabAnswers = (assessmentId, episodeId, tokens) => {
     logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
     throw error
   }
+}
+
+// copy answer UUID into value as we need this when sending answers back to assessment API
+const copyUUIDtoValue = questions => {
+  return questions.map(q => {
+    q.answerSchemas.map(schema => {
+      // eslint-disable-next-line no-param-reassign
+      schema.value = schema.answerSchemaUuid
+      return schema
+    })
+    return q
+  })
 }
 
 const annotateWithAnswers = (questions, answers, body) => {
@@ -204,7 +217,6 @@ const annotateAnswerSchemas = (answerSchemas, answerValue) => {
   if (!answerValue) {
     return answerSchemas
   }
-
   return answerSchemas.map(as => {
     return Object.assign(as, {
       checked: as.value === answerValue || answerValue.includes(as.value),
