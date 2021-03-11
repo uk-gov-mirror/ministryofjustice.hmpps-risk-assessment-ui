@@ -137,7 +137,7 @@ function extractAnswers(postBody) {
     if (Array.isArray(value)) {
       const thisAnswer = {}
       value.forEach(answer => {
-        thisAnswer[answer] = null
+        thisAnswer[answer] = ''
       })
       answerValue = { freeTextAnswer: null, answers: thisAnswer }
     } else {
