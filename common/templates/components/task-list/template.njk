@@ -14,20 +14,32 @@
         {%- if item.status == 'completed' %}
         {{ govukTag({
           text: "completed",
-          classes: 'moj-task-list__task-completed'
+          classes: 'govuk-tag app-task-list__tag moj-task-list__task moj-task-list__task-completed'
         }) }}
         {% endif -%}
         {%- if item.status == 'incomplete' %}
         {{ govukTag({
           text: "incomplete",
-          classes: 'moj-task-list__task-incomplete'
+          classes: 'moj-task-list__task'
         }) }}
         {% endif -%}
         {%- if item.status == 'not started' %}
         {{ govukTag({
           text: "not started yet",
-          classes: 'moj-task-list__task-notstarted'
+          classes: 'moj-task-list__task-notstarted moj-task-list__task'
         }) }}
+        {% endif -%}
+        {%- if item.status == 'in progress' %}
+          {{ govukTag({
+            text: "in progress",
+            classes: 'govuk-tag govuk-tag--blue app-task-list__tag moj-task-list__task'
+          }) }}
+        {% endif -%}
+        {%- if item.status == 'cannot start' %}
+          {{ govukTag({
+            text: "cannot start yet",
+            classes: 'govuk-tag govuk-tag--grey app-task-list__tag moj-task-list__task'
+          }) }}
         {% endif -%}
       </li>
       {% endfor -%}

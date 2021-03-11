@@ -2,40 +2,44 @@
 
 const { logger } = require('../../common/logging/logger')
 const { getQuestionGroupSummary } = require('../../common/data/assessmentApi')
+const { processReplacements } = require('../../common/utils/util')
 
 const displayQuestionGroupSummary = async (
   { params: { assessmentId, groupId }, errors = {}, errorSummary = null, tokens },
   res,
 ) => {
   try {
-    const assessment = await grabQuestionGroupSummary(groupId, tokens)
+    let assessment = await grabQuestionGroupSummary(groupId, tokens)
 
-    const overview = {
+    assessment = processReplacements(assessment, res.locals.offenderDetails)
+
+    const summary = {
       sections: [],
     }
 
-    const sectionContents = {
-      heading: {
-        text: assessment.title,
-      },
-      items: [],
-    }
-
-    assessment.contents?.forEach((item, index) => {
-      const href = `/${assessmentId}/questionGroup/${groupId}/${index}`
-      const newItem = {
-        text: item.title,
-        href,
-        status: item.status,
+    assessment.contents?.forEach(section => {
+      const sectionContents = {
+        heading: {
+          text: section.title,
+        },
+        items: [],
       }
-      sectionContents.items.push(newItem)
-    })
+      section.contents?.forEach((item, index) => {
+        const href = `/${assessmentId}/questionGroup/${item.groupId}/${index}`
+        const newItem = {
+          text: item.title,
+          href,
+          status: item.status,
+        }
+        sectionContents.items.push(newItem)
+      })
 
-    overview.sections.push(sectionContents)
+      summary.sections.push(sectionContents)
+    })
 
     return res.render(`${__dirname}/index`, {
       assessmentId,
-      overview,
+      summary,
       subheading: assessment.title,
       groupId,
     })

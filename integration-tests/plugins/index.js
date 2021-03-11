@@ -7,6 +7,7 @@ const {
   stubAnswers,
   stubEpisodes,
   stubOffenderDetails,
+  stubQuestionSummaries,
 } = require('../../wiremock/assessmentApi')
 const oauthApi = require('../../wiremock/oauth')
 
@@ -21,7 +22,14 @@ module.exports = on => {
     pa11y: pa11y(), // calling the function is important
     reset: resetStubs,
     stubAssessmentApi: () =>
-      Promise.all([stubQuestions(), stubForms(), stubAnswers(), stubEpisodes(), stubOffenderDetails()]),
+      Promise.all([
+        stubQuestions(),
+        stubForms(),
+        stubAnswers(),
+        stubEpisodes(),
+        stubOffenderDetails(),
+        stubQuestionSummaries(),
+      ]),
     stubAuth: () => Promise.all([oauthApi.stubGetToken()]),
   })
 }

@@ -6,6 +6,7 @@ const {
   catchAndReThrowError,
   isValidDate,
   encodeHTML,
+  processReplacements,
 } = require('./util')
 
 const inputText = "There is a green hill far away - and I shouldn't tell you that really"
@@ -129,5 +130,17 @@ describe('encodeHTML', () => {
   it('should leave other text and existing encoded characters unchanged', () => {
     const inputString = '</textarea>&lt;&#x2F;textarea&gt;&lt;'
     expect(encodeHTML(inputString)).toEqual('&lt;/textarea&gt;&lt;&#x2F;textarea&gt;&lt;')
+  })
+
+  it('should replace specific patterns in json objects', () => {
+    const input = { inputText: 'This name: [Name of person] should be inserted' }
+    const replacements = { name: 'Jerry Only' }
+    expect(processReplacements(input, replacements)).toEqual({ inputText: 'This name: Jerry Only should be inserted' })
+  })
+
+  it('should not replace when replacement item is not present', () => {
+    const input = { inputText: 'This name: [Name of person] should not be inserted' }
+    const replacements = { fullname: 'Jerry Only' }
+    expect(processReplacements(input, replacements)).toEqual(input)
   })
 })

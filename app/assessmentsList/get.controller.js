@@ -11,7 +11,7 @@ const displayAssessmentsList = async ({ params: { assessmentId }, tokens }, res)
       .map(form => {
         return {
           ...form,
-          path: `/${assessmentId}/questionGroup/${form.groupId}/0`,
+          path: `/${assessmentId}/questionGroup/${form.groupId}/summary`,
         }
       })
 

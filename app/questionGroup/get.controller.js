@@ -1,6 +1,6 @@
 // @ts-check
 const nunjucks = require('nunjucks')
-
+const { processReplacements } = require('../../common/utils/util')
 const { logger } = require('../../common/logging/logger')
 const { getQuestionGroup, getAnswers } = require('../../common/data/assessmentApi')
 
@@ -9,7 +9,8 @@ const displayQuestionGroup = async (
   res,
 ) => {
   try {
-    const questionGroup = await grabQuestionGroup(groupId, tokens)
+    let questionGroup = await grabQuestionGroup(groupId, tokens)
+    questionGroup = processReplacements(questionGroup, res.locals.offenderDetails)
     const subIndex = Number.parseInt(subgroup, 10)
 
     if (subIndex >= questionGroup.contents.length) {
@@ -20,7 +21,7 @@ const displayQuestionGroup = async (
     }
 
     const { answers } = await grabAnswers(assessmentId, 'current', tokens)
-    let questions = annotateWithAnswers(questionGroup.contents[subIndex].contents, answers, body)
+    let questions = annotateWithAnswers(questionGroup.contents, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
 
     return res.render(`${__dirname}/index`, {

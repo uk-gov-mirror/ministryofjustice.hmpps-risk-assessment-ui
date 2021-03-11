@@ -2,7 +2,7 @@
 const { displayOverview } = require('./get.controller')
 const { getQuestionGroupSummary } = require('../../common/data/assessmentApi')
 const questionGroupSummaryPointer = require('../../wiremock/responses/questionGroups.json')[
-  '7a6836c1-2caf-4a0d-8e5c-5d13482a868f'
+  '65a3924c-4130-4140-b7f4-cc39a52603bb'
 ]
 const expected = require('./fixtures/expected.json')
 
@@ -18,12 +18,17 @@ describe('display question group summary', () => {
     tokens,
     params: {
       assessmentId: 'test-assessment-id',
-      groupId: '7a6836c1-2caf-4a0d-8e5c-5d13482a868f',
+      groupId: '65a3924c-4130-4140-b7f4-cc39a52603bb',
     },
   }
   const res = {
     render: jest.fn(),
     redirect: jest.fn(),
+    locals: {
+      offenderDetails: {
+        name: 'Fred Smith',
+      },
+    },
   }
 
   beforeEach(() => {

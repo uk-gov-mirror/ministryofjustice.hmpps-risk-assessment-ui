@@ -120,6 +120,17 @@ const dynamicMiddleware = async (validators, req, res, next) => {
   )
 }
 
+const processReplacements = (input, replacementDetails) => {
+  let newInput = JSON.stringify(input)
+
+  // replace name
+  if (replacementDetails.name) {
+    newInput = newInput.split('[Name of person]').join(replacementDetails.name)
+  }
+
+  return JSON.parse(newInput)
+}
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -133,4 +144,5 @@ module.exports = {
   updateMDC,
   encodeHTML,
   dynamicMiddleware,
+  processReplacements,
 }

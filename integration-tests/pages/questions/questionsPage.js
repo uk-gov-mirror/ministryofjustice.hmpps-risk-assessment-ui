@@ -16,6 +16,8 @@ export default {
       .find('a')
       .eq(assessmentNumber)
       .click()
+      .get('.moj-task-list__task-name')
+      .click()
     return questionsPage()
   },
 }

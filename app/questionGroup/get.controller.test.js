@@ -36,6 +36,11 @@ describe('display question group and answers', () => {
   const res = {
     render: jest.fn(),
     redirect: jest.fn(),
+    locals: {
+      offenderDetails: {
+        name: 'Fred Smith',
+      },
+    },
   }
 
   beforeEach(() => {
@@ -59,8 +64,8 @@ describe('display question group and answers', () => {
     const expectedWithAnswers = JSON.parse(JSON.stringify(expectedForThisTest))
     const forenameAnswer = 'Bob'
     const surnameAnswer = 'Mould'
-    expectedWithAnswers.questions[0].answer = forenameAnswer
-    expectedWithAnswers.questions[1].answer = surnameAnswer
+    expectedWithAnswers.questions[0].contents[0].answer = forenameAnswer
+    expectedWithAnswers.questions[0].contents[1].answer = surnameAnswer
     getQuestionGroup.mockReturnValueOnce(questionGroup)
     getAnswers.mockReturnValueOnce({
       answers: {
