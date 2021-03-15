@@ -15,5 +15,6 @@
   "videoUploadOnPasses": false,
   "taskTimeout": 200000,
   "pageLoadTimeout": 200000,
-  "nodeVersion": "system"
+  "nodeVersion": "system",
+  "watchForFileChanges": false
 }

@@ -6,6 +6,7 @@
 // } = require('../common/config')
 
 const getOffenderDetails = require('../common/middleware/getOffenderDetails')
+const getQuestionGroup = require('../common/middleware/getQuestionGroup')
 
 // pages
 const { startController } = require('./start/get.controller')
@@ -54,11 +55,12 @@ module.exports = app => {
 
   app.get(`/:assessmentId/questiongroup/:groupId/summary`, getOffenderDetails, displayOverview)
 
-  app.get(`/:assessmentId/questiongroup/:groupId/:subgroup`, getOffenderDetails, displayQuestionGroup)
+  app.get(`/:assessmentId/questiongroup/:groupId/:subgroup`, getOffenderDetails, getQuestionGroup, displayQuestionGroup)
   app.post(
     `/:assessmentId/questiongroup/:groupId/:subgroup`,
     getOffenderDetails,
     assembleDates,
+    getQuestionGroup,
     questionGroupValidationRules,
     validate,
     saveQuestionGroup,

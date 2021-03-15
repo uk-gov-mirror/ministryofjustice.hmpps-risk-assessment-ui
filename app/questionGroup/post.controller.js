@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 const { body } = require('express-validator')
 const { logger } = require('../../common/logging/logger')
-const { displayQuestionGroup, grabQuestionGroup } = require('./get.controller')
+const { displayQuestionGroup } = require('./get.controller')
 const { postAnswers } = require('../../common/data/assessmentApi')
 const { dynamicMiddleware } = require('../../common/utils/util')
 
@@ -17,13 +17,9 @@ const constructValidationRule = (questionId, validationType, validationSettings)
 }
 
 const validationRules = async (req, res, next) => {
-  const {
-    params: { groupId },
-    tokens,
-    body: reqBody,
-  } = req
+  const { body: reqBody } = req
 
-  const questionGroup = await grabQuestionGroup(groupId, tokens)
+  const { questionGroup } = res.locals
   const currentQuestions = questionGroup.contents
 
   const validatorsToSend = []
@@ -104,13 +100,13 @@ const saveQuestionGroup = async (req, res) => {
     tokens,
     errors,
   } = req
+  const { questionGroup } = res.locals
   if (errors) {
     return displayQuestionGroup(req, res)
   }
 
   try {
-    const answers = extractAnswers(reqBody)
-
+    const answers = extractAnswers(reqBody, questionGroup.contents)
     await postAnswers(assessmentId, 'current', answers, tokens)
 
     const subIndex = Number.parseInt(subgroup, 10)
@@ -129,16 +125,22 @@ function findDateAnswerKeys(postBody) {
   })
 }
 
-function extractAnswers(postBody) {
+function extractAnswers(postBody, questions) {
   const shapedAnswers = Object.entries(postBody).reduce((answers, [key, value]) => {
     const trimmedKey = key.replace(/^id-/, '')
 
     let answerValue
-    if (Array.isArray(value)) {
+    const { answerType } = questions.filter(question => trimmedKey === question.questionId)[0] || 'freetext'
+
+    if (answerType === 'checkbox' || answerType === 'radio') {
       const thisAnswer = {}
-      value.forEach(answer => {
-        thisAnswer[answer] = ''
-      })
+      if (Array.isArray(value)) {
+        value.forEach(answer => {
+          thisAnswer[answer] = ''
+        })
+      } else {
+        thisAnswer[value] = ''
+      }
       answerValue = { freeTextAnswer: null, answers: thisAnswer }
     } else {
       answerValue = { freeTextAnswer: value, answers: {} }

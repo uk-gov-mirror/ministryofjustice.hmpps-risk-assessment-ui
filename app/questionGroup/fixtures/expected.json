@@ -1,383 +1,425 @@
 {
   "bodyAnswers": {},
   "assessmentId": "test-assessment-id",
-  "heading": "Brief Form",
-  "subheading": "Case Identification",
-  "groupId": "22222222-2222-2222-2222-222222222203",
+  "heading": "Case Identification",
+  "groupId": "22222222-2222-2222-2222-222222222204",
   "questions": [
     {
-      "type": "group",
-      "groupId": "22222222-2222-2222-2222-222222222204",
-      "groupCode": "bcst_case_id",
-      "title": "Case Identification",
-      "helpText": "Offender and sentence details",
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111111111202",
+      "questionCode": "forename",
+      "answerType": "freetext",
+      "questionText": "Forename",
       "displayOrder": "1",
       "mandatory": "yes",
-      "contents": [
+      "answerSchemas": [],
+      "answer": null,
+      "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the forename\",\"errorSummary\":\"You must enter a forename\"}}"
+    },
+    {
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111111111201",
+      "questionCode": "surname",
+      "answerType": "freetext",
+      "questionText": "Surname",
+      "displayOrder": "2",
+      "mandatory": "yes",
+      "answerSchemas": [],
+      "answer": null,
+      "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the surname\",\"errorSummary\":\"You must enter a surname\"}}"
+    },
+    {
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111111111205",
+      "questionCode": "dob",
+      "answerType": "date",
+      "questionText": "Date of Birth",
+      "displayOrder": "3",
+      "mandatory": "no",
+      "answerSchemas": [],
+      "answer": null
+    },
+    {
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111111111207",
+      "questionCode": "gender",
+      "answerType": "freetext",
+      "questionText": "Gender",
+      "displayOrder": "4",
+      "mandatory": "no",
+      "answerSchemas": [],
+      "answer": null
+    },
+    {
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111111111231",
+      "questionCode": "no_fixed_abode",
+      "answerType": "radio",
+      "questionText": "Currently of no fixed abode or in transient accommodation",
+      "displayOrder": "1",
+      "mandatory": "no",
+      "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an accommodation status\"}}",
+      "answerSchemas": [
         {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111111111202",
-          "questionCode": "forename",
-          "answerType": "freetext",
-          "questionText": "Forename",
-          "displayOrder": "1",
-          "mandatory": "yes",
-          "answerSchemas": [],
-          "answer": null,
-          "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the forename\",\"errorSummary\":\"You must enter a forename\"}}"
-        },
-        {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111111111201",
-          "questionCode": "surname",
-          "answerType": "freetext",
-          "questionText": "Surname",
-          "displayOrder": "2",
-          "mandatory": "yes",
-          "answerSchemas": [],
-          "answer": null,
-          "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the surname\",\"errorSummary\":\"You must enter a surname\"}}"
-        },
-        {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111111111205",
-          "questionCode": "dob",
-          "answerType": "date",
-          "questionText": "Date of Birth",
-          "displayOrder": "3",
-          "mandatory": "no",
-          "answerSchemas": [],
-          "answer": null
-        },
-        {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111111111207",
-          "questionCode": "gender",
-          "answerType": "freetext",
-          "questionText": "Gender",
-          "displayOrder": "4",
-          "mandatory": "no",
-          "answerSchemas": [],
-          "answer": null
-        },
-        {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111111111231",
-          "questionCode": "no_fixed_abode",
-          "answerType": "radio",
-          "questionText": "Currently of no fixed abode or in transient accommodation",
-          "displayOrder": "1",
-          "mandatory": "no",
-          "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an accommodation status\"}}",
-          "answerSchemas": [
+          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "44444444-4444-4444-4444-444444444444",
+          "text": "Yes",
+          "conditionals": [
             {
-              "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "Y",
-              "text": "Yes",
-              "conditionals": [{ "conditional": "conditional-question-id-1111111", "displayInline": true }],
-              "conditional": {
-                "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label Further information govuk-label--m\" for=\"id-conditional-question-id-1111111\">Further information</label><div id=\"id-conditional-question-id-1111111-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-conditional-question-id-1111111\" name=\"id-conditional-question-id-1111111\" rows=\"5\" aria-describedby=\"id-conditional-question-id-1111111-hint\"></textarea>\n</div>"
-              }
-            },
-            {
-              "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
-              "answerSchemaCode": "SR15.1.2.2",
-              "value": "N",
-              "text": "No"
-            }
-          ]
-        },
-        {
-          "type": "question",
-          "questionId": "99111111-1111-1111-1111-111111111231",
-          "questionCode": "no_fixed_abode",
-          "answerType": "radio",
-          "questionText": "Test question for displaying conditional out of line...",
-          "displayOrder": "1",
-          "mandatory": "no",
-          "answerSchemas": [
-            {
-              "answerSchemaUuid": "99444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "Y",
-              "text": "Yes",
-              "conditionals": [{ "conditional": "conditional-question-id-9911111", "displayInline": false }],
-              "attributes": [
-                ["data-conditional", "conditional-question-id-9911111"],
-                ["data-aria-controls", "conditional-id-form-conditional-question-id-9911111"],
-                ["aria-expanded", "false"]
-              ]
-            },
-            {
-              "answerSchemaUuid": "99444444-4444-4444-4444-444444444445",
-              "answerSchemaCode": "SR15.1.2.2",
-              "value": "N",
-              "text": "No"
+              "conditional": "conditional-question-id-1111111",
+              "displayInline": true
             }
           ],
-          "isConditional": true,
-          "attributes": [["data-contains-conditional", "true"]]
+          "conditional": {
+            "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label Further information govuk-label--m\" for=\"id-conditional-question-id-1111111\">Further information</label><div id=\"id-conditional-question-id-1111111-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-conditional-question-id-1111111\" name=\"id-conditional-question-id-1111111\" rows=\"5\" aria-describedby=\"id-conditional-question-id-1111111-hint\"></textarea>\n</div>"
+          }
         },
         {
-          "type": "question",
-          "questionId": "conditional-question-id-9911111",
-          "questionCode": "78.1",
-          "answerType": "radio",
-          "questionText": "Accommodation type",
-          "displayOrder": 4,
-          "mandatory": true,
-          "validation": "{\"mandatory\":{\"errorMessage\":\"Select the accommodation type\",\"errorSummary\":\"Select the accommodation type\"}}",
-          "conditional": true,
-          "answerSchemas": [
+          "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+          "answerSchemaCode": "SR15.1.2.2",
+          "value": "44444444-4444-4444-4444-444444444445",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "99111111-1111-1111-1111-111111111231",
+      "questionCode": "no_fixed_abode",
+      "answerType": "radio",
+      "questionText": "Test question for displaying conditional out of line...",
+      "displayOrder": "1",
+      "mandatory": "no",
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "99444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "99444444-4444-4444-4444-444444444444",
+          "text": "Yes",
+          "conditionals": [
             {
-              "answerSchemaUuid": "a26b1af8-d590-4a87-a347-a78347fa08c9",
-              "answerSchemaCode": "tenant_owner_occupied",
-              "value": "tenant owner / occupied",
-              "text": "Tenant owner / occupied"
-            },
-            {
-              "answerSchemaUuid": "34d227ab-437f-40b6-8a66-93a6486e9d6b",
-              "answerSchemaCode": "living_with_stable_",
-              "value": "living with (stable)",
-              "text": "Living with (stable)"
-            },
-            {
-              "answerSchemaUuid": "d976f515-bfbe-4646-9d68-f0575c10ee96",
-              "answerSchemaCode": "living_with_unstable_",
-              "value": "living with (unstable)",
-              "text": "Living with (unstable)"
+              "conditional": "conditional-question-id-9911111",
+              "displayInline": false
             }
           ],
-          "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
-          "isConditional": true,
           "attributes": [
-            ["data-outofline", "true"],
-            ["data-base-id", "conditional-question-id-9911111"]
+            ["data-conditional", "conditional-question-id-9911111"],
+            ["data-aria-controls", "conditional-id-form-conditional-question-id-9911111"],
+            ["aria-expanded", "false"]
           ]
         },
         {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111114111231",
-          "questionCode": "sentencing_purpose",
-          "answerType": "dropdown",
-          "questionText": "Sentencing purpose",
-          "displayOrder": "1",
-          "mandatory": "no",
-          "answerSchemas": [
-            {
-              "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "punishment",
-              "text": "Punishment"
-            },
-            {
-              "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "public_protection",
-              "text": "Public protection"
-            },
-            {
-              "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "crime_reduction",
-              "text": "Crime reduction"
-            },
-            {
-              "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "reparation",
-              "text": "Reparation"
-            },
-            {
-              "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "reform_or_rehabilitation",
-              "text": "Reform or rehabilitation"
-            }
-          ],
-          "answer": null
+          "answerSchemaUuid": "99444444-4444-4444-4444-444444444445",
+          "answerSchemaCode": "SR15.1.2.2",
+          "value": "99444444-4444-4444-4444-444444444445",
+          "text": "No"
+        }
+      ],
+      "isConditional": true,
+      "attributes": [["data-contains-conditional", "true"]]
+    },
+    {
+      "type": "question",
+      "questionId": "conditional-question-id-9911111",
+      "questionCode": "78.1",
+      "answerType": "radio",
+      "questionText": "Accommodation type",
+      "displayOrder": 4,
+      "mandatory": true,
+      "validation": "{\"mandatory\":{\"errorMessage\":\"Select the accommodation type\",\"errorSummary\":\"Select the accommodation type\"}}",
+      "conditional": true,
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "a26b1af8-d590-4a87-a347-a78347fa08c9",
+          "answerSchemaCode": "tenant_owner_occupied",
+          "value": "a26b1af8-d590-4a87-a347-a78347fa08c9",
+          "text": "Tenant owner / occupied"
         },
         {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111111111310",
-          "questionCode": "add_info",
-          "answerType": "textarea",
-          "questionText": "Additional information",
-          "displayOrder": "1",
-          "mandatory": "no",
-          "hint": "Enter any other relevant information",
-          "answerSchemas": [],
-          "answer": null
+          "answerSchemaUuid": "34d227ab-437f-40b6-8a66-93a6486e9d6b",
+          "answerSchemaCode": "living_with_stable_",
+          "value": "34d227ab-437f-40b6-8a66-93a6486e9d6b",
+          "text": "Living with (stable)"
         },
         {
-          "type": "question",
-          "questionId": "4077c218-3a16-4b92-9f98-bdd33cee476b",
-          "questionCode": "96.1",
-          "answerType": "radio",
-          "questionText": "Is drug misuse linked to offending behaviour?",
-          "displayOrder": 23,
-          "mandatory": true,
-          "conditional": false,
-          "answerSchemas": [
-            {
-              "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
-              "answerSchemaCode": "yes",
-              "value": "y",
-              "text": "Yes",
-              "conditionals": [
-                { "conditional": "ef018645-b846-4022-b290-1e7d3d380b4d", "displayInline": true },
-                { "conditional": "0419944f-ad54-4035-bef0-dca3bda4ff64", "displayInline": false },
-                { "conditional": "db85cfb1-bf5e-4852-bfe8-137f44570cab", "displayInline": false }
-              ],
-              "conditional": {
-                "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label 97.1 govuk-label--m\" for=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\">Give details</label><div id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" name=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" rows=\"5\" aria-describedby=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\"></textarea>\n</div>"
-              },
-              "attributes": [
-                ["data-conditional", "0419944f-ad54-4035-bef0-dca3bda4ff64 db85cfb1-bf5e-4852-bfe8-137f44570cab"],
-                [
-                  "data-aria-controls",
-                  "conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64 conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab"
-                ],
-                ["aria-expanded", "false"]
-              ]
-            },
-            {
-              "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
-              "answerSchemaCode": "no",
-              "value": "n",
-              "text": "No"
-            }
-          ],
-          "isConditional": true,
-          "attributes": [["data-contains-conditional", "true"]]
+          "answerSchemaUuid": "d976f515-bfbe-4646-9d68-f0575c10ee96",
+          "answerSchemaCode": "living_with_unstable_",
+          "value": "d976f515-bfbe-4646-9d68-f0575c10ee96",
+          "text": "Living with (unstable)"
+        }
+      ],
+      "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
+      "isConditional": true,
+      "attributes": [
+        ["data-outofline", "true"],
+        ["data-base-id", "conditional-question-id-9911111"]
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111114111231",
+      "questionCode": "sentencing_purpose",
+      "answerType": "dropdown",
+      "questionText": "Sentencing purpose",
+      "displayOrder": "1",
+      "mandatory": "no",
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "44444444-4444-4444-4444-444444444444",
+          "text": "Punishment"
         },
         {
-          "type": "question",
-          "questionId": "0419944f-ad54-4035-bef0-dca3bda4ff64",
-          "questionCode": "98.1",
-          "answerType": "radio",
-          "questionText": "Is there current or recent drug misuse on a daily or weekly basis?",
-          "displayOrder": 25,
-          "mandatory": true,
-          "conditional": true,
-          "answerSchemas": [
+          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "44444444-4444-4444-4444-444444444444",
+          "text": "Public protection"
+        },
+        {
+          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "44444444-4444-4444-4444-444444444444",
+          "text": "Crime reduction"
+        },
+        {
+          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "44444444-4444-4444-4444-444444444444",
+          "text": "Reparation"
+        },
+        {
+          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "44444444-4444-4444-4444-444444444444",
+          "text": "Reform or rehabilitation"
+        }
+      ],
+      "answer": null
+    },
+    {
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111111111310",
+      "questionCode": "add_info",
+      "answerType": "textarea",
+      "questionText": "Additional information",
+      "displayOrder": "1",
+      "mandatory": "no",
+      "hint": "Enter any other relevant information",
+      "answerSchemas": [],
+      "answer": null
+    },
+    {
+      "type": "question",
+      "questionId": "4077c218-3a16-4b92-9f98-bdd33cee476b",
+      "questionCode": "96.1",
+      "answerType": "radio",
+      "questionText": "Is drug misuse linked to offending behaviour?",
+      "displayOrder": 23,
+      "mandatory": true,
+      "conditional": false,
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "answerSchemaCode": "yes",
+          "value": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "text": "Yes",
+          "conditionals": [
             {
-              "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
-              "answerSchemaCode": "yes",
-              "value": "y",
-              "text": "Yes",
-              "conditionals": [{ "conditional": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec", "displayInline": true }],
-              "conditional": {
-                "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label 99.1 govuk-label--m\" for=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\">Give details</label><div id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" name=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" rows=\"5\" aria-describedby=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\"></textarea>\n</div>"
-              }
+              "conditional": "ef018645-b846-4022-b290-1e7d3d380b4d",
+              "displayInline": true
             },
             {
-              "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
-              "answerSchemaCode": "no",
-              "value": "n",
-              "text": "No"
+              "conditional": "0419944f-ad54-4035-bef0-dca3bda4ff64",
+              "displayInline": false
+            },
+            {
+              "conditional": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
+              "displayInline": false
             }
           ],
-          "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
-          "isConditional": true,
+          "conditional": {
+            "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label 97.1 govuk-label--m\" for=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\">Give details</label><div id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" name=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" rows=\"5\" aria-describedby=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\"></textarea>\n</div>"
+          },
           "attributes": [
-            ["data-outofline", "true"],
-            ["data-base-id", "0419944f-ad54-4035-bef0-dca3bda4ff64"]
+            ["data-conditional", "0419944f-ad54-4035-bef0-dca3bda4ff64 db85cfb1-bf5e-4852-bfe8-137f44570cab"],
+            [
+              "data-aria-controls",
+              "conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64 conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab"
+            ],
+            ["aria-expanded", "false"]
           ]
         },
         {
-          "type": "question",
-          "questionId": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
-          "questionCode": "100.1",
-          "answerType": "freetext",
-          "questionText": "Is the individual motivated to tackle drugs misuse?",
-          "displayOrder": 27,
-          "mandatory": true,
-          "conditional": true,
-          "answerSchemas": [],
-          "answer": null,
-          "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
-          "isConditional": true,
-          "attributes": [
-            ["data-outofline", "true"],
-            ["data-base-id", "db85cfb1-bf5e-4852-bfe8-137f44570cab"]
-          ]
-        },
+          "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "answerSchemaCode": "no",
+          "value": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "text": "No"
+        }
+      ],
+      "isConditional": true,
+      "attributes": [["data-contains-conditional", "true"]]
+    },
+    {
+      "type": "question",
+      "questionId": "0419944f-ad54-4035-bef0-dca3bda4ff64",
+      "questionCode": "98.1",
+      "answerType": "radio",
+      "questionText": "Is there current or recent drug misuse on a daily or weekly basis?",
+      "displayOrder": 25,
+      "mandatory": true,
+      "conditional": true,
+      "answerSchemas": [
         {
-          "type": "question",
-          "questionId": "11111111-1111-1111-1111-111111111631",
-          "questionCode": "sources_of_information",
-          "answerType": "checkbox",
-          "questionText": "Sources of information",
-          "displayOrder": "1",
-          "mandatory": "no",
-          "hint": "Select all that apply",
-          "answerSchemas": [
+          "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "answerSchemaCode": "yes",
+          "value": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "text": "Yes",
+          "conditionals": [
             {
-              "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",
-              "answerSchemaCode": "SR15.1.2.1",
-              "value": "bail_information_record",
-              "text": "Bail information record"
-            },
-            {
-              "answerSchemaUuid": "1234444444-4444-4444-4444-444444444445",
-              "answerSchemaCode": "SR15.1.2.2",
-              "value": "basic_custody_screening",
-              "text": "Basic custody screening"
-            },
-            {
-              "answerSchemaUuid": "1334444444-4444-4444-4444-444444444445",
-              "answerSchemaCode": "SR15.1.2.2",
-              "value": "community_payback",
-              "text": "Community payback"
-            },
-            {
-              "answerSchemaUuid": "1434444444-4444-4444-4444-444444444445",
-              "answerSchemaCode": "SR15.1.2.2",
-              "value": "hostel",
-              "text": "Hostel"
+              "conditional": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec",
+              "displayInline": true
             }
-          ]
+          ],
+          "conditional": {
+            "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label 99.1 govuk-label--m\" for=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\">Give details</label><div id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" name=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" rows=\"5\" aria-describedby=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\"></textarea>\n</div>"
+          }
         },
         {
-          "type": "question",
-          "questionId": "1111",
-          "questionCode": "readonly_radio",
-          "answerType": "radio",
-          "questionText": "Radio readonly question",
-          "displayOrder": "1",
-          "mandatory": "no",
-          "readOnly": true,
-          "answerSchemas": [
-            { "answerSchemaUuid": "2222", "value": "Y", "text": "Yes" },
-            { "answerSchemaUuid": "3333", "value": "N", "text": "No" },
-            { "answerSchemaUuid": "4444", "value": "U", "text": "Don't know" }
-          ],
-          "attributes": { "readonly": true, "disabled": true }
+          "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "answerSchemaCode": "no",
+          "value": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "text": "No"
+        }
+      ],
+      "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
+      "isConditional": true,
+      "attributes": [
+        ["data-outofline", "true"],
+        ["data-base-id", "0419944f-ad54-4035-bef0-dca3bda4ff64"]
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
+      "questionCode": "100.1",
+      "answerType": "freetext",
+      "questionText": "Is the individual motivated to tackle drugs misuse?",
+      "displayOrder": 27,
+      "mandatory": true,
+      "conditional": true,
+      "answerSchemas": [],
+      "answer": null,
+      "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
+      "isConditional": true,
+      "attributes": [
+        ["data-outofline", "true"],
+        ["data-base-id", "db85cfb1-bf5e-4852-bfe8-137f44570cab"]
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "11111111-1111-1111-1111-111111111631",
+      "questionCode": "sources_of_information",
+      "answerType": "checkbox",
+      "questionText": "Sources of information",
+      "displayOrder": "1",
+      "mandatory": "no",
+      "hint": "Select all that apply",
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",
+          "answerSchemaCode": "SR15.1.2.1",
+          "value": "1124444444-4444-4444-4444-444444444444",
+          "text": "Bail information record"
         },
         {
-          "type": "question",
-          "questionId": "5555",
-          "questionCode": "readonly_checkbox",
-          "answerType": "checkbox",
-          "questionText": "checkbox readonly question",
-          "displayOrder": "1",
-          "mandatory": "no",
-          "readOnly": true,
-          "answerSchemas": [
-            { "answerSchemaUuid": "6666", "value": "OPT1", "text": "Option 1" },
-            { "answerSchemaUuid": "7777", "value": "OPT2", "text": "Option 2" },
-            { "answerSchemaUuid": "8888", "value": "OPT3", "text": "Option 3" },
-            { "answerSchemaUuid": "9999", "value": "OPT4", "text": "Option 4" },
-            { "answerSchemaUuid": "AAAA", "value": "OPT5", "text": "Option 5" }
-          ],
-          "attributes": { "readonly": true, "disabled": true }
+          "answerSchemaUuid": "1234444444-4444-4444-4444-444444444445",
+          "answerSchemaCode": "SR15.1.2.2",
+          "value": "1234444444-4444-4444-4444-444444444445",
+          "text": "Basic custody screening"
+        },
+        {
+          "answerSchemaUuid": "1334444444-4444-4444-4444-444444444445",
+          "answerSchemaCode": "SR15.1.2.2",
+          "value": "1334444444-4444-4444-4444-444444444445",
+          "text": "Community payback"
+        },
+        {
+          "answerSchemaUuid": "1434444444-4444-4444-4444-444444444445",
+          "answerSchemaCode": "SR15.1.2.2",
+          "value": "1434444444-4444-4444-4444-444444444445",
+          "text": "Hostel"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "1111",
+      "questionCode": "readonly_radio",
+      "answerType": "radio",
+      "questionText": "Radio readonly question",
+      "displayOrder": "1",
+      "mandatory": "no",
+      "readOnly": true,
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "2222",
+          "value": "2222",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "3333",
+          "value": "3333",
+          "text": "No"
+        },
+        {
+          "answerSchemaUuid": "4444",
+          "value": "4444",
+          "text": "Don't know"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "5555",
+      "questionCode": "readonly_checkbox",
+      "answerType": "checkbox",
+      "questionText": "checkbox readonly question",
+      "displayOrder": "1",
+      "mandatory": "no",
+      "readOnly": true,
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "6666",
+          "value": "6666",
+          "text": "Option 1"
+        },
+        {
+          "answerSchemaUuid": "7777",
+          "value": "7777",
+          "text": "Option 2"
+        },
+        {
+          "answerSchemaUuid": "8888",
+          "value": "8888",
+          "text": "Option 3"
+        },
+        {
+          "answerSchemaUuid": "9999",
+          "value": "9999",
+          "text": "Option 4"
+        },
+        {
+          "answerSchemaUuid": "AAAA",
+          "value": "AAAA",
+          "text": "Option 5"
         }
       ]
     }
   ],
-  "last": true,
+  "last": false,
   "errors": {},
   "errorSummary": null
 }

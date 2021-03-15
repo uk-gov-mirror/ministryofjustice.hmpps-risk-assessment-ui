@@ -1479,6 +1479,7 @@
                 "questionCode": "298.1",
                 "answerType": "checkbox",
                 "questionText": "Sources of information",
+                "hint": "Select all that apply",
                 "displayOrder": 1,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select sources of information\",\"errorSummary\":\"Select sources of information\"}}",

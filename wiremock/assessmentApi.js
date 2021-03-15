@@ -165,6 +165,7 @@ const stubQuestions = async () => {
   await stubQuestionGroup('65a3924c-4130-4140-b7f4-cc39a52603bb') // short psr
 
   await stubAllInternalQuestionGroups(questionGroups['65a3924c-4130-4140-b7f4-cc39a52603bb'])
+  await stubAllInternalQuestionGroups(questionGroups['22222222-2222-2222-2222-222222222203'])
 }
 
 const stubQuestionSummaries = async () => {
