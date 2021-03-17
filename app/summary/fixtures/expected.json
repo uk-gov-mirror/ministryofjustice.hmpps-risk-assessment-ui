@@ -3,109 +3,125 @@
   "summary": {
     "sections": [
       {
-        "heading": { "text": "1. Individual and case details" },
+        "heading": {
+          "text": "Individual and case details"
+        },
         "items": [
           {
             "text": "Fred Smith's details",
-            "href": "/test-assessment-id/questionGroup/f7dd78a8-7f04-4fde-8a4f-ac2cf0c56ff5/0"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/0/0"
           },
           {
             "text": "Assessment details",
-            "href": "/test-assessment-id/questionGroup/78b595f6-efed-405e-9d6e-07882db416a6/1"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/0/1"
           }
         ]
       },
       {
-        "heading": { "text": "2. Sources of information" },
+        "heading": {
+          "text": "Sources of information"
+        },
         "items": [
           {
             "text": "Select sources",
-            "href": "/test-assessment-id/questionGroup/3cc4f4cb-a351-430b-adfb-3ad8ab9b5166/0"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/1/0"
           }
         ]
       },
       {
-        "heading": { "text": "3. Offences, convictions and needs" },
+        "heading": {
+          "text": "Offences, convictions and needs"
+        },
         "items": [
           {
             "text": "Offences and convictions",
-            "href": "/test-assessment-id/questionGroup/eb7b7324-f2a6-4902-91ef-709a8fab1f82/0"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/2/0"
           },
-          { "text": "Needs", "href": "/test-assessment-id/questionGroup/ebf96a74-c140-47d8-b37f-62cff68f41c0/1" }
+          {
+            "text": "Needs",
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/2/1"
+          }
         ]
       },
       {
-        "heading": { "text": "4. ROSH screening" },
+        "heading": {
+          "text": "ROSH screening"
+        },
         "items": [
           {
             "text": "Risk to others",
-            "href": "/test-assessment-id/questionGroup/946091d2-4038-4e2b-9283-83cc4876f6ed/0"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/3/0"
           },
           {
             "text": "Risk to self",
-            "href": "/test-assessment-id/questionGroup/991117ce-8e1a-4c1c-9cd4-962c7979fce2/1"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/3/1"
           },
-          { "text": "Other risks", "href": "/test-assessment-id/questionGroup/5594f062-78b0-4245-bcd3-9f71c3040cfb/2" }
+          {
+            "text": "Other risks",
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/3/2"
+          }
         ]
       },
       {
-        "heading": { "text": "5. ROSH full analysis" },
+        "heading": {
+          "text": "ROSH full analysis"
+        },
         "items": [
           {
             "text": "Current behaviour",
-            "href": "/test-assessment-id/questionGroup/b5447925-aec6-4563-9180-96e33065285f/0"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/0"
           },
           {
             "text": "Previous behaviour",
-            "href": "/test-assessment-id/questionGroup/d135b927-945b-4a7d-b625-4c74c5049886/1"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/1"
           },
           {
             "text": "Risk of serious harm to children whose identity is known",
-            "href": "/test-assessment-id/questionGroup/76704e7d-71bb-46e3-b78d-73a85de99198/2"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/2"
           },
           {
             "text": "Details of children at risk of serious harm",
-            "href": "/test-assessment-id/questionGroup/42222235-2e18-4de6-a9e2-95f5a628b605/3"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/3"
           },
           {
             "text": "Suicide and self-harm",
-            "href": "/test-assessment-id/questionGroup/6c3504a2-ee53-45fe-8e6a-36250e3dd185/4"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/4"
           },
           {
             "text": "Coping in custody or a hostel setting",
-            "href": "/test-assessment-id/questionGroup/3485b4c8-bba9-4032-ae7e-fb0aeab36d8b/5"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/5"
           },
           {
             "text": "Vulnerability",
-            "href": "/test-assessment-id/questionGroup/b5334e5f-b793-4400-8ea1-67c316b2d44f/6"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/6"
           },
           {
             "text": "Escape and abscond",
-            "href": "/test-assessment-id/questionGroup/3c70d53a-08c5-4f30-a144-12e5c6e14205/7"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/7"
           },
           {
             "text": "Control issues or disruptive behaviour",
-            "href": "/test-assessment-id/questionGroup/22be9048-33a7-4e56-a8f4-8c4e2a62524c/8"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/8"
           },
           {
             "text": "Breach of trust",
-            "href": "/test-assessment-id/questionGroup/e807624f-c59e-4b21-b749-2432b08f60f9/9"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/9"
           },
           {
             "text": "Risk summary",
-            "href": "/test-assessment-id/questionGroup/121f7277-c0fc-4cdf-a02c-049f73993cbd/10"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/10"
           },
           {
             "text": "Imminence, circumstances and other factors",
-            "href": "/test-assessment-id/questionGroup/aa8645f9-2774-4962-b73e-e1773d88291d/11"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/11"
           },
           {
             "text": "ROSH scores",
-            "href": "/test-assessment-id/questionGroup/a33c4703-fa0a-4826-99a5-9de753305841/12"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/12"
           },
           {
             "text": "Risk management issues",
-            "href": "/test-assessment-id/questionGroup/1d69e176-8459-4d30-8410-006828ff8c72/13"
+            "href": "/test-assessment-id/questiongroup/65a3924c-4130-4140-b7f4-cc39a52603bb/4/13"
           }
         ]
       }

@@ -27,6 +27,7 @@ describe('post answers', () => {
     render: jest.fn(),
     locals: {
       questionGroup: questionGroupPointer.contents[0],
+      navigation: { next: { url: 'my/next/page' } },
     },
   }
 
@@ -53,9 +54,7 @@ describe('post answers', () => {
       },
       tokens,
     )
-    expect(res.redirect).toHaveBeenCalledWith(
-      '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222204/1',
-    )
+    expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/questiongroup/my/next/page')
   })
 
   it('should save the answers correctly when there are dates in the body', async () => {
@@ -103,9 +102,7 @@ describe('post answers', () => {
       },
       tokens,
     )
-    expect(res.redirect).toHaveBeenCalledWith(
-      '/test-assessment-id/questionGroup/22222222-2222-2222-2222-222222222204/1',
-    )
+    expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/questiongroup/my/next/page')
   })
 
   it('should display an error if answer saving fails', async () => {

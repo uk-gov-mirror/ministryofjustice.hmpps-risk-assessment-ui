@@ -55,9 +55,14 @@ module.exports = app => {
 
   app.get(`/:assessmentId/questiongroup/:groupId/summary`, getOffenderDetails, displayOverview)
 
-  app.get(`/:assessmentId/questiongroup/:groupId/:subgroup`, getOffenderDetails, getQuestionGroup, displayQuestionGroup)
+  app.get(
+    `/:assessmentId/questiongroup/:groupId/:subgroup/:page`,
+    getOffenderDetails,
+    getQuestionGroup,
+    displayQuestionGroup,
+  )
   app.post(
-    `/:assessmentId/questiongroup/:groupId/:subgroup`,
+    `/:assessmentId/questiongroup/:groupId/:subgroup/:page`,
     getOffenderDetails,
     assembleDates,
     getQuestionGroup,

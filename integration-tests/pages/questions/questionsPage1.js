@@ -1,15 +1,15 @@
 const page = require('../page')
 const AssessmentsPage = require('../assessments/assessmentsPage')
 
-const questionsPage = () =>
-  page('Case Identification', {
+const questionsPage1 = () =>
+  page('Page 1', {
     questions: () => cy.get('.govuk-form-group'),
     errorSummary: () => cy.get('.govuk-error-summary'),
-    save: () => cy.get('button').contains('Continue'),
+    save: () => cy.get('button').contains('Save and continue'),
   })
 
 export default {
-  verifyOnPage: questionsPage,
+  verifyOnPage: questionsPage1,
   goTo: (assessmentNumber = 0) => {
     AssessmentsPage.goTo()
       .assessments()
@@ -18,6 +18,6 @@ export default {
       .click()
       .get('.moj-task-list__task-name')
       .click()
-    return questionsPage()
+    return questionsPage1()
   },
 }

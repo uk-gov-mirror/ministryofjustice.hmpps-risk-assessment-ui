@@ -95,12 +95,13 @@ const assembleDates = async (req, res, next) => {
 
 const saveQuestionGroup = async (req, res) => {
   const {
-    params: { assessmentId, groupId, subgroup },
+    params: { assessmentId },
     body: reqBody,
     tokens,
     errors,
   } = req
   const { questionGroup } = res.locals
+
   if (errors) {
     return displayQuestionGroup(req, res)
   }
@@ -109,8 +110,7 @@ const saveQuestionGroup = async (req, res) => {
     const answers = extractAnswers(reqBody, questionGroup.contents)
     await postAnswers(assessmentId, 'current', answers, tokens)
 
-    const subIndex = Number.parseInt(subgroup, 10)
-    return res.redirect(`/${assessmentId}/questionGroup/${groupId}/${subIndex + 1}`)
+    return res.redirect(`/${assessmentId}/questiongroup/${res.locals.navigation.next.url}`)
   } catch (error) {
     logger.error(`Could not save to assessment ${assessmentId}, current episode, error: ${error}`)
     return res.render('app/error', { error })

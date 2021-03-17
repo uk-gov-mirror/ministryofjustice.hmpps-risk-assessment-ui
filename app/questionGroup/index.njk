@@ -8,7 +8,7 @@
 {% set errorHeading = "Error - " + heading %}
 
 {% block pageTitle %}
-    {% if errors %}
+    {% if errors | length %}
         {{ errorHeading }}
     {% else %}
         {{ heading }}
@@ -18,7 +18,8 @@
 {% block beforeContent %}
     <div role="navigation" aria-label="back">
         {{ govukBackLink({
-            href: "/" + assessmentId + "/assessments"
+            href: "/" + assessmentId + "/questiongroup/" + navigation.previous.url,
+            text: "Back to " + navigation.previous.name
         }) }}
     </div>
 {% endblock %}
@@ -27,6 +28,7 @@
     {# include errorSummary partial #}
     {{ super() }}
 
+    <span class="govuk-caption-xl">{{ navigation.parent }}</span>
     <h1 class="govuk-heading-l">
         {{ heading }}
     </h1>
@@ -40,17 +42,17 @@
                     {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId]) }}
                 {% endfor %}
 
-                {% if last %}
-                    {{ govukButton({
-                        text: 'Save',
-                        classes: 'govuk-!-margin-bottom-3'
-                    }) }}
-                {% else %}
-                    {{ govukButton({
-                        text: 'Continue',
-                        classes: 'govuk-!-margin-bottom-3'
-                    }) }}
-                {% endif %}
+                {{ govukButton({
+                    text: 'Save and continue',
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                }) }}
+
+                {{ govukButton({
+                    text: 'Back to assessment progress',
+                    classes: 'govuk-button--secondary',
+                    href: "/" + assessmentId + "/questiongroup/" + groupId + "/summary"
+                }) }}
+
             </form>
         </div>
     </div>

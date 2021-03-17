@@ -1,5 +1,5 @@
-const QuestionsPage = require('../../pages/questions/questionsPage')
-const AssessmentsPage = require('../../pages/assessments/assessmentsPage')
+const QuestionsPage1 = require('../../pages/questions/questionsPage1')
+const QuestionsPage2 = require('../../pages/questions/questionsPage2')
 
 context('Basic questions display', () => {
   before(() => {
@@ -7,7 +7,7 @@ context('Basic questions display', () => {
   })
 
   it('Displays questions', () => {
-    const questionsPage = QuestionsPage.goTo()
+    const questionsPage = QuestionsPage1.goTo()
 
     questionsPage
       .questions()
@@ -21,7 +21,7 @@ context('Basic questions display', () => {
   })
 
   it('Answer a couple of questions, save and see assessments list', () => {
-    const questionsPage = QuestionsPage.goTo()
+    const questionsPage = QuestionsPage1.goTo()
 
     questionsPage
       .questions()
@@ -50,11 +50,11 @@ context('Basic questions display', () => {
 
     questionsPage.save().click()
 
-    // AssessmentsPage.verifyOnPage()
+    QuestionsPage2.verifyOnPage()
   })
 
   it('Show out of line conditional question', () => {
-    const questionsPage = QuestionsPage.goTo()
+    const questionsPage = QuestionsPage1.goTo()
 
     cy.get('#conditional-id-form-conditional-question-id-9911111').should('not.be.visible')
 
@@ -77,8 +77,8 @@ context('Basic questions display', () => {
     cy.get('#conditional-id-form-conditional-question-id-9911111').should('not.be.visible')
   })
 
-  it.skip('Post and see error summary and question error', () => {
-    const questionsPage = QuestionsPage.goTo()
+  it('Post and see error summary and question error', () => {
+    const questionsPage = QuestionsPage1.goTo()
 
     questionsPage
       .questions()
@@ -121,29 +121,31 @@ context('Basic questions display', () => {
       .first()
       .check()
 
+    // questionsPage.save().click()
+    //
+    // // see conditional question error
+    // questionsPage.errorSummary().contains('Enter more detail about the accommodation')
+    // questionsPage
+    //   .questions()
+    //   .eq(8)
+    //   .find('.govuk-error-message')
+    //   .contains('Enter some details')
+    //
+    // // enter something in the conditional and get back to assessment page
+    // questionsPage
+    //   .questions()
+    //   .eq(8)
+    //   .find('textarea')
+    //   .type('More accommodation details')
+
     questionsPage.save().click()
-
-    // see conditional question error
-    questionsPage.errorSummary().contains('Enter more detail about the accommodation')
-    questionsPage
-      .questions()
-      .eq(8)
-      .find('.govuk-error-message')
-      .contains('Enter some details')
-
-    // enter something in the conditional and get back to assessment page
-    questionsPage
-      .questions()
-      .eq(8)
-      .find('textarea')
-      .type('More accommodation details')
-
-    questionsPage.save().click()
-    AssessmentsPage.verifyOnPage()
+    QuestionsPage2.verifyOnPage()
+    // QuestionsPage2.save().click()
+    // AssessmentsPage.verifyOnPage()
   })
 
-  it.skip('Reveals multiple conditional questions', () => {
-    const questionsPage = QuestionsPage.goTo()
+  it('Reveals multiple conditional questions', () => {
+    const questionsPage = QuestionsPage1.goTo()
 
     // check to see conditional questions
     cy.get('#id-4077c218-3a16-4b92-9f98-bdd33cee476b').check()
@@ -154,11 +156,11 @@ context('Basic questions display', () => {
     cy.get('#conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
 
     questionsPage.save().click()
-    cy.get('#id-4077c218-3a16-4b92-9f98-bdd33cee476b').should('be.checked')
+    // cy.get('#id-4077c218-3a16-4b92-9f98-bdd33cee476b').should('be.checked')
 
     // check they auto show after save and redisplay of page
-    cy.get('#id-ef018645-b846-4022-b290-1e7d3d380b4d').should('be.visible')
-    cy.get('#conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64').should('be.visible')
-    cy.get('#conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
+    // cy.get('#id-ef018645-b846-4022-b290-1e7d3d380b4d').should('be.visible')
+    // cy.get('#conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64').should('be.visible')
+    // cy.get('#conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
   })
 })

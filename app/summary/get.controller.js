@@ -17,7 +17,7 @@ const displayQuestionGroupSummary = async (
       sections: [],
     }
 
-    assessment.contents?.forEach(section => {
+    assessment.contents?.forEach((section, sectionIndex) => {
       const sectionContents = {
         heading: {
           text: section.title,
@@ -25,7 +25,7 @@ const displayQuestionGroupSummary = async (
         items: [],
       }
       section.contents?.forEach((item, index) => {
-        const href = `/${assessmentId}/questionGroup/${item.groupId}/${index}`
+        const href = `/${assessmentId}/questiongroup/${groupId}/${sectionIndex}/${index}`
         const newItem = {
           text: item.title,
           href,

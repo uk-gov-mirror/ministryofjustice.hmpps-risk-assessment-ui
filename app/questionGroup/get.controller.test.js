@@ -14,7 +14,7 @@ const { displayQuestionGroup } = require('./get.controller')
 const { getAnswers } = require('../../common/data/assessmentApi')
 const questionGroupPointer = require('../../wiremock/responses/questionGroups.json')[
   '22222222-2222-2222-2222-222222222203'
-].contents[0]
+].contents[0].contents[0]
 const expected = require('./fixtures/expected.json')
 
 jest.mock('../../common/data/assessmentApi')
@@ -86,11 +86,4 @@ describe('display question group and answers', () => {
     await displayQuestionGroup(req, res)
     expect(res.render).toHaveBeenCalledWith(`app/error`, { error: theError })
   })
-
-  // temporarily commented out - this will be addressed in an upcoming update to navigation
-  // it('should redirect to assessments page if high subIndex is requested', async () => {
-  //   req.params.subgroup = 3
-  //   await displayQuestionGroup(req, res)
-  //   expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/assessments')
-  // })
 })
