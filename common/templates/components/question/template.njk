@@ -23,6 +23,9 @@
 {% endif %}
 
 {% if question.attributes.readonly == true %}
+  {% if question.questionText or question.questionAnswer %}
+
+  <!-- {{ question.questionId }} rendered as readonly -->
   {{ govukSummaryList({
     classes: 'govuk-summary-list--no-border govuk-summary-list--no-bottom-margin',
     rows: [
@@ -36,10 +39,16 @@
       }
     ]
   }) }}
+  {% endif %}
 
 {% else %}
 
   {% switch question.answerType %}
+    {% case 'presentation: heading' %}
+      <h2 class="govuk-heading-m">{{ question.questionText }}</h2>
+    {% case 'presentation: divider' %}
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
     {% case 'freetext' %}
       {{ govukInput({
         id: 'id-' + question.questionId,

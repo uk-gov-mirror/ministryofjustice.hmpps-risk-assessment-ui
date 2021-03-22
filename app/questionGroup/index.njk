@@ -42,16 +42,19 @@
                     {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId]) }}
                 {% endfor %}
 
-                {{ govukButton({
-                    text: 'Save and continue',
-                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
-                }) }}
+                <div class="questiongroup-action-buttons">
+                    {{ govukButton({
+                        text: 'Save and continue',
+                        classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                    }) }}
 
-                {{ govukButton({
-                    text: 'Back to assessment progress',
-                    classes: 'govuk-button--secondary',
-                    href: "/" + assessmentId + "/questiongroup/" + groupId + "/summary"
-                }) }}
+
+                    {{ govukButton({
+                        text: 'Back to assessment progress',
+                        classes: 'govuk-button--secondary',
+                        href: "/" + assessmentId + "/questiongroup/" + groupId + "/summary"
+                    }) }}
+                </div>
 
             </form>
         </div>

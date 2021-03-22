@@ -1,24 +1,25 @@
 {% if offenderDetails %}
-  <section class="moj-context-header" role="region" aria-label="Offender details">
-    <div class="moj-context-header__top-block">
+  <section class="key-details-bar" aria-label="Key details">
+  <div class="moj-primary-navigation__container govuk-width-container--app-extra-wide">
+
+    <div class="key-details-bar__top-block moj-context-header">
       <dl>
-        <dt class=""></dt>
-        <dd class="govuk-!-font-size-24 govuk-!-font-weight-bold govuk-body govuk-!-margin-left-0">{{ offenderDetails.name }}</dd>
+        <dd class="key-details-bar__name">{{ offenderDetails.name }}</dd>
         {% if offenderDetails.crn %}
-          <dt class="govuk-!-font-size-19 ">CRN:</dt>
-          <dd class="govuk-!-font-size-19 ">{{ offenderDetails.crn }}</dd>
+          <dt class="govuk-body key-details-bar_divider ">CRN:</dt>
+          <dd class="govuk-body ">{{ offenderDetails.crn }}</dd>
         {% endif %}
         {% if offenderDetails.pnc %}
-          <dt class="govuk-!-font-size-19 ">PNC:</dt>
-          <dd class="govuk-!-font-size-19 ">{{ offenderDetails.pnc }}</dd>
+          <dt class="govuk-body key-details-bar_divider ">PNC:</dt>
+          <dd class="govuk-body ">{{ offenderDetails.pnc }}</dd>
         {% endif %}
         {% if offenderDetails.dob %}
-          <dt class="govuk-!-font-size-19 ">Date of birth:</dt>
-          <dd class="govuk-!-font-size-19 ">{{ offenderDetails.dob | date("DD MMMM YYYY") }} ({{ offenderDetails.age }}
+          <dt class="govuk-body key-details-bar_divider ">Date of birth:</dt>
+          <dd class="govuk-body ">{{ offenderDetails.dob | date("DD MMMM YYYY") }} ({{ offenderDetails.age }}
             years old)
           </dd>
         {% endif %}
       </dl>
-    </div>
+    </div></div>
   </section>
 {% endif %}

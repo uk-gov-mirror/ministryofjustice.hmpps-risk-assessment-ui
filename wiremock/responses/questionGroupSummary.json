@@ -7,7 +7,7 @@
       {
         "groupId": "f1150d9c-1746-4cb2-b721-92de8375f2c9",
         "groupCode": "1_individual_and_case_details",
-        "title": "1. Individual and case details",
+        "title": "Individual and case details",
         "contents": [
           {
             "groupId": "f7dd78a8-7f04-4fde-8a4f-ac2cf0c56ff5",
@@ -26,7 +26,7 @@
       {
         "groupId": "df7526be-5aff-49c6-b2c4-75b7737b7363",
         "groupCode": "2_sources_of_information",
-        "title": "2. Sources of information",
+        "title": "Sources of information",
         "contents": [
           {
             "groupId": "3cc4f4cb-a351-430b-adfb-3ad8ab9b5166",
@@ -39,7 +39,7 @@
       {
         "groupId": "a57f740c-3837-4eba-a1c9-9ffbfeadf108",
         "groupCode": "3_offences_convictions_and_needs",
-        "title": "3. Offences, convictions and needs",
+        "title": "Offences, convictions and needs",
         "contents": [
           {
             "groupId": "eb7b7324-f2a6-4902-91ef-709a8fab1f82",
@@ -58,7 +58,7 @@
       {
         "groupId": "022364b2-ad1e-4278-9a2b-62be19fbe7ec",
         "groupCode": "4_rosh_screening",
-        "title": "4. ROSH screening",
+        "title": "ROSH screening",
         "contents": [
           {
             "groupId": "946091d2-4038-4e2b-9283-83cc4876f6ed",
@@ -80,7 +80,7 @@
       {
         "groupId": "40145986-d86a-4959-87e1-1c4eb8bb16dd",
         "groupCode": "5_rosh_full_analysis",
-        "title": "5. ROSH full analysis",
+        "title": "ROSH full analysis",
         "contents": [
           {
             "groupId": "b5447925-aec6-4563-9180-96e33065285f",

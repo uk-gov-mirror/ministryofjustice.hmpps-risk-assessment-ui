@@ -35,7 +35,7 @@ describe('getOffenderDetails middleware', () => {
     })
     it('should return an object with the required values', () => {
       expect(res.locals.offenderDetails).toEqual({
-        age: '33',
+        age: '34',
         crn: 'J081276',
         dob: '1987-03-14',
         name: 'Garry Hart',
