@@ -121,22 +121,22 @@ context('Basic questions display', () => {
       .first()
       .check()
 
-    // questionsPage.save().click()
-    //
-    // // see conditional question error
-    // questionsPage.errorSummary().contains('Enter more detail about the accommodation')
-    // questionsPage
-    //   .questions()
-    //   .eq(8)
-    //   .find('.govuk-error-message')
-    //   .contains('Enter some details')
-    //
-    // // enter something in the conditional and get back to assessment page
-    // questionsPage
-    //   .questions()
-    //   .eq(8)
-    //   .find('textarea')
-    //   .type('More accommodation details')
+    questionsPage.save().click()
+
+    // see conditional question error
+    questionsPage.errorSummary().contains('Enter more detail about the accommodation')
+    questionsPage
+      .questions()
+      .eq(8)
+      .find('.govuk-error-message')
+      .contains('Enter some details')
+
+    // enter something in the conditional and get back to assessment page
+    questionsPage
+      .questions()
+      .eq(8)
+      .find('textarea')
+      .type('More accommodation details')
 
     questionsPage.save().click()
     QuestionsPage2.verifyOnPage()

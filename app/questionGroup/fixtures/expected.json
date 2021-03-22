@@ -63,7 +63,7 @@
         {
           "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "44444444-4444-4444-4444-444444444444",
+          "value": "Y",
           "text": "Yes",
           "conditionals": [
             {
@@ -78,7 +78,7 @@
         {
           "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
-          "value": "44444444-4444-4444-4444-444444444445",
+          "value": "N",
           "text": "No"
         }
       ]
@@ -95,7 +95,7 @@
         {
           "answerSchemaUuid": "99444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "99444444-4444-4444-4444-444444444444",
+          "value": "Y",
           "text": "Yes",
           "conditionals": [
             {
@@ -112,7 +112,7 @@
         {
           "answerSchemaUuid": "99444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
-          "value": "99444444-4444-4444-4444-444444444445",
+          "value": "N",
           "text": "No"
         }
       ],
@@ -133,19 +133,19 @@
         {
           "answerSchemaUuid": "a26b1af8-d590-4a87-a347-a78347fa08c9",
           "answerSchemaCode": "tenant_owner_occupied",
-          "value": "a26b1af8-d590-4a87-a347-a78347fa08c9",
+          "value": "tenant owner / occupied",
           "text": "Tenant owner / occupied"
         },
         {
           "answerSchemaUuid": "34d227ab-437f-40b6-8a66-93a6486e9d6b",
           "answerSchemaCode": "living_with_stable_",
-          "value": "34d227ab-437f-40b6-8a66-93a6486e9d6b",
+          "value": "living with (stable)",
           "text": "Living with (stable)"
         },
         {
           "answerSchemaUuid": "d976f515-bfbe-4646-9d68-f0575c10ee96",
           "answerSchemaCode": "living_with_unstable_",
-          "value": "d976f515-bfbe-4646-9d68-f0575c10ee96",
+          "value": "living with (unstable)",
           "text": "Living with (unstable)"
         }
       ],
@@ -168,31 +168,31 @@
         {
           "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "44444444-4444-4444-4444-444444444444",
+          "value": "punishment",
           "text": "Punishment"
         },
         {
           "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "44444444-4444-4444-4444-444444444444",
+          "value": "public_protection",
           "text": "Public protection"
         },
         {
           "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "44444444-4444-4444-4444-444444444444",
+          "value": "crime_reduction",
           "text": "Crime reduction"
         },
         {
           "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "44444444-4444-4444-4444-444444444444",
+          "value": "reparation",
           "text": "Reparation"
         },
         {
           "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "44444444-4444-4444-4444-444444444444",
+          "value": "reform_or_rehabilitation",
           "text": "Reform or rehabilitation"
         }
       ],
@@ -223,7 +223,7 @@
         {
           "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
           "answerSchemaCode": "yes",
-          "value": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "value": "y",
           "text": "Yes",
           "conditionals": [
             {
@@ -254,7 +254,7 @@
         {
           "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
           "answerSchemaCode": "no",
-          "value": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "value": "n",
           "text": "No"
         }
       ],
@@ -274,7 +274,7 @@
         {
           "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
           "answerSchemaCode": "yes",
-          "value": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "value": "y",
           "text": "Yes",
           "conditionals": [
             {
@@ -289,7 +289,7 @@
         {
           "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
           "answerSchemaCode": "no",
-          "value": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "value": "n",
           "text": "No"
         }
       ],
@@ -331,25 +331,25 @@
         {
           "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
-          "value": "1124444444-4444-4444-4444-444444444444",
+          "value": "bail_information_record",
           "text": "Bail information record"
         },
         {
           "answerSchemaUuid": "1234444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
-          "value": "1234444444-4444-4444-4444-444444444445",
+          "value": "basic_custody_screening",
           "text": "Basic custody screening"
         },
         {
           "answerSchemaUuid": "1334444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
-          "value": "1334444444-4444-4444-4444-444444444445",
+          "value": "community_payback",
           "text": "Community payback"
         },
         {
           "answerSchemaUuid": "1434444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
-          "value": "1434444444-4444-4444-4444-444444444445",
+          "value": "hostel",
           "text": "Hostel"
         }
       ]
@@ -366,17 +366,17 @@
       "answerSchemas": [
         {
           "answerSchemaUuid": "2222",
-          "value": "2222",
+          "value": "Y",
           "text": "Yes"
         },
         {
           "answerSchemaUuid": "3333",
-          "value": "3333",
+          "value": "N",
           "text": "No"
         },
         {
           "answerSchemaUuid": "4444",
-          "value": "4444",
+          "value": "U",
           "text": "Don't know"
         }
       ]
@@ -393,27 +393,27 @@
       "answerSchemas": [
         {
           "answerSchemaUuid": "6666",
-          "value": "6666",
+          "value": "OPT1",
           "text": "Option 1"
         },
         {
           "answerSchemaUuid": "7777",
-          "value": "7777",
+          "value": "OPT2",
           "text": "Option 2"
         },
         {
           "answerSchemaUuid": "8888",
-          "value": "8888",
+          "value": "OPT3",
           "text": "Option 3"
         },
         {
           "answerSchemaUuid": "9999",
-          "value": "9999",
+          "value": "OPT4",
           "text": "Option 4"
         },
         {
           "answerSchemaUuid": "AAAA",
-          "value": "AAAA",
+          "value": "OPT5",
           "text": "Option 5"
         }
       ]

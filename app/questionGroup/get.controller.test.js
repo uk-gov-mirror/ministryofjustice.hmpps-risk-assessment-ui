@@ -66,12 +66,8 @@ describe('display question group and answers', () => {
     expectedWithAnswers.questions[1].answer = surnameAnswer
     getAnswers.mockReturnValueOnce({
       answers: {
-        '11111111-1111-1111-1111-111111111201': {
-          freeTextAnswer: surnameAnswer,
-        },
-        '11111111-1111-1111-1111-111111111202': {
-          freeTextAnswer: forenameAnswer,
-        },
+        '11111111-1111-1111-1111-111111111201': [surnameAnswer],
+        '11111111-1111-1111-1111-111111111202': [forenameAnswer],
       },
     })
     await displayQuestionGroup(req, res)

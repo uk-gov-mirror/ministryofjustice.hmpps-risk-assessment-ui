@@ -14,7 +14,6 @@ const displayQuestionGroup = async (
     const { answers } = await grabAnswers(assessmentId, 'current', tokens)
     let questions = annotateWithAnswers(questionGroup.contents, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
-    questions = copyUUIDtoValue(questions)
 
     return res.render(`${__dirname}/index`, {
       bodyAnswers: { ...body },
@@ -40,18 +39,6 @@ const grabAnswers = (assessmentId, episodeId, tokens) => {
   }
 }
 
-// copy answer UUID into value as we need this when sending answers back to assessment API
-const copyUUIDtoValue = questions => {
-  return questions.map(q => {
-    q.answerSchemas.map(schema => {
-      // eslint-disable-next-line no-param-reassign
-      schema.value = schema.answerSchemaUuid
-      return schema
-    })
-    return q
-  })
-}
-
 const annotateWithAnswers = (questions, answers, body) => {
   return questions.map(q => {
     if (q.type === 'group') {
@@ -63,22 +50,20 @@ const annotateWithAnswers = (questions, answers, body) => {
     let displayAnswer
     let answerValues
     if (q.answerType === 'radio' || q.answerType === 'checkbox') {
-      const answer = answers[q.questionId]?.answers
+      const answer = answers[q.questionId]
 
-      if (answer) {
-        const answerText = []
-        answerValues = []
-        Object.keys(answer).forEach(ans => {
-          const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.answerSchemaUuid === ans)
-          answerValues.push(thisAnswer?.value)
-          answerText.push(thisAnswer?.text)
-          displayAnswer = answerText.join('<br>')
-        })
-      }
+      const answerText = []
+      answerValues = []
+      answer?.forEach(ans => {
+        const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.value === ans)
+        answerValues.push(thisAnswer?.value)
+        answerText.push(thisAnswer?.text)
+      })
+
       answerValues = body[`id-${q.questionId}`] || answerValues
     } else {
       const answer = answers[q.questionId]
-      displayAnswer = body[`id-${q.questionId}`] || (answer ? answer.freeTextAnswer : null)
+      displayAnswer = body[`id-${q.questionId}`] || (Array.isArray(answer) ? answer[0] : null)
     }
 
     return Object.assign(q, {
@@ -186,7 +171,7 @@ const compileInlineConditionalQuestions = (questions, errors) => {
 }
 
 const annotateAnswerSchemas = (answerSchemas, answerValue) => {
-  if (!answerValue) {
+  if (!answerValue || answerValue?.length === 0) {
     return answerSchemas
   }
   return answerSchemas.map(as => {
