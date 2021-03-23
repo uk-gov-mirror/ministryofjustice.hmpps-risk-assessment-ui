@@ -103,6 +103,18 @@ const encodeHTML = str => {
     .replace(/'/g, '&#039;')
 }
 
+// extract link target from question type formatted as:
+// presentation: link("/update-assessment")
+const extractLink = questionType => {
+  const regex = /^presentation: link\("(?<link>.*)"\)/gm
+  const re = regex.exec(questionType)
+  if (!re) return null
+  const {
+    groups: { link },
+  } = re
+  return link
+}
+
 // This function executes middleware in series
 const dynamicMiddleware = async (validators, req, res, next) => {
   async.eachSeries(
@@ -145,4 +157,5 @@ module.exports = {
   encodeHTML,
   dynamicMiddleware,
   processReplacements,
+  extractLink,
 }

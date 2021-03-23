@@ -7,6 +7,7 @@ const {
   isValidDate,
   encodeHTML,
   processReplacements,
+  extractLink,
 } = require('./util')
 
 const inputText = "There is a green hill far away - and I shouldn't tell you that really"
@@ -142,5 +143,17 @@ describe('encodeHTML', () => {
     const input = { inputText: 'This name: [Name of person] should not be inserted' }
     const replacements = { fullname: 'Jerry Only' }
     expect(processReplacements(input, replacements)).toEqual(input)
+  })
+})
+
+describe('extractLink', () => {
+  it('extracts link target', () => {
+    const input = 'presentation: link("/update-assessment")'
+    expect(extractLink(input)).toEqual('/update-assessment')
+  })
+
+  it('ignores badly formatted link target', () => {
+    const input = 'pres: link("/update-assessment")'
+    expect(extractLink(input)).toEqual(null)
   })
 })

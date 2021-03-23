@@ -26,7 +26,7 @@ const validationRules = async (req, res, next) => {
 
   currentQuestions.forEach(question => {
     let addThisValidation = true
-    if (question.validation) {
+    if (question.validation && question.readOnly !== true) {
       // check if this is a conditional question with a parent
       if (question.conditional) {
         let conditionalParentAnswer = ''

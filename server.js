@@ -28,7 +28,7 @@ const { mdcSetup } = require('./common/logging/logger-mdc')
 const createCredentials = require('./common/middleware/createCredentials')
 const { updateCorrelationId } = require('./common/middleware/updateCorrelationId')
 const { applicationInsights } = require('./common/config')
-const { encodeHTML } = require('./common/utils/util')
+const { encodeHTML, extractLink } = require('./common/utils/util')
 const clientSecret = require('./common/config')
 
 // Global constants
@@ -161,6 +161,7 @@ function initialiseTemplateEngine(app) {
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise
   nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
+  nunjucksEnvironment.addFilter('extractLink', str => extractLink(str))
 
   // Set view engine
   app.set('view engine', 'njk')

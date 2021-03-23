@@ -22,7 +22,7 @@
   {% endfor %}
 {% endif %}
 
-{% if question.attributes.readonly == true %}
+{% if question.attributes.readonly == true and question.questionCode != 'ui'%}
   {% if question.questionText or question.questionAnswer %}
 
   <!-- {{ question.questionId }} rendered as readonly -->
@@ -42,12 +42,20 @@
   {% endif %}
 
 {% else %}
+  {% set qType = question.answerType %}
+  {% set regExp = r/^presentation: link.*/gi %}
+  {% if regExp.test(qType) %}
+    {%  set linkTarget = question.answerType | extractLink %}
+    {% set qType = 'presentation: link' %}
+  {% endif %}
 
-  {% switch question.answerType %}
+  {% switch qType %}
     {% case 'presentation: heading' %}
       <h2 class="govuk-heading-m">{{ question.questionText }}</h2>
     {% case 'presentation: divider' %}
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+    {% case 'presentation: link' %}
+      <div class="body-link__container"><a href="{{ linkTarget }}" class="govuk-link body-link">{{ question.questionText }}</a></div>
 
     {% case 'freetext' %}
       {{ govukInput({
