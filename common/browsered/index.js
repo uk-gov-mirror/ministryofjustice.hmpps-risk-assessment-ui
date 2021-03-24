@@ -53,7 +53,9 @@ window.outOflineConditionalRadios = function() {
   nodeListForEach($outofline, function($outoflineConditional) {
     var baseId = $outoflineConditional.getAttribute('data-base-id')
     var questionFormGroup = $outoflineConditional.closest('.govuk-radios__conditional--noIndent')
-    questionFormGroup.setAttribute('id', 'conditional-id-form-' + baseId)
+    if (questionFormGroup) {
+      questionFormGroup.setAttribute('id', 'conditional-id-form-' + baseId)
+    }
   })
 }
 

@@ -22,7 +22,7 @@
   {% endfor %}
 {% endif %}
 
-{% if question.attributes.readonly == true and question.questionCode != 'ui'%}
+{% if question.attributes.readonly == true and (question.questionCode).slice(0, 2) != 'ui'%}
   {% if question.questionText or question.questionAnswer %}
 
   <!-- {{ question.questionId }} rendered as readonly -->
@@ -52,6 +52,8 @@
   {% switch qType %}
     {% case 'presentation: heading' %}
       <h2 class="govuk-heading-m">{{ question.questionText }}</h2>
+  {% case 'presentation: heading_large' %}
+    <h2 class="govuk-heading-l">{{ question.questionText }}</h2>
     {% case 'presentation: divider' %}
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% case 'presentation: link' %}
