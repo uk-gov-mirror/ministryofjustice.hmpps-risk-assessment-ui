@@ -45,7 +45,7 @@ const postAnswers = (assessmentId, episodeId, answers, tokens) => {
 const getData = (path, tokens) => {
   logger.info(`Calling offenderAssessments API with GET: ${path}`)
 
-  return action(superagent.get(path), tokens)
+  return action(superagent.get(path), tokens).then(([_, body]) => body)
 }
 
 const postData = (path, tokens, data) => {
@@ -65,9 +65,15 @@ const action = async (agent, { authorisationToken }) => {
       .set('x-correlation-id', getCorrelationId())
       .timeout(timeout)
       .then(response => {
-        return response.body
+        return [true, response.body]
       })
   } catch (error) {
+    const { status, response } = error
+    if (status === 422) {
+      // unprocessable entity
+      return [false, response.body]
+    }
+
     return logError(error)
   }
 }

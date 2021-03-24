@@ -32,6 +32,10 @@ describe('post answers', () => {
   }
 
   it('should save the answers', async () => {
+    postAnswers.mockImplementation(() => {
+      return [true, {}]
+    })
+
     req.body = {
       'id-11111111-1111-1111-1111-111111111202': 'Hello',
       'id-11111111-1111-1111-1111-111111111201': 'there',
@@ -52,6 +56,9 @@ describe('post answers', () => {
   })
 
   it('should save the answers correctly when there are dates in the body', async () => {
+    postAnswers.mockImplementation(() => {
+      return [true, {}]
+    })
     req.body = {
       'id-11111111-1111-1111-1111-111111111205-day': '3',
       'id-11111111-1111-1111-1111-111111111205-month': '11',

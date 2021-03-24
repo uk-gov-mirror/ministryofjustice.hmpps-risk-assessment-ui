@@ -13,7 +13,8 @@ const startPsrFromForm = ({ body, tokens }, res) => {
 
 const startPsr = async (courtCode, caseNumber, tokens, res) => {
   try {
-    const assessment = await assessmentSupervision({ courtCode, caseNumber }, tokens)
+    // eslint-disable-next-line no-unused-vars
+    const [ok, assessment] = await assessmentSupervision({ courtCode, caseNumber }, tokens)
 
     return res.redirect(`/${assessment.assessmentUuid}/questionGroup/pre_sentence_assessment/0/0`)
   } catch (error) {

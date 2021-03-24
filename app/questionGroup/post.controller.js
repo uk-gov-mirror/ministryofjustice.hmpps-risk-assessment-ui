@@ -106,13 +106,34 @@ const saveQuestionGroup = async (req, res) => {
 
   try {
     const answers = extractAnswers(reqBody)
-    await postAnswers(assessmentId, 'current', answers, tokens)
+    const [ok, episode] = await postAnswers(assessmentId, 'current', answers, tokens)
+
+    if (!ok) {
+      const [validationErrors, errorSummary] = formatValidationErrors(episode.errors)
+      req.errors = validationErrors
+      req.errorSummary = errorSummary
+      return displayQuestionGroup(req, res)
+    }
 
     return res.redirect(`/${assessmentId}/questiongroup/${res.locals.navigation.next.url}`)
   } catch (error) {
     logger.error(`Could not save to assessment ${assessmentId}, current episode, error: ${error}`)
     return res.render('app/error', { error })
   }
+}
+
+function formatValidationErrors(serverErrors) {
+  const errors = {}
+  const errorSummary = []
+  for (let i = 0; i < Object.entries(serverErrors).length; i += 1) {
+    const [id, msg] = Object.entries(serverErrors)[i]
+    errors[`id-${id}`] = { text: msg[0] }
+    errorSummary.push({
+      text: msg[msg.length === 2 ? 1 : 0],
+      href: `#id-${id}-error`,
+    })
+  }
+  return [errors, errorSummary]
 }
 
 function findDateAnswerKeys(postBody) {
