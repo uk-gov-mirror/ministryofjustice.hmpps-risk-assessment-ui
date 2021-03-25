@@ -16,7 +16,7 @@ const startPsr = async (courtCode, caseNumber, tokens, res) => {
     // eslint-disable-next-line no-unused-vars
     const [ok, assessment] = await assessmentSupervision({ courtCode, caseNumber }, tokens)
 
-    return res.redirect(`/${assessment.assessmentUuid}/questionGroup/pre_sentence_assessment/0/0`)
+    return res.redirect(`/${assessment.assessmentUuid}/questionGroup/pre_sentence_assessment/summary`)
   } catch (error) {
     return res.render('app/error', { error })
   }
