@@ -109,7 +109,7 @@ const saveQuestionGroup = async (req, res) => {
     const [ok, episode] = await postAnswers(assessmentId, 'current', answers, tokens)
 
     if (!ok) {
-      const [validationErrors, errorSummary] = formatValidationErrors(episode.errors)
+      const [validationErrors, errorSummary] = formatValidationErrors(episode.errors, episode.pageErrors)
       req.errors = validationErrors
       req.errorSummary = errorSummary
       return displayQuestionGroup(req, res)
@@ -122,16 +122,26 @@ const saveQuestionGroup = async (req, res) => {
   }
 }
 
-function formatValidationErrors(serverErrors) {
+function formatValidationErrors(serverErrors, pageErrors) {
   const errors = {}
   const errorSummary = []
-  for (let i = 0; i < Object.entries(serverErrors).length; i += 1) {
-    const [id, msg] = Object.entries(serverErrors)[i]
-    errors[`id-${id}`] = { text: msg[0] }
-    errorSummary.push({
-      text: msg[msg.length === 2 ? 1 : 0],
-      href: `#id-${id}-error`,
-    })
+  if (serverErrors) {
+    for (let i = 0; i < Object.entries(serverErrors).length; i += 1) {
+      const [id, msg] = Object.entries(serverErrors)[i]
+      errors[`id-${id}`] = { text: msg[0] }
+      errorSummary.push({
+        text: msg[msg.length === 2 ? 1 : 0],
+        href: `#id-${id}-error`,
+      })
+    }
+  }
+  if (pageErrors) {
+    for (let i = 0; i < pageErrors.length; i += 1) {
+      errorSummary.push({
+        text: pageErrors[i],
+        href: '#',
+      })
+    }
   }
   return [errors, errorSummary]
 }
