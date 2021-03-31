@@ -6,15 +6,6 @@
   @extend .govuk-input--width-20;
 }
 
-// numbers
-#id-d84cef29-893b-4e92-bc98-12a2b4fe75b6,
-#id-feb7ffe9-1e59-4516-9cb8-a1a41f37078f,
-#id-6cc878a7-299d-439b-9c73-53af55cbce2f,
-#id-d3c32fb8-8194-4bd9-8562-21fa2d752b26,
-#id-466d3da9-2d4b-4f8c-a958-90d188c956b4,
-#id-bb7f891c-557a-4bfb-972c-f6d8c291ecc3,
-#id-758c1ba6-f62c-4e73-8423-079db2d451e6,
-#id-46154597-8bc1-45a1-be0b-eba578bd7a3a {
+.numeric input {
   @extend .govuk-input--width-3;
 }
-

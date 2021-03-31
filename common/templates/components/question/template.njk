@@ -49,6 +49,11 @@
     {% set qType = 'presentation: link' %}
   {% endif %}
 
+  {% if qType == 'numeric' %}
+    {% set formClass = question.formClasses + ' numeric' %}
+    {% set qType = 'freetext' %}
+  {% endif %}
+
   {% switch qType %}
     {% case 'presentation: heading' %}
       <h2 class="govuk-heading-m">{{ question.questionText }}</h2>
@@ -65,7 +70,7 @@
         name: 'id-' + question.questionId,
         value: questionAnswer | encodeHtml | safe,
         formGroup : {
-          classes: question.formClasses
+          classes: formClass or question.formClasses
         },
         attributes: question.attributes,
         label: {
