@@ -206,7 +206,7 @@
       "questionText": "Additional information",
       "displayOrder": "1",
       "mandatory": "no",
-      "hint": "Enter any other relevant information",
+      "helpText": "Enter any other relevant information",
       "answerSchemas": [],
       "answer": null
     },
@@ -326,7 +326,7 @@
       "questionText": "Sources of information",
       "displayOrder": "1",
       "mandatory": "no",
-      "hint": "Select all that apply",
+      "helpText": "Select all that apply",
       "answerSchemas": [
         {
           "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",

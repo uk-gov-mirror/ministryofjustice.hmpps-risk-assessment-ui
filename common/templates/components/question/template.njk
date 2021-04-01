@@ -79,7 +79,7 @@
           classes: question.questionCode + ' govuk-label--m'
         },
         hint: {
-          text: question.hint
+          text: question.helpText
         },
         errorMessage: errorMessage
 
@@ -99,7 +99,7 @@
           classes: question.questionCode + ' govuk-label--m'
         },
         hint: {
-          text: question.hint
+          text: question.helpText
         },
         errorMessage: errorMessage
       }) }}
@@ -121,7 +121,7 @@
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
-          text: question.hint
+          text: question.helpText
         }
       }) }}
     {% case 'checkbox' %}
@@ -142,7 +142,7 @@
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
-          text: question.hint
+          text: question.helpText
         }
       }) }}
 
@@ -162,7 +162,7 @@
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
-          text: question.hint
+          text: question.helpText
         }
       }) }}
 
@@ -188,7 +188,7 @@
           }
         },
         hint: {
-          text: question.hint
+          text: question.helpText
         },
         items: [
           {
