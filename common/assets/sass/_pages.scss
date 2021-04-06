@@ -9,3 +9,25 @@
 .numeric input {
   @extend .govuk-input--width-3;
 }
+
+.govuk-fieldset[aria-describedby="id-420c2ffe-8f2c-49b3-a523-674af3197b9e-hint"] {
+  .govuk-radios {
+    @extend .govuk-radios--inline;
+  }
+}
+
+.govuk-fieldset[aria-describedby="id-4dab51be-e9f8-4ca1-8765-b58e07e137ba-hint"] {
+  .govuk-radios {
+    @extend .govuk-radios--inline;
+  }
+}
+
+#conditional-id-bd629547-eab9-46d5-910d-2416b431950f {
+  label {
+    font-size: 19px;
+    font-weight: 400;
+  }
+  input {
+    @extend .govuk-input--width-10
+  }
+}
