@@ -6,6 +6,7 @@ const {
   stubAnswers,
   stubEpisodes,
   stubOffenderDetails,
+  stubAssessmentComplete,
 } = require('./assessmentApi')
 const { stubGetToken } = require('./oauth')
 
@@ -32,6 +33,7 @@ async function stub() {
   await stubAnswers()
   await stubEpisodes()
   await stubGetToken()
+  await stubAssessmentComplete()
   stubOffenderDetails()
 }
 

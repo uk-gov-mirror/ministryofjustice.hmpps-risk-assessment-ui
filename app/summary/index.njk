@@ -2,6 +2,7 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "common/templates/components/task-list/macro.njk" import arnTaskList %}
+{% from "moj/components/banner/macro.njk" import mojBanner %}
 
 {% set heading = 'Assessment progress' %}
 
@@ -31,8 +32,29 @@
     </h1>
 
     <div class="govuk-grid-row-full">
+        {% if assessmentCompletedStatus %}
+            {{ mojBanner({
+                type: assessmentCompletedStatus,
+                text: assessmentCompletedMessage,
+                iconFallbackText: 'Status'
+            }) }}
+        {% endif %}
+
+        <div class="govuk-grid-column">
+            <form method="post" style="display: flex; justify-content: flex-end">
+                {{ govukButton({
+                    text: 'Complete assessment',
+                    classes: 'govuk-!-margin-bottom-3'
+                }) }}
+            </form>
+        </div>
+    </div>
+
+    <div class="govuk-grid-row-full">
         <div class="govuk-grid-column">
             {{ arnTaskList(summary) }}
         </div>
     </div>
+
+
 {% endblock %}

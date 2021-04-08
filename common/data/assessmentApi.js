@@ -37,6 +37,11 @@ const getAssessmentsList = tokens => {
   return getData(path, tokens)
 }
 
+const postCompleteAssessment = (assessmentId, tokens) => {
+  const path = `${url}/assessments/${assessmentId}/complete`
+  return postData(path, tokens)
+}
+
 const postAnswers = (assessmentId, episodeId, answers, tokens) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
   return postData(path, tokens, answers)
@@ -113,4 +118,5 @@ module.exports = {
   getAssessmentsList,
   postAnswers,
   getQuestionGroupSummary,
+  postCompleteAssessment,
 }
