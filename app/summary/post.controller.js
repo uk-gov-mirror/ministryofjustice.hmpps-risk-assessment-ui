@@ -9,8 +9,6 @@ const completeAssessment = async (req, res) => {
     tokens,
   } = req
 
-  console.log('in POST complete assessment')
-
   try {
     const [ok] = await postCompleteAssessment(assessmentId, tokens)
 
