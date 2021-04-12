@@ -14,6 +14,7 @@ const { displayAssessmentsList } = require('./assessmentsList/get.controller')
 const { displayQuestionGroup } = require('./questionGroup/get.controller')
 
 const { displayOverview } = require('./summary/get.controller')
+const { completeAssessment } = require('./summary/post.controller')
 const { saveQuestionGroup, assembleDates, questionGroupValidationRules } = require('./questionGroup/post.controller')
 const { psrFromCourt } = require('./psrFromCourt/get.controller')
 const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.controller')
@@ -70,6 +71,8 @@ module.exports = app => {
     validate,
     saveQuestionGroup,
   )
+
+  app.post('/:assessmentId/questiongroup/:groupId/summary', getOffenderDetails, completeAssessment)
 
   app.get('/psr-from-court', psrFromCourt)
   app.post('/psr-from-court', startPsrFromForm)

@@ -39,6 +39,22 @@ const stubAssessmentSupervision = () => {
   })
 }
 
+const stubAssessmentComplete = () => {
+  stubFor({
+    request: {
+      method: 'POST',
+      urlPattern: '/assessments/.+?/complete',
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: {},
+    },
+  })
+}
+
 const stubQuestionGroup = groupId => {
   stubFor({
     request: {
@@ -194,4 +210,5 @@ module.exports = {
   stubSupervision,
   stubOffenderDetails,
   stubQuestionSummaries,
+  stubAssessmentComplete,
 }
