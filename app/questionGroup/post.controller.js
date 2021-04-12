@@ -2,7 +2,7 @@
 const { body } = require('express-validator')
 const { logger } = require('../../common/logging/logger')
 const { displayQuestionGroup } = require('./get.controller')
-const { postAnswers } = require('../../common/data/assessmentApi')
+const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
 const { dynamicMiddleware } = require('../../common/utils/util')
 
 const constructValidationRule = (questionId, validationType, validationSettings) => {

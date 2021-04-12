@@ -1,5 +1,5 @@
 const { logger } = require('../../common/logging/logger')
-const { getAssessmentsList } = require('../../common/data/assessmentApi')
+const { getAssessmentsList } = require('../../common/data/hmppsAssessmentApi')
 const { sortObject } = require('../../common/utils/util')
 
 const displayAssessmentsList = async ({ params: { assessmentId }, tokens }, res) => {

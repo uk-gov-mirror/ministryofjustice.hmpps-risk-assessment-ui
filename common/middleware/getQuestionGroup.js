@@ -1,6 +1,7 @@
 // @ts-check
 const logger = require('../logging/logger')
-const { getQuestionGroup } = require('../data/assessmentApi')
+const { getQuestionGroup } = require('../data/hmppsAssessmentApi')
+const { getReferenceDataListByCategory } = require('../data/offenderAssessmentApi')
 const { processReplacements } = require('../utils/util')
 
 const findNext = (questionGroups, groupId, section, page) => {
@@ -54,11 +55,64 @@ const findParent = (questionGroups, section) => {
   return questionGroups.contents[section].title
 }
 
+const applyStaticReferenceData = async (questionResponse, tokens) => {
+  const extractReferenceDataCategories = questionSchema => {
+    if (Array.isArray(questionSchema.contents)) {
+      return questionSchema.contents.flatMap(extractReferenceDataCategories)
+    }
+    if (questionSchema.referenceDataCategory) {
+      return [questionSchema.referenceDataCategory]
+    }
+    return []
+  }
+
+  // Get a unique set of reference data categories to fetch
+  const referenceDataCategories = new Set(questionResponse.contents?.flatMap(extractReferenceDataCategories))
+
+  // If there's no reference data categories lets return early
+  if (referenceDataCategories.size === 0) {
+    return questionResponse
+  }
+
+  const referenceDataRequests = Array.from(referenceDataCategories).map(async category => ({
+    category,
+    data: await getReferenceDataListByCategory(category, tokens),
+  }))
+
+  const referenceDataResponses = await Promise.all(referenceDataRequests)
+  const referenceData = referenceDataResponses.reduce(
+    (resultObject, referenceDataResponse) => ({
+      ...resultObject,
+      [referenceDataResponse.category]: referenceDataResponse.data.map(r => ({
+        text: r.description,
+        value: r.code,
+      })),
+    }),
+    {},
+  )
+
+  const applyReferenceData = questionSchema => {
+    if (Array.isArray(questionSchema.contents)) {
+      return { ...questionSchema, contents: questionSchema.contents.map(applyReferenceData) }
+    }
+    if (questionSchema.referenceDataCategory) {
+      return { ...questionSchema, options: referenceData[questionSchema.referenceDataCategory] }
+    }
+    return questionSchema
+  }
+
+  return {
+    ...questionResponse,
+    contents: questionResponse.contents?.map(applyReferenceData),
+  }
+}
+
 module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, tokens }, res, next) => {
   try {
-    const questions = await getQuestionGroup(groupId, tokens)
+    const questionResponse = await getQuestionGroup(groupId, tokens)
+    const hydratedQuestions = await applyStaticReferenceData(questionResponse, tokens)
 
-    const thisQuestionGroup = questions.contents[subgroup].contents[page]
+    const thisQuestionGroup = hydratedQuestions.contents[subgroup].contents[page]
     const readOnlyToAttribute = q => {
       if (q.readOnly) {
         // eslint-disable-next-line no-param-reassign
@@ -70,9 +124,9 @@ module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, tokens },
     res.locals.questionGroup = processReplacements(thisQuestionGroup, res.locals.offenderDetails)
 
     const navigation = {
-      next: findNext(questions, groupId, subgroup, page),
-      previous: findPrevious(questions, groupId, subgroup, page),
-      parent: findParent(questions, subgroup),
+      next: findNext(hydratedQuestions, groupId, subgroup, page),
+      previous: findPrevious(hydratedQuestions, groupId, subgroup, page),
+      parent: findParent(hydratedQuestions, subgroup),
     }
 
     // put next and previous pages into locals

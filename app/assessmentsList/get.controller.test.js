@@ -1,8 +1,8 @@
 const { displayAssessmentsList } = require('./get.controller')
-const { getAssessmentsList } = require('../../common/data/assessmentApi')
+const { getAssessmentsList } = require('../../common/data/hmppsAssessmentApi')
 const questionList = require('../../wiremock/responses/questionList.json')
 
-jest.mock('../../common/data/assessmentApi')
+jest.mock('../../common/data/hmppsAssessmentApi')
 
 const tokens = { authorisationToken: 'mytoken' }
 

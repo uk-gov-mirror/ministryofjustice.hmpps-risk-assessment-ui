@@ -1,7 +1,7 @@
 // @ts-check
 const nunjucks = require('nunjucks')
 const { logger } = require('../../common/logging/logger')
-const { getAnswers } = require('../../common/data/assessmentApi')
+const { getAnswers } = require('../../common/data/hmppsAssessmentApi')
 
 const displayQuestionGroup = async (
   { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary = null, tokens },

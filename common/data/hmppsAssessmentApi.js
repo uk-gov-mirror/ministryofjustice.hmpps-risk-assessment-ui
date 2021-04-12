@@ -3,7 +3,7 @@ const logger = require('../logging/logger')
 const { getCorrelationId } = require('../utils/util')
 const {
   apis: {
-    offenderAssessments: { timeout, url },
+    hmppsAssessments: { timeout, url },
   },
 } = require('../config')
 
@@ -48,20 +48,20 @@ const postAnswers = (assessmentId, episodeId, answers, tokens) => {
 }
 
 const getData = (path, tokens) => {
-  logger.info(`Calling offenderAssessments API with GET: ${path}`)
+  logger.info(`Calling hmppsAssessments API with GET: ${path}`)
 
   return action(superagent.get(path), tokens).then(([_, body]) => body)
 }
 
 const postData = (path, tokens, data) => {
-  logger.info(`Calling offenderAssessments API with POST: ${path}`)
+  logger.info(`Calling hmppsAssessments API with POST: ${path}`)
 
   return action(superagent.post(path).send(data), tokens)
 }
 
 const action = async (agent, { authorisationToken }) => {
   if (authorisationToken === undefined) {
-    return logError('No authorisation token found when calling offenderAssessments API')
+    return logError('No authorisation token found when calling hmppsAssessments API')
   }
 
   try {
@@ -86,7 +86,7 @@ const action = async (agent, { authorisationToken }) => {
 //
 // const putData = async (path, { authorisationToken }, data) => {
 //   if (authorisationToken === undefined) {
-//     return logError(`No authorisation token found when calling offenderAssessments API: ${path}`)
+//     return logError(`No authorisation token found when calling hmppsAssessments API: ${path}`)
 //   }
 //   logger.info(`Calling offenderAssessments API with PUT: ${path}`)
 //   try {
@@ -105,7 +105,7 @@ const action = async (agent, { authorisationToken }) => {
 // }
 
 const logError = error => {
-  logger.warn('Error calling offenderAssessments API')
+  logger.warn('Error calling hmppsAssessments API')
   logger.warn(error)
   throw error
 }

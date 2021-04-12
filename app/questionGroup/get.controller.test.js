@@ -11,13 +11,13 @@ nunjucksEnvironment.addFilter('mojDate', mojDate)
 nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
 
 const { displayQuestionGroup } = require('./get.controller')
-const { getAnswers } = require('../../common/data/assessmentApi')
+const { getAnswers } = require('../../common/data/hmppsAssessmentApi')
 const questionGroupPointer = require('../../wiremock/responses/questionGroups.json')[
   '22222222-2222-2222-2222-222222222203'
 ].contents[0].contents[0]
 const expected = require('./fixtures/expected.json')
 
-jest.mock('../../common/data/assessmentApi')
+jest.mock('../../common/data/hmppsAssessmentApi')
 
 const tokens = { authorisationToken: 'mytoken' }
 let expectedForThisTest

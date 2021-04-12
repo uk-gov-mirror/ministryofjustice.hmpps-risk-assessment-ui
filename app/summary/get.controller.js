@@ -1,7 +1,7 @@
 // @ts-check
 
 const { logger } = require('../../common/logging/logger')
-const { getQuestionGroupSummary } = require('../../common/data/assessmentApi')
+const { getQuestionGroupSummary } = require('../../common/data/hmppsAssessmentApi')
 const { processReplacements } = require('../../common/utils/util')
 
 const displayQuestionGroupSummary = async (

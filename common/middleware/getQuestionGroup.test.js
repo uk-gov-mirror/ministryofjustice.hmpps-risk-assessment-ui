@@ -1,5 +1,6 @@
 const getQuestion = require('./getQuestionGroup')
-const { getQuestionGroup } = require('../data/assessmentApi')
+const { getQuestionGroup } = require('../data/hmppsAssessmentApi')
+const { getReferenceDataListByCategory } = require('../data/offenderAssessmentApi')
 const { processReplacements } = require('../utils/util')
 const {
   dev: { devAssessmentId },
@@ -57,7 +58,8 @@ const questions = {
   ],
 }
 
-jest.mock('../../common/data/assessmentApi')
+jest.mock('../../common/data/hmppsAssessmentApi')
+jest.mock('../../common/data/offenderAssessmentApi')
 jest.mock('../utils/util')
 
 processReplacements.mockImplementation(input => input)
@@ -83,6 +85,7 @@ describe('getQuestionGroup middleware', () => {
   })
   afterEach(() => {
     getQuestionGroup.mockReset()
+    getReferenceDataListByCategory.mockReset()
     next.mockReset()
     render.mockReset()
   })
@@ -195,6 +198,140 @@ describe('getQuestionGroup middleware', () => {
           url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/1/1',
         },
       })
+    })
+  })
+
+  describe('applies static reference data to questions', () => {
+    beforeEach(async () => {
+      getReferenceDataListByCategory.mockResolvedValue([{ description: 'foo', code: 'bar' }])
+    })
+
+    it('fetches data for questions that have a reference data category', async () => {
+      const questionsWithReferenceDataCategories = {
+        type: 'group',
+        groupId: '111',
+        title: 'assessment root',
+        contents: [
+          {
+            type: 'group',
+            groupId: '111_1',
+            title: 'section 1',
+            contents: [
+              {
+                type: 'group',
+                groupId: '111_1_1',
+                title: 'page 1',
+                contents: [
+                  {
+                    type: 'question',
+                    questionText: 'Test Question',
+                    referenceDataCategory: 'REFERENCE_DATA_CATEGORY_1',
+                  },
+                  {
+                    type: 'question',
+                    questionText: 'Test Question',
+                    referenceDataCategory: 'REFERENCE_DATA_CATEGORY_2',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }
+
+      getQuestionGroup.mockResolvedValue(questionsWithReferenceDataCategories)
+
+      await getQuestion(req, res, next)
+
+      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_1', req.tokens)
+      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_2', req.tokens)
+
+      expect(res.locals.questionGroup.contents[0]).toEqual({
+        type: 'question',
+        questionText: 'Test Question',
+        referenceDataCategory: 'REFERENCE_DATA_CATEGORY_1',
+        options: [{ text: 'foo', value: 'bar' }],
+      })
+    })
+
+    it('does not alter questions without a reference data category', async () => {
+      const questionsWithoutReferenceDataCategories = {
+        type: 'group',
+        groupId: '111',
+        title: 'assessment root',
+        contents: [
+          {
+            type: 'group',
+            groupId: '111_1',
+            title: 'section 1',
+            contents: [
+              {
+                type: 'group',
+                groupId: '111_1_1',
+                title: 'page 1',
+                contents: [
+                  {
+                    type: 'question',
+                    questionText: 'Test Question',
+                    answerSchemas: [{ text: 'Should not have altered...', value: '...hopefully' }],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }
+
+      getQuestionGroup.mockResolvedValue(questionsWithoutReferenceDataCategories)
+
+      await getQuestion(req, res, next)
+
+      expect(getReferenceDataListByCategory).not.toHaveBeenCalled()
+      expect(res.locals.questionGroup.contents[0]).toEqual({
+        type: 'question',
+        questionText: 'Test Question',
+        answerSchemas: [{ text: 'Should not have altered...', value: '...hopefully' }],
+      })
+    })
+
+    it('fetches each list only once', async () => {
+      const questionsWithMultipleReferenceDataCategories = {
+        type: 'group',
+        groupId: '111',
+        title: 'assessment root',
+        contents: [
+          {
+            type: 'group',
+            groupId: '111_1',
+            title: 'section 1',
+            contents: [
+              {
+                type: 'group',
+                groupId: '111_1_1',
+                title: 'page 1',
+                contents: [
+                  {
+                    type: 'question',
+                    questionText: 'Test Question 2',
+                    referenceDataCategory: 'REFERENCE_DATA_CATEGORY_1',
+                  },
+                  {
+                    type: 'question',
+                    questionText: 'Test Question 2',
+                    referenceDataCategory: 'REFERENCE_DATA_CATEGORY_1',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }
+
+      getQuestionGroup.mockResolvedValue(questionsWithMultipleReferenceDataCategories)
+
+      await getQuestion(req, res, next)
+
+      expect(getReferenceDataListByCategory).toHaveBeenCalledTimes(1)
     })
   })
 })

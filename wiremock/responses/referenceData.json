@@ -1,0 +1,96 @@
+{
+  "SOURCES_OF_INFORMATION": [
+    {
+      "code": "100",
+      "description": "Bail information record"
+    },
+    {
+      "code": "110",
+      "description": "Pre sentence report"
+    },
+    {
+      "code": "120",
+      "description": "Community Payback"
+    },
+    {
+      "code": "130",
+      "description": "Hostel"
+    },
+    {
+      "code": "140",
+      "description": "Interview"
+    },
+    {
+      "code": "150",
+      "description": "Judge's comments"
+    },
+    {
+      "code": "160",
+      "description": "Medical"
+    },
+    {
+      "code": "170",
+      "description": "Police"
+    },
+    {
+      "code": "180",
+      "description": "Post trial report"
+    },
+    {
+      "code": "190",
+      "description": "Previous convictions"
+    },
+    {
+      "code": "200",
+      "description": "Previous OASys"
+    },
+    {
+      "code": "210",
+      "description": "Prison records"
+    },
+    {
+      "code": "220",
+      "description": "Probation file"
+    },
+    {
+      "code": "230",
+      "description": "Prosecutor (inc CPS)"
+    },
+    {
+      "code": "240",
+      "description": "Psychiatric"
+    },
+    {
+      "code": "250",
+      "description": "Psychology"
+    },
+    {
+      "code": "260",
+      "description": "Local Authority"
+    },
+    {
+      "code": "270",
+      "description": "Victim statement"
+    },
+    {
+      "code": "280",
+      "description": "OASys SAQ"
+    },
+    {
+      "code": "290",
+      "description": "Request for Information"
+    },
+    {
+      "code": "300",
+      "description": "Other (please specify)"
+    },
+    {
+      "code": "310",
+      "description": "Asset"
+    },
+    {
+      "code": "320",
+      "description": "Basic Custody Screening"
+    }
+  ]
+}

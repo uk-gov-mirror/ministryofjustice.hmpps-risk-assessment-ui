@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 const { logger } = require('../../common/logging/logger')
 const { displayOverview } = require('./get.controller')
-const { postCompleteAssessment } = require('../../common/data/assessmentApi')
+const { postCompleteAssessment } = require('../../common/data/hmppsAssessmentApi')
 
 const completeAssessment = async (req, res) => {
   const {

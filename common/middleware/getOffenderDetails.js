@@ -1,5 +1,5 @@
 const logger = require('../logging/logger')
-const { getOffenderData } = require('../data/assessmentApi')
+const { getOffenderData } = require('../data/hmppsAssessmentApi')
 
 module.exports = async ({ params: { assessmentId }, tokens }, res, next) => {
   try {

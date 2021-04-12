@@ -1,11 +1,11 @@
 const getOffenderDetails = require('./getOffenderDetails')
-const { getOffenderData } = require('../data/assessmentApi')
+const { getOffenderData } = require('../data/hmppsAssessmentApi')
 const mockOffenderData = require('../../wiremock/responses/offenderDetails.json')
 const {
   dev: { devAssessmentId },
 } = require('../config')
 
-jest.mock('../../common/data/assessmentApi')
+jest.mock('../data/hmppsAssessmentApi')
 
 describe('getOffenderDetails middleware', () => {
   let req

@@ -1,10 +1,10 @@
 const { saveQuestionGroup, assembleDates } = require('./post.controller')
-const { postAnswers } = require('../../common/data/assessmentApi')
+const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
 const questionGroupPointer = require('../../wiremock/responses/questionGroups.json')[
   '22222222-2222-2222-2222-222222222203'
 ]
 
-jest.mock('../../common/data/assessmentApi')
+jest.mock('../../common/data/hmppsAssessmentApi')
 
 let req
 const tokens = { authorisationToken: 'mytoken' }

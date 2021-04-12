@@ -20,11 +20,23 @@ function get(name, fallback, options = {}) {
 
 module.exports = {
   apis: {
-    offenderAssessments: {
-      url: get('OFFENDERASSESSMENT_API_URL', 'http://localhost:9191', true),
+    hmppsAssessments: {
+      url: get('HMPPS_ASSESSMENT_API_URL', 'http://localhost:9191', true),
       timeout: {
-        response: get('OFFENDERASSESSMENTAPI_ENDPOINT_TIMEOUT_RESPONSE', 20000, true),
-        deadline: get('OFFENDERASSESSMENTAPI_TIMEOUT_DEADLINE', 20000, true),
+        response: get('HMPPS_ASSESSMENT_API_ENDPOINT_TIMEOUT_RESPONSE', 120000, true),
+        deadline: get('HMPPS_ASSESSMENT_API_TIMEOUT_DEADLINE', 120000, true),
+      },
+      agent: {
+        maxSockets: 100,
+        maxFreeSockets: 10,
+        freeSocketTimeout: 30000,
+      },
+    },
+    offenderAssessments: {
+      url: get('OFFENDER_ASSESSMENT_API_URL', 'http://localhost:9191', true),
+      timeout: {
+        response: get('OFFENDER_ASSESSMENT_API_ENDPOINT_TIMEOUT_RESPONSE', 20000, true),
+        deadline: get('OFFENDER_ASSESSMENT_API_TIMEOUT_DEADLINE', 20000, true),
       },
       agent: {
         maxSockets: 100,

@@ -22,8 +22,11 @@ env:
         name: {{ template "risk-assessment-ui.name" . }}
         key: APPINSIGHTS_INSTRUMENTATIONKEY
 
-  - name: OFFENDERASSESSMENT_API_URL
-    value: {{ .Values.env.ASSESSMENTS_API_URL | quote }}
+  - name: HMPPS_ASSESSMENT_API_URL
+    value: {{ .Values.env.HMPPS_ASSESSMENT_API_URL | quote }}
+
+  - name: OFFENDER_ASSESSMENT_API_URL
+    value: {{ .Values.env.OFFENDER_ASSESSMENT_API_URL | quote }}
 
   - name: OAUTH_ENDPOINT_URL
     value: {{ .Values.env.OAUTH_ENDPOINT_URL | quote }}

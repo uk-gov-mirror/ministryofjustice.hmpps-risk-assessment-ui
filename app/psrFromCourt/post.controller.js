@@ -1,5 +1,5 @@
 // const { logger } = require('../../common/logging/logger')
-const { assessmentSupervision } = require('../../common/data/assessmentApi')
+const { assessmentSupervision } = require('../../common/data/hmppsAssessmentApi')
 
 const startPsrFromCourt = ({ params: { courtCode, caseNumber }, tokens }, res) => {
   return startPsr(courtCode, caseNumber, tokens, res)
