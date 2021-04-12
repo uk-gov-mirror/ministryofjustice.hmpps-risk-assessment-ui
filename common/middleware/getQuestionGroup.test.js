@@ -250,7 +250,7 @@ describe('getQuestionGroup middleware', () => {
         type: 'question',
         questionText: 'Test Question',
         referenceDataCategory: 'REFERENCE_DATA_CATEGORY_1',
-        options: [{ text: 'foo', value: 'bar' }],
+        answerSchemas: [{ text: 'foo', value: 'bar' }],
       })
     })
 

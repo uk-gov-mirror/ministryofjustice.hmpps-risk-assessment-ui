@@ -57,7 +57,7 @@ const findParent = (questionGroups, section) => {
 
 const applyStaticReferenceData = async (questionResponse, tokens) => {
   const extractReferenceDataCategories = questionSchema => {
-    if (Array.isArray(questionSchema.contents)) {
+    if (questionSchema.type === 'group') {
       return questionSchema.contents.flatMap(extractReferenceDataCategories)
     }
     if (questionSchema.referenceDataCategory) {
@@ -92,11 +92,11 @@ const applyStaticReferenceData = async (questionResponse, tokens) => {
   )
 
   const applyReferenceData = questionSchema => {
-    if (Array.isArray(questionSchema.contents)) {
+    if (questionSchema.type === 'group') {
       return { ...questionSchema, contents: questionSchema.contents.map(applyReferenceData) }
     }
     if (questionSchema.referenceDataCategory) {
-      return { ...questionSchema, options: referenceData[questionSchema.referenceDataCategory] }
+      return { ...questionSchema, answerSchemas: referenceData[questionSchema.referenceDataCategory] }
     }
     return questionSchema
   }
