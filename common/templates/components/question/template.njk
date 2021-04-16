@@ -64,6 +64,25 @@
     {% case 'presentation: link' %}
       <div class="body-link__container"><a href="{{ linkTarget }}" class="govuk-link body-link">{{ question.questionText }}</a></div>
 
+    {% case 'noinput' %}
+      {{ govukInput({
+        id: 'id-' + question.questionId,
+        name: 'id-' + question.questionId,
+        formGroup : {
+          classes: formClass or question.formClasses
+        },
+        classes: 'moj-hidden',
+        attributes: question.attributes,
+        label: {
+          text: question.questionText,
+          isPageHeading: false,
+          classes: question.questionCode + ' govuk-label--m'
+        },
+        hint: {
+          text: question.helpText
+        },
+        errorMessage: errorMessage
+      }) }}
     {% case 'freetext' %}
       {{ govukInput({
         id: 'id-' + question.questionId,
@@ -82,7 +101,6 @@
           text: question.helpText
         },
         errorMessage: errorMessage
-
       }) }}
     {% case 'textarea' %}
       {{ govukTextarea({

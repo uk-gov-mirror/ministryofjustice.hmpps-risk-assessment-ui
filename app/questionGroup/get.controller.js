@@ -157,6 +157,9 @@ const compileInlineConditionalQuestions = (questions, errors) => {
     .map(question => {
       // add css to hide questions to be displayed out of line
       const questionObject = question
+      if (!questionObject.questionText) {
+        questionObject.formClasses = 'govuk-input--packTogether'
+      }
       if (questionObject.conditional) {
         questionObject.formClasses =
           'govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden'
