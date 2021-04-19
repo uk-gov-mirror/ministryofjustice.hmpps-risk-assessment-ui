@@ -47,6 +47,17 @@ const postAnswers = (assessmentId, episodeId, answers, tokens) => {
   return postData(path, tokens, answers)
 }
 
+const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, tokens) => {
+  const path = `${url}/referencedata/filtered`
+  const requestBody = {
+    assessmentUuid: assessmentId,
+    episodeUuid: episodeId,
+    fieldName: questionUuid,
+    parentList,
+  }
+  return postData(path, tokens, requestBody)
+}
+
 const getData = (path, tokens) => {
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
 
@@ -119,4 +130,5 @@ module.exports = {
   postAnswers,
   getQuestionGroupSummary,
   postCompleteAssessment,
+  getFilteredReferenceData,
 }
