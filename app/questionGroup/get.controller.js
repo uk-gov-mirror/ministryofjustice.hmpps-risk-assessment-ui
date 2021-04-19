@@ -11,7 +11,11 @@ const displayQuestionGroup = async (
     const { questionGroup } = res.locals
     const subIndex = Number.parseInt(subgroup, 10)
 
-    const { answers } = await grabAnswers(assessmentId, 'current', tokens)
+    const { answers, episodeUuid } = await grabAnswers(assessmentId, 'current', tokens)
+
+    res.locals.assessmentUuid = assessmentId
+    res.locals.episodeUuid = episodeUuid
+
     let questions = annotateWithAnswers(questionGroup.contents, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
 

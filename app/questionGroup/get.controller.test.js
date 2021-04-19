@@ -82,4 +82,17 @@ describe('display question group and answers', () => {
     await displayQuestionGroup(req, res)
     expect(res.render).toHaveBeenCalledWith(`app/error`, { error: theError })
   })
+
+  it('adds assessment information to the template for use by client-side javascript', async () => {
+    getAnswers.mockReturnValueOnce({
+      answers: {},
+      episodeUuid: 'test-episode-id',
+    })
+    await displayQuestionGroup(req, res)
+
+    expect(res.locals).toMatchObject({
+      assessmentUuid: 'test-assessment-id',
+      episodeUuid: 'test-episode-id',
+    })
+  })
 })
