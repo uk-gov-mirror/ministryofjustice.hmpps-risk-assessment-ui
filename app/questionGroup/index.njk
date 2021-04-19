@@ -59,4 +59,12 @@
             </form>
         </div>
     </div>
+
+    <script src="/javascripts/filtered-reference-data.js"></script>
+    <script>
+        document.onload = addFilteredReferenceDataListeners(
+            {{ assessmentUuid | dump | safe }},
+            {{ episodeUuid | dump | safe }}
+        );
+    </script>
 {% endblock %}
