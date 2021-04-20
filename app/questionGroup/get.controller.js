@@ -117,9 +117,13 @@ const compileInlineConditionalQuestions = (questions, errors) => {
           let conditionalQuestionString =
             '{% from "./common/templates/components/question/macro.njk" import renderQuestion %} \n'
 
-          conditionalQuestionString += `{{ renderQuestion(${JSON.stringify(
-            conditionalQuestions[subjectId],
-          )},'','',${thisError}) }}`
+          const conditionalQuestion = conditionalQuestions[subjectId]
+          const attributesString = JSON.stringify(conditionalQuestion.attributes)
+
+          conditionalQuestionString += `{{ renderQuestion(${JSON.stringify({
+            ...conditionalQuestion,
+            attributes: attributesString,
+          })},'','',${thisError}) }}`
 
           updatedSchemaLine.conditional = {
             html: nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, ''),
