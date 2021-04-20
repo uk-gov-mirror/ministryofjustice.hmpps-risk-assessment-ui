@@ -14,7 +14,7 @@ const fetchFilteredReferenceData = async (req, res) => {
 
     return res.json(response.map(({ description, code }) => ({ text: description, value: code })))
   } catch (error) {
-    return res.status(error.response.status).send()
+    return res.status(error.response?.status || 500).send()
   }
 }
 
