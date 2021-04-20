@@ -9,6 +9,7 @@ const {
   stubOffenderDetails,
   stubQuestionSummaries,
 } = require('../../wiremock/assessmentApi')
+const { stubReferenceData } = require('../../wiremock/referenceData')
 const oauthApi = require('../../wiremock/oauth')
 
 module.exports = on => {
@@ -29,6 +30,7 @@ module.exports = on => {
         stubEpisodes(),
         stubOffenderDetails(),
         stubQuestionSummaries(),
+        stubReferenceData(),
       ]),
     stubAuth: () => Promise.all([oauthApi.stubGetToken()]),
   })
