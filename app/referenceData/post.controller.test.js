@@ -9,9 +9,8 @@ const tokens = { authorisationToken: 'mytoken' }
 beforeEach(() => {
   req = {
     params: {
-      assessmentId: 'test-assessment-id',
-      groupId: '22222222-2222-2222-2222-222222222204',
-      subgroup: 0,
+      assessmentId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+      episodeId: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
     },
     tokens,
     body: {},
@@ -41,11 +40,6 @@ describe('fetch filtered reference data', () => {
       targetValues: {
         'cccccccc-dddd-eeee-ffff-gggggggggggg': 'some-value',
       },
-    }
-
-    req.params = {
-      assessmentUuid: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
-      episodeUuid: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
     }
 
     await fetchFilteredReferenceData(req, res)
@@ -80,11 +74,6 @@ describe('fetch filtered reference data', () => {
       targetValues: {
         'cccccccc-dddd-eeee-ffff-gggggggggggg': 'some-value',
       },
-    }
-
-    req.params = {
-      assessmentUuid: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
-      episodeUuid: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
     }
 
     await fetchFilteredReferenceData(req, res)

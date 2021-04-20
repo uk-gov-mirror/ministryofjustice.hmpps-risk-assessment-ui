@@ -3,20 +3,14 @@ const { getFilteredReferenceData } = require('../../common/data/hmppsAssessmentA
 const fetchFilteredReferenceData = async (req, res) => {
   try {
     const {
-      params: { assessmentUuid, episodeUuid },
+      params: { assessmentId, episodeId },
       body,
       tokens,
     } = req
     const { questionUuid, targetValues } = body
 
     // eslint-disable-next-line no-unused-vars
-    const [_, response] = await getFilteredReferenceData(
-      assessmentUuid,
-      episodeUuid,
-      questionUuid,
-      targetValues,
-      tokens,
-    )
+    const [_, response] = await getFilteredReferenceData(assessmentId, episodeId, questionUuid, targetValues, tokens)
 
     return res.json(response.map(({ description, code }) => ({ text: description, value: code })))
   } catch (error) {

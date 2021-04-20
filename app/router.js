@@ -73,7 +73,7 @@ module.exports = app => {
     saveQuestionGroup,
   )
 
-  app.post(`/:assessmentUuid/episode/:episodeUuid/referencedata/filtered`, fetchFilteredReferenceData)
+  app.post(`/:assessmentId/episode/:episodeId/referencedata/filtered`, fetchFilteredReferenceData)
 
   app.post('/:assessmentId/questiongroup/:groupId/summary', getOffenderDetails, completeAssessment)
 
