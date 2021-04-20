@@ -29,8 +29,8 @@ const stubDynamicReferenceData = field => {
       headers: {
         'Content-Type': 'application/json;charset=UTF-8',
       },
-      status: 200,
-      jsonBody: filteredReferenceData[field].response,
+      status: filteredReferenceData[field].response.status,
+      jsonBody: filteredReferenceData[field].response.body,
     },
   })
 }
@@ -39,6 +39,7 @@ const stubReferenceData = async () => {
   await stubStaticReferenceData('SOURCES_OF_INFORMATION')
   await stubDynamicReferenceData('ASSESSOR_OFFICE--FIRST')
   await stubDynamicReferenceData('ASSESSOR_OFFICE--SECOND')
+  await stubDynamicReferenceData('ASSESSOR_OFFICE--FAIL')
 }
 
 module.exports = {
