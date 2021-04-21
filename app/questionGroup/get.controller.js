@@ -11,7 +11,11 @@ const displayQuestionGroup = async (
     const { questionGroup } = res.locals
     const subIndex = Number.parseInt(subgroup, 10)
 
-    const { answers } = await grabAnswers(assessmentId, 'current', tokens)
+    const { answers, episodeUuid } = await grabAnswers(assessmentId, 'current', tokens)
+
+    res.locals.assessmentUuid = assessmentId
+    res.locals.episodeUuid = episodeUuid
+
     let questions = annotateWithAnswers(questionGroup.contents, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
 
@@ -113,9 +117,13 @@ const compileInlineConditionalQuestions = (questions, errors) => {
           let conditionalQuestionString =
             '{% from "./common/templates/components/question/macro.njk" import renderQuestion %} \n'
 
-          conditionalQuestionString += `{{ renderQuestion(${JSON.stringify(
-            conditionalQuestions[subjectId],
-          )},'','',${thisError}) }}`
+          const conditionalQuestion = conditionalQuestions[subjectId]
+          const attributesString = JSON.stringify(conditionalQuestion.attributes)
+
+          conditionalQuestionString += `{{ renderQuestion(${JSON.stringify({
+            ...conditionalQuestion,
+            attributes: attributesString,
+          })},'','',${thisError}) }}`
 
           updatedSchemaLine.conditional = {
             html: nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, ''),

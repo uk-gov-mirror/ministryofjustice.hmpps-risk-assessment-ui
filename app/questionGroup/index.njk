@@ -52,11 +52,19 @@
                     {{ govukButton({
                         text: 'Back to assessment progress',
                         classes: 'govuk-button--secondary',
-                        href: "/" + assessmentId + "/questiongroup/" + groupId + "/summary"
+                        href: '/' + assessmentId + '/questiongroup/' + groupId + '/summary'
                     }) }}
                 </div>
 
             </form>
         </div>
     </div>
+
+    <script src="/javascripts/filtered-reference-data.js"></script>
+    <script>
+        document.onload = addFilteredReferenceDataListeners(
+            '{{ assessmentUuid | safe }}',
+            '{{ episodeUuid | safe }}'
+        );
+    </script>
 {% endblock %}

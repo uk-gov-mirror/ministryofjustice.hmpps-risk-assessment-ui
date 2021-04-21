@@ -172,6 +172,18 @@
             "title": "Sample page 1"
           }
         ]
+      },
+      {
+        "groupId": "71b4c413-83f2-48af-a330-0c5d5a4b6e34",
+        "groupCode": "2_filtered_reference_data",
+        "title": "Sample questions",
+        "contents": [
+          {
+            "groupId": "22222222-2222-2222-2222-222222222201",
+            "groupCode": "assessor",
+            "title": "Assessor"
+          }
+        ]
       }
     ]
   }

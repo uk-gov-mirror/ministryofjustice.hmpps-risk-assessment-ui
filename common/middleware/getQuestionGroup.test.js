@@ -246,7 +246,7 @@ describe('getQuestionGroup middleware', () => {
       expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_1', req.tokens)
       expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_2', req.tokens)
 
-      expect(res.locals.questionGroup.contents[0]).toEqual({
+      expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',
         questionText: 'Test Question',
         referenceDataCategory: 'REFERENCE_DATA_CATEGORY_1',
@@ -287,7 +287,7 @@ describe('getQuestionGroup middleware', () => {
       await getQuestion(req, res, next)
 
       expect(getReferenceDataListByCategory).not.toHaveBeenCalled()
-      expect(res.locals.questionGroup.contents[0]).toEqual({
+      expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',
         questionText: 'Test Question',
         answerSchemas: [{ text: 'Should not have altered...', value: '...hopefully' }],
@@ -332,6 +332,93 @@ describe('getQuestionGroup middleware', () => {
       await getQuestion(req, res, next)
 
       expect(getReferenceDataListByCategory).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('creates attributes for filtered reference data', () => {
+    const questionSchema = {
+      type: 'group',
+      groupId: '111',
+      title: 'assessment root',
+      contents: [
+        {
+          type: 'group',
+          groupId: '111_1',
+          title: 'section 1',
+          contents: [
+            {
+              type: 'group',
+              groupId: '111_1_1',
+              title: 'page 1',
+              contents: [
+                {
+                  type: 'question',
+                  questionId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+                  questionText: 'Test Question',
+                  referenceDataTarget: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }
+
+    it('adds a data attribute with the question UUID', async () => {
+      getQuestionGroup.mockResolvedValue(questionSchema)
+
+      await getQuestion(req, res, next)
+
+      expect(res.locals.questionGroup.contents[0]).toMatchObject({
+        type: 'question',
+        questionText: 'Test Question',
+        attributes: { 'data-question-uuid': 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' },
+      })
+    })
+
+    it('adds a data attribute for reference data target fields', async () => {
+      getQuestionGroup.mockResolvedValue(questionSchema)
+
+      await getQuestion(req, res, next)
+
+      expect(res.locals.questionGroup.contents[0]).toMatchObject({
+        type: 'question',
+        questionText: 'Test Question',
+        attributes: { 'data-reference-data-target': 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa' },
+      })
+    })
+
+    it('does not add a data attribute for reference data target fields when not present', async () => {
+      getQuestionGroup.mockResolvedValue({
+        type: 'group',
+        groupId: '111',
+        title: 'assessment root',
+        contents: [
+          {
+            type: 'group',
+            groupId: '111_1',
+            title: 'section 1',
+            contents: [
+              {
+                type: 'group',
+                groupId: '111_1_1',
+                title: 'page 1',
+                contents: [
+                  {
+                    type: 'question',
+                    questionId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+                    questionText: 'Test Question',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      })
+
+      await getQuestion(req, res, next)
+
+      expect(res.locals.questionGroup.contents[0].attributes).not.toHaveProperty('data-reference-data-target')
     })
   })
 })

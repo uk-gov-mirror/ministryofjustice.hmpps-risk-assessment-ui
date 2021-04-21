@@ -1,15 +1,15 @@
 const page = require('../page')
 const AssessmentsPage = require('../assessments/assessmentsPage')
 
-const questionsPage1 = () =>
-  page('Page 1', {
+const filteredReferenceDataPage = () =>
+  page('Test filtered reference data', {
     questions: () => cy.get('.govuk-form-group'),
     errorSummary: () => cy.get('.govuk-error-summary'),
     save: () => cy.get('button').contains('Save and continue'),
   })
 
 export default {
-  verifyOnPage: questionsPage1,
+  verifyOnPage: filteredReferenceDataPage,
   goTo: (assessmentNumber = 0) => {
     AssessmentsPage.goTo()
       .assessments()
@@ -17,8 +17,8 @@ export default {
       .eq(assessmentNumber)
       .click()
       .get('.moj-task-list__task-name')
-      .first()
+      .contains('Assessor')
       .click()
-    return questionsPage1()
+    return filteredReferenceDataPage()
   },
 }

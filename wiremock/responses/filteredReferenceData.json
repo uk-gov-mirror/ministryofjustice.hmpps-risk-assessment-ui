@@ -1,0 +1,59 @@
+{
+  "ASSESSOR_OFFICE--FIRST": {
+    "request": [
+      {
+        "equalToJson": "{\"assessmentUuid\":\"e69a61ff-7395-4a12-b434-b1aa6478aded\",\"episodeUuid\":\"4511a3f6-7f51-4b96-b603-4e75eac0c839\",\"fieldName\":\"11111111-1111-1111-1111-111111111203\",\"parentList\":{\"11111111-1111-1111-1111-111111111202\":\"first\"}}",
+        "ignoreArrayOrder": true,
+        "ignoreExtraElements": true
+      }
+    ],
+    "response": {
+      "status": 200,
+      "body": [
+        {
+          "code": "100",
+          "description": "First Office"
+        },
+        {
+          "code": "101",
+          "description": "Second Office"
+        }
+      ]
+    }
+  },
+  "ASSESSOR_OFFICE--SECOND": {
+    "request": [
+      {
+        "equalToJson": "{\"assessmentUuid\":\"e69a61ff-7395-4a12-b434-b1aa6478aded\",\"episodeUuid\":\"4511a3f6-7f51-4b96-b603-4e75eac0c839\",\"fieldName\":\"11111111-1111-1111-1111-111111111203\",\"parentList\":{\"11111111-1111-1111-1111-111111111202\":\"second\"}}",
+        "ignoreArrayOrder": true,
+        "ignoreExtraElements": true
+      }
+    ],
+    "response": {
+      "status": 200,
+      "body": [
+        {
+          "code": "102",
+          "description": "Third Office"
+        },
+        {
+          "code": "103",
+          "description": "Fourth Office"
+        }
+      ]
+    }
+  },
+  "ASSESSOR_OFFICE--FAIL": {
+    "request": [
+      {
+        "equalToJson": "{\"assessmentUuid\":\"e69a61ff-7395-4a12-b434-b1aa6478aded\",\"episodeUuid\":\"4511a3f6-7f51-4b96-b603-4e75eac0c839\",\"fieldName\":\"11111111-1111-1111-1111-111111111203\",\"parentList\":{\"11111111-1111-1111-1111-111111111202\":\"fail\"}}",
+        "ignoreArrayOrder": true,
+        "ignoreExtraElements": true
+      }
+    ],
+    "response": {
+      "status": 500,
+      "body": {}
+    }
+  }
+}

@@ -121,6 +121,21 @@ module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, tokens },
       q.contents?.forEach(c => readOnlyToAttribute(c))
     }
     thisQuestionGroup.contents?.forEach(q => readOnlyToAttribute(q))
+    thisQuestionGroup.contents = thisQuestionGroup.contents?.map(question => {
+      const attributes = {
+        ...question.attributes,
+        'data-question-uuid': question.questionId,
+      }
+
+      if (question.referenceDataTarget) {
+        attributes['data-reference-data-target'] = question.referenceDataTarget
+      }
+
+      return {
+        ...question,
+        attributes,
+      }
+    })
     res.locals.questionGroup = processReplacements(thisQuestionGroup, res.locals.offenderDetails)
 
     const navigation = {
