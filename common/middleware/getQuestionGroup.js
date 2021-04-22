@@ -125,6 +125,7 @@ module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, tokens },
       const attributes = {
         ...question.attributes,
         'data-question-uuid': question.questionId,
+        'data-question-type': question.answerType,
       }
 
       if (question.referenceDataTarget) {

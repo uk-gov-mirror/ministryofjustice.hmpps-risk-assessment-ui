@@ -12,11 +12,11 @@
       "body": [
         {
           "code": "100",
-          "description": "First Office"
+          "description": "First Team"
         },
         {
           "code": "101",
-          "description": "Second Office"
+          "description": "Second Team"
         }
       ]
     }
@@ -34,11 +34,11 @@
       "body": [
         {
           "code": "102",
-          "description": "Third Office"
+          "description": "Third Team"
         },
         {
           "code": "103",
-          "description": "Fourth Office"
+          "description": "Fourth Team"
         }
       ]
     }

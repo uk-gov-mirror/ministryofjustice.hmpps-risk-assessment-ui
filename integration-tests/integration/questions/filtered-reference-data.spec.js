@@ -11,29 +11,47 @@ context('Test filtered reference data fields', () => {
     questionsPage
       .questions()
       .eq(0)
-      .should('include.text', 'Assessor')
+      .should('include.text', 'Assessor Office')
 
     questionsPage
       .questions()
       .eq(1)
-      .should('include.text', 'Assessor Office')
+      .should('include.text', 'Assessor Team')
   })
 
   it('Populates reference data fields on page load', () => {
+    cy.intercept(
+      'POST',
+      '/e69a61ff-7395-4a12-b434-b1aa6478aded/episode/4511a3f6-7f51-4b96-b603-4e75eac0c839/referencedata/filtered',
+    ).as('update')
+
     const questionsPage = FilteredReferenceDataTestPage.goTo()
+
+    cy.wait('@update')
+      .its('response.statusCode')
+      .should('eq', 200)
 
     questionsPage
       .questions()
-      .contains('div', 'Assessor Office')
-      .find('option')
+      .contains('div', 'Assessor Team')
+      .find('.govuk-label')
       .then(options => {
-        const listOfOptions = [...options].map(o => o.text)
-        expect(listOfOptions).to.deep.eq(['First Office', 'Second Office'])
+        const listOfOptions = [...options].map(o => o.textContent.trim())
+        expect(listOfOptions).to.deep.eq(['First Team', 'Second Team'])
       })
   })
 
   it('updates reference data fields when the target field is updated', () => {
     const questionsPage = FilteredReferenceDataTestPage.goTo()
+
+    questionsPage
+      .questions()
+      .contains('div', 'Assessor Team')
+      .find('.govuk-label')
+      .then(options => {
+        const listOfOptions = [...options].map(o => o.textContent.trim())
+        expect(listOfOptions).to.deep.eq(['First Team', 'Second Team'])
+      })
 
     cy.intercept(
       'POST',
@@ -42,9 +60,9 @@ context('Test filtered reference data fields', () => {
 
     questionsPage
       .questions()
-      .contains('div', 'Assessor')
-      .find('select')
-      .select('second')
+      .contains('div', 'Assessor Office')
+      .find('[type="radio"]')
+      .check('second')
 
     cy.wait('@update')
       .its('response.statusCode')
@@ -52,11 +70,11 @@ context('Test filtered reference data fields', () => {
 
     questionsPage
       .questions()
-      .contains('div', 'Assessor Office')
-      .find('option')
+      .contains('div', 'Assessor Team')
+      .find('.govuk-label')
       .then(options => {
-        const listOfOptions = [...options].map(o => o.text)
-        expect(listOfOptions).to.deep.eq(['Third Office', 'Fourth Office'])
+        const listOfOptions = [...options].map(o => o.textContent.trim())
+        expect(listOfOptions).to.deep.eq(['Third Team', 'Fourth Team'])
       })
   })
 
@@ -70,9 +88,9 @@ context('Test filtered reference data fields', () => {
 
     questionsPage
       .questions()
-      .contains('div', 'Assessor')
-      .find('select')
-      .select('fail')
+      .contains('div', 'Assessor Office')
+      .find('[type="radio"]')
+      .check('fail')
 
     cy.wait('@update')
       .its('response.statusCode')
@@ -80,8 +98,8 @@ context('Test filtered reference data fields', () => {
 
     questionsPage
       .questions()
-      .contains('div', 'Assessor Office')
-      .find('option')
+      .contains('div', 'Assessor Team')
+      .find('.govuk-label')
       .should('not.exist')
   })
 })

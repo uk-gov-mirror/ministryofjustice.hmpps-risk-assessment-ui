@@ -572,9 +572,9 @@
               {
                 "type": "question",
                 "questionId": "11111111-1111-1111-1111-111111111202",
-                "questionCode": "assessor",
-                "answerType": "dropdown",
-                "questionText": "Assessor",
+                "questionCode": "assessor_office",
+                "answerType": "radio",
+                "questionText": "Assessor Office",
                 "displayOrder": "1",
                 "mandatory": "yes",
                 "answerSchemas": [
@@ -603,9 +603,9 @@
               {
                 "type": "question",
                 "questionId": "11111111-1111-1111-1111-111111111203",
-                "questionCode": "assessor_office",
-                "answerType": "dropdown",
-                "questionText": "Assessor Office",
+                "questionCode": "assessor_team",
+                "answerType": "radio",
+                "questionText": "Assessor Team",
                 "displayOrder": "1",
                 "mandatory": "yes",
                 "answerSchemas": [],

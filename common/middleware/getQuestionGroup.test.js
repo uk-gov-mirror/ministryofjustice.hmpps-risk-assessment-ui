@@ -353,6 +353,7 @@ describe('getQuestionGroup middleware', () => {
               contents: [
                 {
                   type: 'question',
+                  answerType: 'text',
                   questionId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
                   questionText: 'Test Question',
                   referenceDataTarget: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
@@ -373,6 +374,18 @@ describe('getQuestionGroup middleware', () => {
         type: 'question',
         questionText: 'Test Question',
         attributes: { 'data-question-uuid': 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' },
+      })
+    })
+
+    it('adds a data attribute with the question type', async () => {
+      getQuestionGroup.mockResolvedValue(questionSchema)
+
+      await getQuestion(req, res, next)
+
+      expect(res.locals.questionGroup.contents[0]).toMatchObject({
+        type: 'question',
+        questionText: 'Test Question',
+        attributes: { 'data-question-type': 'text' },
       })
     })
 

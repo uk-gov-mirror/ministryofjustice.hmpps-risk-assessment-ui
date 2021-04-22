@@ -13,24 +13,87 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     return true
   }
 
-  function clearOptions(multipleChoiceElement) {
-    while (multipleChoiceElement.options.length > 0) {
-      multipleChoiceElement.remove(0)
+  function isRadio(element) {
+    return element.dataset.questionType === 'radio'
+  }
+  function isDropdown(element) {
+    return element.dataset.questionType === 'dropdown'
+  }
+
+  function clearDropdown(element) {
+    while (element.options.length > 0) {
+      element.remove(0)
     }
   }
 
-  function updateOptions(multipleChoiceElement, newOptions) {
-    clearOptions(multipleChoiceElement)
+  function clearRadio(element) {
+    element.replaceChildren()
+  }
 
-    for (var i = 0; i < newOptions.length; i++) {
-      var option = newOptions[i]
+  function removeExistingOptions(element) {
+    if (isRadio(element)) {
+      return clearRadio(element)
+    }
+    if (isDropdown(element)) {
+      return clearDropdown(element)
+    }
+    return
+  }
+
+  function createDropdownOptions(dropdown, options) {
+    for (var i = 0; i < options.length; i++) {
+      var option = options[i]
 
       var optionElement = document.createElement('option')
       optionElement.text = option.text
       optionElement.value = option.value
 
-      multipleChoiceElement.add(optionElement)
+      dropdown.add(optionElement)
     }
+  }
+
+  function createRadioOptions(radioGroup, options) {
+    for (var i = 0; i < options.length; i++) {
+      var option = options[i]
+
+      var radioItem = document.createElement('div')
+      radioItem.className = 'govuk-radios__item'
+
+      var radioInput = document.createElement('input')
+      radioInput.type = 'radio'
+      radioInput.id = 'id-' + radioGroup.dataset.questionUuid + '-' + (1 + i)
+      radioInput.className = 'govuk-radios__input'
+      radioInput.name = 'id-' + radioGroup.dataset.questionUuid
+      radioInput.value = option.value
+
+      var label = document.createElement('label')
+      label.className = 'govuk-label govuk-radios__label'
+      label.innerHTML = option.text
+      label.setAttribute('for', 'id-' + radioGroup.dataset.questionUuid + '-' + (1 + i))
+
+      radioItem.appendChild(radioInput)
+      radioItem.appendChild(label)
+
+      radioGroup.appendChild(radioItem)
+    }
+  }
+
+  function selectFirstRadio(radioGroup) {
+    var firstRadio = radioGroup.querySelector('input')
+    radioGroup.value = firstRadio.value
+    firstRadio.checked = true
+  }
+
+  function updateOptions(element, options) {
+    removeExistingOptions(element)
+
+    if (isRadio(element)) {
+      return createRadioOptions(element, options)
+    }
+    if (isDropdown(element)) {
+      return createDropdownOptions(element, options)
+    }
+    return
   }
 
   function fetchReferenceData(state, multipleChoiceElement, callback) {
@@ -42,13 +105,13 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
 
       req.onload = function() {
         if (this.status !== 200) {
-          return clearOptions(multipleChoiceElement)
+          return removeExistingOptions(multipleChoiceElement)
         }
         callback(JSON.parse(this.responseText))
       }
 
       req.onerror = function() {
-        clearOptions(multipleChoiceElement)
+        removeExistingOptions(multipleChoiceElement)
       }
     }
   }
@@ -76,6 +139,10 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     for (var j = 0; j < targets.length; j++) {
       var target = targets[j]
       var targetId = target.dataset.questionUuid
+
+      if (isRadio(target)) {
+        selectFirstRadio(target)
+      }
 
       state[questionUuid].targetValues[targetId] = target.value
       fetchReferenceData(state[questionUuid], element, function(newOptions) {
