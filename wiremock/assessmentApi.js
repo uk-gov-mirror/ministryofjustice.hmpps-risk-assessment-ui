@@ -27,7 +27,7 @@ const stubAssessmentSupervision = () => {
   stubFor({
     request: {
       method: 'POST',
-      urlPattern: '/assessments/supervision',
+      urlPattern: '/assessments',
     },
     response: {
       headers: {
@@ -203,11 +203,11 @@ const stubSupervision = async () => {
 }
 
 module.exports = {
+  stubSupervision,
   stubForms,
   stubQuestions,
   stubAnswers,
   stubEpisodes,
-  stubSupervision,
   stubOffenderDetails,
   stubQuestionSummaries,
   stubAssessmentComplete,

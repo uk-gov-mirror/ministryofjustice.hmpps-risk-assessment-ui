@@ -1,0 +1,34 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+
+{% block content %}
+    <h1 class="govuk-heading-l">
+        Create Assessment
+    </h1>
+
+    <form method="post" novalidate>
+      {{ govukInput({
+          id: 'crn',
+          name: 'CRN',
+          label: { text: 'CRN', isPageHeading: false },
+          classes: 'govuk-input--width-20'
+      }) }}
+      {{ govukInput({
+          id: 'deliusEventId',
+          name: 'deliusEventId',
+          label: { text: 'Delius Event ID', isPageHeading: false },
+          classes: 'govuk-input--width-20'
+      }) }}
+      {{ govukInput({
+          id: 'assessmentType',
+          name: 'assessmentType',
+          label: { text: 'Assessment Type', isPageHeading: false },
+          classes: 'govuk-input--width-20'
+      }) }}
+      {{ govukButton({
+          text: 'Start'
+      }) }}
+    </form>
+{% endblock %}

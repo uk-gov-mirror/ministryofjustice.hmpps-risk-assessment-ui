@@ -20,6 +20,9 @@ const { fetchFilteredReferenceData } = require('./referenceData/post.controller'
 const { psrFromCourt } = require('./psrFromCourt/get.controller')
 const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.controller')
 
+const { assessmentFromCrn } = require('./assessmentFromCrn/get.controller')
+const { startAssessmentFromCrn, startAssessmentFromForm } = require('./assessmentFromCrn/post.controller')
+
 const { validate } = require('../common/middleware/validator')
 
 // Export
@@ -80,6 +83,10 @@ module.exports = app => {
   app.get('/psr-from-court', psrFromCourt)
   app.post('/psr-from-court', startPsrFromForm)
   app.post('/psr-from-court/:courtCode/case/:caseNumber', startPsrFromCourt)
+
+  app.get('/assessment-from-delius', assessmentFromCrn)
+  app.post('/assessment-from-delius', startAssessmentFromForm)
+  app.post('/assessment-from-delius/:assessmentType/crn/:crn/event/:deliusEventId', startAssessmentFromCrn)
 
   app.get('*', (req, res) => res.status(404).render('app/error', { error: '404, Page Not Found' }))
 }

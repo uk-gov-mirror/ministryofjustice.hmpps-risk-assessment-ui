@@ -8,7 +8,7 @@ const {
 } = require('../config')
 
 const assessmentSupervision = (assessmentDto, tokens) => {
-  const path = `${url}/assessments/supervision`
+  const path = `${url}/assessments`
   return postData(path, tokens, assessmentDto)
 }
 

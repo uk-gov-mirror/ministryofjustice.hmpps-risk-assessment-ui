@@ -1,6 +1,7 @@
 const { stubFor, resetStubs } = require('./wiremock')
 const {
   stubForms,
+  stubSupervision,
   stubQuestions,
   stubQuestionSummaries,
   stubAnswers,
@@ -27,7 +28,7 @@ async function stub() {
       body: 'ping',
     },
   })
-
+  await stubSupervision()
   await stubForms()
   await stubQuestions()
   await stubQuestionSummaries()
