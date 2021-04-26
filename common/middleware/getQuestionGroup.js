@@ -55,12 +55,17 @@ const findParent = (questionGroups, section) => {
   return questionGroups.contents[section].title
 }
 
+const usesStaticReferenceData = questionSchema =>
+  questionSchema.referenceDataCategory && questionSchema.referenceDataCategory !== 'FILTERED_REFERENCE_DATA'
+const usesDynamicReferenceData = questionSchema =>
+  questionSchema.referenceDataCategory && questionSchema.referenceDataCategory === 'FILTERED_REFERENCE_DATA'
+
 const applyStaticReferenceData = async (questionResponse, tokens) => {
   const extractReferenceDataCategories = questionSchema => {
     if (questionSchema.type === 'group') {
       return questionSchema.contents.flatMap(extractReferenceDataCategories)
     }
-    if (questionSchema.referenceDataCategory && questionSchema.referenceDataCategory !== 'FILTERED_REFERENCE_DATA') {
+    if (usesStaticReferenceData(questionSchema)) {
       return [questionSchema.referenceDataCategory]
     }
     return []
@@ -95,7 +100,7 @@ const applyStaticReferenceData = async (questionResponse, tokens) => {
     if (questionSchema.type === 'group') {
       return { ...questionSchema, contents: questionSchema.contents.map(applyReferenceData) }
     }
-    if (questionSchema.referenceDataCategory) {
+    if (usesStaticReferenceData(questionSchema)) {
       return { ...questionSchema, answerSchemas: referenceData[questionSchema.referenceDataCategory] }
     }
     return questionSchema
@@ -121,15 +126,15 @@ module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, tokens },
       q.contents?.forEach(c => readOnlyToAttribute(c))
     }
     thisQuestionGroup.contents?.forEach(q => readOnlyToAttribute(q))
-    thisQuestionGroup.contents = thisQuestionGroup.contents?.map(question => {
+    thisQuestionGroup.contents = thisQuestionGroup.contents?.map(questionSchema => {
       const attributes = {
-        ...question.attributes,
-        'data-question-uuid': question.questionId,
-        'data-question-type': question.answerType,
+        ...questionSchema.attributes,
+        'data-question-uuid': questionSchema.questionId,
+        'data-question-type': questionSchema.answerType,
       }
 
-      if (question.referenceDataCategory === 'FILTERED_REFERENCE_DATA') {
-        const referenceDataTargets = question.referenceDataTargets.map(({ questionSchemaUuid, isRequired }) => ({
+      if (usesDynamicReferenceData(questionSchema)) {
+        const referenceDataTargets = questionSchema.referenceDataTargets.map(({ questionSchemaUuid, isRequired }) => ({
           uuid: questionSchemaUuid,
           isRequired,
         }))
@@ -138,7 +143,7 @@ module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, tokens },
       }
 
       return {
-        ...question,
+        ...questionSchema,
         attributes,
       }
     })

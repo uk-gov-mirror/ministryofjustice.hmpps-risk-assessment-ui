@@ -81,8 +81,10 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
 
   function selectFirstRadio(radioGroup) {
     var firstRadio = radioGroup.querySelector('input')
-    radioGroup.value = firstRadio.value
-    firstRadio.checked = true
+    if (firstRadio) {
+      radioGroup.value = firstRadio.value
+      firstRadio.checked = true
+    }
   }
 
   function updateOptions(element, options) {
@@ -117,13 +119,13 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     }
   }
 
-  function addListenerToTarget(targetElement, multipleChoiceElement, state) {
+  function addListenerToTarget(targetElement, element, state) {
     var questionUuid = targetElement.dataset.questionUuid
     targetElement.addEventListener('change', function(event) {
       state.targetValues[questionUuid] = event.target.value
 
-      fetchReferenceData(state, multipleChoiceElement, function(newOptions) {
-        updateOptions(multipleChoiceElement, newOptions)
+      fetchReferenceData(state, element, function(options) {
+        updateOptions(element, options)
       })
     })
   }
@@ -156,11 +158,12 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
         }
 
         state[questionUuid].targetValues[targetElementUuid] = targetElement.value
-        fetchReferenceData(state[questionUuid], element, function(options) {
-          updateOptions(element, options)
-        })
         addListenerToTarget(targetElement, element, state[questionUuid])
       }
     }
+
+    fetchReferenceData(state[questionUuid], element, function(options) {
+      updateOptions(element, options)
+    })
   }
 }
