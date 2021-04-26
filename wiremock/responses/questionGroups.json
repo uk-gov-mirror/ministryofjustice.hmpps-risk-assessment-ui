@@ -610,7 +610,13 @@
                 "mandatory": "yes",
                 "answerSchemas": [],
                 "answer": null,
-                "referenceDataTarget": "11111111-1111-1111-1111-111111111202",
+                "referenceDataCategory": "FILTERED_REFERENCE_DATA",
+                "referenceDataTargets": [
+                  {
+                    "questionSchemaUuid": "11111111-1111-1111-1111-111111111202",
+                    "isRequired": true
+                  }
+                ],
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter and assessor office\",\"errorSummary\":\"You must have an assessor office\"}}"
               }
             ]

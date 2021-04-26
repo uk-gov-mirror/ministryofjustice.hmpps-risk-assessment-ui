@@ -353,10 +353,16 @@ describe('getQuestionGroup middleware', () => {
               contents: [
                 {
                   type: 'question',
-                  answerType: 'text',
+                  answerType: 'radio',
                   questionId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
                   questionText: 'Test Question',
-                  referenceDataTarget: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
+                  referenceDataCategory: 'FILTERED_REFERENCE_DATA',
+                  referenceDataTargets: [
+                    {
+                      questionSchemaUuid: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
+                      isRequired: false,
+                    },
+                  ],
                 },
               ],
             },
@@ -385,7 +391,7 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',
         questionText: 'Test Question',
-        attributes: { 'data-question-type': 'text' },
+        attributes: { 'data-question-type': 'radio' },
       })
     })
 
@@ -397,7 +403,9 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',
         questionText: 'Test Question',
-        attributes: { 'data-reference-data-target': 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa' },
+        attributes: {
+          'data-reference-data-targets': '[{"uuid":"eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa","isRequired":false}]',
+        },
       })
     })
 

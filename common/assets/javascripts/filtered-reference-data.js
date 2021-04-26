@@ -1,12 +1,13 @@
 /* eslint-disable */
 function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
   var state = {}
-  var elementsWithTargets = document.querySelectorAll('[data-reference-data-target]')
+  var dynamicElements = document.querySelectorAll('[data-is-dynamic]')
 
   function targetHasValues(state) {
-    var keys = Object.keys(state)
-    for (var i = 0; i < keys.length; i++) {
-      if (state[keys[i]] === null) {
+    var requiredQuestions = Object.keys(state.requiredValues)
+    for (var i = 0; i < requiredQuestions.length; i++) {
+      var key = requiredQuestions[i]
+      if (state.requiredValues[key] && !state.targetValues[key]) {
         return false
       }
     }
@@ -116,8 +117,9 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     }
   }
 
-  function addListenerToTarget(questionUuid, multipleChoiceElement, state) {
-    target.addEventListener('change', function(event) {
+  function addListenerToTarget(targetElement, multipleChoiceElement, state) {
+    var questionUuid = targetElement.dataset.questionUuid
+    targetElement.addEventListener('change', function(event) {
       state.targetValues[questionUuid] = event.target.value
 
       fetchReferenceData(state, multipleChoiceElement, function(newOptions) {
@@ -126,29 +128,39 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     })
   }
 
-  for (var i = 0; i < elementsWithTargets.length; i++) {
-    var element = elementsWithTargets[i]
+  for (var i = 0; i < dynamicElements.length; i++) {
+    var element = dynamicElements[i]
     var questionUuid = element.dataset.questionUuid
-    var targetId = element.dataset.referenceDataTarget
+    var targets = JSON.parse(element.dataset.referenceDataTargets)
 
-    state[questionUuid] = { questionUuid: questionUuid, targetValues: {} }
-    state[questionUuid].targetValues[targetId] = null
-
-    var targets = document.querySelectorAll('[data-question-uuid="' + targetId + '"]')
+    state[questionUuid] = { questionUuid: questionUuid, targetValues: {}, requiredValues: {} }
 
     for (var j = 0; j < targets.length; j++) {
       var target = targets[j]
-      var targetId = target.dataset.questionUuid
 
-      if (isRadio(target)) {
-        selectFirstRadio(target)
+      if (target.uuid === questionUuid) {
+        continue
       }
 
-      state[questionUuid].targetValues[targetId] = target.value
-      fetchReferenceData(state[questionUuid], element, function(newOptions) {
-        updateOptions(element, newOptions)
-      })
-      addListenerToTarget(targetId, element, state[questionUuid])
+      state[questionUuid].targetValues[target.uuid] = null
+      state[questionUuid].requiredValues[target.uuid] = target.isRequired
+
+      var targetElements = document.querySelectorAll('[data-question-uuid="' + target.uuid + '"]')
+
+      for (var k = 0; k < targetElements.length; k++) {
+        var targetElement = targetElements[k]
+        var targetElementUuid = targetElement.dataset.questionUuid
+
+        if (isRadio(targetElement)) {
+          selectFirstRadio(targetElement)
+        }
+
+        state[questionUuid].targetValues[targetElementUuid] = targetElement.value
+        fetchReferenceData(state[questionUuid], element, function(options) {
+          updateOptions(element, options)
+        })
+        addListenerToTarget(targetElement, element, state[questionUuid])
+      }
     }
   }
 }
