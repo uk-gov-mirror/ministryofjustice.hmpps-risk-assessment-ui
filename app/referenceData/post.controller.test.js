@@ -26,10 +26,12 @@ describe('fetch filtered reference data', () => {
   }
 
   it('should fetch filtered reference data from the assessments service', async () => {
-    const responseBody = [
-      { code: 'first', description: 'First' },
-      { code: 'second', description: 'Second' },
-    ]
+    const responseBody = {
+      some_field: [
+        { code: 'first', description: 'First' },
+        { code: 'second', description: 'Second' },
+      ],
+    }
 
     getFilteredReferenceData.mockImplementation(() => {
       return [true, responseBody]

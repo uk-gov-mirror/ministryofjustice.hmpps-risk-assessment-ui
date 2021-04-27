@@ -99,7 +99,7 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     return
   }
 
-  function fetchReferenceData(state, multipleChoiceElement, callback) {
+  function fetchReferenceData(state, element, callback) {
     if (targetHasValues(state)) {
       var req = new XMLHttpRequest()
       req.open('POST', '/' + assessmentUuid + '/episode/' + episodeUuid + '/referencedata/filtered')
@@ -108,13 +108,13 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
 
       req.onload = function() {
         if (this.status !== 200) {
-          return removeExistingOptions(multipleChoiceElement)
+          return removeExistingOptions(element)
         }
-        callback(JSON.parse(this.responseText))
+        updateOptions(element, JSON.parse(this.responseText))
       }
 
       req.onerror = function() {
-        removeExistingOptions(multipleChoiceElement)
+        removeExistingOptions(element)
       }
     }
   }
@@ -124,9 +124,7 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     targetElement.addEventListener('change', function(event) {
       state.targetValues[questionUuid] = event.target.value
 
-      fetchReferenceData(state, element, function(options) {
-        updateOptions(element, options)
-      })
+      fetchReferenceData(state, element)
     })
   }
 
@@ -162,8 +160,6 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
       }
     }
 
-    fetchReferenceData(state[questionUuid], element, function(options) {
-      updateOptions(element, options)
-    })
+    fetchReferenceData(state[questionUuid], element)
   }
 }

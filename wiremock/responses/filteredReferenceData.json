@@ -9,16 +9,18 @@
     ],
     "response": {
       "status": 200,
-      "body": [
-        {
-          "code": "100",
-          "description": "First Team"
-        },
-        {
-          "code": "101",
-          "description": "Second Team"
-        }
-      ]
+      "body": {
+        "some_field": [
+          {
+            "code": "100",
+            "description": "First Team"
+          },
+          {
+            "code": "101",
+            "description": "Second Team"
+          }
+        ]
+      }
     }
   },
   "ASSESSOR_OFFICE--SECOND": {
@@ -31,16 +33,18 @@
     ],
     "response": {
       "status": 200,
-      "body": [
-        {
-          "code": "102",
-          "description": "Third Team"
-        },
-        {
-          "code": "103",
-          "description": "Fourth Team"
-        }
-      ]
+      "body": {
+        "some_field": [
+          {
+            "code": "102",
+            "description": "Third Team"
+          },
+          {
+            "code": "103",
+            "description": "Fourth Team"
+          }
+        ]
+      }
     }
   },
   "ASSESSOR_OFFICE--FAIL": {
