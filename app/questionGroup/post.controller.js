@@ -33,7 +33,7 @@ const validationRules = async (req, res, next) => {
         const conditionalQuestionToFind = question.questionId
         const parentQuestion = currentQuestions.filter(thisQuestion => {
           let foundParent = false
-          thisQuestion.answerSchemas.forEach(schema => {
+          thisQuestion.answerSchemas?.forEach(schema => {
             schema.conditionals?.forEach(childQuestion => {
               if (childQuestion.conditional === conditionalQuestionToFind) {
                 foundParent = true

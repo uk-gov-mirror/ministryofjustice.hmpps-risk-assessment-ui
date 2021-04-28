@@ -8,3 +8,4 @@ cypress.json
 cypress-reporter-config.json
 wiremock/responses/*
 integration-tests/mockApis/responses/*
+app/questionGroup/fixtures/*

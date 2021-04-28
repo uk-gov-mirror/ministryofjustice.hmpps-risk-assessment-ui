@@ -31,3 +31,7 @@
     @extend .govuk-input--width-10
   }
 }
+
+.govuk-table__cell-wrap {
+  white-space: pre-wrap;
+}

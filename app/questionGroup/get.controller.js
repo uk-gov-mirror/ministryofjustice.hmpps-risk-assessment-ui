@@ -45,7 +45,7 @@ const grabAnswers = (assessmentId, episodeId, tokens) => {
 
 const annotateWithAnswers = (questions, answers, body) => {
   return questions.map(q => {
-    if (q.type === 'group') {
+    if (q.type === 'group' || q.type === 'table') {
       // eslint-disable-next-line no-param-reassign
       q.contents = annotateWithAnswers(q.contents, answers, body)
       return q
@@ -67,7 +67,14 @@ const annotateWithAnswers = (questions, answers, body) => {
       answerValues = body[`id-${q.questionId}`] || answerValues
     } else {
       const answer = answers[q.questionId]
-      displayAnswer = body[`id-${q.questionId}`] || (Array.isArray(answer) ? answer[0] : null)
+
+      if (body[`id-${q.questionId}`]) {
+        displayAnswer = body[`id-${q.questionId}`]
+      } else if (Array.isArray(answer)) {
+        displayAnswer = answer.length === 1 ? answer[0] : answer
+      } else {
+        displayAnswer = null
+      }
     }
 
     return Object.assign(q, {
@@ -99,7 +106,7 @@ const compileInlineConditionalQuestions = (questions, errors) => {
       return question
     }
     const currentQuestion = question
-    currentQuestion.answerSchemas = question.answerSchemas.map(schemaLine => {
+    currentQuestion.answerSchemas = question.answerSchemas?.map(schemaLine => {
       const updatedSchemaLine = schemaLine
       const outOfLineConditionalsForThisAnswer = []
 

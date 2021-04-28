@@ -22,6 +22,40 @@
   {% endfor %}
 {% endif %}
 
+
+{% if question.type == 'table' %}
+  {% set numColumns = question.contents.length %}
+  {% set numRows = question.contents[0].answer.length %}
+
+  <table class="govuk-table govuk-table-xl">
+    <caption class="govuk-table__caption govuk-table__caption--l">{{ question.title }}</caption>
+    <thead class="govuk-table__head">
+    <tr class="govuk-table__row">
+    {% for tableItems in question.contents %}
+      <th scope="col" class="govuk-table__header" aria-sort="none">{{ tableItems.questionText }}</th>
+    {%  endfor %}
+      <th scope="col" class="govuk-table__header" aria-sort="none">Action</th>
+    </thead>
+
+    <tbody class="govuk-table__body">
+    {% for row in range(0, numRows) %}
+    <tr class="govuk-table__row">
+      {% for column in range(0, numColumns) %}
+      <td class="govuk-table__cell govuk-table__cell-wrap">{{ question.contents[column].answer[row] }}</td>
+      {% endfor %}
+      <td class="govuk-table__cell">
+        <ul class="govuk-list">
+          <li><a class="govuk-link--no-visited-state" href="edit.html">Edit</a></li>
+          <li><a class="govuk-link--no-visited-state" href="delete.html">Remove</a></li>
+        </ul>
+      </td>
+    </tr>
+    {%  endfor %}
+      </tbody>
+      </table>
+
+{% endif %}
+
 {% if question.attributes.readonly == true and (question.questionCode).slice(0, 2) != 'ui'%}
   {% if question.questionText or question.questionAnswer %}
 

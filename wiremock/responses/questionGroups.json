@@ -146,6 +146,36 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the surname\",\"errorSummary\":\"You must enter a surname\"}}"
               },
               {
+                "type": "table",
+                "tableId": "946091d2-4038-4e2b-9283-83cc4876f6ed",
+                "tableCode": "children",
+                "title": "Children",
+                "displayOrder": 2,
+                "contents": [
+                  {
+                    "type": "question",
+                    "questionId": "946091d2-4038-4e2b-9283-83cc4883cc1",
+                    "questionCode": "129.1",
+                    "answerType": "text",
+                    "questionText": "Child's name"
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "946091d2-4038-4e2b-9283-83cc4883cc2",
+                    "questionCode": "129.2",
+                    "answerType": "text",
+                    "questionText": "Child's age"
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "946091d2-4038-4e2b-9283-83cc4883cc3",
+                    "questionCode": "129.3",
+                    "answerType": "text",
+                    "questionText": "Child's address"
+                  }
+                ]
+              },
+              {
                 "type": "question",
                 "questionId": "11111111-1111-1111-1111-111111111205",
                 "questionCode": "dob",
