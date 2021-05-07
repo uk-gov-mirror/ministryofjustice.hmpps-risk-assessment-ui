@@ -61,7 +61,10 @@ const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentL
 const getData = (path, tokens) => {
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
 
-  return action(superagent.get(path), tokens).then(([_, body]) => body)
+  return action(superagent.get(path), tokens).then(([_, body]) => {
+    logger.info(`Calling hmppsAssessments API with GET body: ${body}`)
+    return body
+  })
 }
 
 const postData = (path, tokens, data) => {

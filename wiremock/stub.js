@@ -8,7 +8,11 @@ const {
   stubEpisodes,
   stubOffenderDetails,
   stubAssessmentComplete,
+  stubGetAssessments,
+  stubGetQuestionGroup,
 } = require('./assessmentApi')
+const { stubGetAssessmentFromDelius, stubPostAssessmentFromDelius } = require('./assessmentFromDelius')
+const { stubStart } = require('./start')
 const { stubReferenceData } = require('./referenceData')
 const { stubGetToken } = require('./oauth')
 
@@ -36,6 +40,11 @@ async function stub() {
   await stubEpisodes()
   await stubGetToken()
   await stubAssessmentComplete()
+  await stubGetAssessmentFromDelius()
+  await stubPostAssessmentFromDelius()
+  await stubStart()
+  await stubGetAssessments()
+  await stubGetQuestionGroup()
   await stubReferenceData()
   stubOffenderDetails()
 }

@@ -32,19 +32,12 @@
     </h1>
 
     <div class="govuk-grid-row-full">
-        {% if assessmentCompletedStatus %}
-            {{ mojBanner({
-                type: assessmentCompletedStatus,
-                text: assessmentCompletedMessage,
-                iconFallbackText: 'Status'
-            }) }}
-        {% endif %}
-
         <div class="govuk-grid-column">
             <form method="post" style="display: flex; justify-content: flex-end">
                 {{ govukButton({
                     text: 'Complete assessment',
-                    classes: 'govuk-!-margin-bottom-3'
+                    classes: 'govuk-!-margin-bottom-3',
+                    name: 'complete-assessment'
                 }) }}
             </form>
         </div>

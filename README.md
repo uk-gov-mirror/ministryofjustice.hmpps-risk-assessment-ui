@@ -1,6 +1,6 @@
 # Risk Assessment UI
 
-This is a Node.js app running on [Express] with [Nunjucks] as a template engine.
+This is a Node.js app (v14.16.0) running on [Express] with [Nunjucks] as a template engine.
 
 It includes:
 - [GOV.UK Frontend]

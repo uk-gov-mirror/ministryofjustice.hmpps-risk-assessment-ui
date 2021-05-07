@@ -64,5 +64,22 @@ services:
       - ASSESSMENT_API_URI_ROOT=http://offender-assessment-api:8080
       - SPRING_PROFILES_ACTIVE=disableauthorisation
 
+  hmpps-assessment-api:
+    image: quay.io/hmpps/hmpps-assessments-api:latest
+    restart: always
+    networks:
+      - hmpps
+    container_name: hmpps-assessment-api
+    depends_on:
+      - oauth
+    ports:
+      - "8082:8080"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev
+      - OAUTH_ENDPOINT_URL=http://oauth:9090/auth
+
 networks:
   hmpps:

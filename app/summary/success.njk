@@ -1,0 +1,25 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
+
+{% set panelMessage %}
+You have completed the assessment for {{offenderName}} and it has been submitted
+{% endset %}
+
+{% block content %}
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+           {{ govukPanel({
+                titleText: "Successful submission",
+                html: panelMessage
+            }) }}
+            <p class="govuk-body">We have sent you a confirmation email.</p>
+        </div>
+    </div>
+    {{ govukButton({
+        text: 'Back to case list',
+        classes: 'govuk-!-margin-right-1'
+    }) }}
+
+{% endblock %}
