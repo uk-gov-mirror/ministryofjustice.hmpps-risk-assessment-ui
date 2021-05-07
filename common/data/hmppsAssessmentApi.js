@@ -62,7 +62,6 @@ const getData = (path, tokens) => {
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
 
   return action(superagent.get(path), tokens).then(([_, body]) => {
-    logger.info(`Calling hmppsAssessments API with GET body: ${body}`)
     return body
   })
 }
