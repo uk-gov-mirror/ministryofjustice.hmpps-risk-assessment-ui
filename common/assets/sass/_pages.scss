@@ -10,13 +10,13 @@
   @extend .govuk-input--width-3;
 }
 
-.govuk-fieldset[aria-describedby="id-420c2ffe-8f2c-49b3-a523-674af3197b9e-hint"] {
+.govuk-fieldset[aria-describedby='id-420c2ffe-8f2c-49b3-a523-674af3197b9e-hint'] {
   .govuk-radios {
     @extend .govuk-radios--inline;
   }
 }
 
-.govuk-fieldset[aria-describedby="id-4dab51be-e9f8-4ca1-8765-b58e07e137ba-hint"] {
+.govuk-fieldset[aria-describedby='id-4dab51be-e9f8-4ca1-8765-b58e07e137ba-hint'] {
   .govuk-radios {
     @extend .govuk-radios--inline;
   }
@@ -28,10 +28,21 @@
     font-weight: 400;
   }
   input {
-    @extend .govuk-input--width-10
+    @extend .govuk-input--width-10;
   }
 }
 
 .govuk-table__cell-wrap {
   white-space: pre-wrap;
+}
+
+// 'add a child' page
+#id-23c3e984-54c7-480f-b06c-7d000e2fb87c {
+  @extend .govuk-input--width-20;
+}
+.govuk-fieldset[aria-describedby='id-ecb880ef-02c7-4ffc-8726-7e0f60f1191c-hint'],
+.govuk-fieldset[aria-describedby='id-775cd8bf-fe1b-4625-9937-ae8a238a8402-hint'] {
+  .govuk-radios {
+    @extend .govuk-radios--inline;
+  }
 }

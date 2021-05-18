@@ -4,7 +4,8 @@
 {%- from "node_modules/govuk-frontend/govuk/components/checkboxes/macro.njk" import govukCheckboxes -%}
 {%- from "node_modules/govuk-frontend/govuk/components/select/macro.njk" import govukSelect -%}
 {%- from "node_modules/govuk-frontend/govuk/components/date-input/macro.njk" import govukDateInput -%}
-{%- from "node_modules/govuk-frontend/govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{%- from "node_modules/govuk-frontend/govuk/components/summary-list/macro.njk" import govukSummaryList -%}
+{%- from "node_modules/govuk-frontend/govuk/components/button/macro.njk" import govukButton -%}
 
 
 {# templates for each question type #}
@@ -23,7 +24,7 @@
 {% endif %}
 
 
-{% if question.type == 'table' %}
+{% if question.type == 'table' or question.type == 'TableQuestionDto'%}
   {% set numColumns = question.contents.length %}
   {% set numRows = question.contents[0].answer.length %}
 
@@ -32,7 +33,9 @@
     <thead class="govuk-table__head">
     <tr class="govuk-table__row">
     {% for tableItems in question.contents %}
-      <th scope="col" class="govuk-table__header" aria-sort="none">{{ tableItems.questionText }}</th>
+      {% if 'presentation:' not in tableItems.answerType %}
+        <th scope="col" class="govuk-table__header" aria-sort="none">{{ tableItems.questionText }}</th>
+      {% endif %}
     {%  endfor %}
       <th scope="col" class="govuk-table__header" aria-sort="none">Action</th>
     </thead>
@@ -41,7 +44,9 @@
     {% for row in range(0, numRows) %}
     <tr class="govuk-table__row">
       {% for column in range(0, numColumns) %}
-      <td class="govuk-table__cell govuk-table__cell-wrap">{{ question.contents[column].answer[row] }}</td>
+        {% if 'presentation:' not in  question.contents[column].answerType %}
+          <td class="govuk-table__cell govuk-table__cell-wrap">{{ question.contents[column].answer[row] }}</td>
+        {% endif %}
       {% endfor %}
       <td class="govuk-table__cell">
         <ul class="govuk-list">
@@ -77,10 +82,16 @@
 
 {% else %}
   {% set qType = question.answerType %}
-  {% set regExp = r/^presentation: link.*/gi %}
-  {% if regExp.test(qType) %}
-    {%  set linkTarget = question.answerType | extractLink %}
+  {% set regExp1 = r/^presentation: link.*/gi %}
+  {% if regExp1.test(qType) %}
+    {% set linkTarget = question.answerType | extractLink | doReplace('<base>', requested_url) %}
     {% set qType = 'presentation: link' %}
+  {% endif %}
+
+  {% set regExp2 = r/^presentation: buttonlink.*/gi %}
+  {% if regExp2.test(qType) %}
+    {% set linkTarget = question.answerType | extractLink | doReplace('<base>', requested_url) %}
+    {% set qType = 'presentation: buttonlink' %}
   {% endif %}
 
   {% if qType == 'numeric' %}
@@ -91,13 +102,20 @@
   {% switch qType %}
     {% case 'presentation: heading' %}
       <h2 class="govuk-heading-m">{{ question.questionText }}</h2>
-  {% case 'presentation: heading_large' %}
-    <h2 class="govuk-heading-l">{{ question.questionText }}</h2>
+    {% case 'presentation: heading_large' %}
+      <h2 class="govuk-heading-l">{{ question.questionText }}</h2>
     {% case 'presentation: divider' %}
       <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% case 'presentation: link' %}
       <div class="body-link__container"><a href="{{ linkTarget }}" class="govuk-link body-link">{{ question.questionText }}</a></div>
-
+    {% case 'presentation: buttonlink' %}
+      {{ govukButton({
+        text: question.questionText,
+        classes: 'govuk-button--secondary',
+        href: linkTarget
+      }) }}
+    {% case 'presentation: inset' %}
+      <div class="govuk-inset-text">{{ question.questionText }}</div>
     {% case 'noinput' %}
       {{ govukInput({
         id: 'id-' + question.questionId,

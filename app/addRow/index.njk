@@ -18,8 +18,8 @@
 {% block beforeContent %}
     <div role="navigation" aria-label="back">
         {{ govukBackLink({
-            href: "/" + assessmentId + "/questiongroup/" + navigation.previous.url,
-            text: "Back to " + navigation.previous.name
+            href: returnUrl,
+            text: "Back"
         }) }}
     </div>
 {% endblock %}
@@ -39,20 +39,19 @@
             <form method="post" id="{{ groupId }}" novalidate>
 
                 {% for question in questions %}
-                    {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId], '', requested_url) }}
+                    {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId], '', thisUrl) }}
                 {% endfor %}
 
                 <div class="questiongroup-action-buttons">
                     {{ govukButton({
-                        text: 'Save and continue',
+                        text: submitText,
                         classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
                     }) }}
 
-
                     {{ govukButton({
-                        text: 'Back to assessment progress',
+                        text: 'Cancel',
                         classes: 'govuk-button--secondary',
-                        href: '/' + assessmentId + '/questiongroup/' + groupId + '/summary'
+                        href: returnUrl
                     }) }}
                 </div>
 

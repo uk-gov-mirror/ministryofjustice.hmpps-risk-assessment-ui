@@ -146,7 +146,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the surname\",\"errorSummary\":\"You must enter a surname\"}}"
               },
               {
-                "type": "table",
+                "type": "TableQuestionDto",
                 "tableId": "946091d2-4038-4e2b-9283-83cc4876f6ed",
                 "tableCode": "children",
                 "title": "Children",
@@ -1249,6 +1249,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1261,6 +1262,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1273,6 +1275,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1280,11 +1283,12 @@
                 "questionId": "2d6f7515-dd03-4cfc-b365-6739e1251498",
                 "questionCode": "2.1",
                 "answerType": "freetext",
-                "questionText": "First name or names\n",
+                "questionText": "First name or names",
                 "displayOrder": 4,
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1297,6 +1301,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1309,6 +1314,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1321,6 +1327,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1332,6 +1339,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1344,6 +1352,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1356,6 +1365,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "117b0002-0e4b-48f6-9658-bce2b9fe222a",
@@ -1380,6 +1390,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1392,6 +1403,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1404,6 +1416,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1416,6 +1429,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1427,6 +1441,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1439,6 +1454,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1451,6 +1467,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1462,6 +1479,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1473,6 +1491,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1484,6 +1503,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1495,6 +1515,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1507,6 +1528,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -1529,6 +1551,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1541,6 +1564,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1548,11 +1572,12 @@
                 "questionId": "f693bf6e-be3b-4f5c-8a06-aefeddea311b",
                 "questionCode": "27.1",
                 "answerType": "freetext",
-                "questionText": "Probation practitioner's position",
+                "questionText": "Probation practitioner's role",
                 "displayOrder": 3,
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1566,6 +1591,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter a telephone number\",\"errorSummary\":\"Enter a telephone number\"}}",
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1578,6 +1604,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1591,6 +1618,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"select a LDU\",\"errorSummary\":\"Select a LDU\"}}",
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1604,6 +1632,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a team\",\"errorSummary\":\"Select a team\"}}",
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1611,11 +1640,12 @@
                 "questionId": "10c93cf5-cc0c-404b-b6e4-da176db45527",
                 "questionCode": "32.1",
                 "answerType": "freetext",
-                "questionText": "NPS countersigner or HMPS supervisor",
+                "questionText": "Countersigner",
                 "displayOrder": 8,
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1628,6 +1658,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1640,6 +1671,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1652,6 +1684,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -1685,7 +1718,135 @@
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataCategory": "SOURCES_OF_INFORMATION",
-                "answerSchemas": []
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7df28bc1-ae40-42a1-a97a-2ee736827821",
+                    "answerSchemaCode": "bail_information_record",
+                    "value": "bail information record",
+                    "text": "Bail information record"
+                  },
+                  {
+                    "answerSchemaUuid": "fe5edabc-991c-4d82-b14c-d221bb085c61",
+                    "answerSchemaCode": "basic_custody_screening",
+                    "value": "basic custody screening",
+                    "text": "Basic custody screening"
+                  },
+                  {
+                    "answerSchemaUuid": "dfbf95bd-817a-4a6e-8dde-3531c89d2474",
+                    "answerSchemaCode": "community_payback",
+                    "value": "community payback",
+                    "text": "Community payback"
+                  },
+                  {
+                    "answerSchemaUuid": "7a230d9d-7f0f-4a18-bbaa-dba0501305a6",
+                    "answerSchemaCode": "hostel",
+                    "value": "hostel",
+                    "text": "Hostel"
+                  },
+                  {
+                    "answerSchemaUuid": "3f886290-f325-41d4-8232-eba8859ee786",
+                    "answerSchemaCode": "interview",
+                    "value": "interview",
+                    "text": "Interview"
+                  },
+                  {
+                    "answerSchemaUuid": "cd058cc9-055e-462a-83e7-ad9ef7b49445",
+                    "answerSchemaCode": "judge_s_comments",
+                    "value": "judge's comments",
+                    "text": "Judge's comments"
+                  },
+                  {
+                    "answerSchemaUuid": "e63d3c4d-ef61-47d7-8e5f-9a892aa085eb",
+                    "answerSchemaCode": "local_authority",
+                    "value": "local authority",
+                    "text": "Local authority"
+                  },
+                  {
+                    "answerSchemaUuid": "ee808727-9c95-4373-a52c-3947cb375071",
+                    "answerSchemaCode": "medical",
+                    "value": "medical",
+                    "text": "Medical"
+                  },
+                  {
+                    "answerSchemaUuid": "9b7e2b2d-c577-4ff7-92fe-ab641598d4fa",
+                    "answerSchemaCode": "oasys_saq",
+                    "value": "oasys saq",
+                    "text": "OASys SAQ"
+                  },
+                  {
+                    "answerSchemaUuid": "f76194d3-36fc-451b-a3cf-9b1b8bfc428b",
+                    "answerSchemaCode": "police",
+                    "value": "police",
+                    "text": "Police"
+                  },
+                  {
+                    "answerSchemaUuid": "f8f3d113-edeb-483a-9ded-9f19bebca117",
+                    "answerSchemaCode": "post-trial_report",
+                    "value": "post-trial report",
+                    "text": "Post-trial report"
+                  },
+                  {
+                    "answerSchemaUuid": "071980ca-fe56-4b4e-8e00-a18f5a8a21e5",
+                    "answerSchemaCode": "pre-sentence_report",
+                    "value": "pre-sentence report",
+                    "text": "Pre-sentence report"
+                  },
+                  {
+                    "answerSchemaUuid": "bdfbfdbb-cc3c-4120-a42c-84063f538b99",
+                    "answerSchemaCode": "previous_convictions",
+                    "value": "previous convictions",
+                    "text": "Previous convictions"
+                  },
+                  {
+                    "answerSchemaUuid": "f26c5855-f054-4e99-91d8-2da42e68f53b",
+                    "answerSchemaCode": "previous_oasys",
+                    "value": "previous oasys",
+                    "text": "Previous OASys"
+                  },
+                  {
+                    "answerSchemaUuid": "f96d308d-f47b-4d82-b0d8-be0d15fbb8a1",
+                    "answerSchemaCode": "prison_records",
+                    "value": "prison records",
+                    "text": "Prison records"
+                  },
+                  {
+                    "answerSchemaUuid": "472f572e-c563-4ced-a8a4-58fcbb20ed24",
+                    "answerSchemaCode": "prosecutor_inc_cps_",
+                    "value": "prosecutor (inc cps)",
+                    "text": "Prosecutor (inc CPS)"
+                  },
+                  {
+                    "answerSchemaUuid": "fe665f69-6091-41cf-a68f-89f172ee349b",
+                    "answerSchemaCode": "psychiatric",
+                    "value": "psychiatric",
+                    "text": "Psychiatric"
+                  },
+                  {
+                    "answerSchemaUuid": "980ecbef-3a8f-409a-9365-62e540aa6f08",
+                    "answerSchemaCode": "psychology",
+                    "value": "psychology",
+                    "text": "Psychology"
+                  },
+                  {
+                    "answerSchemaUuid": "394de21b-b467-4076-a7ab-74f7c1a6f7a6",
+                    "answerSchemaCode": "request_for_information",
+                    "value": "request for information",
+                    "text": "Request for information"
+                  },
+                  {
+                    "answerSchemaUuid": "67e80ea5-7a9c-49ef-99a2-273d6139ff97",
+                    "answerSchemaCode": "victim_statement",
+                    "value": "victim statement",
+                    "text": "Victim statement"
+                  },
+                  {
+                    "answerSchemaUuid": "56b7134a-4754-4f54-bd23-53abe7fa796a",
+                    "answerSchemaCode": "other",
+                    "value": "other",
+                    "text": "Other"
+                  }
+                ]
               },
               {
                 "type": "question",
@@ -1697,6 +1858,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -1724,12 +1886,13 @@
                 "questionId": "0bc681b4-7f70-477e-8ef5-0daaf8aa0495",
                 "questionCode": "ui35.1.1",
                 "answerType": "presentation: heading_large",
-                "questionText": "PSR or Court considered offence ",
+                "questionText": "Main offence",
                 "helpText": "Primary or most serious offence as judged by assessor",
                 "displayOrder": 1,
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1742,6 +1905,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1754,6 +1918,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1765,6 +1930,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1777,6 +1943,7 @@
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1790,6 +1957,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of court appearances at which convicted, or received a conditional or absolute discharge aged under 18 years\",\"errorSummary\":\"Enter the number of court appearances at which convicted, or received a conditional or absolute discharge aged under 18 years\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1803,6 +1971,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of court appearances at which convicted, or received a conditional or absolute discharge aged 18 years and over. Do not include current appearances.\",\"errorSummary\":\"Enter the number of court appearances at which convicted, or received a conditional or absolute discharge aged 18 years and over. Do not include current appearances.\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1815,6 +1984,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1822,12 +1992,13 @@
                 "questionId": "8e83a0ad-2fcf-4afb-a0af-09d1e23d3c33",
                 "questionCode": "45.1",
                 "answerType": "numeric",
-                "questionText": "Age at first conviction, conditional or absolute discharge ",
+                "questionText": "Age at first conviction, conditional or absolute discharge",
                 "helpText": "Record in years",
                 "displayOrder": 9,
                 "mandatory": true,
                 "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1841,6 +2012,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous formal cautions, reprimands and final warnings\",\"errorSummary\":\"Enter the number of previous formal cautions, reprimands and final warnings\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1853,6 +2025,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1866,6 +2039,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1879,6 +2053,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (sexual or sexually-motivated offence)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1931,6 +2106,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (contact against a stranger victim)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1958,6 +2134,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\",\"errorSummary\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1971,6 +2148,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1984,6 +2162,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually motivated offences\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -1997,6 +2176,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -2010,6 +2190,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\",\"errorSummary\":\"Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -2024,6 +2205,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter a date\",\"errorSummary\":\"Enter a date\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -2041,12 +2223,13 @@
                 "questionId": "420c2ffe-8f2c-49b3-a523-674af3197b9e",
                 "questionCode": "67.1",
                 "answerType": "radio",
-                "questionText": "Have you completed an interview?",
+                "questionText": "Do you want to answer the dynamic questions",
                 "displayOrder": 1,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (interview completion)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2119,6 +2302,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (carrying or using weapon)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2150,6 +2334,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -2163,6 +2348,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (suitability of accommodation)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "ab24a2b6-8442-4883-810a-7effdebb4b24",
@@ -2201,6 +2387,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Enter yes or no (unemployed now or on release)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "c6eebf27-41f8-4aca-bbbc-c7be6762e5e0",
@@ -2239,6 +2426,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current relationship with partner)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "ab24a2b6-8442-4883-810a-7effdebb4b24",
@@ -2271,12 +2459,13 @@
                 "questionId": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
                 "questionCode": "87.1",
                 "answerType": "radio",
-                "questionText": "Is there evidence that the individual is a perpetrator of domestic violence or partner abuse?",
+                "questionText": "Is there evidence that the individual is a perpetrator of domestic abuse?",
                 "displayOrder": 7,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (perpetrator of domestic violence or partner abuse?)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (perpetrator of domestic  abuse?)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2309,6 +2498,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select victim or perpetrator\",\"errorSummary\":\"Select victim or perpetrator\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "4b6d2415-b152-4ba0-b030-1d203b5b31dc",
@@ -2335,6 +2525,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current use of alcohol)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
@@ -2367,6 +2558,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (evidence of binge drinking or excessive alcohol use)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "ab24a2b6-8442-4883-810a-7effdebb4b24",
@@ -2405,6 +2597,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (impulsivity)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "e014a124-e291-418f-a525-a9e9cfae27f8",
@@ -2437,6 +2630,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (temper control)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "e014a124-e291-418f-a525-a9e9cfae27f8",
@@ -2469,6 +2663,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (pro-criminal attitudes)\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "e014a124-e291-418f-a525-a9e9cfae27f8",
@@ -2501,6 +2696,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (risk assessment)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2538,9 +2734,9 @@
             "contents": [
               {
                 "type": "question",
-                "questionId": "c2a60b0e-2019-4108-ade3-6df3f23dde5a",
+                "questionId": "5da33301-6e4e-4eb5-bf95-748494029669",
                 "questionCode": "129.1",
-                "answerType": "freetext",
+                "answerType": "noinput",
                 "questionText": "Has the individual been convicted of any of the following?",
                 "helpText": "Select all that apply.",
                 "displayOrder": 1,
@@ -2548,6 +2744,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select any previous convictions\",\"errorSummary\":\"Select any previous convictions\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -2560,12 +2757,32 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "052646b6-0b9d-44c6-87dc-bff5b729f521",
+                "questionCode": "130.1",
+                "answerType": "checkbox",
+                "displayOrder": 3,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2574,17 +2791,37 @@
                 "questionId": "e9bbea38-d1d8-4358-aa6a-5f79d44d8461",
                 "questionCode": "131.1",
                 "answerType": "checkbox",
-                "questionText": "Wounding or GBH ",
-                "displayOrder": 3,
+                "questionText": "Wounding or GBH",
+                "displayOrder": 4,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "5be95d71-ba3c-457e-96cc-0e1d8e6ccd44",
+                "questionCode": "131.1",
+                "answerType": "checkbox",
+                "displayOrder": 5,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2594,16 +2831,36 @@
                 "questionCode": "132.1",
                 "answerType": "checkbox",
                 "questionText": "Any sexual offence against a child",
-                "displayOrder": 4,
+                "displayOrder": 6,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "9c707e59-b47a-426b-949a-af99b01abcc7",
+                "questionCode": "132.1",
+                "answerType": "checkbox",
+                "displayOrder": 7,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2613,16 +2870,36 @@
                 "questionCode": "133.1",
                 "answerType": "checkbox",
                 "questionText": "Rape or serious sexual offence against an adult",
-                "displayOrder": 5,
+                "displayOrder": 8,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "3dd0831f-29b7-412f-9e24-f612004e6769",
+                "questionCode": "133.1",
+                "answerType": "checkbox",
+                "displayOrder": 9,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2631,17 +2908,37 @@
                 "questionId": "7de9e887-9dc4-40f3-b888-c49cb3e6dce0",
                 "questionCode": "134.1",
                 "answerType": "checkbox",
-                "questionText": "Any other offence against a child ",
-                "displayOrder": 6,
+                "questionText": "Any other offence against a child",
+                "displayOrder": 10,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "c6c994db-4908-4717-b82f-68554410af02",
+                "questionCode": "134.1",
+                "answerType": "checkbox",
+                "displayOrder": 11,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2651,16 +2948,36 @@
                 "questionCode": "135.1",
                 "answerType": "checkbox",
                 "questionText": "Aggravated burglary",
-                "displayOrder": 7,
+                "displayOrder": 12,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "2c01ecb0-3313-4ce6-b909-e29f2e2deb2f",
+                "questionCode": "135.1",
+                "answerType": "checkbox",
+                "displayOrder": 13,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2670,16 +2987,36 @@
                 "questionCode": "136.1",
                 "answerType": "checkbox",
                 "questionText": "Arson",
-                "displayOrder": 8,
+                "displayOrder": 14,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "aac7a4e6-9d95-4c08-855f-e1ed770a6410",
+                "questionCode": "136.1",
+                "answerType": "checkbox",
+                "displayOrder": 15,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2689,16 +3026,36 @@
                 "questionCode": "137.1",
                 "answerType": "checkbox",
                 "questionText": "Criminal damage with intent to endanger life",
-                "displayOrder": 9,
+                "displayOrder": 16,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "3ab92d47-0be2-4989-b348-8246643d4563",
+                "questionCode": "137.1",
+                "answerType": "checkbox",
+                "displayOrder": 17,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2708,16 +3065,36 @@
                 "questionCode": "138.1",
                 "answerType": "checkbox",
                 "questionText": "Kidnapping or false imprisonment",
-                "displayOrder": 10,
+                "displayOrder": 18,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "a0254d89-cf1b-4cc9-87f9-971b24edaea6",
+                "questionCode": "138.1",
+                "answerType": "checkbox",
+                "displayOrder": 19,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2727,16 +3104,36 @@
                 "questionCode": "139.1",
                 "answerType": "checkbox",
                 "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
-                "displayOrder": 11,
+                "displayOrder": 20,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "6f09156f-fe37-4a43-b00b-85434a10e07e",
+                "questionCode": "139.1",
+                "answerType": "checkbox",
+                "displayOrder": 21,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2746,16 +3143,36 @@
                 "questionCode": "140.1",
                 "answerType": "checkbox",
                 "questionText": "A racially motivated or racially aggravated offence",
-                "displayOrder": 12,
+                "displayOrder": 22,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "e03cb9bb-c4aa-4574-85db-c52801fa8460",
+                "questionCode": "140.1",
+                "answerType": "checkbox",
+                "displayOrder": 23,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2765,16 +3182,36 @@
                 "questionCode": "141.1",
                 "answerType": "checkbox",
                 "questionText": "Robbery",
-                "displayOrder": 13,
+                "displayOrder": 24,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "1acda4d9-1f78-4e3a-8cce-7eff5b844a31",
+                "questionCode": "141.1",
+                "answerType": "checkbox",
+                "displayOrder": 25,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2784,16 +3221,36 @@
                 "questionCode": "142.1",
                 "answerType": "checkbox",
                 "questionText": "Any current or previous offence involving possession and/or use of weapons?",
-                "displayOrder": 14,
+                "displayOrder": 26,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "3260d3f1-59f9-416f-98a0-ef5173f6d6b6",
+                    "answerSchemaCode": "current_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Current conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "ca4f688f-110b-41b0-bca9-6eb21261c4a9",
+                "questionCode": "142.1",
+                "answerType": "checkbox",
+                "displayOrder": 27,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2803,16 +3260,36 @@
                 "questionCode": "143.1",
                 "answerType": "checkbox",
                 "questionText": "Any other offence which is as serious, eg blackmail, harassment, stalking, child pornography, child neglect, abduction etc.  Indicate offence below",
-                "displayOrder": 15,
+                "displayOrder": 28,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "d29ba709-ec2e-4c9c-b794-35aaa869dd99",
+                "questionCode": "143.1",
+                "answerType": "checkbox",
+                "displayOrder": 29,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
+                    "value": "YES",
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2822,10 +3299,11 @@
                 "questionCode": "144.1",
                 "answerType": "freetext",
                 "questionText": "Give details",
-                "displayOrder": 16,
+                "displayOrder": 30,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -2834,10 +3312,11 @@
                 "questionCode": "143.1",
                 "answerType": "checkbox",
                 "questionText": "Any other offence which is as serious, eg blackmail, harassment, stalking, child pornography, child neglect, abduction etc.  Indicate offence below",
-                "displayOrder": 17,
+                "displayOrder": 31,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "44c2fa63-7a88-4843-a1b0-c355b083e14a",
@@ -2859,10 +3338,11 @@
                 "questionCode": "294.1",
                 "answerType": "freetext",
                 "questionText": "Give details",
-                "displayOrder": 18,
+                "displayOrder": 32,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -2871,10 +3351,11 @@
                 "questionCode": "139.1",
                 "answerType": "radio",
                 "questionText": "Has the individual been convicted of possession of a firearm with intent to endanger life or resist arrest?",
-                "displayOrder": 19,
+                "displayOrder": 33,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2896,16 +3377,17 @@
                 "questionCode": "292.1",
                 "answerType": "checkbox",
                 "questionText": "Is the conviction of possession of a firearm for a current or a previous offence?",
-                "displayOrder": 20,
+                "displayOrder": 34,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2916,10 +3398,11 @@
                 "answerType": "freetext",
                 "questionText": "On the information available to you has the individual",
                 "helpText": "Select all that apply.",
-                "displayOrder": 21,
+                "displayOrder": 35,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -2928,16 +3411,17 @@
                 "questionCode": "147.1",
                 "answerType": "checkbox",
                 "questionText": "Assaulted or threatened staff",
-                "displayOrder": 22,
+                "displayOrder": 36,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2947,16 +3431,17 @@
                 "questionCode": "148.1",
                 "answerType": "checkbox",
                 "questionText": "Assaulted or  threatened others",
-                "displayOrder": 23,
+                "displayOrder": 37,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2966,16 +3451,17 @@
                 "questionCode": "149.1",
                 "answerType": "checkbox",
                 "questionText": "Been violent towards partner or other member of their family",
-                "displayOrder": 24,
+                "displayOrder": 38,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -2985,16 +3471,17 @@
                 "questionCode": "150.1",
                 "answerType": "checkbox",
                 "questionText": "Committed a serious offence whilst not complying with medication",
-                "displayOrder": 25,
+                "displayOrder": 39,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3004,16 +3491,17 @@
                 "questionCode": "152.1",
                 "answerType": "checkbox",
                 "questionText": "Been involved in any hate-based behaviour",
-                "displayOrder": 26,
+                "displayOrder": 40,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3023,16 +3511,17 @@
                 "questionCode": "153.1",
                 "answerType": "checkbox",
                 "questionText": "Been assessed as high risk of serious harm on a previous occasion",
-                "displayOrder": 27,
+                "displayOrder": 41,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3042,16 +3531,17 @@
                 "questionCode": "156.1",
                 "answerType": "checkbox",
                 "questionText": "Been a conditionally discharged patient subject to a restriction order under Section 41 MHA 1983",
-                "displayOrder": 28,
+                "displayOrder": 42,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3061,16 +3551,17 @@
                 "questionCode": "158.1",
                 "answerType": "checkbox",
                 "questionText": "Been a stalker",
-                "displayOrder": 29,
+                "displayOrder": 43,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3080,16 +3571,17 @@
                 "questionCode": "159.1",
                 "answerType": "checkbox",
                 "questionText": "Displayed obsessive behaviour linked to offending",
-                "displayOrder": 30,
+                "displayOrder": 44,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3099,16 +3591,17 @@
                 "questionCode": "160.1",
                 "answerType": "checkbox",
                 "questionText": "Been involved in bizarre or ritualistic aspects linked to offending",
-                "displayOrder": 31,
+                "displayOrder": 45,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3118,16 +3611,17 @@
                 "questionCode": "161.1",
                 "answerType": "checkbox",
                 "questionText": "Displayed any offence-related behaviour observed in a custodial setting",
-                "displayOrder": 32,
+                "displayOrder": 46,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3137,16 +3631,17 @@
                 "questionCode": "162.1",
                 "answerType": "checkbox",
                 "questionText": "Displayed any inappropriate behaviour towards members of staff, visitors or prisoners",
-                "displayOrder": 33,
+                "displayOrder": 47,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3156,16 +3651,17 @@
                 "questionCode": "163.1",
                 "answerType": "checkbox",
                 "questionText": "Established links or associations, whilst in custody, which increase risk of serious harm",
-                "displayOrder": 34,
+                "displayOrder": 48,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3175,16 +3671,17 @@
                 "questionCode": "163.2",
                 "answerType": "checkbox",
                 "questionText": "Committed an offence involving excessive use of violence or sadistic violence",
-                "displayOrder": 35,
+                "displayOrder": 49,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3194,16 +3691,17 @@
                 "questionCode": "164.1",
                 "answerType": "checkbox",
                 "questionText": "None of the above apply",
-                "displayOrder": 36,
+                "displayOrder": 50,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "3098b13e-5f55-4bfe-bc15-d598e9f03d61",
-                    "answerSchemaCode": "yes",
+                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
+                    "answerSchemaCode": "previous_conviction",
                     "value": "YES",
-                    "text": "Yes"
+                    "text": "Previous conviction"
                   }
                 ]
               },
@@ -3213,11 +3711,12 @@
                 "questionCode": "165.1",
                 "answerType": "radio",
                 "questionText": "Is the individual, now or on release, likely to live with, or have frequent contact with, any child who is on the child protection register or is being looked after by the local authority.",
-                "displayOrder": 37,
+                "displayOrder": 51,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3245,11 +3744,12 @@
                 "questionCode": "166.1",
                 "answerType": "radio",
                 "questionText": "Are there any concerns in relation to children?",
-                "displayOrder": 38,
+                "displayOrder": 52,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (concerns in relation to children)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3277,11 +3777,12 @@
                 "questionCode": "167.1",
                 "answerType": "radio",
                 "questionText": "Should contact be made with social services?",
-                "displayOrder": 39,
+                "displayOrder": 53,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (contacting social services)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -3317,6 +3818,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3330,6 +3832,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (risk of suicide)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3362,6 +3865,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (risk of self-harm)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3388,12 +3892,13 @@
                 "questionId": "be770fd2-5c0b-4d02-b1b1-8590edcf5f4e",
                 "questionCode": "171.1",
                 "answerType": "radio",
-                "questionText": "Coping in custody or a hostel setting",
+                "questionText": "Are there issues that need to be considered in relation to coping in custody or a hostel setting?",
                 "displayOrder": 4,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (coping in custody or a hostel setting)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3426,6 +3931,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (vulnerability)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3467,6 +3973,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3480,6 +3987,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (escape or abscond)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3512,6 +4020,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (control issues or disruptive behaviour)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3544,6 +4053,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (concerns in respect of breach of trust)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3576,6 +4086,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (risks to other prisoners)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -3608,6 +4119,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (other things to consider regarding whether a full analysis is required)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -3634,6 +4146,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter details\",\"errorSummary\":\"Enter details\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3647,6 +4160,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (full risk of harm analysis)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -3673,6 +4187,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter details\",\"errorSummary\":\"Enter details\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -3705,6 +4220,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3712,12 +4228,13 @@
                 "questionId": "5974af31-268a-4413-be23-6285cfe61346",
                 "questionCode": "182.1",
                 "answerType": "freetext",
-                "questionText": "Offence details ",
+                "questionText": "Offence details",
                 "displayOrder": 2,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter offence details\",\"errorSummary\":\"Enter offence details\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3731,6 +4248,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say where and when they did it\",\"errorSummary\":\"Say where and when they did it\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3738,12 +4256,14 @@
                 "questionId": "31a47ad0-6d66-4478-94c8-65ef70091dee",
                 "questionCode": "184.1",
                 "answerType": "freetext",
-                "questionText": "How did they do it? ",
+                "questionText": "How did they do it?",
+                "helpText": "Was there any pre planning, use of weapon, tool etc?",
                 "displayOrder": 4,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say how they did it\",\"errorSummary\":\"Say how they did it\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3751,12 +4271,14 @@
                 "questionId": "90d93a85-d0d6-4b79-9320-c1054f0c00df",
                 "questionCode": "185.1",
                 "answerType": "freetext",
-                "questionText": "Who were the victims? ",
+                "questionText": "Who were the victims?",
+                "helpText": "Are there concerns about targeting, type, age, race or vulnerability of victim?",
                 "displayOrder": 5,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the victims\",\"errorSummary\":\"Enter the victims\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3770,6 +4292,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say if anyone else was present or involved\",\"errorSummary\":\"Say if anyone else was present or involved\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3777,12 +4300,14 @@
                 "questionId": "8d5404d8-a633-4789-aa03-68061e3bf373",
                 "questionCode": "187.1",
                 "answerType": "freetext",
-                "questionText": "Why did they do it? ",
+                "questionText": "Why did they do it?",
+                "helpText": "Motivation and triggers",
                 "displayOrder": 7,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say why they did it\",\"errorSummary\":\"Say why they did it\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3796,6 +4321,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter sources of information\",\"errorSummary\":\"Enter sources of information\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -3818,6 +4344,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3831,6 +4358,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say exactly what they did\",\"errorSummary\":\"Say exactly what they did\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3844,6 +4372,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say where and when they did it\",\"errorSummary\":\"Say where and when they did it\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3851,12 +4380,14 @@
                 "questionId": "0ba2c568-8625-47a3-a911-6066188d7e94",
                 "questionCode": "192.1",
                 "answerType": "freetext",
-                "questionText": "How did they do it? ",
+                "questionText": "How did they do it?",
+                "helpText": "Was there any pre planning, use of weapon, tool etc?",
                 "displayOrder": 4,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say how they did it\",\"errorSummary\":\"Say how they did it\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3864,12 +4395,14 @@
                 "questionId": "627f694d-efb1-4556-bbea-a7d93179cf3f",
                 "questionCode": "193.1",
                 "answerType": "freetext",
-                "questionText": "Who were the victims? ",
+                "questionText": "Who were the victims?",
+                "helpText": "Were there concerns about targeting, type, age, race or vulnerability of victim?",
                 "displayOrder": 5,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the victims\",\"errorSummary\":\"Enter the victims\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3883,6 +4416,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say if anyone else was present or involved\",\"errorSummary\":\"Say if anyone else was present or involved\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3890,12 +4424,14 @@
                 "questionId": "cf9a187c-18f1-4ccd-a3ff-fcc1f128496a",
                 "questionCode": "195.1",
                 "answerType": "freetext",
-                "questionText": "Why did they do it? ",
+                "questionText": "Why did they do it?",
+                "helpText": "Motivation and triggers",
                 "displayOrder": 7,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say why they dd it\",\"errorSummary\":\"Say why they dd it\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3909,6 +4445,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter sources of information\",\"errorSummary\":\"Enter sources of information\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -3930,6 +4467,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3937,11 +4475,12 @@
                 "questionId": "a2f4a30f-1448-4281-9c09-96d66db07601",
                 "questionCode": "197.1",
                 "answerType": "freetext",
-                "questionText": "Is this section being completed because the individual: ",
+                "questionText": "Is this section being completed because the individual:",
                 "displayOrder": 2,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -3955,6 +4494,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (risk to identifiable children)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -3981,6 +4521,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter details of relevant factors and situations\",\"errorSummary\":\"Enter details of relevant factors and situations\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -4007,6 +4548,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (identifiable children at risk from others)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -4033,6 +4575,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Explain the individual's involvement in the family\",\"errorSummary\":\"Explain the individual's involvement in the family\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -4047,232 +4590,351 @@
             "contents": [
               {
                 "type": "question",
-                "questionId": "59b77990-875e-47ef-8b39-607fb48b254c",
-                "questionCode": "202.1",
-                "answerType": "freetext",
-                "questionText": "Inset text: Consider carefully whether this information can be recorded safely.",
+                "questionId": "b0608208-e593-4958-a903-d23b47948429",
+                "questionCode": "uiS5.1",
+                "answerType": "presentation: buttonlink(\"<base>/addrow/children_at_risk_of_serious_harm\")",
+                "questionText": "Add another child",
                 "displayOrder": 1,
                 "mandatory": true,
-                "readOnly": false,
+                "readOnly": true,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
-                "type": "question",
-                "questionId": "b46893d5-b69f-4743-addd-57bc2a5651c7",
-                "questionCode": "203.1",
-                "answerType": "freetext",
-                "questionText": "Name",
-                "displayOrder": 2,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter name\",\"errorSummary\":\"Enter name\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "0a305419-4d12-427d-a3aa-f7b204c49b00",
-                "questionCode": "204.1",
-                "answerType": "numeric",
-                "questionText": "Age ",
-                "helpText": "Enter an age in years from 0 to 17",
-                "displayOrder": 3,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Age cannot be more than 17\",\"errorSummary\":\"Age cannot be more than 17\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "af8444f9-9e71-49e0-b171-8a88006a589e",
-                "questionCode": "205.1",
-                "answerType": "date",
-                "questionText": "Date of Birth",
-                "displayOrder": 4,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter date of birth\",\"errorSummary\":\"Enter date of birth\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "106f08df-ceef-41f0-9d1a-2c44bf8c4f6f",
-                "questionCode": "206.1",
-                "answerType": "radio",
-                "questionText": "Gender",
-                "displayOrder": 5,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select gender\",\"errorSummary\":\"Select gender\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": [
+                "type": "TableQuestionDto",
+                "tableId": "fb777be0-a183-4c83-8209-e7871df9c547",
+                "tableCode": "children_at_risk_of_serious_harm",
+                "title": "Children at Risk of Serious Harm",
+                "contents": [
                   {
-                    "answerSchemaUuid": "d9169ca3-6b6a-4206-b909-48e3e10af0dc",
-                    "answerSchemaCode": "male",
-                    "value": "male",
-                    "text": "Male"
+                    "type": "question",
+                    "questionId": "8c5c0274-3087-4ea3-aa09-4efd88a64490",
+                    "questionCode": "uiS5.1",
+                    "answerType": "presentation: inset",
+                    "questionText": "Consider carefully whether this information can be recorded safely.",
+                    "displayOrder": 1,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "051a5b80-03b6-4195-b9d3-5f03091e1f1b",
-                    "answerSchemaCode": "female",
-                    "value": "female",
-                    "text": "Female"
+                    "type": "question",
+                    "questionId": "1c7dc48a-e90f-4141-829e-ff16ce8dbb20",
+                    "questionCode": "uiS5.2",
+                    "answerType": "presentation: heading_large",
+                    "questionText": "Personal details",
+                    "displayOrder": 2,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "76a3676b-a68e-41ae-8171-229cfd335f6f",
-                    "answerSchemaCode": "not_specified",
-                    "value": "not specified",
-                    "text": "Not specified"
+                    "type": "question",
+                    "questionId": "23c3e984-54c7-480f-b06c-7d000e2fb87c",
+                    "questionCode": "203.1",
+                    "answerType": "freetext",
+                    "questionText": "Name",
+                    "displayOrder": 3,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter name\",\"errorSummary\":\"Enter name\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "2bcb18ab-9310-4188-a3a5-7d262fbb5b43",
-                    "answerSchemaCode": "not_known",
-                    "value": "not known",
-                    "text": "Not known"
-                  }
-                ]
-              },
-              {
-                "type": "question",
-                "questionId": "ac9308db-2dea-4b20-8b23-b0badfc992aa",
-                "questionCode": "207.1",
-                "answerType": "freetext",
-                "questionText": "Address (if disclosable)",
-                "displayOrder": 6,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter address\",\"errorSummary\":\"Enter address\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "43cddd02-3f2f-472f-8211-ebc5b109ec7a",
-                "questionCode": "208.1",
-                "answerType": "radio",
-                "questionText": "Currently Registered with Social Services",
-                "displayOrder": 7,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                    "answerSchemaCode": "yes",
-                    "value": "YES",
-                    "text": "Yes"
+                    "type": "question",
+                    "questionId": "263c9dde-4290-4bf9-a596-f470b68da524",
+                    "questionCode": "204.1",
+                    "answerType": "numeric",
+                    "questionText": "Age",
+                    "helpText": "Enter an age in years from 0 to 17",
+                    "displayOrder": 4,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Age cannot be more than 17\",\"errorSummary\":\"Age cannot be more than 17\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                    "answerSchemaCode": "no",
-                    "value": "NO",
-                    "text": "No"
-                  }
-                ]
-              },
-              {
-                "type": "question",
-                "questionId": "362b2ae7-7eae-42e8-9725-d7a76cb241ae",
-                "questionCode": "209.1",
-                "answerType": "radio",
-                "questionText": "Previously Registered with Social Services",
-                "displayOrder": 8,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                    "answerSchemaCode": "yes",
-                    "value": "YES",
-                    "text": "Yes"
+                    "type": "question",
+                    "questionId": "41677239-234c-4653-ac98-4e2e002948cc",
+                    "questionCode": "205.1",
+                    "answerType": "date",
+                    "questionText": "Date of Birth",
+                    "displayOrder": 5,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter date of birth\",\"errorSummary\":\"Enter date of birth\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                    "answerSchemaCode": "no",
-                    "value": "NO",
-                    "text": "No"
-                  }
-                ]
-              },
-              {
-                "type": "question",
-                "questionId": "16b0d3cd-77b7-4ab5-a394-38edb45d7b0f",
-                "questionCode": "210.1",
-                "answerType": "checkbox",
-                "questionText": "Current category of child protection registration ",
-                "displayOrder": 9,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select a currentcategory of child protection registration\",\"errorSummary\":\"Select a current category of child protection registration\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "d82a79b2-b6ff-44e8-a4ae-c4ad8312f48d",
-                    "answerSchemaCode": "neglect",
-                    "value": "neglect",
-                    "text": "Neglect"
+                    "type": "question",
+                    "questionId": "61857dff-dfd8-4b92-a8c7-1ddfc4cebc45",
+                    "questionCode": "206.1",
+                    "answerType": "radio",
+                    "questionText": "Gender",
+                    "displayOrder": 6,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select gender\",\"errorSummary\":\"Select gender\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "d9169ca3-6b6a-4206-b909-48e3e10af0dc",
+                        "answerSchemaCode": "male",
+                        "value": "male",
+                        "text": "Male"
+                      },
+                      {
+                        "answerSchemaUuid": "051a5b80-03b6-4195-b9d3-5f03091e1f1b",
+                        "answerSchemaCode": "female",
+                        "value": "female",
+                        "text": "Female"
+                      },
+                      {
+                        "answerSchemaUuid": "76a3676b-a68e-41ae-8171-229cfd335f6f",
+                        "answerSchemaCode": "not_specified",
+                        "value": "not specified",
+                        "text": "Not specified"
+                      },
+                      {
+                        "answerSchemaUuid": "2bcb18ab-9310-4188-a3a5-7d262fbb5b43",
+                        "answerSchemaCode": "not_known",
+                        "value": "not known",
+                        "text": "Not known"
+                      }
+                    ]
                   },
                   {
-                    "answerSchemaUuid": "74865d30-f744-41ef-a7f2-eec481b2d4c6",
-                    "answerSchemaCode": "physical",
-                    "value": "physical",
-                    "text": "Physical"
+                    "type": "question",
+                    "questionId": "3a0351a4-077e-4da0-b66d-bd552da6b273",
+                    "questionCode": "uiS5.3",
+                    "answerType": "presentation: divider",
+                    "displayOrder": 7,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "b4a070d2-33b4-40f3-a155-a25912c9c8c5",
-                    "answerSchemaCode": "sexual",
-                    "value": "sexual",
-                    "text": "Sexual"
+                    "type": "question",
+                    "questionId": "4903acda-926d-4c7e-813f-7511bf5a62c4",
+                    "questionCode": "uiS5.4",
+                    "answerType": "presentation: heading_large",
+                    "questionText": "Contact details",
+                    "displayOrder": 8,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "4fd4b523-01fc-4ac3-966b-5afcd56dca9b",
-                    "answerSchemaCode": "emotional",
-                    "value": "emotional",
-                    "text": "Emotional"
-                  }
-                ]
-              },
-              {
-                "type": "question",
-                "questionId": "9e3d1286-93d6-42a3-9ed1-2d81a1170ce5",
-                "questionCode": "211.1",
-                "answerType": "checkbox",
-                "questionText": "Previous category of child protection registration ",
-                "displayOrder": 10,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select a previous category of child protection registration\",\"errorSummary\":\"Select a previous category of child protection registration\"}}",
-                "readOnly": false,
-                "conditional": false,
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "d82a79b2-b6ff-44e8-a4ae-c4ad8312f48d",
-                    "answerSchemaCode": "neglect",
-                    "value": "neglect",
-                    "text": "Neglect"
+                    "type": "question",
+                    "questionId": "c8668b01-ad96-454f-8afd-cccf6d827d5b",
+                    "questionCode": "207.1",
+                    "answerType": "textarea",
+                    "questionText": "Address (if disclosable)",
+                    "displayOrder": 9,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter address\",\"errorSummary\":\"Enter address\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "74865d30-f744-41ef-a7f2-eec481b2d4c6",
-                    "answerSchemaCode": "physical",
-                    "value": "physical",
-                    "text": "Physical"
+                    "type": "question",
+                    "questionId": "d52774aa-f2cb-457b-b494-62cf68fd9850",
+                    "questionCode": "uiS5.5",
+                    "answerType": "presentation: divider",
+                    "displayOrder": 10,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "b4a070d2-33b4-40f3-a155-a25912c9c8c5",
-                    "answerSchemaCode": "sexual",
-                    "value": "sexual",
-                    "text": "Sexual"
+                    "type": "question",
+                    "questionId": "e874acf7-5515-48d0-9ee3-efb034b2f05b",
+                    "questionCode": "uiS5.6",
+                    "answerType": "presentation: heading_large",
+                    "questionText": "Social services details",
+                    "displayOrder": 11,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
                   },
                   {
-                    "answerSchemaUuid": "4fd4b523-01fc-4ac3-966b-5afcd56dca9b",
-                    "answerSchemaCode": "emotional",
-                    "value": "emotional",
-                    "text": "Emotional"
+                    "type": "question",
+                    "questionId": "ecb880ef-02c7-4ffc-8726-7e0f60f1191c",
+                    "questionCode": "208.1",
+                    "answerType": "radio",
+                    "questionText": "Currently Registered with Social Services",
+                    "displayOrder": 12,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "775cd8bf-fe1b-4625-9937-ae8a238a8402",
+                    "questionCode": "209.1",
+                    "answerType": "radio",
+                    "questionText": "Previously Registered with Social Services",
+                    "displayOrder": 13,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "589686ed-add7-4f36-a14d-80a4f450ae63",
+                    "questionCode": "uiS5.7",
+                    "answerType": "presentation: divider",
+                    "displayOrder": 14,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "2faa8008-ecd2-4ba1-8064-ce5c3d1fa360",
+                    "questionCode": "uiS5.8",
+                    "answerType": "presentation: heading_large",
+                    "questionText": "Child protection details",
+                    "displayOrder": 15,
+                    "mandatory": true,
+                    "readOnly": true,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": []
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "ad56e86d-56df-4c1a-974f-81454e941be0",
+                    "questionCode": "210.1",
+                    "answerType": "checkbox",
+                    "questionText": "Current category of child protection registration",
+                    "displayOrder": 16,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select a currentcategory of child protection registration\",\"errorSummary\":\"Select a current category of child protection registration\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "d82a79b2-b6ff-44e8-a4ae-c4ad8312f48d",
+                        "answerSchemaCode": "neglect",
+                        "value": "neglect",
+                        "text": "Neglect"
+                      },
+                      {
+                        "answerSchemaUuid": "74865d30-f744-41ef-a7f2-eec481b2d4c6",
+                        "answerSchemaCode": "physical",
+                        "value": "physical",
+                        "text": "Physical"
+                      },
+                      {
+                        "answerSchemaUuid": "b4a070d2-33b4-40f3-a155-a25912c9c8c5",
+                        "answerSchemaCode": "sexual",
+                        "value": "sexual",
+                        "text": "Sexual"
+                      },
+                      {
+                        "answerSchemaUuid": "4fd4b523-01fc-4ac3-966b-5afcd56dca9b",
+                        "answerSchemaCode": "emotional",
+                        "value": "emotional",
+                        "text": "Emotional"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "b0a4f119-6226-452b-a145-1f822d5737fe",
+                    "questionCode": "211.1",
+                    "answerType": "checkbox",
+                    "questionText": "Previous category of child protection registration",
+                    "displayOrder": 17,
+                    "mandatory": true,
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select a previous category of child protection registration\",\"errorSummary\":\"Select a previous category of child protection registration\"}}",
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "d82a79b2-b6ff-44e8-a4ae-c4ad8312f48d",
+                        "answerSchemaCode": "neglect",
+                        "value": "neglect",
+                        "text": "Neglect"
+                      },
+                      {
+                        "answerSchemaUuid": "74865d30-f744-41ef-a7f2-eec481b2d4c6",
+                        "answerSchemaCode": "physical",
+                        "value": "physical",
+                        "text": "Physical"
+                      },
+                      {
+                        "answerSchemaUuid": "b4a070d2-33b4-40f3-a155-a25912c9c8c5",
+                        "answerSchemaCode": "sexual",
+                        "value": "sexual",
+                        "text": "Sexual"
+                      },
+                      {
+                        "answerSchemaUuid": "4fd4b523-01fc-4ac3-966b-5afcd56dca9b",
+                        "answerSchemaCode": "emotional",
+                        "value": "emotional",
+                        "text": "Emotional"
+                      }
+                    ]
                   }
                 ]
               },
@@ -4282,11 +4944,12 @@
                 "questionCode": "212.1",
                 "answerType": "radio",
                 "questionText": "Have there been any child protection conferences or ‘looked after children’ reviews?",
-                "displayOrder": 11,
+                "displayOrder": 3,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Selecy yes or no\",\"errorSummary\":\"Select yes or no (child protection conferences or reviews)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (child protection conferences or reviews)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -4310,54 +4973,58 @@
               },
               {
                 "type": "question",
-                "questionId": "04a8eea7-18a4-4a5b-bbbb-9fe04e322abe",
+                "questionId": "78d36748-657e-4d5f-a964-82bef4e5089b",
                 "questionCode": "213.1",
-                "answerType": "freetext",
+                "answerType": "textarea",
                 "questionText": "Give details of child protection conferences, child protection decisions and looked after children review dates, if applicable",
-                "displayOrder": 12,
+                "displayOrder": 4,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter details of child protection conferences, child protection decisions and looked after children review dates\",\"errorSummary\":\"Enter details of child protection conferences, child protection decisions and looked after children review dates\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "e474f386-d90e-41ca-b17f-ee45c724dbc4",
+                "questionId": "2d640653-96e1-4d1b-8411-2963ea2b0687",
                 "questionCode": "214.1",
-                "answerType": "freetext",
+                "answerType": "textarea",
                 "questionText": "Local Authority Children’s Services  key worker name, address and telephone number, if applicable",
-                "displayOrder": 13,
+                "displayOrder": 5,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter Local Authority Children’s Services  key worker name, address and telephone number,\",\"errorSummary\":\"Enter Local Authority Children’s Services  key worker name, address and telephone number,\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "e68d9e2b-5a67-449a-85dc-a941504cdd0c",
+                "questionId": "0ea85849-bf04-489d-a7b4-8678a09674a3",
                 "questionCode": "215.1",
-                "answerType": "freetext",
+                "answerType": "textarea",
                 "questionText": "Other agencies and personnel involved, if applicable",
-                "displayOrder": 14,
+                "displayOrder": 6,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter other agencies and personnel involved\",\"errorSummary\":\"Enter other agencies and personnel involved\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "0a4914e4-2a46-4e0d-945c-86764f20f55f",
+                "questionId": "bf5ee0a3-4842-49c3-b4e2-bf35b75673e8",
                 "questionCode": "216.1",
-                "answerType": "freetext",
+                "answerType": "textarea",
                 "questionText": "Additional information",
-                "displayOrder": 15,
+                "displayOrder": 7,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter additional information\",\"errorSummary\":\"Enter additional information\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4367,11 +5034,12 @@
                 "answerType": "date",
                 "questionText": "Date that child protection issues came to assessor’s attention",
                 "helpText": "For example, 12 11 2007",
-                "displayOrder": 16,
+                "displayOrder": 8,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter date that child protection issues came to assessor’s attention\",\"errorSummary\":\"Enter date that child protection issues came to assessor’s attention\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -4395,6 +5063,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (current concerns about suicide)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4408,6 +5077,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (current concerns about self-harm)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4415,12 +5085,13 @@
                 "questionId": "2096b72c-ac71-4664-ad4f-051c2a56a137",
                 "questionCode": "288.1",
                 "answerType": "freetext",
-                "questionText": "Describe circumstances, issues and needs that relate to current concerns ",
+                "questionText": "Describe circumstances, issues and needs that relate to current concerns",
                 "displayOrder": 3,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter circumstances, issues and needs that relate to current concerns \",\"errorSummary\":\"Enter circumstances, issues and needs that relate to current concerns \"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4434,6 +5105,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (is there a current ACCT?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4447,6 +5119,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter book number\",\"errorSummary\":\"Enter book number\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4460,6 +5133,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter any past concerns about suicide\",\"errorSummary\":\"Enter any past concerns about suicide\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4473,6 +5147,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter details\",\"errorSummary\":\"Enter deails\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4486,6 +5161,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (concerns about self-harm)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4499,6 +5175,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter details\",\"errorSummary\":\"Enter deails\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -4522,6 +5199,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or N/A\",\"errorSummary\":\"Select yes, no or N/A (current concerns about coping in custody)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "784f9f50-9029-4a83-a8bf-8784559b26b4",
@@ -4554,6 +5232,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or N/A\",\"errorSummary\":\"Select yes, no or N/A (current concerns about coping in a hostel setting)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "784f9f50-9029-4a83-a8bf-8784559b26b4",
@@ -4586,6 +5265,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, issues and needs\",\"errorSummary\":\"Describe circumstances, issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4599,6 +5279,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or N/A\",\"errorSummary\":\"Select yes, no or N/A (previous concerns about coping in custody)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -4631,6 +5312,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (previous concerns about coping in a hostel setting)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -4663,6 +5345,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, issues and needs\",\"errorSummary\":\"Describe circumstances, issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -4680,12 +5363,14 @@
                 "questionId": "31eb26f4-667f-45cb-bf58-4e7c249cd8b9",
                 "questionCode": "228.1",
                 "answerType": "radio",
-                "questionText": "Are there any current concerns about vulnerability? ",
+                "questionText": "Are there any current concerns about vulnerability?",
+                "helpText": "For example: victimisation, being bullied, assaulted, exploited.",
                 "displayOrder": 1,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (current concerns about vulnerability)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -4712,6 +5397,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4720,11 +5406,13 @@
                 "questionCode": "230.1",
                 "answerType": "radio",
                 "questionText": "Have there been any previous concerns about vulnerability?",
+                "helpText": "For example: victimisation, being bullied, assaulted, exploited.",
                 "displayOrder": 3,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (previous concerns about vulnerability)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -4757,6 +5445,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4764,12 +5453,13 @@
                 "questionId": "1801ecdd-953e-4565-8063-c83bd19b4866",
                 "questionCode": "232.1",
                 "answerType": "radio",
-                "questionText": "Do any of the questions about suicide, self-harm, coping in custody or a hostel setting, or vulnerability indicate a risk of serious harm to others? ",
+                "questionText": "Do any of the questions about suicide, self-harm, coping in custody or a hostel setting, or vulnerability indicate a risk of serious harm to others?",
                 "displayOrder": 5,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (risk of serious harm to others)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -4796,6 +5486,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -4819,6 +5510,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (current concerns about escape or abscond)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -4845,6 +5537,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4858,6 +5551,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or N/A\",\"errorSummary\":\"Select yes, no or N/A (previous concerns about escape or abscond)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -4890,6 +5584,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -4913,6 +5608,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (current concerns about control and disruptive behaviour)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -4939,6 +5635,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -4952,6 +5649,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (previous concerns about control and disruptive behaviour)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -4984,6 +5682,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -5007,6 +5706,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (current concerns about breach of trust)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5033,6 +5733,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5046,6 +5747,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes, no or don't know\",\"errorSummary\":\"Select yes, no or don't know (previous concerns about breach of trust)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "9541bbcd-dc4f-4d38-8a7c-0ddda92e82d4",
@@ -5078,6 +5780,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Describe circumstances, relevant issues and needs\",\"errorSummary\":\"Describe circumstances, relevant issues and needs\"}}",
                 "readOnly": false,
                 "conditional": true,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -5101,6 +5804,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say who is at risk\",\"errorSummary\":\"Say who is at risk\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5114,6 +5818,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say the nature of the risk\",\"errorSummary\":\"Say the nature of the risk\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -5136,6 +5841,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5143,12 +5849,14 @@
                 "questionId": "944b9da0-9e44-42c2-96e2-75906945729e",
                 "questionCode": "249.1",
                 "answerType": "freetext",
-                "questionText": "When is the risk likely to be greatest?\n\n",
+                "questionText": "When is the risk likely to be greatest?",
+                "helpText": "Consider the timescale and indicate whether risk is immediate or not. Consider the risks in custody as well as on release.",
                 "displayOrder": 2,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say when the risk is likely to be greatest\",\"errorSummary\":\"Say when the risk is likely to be greatest\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5156,12 +5864,14 @@
                 "questionId": "82b58db0-7a55-4f0c-b335-f5803052c584",
                 "questionCode": "250.1",
                 "answerType": "freetext",
-                "questionText": "What circumstances are likely to increase risk?\n",
+                "questionText": "What circumstances are likely to increase risk?",
+                "helpText": "Describe factors, actions and events which might increase level of risk, now and in the future",
                 "displayOrder": 3,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say what circumstances are likely to increase risk\",\"errorSummary\":\"Say what circumstances are likely to increase risk\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5169,12 +5879,14 @@
                 "questionId": "3798896c-2308-4b98-b1dc-8c0b45dc2a95",
                 "questionCode": "251.1",
                 "answerType": "freetext",
-                "questionText": "What factors are likely to reduce the risk?\n",
+                "questionText": "What factors are likely to reduce the risk?",
+                "helpText": "Describe factors, actions, and events which may reduce or contain the level of risk. ",
                 "displayOrder": 4,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Say what factors are likely to reduce the risk\",\"errorSummary\":\"Say what factors are likely to reduce the risk\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -5196,6 +5908,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5209,6 +5922,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in the community to children\",\"errorSummary\":\"Select a level of risk in the community to children\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5247,6 +5961,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in the community to the public\",\"errorSummary\":\"Select a level of risk in the community to the public\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5285,6 +6000,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in the community to known adults\",\"errorSummary\":\"Select a level of risk in the community to known adults\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5323,6 +6039,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in the community to staff\",\"errorSummary\":\"Select a level of risk in the community to staff\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5359,6 +6076,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5372,6 +6090,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in custody to children\",\"errorSummary\":\"Select a level of risk in custody to children\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5410,6 +6129,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in custody to the public\",\"errorSummary\":\"Select a level of risk in custody to the public\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5448,6 +6168,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in the community to known adults\",\"errorSummary\":\"Select a level of risk in the community to known adults\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5486,6 +6207,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in custody to staff\",\"errorSummary\":\"Select a level of risk in custody to staff\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5524,6 +6246,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select a level of risk in custody to prisoners\",\"errorSummary\":\"Select a level of risk in custody to prisoners\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "a151763e-4046-4d30-85ef-919cee3c08a4",
@@ -5562,6 +6285,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the details of any key documents or reports used in this analysis\",\"errorSummary\":\"Enter the details of any key documents or reports used in this analysis\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               }
             ]
@@ -5585,6 +6309,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5598,6 +6323,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (L2 local multi-agency risk management)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5624,6 +6350,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (L3 MAPP)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5649,6 +6376,7 @@
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": []
               },
               {
@@ -5662,6 +6390,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (L2 local multi-agency risk management)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5688,6 +6417,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (L3 MAPP)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5714,6 +6444,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (referred as critical public protection case?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5740,6 +6471,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (should case be referred now?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5766,6 +6498,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (should case be referred pre-release?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5792,6 +6525,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (required to register under Sex Offender Act?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5818,6 +6552,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (have they registered?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5838,12 +6573,13 @@
                 "questionId": "c076395e-0e40-46d8-b665-ee0b74f8370c",
                 "questionCode": "276.1",
                 "answerType": "radio",
-                "questionText": "Is the individual disquaified from working with children as set out in Section 35 (4) of the Criminal Justice & Court Services Act 2000? ",
+                "questionText": "Is the individual disquaified from working with children as set out in Section 35 (4) of the Criminal Justice & Court Services Act 2000?",
                 "displayOrder": 12,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (are they disqualified from working with children?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5870,6 +6606,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (have they  present or previous conviction against a child?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5896,6 +6633,7 @@
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (are they an ongoing risk to children?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5916,12 +6654,13 @@
                 "questionId": "7954e117-966a-470f-b577-f7dc36ae269e",
                 "questionCode": "279.1",
                 "answerType": "radio",
-                "questionText": "Do the Police, Local Authority and Offender Manager need to be notified prior to the release of the individual from custody? ",
+                "questionText": "Do the Police, Local Authority and Offender Manager need to be notified prior to the release of the individual from custody?",
                 "displayOrder": 15,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (notification to authorities prior to release)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5942,12 +6681,13 @@
                 "questionId": "106e8722-04b3-4f55-b661-1eb250e1d5f6",
                 "questionCode": "280.1",
                 "answerType": "radio",
-                "questionText": "Is the individual subject to Prison Service Order 4400 Prisoner Communications?",
+                "questionText": "Is the individual subject to Public Protection Manual restrictions or communications?",
                 "displayOrder": 16,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (subject to Prison Service Order 4400?)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (subject to Public Protection Manual restrictions or communications?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5968,12 +6708,13 @@
                 "questionId": "0a7bc16c-5213-4a1a-8cd2-f29162eab17d",
                 "questionCode": "281.1",
                 "answerType": "radio",
-                "questionText": "Is the individual a conditionally discharged patient under Section 41 of the Mental Health Act 1983? ",
+                "questionText": "Is the individual a conditionally discharged patient under Section 41 of the Mental Health Act 1983?",
                 "displayOrder": 17,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (conditionally discharged under Mental Health Act?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -5994,12 +6735,40 @@
                 "questionId": "b06ab9df-16b9-4dd2-8a91-1f45aeaa4f2c",
                 "questionCode": "282.1",
                 "answerType": "radio",
-                "questionText": "Is the individual on life licence following a sentence of imprisonment or detention for public protection? (Section 230, schedule 18)  ",
+                "questionText": "Is the individual on life licence following a sentence of imprisonment or detention for public protection? (Section 230, schedule 18)",
                 "displayOrder": 18,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (on life licence?)\"}}",
                 "readOnly": false,
                 "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
+                  },
+                  {
+                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "9a8d6d8e-ac11-4ff5-b4e6-9553fd462851",
+                "questionCode": "283.1",
+                "answerType": "radio",
+                "questionText": "Has the individual received an extended sentence?",
+                "displayOrder": 19,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (extended sentence?)\"}}",
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
                 "answerSchemas": [
                   {
                     "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",

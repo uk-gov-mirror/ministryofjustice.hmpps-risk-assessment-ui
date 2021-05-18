@@ -23,7 +23,7 @@ const countWords = str => {
 }
 
 const removeUrlLevels = (url, levels) => {
-  return !levels
+  return !levels || !url
     ? url
     : url
         .split('/')
@@ -106,13 +106,17 @@ const encodeHTML = str => {
 // extract link target from question type formatted as:
 // presentation: link("/update-assessment")
 const extractLink = questionType => {
-  const regex = /^presentation: link\("(?<link>.*)"\)/gm
+  const regex = /^(?:presentation: link|^presentation: buttonlink)\("(?<link>.*)"\)/gm
   const re = regex.exec(questionType)
   if (!re) return null
   const {
     groups: { link },
   } = re
   return link
+}
+
+const doReplace = (input, target, replacement) => {
+  return input.split(target).join(replacement)
 }
 
 // This function executes middleware in series
@@ -158,4 +162,5 @@ module.exports = {
   dynamicMiddleware,
   processReplacements,
   extractLink,
+  doReplace,
 }
