@@ -6,6 +6,7 @@
 {%- from "node_modules/govuk-frontend/govuk/components/date-input/macro.njk" import govukDateInput -%}
 {%- from "node_modules/govuk-frontend/govuk/components/summary-list/macro.njk" import govukSummaryList -%}
 {%- from "node_modules/govuk-frontend/govuk/components/button/macro.njk" import govukButton -%}
+{%- from "node_modules/govuk-frontend/govuk/components/character-count/macro.njk" import govukCharacterCount -%}
 
 
 {# templates for each question type #}
@@ -27,6 +28,10 @@
 {% if question.type == 'table' or question.type == 'TableQuestionDto'%}
   {% set numColumns = question.contents.length %}
   {% set numRows = question.contents[0].answer.length %}
+  {% if not numRows %}
+    {% set numRows = 1 %}
+    {% set defaultAnswer = 'n/a' %}
+  {% endif %}
 
   <table class="govuk-table govuk-table-xl">
     <caption class="govuk-table__caption govuk-table__caption--l">{{ question.title }}</caption>
@@ -45,13 +50,15 @@
     <tr class="govuk-table__row">
       {% for column in range(0, numColumns) %}
         {% if 'presentation:' not in  question.contents[column].answerType %}
-          <td class="govuk-table__cell govuk-table__cell-wrap">{{ question.contents[column].answer[row] }}</td>
+          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}{{ question.contents[column].answer[row] }}{% endif %}</td>
         {% endif %}
       {% endfor %}
       <td class="govuk-table__cell">
         <ul class="govuk-list">
+          {% if not defaultAnswer %}
           <li><a class="govuk-link--no-visited-state" href="edit.html">Edit</a></li>
           <li><a class="govuk-link--no-visited-state" href="delete.html">Remove</a></li>
+          {% endif %}
         </ul>
       </td>
     </tr>
@@ -155,25 +162,27 @@
         errorMessage: errorMessage
       }) }}
     {% case 'textarea' %}
-      {{ govukTextarea({
-        id: 'id-' + question.questionId,
-        name: 'id-' + question.questionId,
-        value: questionAnswer | encodeHtml | safe,
-        formGroup : {
-          classes: question.formClasses
-        },
-        attributes: question.attributes,
-        label: {
-          text: question.questionText,
-          isPageHeading: false,
-          classes: question.questionCode + ' govuk-label--m'
-        },
-        hint: {
-          text: question.helpText
-        },
-        errorMessage: errorMessage
-      }) }}
-    {% case 'radio' %}
+    {{ govukCharacterCount({
+      name:'id-' + question.questionId,
+      id: 'id-' + question.questionId,
+      maxlength: 4000,
+      value: questionAnswer | encodeHtml | safe,
+      label: {
+        text: question.questionText,
+        isPageHeading: false,
+        classes: question.questionCode + ' govuk-label--m'
+      },
+      formGroup : {
+        classes: question.formClasses
+      },
+      attributes: question.attributes,
+      hint: {
+        text: question.helpText
+      },
+      errorMessage: errorMessage
+    }) }}
+
+  {% case 'radio' %}
       {{ govukRadios({
         idPrefix: 'id-' + question.questionId,
         name: 'id-' + question.questionId,

@@ -101,7 +101,7 @@
           "text": "Yes",
           "conditionals": [{ "conditional": "conditional-question-id-1111111", "displayInline": true }],
           "conditional": {
-            "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label Further information govuk-label--m\" for=\"id-conditional-question-id-1111111\">Further information</label><div id=\"id-conditional-question-id-1111111-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-conditional-question-id-1111111\" name=\"id-conditional-question-id-1111111\" rows=\"5\" aria-describedby=\"id-conditional-question-id-1111111-hint\"></textarea>\n</div>"
+            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label Further information govuk-label--m\" for=\"id-conditional-question-id-1111111\">Further information</label><div id=\"id-conditional-question-id-1111111-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"id-conditional-question-id-1111111\" name=\"id-conditional-question-id-1111111\" rows=\"5\" aria-describedby=\"id-conditional-question-id-1111111-info id-conditional-question-id-1111111-hint\"></textarea>\n</div><div id=\"id-conditional-question-id-1111111-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
           }
         },
         {
@@ -255,7 +255,7 @@
             { "conditional": "db85cfb1-bf5e-4852-bfe8-137f44570cab", "displayInline": false }
           ],
           "conditional": {
-            "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label 97.1 govuk-label--m\" for=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\">Give details</label><div id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" name=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" rows=\"5\" aria-describedby=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\"></textarea>\n</div>"
+            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label 97.1 govuk-label--m\" for=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\">Give details</label><div id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" name=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" rows=\"5\" aria-describedby=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-info id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\"></textarea>\n</div><div id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
           },
           "attributes": [
             ["data-conditional", "0419944f-ad54-4035-bef0-dca3bda4ff64 db85cfb1-bf5e-4852-bfe8-137f44570cab"],
@@ -293,7 +293,7 @@
           "text": "Yes",
           "conditionals": [{ "conditional": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec", "displayInline": true }],
           "conditional": {
-            "html": " <div class=\"govuk-form-group\"><label class=\"govuk-label 99.1 govuk-label--m\" for=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\">Give details</label><div id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea\" id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" name=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" rows=\"5\" aria-describedby=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\"></textarea>\n</div>"
+            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label 99.1 govuk-label--m\" for=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\">Give details</label><div id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" name=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" rows=\"5\" aria-describedby=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-info id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\"></textarea>\n</div><div id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
           }
         },
         {
