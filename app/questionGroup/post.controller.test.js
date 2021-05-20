@@ -8,7 +8,7 @@ const questionGroupPointer = require('../../wiremock/responses/questionGroups.js
 jest.mock('../../common/data/hmppsAssessmentApi')
 
 let req
-const user = { token: 'mytoken' }
+const tokens = { authorisationToken: 'mytoken' }
 
 beforeEach(() => {
   req = {
@@ -17,7 +17,7 @@ beforeEach(() => {
       groupId: '22222222-2222-2222-2222-222222222204',
       subgroup: 0,
     },
-    user,
+    tokens,
     body: {},
   }
 })
@@ -51,7 +51,7 @@ describe('post answers', () => {
           '11111111-1111-1111-1111-111111111202': 'Hello',
         },
       },
-      user.token,
+      tokens,
     )
     expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/questiongroup/my/next/page')
   })
@@ -87,7 +87,7 @@ describe('post answers', () => {
           '11111111-1111-1111-1111-111111111209': '',
         },
       },
-      user.token,
+      tokens,
     )
     expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/questiongroup/my/next/page')
   })

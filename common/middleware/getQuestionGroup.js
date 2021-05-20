@@ -60,7 +60,7 @@ const usesStaticReferenceData = questionSchema =>
 const usesDynamicReferenceData = questionSchema =>
   questionSchema.referenceDataCategory && questionSchema.referenceDataCategory === 'FILTERED_REFERENCE_DATA'
 
-const applyStaticReferenceData = async (questionResponse, authorisationToken) => {
+const applyStaticReferenceData = async (questionResponse, tokens) => {
   const extractReferenceDataCategories = questionSchema => {
     if (questionSchema.type === 'group') {
       return questionSchema.contents.flatMap(extractReferenceDataCategories)
@@ -81,7 +81,7 @@ const applyStaticReferenceData = async (questionResponse, authorisationToken) =>
 
   const referenceDataRequests = Array.from(referenceDataCategories).map(async category => ({
     category,
-    data: await getReferenceDataListByCategory(category, authorisationToken),
+    data: await getReferenceDataListByCategory(category, tokens),
   }))
 
   const referenceDataResponses = await Promise.all(referenceDataRequests)
@@ -112,10 +112,10 @@ const applyStaticReferenceData = async (questionResponse, authorisationToken) =>
   }
 }
 
-module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, user }, res, next) => {
+module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, tokens }, res, next) => {
   try {
-    const questionResponse = await getQuestionGroup(groupId, user?.token)
-    const hydratedQuestions = await applyStaticReferenceData(questionResponse, user?.token)
+    const questionResponse = await getQuestionGroup(groupId, tokens)
+    const hydratedQuestions = await applyStaticReferenceData(questionResponse, tokens)
 
     const thisQuestionGroup = hydratedQuestions.contents[subgroup].contents[page]
     const readOnlyToAttribute = q => {

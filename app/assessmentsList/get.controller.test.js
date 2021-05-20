@@ -4,14 +4,14 @@ const questionList = require('../../wiremock/responses/questionList.json')
 
 jest.mock('../../common/data/hmppsAssessmentApi')
 
-const user = { token: 'mytoken' }
+const tokens = { authorisationToken: 'mytoken' }
 
 describe('getFormsList', () => {
   const req = {
     params: {
       assessmentId: 'test-assessment-id',
     },
-    user,
+    tokens,
   }
   const res = {
     render: jest.fn(),

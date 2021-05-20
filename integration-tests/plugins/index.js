@@ -13,7 +13,7 @@ const {
   stubAssessmentComplete,
 } = require('../../wiremock/assessmentApi')
 const { stubReferenceData } = require('../../wiremock/referenceData')
-const { stubAuth, getLoginUrl } = require('../../wiremock/auth')
+const oauthApi = require('../../wiremock/oauth')
 
 module.exports = on => {
   // eslint-disable-next-line no-unused-vars
@@ -38,7 +38,6 @@ module.exports = on => {
         stubGetQuestionGroup(),
         stubAssessmentComplete(),
       ]),
-    stubAuth: () => Promise.all([stubAuth()]),
-    getLoginUrl,
+    stubAuth: () => Promise.all([oauthApi.stubGetToken()]),
   })
 }

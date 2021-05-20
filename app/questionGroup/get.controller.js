@@ -7,14 +7,14 @@ const {
 } = require('../../common/question-groups/get-question-groups')
 
 const displayQuestionGroup = async (
-  { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary = null, user },
+  { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary = null, tokens },
   res,
 ) => {
   try {
     const { questionGroup } = res.locals
     const subIndex = Number.parseInt(subgroup, 10)
 
-    const { answers, episodeUuid } = await grabAnswers(assessmentId, 'current', user?.token)
+    const { answers, episodeUuid } = await grabAnswers(assessmentId, 'current', tokens)
 
     res.locals.assessmentUuid = assessmentId
     res.locals.episodeUuid = episodeUuid
@@ -37,9 +37,9 @@ const displayQuestionGroup = async (
   }
 }
 
-const grabAnswers = (assessmentId, episodeId, token) => {
+const grabAnswers = (assessmentId, episodeId, tokens) => {
   try {
-    return getAnswers(assessmentId, episodeId, token)
+    return getAnswers(assessmentId, episodeId, tokens)
   } catch (error) {
     logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
     throw error

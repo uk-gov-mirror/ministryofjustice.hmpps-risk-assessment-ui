@@ -5,7 +5,6 @@ common/browsered/*.js
 package.json
 package-lock.json
 cypress.json
-cypress.env.json
 cypress-reporter-config.json
 wiremock/responses/*
 integration-tests/mockApis/responses/*

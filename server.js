@@ -12,11 +12,8 @@ const loggingMiddleware = require('morgan')
 const compression = require('compression')
 const { configure } = require('nunjucks')
 const dateFilter = require('nunjucks-date-filter')
-const session = require('express-session')
+const cookieSession = require('cookie-session')
 const helmet = require('helmet')
-const passport = require('passport')
-const redis = require('redis')
-const connectRedis = require('connect-redis')
 
 // Local dependencies
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -26,12 +23,13 @@ const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filt
 const logger = require('./common/logging/logger')
 const router = require('./app/router')
 const noCache = require('./common/utils/no-cache')
+const addUserInformation = require('./common/middleware/add-user-information')
 const { mdcSetup } = require('./common/logging/logger-mdc')
+const createCredentials = require('./common/middleware/createCredentials')
 const { updateCorrelationId } = require('./common/middleware/updateCorrelationId')
 const { applicationInsights } = require('./common/config')
 const { encodeHTML, extractLink, doReplace } = require('./common/utils/util')
-const config = require('./common/config')
-const auth = require('./common/middleware/auth')
+const clientSecret = require('./common/config')
 
 // Global constants
 const { static: _static } = express
@@ -43,8 +41,6 @@ const { NODE_ENV } = process.env
 const CSS_PATH = staticify.getVersionedPath('/stylesheets/application.min.css')
 const JAVASCRIPT_PATH = staticify.getVersionedPath('/javascripts/application.js')
 const allGateKeeperPages = /^\/(?!health$).*/
-
-const RedisStore = connectRedis(session)
 
 // Define app views
 const APP_VIEWS = [
@@ -105,27 +101,37 @@ function initialiseGlobalMiddleware(app) {
     next()
   })
 
-  const redisClient = redis.createClient({
-    port: config.redis.port,
-    password: config.redis.password,
-    host: config.redis.host,
-    tls: config.redis.tls_enabled === 'true' ? {} : false,
-  })
-
   app.use(
-    session({
-      store: new RedisStore({ client: redisClient }),
-      secret: config.sessionSecret,
-      cookie: { secure: config.https, sameSite: 'lax', maxAge: 24 * 60 * 60 * 1000 }, // 24 hours
-      resave: false, // redis implements touch so shouldn't need this
-      saveUninitialized: false,
-      rolling: true,
+    cookieSession({
+      name: 'session',
+      keys: ['key1', 'key2'],
+      secret: clientSecret,
+
+      // Cookie Options
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
     }),
   )
 
-  auth.init()
-  app.use(passport.initialize())
-  app.use(passport.session())
+  if (process.env.NODE_ENV === 'local') {
+    app.use(allGateKeeperPages, (req, res, next) => {
+      const keycloakHeaders = [
+        'x-auth-name',
+        'x-auth-username',
+        'x-auth-given-name',
+        'x-auth-family-name',
+        'x-auth-email',
+        'x-auth-locations',
+      ]
+      logger.info(`Running locally: setting default headers for ${keycloakHeaders}`)
+      keycloakHeaders.forEach(headerName => {
+        req.headers[headerName] = `Test ${headerName}`
+      })
+      next()
+    })
+  }
+
+  app.use(allGateKeeperPages, addUserInformation)
+  app.use(allGateKeeperPages, createCredentials)
 
   // must be after session since we need session
   app.use(mdcSetup)

@@ -12,17 +12,6 @@ const getJwtToken = () => {
   return postData(`${url}/token?grant_type=client_credentials`)
 }
 
-const checkTokenIsActive = async token => {
-  return superagent
-    .post(`${url}/token/verify`)
-    .auth(token, { type: 'bearer' })
-    .timeout(timeout)
-    .then(response => response.body && response.body.active)
-    .catch(error => {
-      logger.error(`Unable to verify token: ${error.message}`)
-    })
-}
-
 const postData = async path => {
   logger.info(`Calling oauth API with POST: ${path}`)
   try {
@@ -47,5 +36,4 @@ const logError = error => {
 
 module.exports = {
   getJwtToken,
-  checkTokenIsActive,
 }

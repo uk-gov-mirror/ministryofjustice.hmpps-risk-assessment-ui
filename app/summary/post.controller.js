@@ -6,11 +6,11 @@ const { postCompleteAssessment } = require('../../common/data/hmppsAssessmentApi
 const completeAssessment = async (req, res) => {
   const {
     params: { assessmentId },
-    user,
+    tokens,
   } = req
 
   try {
-    const [ok] = await postCompleteAssessment(assessmentId, user?.token)
+    const [ok] = await postCompleteAssessment(assessmentId, tokens)
 
     if (ok) {
       res.locals.hideOffenderDetails = true

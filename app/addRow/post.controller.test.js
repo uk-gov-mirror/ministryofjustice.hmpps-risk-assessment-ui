@@ -7,7 +7,7 @@ const questionGroupPointer = require('../../wiremock/responses/questionGroups.js
 jest.mock('../../common/data/hmppsAssessmentApi')
 
 let req
-const user = { token: 'mytoken' }
+const tokens = { authorisationToken: 'mytoken' }
 
 beforeEach(() => {
   req = {
@@ -17,7 +17,7 @@ beforeEach(() => {
       tableName: 'children',
     },
     originalUrl: 'this.url/has/this/many/parts',
-    user,
+    tokens,
     body: {},
   }
 })
@@ -52,7 +52,7 @@ describe('post new table row', () => {
           '11111111-1111-1111-1111-111111111202': 'Hello',
         },
       },
-      user.token,
+      tokens,
     )
     expect(res.redirect).toHaveBeenCalledWith('this.url/has/this')
   })

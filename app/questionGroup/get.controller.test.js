@@ -19,13 +19,13 @@ const expected = require('./fixtures/expected.json')
 
 jest.mock('../../common/data/hmppsAssessmentApi')
 
-const user = { token: 'mytoken' }
+const tokens = { authorisationToken: 'mytoken' }
 let expectedForThisTest
 
 describe('display question group and answers', () => {
   const req = {
     body: {},
-    user,
+    tokens,
     params: {
       assessmentId: 'test-assessment-id',
       groupId: '22222222-2222-2222-2222-222222222204',

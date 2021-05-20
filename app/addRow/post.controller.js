@@ -9,7 +9,7 @@ const saveTableRow = async (req, res) => {
   const {
     params: { assessmentId, tableName },
     body: reqBody,
-    user,
+    tokens,
     originalUrl,
     errors,
   } = req
@@ -20,7 +20,7 @@ const saveTableRow = async (req, res) => {
   try {
     const returnUrl = removeUrlLevels(originalUrl, 2)
     const answers = extractAnswers(reqBody)
-    const [ok, episode] = await postTableRow(assessmentId, 'current', tableName, answers, user?.token)
+    const [ok, episode] = await postTableRow(assessmentId, 'current', tableName, answers, tokens)
 
     if (!ok) {
       const [validationErrors, errorSummary] = formatValidationErrors(episode.errors, episode.pageErrors)

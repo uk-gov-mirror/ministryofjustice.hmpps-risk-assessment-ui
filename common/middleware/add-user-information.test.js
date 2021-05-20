@@ -6,7 +6,9 @@ describe('Put keycloak header information into session', () => {
   let res
   beforeEach(() => {
     req = {
-      user: { username: 'James' },
+      headers: {
+        'x-auth-name': 'James',
+      },
     }
     res = {
       locals: {},

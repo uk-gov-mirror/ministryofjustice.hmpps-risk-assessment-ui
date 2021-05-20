@@ -7,52 +7,52 @@ const {
   },
 } = require('../config')
 
-const assessmentSupervision = (assessmentDto, authorisationToken) => {
+const assessmentSupervision = (assessmentDto, tokens) => {
   const path = `${url}/assessments`
-  return postData(path, authorisationToken, assessmentDto)
+  return postData(path, tokens, assessmentDto)
 }
 
-const getOffenderData = (uuid, authorisationToken) => {
+const getOffenderData = (uuid, tokens) => {
   const path = `${url}/assessments/${uuid}/subject`
-  return getData(path, authorisationToken)
+  return getData(path, tokens)
 }
 
-const getQuestionGroup = (groupId, authorisationToken) => {
+const getQuestionGroup = (groupId, tokens) => {
   const path = `${url}/questions/${groupId}`
-  return getData(path, authorisationToken)
+  return getData(path, tokens)
 }
 
-const getQuestionGroupSummary = (groupId, authorisationToken) => {
+const getQuestionGroupSummary = (groupId, tokens) => {
   const path = `${url}/questions/${groupId}/summary`
-  return getData(path, authorisationToken)
+  return getData(path, tokens)
 }
 
-const getAnswers = (assessmentId, episodeId, authorisationToken) => {
+const getAnswers = (assessmentId, episodeId, tokens) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
-  return getData(path, authorisationToken)
+  return getData(path, tokens)
 }
 
-const getAssessmentsList = authorisationToken => {
+const getAssessmentsList = tokens => {
   const path = `${url}/questions/list`
-  return getData(path, authorisationToken)
+  return getData(path, tokens)
 }
 
-const postCompleteAssessment = (assessmentId, authorisationToken) => {
+const postCompleteAssessment = (assessmentId, tokens) => {
   const path = `${url}/assessments/${assessmentId}/complete`
-  return postData(path, authorisationToken)
+  return postData(path, tokens)
 }
 
-const postAnswers = (assessmentId, episodeId, answers, authorisationToken) => {
+const postAnswers = (assessmentId, episodeId, answers, tokens) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
-  return postData(path, authorisationToken, answers)
+  return postData(path, tokens, answers)
 }
 
-const postTableRow = (assessmentId, episodeId, tableName, answers, authorisationToken) => {
+const postTableRow = (assessmentId, episodeId, tableName, answers, tokens) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}`
-  return postData(path, authorisationToken, answers)
+  return postData(path, tokens, answers)
 }
 
-const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, authorisationToken) => {
+const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, tokens) => {
   const path = `${url}/referencedata/filtered`
   const requestBody = {
     assessmentUuid: assessmentId,
@@ -60,24 +60,24 @@ const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentL
     fieldName: questionUuid,
     parentList,
   }
-  return postData(path, authorisationToken, requestBody)
+  return postData(path, tokens, requestBody)
 }
 
-const getData = (path, authorisationToken) => {
+const getData = (path, tokens) => {
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
 
-  return action(superagent.get(path), authorisationToken).then(([_, body]) => {
+  return action(superagent.get(path), tokens).then(([_, body]) => {
     return body
   })
 }
 
-const postData = (path, authorisationToken, data) => {
+const postData = (path, tokens, data) => {
   logger.info(`Calling hmppsAssessments API with POST: ${path}`)
 
-  return action(superagent.post(path).send(data), authorisationToken)
+  return action(superagent.post(path).send(data), tokens)
 }
 
-const action = async (agent, authorisationToken) => {
+const action = async (agent, { authorisationToken }) => {
   if (authorisationToken === undefined) {
     return logError('No authorisation token found when calling hmppsAssessments API')
   }

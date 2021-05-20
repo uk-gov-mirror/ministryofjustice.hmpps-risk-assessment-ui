@@ -2,9 +2,9 @@ const { logger } = require('../../common/logging/logger')
 const { getAssessmentsList } = require('../../common/data/hmppsAssessmentApi')
 const { sortObject } = require('../../common/utils/util')
 
-const displayAssessmentsList = async ({ params: { assessmentId }, user }, res) => {
+const displayAssessmentsList = async ({ params: { assessmentId }, tokens }, res) => {
   try {
-    const questionsList = await getAssessmentsList(user?.token)
+    const questionsList = await getAssessmentsList(tokens)
 
     const topLevelForms = questionsList
       .filter(form => form.questionCount === 0)

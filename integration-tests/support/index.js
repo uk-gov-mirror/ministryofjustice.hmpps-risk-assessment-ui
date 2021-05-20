@@ -2,16 +2,14 @@
 import './commands'
 
 before(() => {
+  cy.clearCookies()
   cy.task('reset')
-  cy.task('stubAuth')
   cy.task('stubAssessmentApi')
+  cy.task('stubAuth')
 })
 
 // any functionality to happen before every test
-beforeEach(() => {
-  cy.clearCookies()
-  cy.login()
-})
+beforeEach(() => {})
 
 // any functionality to happen after every test
 afterEach(() => {
