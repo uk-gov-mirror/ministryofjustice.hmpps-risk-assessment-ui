@@ -5,12 +5,18 @@ const fetchFilteredReferenceData = async (req, res) => {
     const {
       params: { assessmentId, episodeId },
       body,
-      tokens,
+      user,
     } = req
     const { questionUuid, targetValues } = body
 
     // eslint-disable-next-line no-unused-vars
-    const [_, response] = await getFilteredReferenceData(assessmentId, episodeId, questionUuid, targetValues, tokens)
+    const [_, response] = await getFilteredReferenceData(
+      assessmentId,
+      episodeId,
+      questionUuid,
+      targetValues,
+      user?.token,
+    )
 
     return res.json(
       Object.values(response)

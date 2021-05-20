@@ -104,6 +104,7 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
       var req = new XMLHttpRequest()
       req.open('POST', '/' + assessmentUuid + '/episode/' + episodeUuid + '/referencedata/filtered')
       req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+      req.withCredentials = true
       req.send(JSON.stringify(state))
 
       req.onload = function() {

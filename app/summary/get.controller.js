@@ -5,11 +5,11 @@ const { getQuestionGroupSummary } = require('../../common/data/hmppsAssessmentAp
 const { processReplacements } = require('../../common/utils/util')
 
 const displayQuestionGroupSummary = async (
-  { params: { assessmentId, groupId }, errors = {}, errorSummary = null, tokens },
+  { params: { assessmentId, groupId }, errors = {}, errorSummary = null, user },
   res,
 ) => {
   try {
-    let assessment = await grabQuestionGroupSummary(groupId, tokens)
+    let assessment = await grabQuestionGroupSummary(groupId, user?.token)
 
     assessment = processReplacements(assessment, res.locals.offenderDetails)
 
@@ -48,9 +48,9 @@ const displayQuestionGroupSummary = async (
   }
 }
 
-const grabQuestionGroupSummary = (groupId, tokens) => {
+const grabQuestionGroupSummary = (groupId, token) => {
   try {
-    return getQuestionGroupSummary(groupId, tokens)
+    return getQuestionGroupSummary(groupId, token)
   } catch (error) {
     logger.error(`Could not retrieve question group summary for ${groupId}, error: ${error}`)
     throw error

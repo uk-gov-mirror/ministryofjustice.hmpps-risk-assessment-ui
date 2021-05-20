@@ -5,13 +5,13 @@ const assessmentEpisodesJson = require('../../wiremock/responses/assessmentEpiso
 
 jest.mock('../../common/data/hmppsAssessmentApi')
 
-const tokens = { authorisationToken: 'mytoken' }
+const user = { token: 'mytoken' }
 let assessmentEpisodes
 
 describe('display complete assessment page', () => {
   const req = {
     body: {},
-    tokens,
+    user,
     params: {
       assessmentId: 'test-assessment-id',
     },

@@ -22,6 +22,21 @@ env:
         name: {{ template "risk-assessment-ui.name" . }}
         key: APPINSIGHTS_INSTRUMENTATIONKEY
 
+  - name: REDIS HOST
+    valueFrom:
+      secretKeyRef:
+        name: {{ .Values.redis.secret }}
+        key: primary_endpoint_address
+
+  - name: REDIS_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: {{ .Values.redis.secret }}
+        key: auth_token
+
+  - name: REDIS_TLS_ENABLED
+    value: {{ .Values.redis.tlsEnabled | quote }}
+
   - name: HMPPS_ASSESSMENT_API_URL
     value: {{ .Values.env.HMPPS_ASSESSMENT_API_URL | quote }}
 

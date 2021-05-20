@@ -70,7 +70,7 @@ describe('getQuestionGroup middleware', () => {
   const questionData = questions
   const next = jest.fn()
   const render = jest.fn()
-  const tokens = {}
+  const user = {}
   beforeEach(() => {
     req = {
       params: {
@@ -78,7 +78,7 @@ describe('getQuestionGroup middleware', () => {
         subgroup: 0,
         page: 0,
       },
-      tokens,
+      user,
     }
     res = { render, locals: {} }
     getQuestionGroup.mockResolvedValue(questionData)
@@ -103,7 +103,7 @@ describe('getQuestionGroup middleware', () => {
     })
     it('should call the data service once and pass the id', () => {
       expect(getQuestionGroup).toHaveBeenCalledTimes(1)
-      expect(getQuestionGroup).toHaveBeenCalledWith(devAssessmentId, tokens)
+      expect(getQuestionGroup).toHaveBeenCalledWith(devAssessmentId, user.token)
     })
     it('should call the next function', () => {
       expect(next).toHaveBeenCalledTimes(1)
@@ -243,8 +243,8 @@ describe('getQuestionGroup middleware', () => {
 
       await getQuestion(req, res, next)
 
-      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_1', req.tokens)
-      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_2', req.tokens)
+      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_1', user.token)
+      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_2', user.token)
 
       expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',
