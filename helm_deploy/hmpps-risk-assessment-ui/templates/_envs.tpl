@@ -22,7 +22,7 @@ env:
         name: {{ template "risk-assessment-ui.name" . }}
         key: APPINSIGHTS_INSTRUMENTATIONKEY
 
-  - name: REDIS HOST
+  - name: REDIS_HOST
     valueFrom:
       secretKeyRef:
         name: {{ .Values.redis.secret }}
