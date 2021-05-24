@@ -7,3 +7,13 @@ services:
     ports:
       - "9191:8080"
     command: [--verbose]
+
+  redis:
+    image: "redis:6.2.3-alpine"
+    networks:
+      - hmpps
+    container_name: redis
+    ports:
+      - "6379:8080"
+networks:
+  hmpps:

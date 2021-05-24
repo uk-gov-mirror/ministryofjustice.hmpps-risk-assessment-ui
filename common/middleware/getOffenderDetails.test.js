@@ -13,13 +13,13 @@ describe('getOffenderDetails middleware', () => {
   const offenderData = mockOffenderData
   const next = jest.fn()
   const render = jest.fn()
-  const tokens = {}
+  const user = {}
   beforeEach(() => {
     req = {
       params: {
         assessmentId: devAssessmentId,
       },
-      tokens,
+      user,
     }
     res = { render, locals: {} }
     getOffenderData.mockResolvedValue(offenderData)
@@ -44,7 +44,7 @@ describe('getOffenderDetails middleware', () => {
     })
     it('should call the data service once and pass the id', () => {
       expect(getOffenderData).toHaveBeenCalledTimes(1)
-      expect(getOffenderData).toHaveBeenCalledWith(devAssessmentId, tokens)
+      expect(getOffenderData).toHaveBeenCalledWith(devAssessmentId, user.token)
     })
     it('should call the next function', () => {
       expect(next).toHaveBeenCalledTimes(1)

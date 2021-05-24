@@ -5,8 +5,11 @@
 //   apis: { offenderAssessments },
 // } = require('../common/config')
 
+const passport = require('passport')
+
 const getOffenderDetails = require('../common/middleware/getOffenderDetails')
 const getQuestionGroup = require('../common/middleware/getQuestionGroup')
+const addUserToLocals = require('../common/middleware/add-user-information')
 
 // pages
 const { startController } = require('./start/get.controller')
@@ -27,6 +30,13 @@ const { assessmentFromCrn } = require('./assessmentFromCrn/get.controller')
 const { startAssessmentFromCrn, startAssessmentFromForm } = require('./assessmentFromCrn/post.controller')
 
 const { validate } = require('../common/middleware/validator')
+
+const {
+  checkUserIsAuthenticated,
+  handleLoginCallback,
+  handleLogout,
+  checkForTokenRefresh,
+} = require('../common/middleware/auth')
 
 // Export
 module.exports = app => {
@@ -53,6 +63,13 @@ module.exports = app => {
   app.get('/ping', (req, res) => {
     res.status(200).send('pong')
   })
+
+  app.get('/login', passport.authenticate('oauth2'))
+  app.get('/login/callback', handleLoginCallback())
+  app.get('/logout', handleLogout())
+  app.get('/login/error', (req, res) => res.status(401).render('app/error', { error: 'Unable to sign in' }))
+
+  app.use(checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
 
   app.get(`/`, (req, res) => {
     res.redirect('/start')

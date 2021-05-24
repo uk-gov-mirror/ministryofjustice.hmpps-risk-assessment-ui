@@ -2,10 +2,12 @@
 import './commands'
 
 before(() => {
-  cy.clearCookies()
   cy.task('reset')
-  cy.task('stubAssessmentApi')
+  cy.clearCookies()
   cy.task('stubAuth')
+  cy.task('stubAssessmentApi')
+  Cypress.Cookies.preserveOnce()
+  cy.login()
 })
 
 // any functionality to happen before every test

@@ -7,18 +7,18 @@ const {
   },
 } = require('../config')
 
-const getReferenceDataListByCategory = (category, tokens) => {
+const getReferenceDataListByCategory = (category, authorisationToken) => {
   const path = `${url}/referencedata/${category}`
-  return getData(path, tokens)
+  return getData(path, authorisationToken)
 }
 
-const getData = (path, tokens) => {
+const getData = (path, authorisationToken) => {
   logger.info(`Calling offenderAssessments API with GET: ${path}`)
 
-  return action(superagent.get(path), tokens).then(([_, body]) => body)
+  return action(superagent.get(path), authorisationToken).then(([_, body]) => body)
 }
 
-const action = async (agent, { authorisationToken }) => {
+const action = async (agent, authorisationToken) => {
   if (authorisationToken === undefined) {
     return logError('No authorisation token found when calling offenderAssessments API')
   }

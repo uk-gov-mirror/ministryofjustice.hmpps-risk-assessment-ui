@@ -45,7 +45,7 @@ module.exports = {
       },
     },
     oauth: {
-      url: get('OAUTH_ENDPOINT_URL', 'http://localhost:9191/oauth', true),
+      url: get('OAUTH_ENDPOINT_URL', 'http://localhost:9191/auth', true),
       timeout: {
         response: get('OAUTH_API_ENDPOINT_TIMEOUT_RESPONSE', 10000, true),
         deadline: get('OAUTH_API_TIMEOUT_DEADLINE', 10000, true),
@@ -54,6 +54,7 @@ module.exports = {
         maxSockets: 100,
         maxFreeSockets: 10,
         freeSocketTimeout: 30000,
+        verifyToken: get('OAUTH_VERIFY_TOKEN', true),
       },
     },
   },
@@ -67,8 +68,17 @@ module.exports = {
     disabled: get('APPINSIGHTS_DISABLE', false, { parser: bool }),
     internalLogging: get('APPINSIGHTS_LOGGING', false, { parser: bool }),
   },
-  clientId: get('API_CLIENT_ID', 'clientId'),
-  clientSecret: get('API_CLIENT_SECRET', 'clientSecret'),
+  redis: {
+    host: get('REDIS_HOST', 'localhost', true),
+    port: parseInt(get('REDIS_PORT', '6379'), 10),
+    password: get('REDIS_PASSWORD', '', true),
+    tls_enabled: get('REDIS_TLS_ENABLED', 'false', true),
+  },
+  authClientId: get('AUTH_CLIENT_ID', 'clientId'),
+  authClientSecret: get('AUTH_CLIENT_SECRET', 'clientSecret'),
+  apiClientId: get('API_CLIENT_ID', 'clientId'),
+  apiClientSecret: get('API_CLIENT_SECRET', 'clientSecret'),
+  sessionSecret: get('SESSION_SECRET', 'superSecret'),
   dev: {
     devAssessmentId: get('DEV_ASSESSMENT_ID', 'e69a61ff-7395-4a12-b434-b1aa6478aded'),
     devPreSentenceQuestionGroupId: get('DEV_PRE_SENTENCE_QUESTION_GROUP_ID', '65a3924c-4130-4140-b7f4-cc39a52603bb'),
