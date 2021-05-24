@@ -79,7 +79,7 @@ const postData = (path, authorisationToken, data) => {
 
 const action = async (agent, authorisationToken) => {
   if (authorisationToken === undefined) {
-    return logError('No authorisation token found when calling hmppsAssessments API')
+    return logger.warn('No authorisation token found when calling hmppsAssessments API')
   }
 
   try {
@@ -101,30 +101,14 @@ const action = async (agent, authorisationToken) => {
   }
 }
 
-//
-// const putData = async (path, { authorisationToken }, data) => {
-//   if (authorisationToken === undefined) {
-//     return logError(`No authorisation token found when calling hmppsAssessments API: ${path}`)
-//   }
-//   logger.info(`Calling offenderAssessments API with PUT: ${path}`)
-//   try {
-//     return await superagent
-//       .put(path)
-//       .send(data)
-//       .auth(authorisationToken, { type: 'bearer' })
-//       .set('x-correlation-id', getCorrelationId())
-//       .timeout(timeout)
-//       .then(response => {
-//         return response.body
-//       })
-//   } catch (error) {
-//     return logError(error)
-//   }
-// }
-
 const logError = error => {
   logger.warn('Error calling hmppsAssessments API')
-  logger.warn(error)
+  logger.warn({
+    status: error.status,
+    method: error.response?.req?.method,
+    url: error.response?.req?.url,
+    text: error.response?.text,
+  })
   throw error
 }
 

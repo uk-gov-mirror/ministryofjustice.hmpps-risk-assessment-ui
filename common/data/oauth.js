@@ -41,7 +41,12 @@ const postData = async path => {
 
 const logError = error => {
   logger.warn('Error calling authentication API')
-  logger.warn(error)
+  logger.warn({
+    status: error.status,
+    method: error.response?.req?.method,
+    url: error.response?.req?.url,
+    text: error.response?.text,
+  })
   throw error
 }
 
