@@ -19,6 +19,18 @@ $ npm install
 $ npm run start:local
 ```
 
+The `env` can be configured as
+
+```
+HMPPS_ASSESSMENT_API_URL=http://localhost:8082
+OFFENDER_ASSESSMENT_API_URL=http://localhost:8081
+OAUTH_ENDPOINT_URL=http://oauth:9090/auth -- need to add alias oauth to /etc/hosts for this to work
+API_CLIENT_ID=sentence-plan-client
+API_CLIENT_SECRET=clientsecret
+AUTH_CLIENT_ID=sentence-plan-client
+AUTH_CLIENT_SECRET=clientsecret
+```
+
 Then go to [http://localhost:3000/](http://localhost:3000/) to see it in action.
 
 When running in this 'local' mode the service will attempt to stub out some API responses in wiremock at startup. It is assumed the wiremock server is running on port 9191. You can start up an instance of wiremock using docker-compose:
@@ -32,18 +44,18 @@ docker-compose -f docker-compose-test.yml up
 By default the application will use the mock APIs for auth - to run the application against HMPPS Auth run the following
 
 ```
-docker-compose -f docker-compose-test.yml up -D
-docker-compose up -D oauth
+docker-compose -f docker-compose-test.yml up -d
+docker-compose up -d oauth
 ```
 
-The `env` can be configured to to point the local Auth, for example
+The `env` can be configured to point the local Auth, for example
 
 ```
 OAUTH_ENDPOINT_URL=http://localhost:9090/auth
-AUTH_CLIENT_ID=clientId
-AUTH_CLIENT_SECRET=clientSecret
-API_CLIENT_ID=clientId
-API_CLIENT_SECRET=clientSecret
+API_CLIENT_ID=sentence-plan-client
+API_CLIENT_SECRET=clientsecret
+AUTH_CLIENT_ID=sentence-plan-client
+AUTH_CLIENT_SECRET=clientsecret
 ```
 
 Where `clientId` and `clientSecret` are replaced for ones configured in the local HMPPS Auth

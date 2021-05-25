@@ -8,12 +8,12 @@ services:
       - "9191:8080"
     command: [--verbose]
 
-  redis:
+  risk-assessment-redis:
     image: "redis:6.2.3-alpine"
     networks:
-      - hmpps
-    container_name: redis
+      - risk-assessment-hmpps
+    container_name: risk-assessment-redis
     ports:
-      - "6379:8080"
+      - "6379:6379"
 networks:
-  hmpps:
+  risk-assessment-hmpps:

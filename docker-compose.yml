@@ -67,6 +67,7 @@ services:
       - SERVER_PORT=8080
       - SPRING_PROFILES_ACTIVE=dev
       - OAUTH_ENDPOINT_URL=http://oauth:9090/auth
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=DEBUG
 
 networks:
   hmpps:
