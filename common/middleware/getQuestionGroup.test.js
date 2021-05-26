@@ -1,10 +1,15 @@
 const getQuestion = require('./getQuestionGroup')
 const { getQuestionGroup } = require('../data/hmppsAssessmentApi')
+const { getApiToken } = require('../data/oauth')
 const { getReferenceDataListByCategory } = require('../data/offenderAssessmentApi')
 const { processReplacements } = require('../utils/util')
 const {
   dev: { devAssessmentId },
 } = require('../config')
+
+jest.mock('../data/oauth', () => ({
+  getApiToken: jest.fn(),
+}))
 
 const questions = {
   type: 'group',
@@ -204,6 +209,7 @@ describe('getQuestionGroup middleware', () => {
   describe('applies static reference data to questions', () => {
     beforeEach(async () => {
       getReferenceDataListByCategory.mockResolvedValue([{ description: 'foo', code: 'bar' }])
+      getApiToken.mockResolvedValue('API_TOKEN')
     })
 
     it('fetches data for questions that have a reference data category', async () => {
@@ -243,8 +249,8 @@ describe('getQuestionGroup middleware', () => {
 
       await getQuestion(req, res, next)
 
-      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_1', user.token)
-      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_2', user.token)
+      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_1', 'API_TOKEN')
+      expect(getReferenceDataListByCategory).toHaveBeenCalledWith('REFERENCE_DATA_CATEGORY_2', 'API_TOKEN')
 
       expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',

@@ -1,16 +1,13 @@
 const superagent = require('superagent')
 const logger = require('../logging/logger')
 const {
-  clientId,
-  clientSecret,
+  apiClientId,
+  apiClientSecret,
   apis: {
     oauth: { timeout, url },
   },
 } = require('../config')
-
-const getJwtToken = () => {
-  return postData(`${url}/token?grant_type=client_credentials`)
-}
+const redis = require('./redis')
 
 const checkTokenIsActive = async token => {
   return superagent
@@ -23,16 +20,39 @@ const checkTokenIsActive = async token => {
     })
 }
 
-const postData = async path => {
-  logger.info(`Calling oauth API with POST: ${path}`)
+const getUserEmail = async token => {
+  return superagent
+    .get(`${url}/api/me/email`)
+    .auth(token, { type: 'bearer' })
+    .timeout(timeout)
+    .then(response => {
+      return response.body?.email
+    })
+    .catch(error => {
+      logger.error(`Unable to get user email: ${error.message}`)
+    })
+}
+
+const getApiToken = async () => {
+  logger.info('Getting API bearer token')
   try {
+    const cachedToken = await redis.get('ui:apiToken')
+
+    if (cachedToken) {
+      return cachedToken
+    }
+
+    logger.info('API bearer token not found in cache - fetching a new one')
+
     return await superagent
-      .post(path)
+      .post(`${url}/oauth/token?grant_type=client_credentials`)
       .send()
-      .auth(clientId, clientSecret)
+      .auth(apiClientId, apiClientSecret)
       .timeout(timeout)
       .then(response => {
-        return response.body
+        const { access_token: token, expires_in: expiresIn } = response.body
+        redis.set('ui:apiToken', token, 'EX', expiresIn)
+        return token
       })
   } catch (error) {
     return logError(error)
@@ -51,6 +71,7 @@ const logError = error => {
 }
 
 module.exports = {
-  getJwtToken,
+  getApiToken,
+  getUserEmail,
   checkTokenIsActive,
 }

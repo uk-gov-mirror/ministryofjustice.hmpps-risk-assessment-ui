@@ -1,20 +1,33 @@
 const refresh = require('passport-oauth2-refresh')
 const passport = require('passport')
 const auth = require('./auth')
-const { checkTokenIsActive } = require('../data/oauth')
+const { checkTokenIsActive, getUserEmail } = require('../data/oauth')
+const redis = require('../data/redis')
+const User = require('../models/user')
 
 jest.mock('passport-oauth2-refresh')
 jest.mock('passport')
 jest.mock('../data/oauth', () => ({
   checkTokenIsActive: jest.fn(),
+  getUserEmail: jest.fn(),
+}))
+jest.mock('../data/redis', () => ({
+  get: jest.fn(),
+  set: jest.fn(),
 }))
 
 describe('Auth', () => {
+  beforeEach(() => {
+    getUserEmail.mockReset()
+    redis.get.mockReset()
+    redis.set.mockReset()
+  })
+
   describe('tokenVerifier', () => {
     const baseRequest = {
-      user: {
+      user: User.from({
         token: 'TOKEN',
-      },
+      }),
     }
 
     beforeEach(() => checkTokenIsActive.mockReset())
@@ -147,11 +160,11 @@ describe('Auth', () => {
       const expiry = now - 60
 
       const req = {
-        user: {
+        user: User.from({
           username: 'Test User',
           refreshToken: 'REFRESH_TOKEN',
           tokenExpiryTime: expiry,
-        },
+        }),
         session: {
           passport: { user: {} },
           save: jest.fn(),
@@ -177,9 +190,9 @@ describe('Auth', () => {
       const expiry = now + 60
 
       const req = {
-        user: {
+        user: User.from({
           tokenExpiryTime: expiry,
-        },
+        }),
       }
 
       auth.checkForTokenRefresh(req, res, next)
@@ -240,7 +253,7 @@ describe('Auth', () => {
     })
 
     it('logs the user out and redirects if signed in', () => {
-      const req = { ...baseRequest, user: { username: 'Test User' } }
+      const req = { ...baseRequest, user: User.from({ username: 'Test User' }) }
 
       handleLogout(req, res)
 
@@ -264,6 +277,94 @@ describe('Auth', () => {
     it('generates a basic auth token', () => {
       const authToken = auth.generateBasicAuthToken('clientId', 'clientSecret')
       expect(authToken).toEqual('Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0')
+    })
+  })
+
+  describe('serializer', () => {
+    it('sets the user serializer', async () => {
+      expect(passport.serializeUser).toHaveBeenCalledTimes(1)
+      const [serializer] = passport.serializeUser.mock.calls[0]
+      expect(typeof serializer).toBe('function')
+
+      getUserEmail.mockResolvedValue('foo@bar.baz')
+      const callback = jest.fn()
+
+      await serializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
+      // We grab the user email
+      expect(getUserEmail).toHaveBeenCalledWith('FOO_TOKEN')
+      // Persist user details to Redis and key by the user's ID
+      expect(redis.set).toHaveBeenCalledWith('user:1', '{"email":"foo@bar.baz","username":"Foo"}', 'EX', 43200)
+      // Persist the user token to the session
+      expect(callback).toHaveBeenCalledWith(null, { id: 1, token: 'FOO_TOKEN' })
+    })
+
+    it('does not fetch the user email if it already exists', async () => {
+      expect(passport.serializeUser).toHaveBeenCalledTimes(1)
+      const [serializer] = passport.serializeUser.mock.calls[0]
+      expect(typeof serializer).toBe('function')
+
+      getUserEmail.mockResolvedValue('foo@bar.baz')
+      const callback = jest.fn()
+
+      await serializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo', email: 'foo@bar.baz' }), callback)
+      // We grab the user email
+      expect(getUserEmail).not.toHaveBeenCalled()
+      expect(redis.set).toHaveBeenCalled()
+      expect(callback).toHaveBeenCalled()
+    })
+
+    it('passes errors to the callback', async () => {
+      expect(passport.serializeUser).toHaveBeenCalledTimes(1)
+      const [serializer] = passport.serializeUser.mock.calls[0]
+      expect(typeof serializer).toBe('function')
+
+      getUserEmail.mockRejectedValue('💥')
+      const callback = jest.fn()
+
+      await serializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
+
+      expect(callback).toHaveBeenCalledWith('💥')
+    })
+  })
+
+  describe('deserializer', () => {
+    it('sets the passport deserializer', async () => {
+      expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
+      const [deserializer] = passport.deserializeUser.mock.calls[0]
+      expect(typeof deserializer).toBe('function')
+
+      redis.get.mockResolvedValue('{"email":"foo@bar.baz","username":"Foo"}')
+      const callback = jest.fn()
+
+      await deserializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo', email: 'foo@bar.baz' }), callback)
+
+      expect(redis.get).toHaveBeenCalledWith('user:1')
+      expect(callback).toHaveBeenCalled()
+
+      const [error, user] = callback.mock.calls[0]
+
+      expect(error).toBeNull()
+      expect(user.getDetails()).toEqual({
+        username: 'Foo',
+        email: 'foo@bar.baz',
+      })
+      expect(user.getSession()).toEqual({
+        id: 1,
+        token: 'FOO_TOKEN',
+      })
+    })
+
+    it('passes errors to the callback', async () => {
+      expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
+      const [deserializer] = passport.deserializeUser.mock.calls[0]
+      expect(typeof deserializer).toBe('function')
+
+      redis.get.mockRejectedValue('💥')
+      const callback = jest.fn()
+
+      await deserializer(User.from({ id: 1, token: 'FOO_TOKEN' }), callback)
+
+      expect(callback).toHaveBeenCalledWith('💥', { id: 1, token: 'FOO_TOKEN' })
     })
   })
 })

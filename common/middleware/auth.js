@@ -1,13 +1,35 @@
 const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
-const { checkTokenIsActive } = require('../data/oauth')
+const { checkTokenIsActive, getUserEmail } = require('../data/oauth')
 const config = require('../config')
 const logger = require('../logging/logger')
+const redis = require('../data/redis')
+const User = require('../models/user')
 
-// Required by Passport - http://www.passportjs.org/docs/configure/#sessions
-passport.serializeUser((user, done) => done(null, user))
-passport.deserializeUser((user, done) => done(null, user))
+passport.serializeUser(async (user, done) => {
+  try {
+    if (!user.email) {
+      const email = await getUserEmail(user.token)
+      user.setEmail(email)
+    }
+    const serialisedDetails = JSON.stringify(user.getDetails())
+    await redis.set(`user:${user.id}`, serialisedDetails, 'EX', 12 * 60 * 60)
+    done(null, user.getSession())
+  } catch (e) {
+    done(e)
+  }
+})
+
+passport.deserializeUser(async (user, done) => {
+  try {
+    const serialisedDetails = await redis.get(`user:${user.id}`)
+    const details = JSON.parse(serialisedDetails)
+    done(null, User.from(user).withDetails(details))
+  } catch (e) {
+    done(e, user)
+  }
+})
 
 const tokenVerifier = async (req, enabled = config.apis.oauth.verifyToken) => {
   const { user, verified } = req
@@ -44,15 +66,21 @@ const checkForTokenRefresh = (req, res, next) => {
   const { user } = req
   if (user && userHasExpiredToken(user.tokenExpiryTime)) {
     logger.info(`Token expiring for user: ${user.username} - attempting refresh`)
-    return refresh.requestNewAccessToken('oauth2', user.refreshToken, (err, accessToken, refreshToken) => {
+    return refresh.requestNewAccessToken('oauth2', user.refreshToken, (err, token, refreshToken) => {
       if (err) {
         logger.info(`Failed to refresh token for user: ${user.username}`)
         next(err)
       }
 
-      req.user = { ...user, accessToken, refreshToken, tokenExpiryTime: Date.now() + user.tokenLifetime }
-      req.session.passport.user = req.user
+      req.user = user.updateToken({
+        token,
+        refreshToken,
+        tokenExpiryTime: Date.now() + user.tokenLifetime,
+      })
+
+      req.session.passport.user = req.user.getSession()
       req.session.save()
+
       logger.info(`Token refreshed for user: ${user.username}`)
       next()
     })
@@ -110,14 +138,18 @@ const initializeAuth = () => {
       logger.info(`User logged in: ${params.user_name}}`)
       // Token expiry = 1hr, Refresh token = 12hr
       // OASys call for user information could live here?
-      done(null, {
-        token,
-        refreshToken,
-        tokenLifetime: params.expires_in,
-        tokenExpiryTime: Date.now() + params.expires_in,
-        username: params.user_name,
-        authSource: params.auth_source,
-      })
+      done(
+        null,
+        User.from({
+          id: params.user_id,
+          token,
+          refreshToken,
+          tokenLifetime: params.expires_in,
+          tokenExpiryTime: Date.now() + params.expires_in,
+        }).withDetails({
+          username: params.user_name,
+        }),
+      )
     },
   )
 

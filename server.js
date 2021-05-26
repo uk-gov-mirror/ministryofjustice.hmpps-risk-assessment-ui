@@ -15,7 +15,6 @@ const dateFilter = require('nunjucks-date-filter')
 const session = require('express-session')
 const helmet = require('helmet')
 const passport = require('passport')
-const redis = require('redis')
 const connectRedis = require('connect-redis')
 
 // Local dependencies
@@ -32,6 +31,7 @@ const { applicationInsights } = require('./common/config')
 const { encodeHTML, extractLink, doReplace } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
+const redis = require('./common/data/redis')
 
 // Global constants
 const { static: _static } = express
@@ -105,16 +105,9 @@ function initialiseGlobalMiddleware(app) {
     next()
   })
 
-  const redisClient = redis.createClient({
-    port: config.redis.port,
-    password: config.redis.password,
-    host: config.redis.host,
-    tls: config.redis.tls_enabled === 'true' ? {} : false,
-  })
-
   app.use(
     session({
-      store: new RedisStore({ client: redisClient }),
+      store: new RedisStore({ client: redis.client }),
       secret: config.sessionSecret,
       cookie: { secure: config.https, sameSite: 'lax', maxAge: 24 * 60 * 60 * 1000 }, // 24 hours
       resave: false, // redis implements touch so shouldn't need this

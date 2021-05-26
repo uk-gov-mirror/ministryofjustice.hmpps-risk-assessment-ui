@@ -1,6 +1,7 @@
 // @ts-check
 const logger = require('../logging/logger')
 const { getQuestionGroup } = require('../data/hmppsAssessmentApi')
+const { getApiToken } = require('../data/oauth')
 const { getReferenceDataListByCategory } = require('../data/offenderAssessmentApi')
 const { processReplacements } = require('../utils/util')
 
@@ -60,7 +61,7 @@ const usesStaticReferenceData = questionSchema =>
 const usesDynamicReferenceData = questionSchema =>
   questionSchema.referenceDataCategory && questionSchema.referenceDataCategory === 'FILTERED_REFERENCE_DATA'
 
-const applyStaticReferenceData = async (questionResponse, authorisationToken) => {
+const applyStaticReferenceData = async questionResponse => {
   const extractReferenceDataCategories = questionSchema => {
     if (questionSchema.type === 'group') {
       return questionSchema.contents.flatMap(extractReferenceDataCategories)
@@ -79,9 +80,11 @@ const applyStaticReferenceData = async (questionResponse, authorisationToken) =>
     return questionResponse
   }
 
+  const apiToken = await getApiToken()
+
   const referenceDataRequests = Array.from(referenceDataCategories).map(async category => ({
     category,
-    data: await getReferenceDataListByCategory(category, authorisationToken),
+    data: await getReferenceDataListByCategory(category, apiToken),
   }))
 
   const referenceDataResponses = await Promise.all(referenceDataRequests)
@@ -115,7 +118,7 @@ const applyStaticReferenceData = async (questionResponse, authorisationToken) =>
 module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, user }, res, next) => {
   try {
     const questionResponse = await getQuestionGroup(groupId, user?.token)
-    const hydratedQuestions = await applyStaticReferenceData(questionResponse, user?.token)
+    const hydratedQuestions = await applyStaticReferenceData(questionResponse)
 
     const thisQuestionGroup = hydratedQuestions.contents[subgroup].contents[page]
     const readOnlyToAttribute = q => {
