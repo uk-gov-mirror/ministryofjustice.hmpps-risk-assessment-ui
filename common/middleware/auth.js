@@ -1,6 +1,7 @@
 const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
+const { addSeconds } = require('date-fns')
 const { checkTokenIsActive, getUserEmail } = require('../data/oauth')
 const config = require('../config')
 const logger = require('../logging/logger')
@@ -64,7 +65,9 @@ const checkUserIsAuthenticated = (verifyToken = tokenVerifier) => {
   }
 }
 
-const userHasExpiredToken = (tokenExpiryTime, nowInSeconds = Date.now()) => tokenExpiryTime <= nowInSeconds
+const userHasExpiredToken = (tokenExpiryTime, nowInSeconds = Date.now()) => {
+  return tokenExpiryTime <= nowInSeconds
+}
 
 const checkForTokenRefresh = (req, res, next) => {
   const { user } = req
@@ -76,10 +79,12 @@ const checkForTokenRefresh = (req, res, next) => {
         return next(err)
       }
 
+      const now = new Date()
+
       req.user = user.updateToken({
         token,
         refreshToken,
-        tokenExpiryTime: Date.now() + user.tokenLifetime,
+        tokenExpiryTime: addSeconds(now, user.tokenLifetime - 60).valueOf(),
       })
 
       req.session.passport.user = req.user.getSession()
@@ -142,6 +147,7 @@ const initializeAuth = () => {
       logger.info(`User logged in: ${params.user_name}}`)
       // Token expiry = 1hr, Refresh token = 12hr
       // OASys call for user information could live here?
+      const now = new Date()
       done(
         null,
         User.from({
@@ -149,7 +155,7 @@ const initializeAuth = () => {
           token,
           refreshToken,
           tokenLifetime: params.expires_in,
-          tokenExpiryTime: Date.now() + params.expires_in,
+          tokenExpiryTime: addSeconds(now, params.expires_in - 60).valueOf(),
         }).withDetails({
           username: params.user_name,
         }),
