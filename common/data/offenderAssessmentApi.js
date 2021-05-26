@@ -20,7 +20,7 @@ const getData = (path, authorisationToken) => {
 
 const action = async (agent, authorisationToken) => {
   if (authorisationToken === undefined) {
-    return logger.warn('No authorisation token found when calling offenderAssessments API')
+    throw new Error('No authorisation token found when calling offenderAssessments API')
   }
 
   try {

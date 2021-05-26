@@ -79,7 +79,7 @@ const postData = (path, authorisationToken, data) => {
 
 const action = async (agent, authorisationToken) => {
   if (authorisationToken === undefined) {
-    return logger.warn('No authorisation token found when calling hmppsAssessments API')
+    throw new Error('No authorisation token found when calling hmppsAssessments API')
   }
 
   try {
