@@ -73,7 +73,7 @@ const checkForTokenRefresh = (req, res, next) => {
     return refresh.requestNewAccessToken('oauth2', user.refreshToken, (err, token, refreshToken) => {
       if (err) {
         logger.info(`Failed to refresh token for user: ${user.username}`)
-        next(err)
+        return next(err)
       }
 
       req.user = user.updateToken({
@@ -86,7 +86,7 @@ const checkForTokenRefresh = (req, res, next) => {
       req.session.save()
 
       logger.info(`Token refreshed for user: ${user.username}`)
-      next()
+      return next()
     })
   }
   return next()

@@ -1,13 +1,13 @@
 class User {
-  static from({ id, token, refreshToken, tokenLifetime, tokenExpiryTime, username, email } = {}) {
+  static from(other = {}) {
     const user = new User()
-    user.id = id
-    user.token = token
-    user.refreshToken = refreshToken
-    user.tokenLifetime = tokenLifetime
-    user.tokenExpiryTime = tokenExpiryTime
-    user.username = username
-    user.email = email
+    user.id = other.id
+    user.token = other.token
+    user.refreshToken = other.refreshToken
+    user.tokenLifetime = other.tokenLifetime
+    user.tokenExpiryTime = other.tokenExpiryTime
+    user.username = other.username
+    user.email = other.email
     return user
   }
 
