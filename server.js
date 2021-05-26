@@ -154,6 +154,8 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
   nunjucksEnvironment.addFilter('extractLink', str => extractLink(str))
   nunjucksEnvironment.addFilter('doReplace', (str, target, replacement) => doReplace(str, target, replacement))
+  // typeof for array, using native JS Array.isArray()
+  nunjucksEnvironment.addFilter('isArr', str => Array.isArray(str))
 
   // Set view engine
   app.set('view engine', 'njk')

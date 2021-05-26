@@ -172,6 +172,43 @@
                     "questionCode": "129.3",
                     "answerType": "text",
                     "questionText": "Child's address"
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "946091d2-4038-4e2b-9283-83cc4883cc4",
+                    "questionCode": "129.4",
+                    "answerType": "date",
+                    "questionText": "Date of birth"
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "946091d2-4038-4e2b-9283-83cc4883cc5",
+                    "questionCode": "129.5",
+                    "answerType": "checkbox",
+                    "questionText": "Type",
+                    "displayOrder": "1",
+                    "mandatory": "no",
+                    "helpText": "Select all that apply",
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",
+                        "answerSchemaCode": "SR15.1.2.1",
+                        "value": "physical",
+                        "text": "Physical"
+                      },
+                      {
+                        "answerSchemaUuid": "1234444444-4444-4444-4444-444444444445",
+                        "answerSchemaCode": "SR15.1.2.2",
+                        "value": "mental",
+                        "text": "Mental"
+                      },
+                      {
+                        "answerSchemaUuid": "1334444444-4444-4444-4444-444444444445",
+                        "answerSchemaCode": "SR15.1.2.2",
+                        "value": "emotional",
+                        "text": "Emotional"
+                      }
+                    ]
                   }
                 ]
               },

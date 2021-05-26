@@ -8,6 +8,19 @@
 {%- from "node_modules/govuk-frontend/govuk/components/button/macro.njk" import govukButton -%}
 {%- from "node_modules/govuk-frontend/govuk/components/character-count/macro.njk" import govukCharacterCount -%}
 
+{% macro renderReadonlyField(question, row='0') %}
+  {% if question.answer | isArr %}
+    {% set value = question.answer[row] %}
+  {% else %}
+    {% set value = question.answer %}
+  {% endif %}
+
+  {% switch question.answerType %}
+  {% case 'date' %}{{ value | date("DD MMMM YYYY") }}
+  {% default %}{{ value }}
+  {% endswitch %}
+{% endmacro %}
+
 
 {# templates for each question type #}
 {% set questionAnswer = bodyAnswer or question.answer or '' %}
@@ -27,9 +40,14 @@
 
 {% if question.type == 'table' or question.type == 'TableQuestionDto'%}
   {% set numColumns = question.contents.length %}
-  {% set numRows = question.contents[0].answer.length %}
-  {% if not numRows %}
+
+  {% if question.contents[0].answer | isArr %}
+    {% set numRows = question.contents[0].answer.length %}
+  {% else %}
     {% set numRows = 1 %}
+  {% endif %}
+
+  {% if not question.contents[0].answer %}
     {% set defaultAnswer = 'n/a' %}
   {% endif %}
 
@@ -50,14 +68,15 @@
     <tr class="govuk-table__row">
       {% for column in range(0, numColumns) %}
         {% if 'presentation:' not in  question.contents[column].answerType %}
-          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}{{ question.contents[column].answer[row] }}{% endif %}</td>
-        {% endif %}
+          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}
+              {{ renderReadonlyField(question.contents[column], row) }}</td>
+        {% endif %}{% endif %}
       {% endfor %}
       <td class="govuk-table__cell">
         <ul class="govuk-list">
           {% if not defaultAnswer %}
-          <li><a class="govuk-link--no-visited-state" href="edit.html">Edit</a></li>
-          <li><a class="govuk-link--no-visited-state" href="delete.html">Remove</a></li>
+            <li><a class="govuk-link--no-visited-state" href="edit.html">Edit</a></li>
+            <li><a class="govuk-link--no-visited-state" href="delete.html">Remove</a></li>
           {% endif %}
         </ul>
       </td>

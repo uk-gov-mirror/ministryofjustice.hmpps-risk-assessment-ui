@@ -17,9 +17,20 @@ const annotateWithAnswers = (questions, answers, body) => {
       const answerText = []
       answerValues = []
       answer?.forEach(ans => {
-        const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.value === ans)
-        answerValues.push(thisAnswer?.value)
-        answerText.push(thisAnswer?.text)
+        if (Array.isArray(ans)) {
+          const thisElementAnswer = []
+          ans.forEach(arrayAns => {
+            const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.value === arrayAns)
+            thisElementAnswer.push(thisAnswer.text)
+          })
+          answerValues.push(thisElementAnswer)
+          answerText.push(thisElementAnswer)
+          displayAnswer = answerValues
+        } else {
+          const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.value === ans)
+          answerValues.push(thisAnswer?.value)
+          answerText.push(thisAnswer?.text)
+        }
       })
 
       answerValues = body[`id-${q.questionId}`] || answerValues
