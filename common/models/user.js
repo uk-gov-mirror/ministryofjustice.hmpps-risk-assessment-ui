@@ -24,7 +24,7 @@ class User {
     return this
   }
 
-  setEmail(email) {
+  setEmail(email = {}) {
     this.email = email
   }
 

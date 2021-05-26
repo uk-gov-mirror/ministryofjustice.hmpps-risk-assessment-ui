@@ -354,6 +354,32 @@ describe('Auth', () => {
       })
     })
 
+    it('handles a cache miss from Redis', async () => {
+      expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
+      const [deserializer] = passport.deserializeUser.mock.calls[0]
+      expect(typeof deserializer).toBe('function')
+
+      redis.get.mockResolvedValue(null)
+      const callback = jest.fn()
+
+      await deserializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo', email: 'foo@bar.baz' }), callback)
+
+      expect(redis.get).toHaveBeenCalledWith('user:1')
+      expect(callback).toHaveBeenCalled()
+
+      const [error, user] = callback.mock.calls[0]
+
+      expect(error).toBeNull()
+      expect(user.getDetails()).toEqual({
+        username: 'Foo',
+        email: 'foo@bar.baz',
+      })
+      expect(user.getSession()).toEqual({
+        id: 1,
+        token: 'FOO_TOKEN',
+      })
+    })
+
     it('passes errors to the callback', async () => {
       expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
       const [deserializer] = passport.deserializeUser.mock.calls[0]

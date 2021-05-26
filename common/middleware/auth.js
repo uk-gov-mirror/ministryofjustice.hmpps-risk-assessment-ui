@@ -21,13 +21,17 @@ passport.serializeUser(async (user, done) => {
   }
 })
 
-passport.deserializeUser(async (user, done) => {
+passport.deserializeUser(async (serializedUser, done) => {
   try {
-    const serialisedDetails = await redis.get(`user:${user.id}`)
-    const details = JSON.parse(serialisedDetails)
-    done(null, User.from(user).withDetails(details))
+    const user = User.from(serializedUser)
+    const serializedDetails = await redis.get(`user:${user.id}`)
+    if (serializedDetails !== null) {
+      const details = JSON.parse(serializedDetails)
+      user.withDetails(details)
+    }
+    done(null, user)
   } catch (e) {
-    done(e, user)
+    done(e, serializedUser)
   }
 })
 
