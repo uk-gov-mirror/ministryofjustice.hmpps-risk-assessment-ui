@@ -2,21 +2,37 @@ const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
 const { addSeconds } = require('date-fns')
-const { checkTokenIsActive, getUserEmail } = require('../data/oauth')
+const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
+const { getUserByEmail } = require('../data/offenderAssessmentApi')
 const config = require('../config')
 const logger = require('../logging/logger')
 const redis = require('../data/redis')
 const User = require('../models/user')
 const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('../utils/constants')
 
+const cacheUserDetails = async user => {
+  if (!user.email) {
+    const email = await getUserEmail(user.token)
+    const apiToken = await getApiToken()
+    const oasysUser = await getUserByEmail(email, apiToken)
+
+    const userDetails = {
+      isActive: oasysUser?.accountStatus === 'ACTIVE',
+      email: oasysUser?.email,
+      oasysUserCode: oasysUser?.oasysUserCode,
+      username: `${oasysUser?.userForename1} ${oasysUser?.userFamilyName}`,
+    }
+
+    await redis.set(`user:${user.id}`, JSON.stringify(userDetails), 'EX', REFRESH_TOKEN_LIFETIME_SECONDS)
+
+    return userDetails
+  }
+  return user.getDetails()
+}
+
 passport.serializeUser(async (user, done) => {
   try {
-    if (!user.email) {
-      const email = await getUserEmail(user.token)
-      user.setEmail(email)
-    }
-    const serialisedDetails = JSON.stringify(user.getDetails())
-    await redis.set(`user:${user.id}`, serialisedDetails, 'EX', REFRESH_TOKEN_LIFETIME_SECONDS)
+    await cacheUserDetails(user)
     done(null, user.getSession())
   } catch (e) {
     done(e)
@@ -27,10 +43,10 @@ passport.deserializeUser(async (serializedUser, done) => {
   try {
     const user = User.from(serializedUser)
     const serializedDetails = await redis.get(`user:${user.id}`)
-    if (serializedDetails !== null) {
-      const details = JSON.parse(serializedDetails)
-      user.withDetails(details)
-    }
+
+    const details = serializedDetails !== null ? JSON.parse(serializedDetails) : await cacheUserDetails(user)
+
+    user.withDetails(details)
     done(null, user)
   } catch (e) {
     done(e, serializedUser)
@@ -154,8 +170,6 @@ const initializeAuth = () => {
           refreshToken,
           tokenLifetime: params.expires_in,
           tokenExpiryTime: addSeconds(now, params.expires_in - SIXTY_SECONDS).valueOf(),
-        }).withDetails({
-          username: params.user_name,
         }),
       )
     },

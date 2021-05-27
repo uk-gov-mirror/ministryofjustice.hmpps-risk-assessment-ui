@@ -1,7 +1,8 @@
 const refresh = require('passport-oauth2-refresh')
 const passport = require('passport')
 const auth = require('./auth')
-const { checkTokenIsActive, getUserEmail } = require('../data/oauth')
+const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
+const { getUserByEmail } = require('../data/offenderAssessmentApi')
 const redis = require('../data/redis')
 const User = require('../models/user')
 
@@ -10,6 +11,10 @@ jest.mock('passport')
 jest.mock('../data/oauth', () => ({
   checkTokenIsActive: jest.fn(),
   getUserEmail: jest.fn(),
+  getApiToken: jest.fn(),
+}))
+jest.mock('../data/offenderAssessmentApi', () => ({
+  getUserByEmail: jest.fn(),
 }))
 jest.mock('../data/redis', () => ({
   get: jest.fn(),
@@ -19,6 +24,8 @@ jest.mock('../data/redis', () => ({
 describe('Auth', () => {
   beforeEach(() => {
     getUserEmail.mockReset()
+    getApiToken.mockReset()
+    getUserByEmail.mockReset()
     redis.get.mockReset()
     redis.set.mockReset()
   })
@@ -287,13 +294,27 @@ describe('Auth', () => {
       expect(typeof serializer).toBe('function')
 
       getUserEmail.mockResolvedValue('foo@bar.baz')
+      getApiToken.mockResolvedValue('BAR_TOKEN')
+      getUserByEmail.mockResolvedValue({
+        oasysUserCode: 'USER_CODE',
+        userForename1: 'Test',
+        userFamilyName: 'User',
+        email: 'foo@bar.baz',
+        accountStatus: 'ACTIVE',
+      })
       const callback = jest.fn()
 
       await serializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
       // We grab the user email
       expect(getUserEmail).toHaveBeenCalledWith('FOO_TOKEN')
+      expect(getUserByEmail).toHaveBeenCalledWith('foo@bar.baz', 'BAR_TOKEN')
       // Persist user details to Redis and key by the user's ID
-      expect(redis.set).toHaveBeenCalledWith('user:1', '{"email":"foo@bar.baz","username":"Foo"}', 'EX', 43200)
+      expect(redis.set).toHaveBeenCalledWith(
+        'user:1',
+        '{"isActive":true,"email":"foo@bar.baz","oasysUserCode":"USER_CODE","username":"Test User"}',
+        'EX',
+        43200,
+      )
       // Persist the user token to the session
       expect(callback).toHaveBeenCalledWith(null, { id: 1, token: 'FOO_TOKEN' })
     })
@@ -306,10 +327,13 @@ describe('Auth', () => {
       getUserEmail.mockResolvedValue('foo@bar.baz')
       const callback = jest.fn()
 
-      await serializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo', email: 'foo@bar.baz' }), callback)
+      await serializer(
+        User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }).withDetails({ email: 'foo@bar.baz' }),
+        callback,
+      )
       // We grab the user email
       expect(getUserEmail).not.toHaveBeenCalled()
-      expect(redis.set).toHaveBeenCalled()
+      expect(redis.set).not.toHaveBeenCalled()
       expect(callback).toHaveBeenCalled()
     })
 
@@ -354,15 +378,24 @@ describe('Auth', () => {
       })
     })
 
-    it('handles a cache miss from Redis', async () => {
+    it('handles a cache miss from Redis by fetching user details', async () => {
       expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
       const [deserializer] = passport.deserializeUser.mock.calls[0]
       expect(typeof deserializer).toBe('function')
 
       redis.get.mockResolvedValue(null)
+      getUserEmail.mockResolvedValue('foo@bar.baz')
+      getApiToken.mockResolvedValue('BAR_TOKEN')
+      getUserByEmail.mockResolvedValue({
+        oasysUserCode: 'USER_CODE',
+        userForename1: 'Test',
+        userFamilyName: 'User',
+        email: 'foo@bar.baz',
+        accountStatus: 'ACTIVE',
+      })
       const callback = jest.fn()
 
-      await deserializer(User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo', email: 'foo@bar.baz' }), callback)
+      await deserializer(User.from({ id: 1, token: 'FOO_TOKEN' }), callback)
 
       expect(redis.get).toHaveBeenCalledWith('user:1')
       expect(callback).toHaveBeenCalled()
@@ -371,8 +404,10 @@ describe('Auth', () => {
 
       expect(error).toBeNull()
       expect(user.getDetails()).toEqual({
-        username: 'Foo',
+        username: 'Test User',
         email: 'foo@bar.baz',
+        isActive: true,
+        oasysUserCode: 'USER_CODE',
       })
       expect(user.getSession()).toEqual({
         id: 1,

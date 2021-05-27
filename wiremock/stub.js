@@ -15,6 +15,7 @@ const { stubGetAssessmentFromDelius, stubPostAssessmentFromDelius } = require('.
 const { stubStart } = require('./start')
 const { stubReferenceData } = require('./referenceData')
 const { stubGetToken } = require('./oauth')
+const { stubOasysUser } = require('./oasysUser')
 
 async function stub() {
   await resetStubs()
@@ -46,6 +47,7 @@ async function stub() {
   await stubGetAssessments()
   await stubGetQuestionGroup()
   await stubReferenceData()
+  await stubOasysUser()
   stubOffenderDetails()
 }
 

@@ -12,10 +12,21 @@ const getReferenceDataListByCategory = (category, authorisationToken) => {
   return getData(path, authorisationToken)
 }
 
+const getUserByEmail = (email, authorisationToken) => {
+  const path = `${url}/authentication/user/email`
+  return postData(path, authorisationToken, { email })
+}
+
 const getData = (path, authorisationToken) => {
   logger.info(`Calling offenderAssessments API with GET: ${path}`)
 
   return action(superagent.get(path), authorisationToken).then(([_, body]) => body)
+}
+
+const postData = (path, authorisationToken, data) => {
+  logger.info(`Calling hmppsAssessments API with POST: ${path}`)
+
+  return action(superagent.post(path).send(data), authorisationToken).then(([_, body]) => body)
 }
 
 const action = async (agent, authorisationToken) => {
@@ -55,4 +66,5 @@ const logError = error => {
 
 module.exports = {
   getReferenceDataListByCategory,
+  getUserByEmail,
 }

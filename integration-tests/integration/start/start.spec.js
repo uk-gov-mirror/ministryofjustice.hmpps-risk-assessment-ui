@@ -16,7 +16,7 @@ context('Start page display', () => {
     cy.visit('/start')
     cy.url().should('include', 'start')
     StartPage.verifyOnPage()
-    cy.get('.moj-header__navigation-item').should('contain.text', 'TEST_USER')
+    cy.get('.moj-header__navigation-item').should('contain.text', 'Ray Arnold')
   })
 
   it('Has a link to logout', () => {

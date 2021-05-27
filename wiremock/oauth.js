@@ -5,7 +5,7 @@ const stubOauth = () => {
   stubFor({
     request: {
       method: 'POST',
-      urlPattern: `/oauth/token\\?grant_type=client_credentials`,
+      urlPattern: `/auth/oauth/token\\?grant_type=client_credentials`,
     },
     response: {
       headers: {

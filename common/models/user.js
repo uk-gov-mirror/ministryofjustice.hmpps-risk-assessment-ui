@@ -6,8 +6,6 @@ class User {
     user.refreshToken = other.refreshToken
     user.tokenLifetime = other.tokenLifetime
     user.tokenExpiryTime = other.tokenExpiryTime
-    user.username = other.username
-    user.email = other.email
     return user
   }
 
@@ -18,19 +16,19 @@ class User {
     return this
   }
 
-  withDetails({ email, username } = {}) {
+  withDetails({ isActive, email, oasysUserCode, username } = {}) {
+    this.isActive = isActive
     this.email = email
+    this.oasysUserCode = oasysUserCode
     this.username = username
     return this
   }
 
-  setEmail(email = {}) {
-    this.email = email
-  }
-
   getDetails() {
     return {
+      isActive: this.isActive,
       email: this.email,
+      oasysUserCode: this.oasysUserCode,
       username: this.username,
     }
   }
