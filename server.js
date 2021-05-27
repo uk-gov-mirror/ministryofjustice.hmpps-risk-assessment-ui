@@ -32,6 +32,7 @@ const { encodeHTML, extractLink, doReplace } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
 const redis = require('./common/data/redis')
+const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('./common/utils/constants')
 
 // Global constants
 const { static: _static } = express
@@ -110,7 +111,11 @@ function initialiseGlobalMiddleware(app) {
     session({
       store: new RedisStore({ client: redis.client }),
       secret: config.sessionSecret,
-      cookie: { secure: config.https, sameSite: 'lax', maxAge: 24 * 60 * 60 * 1000 }, // 24 hours
+      cookie: {
+        secure: config.https,
+        sameSite: 'lax',
+        maxAge: (REFRESH_TOKEN_LIFETIME_SECONDS - SIXTY_SECONDS) * 1000,
+      },
       resave: false, // redis implements touch so shouldn't need this
       saveUninitialized: false,
       rolling: true,

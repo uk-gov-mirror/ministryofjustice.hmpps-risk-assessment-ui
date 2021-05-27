@@ -8,6 +8,7 @@ const {
   },
 } = require('../config')
 const redis = require('./redis')
+const { SIXTY_SECONDS } = require('../utils/constants')
 
 const checkTokenIsActive = async token => {
   return superagent
@@ -51,7 +52,7 @@ const getApiToken = async () => {
       .timeout(timeout)
       .then(response => {
         const { access_token: token, expires_in: expiresIn } = response.body
-        redis.set('ui:apiToken', token, 'EX', expiresIn)
+        redis.set('ui:apiToken', token, 'EX', expiresIn - SIXTY_SECONDS)
         return token
       })
   } catch (error) {

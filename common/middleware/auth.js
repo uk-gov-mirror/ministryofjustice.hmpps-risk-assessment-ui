@@ -7,6 +7,7 @@ const config = require('../config')
 const logger = require('../logging/logger')
 const redis = require('../data/redis')
 const User = require('../models/user')
+const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('../utils/constants')
 
 passport.serializeUser(async (user, done) => {
   try {
@@ -15,7 +16,7 @@ passport.serializeUser(async (user, done) => {
       user.setEmail(email)
     }
     const serialisedDetails = JSON.stringify(user.getDetails())
-    await redis.set(`user:${user.id}`, serialisedDetails, 'EX', 12 * 60 * 60)
+    await redis.set(`user:${user.id}`, serialisedDetails, 'EX', REFRESH_TOKEN_LIFETIME_SECONDS)
     done(null, user.getSession())
   } catch (e) {
     done(e)
@@ -65,10 +66,7 @@ const checkUserIsAuthenticated = (verifyToken = tokenVerifier) => {
   }
 }
 
-const userHasExpiredToken = (tokenExpiryTime, nowInSeconds = Date.now()) => {
-  logger.info(`userHasExpiredToken tokenExpiryTime: ${tokenExpiryTime} nowInSeconds:${nowInSeconds}`)
-  return tokenExpiryTime <= nowInSeconds
-}
+const userHasExpiredToken = (tokenExpiryTime, nowInSeconds = Date.now()) => tokenExpiryTime <= nowInSeconds
 
 const checkForTokenRefresh = (req, res, next) => {
   const { user } = req
@@ -85,7 +83,7 @@ const checkForTokenRefresh = (req, res, next) => {
       req.user = user.updateToken({
         token,
         refreshToken,
-        tokenExpiryTime: addSeconds(now, user.tokenLifetime - 60).valueOf(),
+        tokenExpiryTime: addSeconds(now, user.tokenLifetime - SIXTY_SECONDS).valueOf(),
       })
 
       req.session.passport.user = req.user.getSession()
@@ -147,7 +145,6 @@ const initializeAuth = () => {
     (token, refreshToken, params, profile, done) => {
       logger.info(`User logged in: ${params.user_name}}`)
       // Token expiry = 1hr, Refresh token = 12hr
-      // OASys call for user information could live here?
       const now = new Date()
       done(
         null,
@@ -156,7 +153,7 @@ const initializeAuth = () => {
           token,
           refreshToken,
           tokenLifetime: params.expires_in,
-          tokenExpiryTime: addSeconds(now, params.expires_in - 60).valueOf(),
+          tokenExpiryTime: addSeconds(now, params.expires_in - SIXTY_SECONDS).valueOf(),
         }).withDetails({
           username: params.user_name,
         }),
