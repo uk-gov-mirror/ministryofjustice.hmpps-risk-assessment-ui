@@ -66,6 +66,7 @@ const checkUserIsAuthenticated = (verifyToken = tokenVerifier) => {
 }
 
 const userHasExpiredToken = (tokenExpiryTime, nowInSeconds = Date.now()) => {
+  logger.info(`userHasExpiredToken tokenExpiryTime: ${tokenExpiryTime} nowInSeconds:${nowInSeconds}`)
   return tokenExpiryTime <= nowInSeconds
 }
 
@@ -75,7 +76,7 @@ const checkForTokenRefresh = (req, res, next) => {
     logger.info(`Token expiring for user: ${user.username} - attempting refresh`)
     return refresh.requestNewAccessToken('oauth2', user.refreshToken, (err, token, refreshToken) => {
       if (err) {
-        logger.info(`Failed to refresh token for user: ${user.username}`)
+        logger.error(`Failed to refresh token for user: ${user.username} with error: ${err}`)
         return next(err)
       }
 
