@@ -61,4 +61,7 @@ env:
   - name: INGRESS_URL
     value: 'https://{{ .Values.ingress.host }}'
 
+  - name: SHOW_DETAILED_ERRORS
+    value: {{ .Values.env.SHOW_DETAILED_ERRORS | quote }}
+
 {{- end -}}

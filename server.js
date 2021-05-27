@@ -95,6 +95,7 @@ function initialiseGlobalMiddleware(app) {
 
   app.use((req, res, next) => {
     res.locals.asset_path = '/public/' // eslint-disable-line camelcase
+    res.locals.showDetailedErrors = process.env.SHOW_DETAILED_ERRORS === 'true'
     noCache(res)
     next()
   })
