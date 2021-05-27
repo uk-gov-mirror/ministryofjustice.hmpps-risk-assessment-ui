@@ -26,7 +26,7 @@ const displayQuestionGroup = async (
       bodyAnswers: { ...body },
       assessmentId,
       heading: questionGroup.title,
-      subheading: questionGroup.contents[subIndex].title,
+      subheading: questionGroup.contents[subIndex]?.title,
       groupId,
       questions,
       errors,
