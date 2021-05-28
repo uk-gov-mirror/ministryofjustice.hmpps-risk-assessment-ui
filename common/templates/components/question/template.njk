@@ -75,8 +75,8 @@
       <td class="govuk-table__cell">
         <ul class="govuk-list">
           {% if not defaultAnswer %}
-            <li><a class="govuk-link--no-visited-state" href="edit.html">Edit</a></li>
-            <li><a class="govuk-link--no-visited-state" href="delete.html">Remove</a></li>
+            <li><a class="govuk-link--no-visited-state" aria-label="Edit {{ renderReadonlyField(question.contents[0], row) }}" href="{{ requested_url }}/edit/{{ question.tableCode }}/{{ loop.index0 }}">Edit</a></li>
+            <li><a class="govuk-link--no-visited-state" aria-label="Delete {{ renderReadonlyField(question.contents[0], row) }}"href="{{ requested_url }}/delete/{{ question.tableCode }}/{{ loop.index0 }}">Remove</a></li>
           {% endif %}
         </ul>
       </td>

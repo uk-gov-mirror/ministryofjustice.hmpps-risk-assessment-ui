@@ -18,6 +18,9 @@ const { displayQuestionGroup } = require('./questionGroup/get.controller')
 const { displayAddRow } = require('./addRow/get.controller')
 const { saveTableRow } = require('./addRow/post.controller')
 
+const { displayDeleteRow } = require('./deleteRow/get.controller')
+const { removeTableRow } = require('./deleteRow/post.controller')
+
 const { displayOverview } = require('./summary/get.controller')
 const { completeAssessment } = require('./summary/post.controller')
 const { saveQuestionGroup } = require('./questionGroup/post.controller')
@@ -113,6 +116,14 @@ module.exports = app => {
     validate,
     saveTableRow,
   )
+
+  app.get(
+    `/:assessmentId/questiongroup/:groupId/:subgroup/:page/delete/:tableName/:tableRow`,
+    getOffenderDetails,
+    getQuestionGroup,
+    displayDeleteRow,
+  )
+  app.post('/:assessmentId/questiongroup/:groupId/:subgroup/:page/delete/:tableName/:tableRow', removeTableRow)
 
   app.post('/:assessmentId/questiongroup/:groupId/summary', getOffenderDetails, completeAssessment)
 

@@ -52,6 +52,11 @@ const postTableRow = (assessmentId, episodeId, tableName, answers, authorisation
   return postData(path, authorisationToken, answers)
 }
 
+const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisationToken) => {
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}/${tableRow}`
+  return deleteData(path, authorisationToken)
+}
+
 const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, authorisationToken) => {
   const path = `${url}/referencedata/filtered`
   const requestBody = {
@@ -75,6 +80,12 @@ const postData = (path, authorisationToken, data) => {
   logger.info(`Calling hmppsAssessments API with POST: ${path}`)
 
   return action(superagent.post(path).send(data), authorisationToken)
+}
+
+const deleteData = (path, authorisationToken) => {
+  logger.info(`Calling hmppsAssessments API with DELETE: ${path}`)
+
+  return action(superagent.delete(path), authorisationToken)
 }
 
 const action = async (agent, authorisationToken) => {
@@ -123,4 +134,5 @@ module.exports = {
   postCompleteAssessment,
   getFilteredReferenceData,
   postTableRow,
+  deleteTableRow,
 }

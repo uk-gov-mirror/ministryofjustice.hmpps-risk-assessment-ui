@@ -194,6 +194,20 @@ const stubQuestionsList = () => {
     },
   })
 }
+const stubDeleteTableRow = () => {
+  stubFor({
+    request: {
+      method: 'DELETE',
+      urlPattern: `/assessments/.+?/episodes/.+?/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+    },
+  })
+}
 const stubAssessmentEpisodes = () => {
   stubFor({
     request: {
@@ -250,6 +264,9 @@ const stubEpisodes = async () => {
 const stubSupervision = async () => {
   await stubAssessmentSupervision()
 }
+const stubRemoveTableRow = async () => {
+  await stubDeleteTableRow()
+}
 
 module.exports = {
   stubSupervision,
@@ -262,4 +279,5 @@ module.exports = {
   stubAssessmentComplete,
   stubGetAssessments,
   stubGetQuestionGroup,
+  stubRemoveTableRow,
 }

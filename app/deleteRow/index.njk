@@ -1,0 +1,82 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+
+{% set errorHeading = "Error - " + submitText %}
+
+{% block pageTitle %}
+    {% if errors | length %}
+        {{ errorHeading }}
+    {% else %}
+        {{ submitText }}
+    {% endif %}
+{% endblock %}
+
+{% block beforeContent %}
+    <div role="navigation" aria-label="back">
+        {{ govukBackLink({
+            href: returnUrl,
+            text: "Back"
+        }) }}
+    </div>
+{% endblock %}
+
+{% block content %}
+    {# include errorSummary partial #}
+    {{ super() }}
+
+    <span class="govuk-caption-xl">{{ navigation.parent }}</span>
+    <h1 class="govuk-heading-xl">
+        Delete {{ rowDescriptor }}'s details
+    </h1>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+
+            <form method="post" id="{{ groupId }}" novalidate>
+
+                {% set legendText = '' %}
+                {{ govukRadios({
+                    classes: "govuk-radios--inline",
+                    idPrefix: "confirm-delete",
+                    name: "confirm-delete",
+                    fieldset: {
+                        legend: {
+                            text: "Are you sure you want to delete " + rowDescriptor + "?",
+                            isPageHeading: true,
+                            classes: "govuk-fieldset__legend--l"
+                        }
+                    },
+                    items: [
+                        {
+                            value: "yes",
+                            text: "Yes"
+                        },
+                        {
+                            value: "no",
+                            text: "No"
+                        }
+                    ]
+                }) }}
+
+                <div class="questiongroup-action-buttons">
+                    {{ govukButton({
+                        text: submitText,
+                        classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                    }) }}
+
+                    {{ govukButton({
+                        text: 'Cancel',
+                        classes: 'govuk-button--secondary',
+                        href: returnUrl
+                    }) }}
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
