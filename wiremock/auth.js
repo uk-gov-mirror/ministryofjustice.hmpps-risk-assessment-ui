@@ -135,7 +135,7 @@ const stubEmail = username =>
   stubFor({
     request: {
       method: 'GET',
-      url: `/auth/api/user/${encodeURI(username)}/email`,
+      url: `/auth/api/me/email`,
     },
     response: {
       status: 200,
@@ -143,7 +143,6 @@ const stubEmail = username =>
         'Content-Type': 'application/json;charset=UTF-8',
       },
       jsonBody: {
-        username,
         email: `${username}@gov.uk`,
       },
     },

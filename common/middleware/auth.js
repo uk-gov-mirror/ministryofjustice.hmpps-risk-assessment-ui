@@ -9,6 +9,7 @@ const logger = require('../logging/logger')
 const redis = require('../data/redis')
 const User = require('../models/user')
 const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('../utils/constants')
+const { AuthenticationError } = require('../utils/errors')
 
 const cacheUserDetails = async user => {
   if (!user.email) {
@@ -23,6 +24,10 @@ const cacheUserDetails = async user => {
       username: `${oasysUser?.userForename1} ${oasysUser?.userFamilyName}`,
     }
 
+    if (!userDetails.isActive) {
+      throw new AuthenticationError('OASys account not active')
+    }
+
     await redis.set(`user:${user.id}`, JSON.stringify(userDetails), 'EX', REFRESH_TOKEN_LIFETIME_SECONDS)
 
     return userDetails
@@ -34,8 +39,8 @@ passport.serializeUser(async (user, done) => {
   try {
     await cacheUserDetails(user)
     done(null, user.getSession())
-  } catch (e) {
-    done(e)
+  } catch (error) {
+    done(error)
   }
 })
 
@@ -48,8 +53,8 @@ passport.deserializeUser(async (serializedUser, done) => {
 
     user.withDetails(details)
     done(null, user)
-  } catch (e) {
-    done(e, serializedUser)
+  } catch (error) {
+    done(error)
   }
 })
 
@@ -116,7 +121,8 @@ const handleLoginCallback = () => {
   return (req, res, next) => {
     passport.authenticate('oauth2', {
       successReturnToOrRedirect: req.session.returnUrl || '/',
-      failureRedirect: '/login/error',
+      failureRedirect: '/login',
+      failureFlash: true,
     })(req, res, next)
   }
 }

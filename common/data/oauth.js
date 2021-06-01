@@ -9,6 +9,7 @@ const {
 } = require('../config')
 const redis = require('./redis')
 const { SIXTY_SECONDS } = require('../utils/constants')
+const { AuthenticationError } = require('../utils/errors')
 
 const checkTokenIsActive = async token => {
   return superagent
@@ -31,6 +32,7 @@ const getUserEmail = async token => {
     })
     .catch(error => {
       logger.error(`Unable to get user email: ${error.message}`)
+      throw new AuthenticationError('Unable to fetch user details')
     })
 }
 

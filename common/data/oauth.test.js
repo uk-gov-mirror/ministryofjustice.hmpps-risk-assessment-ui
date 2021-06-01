@@ -1,4 +1,5 @@
 const nock = require('nock')
+const { AuthenticationError } = require('../utils/errors')
 const { getApiToken, getUserEmail, checkTokenIsActive } = require('./oauth')
 const redis = require('./redis')
 
@@ -64,15 +65,13 @@ describe('Oauth', () => {
       expect(email).toEqual('foo@bar.baz')
     })
 
-    it('swallows exceptions', async () => {
+    it('Throws AuthenticationError when unable to find user', async () => {
       authService
         .get('/api/me/email')
         .matchHeader('authorization', 'Bearer FOO_TOKEN')
-        .reply(500)
+        .reply(404)
 
-      const email = await getUserEmail('FOO_TOKEN')
-
-      expect(email).toEqual(undefined)
+      await expect(getUserEmail('FOO_TOKEN')).rejects.toThrow(new AuthenticationError('Unable to fetch user details'))
     })
   })
 

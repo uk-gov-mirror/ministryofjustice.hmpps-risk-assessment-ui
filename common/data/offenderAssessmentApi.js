@@ -1,6 +1,7 @@
 const superagent = require('superagent')
 const logger = require('../logging/logger')
 const { getCorrelationId } = require('../utils/util')
+const { AuthenticationError } = require('../utils/errors')
 const {
   apis: {
     offenderAssessments: { timeout, url },
@@ -12,9 +13,16 @@ const getReferenceDataListByCategory = (category, authorisationToken) => {
   return getData(path, authorisationToken)
 }
 
-const getUserByEmail = (email, authorisationToken) => {
-  const path = `${url}/authentication/user/email`
-  return postData(path, authorisationToken, { email })
+const getUserByEmail = async (email, authorisationToken) => {
+  try {
+    const path = `${url}/authentication/user/email`
+    return await postData(path, authorisationToken, { email })
+  } catch (error) {
+    if (error.status === 404) {
+      throw new AuthenticationError('OASys account not found')
+    }
+    throw new AuthenticationError('Unable to fetch OASys user details')
+  }
 }
 
 const getData = (path, authorisationToken) => {

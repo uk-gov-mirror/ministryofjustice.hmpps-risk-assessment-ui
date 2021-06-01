@@ -70,7 +70,17 @@ module.exports = app => {
   app.get('/login', passport.authenticate('oauth2'))
   app.get('/login/callback', handleLoginCallback())
   app.get('/logout', handleLogout())
-  app.get('/login/error', (req, res) => res.status(401).render('app/error', { error: 'Unable to sign in' }))
+  app.use(['/login', '/logout'], (error, req, res, next) => {
+    req.logout()
+    req.session.destroy(() => {
+      res.status(error.status || 500)
+      res.render('app/error', {
+        heading: 'Something went wrong',
+        subHeading: 'We are unable to sign you in at this time',
+        error,
+      })
+    })
+  })
 
   app.use(checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
 
@@ -135,5 +145,16 @@ module.exports = app => {
   app.post('/assessment-from-delius', startAssessmentFromForm)
   app.post('/assessment-from-delius/:assessmentType/crn/:crn/event/:deliusEventId', startAssessmentFromCrn)
 
-  app.get('*', (req, res) => res.status(404).render('app/error', { error: '404, Page Not Found' }))
+  app.use((error, req, res, next) =>
+    res.render('app/error', {
+      subHeading: 'Something unexpected happened',
+      error,
+    }),
+  )
+
+  app.get('*', (req, res) =>
+    res.status(404).render('app/error', {
+      subHeading: "We're unable to find the page you're looking for",
+    }),
+  )
 }

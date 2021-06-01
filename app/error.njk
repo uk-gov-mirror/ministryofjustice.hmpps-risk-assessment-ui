@@ -9,10 +9,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
-        Oh dear!
+        {{ heading | default("Oh dear!") }}
       </h1>
       <h3 class="govuk-heading-m">
-        Something went wrong.
+        {{ subHeading | default("Something went wrong") }}
       <h3>
       <p class="govuk-body">
       {% if showDetailedErrors %}
@@ -26,7 +26,7 @@
           </div>
         {% endif %}
       {% else %}
-        {{ error }}
+        {{ error.message }}
       {% endif %}
       </p>
     </div>
