@@ -24,6 +24,12 @@ class User {
     return this
   }
 
+  setArea({ areaCode, areaName } = {}) {
+    this.areaCode = areaCode
+    this.areaName = areaName
+    return this
+  }
+
   getDetails() {
     return {
       isActive: this.isActive,

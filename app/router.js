@@ -13,6 +13,8 @@ const addUserToLocals = require('../common/middleware/add-user-information')
 
 // pages
 const { startController } = require('./start/get.controller')
+const { areaSelectionController } = require('./areaSelectionPage/get.controller')
+const { redirectToAssessmentList } = require('./areaSelectionPage/post.controller')
 const { displayAssessmentsList } = require('./assessmentsList/get.controller')
 const { displayQuestionGroup } = require('./questionGroup/get.controller')
 const { displayAddRow } = require('./addRow/get.controller')
@@ -88,6 +90,9 @@ module.exports = app => {
     res.redirect('/start')
   })
   app.get(`/start`, startController)
+
+  app.get(`/area-selection`, areaSelectionController)
+  app.post('/area-selection', redirectToAssessmentList)
 
   app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 

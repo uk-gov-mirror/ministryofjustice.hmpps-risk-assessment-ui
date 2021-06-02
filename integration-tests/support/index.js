@@ -6,6 +6,7 @@ before(() => {
   cy.clearCookies()
   cy.task('stubAuth')
   cy.task('stubAssessmentApi')
+  cy.task('stubGetUserProfileWithSingleArea')
   Cypress.Cookies.preserveOnce()
   cy.login()
 })

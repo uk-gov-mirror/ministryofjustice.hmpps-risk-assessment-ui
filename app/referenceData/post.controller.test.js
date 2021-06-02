@@ -4,7 +4,7 @@ const { getFilteredReferenceData } = require('../../common/data/hmppsAssessmentA
 jest.mock('../../common/data/hmppsAssessmentApi')
 
 let req
-const user = { token: 'mytoken' }
+const user = { token: 'mytoken', id: '1' }
 
 beforeEach(() => {
   req = {
@@ -52,6 +52,7 @@ describe('fetch filtered reference data', () => {
       'bbbbbbbb-cccc-dddd-eeee-ffffffffffff',
       { 'cccccccc-dddd-eeee-ffff-gggggggggggg': 'some-value' },
       user.token,
+      user.id,
     )
 
     expect(res.json).toHaveBeenCalledWith([

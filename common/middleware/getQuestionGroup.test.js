@@ -108,7 +108,7 @@ describe('getQuestionGroup middleware', () => {
     })
     it('should call the data service once and pass the id', () => {
       expect(getQuestionGroup).toHaveBeenCalledTimes(1)
-      expect(getQuestionGroup).toHaveBeenCalledWith(devAssessmentId, user.token)
+      expect(getQuestionGroup).toHaveBeenCalledWith(devAssessmentId, user.token, user.id)
     })
     it('should call the next function', () => {
       expect(next).toHaveBeenCalledTimes(1)

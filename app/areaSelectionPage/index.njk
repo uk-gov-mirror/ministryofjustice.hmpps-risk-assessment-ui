@@ -1,0 +1,25 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "common/templates/components/accessible-autocomplete/macro.njk" import accessibleAutocomplete %}
+
+{% block content %}
+    <h1 class="govuk-heading-l">
+        List of areas
+    </h1>
+    {{ govukInsetText({
+        text: "Because this is a new assessment, you must select an area to associate with an individual."
+    }) }}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <form method="post" novalidate>
+                {{accessibleAutocomplete('area', areas, 'Choose an area')}}
+                {{ govukButton({
+                    text: 'Start assessment',
+                    isStartButton: true
+                }) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

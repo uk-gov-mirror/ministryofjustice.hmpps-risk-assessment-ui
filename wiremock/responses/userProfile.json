@@ -1,0 +1,25 @@
+{
+  "userCode": "SUPPORT1",
+  "firstName": "Ray",
+  "lastName": "Arnold",
+  "email": "ray.arnold@hmpps.gsi.gov.uk",
+  "regions": [
+    {
+      "name": "Hertfordshire",
+      "code": "HFS"
+    },
+    {
+      "name": "West Yorkshire",
+      "code": "YSW"
+    },
+    {
+      "name": "Lancashire",
+      "code": "LAN"
+    },
+    {
+      "name": "Lancashire 2 (HMP)",
+      "code": "LAN2"
+    }
+  ],
+  "enabled": true
+}

@@ -117,7 +117,7 @@ const applyStaticReferenceData = async questionResponse => {
 
 module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, user }, res, next) => {
   try {
-    const questionResponse = await getQuestionGroup(groupId, user?.token)
+    const questionResponse = await getQuestionGroup(groupId, user?.token, user?.id)
     const hydratedQuestions = await applyStaticReferenceData(questionResponse)
 
     const thisQuestionGroup = hydratedQuestions.contents[subgroup].contents[page]

@@ -14,7 +14,7 @@ const displayQuestionGroup = async (
     const { questionGroup } = res.locals
     const subIndex = Number.parseInt(subgroup, 10)
 
-    const { answers, episodeUuid } = await grabAnswers(assessmentId, 'current', user?.token)
+    const { answers, episodeUuid } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
 
     res.locals.assessmentUuid = assessmentId
     res.locals.episodeUuid = episodeUuid
@@ -37,9 +37,9 @@ const displayQuestionGroup = async (
   }
 }
 
-const grabAnswers = (assessmentId, episodeId, token) => {
+const grabAnswers = (assessmentId, episodeId, token, userId) => {
   try {
-    return getAnswers(assessmentId, episodeId, token)
+    return getAnswers(assessmentId, episodeId, token, userId)
   } catch (error) {
     logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
     throw error

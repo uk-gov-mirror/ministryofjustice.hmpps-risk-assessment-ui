@@ -8,6 +8,11 @@ const {
   },
 } = require('../config')
 
+const getUserProfile = (userCode, authorisationToken) => {
+  const path = `${url}/authentication/user/${userCode}`
+  return getData(path, authorisationToken)
+}
+
 const getReferenceDataListByCategory = (category, authorisationToken) => {
   const path = `${url}/referencedata/${category}`
   return getData(path, authorisationToken)
@@ -75,4 +80,5 @@ const logError = error => {
 module.exports = {
   getReferenceDataListByCategory,
   getUserByEmail,
+  getUserProfile,
 }

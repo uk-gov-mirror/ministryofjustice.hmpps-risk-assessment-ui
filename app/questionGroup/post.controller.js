@@ -18,7 +18,7 @@ const saveQuestionGroup = async (req, res) => {
 
   try {
     const answers = extractAnswers(reqBody)
-    const [ok, episode] = await postAnswers(assessmentId, 'current', answers, user?.token)
+    const [ok, episode] = await postAnswers(assessmentId, 'current', answers, user?.token, user?.id)
 
     if (!ok) {
       const [validationErrors, errorSummary] = formatValidationErrors(episode.errors, episode.pageErrors)

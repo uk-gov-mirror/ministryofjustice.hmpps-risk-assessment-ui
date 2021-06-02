@@ -4,7 +4,7 @@ const { sortObject } = require('../../common/utils/util')
 
 const displayAssessmentsList = async ({ params: { assessmentId }, user }, res) => {
   try {
-    const questionsList = await getAssessmentsList(user?.token)
+    const questionsList = await getAssessmentsList(user?.token, user?.id)
 
     const topLevelForms = questionsList
       .filter(form => form.questionCount === 0)

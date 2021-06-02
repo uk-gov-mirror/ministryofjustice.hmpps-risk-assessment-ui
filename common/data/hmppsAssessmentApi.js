@@ -1,55 +1,56 @@
 const superagent = require('superagent')
 const logger = require('../logging/logger')
 const { getCorrelationId } = require('../utils/util')
+const { getCachedUserDetails } = require('./userDetailsCache')
 const {
   apis: {
     hmppsAssessments: { timeout, url },
   },
 } = require('../config')
 
-const assessmentSupervision = (assessmentDto, authorisationToken) => {
+const assessmentSupervision = (assessmentDto, authorisationToken, userId) => {
   const path = `${url}/assessments`
-  return postData(path, authorisationToken, assessmentDto)
+  return postData(path, authorisationToken, userId, assessmentDto)
 }
 
-const getOffenderData = (uuid, authorisationToken) => {
+const getOffenderData = (uuid, authorisationToken, userId) => {
   const path = `${url}/assessments/${uuid}/subject`
-  return getData(path, authorisationToken)
+  return getData(path, authorisationToken, userId)
 }
 
-const getQuestionGroup = (groupId, authorisationToken) => {
+const getQuestionGroup = (groupId, authorisationToken, userId) => {
   const path = `${url}/questions/${groupId}`
-  return getData(path, authorisationToken)
+  return getData(path, authorisationToken, userId)
 }
 
-const getQuestionGroupSummary = (groupId, authorisationToken) => {
+const getQuestionGroupSummary = (groupId, authorisationToken, userId) => {
   const path = `${url}/questions/${groupId}/summary`
-  return getData(path, authorisationToken)
+  return getData(path, authorisationToken, userId)
 }
 
-const getAnswers = (assessmentId, episodeId, authorisationToken) => {
+const getAnswers = (assessmentId, episodeId, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
-  return getData(path, authorisationToken)
+  return getData(path, authorisationToken, userId)
 }
 
-const getAssessmentsList = authorisationToken => {
+const getAssessmentsList = (authorisationToken, userId) => {
   const path = `${url}/questions/list`
-  return getData(path, authorisationToken)
+  return getData(path, authorisationToken, userId)
 }
 
-const postCompleteAssessment = (assessmentId, authorisationToken) => {
+const postCompleteAssessment = (assessmentId, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/complete`
-  return postData(path, authorisationToken)
+  return postData(path, authorisationToken, userId)
 }
 
-const postAnswers = (assessmentId, episodeId, answers, authorisationToken) => {
+const postAnswers = (assessmentId, episodeId, answers, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
-  return postData(path, authorisationToken, answers)
+  return postData(path, authorisationToken, userId, answers)
 }
 
-const postTableRow = (assessmentId, episodeId, tableName, answers, authorisationToken) => {
+const postTableRow = (assessmentId, episodeId, tableName, answers, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}`
-  return postData(path, authorisationToken, answers)
+  return postData(path, authorisationToken, userId, answers)
 }
 
 const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisationToken) => {
@@ -57,7 +58,7 @@ const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisat
   return deleteData(path, authorisationToken)
 }
 
-const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, authorisationToken) => {
+const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, authorisationToken, userId) => {
   const path = `${url}/referencedata/filtered`
   const requestBody = {
     assessmentUuid: assessmentId,
@@ -65,21 +66,21 @@ const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentL
     fieldName: questionUuid,
     parentList,
   }
-  return postData(path, authorisationToken, requestBody)
+  return postData(path, authorisationToken, userId, requestBody)
 }
 
-const getData = (path, authorisationToken) => {
+const getData = (path, authorisationToken, userId) => {
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
 
-  return action(superagent.get(path), authorisationToken).then(([_, body]) => {
+  return action(superagent.get(path), authorisationToken, userId).then(([_, body]) => {
     return body
   })
 }
 
-const postData = (path, authorisationToken, data) => {
+const postData = (path, authorisationToken, userId, data) => {
   logger.info(`Calling hmppsAssessments API with POST: ${path}`)
 
-  return action(superagent.post(path).send(data), authorisationToken)
+  return action(superagent.post(path).send(data), authorisationToken, userId)
 }
 
 const deleteData = (path, authorisationToken) => {
@@ -88,15 +89,17 @@ const deleteData = (path, authorisationToken) => {
   return action(superagent.delete(path), authorisationToken)
 }
 
-const action = async (agent, authorisationToken) => {
+const action = async (agent, authorisationToken, userId) => {
   if (authorisationToken === undefined) {
     throw new Error('No authorisation token found when calling hmppsAssessments API')
   }
 
   try {
+    const cachedDetails = await getCachedUserDetails(userId)
     return await agent
       .auth(authorisationToken, { type: 'bearer' })
       .set('x-correlation-id', getCorrelationId())
+      .set('x-user-area', cachedDetails?.areaCode)
       .timeout(timeout)
       .then(response => {
         return [true, response.body]

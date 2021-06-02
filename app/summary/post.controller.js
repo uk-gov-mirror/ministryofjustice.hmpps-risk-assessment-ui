@@ -10,7 +10,7 @@ const completeAssessment = async (req, res) => {
   } = req
 
   try {
-    const [ok] = await postCompleteAssessment(assessmentId, user?.token)
+    const [ok] = await postCompleteAssessment(assessmentId, user?.token, user?.id)
 
     if (ok) {
       res.locals.hideOffenderDetails = true

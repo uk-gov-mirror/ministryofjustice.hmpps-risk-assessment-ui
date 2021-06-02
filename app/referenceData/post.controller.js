@@ -16,6 +16,7 @@ const fetchFilteredReferenceData = async (req, res) => {
       questionUuid,
       targetValues,
       user?.token,
+      user?.id,
     )
 
     return res.json(

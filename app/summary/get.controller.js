@@ -9,7 +9,7 @@ const displayQuestionGroupSummary = async (
   res,
 ) => {
   try {
-    let assessment = await grabQuestionGroupSummary(groupId, user?.token)
+    let assessment = await grabQuestionGroupSummary(groupId, user?.token, user?.id)
 
     assessment = processReplacements(assessment, res.locals.offenderDetails)
 
@@ -48,9 +48,9 @@ const displayQuestionGroupSummary = async (
   }
 }
 
-const grabQuestionGroupSummary = (groupId, token) => {
+const grabQuestionGroupSummary = (groupId, token, userId) => {
   try {
-    return getQuestionGroupSummary(groupId, token)
+    return getQuestionGroupSummary(groupId, token, userId)
   } catch (error) {
     logger.error(`Could not retrieve question group summary for ${groupId}, error: ${error}`)
     throw error

@@ -4,32 +4,24 @@ const refresh = require('passport-oauth2-refresh')
 const { addSeconds } = require('date-fns')
 const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
 const { getUserByEmail } = require('../data/offenderAssessmentApi')
+const { cacheUserDetails, getCachedUserDetails } = require('../data/userDetailsCache')
 const config = require('../config')
 const logger = require('../logging/logger')
-const redis = require('../data/redis')
 const User = require('../models/user')
-const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('../utils/constants')
+const { SIXTY_SECONDS } = require('../utils/constants')
 const { AuthenticationError } = require('../utils/errors')
 
-const cacheUserDetails = async user => {
+const getAndCacheUserDetails = async user => {
   if (!user.email) {
     const email = await getUserEmail(user.token)
     const apiToken = await getApiToken()
     const oasysUser = await getUserByEmail(email, apiToken)
 
-    const userDetails = {
-      isActive: oasysUser?.accountStatus === 'ACTIVE',
-      email: oasysUser?.email,
-      oasysUserCode: oasysUser?.oasysUserCode,
-      username: `${oasysUser?.userForename1} ${oasysUser?.userFamilyName}`,
-    }
+    const userDetails = await cacheUserDetails(user.id, oasysUser)
 
     if (!userDetails.isActive) {
       throw new AuthenticationError('OASys account not active')
     }
-
-    await redis.set(`user:${user.id}`, JSON.stringify(userDetails), 'EX', REFRESH_TOKEN_LIFETIME_SECONDS)
-
     return userDetails
   }
   return user.getDetails()
@@ -37,7 +29,7 @@ const cacheUserDetails = async user => {
 
 passport.serializeUser(async (user, done) => {
   try {
-    await cacheUserDetails(user)
+    await getAndCacheUserDetails(user)
     done(null, user.getSession())
   } catch (error) {
     done(error)
@@ -47,9 +39,9 @@ passport.serializeUser(async (user, done) => {
 passport.deserializeUser(async (serializedUser, done) => {
   try {
     const user = User.from(serializedUser)
-    const serializedDetails = await redis.get(`user:${user.id}`)
+    const serializedDetails = await getCachedUserDetails(user.id)
 
-    const details = serializedDetails !== null ? JSON.parse(serializedDetails) : await cacheUserDetails(user)
+    const details = serializedDetails !== null ? serializedDetails : await getAndCacheUserDetails(user)
 
     user.withDetails(details)
     done(null, user)
