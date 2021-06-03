@@ -50,13 +50,13 @@
 
   {% set numColumns = question.contents.length %}
 
-  {% if question.contents[firstDataColumn].answer | isArr %}
+  {% if (question.contents[firstDataColumn].answer | isArr) and question.contents[firstDataColumn].answer.length > 0 %}
     {% set numRows = question.contents[firstDataColumn].answer.length %}
   {% else %}
     {% set numRows = 1 %}
   {% endif %}
-
-  {% if not question.contents[firstDataColumn].answer %}
+  
+  {% if (question.contents[firstDataColumn].answer.length) == 0 %}
     {% set defaultAnswer = 'n/a' %}
   {% endif %}
 
