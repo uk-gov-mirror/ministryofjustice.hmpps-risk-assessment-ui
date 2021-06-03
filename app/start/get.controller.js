@@ -4,11 +4,13 @@ const { cacheUserDetailsWithRegion } = require('../../common/data/userDetailsCac
 const {
   dev: { devAssessmentId },
 } = require('../../common/config')
+const { getApiToken } = require('../../common/data/oauth')
 
 const startController = async (req, res) => {
   const { user } = req
   if (user && (user.areaCode === undefined || user.areaCode === null)) {
-    const { regions } = await getUserProfile(user.oasysUserCode, user.token)
+    const apiToken = await getApiToken()
+    const { regions } = await getUserProfile(user.oasysUserCode, apiToken)
     if (regions.length === 1) {
       await cacheUserDetailsWithRegion(user.id, regions[0].code, regions[0].name)
     } else {
