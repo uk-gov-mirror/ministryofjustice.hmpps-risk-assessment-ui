@@ -8,6 +8,32 @@
   "questions": [
     {
       "type": "question",
+      "questionId": "8c5c0274-3087-4ea3-aa09-4efd88a64490",
+      "questionCode": "uiS5.1",
+      "answerType": "presentation: inset",
+      "questionText": "Consider carefully whether this information can be recorded safely.",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": true,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "1c7dc48a-e90f-4141-829e-ff16ce8dbb20",
+      "questionCode": "uiS5.2",
+      "answerType": "presentation: heading_large",
+      "questionText": "Personal details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": true,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
       "questionId": "946091d2-4038-4e2b-9283-83cc4883cc1",
       "questionCode": "129.1",
       "answerType": "text",

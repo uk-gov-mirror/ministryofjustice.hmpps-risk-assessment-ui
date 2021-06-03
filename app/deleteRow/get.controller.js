@@ -12,10 +12,13 @@ const displayDeleteRow = async (
     const returnUrl = removeUrlLevels(originalUrl, 3)
 
     // extract the table questions from the question group
-    const thisTableIdentifier = questionGroup.contents.find(element => element.tableCode === tableName).contents[0]
-      .questionId
+    // get table with this table code then find the first question within that group
+    // with an answerType which is not presentational
+    const thisTableIdentifier = questionGroup.contents
+      .find(element => element.tableCode === tableName)
+      .contents.find(element => element.answerType.indexOf('presentation') === -1).questionId
 
-    const { answers } = await grabAnswers(assessmentId, 'current', user?.token)
+    const { answers } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
 
     const rowDescriptor = answers[thisTableIdentifier][tableRow]
 
@@ -43,9 +46,9 @@ const displayDeleteRow = async (
   }
 }
 
-const grabAnswers = (assessmentId, episodeId, token) => {
+const grabAnswers = (assessmentId, episodeId, token, userId) => {
   try {
-    return getAnswers(assessmentId, episodeId, token)
+    return getAnswers(assessmentId, episodeId, token, userId)
   } catch (error) {
     logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
     throw error

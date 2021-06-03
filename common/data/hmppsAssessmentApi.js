@@ -53,9 +53,9 @@ const postTableRow = (assessmentId, episodeId, tableName, answers, authorisation
   return postData(path, authorisationToken, userId, answers)
 }
 
-const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisationToken) => {
+const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}/${tableRow}`
-  return deleteData(path, authorisationToken)
+  return deleteData(path, authorisationToken, userId)
 }
 
 const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, authorisationToken, userId) => {
@@ -83,10 +83,10 @@ const postData = (path, authorisationToken, userId, data) => {
   return action(superagent.post(path).send(data), authorisationToken, userId)
 }
 
-const deleteData = (path, authorisationToken) => {
+const deleteData = (path, authorisationToken, userId) => {
   logger.info(`Calling hmppsAssessments API with DELETE: ${path}`)
 
-  return action(superagent.delete(path), authorisationToken)
+  return action(superagent.delete(path), authorisationToken, userId)
 }
 
 const action = async (agent, authorisationToken, userId) => {

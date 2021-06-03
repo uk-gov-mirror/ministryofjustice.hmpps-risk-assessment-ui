@@ -14,10 +14,9 @@
   {% else %}
     {% set value = question.answer %}
   {% endif %}
-
   {% switch question.answerType %}
-  {% case 'date' %}{{ value | date("DD MMMM YYYY") }}
-  {% default %}{{ value }}
+    {% case 'date' %}{{ value | date("DD MMMM YYYY") }}
+    {% default %}{{ value }}
   {% endswitch %}
 {% endmacro %}
 
@@ -55,8 +54,12 @@
     <caption class="govuk-table__caption govuk-table__caption--l">{{ question.title }}</caption>
     <thead class="govuk-table__head">
     <tr class="govuk-table__row">
+    {% set firstDataColumn = null %}
     {% for tableItems in question.contents %}
       {% if 'presentation:' not in tableItems.answerType %}
+        {% if firstDataColumn == null %}
+          {% set firstDataColumn = loop.index0 %}
+        {% endif %}
         <th scope="col" class="govuk-table__header" aria-sort="none">{{ tableItems.questionText }}</th>
       {% endif %}
     {%  endfor %}
@@ -68,15 +71,14 @@
     <tr class="govuk-table__row">
       {% for column in range(0, numColumns) %}
         {% if 'presentation:' not in  question.contents[column].answerType %}
-          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}
-              {{ renderReadonlyField(question.contents[column], row) }}</td>
+          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}{{ renderReadonlyField(question.contents[column], row) }}</td>
         {% endif %}{% endif %}
       {% endfor %}
       <td class="govuk-table__cell">
         <ul class="govuk-list">
           {% if not defaultAnswer %}
-            <li><a class="govuk-link--no-visited-state" aria-label="Edit {{ renderReadonlyField(question.contents[0], row) }}" href="{{ requested_url }}/edit/{{ question.tableCode }}/{{ loop.index0 }}">Edit</a></li>
-            <li><a class="govuk-link--no-visited-state" aria-label="Delete {{ renderReadonlyField(question.contents[0], row) }}"href="{{ requested_url }}/delete/{{ question.tableCode }}/{{ loop.index0 }}">Remove</a></li>
+            <li><a class="govuk-link--no-visited-state" aria-label="Edit {{ renderReadonlyField(question.contents[firstDataColumn], row) }}" href="{{ requested_url }}/edit/{{ question.tableCode }}/{{ loop.index0 }}">Edit</a></li>
+            <li><a class="govuk-link--no-visited-state" aria-label="Delete {{ renderReadonlyField(question.contents[firstDataColumn], row) }}"href="{{ requested_url }}/delete/{{ question.tableCode }}/{{ loop.index0 }}">Remove</a></li>
           {% endif %}
         </ul>
       </td>

@@ -21,7 +21,7 @@ const removeTableRow = async (req, res) => {
     const confirmDelete = reqBody['confirm-delete']
 
     if (confirmDelete === 'yes') {
-      await deleteTableRow(assessmentId, 'current', tableName, tableRow, user?.token)
+      await deleteTableRow(assessmentId, 'current', tableName, tableRow, user?.token, user?.id)
     }
     return res.redirect(returnUrl)
   } catch (error) {
