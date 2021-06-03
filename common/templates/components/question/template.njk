@@ -38,15 +38,25 @@
 
 
 {% if question.type == 'table' or question.type == 'TableQuestionDto'%}
+  {#  find first question that is not presentational #}
+  {% set firstDataColumn = null %}
+  {% for questions in question.contents %}
+    {% if 'presentation:' not in questions.answerType %}
+      {% if firstDataColumn == null %}
+        {% set firstDataColumn = loop.index0 %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
   {% set numColumns = question.contents.length %}
 
-  {% if question.contents[0].answer | isArr %}
-    {% set numRows = question.contents[0].answer.length %}
+  {% if question.contents[firstDataColumn].answer | isArr %}
+    {% set numRows = question.contents[firstDataColumn].answer.length %}
   {% else %}
     {% set numRows = 1 %}
   {% endif %}
 
-  {% if not question.contents[0].answer %}
+  {% if not question.contents[firstDataColumn].answer %}
     {% set defaultAnswer = 'n/a' %}
   {% endif %}
 
