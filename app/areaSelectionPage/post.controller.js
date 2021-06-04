@@ -11,7 +11,7 @@ const redirectToAssessmentList = async (req, res) => {
 
     await cacheUserDetailsWithRegion(user.id, areaInfo.areaCode, areaInfo.areaName)
 
-    return res.redirect(`/${devAssessmentId}/assessments`)
+    return res.redirect(`/${devAssessmentId}/questiongroup/pre_sentence_assessment/summary`)
   } catch (error) {
     return res.render('app/error', { error })
   }

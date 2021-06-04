@@ -1,4 +1,3 @@
-const AssessmentPage = require('../../pages/assessments/assessmentsPage')
 const AreaSelectionPage = require('../../pages/areaSelection/areaSelectionPage')
 
 context('Area Selection page display all regions', () => {
@@ -18,6 +17,5 @@ context('Area Selection page display all regions', () => {
     AreaSelectionPage.selectRegion('La', 'Lancashire')
     AreaSelectionPage.selectRegion('La', 'Lancashire 2 (HMP)')
     page.startAssessmentButton().click()
-    AssessmentPage.verifyOnPage()
   })
 })

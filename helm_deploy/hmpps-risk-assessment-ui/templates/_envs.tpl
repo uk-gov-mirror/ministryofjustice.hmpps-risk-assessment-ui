@@ -4,6 +4,9 @@ Environment variables for web and worker containers
 */}}
 {{- define "deployment.envs" }}
 env:
+  - name: DEV_ASSESSMENT_ID
+    value: {{ .Values.env.DEV_ASSESSMENT_ID | quote}}
+
   - name: API_CLIENT_ID
     valueFrom:
       secretKeyRef:
