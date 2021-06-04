@@ -31,6 +31,7 @@ env:
   OFFENDER_ASSESSMENT_API_URL: https://offender-dev.aks-dev-1.studio-hosting.service.justice.gov.uk
   OAUTH_ENDPOINT_URL: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
   SHOW_DETAILED_ERRORS: true
+  DEV_ASSESSMENT_ID: "cf94d1b1-4a3a-4071-bea4-9c77f742f357"
 
 allow_list:
   office: "217.33.148.210/32"
