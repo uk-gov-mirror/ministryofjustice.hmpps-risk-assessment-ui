@@ -4,8 +4,7 @@ const { getApiToken } = require('../../common/data/oauth')
 
 const areaSelectionController = async (req, res) => {
   try {
-    const [flashRegions] = req.flash('regions')
-    let regions = typeof flashRegions === 'string' ? JSON.parse(flashRegions) : []
+    let regions = req.session.regions || []
     if (regions.length === 0) {
       const apiToken = await getApiToken()
       const userProfile = await getUserProfile(req.user?.oasysUserCode, apiToken)

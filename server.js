@@ -16,7 +16,6 @@ const session = require('express-session')
 const helmet = require('helmet')
 const passport = require('passport')
 const connectRedis = require('connect-redis')
-const flash = require('connect-flash')
 
 // Local dependencies
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -126,7 +125,6 @@ function initialiseGlobalMiddleware(app) {
   auth.init()
   app.use(passport.initialize())
   app.use(passport.session())
-  app.use(flash())
 
   // must be after session since we need session
   app.use(mdcSetup)

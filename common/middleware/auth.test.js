@@ -399,6 +399,8 @@ describe('Auth', () => {
         email: 'foo@bar.baz',
         isActive: true,
         oasysUserCode: 'SUPPORT1',
+        areaCode: 'HFS',
+        areaName: 'Hertfordshire',
       })
       expect(user.getSession()).toEqual({
         id: 1,

@@ -1,12 +1,26 @@
 const { areaSelectionController } = require('./get.controller')
+const { getUserProfile } = require('../../common/data/offenderAssessmentApi')
+const { getApiToken } = require('../../common/data/oauth')
+
+jest.mock('../../common/data/offenderAssessmentApi', () => ({
+  getUserProfile: jest.fn(),
+}))
+
+jest.mock('../../common/data/oauth', () => ({
+  getApiToken: jest.fn(),
+}))
 
 describe('get areas', () => {
   const req = {
-    flash: jest.fn(),
+    session: {
+      save: jest.fn(),
+    },
   }
   const res = {
     render: jest.fn(),
   }
+
+  getApiToken.mockResolvedValue('FOO_TOKEN')
 
   beforeEach(() => {
     const testRegions = [
@@ -27,7 +41,7 @@ describe('get areas', () => {
         code: 'LAN2',
       },
     ]
-    req.flash.mockReturnValue([JSON.stringify(testRegions)])
+    req.session.regions = testRegions
   })
 
   it('should call render with the correct areas', async () => {
@@ -57,10 +71,8 @@ describe('get areas', () => {
 
   it('should render the error page', async () => {
     const theError = new Error('Error message')
-    req.flash.mockImplementation(() => {
-      throw theError
-    })
-    await areaSelectionController(req, res)
+    getUserProfile.mockRejectedValue(theError)
+    await areaSelectionController({ ...req, session: {} }, res)
     expect(res.render).toHaveBeenCalledWith(`app/error`, { error: theError })
   })
 })

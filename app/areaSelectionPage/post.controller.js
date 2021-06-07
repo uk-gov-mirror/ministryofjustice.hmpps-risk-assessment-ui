@@ -1,9 +1,5 @@
 const { cacheUserDetailsWithRegion } = require('../../common/data/userDetailsCache')
 
-const {
-  dev: { devAssessmentId },
-} = require('../../common/config')
-
 const redirectToAssessmentList = async (req, res) => {
   try {
     const { user } = req
@@ -11,7 +7,11 @@ const redirectToAssessmentList = async (req, res) => {
 
     await cacheUserDetailsWithRegion(user.id, areaInfo.areaCode, areaInfo.areaName)
 
-    return res.redirect(`/${devAssessmentId}/questiongroup/pre_sentence_assessment/summary`)
+    const redirectUrl = req.session.redirectUrl || '/'
+    delete req.session.redirectUrl
+    req.session.save()
+
+    return res.redirect(redirectUrl)
   } catch (error) {
     return res.render('app/error', { error })
   }

@@ -16,15 +16,11 @@ class User {
     return this
   }
 
-  withDetails({ isActive, email, oasysUserCode, username } = {}) {
+  withDetails({ isActive, email, oasysUserCode, username, areaCode, areaName } = {}) {
     this.isActive = isActive
     this.email = email
     this.oasysUserCode = oasysUserCode
     this.username = username
-    return this
-  }
-
-  setArea({ areaCode, areaName } = {}) {
     this.areaCode = areaCode
     this.areaName = areaName
     return this
@@ -36,6 +32,8 @@ class User {
       email: this.email,
       oasysUserCode: this.oasysUserCode,
       username: this.username,
+      areaCode: this.areaCode,
+      areaName: this.areaName,
     }
   }
 

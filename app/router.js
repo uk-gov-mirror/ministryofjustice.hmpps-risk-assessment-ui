@@ -43,6 +43,14 @@ const {
   checkForTokenRefresh,
 } = require('../common/middleware/auth')
 
+const { checkUserHasAreaSelected } = require('../common/middleware/area-selection')
+
+const {
+  dev: { devAssessmentId },
+} = require('../common/config')
+
+const assessmentUrl = `/${devAssessmentId}/questiongroup/pre_sentence_assessment/summary`
+
 // Export
 module.exports = app => {
   // app.get('/health', (req, res, next) => {
@@ -89,11 +97,12 @@ module.exports = app => {
   app.get(`/`, (req, res) => {
     res.redirect('/start')
   })
-  app.get(`/start`, startController)
+  app.get(`/start`, checkUserHasAreaSelected(assessmentUrl), startController)
 
   app.get(`/area-selection`, areaSelectionController)
   app.post('/area-selection', redirectToAssessmentList)
 
+  app.get('*', checkUserHasAreaSelected())
   app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 
   app.get(`/:assessmentId/questiongroup/:groupId/summary`, getOffenderDetails, displayOverview)

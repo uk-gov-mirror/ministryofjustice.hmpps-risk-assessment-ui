@@ -16,8 +16,8 @@ const cacheUserDetails = async (userId, oasysUser) => {
 }
 
 const cacheUserDetailsWithRegion = async (userId, areaCode, areaName) => {
-  const serializedDetails = await getCachedUserDetails(userId)
-  const userDetails = new User().withDetails(serializedDetails).setArea({ areaCode, areaName })
+  const existingDetails = await getCachedUserDetails(userId)
+  const userDetails = new User().withDetails({ ...existingDetails, areaCode, areaName })
   await redis.set(`user:${userId}`, JSON.stringify(userDetails))
 }
 
