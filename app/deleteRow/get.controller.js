@@ -14,13 +14,25 @@ const displayDeleteRow = async (
     // extract the table questions from the question group
     // get table with this table code then find the first question within that group
     // with an answerType which is not presentational
-    const thisTableIdentifier = questionGroup.contents
-      .find(element => element.tableCode === tableName)
-      .contents.find(element => element.answerType.indexOf('presentation') === -1).questionId
+
+    const thisTable = questionGroup.contents?.find(element => element.tableCode === tableName)
+
+    let thisTableIdentifier
+    if (thisTable) {
+      thisTableIdentifier = thisTable.contents?.find(element => element.answerType.indexOf('presentation') === -1)
+        .questionId
+    } else {
+      throw new Error('No table with that name found in question group')
+    }
 
     const { answers } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
 
-    const rowDescriptor = answers[thisTableIdentifier][tableRow]
+    let rowDescriptor
+    if (answers[thisTableIdentifier].length > tableRow) {
+      rowDescriptor = answers[thisTableIdentifier][tableRow]
+    } else {
+      throw new Error('No table data row found')
+    }
 
     let submitText = 'Delete item'
     if (tableName === 'children_at_risk_of_serious_harm') {
@@ -40,7 +52,7 @@ const displayDeleteRow = async (
     })
   } catch (error) {
     logger.error(
-      `Could not retrieve new table information for assessment ${assessmentId}, table ${tableName}, error: ${error}`,
+      `Could not retrieve table information for assessment ${assessmentId}, table ${tableName}, row ${tableRow} error: ${error}`,
     )
     return res.render('app/error', { error })
   }
