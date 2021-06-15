@@ -58,6 +58,11 @@ const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisat
   return deleteData(path, authorisationToken, userId)
 }
 
+const updateTableRow = (assessmentId, episodeId, tableName, answers, tableRow, authorisationToken, userId) => {
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}/${tableRow}`
+  return postData(path, authorisationToken, userId, answers)
+}
+
 const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, authorisationToken, userId) => {
   const path = `${url}/referencedata/filtered`
   const requestBody = {
@@ -138,4 +143,5 @@ module.exports = {
   getFilteredReferenceData,
   postTableRow,
   deleteTableRow,
+  updateEditedTableRow: updateTableRow,
 }

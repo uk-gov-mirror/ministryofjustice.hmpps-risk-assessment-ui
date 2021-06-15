@@ -1,7 +1,7 @@
 // @ts-check
 const { logger } = require('../../common/logging/logger')
 const { removeUrlLevels } = require('../../common/utils/util')
-const { getAnswers } = require('../../common/data/hmppsAssessmentApi')
+const { grabAnswers } = require('../../common/question-groups/get-question-groups')
 
 const displayDeleteRow = async (
   { params: { assessmentId, groupId, tableName, tableRow }, originalUrl, body, errors = {}, errorSummary = null, user },
@@ -55,15 +55,6 @@ const displayDeleteRow = async (
       `Could not retrieve table information for assessment ${assessmentId}, table ${tableName}, row ${tableRow} error: ${error}`,
     )
     return res.render('app/error', { error })
-  }
-}
-
-const grabAnswers = (assessmentId, episodeId, token, userId) => {
-  try {
-    return getAnswers(assessmentId, episodeId, token, userId)
-  } catch (error) {
-    logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
-    throw error
   }
 }
 

@@ -4,10 +4,11 @@ const { removeUrlLevels } = require('../../common/utils/util')
 const {
   annotateWithAnswers,
   compileInlineConditionalQuestions,
+  grabAnswers,
 } = require('../../common/question-groups/get-question-groups')
 
-const displayAddRow = async (
-  { params: { assessmentId, groupId, tableName }, originalUrl, body, errors = {}, errorSummary = null },
+const editTableRow = async (
+  { params: { assessmentId, groupId, tableName, tableRow }, originalUrl, body, errors = {}, errorSummary = null, user },
   res,
 ) => {
   try {
@@ -17,15 +18,31 @@ const displayAddRow = async (
     // extract the table questions from the question group
     const thisTable = questionGroup.contents.find(element => element.tableCode === tableName)
 
-    let heading = questionGroup.title || 'Add item'
+    let heading = questionGroup.title || 'Edit item'
     let submitText = 'Save item'
     if (tableName === 'children_at_risk_of_serious_harm') {
-      heading = 'Add a child'
-      submitText = 'Add child'
+      heading = 'Edit a child'
+      submitText = 'Edit child'
     }
     res.locals.assessmentUuid = assessmentId
 
-    let questions = annotateWithAnswers(thisTable.contents, {}, body)
+    const { answers } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
+
+    // update answers to just appropriate ones for this table row
+    // go through questions
+
+    // if this question is in answers, change answer to just the one for this row
+    thisTable.contents.forEach(question => {
+      if (answers[question.questionId] && answers[question.questionId].length > tableRow) {
+        if (Array.isArray(answers[question.questionId][tableRow])) {
+          answers[question.questionId] = answers[question.questionId][tableRow]
+        } else {
+          answers[question.questionId] = [answers[question.questionId][tableRow]]
+        }
+      }
+    })
+
+    let questions = annotateWithAnswers(thisTable.contents, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
 
     return res.render(`${__dirname}/index`, {
@@ -47,4 +64,4 @@ const displayAddRow = async (
   }
 }
 
-module.exports = { displayAddRow }
+module.exports = { editTableRow }

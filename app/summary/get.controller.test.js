@@ -1,9 +1,7 @@
 // Initialise nunjucks environment
 const { displayOverview } = require('./get.controller')
 const { getQuestionGroupSummary } = require('../../common/data/hmppsAssessmentApi')
-const questionGroupSummaryPointer = require('../../wiremock/responses/questionGroups.json')[
-  '65a3924c-4130-4140-b7f4-cc39a52603bb'
-]
+const questionGroupSummaryPointer = require('../../wiremock/responses/questionGroups.json').pre_sentence_assessment
 const expected = require('./fixtures/expected.json')
 
 jest.mock('../../common/data/hmppsAssessmentApi')

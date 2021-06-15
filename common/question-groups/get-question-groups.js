@@ -1,5 +1,7 @@
 // @ts-check
 const nunjucks = require('nunjucks')
+const { getAnswers } = require('../data/hmppsAssessmentApi')
+const { logger } = require('../logging/logger')
 
 const annotateWithAnswers = (questions, answers, body) => {
   return questions.map(q => {
@@ -169,4 +171,13 @@ const annotateAnswerSchemas = (answerSchemas, answerValue) => {
   })
 }
 
-module.exports = { compileInlineConditionalQuestions, annotateWithAnswers }
+const grabAnswers = (assessmentId, episodeId, token, userId) => {
+  try {
+    return getAnswers(assessmentId, episodeId, token, userId)
+  } catch (error) {
+    logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
+    throw error
+  }
+}
+
+module.exports = { compileInlineConditionalQuestions, annotateWithAnswers, grabAnswers }

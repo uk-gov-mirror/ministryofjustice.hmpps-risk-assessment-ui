@@ -115,7 +115,7 @@
     "@babel/plugin-proposal-optional-chaining": "^7.13.12",
     "@babel/preset-env": "^7.13.12",
     "browserify": "^16.5.2",
-    "cheerio": "^1.0.0-rc.5",
+    "cheerio": "^1.0.0-rc.10",
     "chokidar-cli": "latest",
     "clean-css-cli": "^4.3.0",
     "concat": "^1.0.3",

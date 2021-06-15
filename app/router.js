@@ -23,6 +23,9 @@ const { saveTableRow } = require('./addRow/post.controller')
 const { displayDeleteRow } = require('./deleteRow/get.controller')
 const { removeTableRow } = require('./deleteRow/post.controller')
 
+const { editTableRow } = require('./editRow/get.controller')
+const { updateTableRow } = require('./editRow/post.controller')
+
 const { displayOverview } = require('./summary/get.controller')
 const { completeAssessment } = require('./summary/post.controller')
 const { saveQuestionGroup } = require('./questionGroup/post.controller')
@@ -125,6 +128,7 @@ module.exports = app => {
 
   app.post(`/:assessmentId/episode/:episodeId/referencedata/filtered`, fetchFilteredReferenceData)
 
+  // add a new table row
   app.get(
     `/:assessmentId/questiongroup/:groupId/:subgroup/:page/addrow/:tableName`,
     getOffenderDetails,
@@ -141,6 +145,7 @@ module.exports = app => {
     saveTableRow,
   )
 
+  // delete table row
   app.get(
     `/:assessmentId/questiongroup/:groupId/:subgroup/:page/delete/:tableName/:tableRow`,
     getOffenderDetails,
@@ -148,6 +153,23 @@ module.exports = app => {
     displayDeleteRow,
   )
   app.post('/:assessmentId/questiongroup/:groupId/:subgroup/:page/delete/:tableName/:tableRow', removeTableRow)
+
+  // edit a table row
+  app.get(
+    `/:assessmentId/questiongroup/:groupId/:subgroup/:page/edit/:tableName/:tableRow`,
+    getOffenderDetails,
+    getQuestionGroup,
+    editTableRow,
+  )
+  app.post(
+    '/:assessmentId/questiongroup/:groupId/:subgroup/:page/edit/:tableName/:tableRow',
+    getOffenderDetails,
+    assembleDates,
+    getQuestionGroup,
+    questionGroupValidationRules,
+    validate,
+    updateTableRow,
+  )
 
   app.post('/:assessmentId/questiongroup/:groupId/summary', getOffenderDetails, completeAssessment)
 

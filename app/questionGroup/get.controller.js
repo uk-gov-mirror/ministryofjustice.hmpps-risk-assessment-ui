@@ -1,9 +1,8 @@
 // @ts-check
-const { logger } = require('../../common/logging/logger')
-const { getAnswers } = require('../../common/data/hmppsAssessmentApi')
 const {
   annotateWithAnswers,
   compileInlineConditionalQuestions,
+  grabAnswers,
 } = require('../../common/question-groups/get-question-groups')
 
 const displayQuestionGroup = async (
@@ -34,15 +33,6 @@ const displayQuestionGroup = async (
     })
   } catch (error) {
     return res.render('app/error', { error })
-  }
-}
-
-const grabAnswers = (assessmentId, episodeId, token, userId) => {
-  try {
-    return getAnswers(assessmentId, episodeId, token, userId)
-  } catch (error) {
-    logger.error(`Could not retrieve answers for assessment ${assessmentId} episode ${episodeId}, error: ${error}`)
-    throw error
   }
 }
 

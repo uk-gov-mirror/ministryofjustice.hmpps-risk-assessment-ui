@@ -195,21 +195,22 @@
                     "type": "question",
                     "questionId": "946091d2-4038-4e2b-9283-83cc4883cc1",
                     "questionCode": "129.1",
-                    "answerType": "text",
-                    "questionText": "Child's name"
+                    "answerType": "freetext",
+                    "questionText": "Child's name",
+                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the name\",\"errorSummary\":\"You must enter a name\"}}"
                   },
                   {
                     "type": "question",
                     "questionId": "946091d2-4038-4e2b-9283-83cc4883cc2",
                     "questionCode": "129.2",
-                    "answerType": "text",
+                    "answerType": "freetext",
                     "questionText": "Child's age"
                   },
                   {
                     "type": "question",
                     "questionId": "946091d2-4038-4e2b-9283-83cc4883cc3",
                     "questionCode": "129.3",
-                    "answerType": "text",
+                    "answerType": "textarea",
                     "questionText": "Child's address"
                   },
                   {
@@ -1293,7 +1294,7 @@
       }
     ]
   },
-  "65a3924c-4130-4140-b7f4-cc39a52603bb": {
+  "pre_sentence_assessment": {
     "type": "group",
     "groupId": "65a3924c-4130-4140-b7f4-cc39a52603bb",
     "groupCode": "pre_sentence_assessment",
