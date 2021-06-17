@@ -13,7 +13,7 @@ const editTableRow = async (
 ) => {
   try {
     const { questionGroup } = res.locals
-    const returnUrl = removeUrlLevels(originalUrl, 2)
+    const returnUrl = removeUrlLevels(originalUrl, 3)
 
     // extract the table questions from the question group
     const thisTable = questionGroup.contents.find(element => element.tableCode === tableName)
