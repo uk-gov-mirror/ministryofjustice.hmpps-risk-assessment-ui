@@ -38,4 +38,15 @@ describe('display complete assessment page', () => {
 
     expect(res.render).toHaveBeenCalledWith(`${__dirname}/success`, { offenderName: 'Fred Smith' })
   })
+
+  it('renders an error when the user does not have permission to update the assessment', async () => {
+    postCompleteAssessment.mockResolvedValue([false, { status: 403, reason: 'OASYS_PERMISSION' }])
+
+    await completeAssessment(req, res)
+
+    const theError = new Error(
+      'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.',
+    )
+    expect(res.render).toHaveBeenCalledWith('app/error', { error: theError })
+  })
 })

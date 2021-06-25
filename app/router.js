@@ -178,8 +178,8 @@ module.exports = app => {
   app.post('/psr-from-court/:courtCode/case/:caseNumber', startPsrFromCourt)
 
   app.get('/assessment-from-delius', assessmentFromCrn)
-  app.post('/assessment-from-delius', startAssessmentFromForm)
-  app.post('/assessment-from-delius/:assessmentType/crn/:crn/event/:deliusEventId', startAssessmentFromCrn)
+  app.post('/assessment-from-delius', startAssessmentFromForm())
+  app.post('/assessment-from-delius/:assessmentType/crn/:crn/event/:deliusEventId', startAssessmentFromCrn())
 
   app.use((error, req, res, next) =>
     res.render('app/error', {

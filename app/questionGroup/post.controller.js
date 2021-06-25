@@ -5,6 +5,14 @@ const { displayQuestionGroup } = require('./get.controller')
 const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
 const { formatValidationErrors, extractAnswers } = require('../../common/question-groups/post-question-groups')
 
+const getErrorMessage = reason => {
+  if (reason === 'OASYS_PERMISSION') {
+    return 'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+  }
+
+  return 'Something went wrong'
+}
+
 const saveQuestionGroup = async (req, res) => {
   const {
     params: { assessmentId },
@@ -18,13 +26,16 @@ const saveQuestionGroup = async (req, res) => {
 
   try {
     const answers = extractAnswers(reqBody)
-    const [ok, episode] = await postAnswers(assessmentId, 'current', answers, user?.token, user?.id)
+    const [ok, response] = await postAnswers(assessmentId, 'current', answers, user?.token, user?.id)
 
     if (!ok) {
-      const [validationErrors, errorSummary] = formatValidationErrors(episode.errors, episode.pageErrors)
-      req.errors = validationErrors
-      req.errorSummary = errorSummary
-      return displayQuestionGroup(req, res)
+      if (response.status === 422) {
+        const [validationErrors, errorSummary] = formatValidationErrors(response.errors, response.pageErrors)
+        req.errors = validationErrors
+        req.errorSummary = errorSummary
+        return displayQuestionGroup(req, res)
+      }
+      return res.render('app/error', { error: new Error(getErrorMessage(response.reason)) })
     }
 
     return res.redirect(`/${assessmentId}/questiongroup/${res.locals.navigation.next.url}`)
