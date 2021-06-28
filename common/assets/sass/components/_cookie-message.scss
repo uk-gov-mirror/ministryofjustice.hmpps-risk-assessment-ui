@@ -1,9 +1,8 @@
 .cookie-banner {
   box-sizing: border-box;
   width: 100%;
-
   padding: govuk-spacing(3);
-  background-color: lighten(desaturate(govuk-colour("light-blue"), 8.46), 42.55);
+  background-color: lighten(desaturate(govuk-colour('light-blue'), 8.46), 42.55);
 
   &--hide {
     display: none;

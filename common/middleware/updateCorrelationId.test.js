@@ -1,7 +1,7 @@
 // Local dependencies
 const cls = require('cls-hooked')
 const { updateCorrelationId } = require('./updateCorrelationId')
-const { updateMDC } = require('../utils/util.js')
+const { updateMDC } = require('../utils/util')
 
 jest.mock('../utils/util.js', () => ({
   updateMDC: jest.fn(),

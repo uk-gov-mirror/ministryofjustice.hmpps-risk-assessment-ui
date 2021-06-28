@@ -144,11 +144,11 @@ const compileInlineConditionalQuestions = (questions, errors) => {
       // add css to hide questions to be displayed out of line
       const questionObject = question
       if (!questionObject.questionText) {
-        questionObject.formClasses = 'govuk-input--packTogether'
+        questionObject.formClasses = 'govuk-input--pack-together'
       }
       if (questionObject.conditional) {
         questionObject.formClasses =
-          'govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden'
+          'govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden'
         questionObject.isConditional = true
         questionObject.attributes = [
           ['data-outofline', 'true'],

@@ -1,13 +1,12 @@
-@import "govuk-frontend/govuk/all";
-@import "@ministryofjustice/frontend/moj/all";
-@import "accessible-autocomplete/dist/accessible-autocomplete.min";
+@import 'govuk-frontend/govuk/all';
+@import '@ministryofjustice/frontend/moj/all';
+@import 'accessible-autocomplete/dist/accessible-autocomplete.min';
+@import 'components/accessible-autocomplete';
+@import 'components/cookie-message';
+@import 'components/task-list';
+@import 'pages';
 
-@import "components/accessible-autocomplete";
-@import "components/cookie-message";
-@import "components/task-list";
-@import "pages";
-
-$white-transparent: rgba(255, 255, 255, .25);
+$white-transparent: rgba(255, 255, 255, 0.25);
 
 .govuk-width-container--app-extra-wide {
   max-width: 1220px;
@@ -19,20 +18,21 @@ $white-transparent: rgba(255, 255, 255, .25);
   padding: 30px;
 }
 
-.key-details-bar_divider {
+.key-details-bar__divider {
   color: #fff;
   font-size: 19px;
 }
 
 .key-details-bar__name {
-  font-size: 24px!important;
-  font-family: "GDS Transport", Arial, sans-serif!important;
-  font-weight: 700!important;
+  font-size: 24px !important;
+  font-family: 'GDS Transport', Arial, sans-serif !important;
+  font-weight: 700 !important;
 }
 
-.moj-header__link, .moj-header__navigation-link {
+.moj-header__link,
+.moj-header__navigation-link {
   &:focus {
-    background-color: govuk-colour("yellow");
+    background-color: govuk-colour('yellow');
     outline: 0;
   }
 }
@@ -41,21 +41,17 @@ p {
   @extend .govuk-body;
 }
 
-.moj-context-header dt, .moj-context-header dd {
-  color: govuk-colour("white");
+.moj-context-header dt,
+.moj-context-header dd {
+  color: govuk-colour('white');
   padding-top: 0;
   display: inline-block;
   margin: govuk-spacing(1);
 }
 
-.moj-context-header__block dt:first-of-type {
-  margin-left: govuk-spacing(0) !important;
-  padding-left: govuk-spacing(0) !important;
-  border-left: 0;
-}
-
 .moj-context-header dt {
   @extend .govuk-heading-s;
+
   padding: 0 0 0 govuk-spacing(2) !important;
 }
 
@@ -64,24 +60,31 @@ p {
 }
 
 .moj-context-header__block dt {
-  border-left: 1px solid govuk-colour("white");;
+  border-left: 1px solid govuk-colour('white');
+}
+
+.moj-context-header__block dt:first-of-type {
+  margin-left: govuk-spacing(0) !important;
+  padding-left: govuk-spacing(0) !important;
+  border-left: 0;
 }
 
 .moj-context-header__block {
   @extend .govuk-width-container;
+
   padding-bottom: govuk-spacing(1);
-  border-top: 1px solid govuk-colour("white");;
+  border-top: 1px solid govuk-colour('white');
 }
 
 .moj-context-header__top-block {
   @extend .moj-context-header__block;
-  border-top: 0
+
+  border-top: 0;
 }
 
-.no_left_border {
+.no-left-border {
   border-left: 0 !important;
 }
-
 
 .extra-error {
   margin-top: -18px;
@@ -116,7 +119,8 @@ p {
 }
 
 @media print {
-  .no-print, .no-print * {
+  .no-print,
+  .no-print * {
     display: none !important;
   }
 }
@@ -134,7 +138,7 @@ p {
   border-bottom: 0;
 }
 
-.widthZero {
+.width-zero {
   width: 0;
 }
 
@@ -144,33 +148,34 @@ p {
 
 .pac-phase-tag {
   float: right;
-  margin-top:5px;
+  margin-top: 5px;
   margin-left: 14px;
 }
 
-.govuk-radios__conditional--noIndent {
+.govuk-radios__conditional--no-indent {
   margin-bottom: 40px;
   margin-left: 0;
   padding-left: 0;
   border-left: none;
 }
 
-.govuk-input--packTogether {
+.govuk-input--pack-together {
   margin-top: -30px;
 }
 
 .moj-task-list__task-completed {
-  background-color: govuk-colour("green");
+  background-color: govuk-colour('green');
 }
 
-.moj-task-list__task-notstarted {
-  color: govuk-colour("dark-grey");
-  background-color: govuk-colour("light-grey");
+.moj-task-list__task--not-started {
+  color: govuk-colour('dark-grey');
+  background-color: govuk-colour('light-grey');
 }
 
 .moj-task-list__task {
   margin-top: govuk-spacing(2);
   margin-bottom: govuk-spacing(1);
+
   @include govuk-media-query($from: 450px) {
     float: right;
     margin-top: 0;

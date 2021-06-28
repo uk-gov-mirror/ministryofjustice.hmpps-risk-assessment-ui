@@ -141,7 +141,7 @@
           ]
         }
       ],
-      "formClasses": "govuk-input--packTogether"
+      "formClasses": "govuk-input--pack-together"
     },
     {
       "type": "question",
@@ -264,7 +264,7 @@
           "text": "Living with (unstable)"
         }
       ],
-      "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
+      "formClasses": "govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden",
       "isConditional": true,
       "attributes": [
         ["data-outofline", "true"],
@@ -408,7 +408,7 @@
           "text": "No"
         }
       ],
-      "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
+      "formClasses": "govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden",
       "isConditional": true,
       "attributes": [
         ["data-outofline", "true"],
@@ -426,7 +426,7 @@
       "conditional": true,
       "answerSchemas": [],
       "answer": null,
-      "formClasses": "govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden",
+      "formClasses": "govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden",
       "isConditional": true,
       "attributes": [
         ["data-outofline", "true"],

@@ -4,7 +4,7 @@ const { configure } = require('nunjucks')
 const nunjucksEnvironment = configure({}, {})
 const dateFilter = require('nunjucks-date-filter')
 const { encodeHTML } = require('../../common/utils/util')
-const { mojDate } = require('../../node_modules/@ministryofjustice/frontend/moj/filters/all.js')()
+const { mojDate } = require('../../node_modules/@ministryofjustice/frontend/moj/filters/all')()
 // add custom nunjucks filters
 nunjucksEnvironment.addFilter('date', dateFilter)
 nunjucksEnvironment.addFilter('mojDate', mojDate)

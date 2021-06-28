@@ -7,7 +7,7 @@
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0",
-    "npm": ">=6.14.5"
+    "npm": ">=7.0.0"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -39,11 +39,7 @@
       ]
     ]
   },
-  "resolutions": {
-    "minimist": "^1.2.3"
-  },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "build": "npm run build:copy & npm run build:css & npm run build:js",
     "clean": "rimraf public",
     "build:copy": "npm run copy-govuk-assets && npm run copy-assets",
@@ -60,9 +56,10 @@
     "start": "npm run clean && npm run build && node ./start.js",
     "start:local": "npm run clean && npm run build && npm run setupStubs && NODE_ENV=local node ./start.js & npm run watch",
     "start:cypress": "npm run clean && npm run build && npm run setupStubs && NODE_ENV=local PORT=3008 INGRESS_URL=http://localhost:3008 npm run server",
-    "lint-sass": "./node_modules/.bin/sass-lint -v",
+    "lint-sass": "stylelint '**/*.scss'",
+    "lint-sass:fix": "stylelint '**/*.scss' --fix",
     "test": "jest",
-    "lint": "eslint . --cache --max-warnings 0",
+    "lint": "eslint . --cache --max-warnings 0 && stylelint '**/*.scss' --cache --max-warnings 0",
     "watch:sass": "nodemon -e scss -x \"npm run build:css\"",
     "watch": "npm run watch:sass",
     "record-build-info": "node ./bin/record-build-info",
@@ -72,7 +69,7 @@
     "int-test-ui": "cypress open"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "^0.0.21",
+    "@ministryofjustice/frontend": "^0.2.4",
     "accessible-autocomplete": "^2.0.3",
     "agentkeepalive": "^4.1.4",
     "applicationinsights": "^1.8.10",
@@ -81,19 +78,19 @@
     "body-parser": "1.19.0",
     "cls-hooked": "^4.2.2",
     "compression": "^1.7.4",
-    "connect-redis": "^5.2.0",
+    "connect-redis": "^6.0.0",
     "continuation-local-storage": "^3.2.1",
-    "cookie-session": "^1.3.3",
-    "date-fns": "^2.21.3",
-    "dotenv": "^8.2.0",
+    "cookie-session": "^1.4.0",
+    "date-fns": "^2.22.1",
+    "dotenv": "^10.0.0",
     "express": "4.17.1",
-    "express-session": "^1.17.1",
-    "express-validator": "^6.10.0",
-    "govuk-frontend": "^3.11.0",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.12.0",
+    "govuk-frontend": "^3.13.0",
     "helmet": "^3.23.3",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
-    "morgan": "1.9.x",
+    "morgan": "1.10.0",
     "nunjucks": "^3.2.3",
     "nunjucks-date-filter": "^0.1.1",
     "passport": "^0.4.1",
@@ -101,23 +98,23 @@
     "passport-oauth2-refresh": "^2.0.2",
     "redis": "^3.1.2",
     "serve-favicon": "^2.5.0",
-    "staticify": "^3.3.4",
-    "superagent": "^5.3.1",
+    "staticify": "^5.0.0",
+    "superagent": "^6.1.0",
     "throng": "4.0.x",
-    "uuid": "^3.4.0",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3",
     "winston-azure-application-insights": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.14",
-    "@babel/core": "^7.13.14",
-    "@babel/helper-compilation-targets": "^7.13.13",
-    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
-    "@babel/preset-env": "^7.13.12",
-    "browserify": "^16.5.2",
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.5",
+    "@babel/helper-compilation-targets": "^7.14.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "browserify": "^17.0.0",
     "cheerio": "^1.0.0-rc.10",
-    "chokidar-cli": "latest",
-    "clean-css-cli": "^4.3.0",
+    "chokidar-cli": "2.1.0",
+    "clean-css-cli": "^5.3.0",
     "concat": "^1.0.3",
     "copyfiles": "^2.4.1",
     "cypress": "^6.9.1",
@@ -125,24 +122,26 @@
     "cypress-file-upload": "^4.0.7",
     "cypress-multi-reporters": "^1.4.0",
     "envfile": "^3.0.0",
-    "eslint": "^7.23.0",
+    "eslint": "^7.29.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-cypress": "^2.10.3",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
     "husky": "^4.3.8",
-    "jest": "^25.5.4",
-    "lint-staged": "^10.5.4",
-    "minimist": "^1.2.3",
+    "jest": "^27.0.5",
+    "lint-staged": "^11.0.0",
     "mocha-junit-reporter": "^2.0.0",
-    "nock": "^12.0.3",
+    "nock": "^13.1.0",
     "nodemon": "^2.0.7",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.2",
-    "sass": "^1.32.8",
-    "sass-lint": "^1.2.3",
-    "supertest": "^4.0.2"
+    "sass": "^1.35.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-recommended": "^5.0.0",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-scss": "^3.19.0",
+    "supertest": "^6.1.3"
   },
   "husky": {
     "hooks": {
@@ -153,6 +152,10 @@
     "*.{js,json,css}": [
       "prettier --write",
       "eslint --cache --fix",
+      "git add"
+    ],
+    "*.{scss}": [
+      "stylelint '**/*.scss' --cache --fix",
       "git add"
     ]
   }

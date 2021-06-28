@@ -4,7 +4,7 @@ const { configure } = require('nunjucks')
 const nunjucksEnvironment = configure({}, {})
 const dateFilter = require('nunjucks-date-filter')
 const { encodeHTML } = require('../utils/util')
-const { mojDate } = require('../../node_modules/@ministryofjustice/frontend/moj/filters/all.js')()
+const { mojDate } = require('../../node_modules/@ministryofjustice/frontend/moj/filters/all')()
 // add custom nunjucks filters
 nunjucksEnvironment.addFilter('date', dateFilter)
 nunjucksEnvironment.addFilter('mojDate', mojDate)
@@ -166,7 +166,7 @@ describe('process conditional questions', () => {
         ],
         conditional: 'yes',
         displayOrder: '1',
-        formClasses: 'govuk-radios__conditional govuk-radios__conditional--noIndent govuk-radios__conditional--hidden',
+        formClasses: 'govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden',
         isConditional: true,
         mandatory: 'no',
         questionCode: 'Further information',

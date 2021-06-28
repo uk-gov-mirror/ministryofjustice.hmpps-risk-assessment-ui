@@ -21,7 +21,7 @@ const connectRedis = require('connect-redis')
 // eslint-disable-next-line import/no-extraneous-dependencies
 const argv = require('minimist')(process.argv.slice(2))
 const staticify = require('staticify')(join(__dirname, 'public'))
-const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filters/all.js')()
+const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filters/all')()
 const logger = require('./common/logging/logger')
 const router = require('./app/router')
 const noCache = require('./common/utils/no-cache')

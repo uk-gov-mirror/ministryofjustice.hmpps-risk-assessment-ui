@@ -103,35 +103,37 @@ const stubQuestionGroup = groupId => {
   })
 }
 
-const stubAllInternalQuestionGroups = groups => {
-  if (Array.isArray(groups)) {
-    groups.forEach(group => {
-      if (group.contents?.type === 'group') {
-        stubAllInternalQuestionGroups(group.contents)
-      }
-    })
-  } else {
-    stubFor({
-      request: {
-        method: 'GET',
-        urlPattern: `/questions/${groups.groupId}`,
-      },
-      response: {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-        },
-        status: 200,
-        jsonBody: groups,
-      },
-    })
-    groups.contents?.forEach(subgroup => {
-      if (subgroup.type === 'group') {
-        // eslint-disable-next-line no-unused-vars
-        stubAllInternalQuestionGroups(subgroup)
-      }
-    })
-  }
-}
+// TODO: Is this stub still needed, currently it has not usages 🤔
+
+// const stubAllInternalQuestionGroups = groups => {
+//   if (Array.isArray(groups)) {
+//     groups.forEach(group => {
+//       if (group.contents?.type === 'group') {
+//         stubAllInternalQuestionGroups(group.contents)
+//       }
+//     })
+//   } else {
+//     stubFor({
+//       request: {
+//         method: 'GET',
+//         urlPattern: `/questions/${groups.groupId}`,
+//       },
+//       response: {
+//         headers: {
+//           'Content-Type': 'application/json;charset=UTF-8',
+//         },
+//         status: 200,
+//         jsonBody: groups,
+//       },
+//     })
+//     groups.contents?.forEach(subgroup => {
+//       if (subgroup.type === 'group') {
+//         // eslint-disable-next-line no-unused-vars
+//         stubAllInternalQuestionGroups(subgroup)
+//       }
+//     })
+//   }
+// }
 
 const stubQuestionGroupSummary = groupId => {
   stubFor({
