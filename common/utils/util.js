@@ -103,6 +103,16 @@ const encodeHTML = str => {
     .replace(/'/g, '&#039;')
 }
 
+// used in nunjucks templates which doesn't support directly setting json values
+const updateJsonValue = (jsonObj, key, value) => {
+  if (!jsonObj) {
+    return {}
+  }
+  // eslint-disable-next-line no-param-reassign
+  jsonObj[key] = value
+  return jsonObj
+}
+
 // extract link target from question type formatted as:
 // presentation: link("/update-assessment")
 const extractLink = questionType => {
@@ -163,4 +173,5 @@ module.exports = {
   processReplacements,
   extractLink,
   doReplace,
+  updateJsonValue,
 }

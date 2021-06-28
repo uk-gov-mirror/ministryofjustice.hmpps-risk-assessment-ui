@@ -16,5 +16,6 @@
   "taskTimeout": 200000,
   "pageLoadTimeout": 200000,
   "nodeVersion": "system",
-  "watchForFileChanges": false
+  "watchForFileChanges": false,
+  "retries": 2
 }

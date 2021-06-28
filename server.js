@@ -28,7 +28,7 @@ const noCache = require('./common/utils/no-cache')
 const { mdcSetup } = require('./common/logging/logger-mdc')
 const { updateCorrelationId } = require('./common/middleware/updateCorrelationId')
 const { applicationInsights } = require('./common/config')
-const { encodeHTML, extractLink, doReplace } = require('./common/utils/util')
+const { encodeHTML, extractLink, doReplace, updateJsonValue } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
 const redis = require('./common/data/redis')
@@ -162,6 +162,9 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('doReplace', (str, target, replacement) => doReplace(str, target, replacement))
   // typeof for array, using native JS Array.isArray()
   nunjucksEnvironment.addFilter('isArr', str => Array.isArray(str))
+  nunjucksEnvironment.addFilter('updateJsonValue', (jsonObj, keyToChange, newValue) =>
+    updateJsonValue(jsonObj, keyToChange, newValue),
+  )
 
   // Set view engine
   app.set('view engine', 'njk')

@@ -8,6 +8,30 @@
 {%- from "node_modules/govuk-frontend/govuk/components/button/macro.njk" import govukButton -%}
 {%- from "node_modules/govuk-frontend/govuk/components/character-count/macro.njk" import govukCharacterCount -%}
 
+{% macro compileMultiValueAnswer(answerSchema, selectedAnswers) %}
+  {% if selectedAnswers %}
+    {% set newAnswerSchema = [] %}
+    {% for answer in answerSchema %}
+      {% if answer.text in selectedAnswers %}
+          {% set thisSchemaItem = answerSchema[loop.index0] | updateJsonValue('selected', true) %}
+          {% set newAnswerSchema = (newAnswerSchema.push(thisSchemaItem), newAnswerSchema) %}
+        {% else %}
+          {% set newAnswerSchema = (newAnswerSchema.push(answerSchema[loop.index0]), newAnswerSchema) %}
+      {% endif %}
+    {% endfor %}
+      {% set answerSchema = newAnswerSchema %}
+  {% endif %}
+  {% set selectedArray = [] %}
+  {% for answer in answerSchema %}
+    {% if answer.checked == true or answer.selected == true %}
+      {% set selectedArray = (selectedArray.push(answer.text), selectedArray) %}
+    {% endif %}
+  {% endfor %}
+  {% for answer in selectedArray %}
+      {{- answer }}{{ ", " if not loop.last else "" -}}
+  {% endfor %}
+{% endmacro %}
+
 {% macro renderReadonlyField(question, row='0') %}
   {% if question.answer | isArr %}
     {% set value = question.answer[row] %}
@@ -16,6 +40,8 @@
   {% endif %}
   {% switch question.answerType %}
     {% case 'date' %}{{ value | date("DD MMMM YYYY") }}
+    {% case 'radio' %}{{ compileMultiValueAnswer(question.answerSchemas, value) }}
+    {% case 'checkbox' %}{{ compileMultiValueAnswer(question.answerSchemas, value) }}
     {% default %}{{ value }}
   {% endswitch %}
 {% endmacro %}
