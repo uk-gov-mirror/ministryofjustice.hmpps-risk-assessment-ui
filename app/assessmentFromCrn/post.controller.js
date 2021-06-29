@@ -17,9 +17,8 @@ const startAssessment = async (crn, deliusEventId, assessmentType, user, res) =>
     const [ok, response] = await assessmentSupervision({ crn, deliusEventId, assessmentType }, user?.token, user?.id)
 
     if (!ok) {
-      // get offender details?
       return res.render('app/error', {
-        error: new Error(getErrorMessageFor(response.reason, user)),
+        subHeading: getErrorMessageFor(response.reason, user),
       })
     }
 
@@ -29,20 +28,16 @@ const startAssessment = async (crn, deliusEventId, assessmentType, user, res) =>
   }
 }
 
-const createStartAssessmentFromCrnMiddleware = () => {
-  return function startAssessmentFromCrn({ params: { crn, deliusEventId, assessmentType }, user }, res) {
-    return startAssessment(crn, deliusEventId, assessmentType, user, res)
-  }
+const startAssessmentFromCrn = ({ params: { crn, deliusEventId, assessmentType }, user }, res) => {
+  return startAssessment(crn, deliusEventId, assessmentType, user, res)
 }
 
-const createStartAssessmentFromFormMiddleware = () => {
-  return function startAssessmentFromForm({ body, user }, res) {
-    const { crn, deliusEventId, assessmentType } = body
-    return startAssessment(crn, deliusEventId, assessmentType, user, res)
-  }
+const startAssessmentFromForm = ({ body, user }, res) => {
+  const { crn, deliusEventId, assessmentType } = body
+  return startAssessment(crn, deliusEventId, assessmentType, user, res)
 }
 
 module.exports = {
-  startAssessmentFromCrn: createStartAssessmentFromCrnMiddleware,
-  startAssessmentFromForm: createStartAssessmentFromFormMiddleware,
+  startAssessmentFromCrn,
+  startAssessmentFromForm,
 }

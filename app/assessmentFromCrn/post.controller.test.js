@@ -18,8 +18,6 @@ describe('POST: Start an assessment', () => {
   }
 
   describe('from CRN', () => {
-    const middleware = startAssessmentFromCrn()
-
     beforeEach(() => {
       assessmentSupervision.mockReset()
       res.redirect.mockReset()
@@ -40,7 +38,7 @@ describe('POST: Start an assessment', () => {
 
       assessmentSupervision.mockResolvedValue(apiResponse)
 
-      await middleware(req, res)
+      await startAssessmentFromCrn(req, res)
 
       expect(res.redirect).toHaveBeenCalledWith('/ASSESSMENT_UUID/questionGroup/pre_sentence_assessment/summary')
     })
@@ -59,12 +57,12 @@ describe('POST: Start an assessment', () => {
 
       assessmentSupervision.mockResolvedValue(apiResponse)
 
-      await middleware(req, res)
+      await startAssessmentFromCrn(req, res)
 
-      const theError = new Error(
-        'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.',
-      )
-      expect(res.render).toHaveBeenCalledWith('app/error', { error: theError })
+      const theError =
+        'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+
+      expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
 
     it('renders an error when attempting to create a duplicate assessment', async () => {
@@ -87,18 +85,16 @@ describe('POST: Start an assessment', () => {
 
       assessmentSupervision.mockResolvedValue(apiResponse)
 
-      await middleware(req, res)
+      await startAssessmentFromCrn(req, res)
 
-      const theError = new Error(
-        'The offender is showing as a possible duplicate record under USER_AREA. Log into OASys to manage the duplication. If you need help, contact the OASys Application Support team',
-      )
-      expect(res.render).toHaveBeenCalledWith('app/error', { error: theError })
+      const theError =
+        'The offender is showing as a possible duplicate record under USER_AREA. Log into OASys to manage the duplication. If you need help, contact the OASys Application Support team'
+
+      expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
   })
 
   describe('from form', () => {
-    const middleware = startAssessmentFromForm()
-
     beforeEach(() => {
       assessmentSupervision.mockReset()
       res.redirect.mockReset()
@@ -119,7 +115,7 @@ describe('POST: Start an assessment', () => {
 
       assessmentSupervision.mockResolvedValue(apiResponse)
 
-      await middleware(req, res)
+      await startAssessmentFromForm(req, res)
 
       expect(res.redirect).toHaveBeenCalledWith('/ASSESSMENT_UUID/questionGroup/pre_sentence_assessment/summary')
     })
@@ -138,12 +134,12 @@ describe('POST: Start an assessment', () => {
 
       assessmentSupervision.mockResolvedValue(apiResponse)
 
-      await middleware(req, res)
+      await startAssessmentFromForm(req, res)
 
-      const theError = new Error(
-        'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.',
-      )
-      expect(res.render).toHaveBeenCalledWith('app/error', { error: theError })
+      const theError =
+        'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+
+      expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
 
     it('renders an error when attempting to create a duplicate assessment', async () => {
@@ -166,12 +162,12 @@ describe('POST: Start an assessment', () => {
 
       assessmentSupervision.mockResolvedValue(apiResponse)
 
-      await middleware(req, res)
+      await startAssessmentFromForm(req, res)
 
-      const theError = new Error(
-        'The offender is showing as a possible duplicate record under USER_AREA. Log into OASys to manage the duplication. If you need help, contact the OASys Application Support team',
-      )
-      expect(res.render).toHaveBeenCalledWith('app/error', { error: theError })
+      const theError =
+        'The offender is showing as a possible duplicate record under USER_AREA. Log into OASys to manage the duplication. If you need help, contact the OASys Application Support team'
+
+      expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
   })
 })

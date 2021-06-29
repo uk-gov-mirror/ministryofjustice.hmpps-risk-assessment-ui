@@ -115,10 +115,10 @@ describe('post answers', () => {
 
     await saveQuestionGroup(req, res)
 
-    const theError = new Error(
-      'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.',
-    )
-    expect(res.render).toHaveBeenCalledWith('app/error', { error: theError })
+    const theError =
+      'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+
+    expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
   })
 
   it('should display an error if answer saving fails', async () => {

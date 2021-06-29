@@ -20,7 +20,7 @@ const completeAssessment = async (req, res) => {
     const [ok, response] = await postCompleteAssessment(assessmentId, user?.token, user?.id)
 
     if (!ok) {
-      return res.render('app/error', { error: new Error(getErrorMessage(response.reason)) })
+      return res.render('app/error', { subHeading: getErrorMessage(response.reason) })
     }
 
     res.locals.hideOffenderDetails = true

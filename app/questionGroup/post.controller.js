@@ -35,7 +35,7 @@ const saveQuestionGroup = async (req, res) => {
         req.errorSummary = errorSummary
         return displayQuestionGroup(req, res)
       }
-      return res.render('app/error', { error: new Error(getErrorMessage(response.reason)) })
+      return res.render('app/error', { subHeading: getErrorMessage(response.reason) })
     }
 
     return res.redirect(`/${assessmentId}/questiongroup/${res.locals.navigation.next.url}`)
