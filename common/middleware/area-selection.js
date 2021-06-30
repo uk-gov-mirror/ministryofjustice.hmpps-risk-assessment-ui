@@ -11,6 +11,8 @@ const checkUserHasAreaSelected = overrideUrl => async (req, res, next) => {
       const { regions } = await getUserProfile(user.oasysUserCode, apiToken)
       if (regions.length === 1) {
         await cacheUserDetailsWithRegion(user.id, regions[0].code, regions[0].name)
+        req.session.regions = regions
+        req.session.save()
       } else {
         req.session.regions = regions
         req.session.redirectUrl = overrideUrl || req.originalUrl
