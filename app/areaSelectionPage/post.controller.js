@@ -3,15 +3,30 @@ const { cacheUserDetailsWithRegion } = require('../../common/data/userDetailsCac
 const redirectToAssessmentList = async (req, res) => {
   try {
     const { user } = req
-    const areaInfo = JSON.parse(req.body.area)
+    const requestedArea = JSON.parse(req.body.area)
 
-    await cacheUserDetailsWithRegion(user.id, areaInfo.areaCode, areaInfo.areaName)
+    const providedOptions = req.session.regions || []
 
-    const redirectUrl = req.session.redirectUrl || '/'
-    delete req.session.redirectUrl
-    req.session.save()
+    const isValidUserRegion = providedOptions.map(({ code }) => code).includes(requestedArea.areaCode)
 
-    return res.redirect(redirectUrl)
+    if (isValidUserRegion) {
+      await cacheUserDetailsWithRegion(user.id, requestedArea.areaCode, requestedArea.areaName)
+
+      const redirectUrl = req.session.redirectUrl || '/'
+      delete req.session.redirectUrl
+      req.session.save()
+
+      return res.redirect(redirectUrl)
+    }
+    return res.render(`${__dirname}/index`, {
+      areas: {
+        error: 'Enter a valid area',
+        options: providedOptions.map(({ name, code }) => ({
+          text: name,
+          value: JSON.stringify({ areaName: name, areaCode: code }),
+        })),
+      },
+    })
   } catch (error) {
     return res.render('app/error', { error })
   }

@@ -11,10 +11,12 @@ const areaSelectionController = async (req, res) => {
       regions = userProfile.regions
     }
     return res.render(`${__dirname}/index`, {
-      areas: regions.map(({ name, code }) => ({
-        text: name,
-        value: JSON.stringify({ areaName: name, areaCode: code }),
-      })),
+      areas: {
+        options: regions.map(({ name, code }) => ({
+          text: name,
+          value: JSON.stringify({ areaName: name, areaCode: code }),
+        })),
+      },
     })
   } catch (error) {
     logger.error(`Area selection, error: ${error}`)

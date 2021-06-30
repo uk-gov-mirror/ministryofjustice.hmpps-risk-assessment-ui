@@ -2,6 +2,7 @@
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "common/templates/components/accessible-autocomplete/macro.njk" import accessibleAutocomplete %}
 
 {% block content %}
@@ -14,7 +15,7 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
             <form method="post" novalidate>
-                {{accessibleAutocomplete('area', areas, 'Choose an area')}}
+                {{accessibleAutocomplete('area', areas.options, 'Choose an area', areas.error)}}
                 {{ govukButton({
                     text: 'Start assessment',
                     isStartButton: true

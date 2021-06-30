@@ -46,24 +46,26 @@ describe('get areas', () => {
 
   it('should call render with the correct areas', async () => {
     const expected = {
-      areas: [
-        {
-          text: 'Hertfordshire',
-          value: '{"areaName":"Hertfordshire","areaCode":"HFS"}',
-        },
-        {
-          text: 'West Yorkshire',
-          value: '{"areaName":"West Yorkshire","areaCode":"YSW"}',
-        },
-        {
-          text: 'Lancashire',
-          value: '{"areaName":"Lancashire","areaCode":"LAN"}',
-        },
-        {
-          text: 'Lancashire 2 (HMP)',
-          value: '{"areaName":"Lancashire 2 (HMP)","areaCode":"LAN2"}',
-        },
-      ],
+      areas: {
+        options: [
+          {
+            text: 'Hertfordshire',
+            value: '{"areaName":"Hertfordshire","areaCode":"HFS"}',
+          },
+          {
+            text: 'West Yorkshire',
+            value: '{"areaName":"West Yorkshire","areaCode":"YSW"}',
+          },
+          {
+            text: 'Lancashire',
+            value: '{"areaName":"Lancashire","areaCode":"LAN"}',
+          },
+          {
+            text: 'Lancashire 2 (HMP)',
+            value: '{"areaName":"Lancashire 2 (HMP)","areaCode":"LAN2"}',
+          },
+        ],
+      },
     }
     await areaSelectionController(req, res)
     expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, expected)
