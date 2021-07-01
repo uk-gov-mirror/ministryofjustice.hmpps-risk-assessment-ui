@@ -60,7 +60,7 @@ describe('POST: Start an assessment', () => {
       await startAssessmentFromCrn(req, res)
 
       const theError =
-        'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+        'You do not have permission to create this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
 
       expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
@@ -137,7 +137,7 @@ describe('POST: Start an assessment', () => {
       await startAssessmentFromForm(req, res)
 
       const theError =
-        'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+        'You do not have permission to create this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
 
       expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })

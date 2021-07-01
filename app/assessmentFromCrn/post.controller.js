@@ -2,7 +2,7 @@ const { assessmentSupervision } = require('../../common/data/hmppsAssessmentApi'
 
 const getErrorMessageFor = (reason, user) => {
   if (reason === 'OASYS_PERMISSION') {
-    return 'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+    return 'You do not have permission to create this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
   }
   if (reason === 'DUPLICATE_OFFENDER_RECORD') {
     return `The offender is showing as a possible duplicate record under ${user.areaName}. Log into OASys to manage the duplication. If you need help, contact the OASys Application Support team`
