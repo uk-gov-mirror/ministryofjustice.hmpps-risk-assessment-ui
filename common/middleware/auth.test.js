@@ -234,7 +234,6 @@ describe('Auth', () => {
       expect(passport.authenticate).toHaveBeenCalledWith('oauth2', {
         successReturnToOrRedirect: req.session.returnUrl,
         failureRedirect: '/login',
-        failureFlash: true,
       })
 
       expect(mockPassportAuthenticateMiddleware).toHaveBeenCalledWith(req, res, next)

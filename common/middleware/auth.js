@@ -114,7 +114,6 @@ const handleLoginCallback = () => {
     passport.authenticate('oauth2', {
       successReturnToOrRedirect: req.session.returnUrl || '/',
       failureRedirect: '/login',
-      failureFlash: true,
     })(req, res, next)
   }
 }
