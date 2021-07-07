@@ -2,6 +2,7 @@ const superagent = require('superagent')
 const logger = require('../logging/logger')
 const { getCorrelationId } = require('../utils/util')
 const { getCachedUserDetails } = require('./userDetailsCache')
+const { ServerError } = require('../utils/errors')
 const {
   apis: {
     hmppsAssessments: { timeout, url },
@@ -110,12 +111,17 @@ const action = async (agent, authorisationToken, userId) => {
         return [true, response.body]
       })
   } catch (error) {
+    logError(error)
     const { status, response } = error
     if (status === 400 || status === 403 || status === 422) {
       return [false, response.body]
     }
 
-    return logError(error)
+    if (status >= 500) {
+      throw new ServerError()
+    }
+
+    throw error
   }
 }
 
@@ -127,7 +133,6 @@ const logError = error => {
     url: error.response?.req?.url,
     text: error.response?.text,
   })
-  throw error
 }
 
 module.exports = {

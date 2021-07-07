@@ -12,14 +12,13 @@
         {{ heading | default("There is a problem with the service") }}
       </h1>
       {% if subHeading %}
-      <h3 class="govuk-heading-m">
+      <h2 class="govuk-heading-m">
         {{ subHeading }}
-      <h3>
+      </h2>
       {% endif %}
-      <p class="govuk-body">
       {% if showDetailedErrors %}
         {% if error %}
-          <h4 class="govuk-heading-s">Geek Stuff 👇</h4>
+          <h2 class="govuk-heading-s">Geek Stuff 👇</h2>
           <div class="govuk-inset-text">
             <p class="govuk-body govuk-!-font-weight-bold">
               {{ error.message }}
@@ -28,7 +27,7 @@
           </div>
         {% endif %}
       {% else %}
-        {{ error.message }}
+        <p class="govuk-body">{{ error.message }}</p>
       {% endif %}
       </p>
     </div>

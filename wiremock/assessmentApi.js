@@ -271,6 +271,27 @@ const stubRemoveTableRow = async () => {
   await stubDeleteTableRow()
 }
 
+const stubErrors = () => {
+  stubFor({
+    request: {
+      method: 'ANY',
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 503,
+      jsonBody: {
+        status: 503,
+        developerMessage: 'Unable to create assessment',
+        reason: 'OASYS_PERMISSIONS',
+        moreInfo:
+          'GEORGE CLARKE in Warwickshire is currently doing an assessment on this offender, created on 12/04/2021.',
+      },
+    },
+  })
+}
+
 module.exports = {
   stubSupervision,
   stubForms,
@@ -283,4 +304,5 @@ module.exports = {
   stubGetAssessments,
   stubGetQuestionGroup,
   stubRemoveTableRow,
+  stubErrors,
 }
