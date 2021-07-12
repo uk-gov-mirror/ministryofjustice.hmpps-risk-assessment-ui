@@ -80,7 +80,7 @@ module.exports = {
   apiClientSecret: get('API_CLIENT_SECRET', 'clientSecret'),
   sessionSecret: get('SESSION_SECRET', 'superSecret'),
   dev: {
-    devAssessmentId: get('DEV_ASSESSMENT_ID', 'e69a61ff-7395-4a12-b434-b1aa6478aded'),
+    devAssessmentId: get('DEV_ASSESSMENT_ID', 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4'),
     devPreSentenceQuestionGroupId: get('DEV_PRE_SENTENCE_QUESTION_GROUP_ID', '65a3924c-4130-4140-b7f4-cc39a52603bb'),
   },
 }

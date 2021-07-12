@@ -22,7 +22,7 @@ context('Test filtered reference data fields', () => {
   it('Populates reference data fields on page load', () => {
     cy.intercept(
       'POST',
-      '/e69a61ff-7395-4a12-b434-b1aa6478aded/episode/4511a3f6-7f51-4b96-b603-4e75eac0c839/referencedata/filtered',
+      '/fb6b7c33-07fc-4c4c-a009-8d60f66952c4/episode/4511a3f6-7f51-4b96-b603-4e75eac0c839/referencedata/filtered',
     ).as('update')
 
     const questionsPage = FilteredReferenceDataTestPage.goTo()
@@ -55,7 +55,7 @@ context('Test filtered reference data fields', () => {
 
     cy.intercept(
       'POST',
-      '/e69a61ff-7395-4a12-b434-b1aa6478aded/episode/4511a3f6-7f51-4b96-b603-4e75eac0c839/referencedata/filtered',
+      '/fb6b7c33-07fc-4c4c-a009-8d60f66952c4/episode/4511a3f6-7f51-4b96-b603-4e75eac0c839/referencedata/filtered',
     ).as('update')
 
     questionsPage
@@ -83,7 +83,7 @@ context('Test filtered reference data fields', () => {
 
     cy.intercept(
       'POST',
-      '/e69a61ff-7395-4a12-b434-b1aa6478aded/episode/4511a3f6-7f51-4b96-b603-4e75eac0c839/referencedata/filtered',
+      '/fb6b7c33-07fc-4c4c-a009-8d60f66952c4/episode/4511a3f6-7f51-4b96-b603-4e75eac0c839/referencedata/filtered',
     ).as('update')
 
     questionsPage

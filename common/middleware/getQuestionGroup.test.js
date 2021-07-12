@@ -129,12 +129,12 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.navigation).toEqual({
         next: {
           name: 'page 2',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/0/1',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/0/1',
         },
         parent: 'section 1',
         previous: {
           name: 'Assessment progress',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/summary',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/summary',
         },
       })
     })
@@ -151,12 +151,12 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.navigation).toEqual({
         next: {
           name: 'page 3',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/1/0',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/1/0',
         },
         parent: 'section 1',
         previous: {
           name: 'page 1',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/0/0',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/0/0',
         },
       })
     })
@@ -173,12 +173,12 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.navigation).toEqual({
         next: {
           name: 'page 4',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/1/1',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/1/1',
         },
         parent: 'section 2',
         previous: {
           name: 'page 2',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/0/1',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/0/1',
         },
       })
     })
@@ -195,12 +195,12 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.navigation).toEqual({
         next: {
           name: 'Assessment progress',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/summary',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/summary',
         },
         parent: 'section 2',
         previous: {
           name: 'page 4',
-          url: 'e69a61ff-7395-4a12-b434-b1aa6478aded/1/1',
+          url: 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4/1/1',
         },
       })
     })
