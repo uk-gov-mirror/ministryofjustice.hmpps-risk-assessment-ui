@@ -19,13 +19,18 @@ const getOffenderData = (uuid, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
-const getQuestionGroup = (groupId, authorisationToken, userId) => {
-  const path = `${url}/questions/${groupId}`
+const getAssessmentQuestions = (assessmentType, authorisationToken, userId) => {
+  const path = `${url}/assessments/schema/${assessmentType}`
   return getData(path, authorisationToken, userId)
 }
 
 const getQuestionGroupSummary = (groupId, authorisationToken, userId) => {
   const path = `${url}/questions/${groupId}/summary`
+  return getData(path, authorisationToken, userId)
+}
+
+const getAssessmentSummary = (assessmentType, authorisationToken, userId) => {
+  const path = `${url}/assessments/schema/${assessmentType}/summary`
   return getData(path, authorisationToken, userId)
 }
 
@@ -138,11 +143,12 @@ const logError = error => {
 module.exports = {
   assessmentSupervision,
   getOffenderData,
-  getQuestionGroup,
+  getAssessmentQuestions,
   getAnswers,
   getAssessmentsList,
   postAnswers,
   getQuestionGroupSummary,
+  getAssessmentSummary,
   postCompleteAssessment,
   getFilteredReferenceData,
   postTableRow,

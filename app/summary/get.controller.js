@@ -1,15 +1,15 @@
 // @ts-check
 
 const { logger } = require('../../common/logging/logger')
-const { getQuestionGroupSummary } = require('../../common/data/hmppsAssessmentApi')
+const { getAssessmentSummary } = require('../../common/data/hmppsAssessmentApi')
 const { processReplacements } = require('../../common/utils/util')
 
-const displayQuestionGroupSummary = async (
-  { params: { assessmentId, groupId }, errors = {}, errorSummary = null, user },
+const displayOverview = async (
+  { params: { assessmentId, assessmentType }, errors = {}, errorSummary = null, user },
   res,
 ) => {
   try {
-    let assessment = await grabQuestionGroupSummary(groupId, user?.token, user?.id)
+    let assessment = await grabAssessmentSummary(assessmentType, user?.token, user?.id)
 
     assessment = processReplacements(assessment, res.locals.offenderDetails)
 
@@ -25,7 +25,7 @@ const displayQuestionGroupSummary = async (
         items: [],
       }
       section.contents?.forEach((item, index) => {
-        const href = `/${assessmentId}/questiongroup/${groupId}/${sectionIndex}/${index}`
+        const href = `/${assessmentId}/questiongroup/${assessmentType}/${sectionIndex}/${index}`
         const newItem = {
           text: item.title,
           href,
@@ -41,22 +41,22 @@ const displayQuestionGroupSummary = async (
       assessmentId,
       summary,
       subheading: assessment.title,
-      groupId,
+      groupId: assessmentType,
     })
   } catch (error) {
     return res.render('app/error', { error })
   }
 }
 
-const grabQuestionGroupSummary = (groupId, token, userId) => {
+const grabAssessmentSummary = (assessmentType, token, userId) => {
   try {
-    return getQuestionGroupSummary(groupId, token, userId)
+    return getAssessmentSummary(assessmentType, token, userId)
   } catch (error) {
-    logger.error(`Could not retrieve question group summary for ${groupId}, error: ${error}`)
+    logger.error(`Could not retrieve assessment summary for ${assessmentType}, error: ${error}`)
     throw error
   }
 }
 
 module.exports = {
-  displayOverview: displayQuestionGroupSummary,
+  displayOverview,
 }

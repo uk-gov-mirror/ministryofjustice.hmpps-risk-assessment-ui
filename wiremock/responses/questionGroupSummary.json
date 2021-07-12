@@ -186,5 +186,157 @@
         ]
       }
     ]
+  },
+  "ROSH": {
+    "groupId": "65a3924c-4130-4140-b7f4-cc39a52603bb",
+    "groupCode": "pre_sentence_assessment",
+    "title": "Pre-Sentence Assessment",
+    "contents": [
+      {
+        "groupId": "5d77fc6b-0001-4955-ad54-7f417becc7c8",
+        "groupCode": "individual_and_case_details",
+        "title": "Individual and case details",
+        "contents": [
+          {
+            "groupId": "f7dd78a8-7f04-4fde-8a4f-ac2cf0c56ff5",
+            "groupCode": "[name_of_person]_s_details",
+            "title": "[Name of person]'s details"
+          },
+          {
+            "groupId": "78b595f6-efed-405e-9d6e-07882db416a6",
+            "groupCode": "assessment_details",
+            "title": "Assessment details"
+          }
+        ]
+      },
+      {
+        "groupId": "d9d1df65-9878-4a76-bbae-9e7685ea4efa",
+        "groupCode": "sources_of_information",
+        "title": "Sources of information",
+        "contents": [
+          {
+            "groupId": "3cc4f4cb-a351-430b-adfb-3ad8ab9b5166",
+            "groupCode": "select_sources",
+            "title": "Select sources"
+          }
+        ]
+      },
+      {
+        "groupId": "61feebd9-afe5-43ef-94a5-27c400453eba",
+        "groupCode": "offences_convictions_and_needs",
+        "title": "Offences, convictions and needs",
+        "contents": [
+          {
+            "groupId": "eb7b7324-f2a6-4902-91ef-709a8fab1f82",
+            "groupCode": "offences_and_convictions",
+            "title": "Offences and convictions"
+          },
+          {
+            "groupId": "ebf96a74-c140-47d8-b37f-62cff68f41c0",
+            "groupCode": "needs",
+            "title": "Needs"
+          }
+        ]
+      },
+      {
+        "groupId": "1e1159e1-6092-4e22-9e29-5734654baeda",
+        "groupCode": "rosh_screening",
+        "title": "ROSH screening",
+        "contents": [
+          {
+            "groupId": "946091d2-4038-4e2b-9283-83cc4876f6ed",
+            "groupCode": "risk_to_others",
+            "title": "Risk to others"
+          },
+          {
+            "groupId": "991117ce-8e1a-4c1c-9cd4-962c7979fce2",
+            "groupCode": "risk_to_self",
+            "title": "Risk to self"
+          },
+          {
+            "groupId": "5594f062-78b0-4245-bcd3-9f71c3040cfb",
+            "groupCode": "other_risks",
+            "title": "Other risks"
+          }
+        ]
+      },
+      {
+        "groupId": "7773691f-7244-4415-b410-17c495bf9a59",
+        "groupCode": "rosh_full_analysis",
+        "title": "ROSH full analysis",
+        "contents": [
+          {
+            "groupId": "b5447925-aec6-4563-9180-96e33065285f",
+            "groupCode": "current_behaviour",
+            "title": "Current behaviour"
+          },
+          {
+            "groupId": "d135b927-945b-4a7d-b625-4c74c5049886",
+            "groupCode": "previous_behaviour",
+            "title": "Previous behaviour"
+          },
+          {
+            "groupId": "76704e7d-71bb-46e3-b78d-73a85de99198",
+            "groupCode": "risk_of_serious_harm_to_children_whose_identity_is_known",
+            "title": "Risk of serious harm to children whose identity is known"
+          },
+          {
+            "groupId": "42222235-2e18-4de6-a9e2-95f5a628b605",
+            "groupCode": "details_of_children_at_risk_of_serious_harm",
+            "title": "Details of children at risk of serious harm"
+          },
+          {
+            "groupId": "6c3504a2-ee53-45fe-8e6a-36250e3dd185",
+            "groupCode": "suicide_and_self_harm",
+            "title": "Suicide and self-harm"
+          },
+          {
+            "groupId": "3485b4c8-bba9-4032-ae7e-fb0aeab36d8b",
+            "groupCode": "coping_in_custody_or_a_hostel_setting",
+            "title": "Coping in custody or a hostel setting"
+          },
+          {
+            "groupId": "b5334e5f-b793-4400-8ea1-67c316b2d44f",
+            "groupCode": "vulnerability",
+            "title": "Vulnerability"
+          },
+          {
+            "groupId": "3c70d53a-08c5-4f30-a144-12e5c6e14205",
+            "groupCode": "escape_and_abscond",
+            "title": "Escape and abscond"
+          },
+          {
+            "groupId": "22be9048-33a7-4e56-a8f4-8c4e2a62524c",
+            "groupCode": "control_issues_or_disruptive_behaviour",
+            "title": "Control issues or disruptive behaviour"
+          },
+          {
+            "groupId": "e807624f-c59e-4b21-b749-2432b08f60f9",
+            "groupCode": "breach_of_trust",
+            "title": "Breach of trust"
+          },
+          {
+            "groupId": "121f7277-c0fc-4cdf-a02c-049f73993cbd",
+            "groupCode": "risk_summary",
+            "title": "Risk summary"
+          },
+          {
+            "groupId": "aa8645f9-2774-4962-b73e-e1773d88291d",
+            "groupCode": "imminence_circumstances_and_other_factors",
+            "title": "Imminence, circumstances and other factors"
+          },
+          {
+            "groupId": "a33c4703-fa0a-4826-99a5-9de753305841",
+            "groupCode": "rosh_scores",
+            "title": "ROSH scores"
+          },
+          {
+            "groupId": "1d69e176-8459-4d30-8410-006828ff8c72",
+            "groupCode": "risk_management_issues",
+            "title": "Risk management issues"
+          }
+        ]
+      }
+    ]
   }
 }

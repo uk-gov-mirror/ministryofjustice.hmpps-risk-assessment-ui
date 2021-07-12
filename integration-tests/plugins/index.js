@@ -11,6 +11,7 @@ const {
   stubGetAssessments,
   stubGetQuestionGroup,
   stubAssessmentComplete,
+  stubAssessmentTypeSummaries,
   stubErrors,
 } = require('../../wiremock/assessmentApi')
 const { stubReferenceData } = require('../../wiremock/referenceData')
@@ -36,6 +37,7 @@ module.exports = on => {
         stubEpisodes(),
         stubOffenderDetails(),
         stubQuestionSummaries(),
+        stubAssessmentTypeSummaries(),
         stubReferenceData(),
         stubGetAssessments(),
         stubGetQuestionGroup(),

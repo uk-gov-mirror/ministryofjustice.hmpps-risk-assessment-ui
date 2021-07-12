@@ -1,13 +1,13 @@
 // Initialise nunjucks environment
 const { displayOverview } = require('./get.controller')
-const { getQuestionGroupSummary } = require('../../common/data/hmppsAssessmentApi')
-const questionGroupSummaryPointer = require('../../wiremock/responses/questionGroups.json').pre_sentence_assessment
+const { getAssessmentSummary } = require('../../common/data/hmppsAssessmentApi')
+const assessmentSummaryPointer = require('../../wiremock/responses/questionGroupSummary.json').ROSH
 const expected = require('./fixtures/expected.json')
 
 jest.mock('../../common/data/hmppsAssessmentApi')
 
 const user = { token: 'mytoken', id: '1' }
-let questionGroupSummary
+let assessmentSummary
 let expectedForThisTest
 
 describe('display question group summary', () => {
@@ -16,7 +16,7 @@ describe('display question group summary', () => {
     user,
     params: {
       assessmentId: 'test-assessment-id',
-      groupId: '65a3924c-4130-4140-b7f4-cc39a52603bb',
+      assessmentType: 'ROSH',
     },
   }
   const res = {
@@ -30,14 +30,14 @@ describe('display question group summary', () => {
   }
 
   beforeEach(() => {
-    questionGroupSummary = JSON.parse(JSON.stringify(questionGroupSummaryPointer))
+    assessmentSummary = JSON.parse(JSON.stringify(assessmentSummaryPointer))
     expectedForThisTest = JSON.parse(JSON.stringify(expected))
     req.params.subgroup = 0
-    getQuestionGroupSummary.mockReset()
+    getAssessmentSummary.mockReset()
   })
 
   it('should render the page with the correct structure', async () => {
-    getQuestionGroupSummary.mockReturnValueOnce(questionGroupSummary)
+    getAssessmentSummary.mockReturnValueOnce(assessmentSummary)
 
     await displayOverview(req, res)
     expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, expectedForThisTest)
@@ -45,7 +45,7 @@ describe('display question group summary', () => {
 
   it('should throw an error if it cannot retrieve question group summary', async () => {
     const theError = new Error('Question group error message')
-    getQuestionGroupSummary.mockImplementation(() => {
+    getAssessmentSummary.mockImplementation(() => {
       throw theError
     })
     await displayOverview(req, res)

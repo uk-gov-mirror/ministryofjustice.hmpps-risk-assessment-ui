@@ -1294,7 +1294,7 @@
       }
     ]
   },
-  "pre_sentence_assessment": {
+  "ROSH": {
     "type": "group",
     "groupId": "65a3924c-4130-4140-b7f4-cc39a52603bb",
     "groupCode": "pre_sentence_assessment",

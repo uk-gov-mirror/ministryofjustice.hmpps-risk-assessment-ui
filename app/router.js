@@ -108,7 +108,7 @@ module.exports = app => {
   app.get('*', checkUserHasAreaSelected())
   app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 
-  app.get(`/:assessmentId/questiongroup/:groupId/summary`, getOffenderDetails, displayOverview)
+  app.get(`/:assessmentId/questiongroup/:assessmentType/summary`, getOffenderDetails, displayOverview)
 
   app.get(
     `/:assessmentId/questiongroup/:groupId/:subgroup/:page`,

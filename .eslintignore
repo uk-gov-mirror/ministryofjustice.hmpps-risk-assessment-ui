@@ -12,3 +12,4 @@ integration-tests/mockApis/responses/*
 app/questionGroup/fixtures/*.json
 app/addRow/fixtures/*.json
 app/editRow/fixtures/*.json
+app/summary/fixtures/*.json

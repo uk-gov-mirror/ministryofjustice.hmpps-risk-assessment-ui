@@ -1,5 +1,5 @@
 const getQuestion = require('./getQuestionGroup')
-const { getQuestionGroup } = require('../data/hmppsAssessmentApi')
+const { getAssessmentQuestions } = require('../data/hmppsAssessmentApi')
 const { getApiToken } = require('../data/oauth')
 const { getReferenceDataListByCategory } = require('../data/offenderAssessmentApi')
 const { processReplacements } = require('../utils/util')
@@ -86,10 +86,10 @@ describe('getQuestionGroup middleware', () => {
       user,
     }
     res = { render, locals: {} }
-    getQuestionGroup.mockResolvedValue(questionData)
+    getAssessmentQuestions.mockResolvedValue(questionData)
   })
   afterEach(() => {
-    getQuestionGroup.mockReset()
+    getAssessmentQuestions.mockReset()
     getReferenceDataListByCategory.mockReset()
     next.mockReset()
     render.mockReset()
@@ -107,8 +107,8 @@ describe('getQuestionGroup middleware', () => {
       })
     })
     it('should call the data service once and pass the id', () => {
-      expect(getQuestionGroup).toHaveBeenCalledTimes(1)
-      expect(getQuestionGroup).toHaveBeenCalledWith(devAssessmentId, user.token, user.id)
+      expect(getAssessmentQuestions).toHaveBeenCalledTimes(1)
+      expect(getAssessmentQuestions).toHaveBeenCalledWith(devAssessmentId, user.token, user.id)
     })
     it('should call the next function', () => {
       expect(next).toHaveBeenCalledTimes(1)
@@ -245,7 +245,7 @@ describe('getQuestionGroup middleware', () => {
         ],
       }
 
-      getQuestionGroup.mockResolvedValue(questionsWithReferenceDataCategories)
+      getAssessmentQuestions.mockResolvedValue(questionsWithReferenceDataCategories)
 
       await getQuestion(req, res, next)
 
@@ -288,7 +288,7 @@ describe('getQuestionGroup middleware', () => {
         ],
       }
 
-      getQuestionGroup.mockResolvedValue(questionsWithoutReferenceDataCategories)
+      getAssessmentQuestions.mockResolvedValue(questionsWithoutReferenceDataCategories)
 
       await getQuestion(req, res, next)
 
@@ -333,7 +333,7 @@ describe('getQuestionGroup middleware', () => {
         ],
       }
 
-      getQuestionGroup.mockResolvedValue(questionsWithMultipleReferenceDataCategories)
+      getAssessmentQuestions.mockResolvedValue(questionsWithMultipleReferenceDataCategories)
 
       await getQuestion(req, res, next)
 
@@ -378,7 +378,7 @@ describe('getQuestionGroup middleware', () => {
     }
 
     it('adds a data attribute with the question UUID', async () => {
-      getQuestionGroup.mockResolvedValue(questionSchema)
+      getAssessmentQuestions.mockResolvedValue(questionSchema)
 
       await getQuestion(req, res, next)
 
@@ -390,7 +390,7 @@ describe('getQuestionGroup middleware', () => {
     })
 
     it('adds a data attribute with the question type', async () => {
-      getQuestionGroup.mockResolvedValue(questionSchema)
+      getAssessmentQuestions.mockResolvedValue(questionSchema)
 
       await getQuestion(req, res, next)
 
@@ -402,7 +402,7 @@ describe('getQuestionGroup middleware', () => {
     })
 
     it('adds a data attribute for reference data target fields', async () => {
-      getQuestionGroup.mockResolvedValue(questionSchema)
+      getAssessmentQuestions.mockResolvedValue(questionSchema)
 
       await getQuestion(req, res, next)
 
@@ -416,7 +416,7 @@ describe('getQuestionGroup middleware', () => {
     })
 
     it('does not add a data attribute for reference data target fields when not present', async () => {
-      getQuestionGroup.mockResolvedValue({
+      getAssessmentQuestions.mockResolvedValue({
         type: 'group',
         groupId: '111',
         title: 'assessment root',
