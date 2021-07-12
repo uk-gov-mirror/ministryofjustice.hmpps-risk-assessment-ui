@@ -52,7 +52,7 @@ const {
   dev: { devAssessmentId },
 } = require('../common/config')
 
-const assessmentUrl = `/${devAssessmentId}/questiongroup/pre_sentence_assessment/summary`
+const assessmentUrl = `/${devAssessmentId}/questiongroup/ROSH/summary`
 
 // Export
 module.exports = app => {

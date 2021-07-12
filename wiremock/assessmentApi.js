@@ -167,11 +167,11 @@ const stubAssessmentTypeSummary = assessmentType => {
   })
 }
 
-const stubQuestionGroupCodeSummary = (groupCode, groupId) => {
+const stubQuestionGroupCodeSummary = (assessmentSchemaCode, groupId) => {
   stubFor({
     request: {
       method: 'GET',
-      urlPattern: `/questions/${groupCode}/summary`,
+      urlPattern: `/questions/${assessmentSchemaCode}/summary`,
     },
     response: {
       headers: {
@@ -267,7 +267,7 @@ const stubQuestions = async () => {
 }
 
 const stubQuestionSummaries = async () => {
-  await stubQuestionGroupCodeSummary('pre_sentence_assessment', '65a3924c-4130-4140-b7f4-cc39a52603bb')
+  await stubQuestionGroupCodeSummary('ROSH', '65a3924c-4130-4140-b7f4-cc39a52603bb')
   await stubQuestionGroupSummary('65a3924c-4130-4140-b7f4-cc39a52603bb') // short psr
   await stubQuestionGroupSummary('22222222-2222-2222-2222-222222222203') // brief
 }
