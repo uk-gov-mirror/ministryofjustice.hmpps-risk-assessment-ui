@@ -19,8 +19,8 @@ const getOffenderData = (uuid, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
-const getAssessmentQuestions = (assessmentType, authorisationToken, userId) => {
-  const path = `${url}/assessments/schema/${assessmentType}`
+const getAssessmentQuestions = (assessmentSchemaCode, authorisationToken, userId) => {
+  const path = `${url}/assessments/schema/${assessmentSchemaCode}`
   return getData(path, authorisationToken, userId)
 }
 
@@ -29,8 +29,8 @@ const getQuestionGroupSummary = (groupId, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
-const getAssessmentSummary = (assessmentType, authorisationToken, userId) => {
-  const path = `${url}/assessments/schema/${assessmentType}/summary`
+const getAssessmentSummary = (assessmentSchemaCode, authorisationToken, userId) => {
+  const path = `${url}/assessments/schema/${assessmentSchemaCode}/summary`
   return getData(path, authorisationToken, userId)
 }
 

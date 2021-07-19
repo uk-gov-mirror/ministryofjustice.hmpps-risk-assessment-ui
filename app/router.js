@@ -108,7 +108,7 @@ module.exports = app => {
   app.get('*', checkUserHasAreaSelected())
   app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 
-  app.get(`/:assessmentId/questiongroup/:assessmentType/summary`, getOffenderDetails, displayOverview)
+  app.get(`/:assessmentId/questiongroup/:assessmentSchemaCode/summary`, getOffenderDetails, displayOverview)
 
   app.get(
     `/:assessmentId/questiongroup/:groupId/:subgroup/:page`,
@@ -179,7 +179,7 @@ module.exports = app => {
 
   app.get('/assessment-from-delius', assessmentFromCrn)
   app.post('/assessment-from-delius', startAssessmentFromForm)
-  app.post('/assessment-from-delius/:assessmentType/crn/:crn/event/:deliusEventId', startAssessmentFromCrn)
+  app.post('/assessment-from-delius/:assessmentSchemaCode/crn/:crn/event/:deliusEventId', startAssessmentFromCrn)
 
   app.use((error, req, res, next) =>
     res.render('app/error', {

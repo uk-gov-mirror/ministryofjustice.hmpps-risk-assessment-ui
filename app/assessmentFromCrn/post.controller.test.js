@@ -29,7 +29,7 @@ describe('POST: Start an assessment', () => {
         params: {
           crn: 'CRN',
           deliusEventId: 'DELIUS_EVENT_ID',
-          assessmentType: 'ASSESSMENT_TYPE',
+          assessmentSchemaCode: 'ASSESSMENT_TYPE',
         },
         user,
       }
@@ -48,7 +48,7 @@ describe('POST: Start an assessment', () => {
         params: {
           crn: 'CRN',
           deliusEventId: 'DELIUS_EVENT_ID',
-          assessmentType: 'ASSESSMENT_TYPE',
+          assessmentSchemaCode: 'ASSESSMENT_TYPE',
         },
         user,
       }
@@ -70,7 +70,7 @@ describe('POST: Start an assessment', () => {
         params: {
           crn: 'CRN',
           deliusEventId: 'DELIUS_EVENT_ID',
-          assessmentType: 'ASSESSMENT_TYPE',
+          assessmentSchemaCode: 'ASSESSMENT_TYPE',
         },
         user,
       }
@@ -106,7 +106,7 @@ describe('POST: Start an assessment', () => {
         body: {
           crn: 'CRN',
           deliusEventId: 'DELIUS_EVENT_ID',
-          assessmentType: 'ASSESSMENT_TYPE',
+          assessmentSchemaCode: 'ASSESSMENT_TYPE',
         },
         user,
       }
@@ -125,7 +125,7 @@ describe('POST: Start an assessment', () => {
         body: {
           crn: 'CRN',
           deliusEventId: 'DELIUS_EVENT_ID',
-          assessmentType: 'ASSESSMENT_TYPE',
+          assessmentSchemaCode: 'ASSESSMENT_TYPE',
         },
         user,
       }
@@ -147,7 +147,7 @@ describe('POST: Start an assessment', () => {
         body: {
           crn: 'CRN',
           deliusEventId: 'DELIUS_EVENT_ID',
-          assessmentType: 'ASSESSMENT_TYPE',
+          assessmentSchemaCode: 'ASSESSMENT_TYPE',
         },
         user,
       }

@@ -5,11 +5,11 @@ const { getAssessmentSummary } = require('../../common/data/hmppsAssessmentApi')
 const { processReplacements } = require('../../common/utils/util')
 
 const displayOverview = async (
-  { params: { assessmentId, assessmentType }, errors = {}, errorSummary = null, user },
+  { params: { assessmentId, assessmentSchemaCode }, errors = {}, errorSummary = null, user },
   res,
 ) => {
   try {
-    let assessment = await grabAssessmentSummary(assessmentType, user?.token, user?.id)
+    let assessment = await grabAssessmentSummary(assessmentSchemaCode, user?.token, user?.id)
 
     assessment = processReplacements(assessment, res.locals.offenderDetails)
 
@@ -25,7 +25,7 @@ const displayOverview = async (
         items: [],
       }
       section.contents?.forEach((item, index) => {
-        const href = `/${assessmentId}/questiongroup/${assessmentType}/${sectionIndex}/${index}`
+        const href = `/${assessmentId}/questiongroup/${assessmentSchemaCode}/${sectionIndex}/${index}`
         const newItem = {
           text: item.title,
           href,
@@ -41,18 +41,18 @@ const displayOverview = async (
       assessmentId,
       summary,
       subheading: assessment.title,
-      groupId: assessmentType,
+      groupId: assessmentSchemaCode,
     })
   } catch (error) {
     return res.render('app/error', { error })
   }
 }
 
-const grabAssessmentSummary = (assessmentType, token, userId) => {
+const grabAssessmentSummary = (assessmentSchemaCode, token, userId) => {
   try {
-    return getAssessmentSummary(assessmentType, token, userId)
+    return getAssessmentSummary(assessmentSchemaCode, token, userId)
   } catch (error) {
-    logger.error(`Could not retrieve assessment summary for ${assessmentType}, error: ${error}`)
+    logger.error(`Could not retrieve assessment summary for ${assessmentSchemaCode}, error: ${error}`)
     throw error
   }
 }

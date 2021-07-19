@@ -16,7 +16,7 @@ describe('display question group summary', () => {
     user,
     params: {
       assessmentId: 'test-assessment-id',
-      assessmentType: 'ROSH',
+      assessmentSchemaCode: 'ROSH',
     },
   }
   const res = {

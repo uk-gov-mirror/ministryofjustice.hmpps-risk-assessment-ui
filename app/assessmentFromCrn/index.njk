@@ -22,9 +22,10 @@
           classes: 'govuk-input--width-20'
       }) }}
       {{ govukInput({
-          id: 'assessmentType',
-          name: 'assessmentType',
-          label: { text: 'Assessment Type', isPageHeading: false },
+          id: 'assessmentSchemaCode',
+          name: 'assessmentSchemaCode',
+          label: { text: 'Assessment Code', isPageHeading: false },
+          hint: { text: 'For example "ROSH" or "RSR"'},
           classes: 'govuk-input--width-20'
       }) }}
       {{ govukButton({
