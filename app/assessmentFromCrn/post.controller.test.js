@@ -40,7 +40,7 @@ describe('POST: Start an assessment', () => {
 
       await startAssessmentFromCrn(req, res)
 
-      expect(res.redirect).toHaveBeenCalledWith('/ASSESSMENT_UUID/questionGroup/ROSH/summary')
+      expect(res.redirect).toHaveBeenCalledWith('/ASSESSMENT_UUID/questionGroup/ASSESSMENT_TYPE/summary')
     })
 
     it('renders an error when the user does not have permission', async () => {
@@ -117,7 +117,7 @@ describe('POST: Start an assessment', () => {
 
       await startAssessmentFromForm(req, res)
 
-      expect(res.redirect).toHaveBeenCalledWith('/ASSESSMENT_UUID/questionGroup/ROSH/summary')
+      expect(res.redirect).toHaveBeenCalledWith('/ASSESSMENT_UUID/questionGroup/ASSESSMENT_TYPE/summary')
     })
 
     it('renders an error when the user does not have permission', async () => {

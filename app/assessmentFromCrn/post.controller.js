@@ -26,7 +26,7 @@ const startAssessment = async (crn, deliusEventId, assessmentSchemaCode, user, r
       })
     }
 
-    return res.redirect(`/${response.assessmentUuid}/questionGroup/ROSH/summary`)
+    return res.redirect(`/${response.assessmentUuid}/questionGroup/${assessmentSchemaCode}/summary`)
   } catch (error) {
     return res.render('app/error', { error })
   }
