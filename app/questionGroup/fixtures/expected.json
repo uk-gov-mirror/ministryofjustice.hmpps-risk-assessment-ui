@@ -13,7 +13,7 @@
       "displayOrder": "1",
       "mandatory": "yes",
       "answerSchemas": [],
-      "answer": null,
+      "answer": "",
       "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the forename\",\"errorSummary\":\"You must enter a forename\"}}"
     },
     {
@@ -25,7 +25,7 @@
       "displayOrder": "2",
       "mandatory": "yes",
       "answerSchemas": [],
-      "answer": null,
+      "answer": "",
       "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the surname\",\"errorSummary\":\"You must enter a surname\"}}"
     },
     {
@@ -40,7 +40,7 @@
       "conditional": false,
       "referenceDataTargets": [],
       "answerSchemas": [],
-      "answer": null
+      "answer": ""
     },
     {
       "type": "TableQuestionDto",
@@ -61,7 +61,7 @@
           "conditional": false,
           "referenceDataTargets": [],
           "answerSchemas": [],
-          "answer": null
+          "answer": ""
         },
         {
           "type": "question",
@@ -75,7 +75,7 @@
           "conditional": false,
           "referenceDataTargets": [],
           "answerSchemas": [],
-          "answer": null
+          "answer": ""
         },
         {
           "type": "question",
@@ -84,7 +84,7 @@
           "answerType": "freetext",
           "questionText": "Child's name",
           "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the name\",\"errorSummary\":\"You must enter a name\"}}",
-          "answer": null
+          "answer": ""
         },
         {
           "type": "question",
@@ -92,7 +92,7 @@
           "questionCode": "129.2",
           "answerType": "freetext",
           "questionText": "Child's age",
-          "answer": null
+          "answer": ""
         },
         {
           "type": "question",
@@ -100,7 +100,7 @@
           "questionCode": "129.3",
           "answerType": "textarea",
           "questionText": "Child's address",
-          "answer": null
+          "answer": ""
         },
         {
           "type": "question",
@@ -108,7 +108,7 @@
           "questionCode": "129.4",
           "answerType": "date",
           "questionText": "Date of birth",
-          "answer": null
+          "answer": ""
         },
         {
           "type": "question",
@@ -152,7 +152,7 @@
       "displayOrder": "3",
       "mandatory": "no",
       "answerSchemas": [],
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -163,7 +163,7 @@
       "displayOrder": "4",
       "mandatory": "no",
       "answerSchemas": [],
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -311,7 +311,7 @@
           "text": "Reform or rehabilitation"
         }
       ],
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -323,7 +323,7 @@
       "mandatory": "no",
       "helpText": "Enter any other relevant information",
       "answerSchemas": [],
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -425,7 +425,7 @@
       "mandatory": true,
       "conditional": true,
       "answerSchemas": [],
-      "answer": null,
+      "answer": "",
       "formClasses": "govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden",
       "isConditional": true,
       "attributes": [

@@ -74,6 +74,21 @@ describe('display question group and answers', () => {
     expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, expectedWithAnswers)
   })
 
+  it('should default answers where not available', async () => {
+    const expectedWithAnswers = JSON.parse(JSON.stringify(expectedForThisTest))
+    expectedWithAnswers.questions[0].answer = ''
+    expectedWithAnswers.questions[1].answer = ''
+    getAnswers.mockReturnValueOnce({
+      answers: {
+        '11111111-1111-1111-1111-111111111201': [],
+        '11111111-1111-1111-1111-111111111202': [],
+      },
+    })
+
+    await displayQuestionGroup(req, res)
+    expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, expectedWithAnswers)
+  })
+
   it('should throw an error if it cannot retrieve answers', async () => {
     const theError = new Error('Answers error message')
     getAnswers.mockImplementation(() => {

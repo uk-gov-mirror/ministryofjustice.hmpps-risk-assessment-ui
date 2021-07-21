@@ -3,55 +3,75 @@ const nunjucks = require('nunjucks')
 const { getAnswers } = require('../data/hmppsAssessmentApi')
 const { logger } = require('../logging/logger')
 
+const whereAnswerSchemaValueIs = value => answerSchema => answerSchema.value === value
+const isMultipleChoiceAnswerFor = answerType => answerType === 'radio' || answerType === 'checkbox'
+const isPresentationOnlyFor = answerType => typeof answerType === 'string' && answerType.match(/presentation:/gi)
+
 const annotateWithAnswers = (questions, answers, body) => {
-  return questions.map(q => {
-    if (q.type === 'group' || q.type === 'table' || q.type === 'TableQuestionDto') {
-      // eslint-disable-next-line no-param-reassign
-      q.contents = annotateWithAnswers(q.contents, answers, body)
-      return q
+  return questions.map(questionSchema => {
+    if (questionSchema.type === 'group') {
+      return {
+        ...questionSchema,
+        contents: annotateWithAnswers(questionSchema.contents, answers, body),
+      }
+    }
+
+    if (isPresentationOnlyFor(questionSchema.answerType)) {
+      return {
+        ...questionSchema,
+        answer: '',
+      }
+    }
+
+    if (questionSchema.type === 'table' || questionSchema.type === 'TableQuestionDto') {
+      return {
+        ...questionSchema,
+        contents: annotateWithAnswers(questionSchema.contents, answers, body),
+      }
     }
 
     let displayAnswer
     let answerValues
-    if (q.answerType === 'radio' || q.answerType === 'checkbox') {
-      const answer = answers[q.questionId]
+    const answerInBody = body[`id-${questionSchema.questionId}`]
+    const answer = answers[questionSchema.questionId] || []
 
+    if (isMultipleChoiceAnswerFor(questionSchema.answerType)) {
       const answerText = []
       answerValues = []
+
       answer?.forEach(ans => {
         if (Array.isArray(ans)) {
           const thisElementAnswer = []
           ans.forEach(arrayAns => {
-            const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.value === arrayAns)
+            const thisAnswer = questionSchema.answerSchemas.find(whereAnswerSchemaValueIs(arrayAns))
             thisElementAnswer.push(thisAnswer.text)
           })
           answerValues.push(thisElementAnswer)
           answerText.push(thisElementAnswer)
           displayAnswer = answerValues
         } else {
-          const thisAnswer = q.answerSchemas.find(answerSchema => answerSchema.value === ans)
+          const thisAnswer = questionSchema.answerSchemas.find(whereAnswerSchemaValueIs(ans))
           answerValues.push(thisAnswer?.value)
           answerText.push(thisAnswer?.text)
         }
       })
 
-      answerValues = body[`id-${q.questionId}`] || answerValues
-    } else {
-      const answer = answers[q.questionId]
-
-      if (body[`id-${q.questionId}`]) {
-        displayAnswer = body[`id-${q.questionId}`]
-      } else if (Array.isArray(answer)) {
-        displayAnswer = answer.length === 1 ? answer[0] : answer
-      } else {
-        displayAnswer = null
+      return {
+        ...questionSchema,
+        answerSchemas: annotateAnswerSchemas(questionSchema.answerSchemas, answerInBody || answerValues),
       }
     }
+    if (answerInBody) {
+      displayAnswer = answerInBody
+    } else {
+      const [firstAnswer = ''] = answer
+      displayAnswer = firstAnswer
+    }
 
-    return Object.assign(q, {
+    return {
+      ...questionSchema,
       answer: displayAnswer,
-      answerSchemas: annotateAnswerSchemas(q.answerSchemas, answerValues),
-    })
+    }
   })
 }
 

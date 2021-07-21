@@ -18,7 +18,7 @@
       "conditional": false,
       "referenceDataTargets": [],
       "answerSchemas": [],
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -32,7 +32,7 @@
       "conditional": false,
       "referenceDataTargets": [],
       "answerSchemas": [],
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -41,7 +41,7 @@
       "answerType": "freetext",
       "questionText": "Child's name",
       "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the name\",\"errorSummary\":\"You must enter a name\"}}",
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -49,7 +49,7 @@
       "questionCode": "129.2",
       "answerType": "freetext",
       "questionText": "Child's age",
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -57,7 +57,7 @@
       "questionCode": "129.3",
       "answerType": "textarea",
       "questionText": "Child's address",
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
@@ -65,7 +65,7 @@
       "questionCode": "129.4",
       "answerType": "date",
       "questionText": "Date of birth",
-      "answer": null
+      "answer": ""
     },
     {
       "type": "question",
