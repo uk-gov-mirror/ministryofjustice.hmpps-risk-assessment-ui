@@ -43,7 +43,7 @@
       "answer": ""
     },
     {
-      "type": "TableQuestionDto",
+      "type": "tableGroup",
       "tableId": "946091d2-4038-4e2b-9283-83cc4876f6ed",
       "tableCode": "children",
       "title": "Children",

@@ -23,7 +23,7 @@ const annotateWithAnswers = (questions, answers, body) => {
       }
     }
 
-    if (questionSchema.type === 'table' || questionSchema.type === 'TableQuestionDto') {
+    if (questionSchema.type === 'table' || questionSchema.type === 'tableGroup') {
       return {
         ...questionSchema,
         contents: annotateWithAnswers(questionSchema.contents, answers, body),

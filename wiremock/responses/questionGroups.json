@@ -159,7 +159,7 @@
                 "answerSchemas": []
               },
               {
-                "type": "TableQuestionDto",
+                "type": "tableGroup",
                 "tableId": "946091d2-4038-4e2b-9283-83cc4876f6ed",
                 "tableCode": "children",
                 "title": "Children",
@@ -4679,7 +4679,7 @@
                 "answerSchemas": []
               },
               {
-                "type": "TableQuestionDto",
+                "type": "tableGroup",
                 "tableId": "fb777be0-a183-4c83-8209-e7871df9c547",
                 "tableCode": "children_at_risk_of_serious_harm",
                 "title": "Children at Risk of Serious Harm",

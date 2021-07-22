@@ -63,7 +63,7 @@
 {% endif %}
 
 
-{% if question.type == 'table' or question.type == 'TableQuestionDto'%}
+{% if question.type == 'table' or question.type == 'tableGroup'%}
   {#  find first question that is not presentational #}
   {% set firstDataColumn = null %}
   {% for questions in question.contents %}
