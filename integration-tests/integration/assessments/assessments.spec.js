@@ -9,11 +9,11 @@ context('Basic assessment list', () => {
     const assessPage = AssessmentsPage.goTo()
 
     // check right number of forms
-    const forms = ['Brief Form', 'Long Form', 'Overview', 'Short pre sentence assessment']
+    const forms = ['Brief Form', 'Long Form', 'Overview', 'Short pre sentence assessment', 'Standalone PSR']
     assessPage
       .assessments()
       .find('h2')
-      .should('have.length', 4)
+      .should('have.length', 5)
       .each(($el, index) => {
         expect($el.text()).to.equal(forms[index])
       })

@@ -37,7 +37,7 @@ const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.con
 const { assessmentFromCrn } = require('./assessmentFromCrn/get.controller')
 const { startAssessmentFromCrn, startAssessmentFromForm } = require('./assessmentFromCrn/post.controller')
 
-const { validate } = require('../common/middleware/validator')
+const { validate, localValidationRules } = require('../common/middleware/validator')
 
 const {
   checkUserIsAuthenticated,
@@ -122,6 +122,7 @@ module.exports = app => {
     assembleDates,
     getQuestionGroup,
     questionGroupValidationRules,
+    localValidationRules,
     validate,
     saveQuestionGroup,
   )

@@ -56,6 +56,14 @@ describe('getFormsList', () => {
           questionCount: 0,
           title: 'Short pre sentence assessment',
         },
+        {
+          contentCount: 3,
+          groupCount: 0,
+          groupId: '12222222-2222-2222-2222-222222222203',
+          path: '/test-assessment-id/questionGroup/12222222-2222-2222-2222-222222222203/summary',
+          questionCount: 0,
+          title: 'Standalone PSR',
+        },
       ],
     }
     getAssessmentsList.mockReturnValueOnce(questionList)

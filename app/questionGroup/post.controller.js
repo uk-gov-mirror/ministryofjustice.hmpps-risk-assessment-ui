@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-
 const { logger } = require('../../common/logging/logger')
 const { displayQuestionGroup } = require('./get.controller')
 const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
