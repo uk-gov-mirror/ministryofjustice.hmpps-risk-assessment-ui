@@ -26,7 +26,7 @@ const getFieldId = id => {
 const localValidationRules = async (req, res, next) => {
   const {
     body: reqBody,
-    params: { groupId: assessmentType },
+    params: { groupId: assessmentType, page },
   } = req
 
   const {
@@ -37,7 +37,7 @@ const localValidationRules = async (req, res, next) => {
   const validations = []
 
   // todo: update assessmentType
-  if (assessmentType === 'RSR') {
+  if (assessmentType === 'RSR' && page === 0) {
     /// ///////////////////////////////////////////////////
     // Date of first sanction:
     validations.push(
