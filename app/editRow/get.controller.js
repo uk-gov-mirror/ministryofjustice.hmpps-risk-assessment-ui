@@ -5,7 +5,7 @@ const {
   annotateWithAnswers,
   compileInlineConditionalQuestions,
   grabAnswers,
-} = require('../../common/question-groups/get-question-groups')
+} = require('../../common/middleware/questionGroups/getHandlers')
 
 const editTableRow = async (
   { params: { assessmentId, groupId, tableName, tableRow }, originalUrl, body, errors = {}, errorSummary = null, user },

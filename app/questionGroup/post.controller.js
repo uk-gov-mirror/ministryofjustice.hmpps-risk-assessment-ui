@@ -2,7 +2,7 @@
 const { logger } = require('../../common/logging/logger')
 const { displayQuestionGroup } = require('./get.controller')
 const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
-const { formatValidationErrors, extractAnswers } = require('../../common/question-groups/post-question-groups')
+const { formatValidationErrors } = require('../../common/middleware/questionGroups/postHandlers')
 
 const getErrorMessage = reason => {
   if (reason === 'OASYS_PERMISSION') {
@@ -15,17 +15,16 @@ const getErrorMessage = reason => {
 const saveQuestionGroup = async (req, res) => {
   const {
     params: { assessmentId },
-    body: reqBody,
     user,
     errors,
+    body: answers,
   } = req
   if (errors) {
     return displayQuestionGroup(req, res)
   }
 
   try {
-    const answers = extractAnswers(reqBody)
-    const [ok, response] = await postAnswers(assessmentId, 'current', answers, user?.token, user?.id)
+    const [ok, response] = await postAnswers(assessmentId, 'current', { answers }, user?.token, user?.id)
 
     if (!ok) {
       if (response.status === 422) {

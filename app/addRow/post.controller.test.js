@@ -38,8 +38,8 @@ describe('post new table row', () => {
     })
 
     req.body = {
-      'id-11111111-1111-1111-1111-111111111202': 'Hello',
-      'id-11111111-1111-1111-1111-111111111201': 'there',
+      '11111111-1111-1111-1111-111111111202': 'Hello',
+      '11111111-1111-1111-1111-111111111201': 'there',
     }
     await saveTableRow(req, res)
     expect(postTableRow).toHaveBeenCalledWith(

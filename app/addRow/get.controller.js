@@ -4,7 +4,7 @@ const { removeUrlLevels } = require('../../common/utils/util')
 const {
   annotateWithAnswers,
   compileInlineConditionalQuestions,
-} = require('../../common/question-groups/get-question-groups')
+} = require('../../common/middleware/questionGroups/getHandlers')
 
 const displayAddRow = async (
   { params: { assessmentId, groupId, tableName }, originalUrl, body, errors = {}, errorSummary = null },

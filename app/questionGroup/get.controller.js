@@ -3,7 +3,8 @@ const {
   annotateWithAnswers,
   compileInlineConditionalQuestions,
   grabAnswers,
-} = require('../../common/question-groups/get-question-groups')
+} = require('../../common/middleware/questionGroups/getHandlers')
+const { flattenCheckboxGroups } = require('../../common/middleware/questionGroups/checkboxGroups')
 
 const displayQuestionGroup = async (
   { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary = null, user },
@@ -18,7 +19,8 @@ const displayQuestionGroup = async (
     res.locals.assessmentUuid = assessmentId
     res.locals.episodeUuid = episodeUuid
 
-    let questions = annotateWithAnswers(questionGroup.contents, answers, body)
+    let questions = flattenCheckboxGroups(questionGroup.contents)
+    questions = annotateWithAnswers(questions, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
 
     return res.render(`${__dirname}/index`, {

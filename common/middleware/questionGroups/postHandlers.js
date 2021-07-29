@@ -1,7 +1,8 @@
 const { body } = require('express-validator')
 const { isDate } = require('date-fns')
-const { dynamicMiddleware } = require('../utils/util')
-const { logger } = require('../logging/logger')
+const { dynamicMiddleware } = require('../../utils/util')
+const { logger } = require('../../logging/logger')
+const { extractCheckboxGroupAnswers } = require('./checkboxGroups')
 
 function findDateAnswerKeys(postBody) {
   // find keys of all the dates in the body
@@ -137,13 +138,20 @@ function formatValidationErrors(serverErrors, pageErrors) {
   return [errors, errorSummary]
 }
 
-function extractAnswers(postBody) {
-  const shapedAnswers = Object.entries(postBody).reduce((answers, [key, value]) => {
+function extractAnswers(req, res, next) {
+  const { body: reqBody } = req
+  const { questionGroup } = res.locals
+  const currentQuestions = questionGroup.contents
+
+  const shapedAnswers = Object.entries(reqBody).reduce((answers, [key, value]) => {
     const trimmedKey = key.replace(/^id-/, '')
     return Object.assign(answers, { [trimmedKey]: value })
   }, {})
 
-  return { answers: shapedAnswers }
+  const answers = extractCheckboxGroupAnswers(currentQuestions, shapedAnswers)
+
+  req.body = answers
+  next()
 }
 
 module.exports = { questionGroupValidationRules, assembleDates, formatValidationErrors, extractAnswers }

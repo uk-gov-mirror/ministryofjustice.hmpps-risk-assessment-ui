@@ -1,7 +1,7 @@
 // @ts-check
 const { logger } = require('../../common/logging/logger')
 const { removeUrlLevels } = require('../../common/utils/util')
-const { grabAnswers } = require('../../common/question-groups/get-question-groups')
+const { grabAnswers } = require('../../common/middleware/questionGroups/getHandlers')
 
 const displayDeleteRow = async (
   { params: { assessmentId, groupId, tableName, tableRow }, originalUrl, body, errors = {}, errorSummary = null, user },

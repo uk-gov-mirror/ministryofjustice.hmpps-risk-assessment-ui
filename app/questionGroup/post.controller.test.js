@@ -1,6 +1,6 @@
 const { saveQuestionGroup } = require('./post.controller')
 const { displayQuestionGroup } = require('./get.controller')
-const { assembleDates } = require('../../common/question-groups/post-question-groups')
+const { assembleDates } = require('../../common/middleware/questionGroups/postHandlers')
 const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
 const questionGroupPointer = require('../../wiremock/responses/questionGroups.json')[
   '22222222-2222-2222-2222-222222222203'
@@ -43,8 +43,8 @@ describe('post answers', () => {
     postAnswers.mockResolvedValue([true, {}])
 
     req.body = {
-      'id-11111111-1111-1111-1111-111111111202': 'Hello',
-      'id-11111111-1111-1111-1111-111111111201': 'there',
+      '11111111-1111-1111-1111-111111111202': 'Hello',
+      '11111111-1111-1111-1111-111111111201': 'there',
     }
 
     await saveQuestionGroup(req, res)
@@ -68,17 +68,17 @@ describe('post answers', () => {
     postAnswers.mockResolvedValue([true, {}])
 
     req.body = {
-      'id-11111111-1111-1111-1111-111111111205-day': '3',
-      'id-11111111-1111-1111-1111-111111111205-month': '11',
-      'id-11111111-1111-1111-1111-111111111205-year': '2011',
-      'id-11111111-1111-1111-1111-111111111202': 'Hello',
-      'id-11111111-1111-1111-1111-111111111201': 'there',
-      'id-11111111-1111-1111-1111-111111111203-day': '21',
-      'id-11111111-1111-1111-1111-111111111203-month': '2',
-      'id-11111111-1111-1111-1111-111111111203-year': '2020',
-      'id-11111111-1111-1111-1111-111111111209-day': '21',
-      'id-11111111-1111-1111-1111-111111111209-month': '',
-      'id-11111111-1111-1111-1111-111111111209-year': '2020',
+      '11111111-1111-1111-1111-111111111205-day': '3',
+      '11111111-1111-1111-1111-111111111205-month': '11',
+      '11111111-1111-1111-1111-111111111205-year': '2011',
+      '11111111-1111-1111-1111-111111111202': 'Hello',
+      '11111111-1111-1111-1111-111111111201': 'there',
+      '11111111-1111-1111-1111-111111111203-day': '21',
+      '11111111-1111-1111-1111-111111111203-month': '2',
+      '11111111-1111-1111-1111-111111111203-year': '2020',
+      '11111111-1111-1111-1111-111111111209-day': '21',
+      '11111111-1111-1111-1111-111111111209-month': '',
+      '11111111-1111-1111-1111-111111111209-year': '2020',
     }
 
     await assembleDates(req, res, () => {})

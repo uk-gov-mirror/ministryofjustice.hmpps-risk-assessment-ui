@@ -3,15 +3,15 @@ const {
   extractAnswers,
   formatValidationErrors,
   assembleDates,
-} = require('./post-question-groups')
-const { dynamicMiddleware } = require('../utils/util')
-const { logger } = require('../logging/logger')
+} = require('./postHandlers')
+const { dynamicMiddleware } = require('../../utils/util')
+const { logger } = require('../../logging/logger')
 
-jest.mock('../utils/util', () => ({
+jest.mock('../../utils/util', () => ({
   dynamicMiddleware: jest.fn(),
 }))
 
-jest.mock('../logging/logger', () => ({
+jest.mock('../../logging/logger', () => ({
   logger: {
     info: jest.fn(),
     error: jest.fn(),
@@ -341,20 +341,46 @@ describe('Format validation errors', () => {
 
 describe('Extract answers', () => {
   it('formats answers that are passed to it', () => {
-    const postBody = {
-      'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'YES',
+    const req = {
+      body: {
+        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'YES',
+      },
     }
 
-    const { answers } = extractAnswers(postBody)
+    const res = {
+      locals: {
+        questionGroup: {
+          contents: [],
+        },
+      },
+    }
 
-    expect(answers['b9065f11-0955-416d-bd58-c234d8b6ffb5']).toEqual('YES')
+    const next = jest.fn()
+
+    extractAnswers(req, res, next)
+
+    expect(req.body['b9065f11-0955-416d-bd58-c234d8b6ffb5']).toEqual('YES')
   })
 
   it('handles when no answers are passed', () => {
-    const postBody = {}
+    const req = {
+      body: {
+        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'YES',
+      },
+    }
 
-    const { answers } = extractAnswers(postBody)
+    const res = {
+      locals: {
+        questionGroup: {
+          contents: [],
+        },
+      },
+    }
 
-    expect(answers).toBeDefined()
+    const next = jest.fn()
+
+    extractAnswers(req, res, next)
+
+    expect(req.body).toBeDefined()
   })
 })

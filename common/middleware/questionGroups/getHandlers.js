@@ -1,7 +1,7 @@
 // @ts-check
 const nunjucks = require('nunjucks')
-const { getAnswers } = require('../data/hmppsAssessmentApi')
-const { logger } = require('../logging/logger')
+const { getAnswers } = require('../../data/hmppsAssessmentApi')
+const { logger } = require('../../logging/logger')
 
 const whereAnswerSchemaValueIs = value => answerSchema => answerSchema.value === value
 const isMultipleChoiceAnswerFor = answerType => answerType === 'radio' || answerType === 'checkbox'
@@ -32,15 +32,42 @@ const annotateWithAnswers = (questions, answers, body) => {
       }
     }
 
-    let displayAnswer
+    if (questionSchema.answerType === 'checkboxGroup') {
+      const extractedAnswers = questionSchema.answerSchemas.reduce((acc, answerSchema) => {
+        const answerInBody = body[`${answerSchema.value}`]
+        const storedAnswer = answers[`${answerSchema.value}`]
+        const answer = answerInBody || storedAnswer
+
+        if (!answer || !answer.includes('YES')) {
+          return acc
+        }
+
+        return [...acc, answerSchema.value]
+      }, [])
+
+      return {
+        ...questionSchema,
+        answerSchemas: annotateAnswerSchemas(questionSchema.answerSchemas, extractedAnswers),
+      }
+    }
+
+    const asArray = v => {
+      if (!v) {
+        return []
+      }
+
+      return Array.isArray(v) ? v : [v]
+    }
+
     let answerValues
-    const answerInBody = body[`id-${questionSchema.questionId}`]
-    const answer = answers[questionSchema.questionId] || []
+    const answerInBody = body[questionSchema.questionId]
+    const storedAnswer = answers[questionSchema.questionId]
+    const preferredAnswer = answerInBody || storedAnswer
+    const answer = asArray(preferredAnswer)
 
     if (isMultipleChoiceAnswerFor(questionSchema.answerType)) {
       const answerText = []
       answerValues = []
-
       answer?.forEach(ans => {
         if (Array.isArray(ans)) {
           const thisElementAnswer = []
@@ -50,7 +77,6 @@ const annotateWithAnswers = (questions, answers, body) => {
           })
           answerValues.push(thisElementAnswer)
           answerText.push(thisElementAnswer)
-          displayAnswer = answerValues
         } else {
           const thisAnswer = questionSchema.answerSchemas.find(whereAnswerSchemaValueIs(ans))
           answerValues.push(thisAnswer?.value)
@@ -63,16 +89,12 @@ const annotateWithAnswers = (questions, answers, body) => {
         answerSchemas: annotateAnswerSchemas(questionSchema.answerSchemas, answerInBody || answerValues),
       }
     }
-    if (answerInBody) {
-      displayAnswer = answerInBody
-    } else {
-      const [firstAnswer = ''] = answer
-      displayAnswer = firstAnswer
-    }
+
+    const [firstAnswer = ''] = answer
 
     return {
       ...questionSchema,
-      answer: displayAnswer,
+      answer: firstAnswer,
     }
   })
 }

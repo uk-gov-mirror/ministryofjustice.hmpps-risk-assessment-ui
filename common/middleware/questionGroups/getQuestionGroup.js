@@ -1,9 +1,9 @@
 // @ts-check
-const logger = require('../logging/logger')
-const { getAssessmentQuestions } = require('../data/hmppsAssessmentApi')
-const { getApiToken } = require('../data/oauth')
-const { getReferenceDataListByCategory } = require('../data/offenderAssessmentApi')
-const { processReplacements } = require('../utils/util')
+const logger = require('../../logging/logger')
+const { getAssessmentQuestions } = require('../../data/hmppsAssessmentApi')
+const { getApiToken } = require('../../data/oauth')
+const { getReferenceDataListByCategory } = require('../../data/offenderAssessmentApi')
+const { processReplacements } = require('../../utils/util')
 
 const findNext = (questionGroups, groupId, section, page) => {
   const nextPage = parseInt(page, 10) + 1

@@ -282,6 +282,28 @@
         }
       }) }}
 
+    {% case 'checkboxGroup' %}
+      {{ govukCheckboxes({
+        idPrefix: 'id-' + question.questionId,
+        name: 'id-' + question.questionId,
+        formGroup : {
+          classes: question.formClasses
+        },
+        attributes: question.attributes,
+        fieldset: {
+          legend: {
+            text: question.questionText,
+            classes: question.questionCode + ' govuk-label--m'
+          }
+        },
+        items: question.answerSchemas,
+        errorMessage: errorMessage,
+        isConditional: question.isConditional,
+        hint: {
+          text: question.helpText
+        }
+      }) }}
+
     {% case 'dropdown' %}
       {{ govukSelect({
         id: 'id-' + question.questionId,

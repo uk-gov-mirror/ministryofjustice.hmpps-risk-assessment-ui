@@ -1,13 +1,13 @@
 const getQuestion = require('./getQuestionGroup')
-const { getAssessmentQuestions } = require('../data/hmppsAssessmentApi')
-const { getApiToken } = require('../data/oauth')
-const { getReferenceDataListByCategory } = require('../data/offenderAssessmentApi')
-const { processReplacements } = require('../utils/util')
+const { getAssessmentQuestions } = require('../../data/hmppsAssessmentApi')
+const { getApiToken } = require('../../data/oauth')
+const { getReferenceDataListByCategory } = require('../../data/offenderAssessmentApi')
+const { processReplacements } = require('../../utils/util')
 const {
   dev: { devAssessmentId },
-} = require('../config')
+} = require('../../config')
 
-jest.mock('../data/oauth', () => ({
+jest.mock('../../data/oauth', () => ({
   getApiToken: jest.fn(),
 }))
 
@@ -63,9 +63,9 @@ const questions = {
   ],
 }
 
-jest.mock('../../common/data/hmppsAssessmentApi')
-jest.mock('../../common/data/offenderAssessmentApi')
-jest.mock('../utils/util')
+jest.mock('../../data/hmppsAssessmentApi')
+jest.mock('../../data/offenderAssessmentApi')
+jest.mock('../../utils/util')
 
 processReplacements.mockImplementation(input => input)
 

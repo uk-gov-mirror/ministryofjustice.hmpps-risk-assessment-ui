@@ -8,7 +8,7 @@
 const passport = require('passport')
 
 const getOffenderDetails = require('../common/middleware/getOffenderDetails')
-const getQuestionGroup = require('../common/middleware/getQuestionGroup')
+const getQuestionGroup = require('../common/middleware/questionGroups/getQuestionGroup')
 const addUserToLocals = require('../common/middleware/add-user-information')
 
 // pages
@@ -29,7 +29,11 @@ const { updateTableRow } = require('./editRow/post.controller')
 const { displayOverview } = require('./summary/get.controller')
 const { completeAssessment } = require('./summary/post.controller')
 const { saveQuestionGroup } = require('./questionGroup/post.controller')
-const { questionGroupValidationRules, assembleDates } = require('../common/question-groups/post-question-groups')
+const {
+  questionGroupValidationRules,
+  assembleDates,
+  extractAnswers,
+} = require('../common/middleware/questionGroups/postHandlers')
 const { fetchFilteredReferenceData } = require('./referenceData/post.controller')
 const { psrFromCourt } = require('./psrFromCourt/get.controller')
 const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.controller')
@@ -119,11 +123,12 @@ module.exports = app => {
   app.post(
     `/:assessmentId/questiongroup/:groupId/:subgroup/:page`,
     getOffenderDetails,
-    assembleDates,
     getQuestionGroup,
+    assembleDates,
     questionGroupValidationRules,
     localValidationRules,
     validate,
+    extractAnswers,
     saveQuestionGroup,
   )
 
@@ -139,10 +144,11 @@ module.exports = app => {
   app.post(
     `/:assessmentId/questiongroup/:groupId/:subgroup/:page/addrow/:tableName`,
     getOffenderDetails,
-    assembleDates,
     getQuestionGroup,
+    assembleDates,
     questionGroupValidationRules,
     validate,
+    extractAnswers,
     saveTableRow,
   )
 
@@ -165,10 +171,11 @@ module.exports = app => {
   app.post(
     '/:assessmentId/questiongroup/:groupId/:subgroup/:page/edit/:tableName/:tableRow',
     getOffenderDetails,
-    assembleDates,
     getQuestionGroup,
+    assembleDates,
     questionGroupValidationRules,
     validate,
+    extractAnswers,
     updateTableRow,
   )
 
