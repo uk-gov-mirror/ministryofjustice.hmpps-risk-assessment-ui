@@ -32,6 +32,7 @@ const displayQuestionGroup = async (
       questions,
       errors,
       errorSummary,
+      groupUuid: res.locals.questionGroup?.groupId,
     })
   } catch (error) {
     return res.render('app/error', { error })
