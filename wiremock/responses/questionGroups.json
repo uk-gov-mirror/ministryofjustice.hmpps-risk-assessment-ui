@@ -7531,7 +7531,7 @@
       }
     ]
   },
-  "rsr_only": {
+  "RSR": {
     "type": "group",
     "groupId": "b89429c8-9e3e-4989-b886-9caed4ed0a30",
     "groupCode": "rsr_only",
@@ -7540,1047 +7540,1033 @@
       {
         "type": "group",
         "groupId": "5d37254e-d956-488e-89be-1eaec8758ef7",
-        "groupCode": "offences_convictions_needs_risk_to_others",
+        "groupCode": "rsr_offences_convictions_needs_risk_to_others",
         "title": "Offences, convictions, needs and risk to others",
         "displayOrder": 1,
         "mandatory": false,
         "contents": [
           {
             "type": "group",
-            "groupId": "61feebd9-afe5-43ef-94a5-27c400453eba",
-            "groupCode": "offences_convictions_and_needs",
-            "title": "Offences, convictions and needs",
+            "groupId": "eb7b7324-f2a6-4902-91ef-709a8fab1f82",
+            "groupCode": "offences_and_convictions",
+            "title": "Offences and convictions",
             "displayOrder": 1,
             "mandatory": true,
             "contents": [
               {
-                "type": "group",
-                "groupId": "eb7b7324-f2a6-4902-91ef-709a8fab1f82",
-                "groupCode": "offences_and_convictions",
-                "title": "Offences and convictions",
+                "type": "question",
+                "questionId": "0bc681b4-7f70-477e-8ef5-0daaf8aa0495",
+                "questionCode": "ui35.1.1",
+                "answerType": "presentation: heading_large",
+                "questionText": "Main offence",
+                "helpText": "Primary or most serious offence as judged by assessor",
                 "displayOrder": 1,
                 "mandatory": true,
-                "contents": [
-                  {
-                    "type": "question",
-                    "questionId": "0bc681b4-7f70-477e-8ef5-0daaf8aa0495",
-                    "questionCode": "ui35.1.1",
-                    "answerType": "presentation: heading_large",
-                    "questionText": "Main offence",
-                    "helpText": "Primary or most serious offence as judged by assessor",
-                    "displayOrder": 1,
-                    "mandatory": true,
-                    "readOnly": true,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "54b03faa-efc0-49ef-9add-7581dca17d70",
-                    "questionCode": "35.1.1",
-                    "answerType": "freetext",
-                    "questionText": "Offence",
-                    "displayOrder": 2,
-                    "mandatory": true,
-                    "readOnly": true,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "91c83565-91dc-4876-97d7-f186ce04584c",
-                    "questionCode": "35.1.2",
-                    "answerType": "freetext",
-                    "questionText": "Subcode",
-                    "displayOrder": 3,
-                    "mandatory": true,
-                    "readOnly": true,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "de19c962-bd78-428f-ad29-ab002e7ef25a",
-                    "questionCode": "ui35.1.2",
-                    "answerType": "presentation: divider",
-                    "displayOrder": 4,
-                    "mandatory": true,
-                    "readOnly": true,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "96d6c7fd-c755-4dad-b3be-8619674c8ad7",
-                    "questionCode": "ui43.1",
-                    "answerType": "presentation: heading_large",
-                    "questionText": "RSR analysis",
-                    "displayOrder": 5,
-                    "mandatory": true,
-                    "readOnly": true,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "5ca86a06-5472-4861-bd6a-a011780db49a",
-                    "questionCode": "293.1",
-                    "answerType": "date",
-                    "questionText": "Date of first sanction",
-                    "displayOrder": 6,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "63099aab-f852-4dd9-9179-16ee2218d0c6",
-                    "questionCode": "291.2",
-                    "answerType": "numeric",
-                    "questionText": "Age at first conviction, conditional or absolute discharge in years",
-                    "helpText": "Record in years",
-                    "displayOrder": 7,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "8e83a0ad-2fcf-4afb-a0af-09d1e23d3c33",
-                    "questionCode": "45.1",
-                    "answerType": "numeric",
-                    "questionText": "Total number of sanctions for all offences",
-                    "displayOrder": 8,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the total number of sanctions\",\"errorSummary\":\"Enter the total number of sanctions\"}}",
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "496587b9-81f3-47ad-a41e-77900fdca573",
-                    "questionCode": "46.1",
-                    "answerType": "numeric",
-                    "questionText": "How many of the total number of sanctions involved violent offences?",
-                    "displayOrder": 9,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Say how many sanctions involved violent offences\",\"errorSummary\":\"Say how many sanctions involved violent offences\"}}",
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "f5d1dd7c-1774-4c76-89c2-a47240ad98ba",
-                    "questionCode": "48.1",
-                    "answerType": "date",
-                    "questionText": "Date of current conviction",
-                    "helpText": "For example, 12 11 2007",
-                    "displayOrder": 10,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "58d3efd1-65a1-439b-952f-b2826ffa5e71",
-                    "questionCode": "59.1",
-                    "answerType": "radio",
-                    "questionText": "Have they ever committed a sexual offence?",
-                    "displayOrder": 11,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (sexual or sexually-motivated offence)\"}}",
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes",
-                        "conditionals": [
-                          {
-                            "conditional": "3662710d-ce3e-4e45-bce3-caa4155872aa",
-                            "displayInline": true
-                          },
-                          {
-                            "conditional": "a00223d0-1c20-43b5-8076-8a292ca25773",
-                            "displayInline": true
-                          },
-                          {
-                            "conditional": "fc45b061-a4a6-44c3-937c-2949069e0926",
-                            "displayInline": true
-                          },
-                          {
-                            "conditional": "ed495c57-21f3-4388-87e6-57017a6999b1",
-                            "displayInline": true
-                          },
-                          {
-                            "conditional": "00a559e4-32d5-4ae7-aa21-247068a639ad",
-                            "displayInline": true
-                          },
-                          {
-                            "conditional": "1b6c8f79-0fd9-45d4-ba50-309c3ccfdb2d",
-                            "displayInline": true
-                          }
-                        ]
-                      },
-                      {
-                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "3662710d-ce3e-4e45-bce3-caa4155872aa",
-                    "questionCode": "292.1",
-                    "answerType": "radio",
-                    "questionText": "Does the current offence have a sexual motivation?",
-                    "displayOrder": 12,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (current sexual offence)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes",
-                        "conditionals": [
-                          {
-                            "conditional": "86ee742c-4bfb-4e29-afca-04ad35a3abda",
-                            "displayInline": true
-                          }
-                        ]
-                      },
-                      {
-                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "86ee742c-4bfb-4e29-afca-04ad35a3abda",
-                    "questionCode": "61.1",
-                    "answerType": "radio",
-                    "questionText": "Does the current offence involve a victim who was a stranger?",
-                    "displayOrder": 13,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (contact against a stranger victim)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "a00223d0-1c20-43b5-8076-8a292ca25773",
-                    "questionCode": "62.1",
-                    "answerType": "date",
-                    "questionText": "Date of most recent sanction involving a sexual or sexually motivated offence",
-                    "helpText": "For example, 12 11 2007",
-                    "displayOrder": 14,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\",\"errorSummary\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "fc45b061-a4a6-44c3-937c-2949069e0926",
-                    "questionCode": "63.1",
-                    "answerType": "numeric",
-                    "questionText": "Number of previous or current sanctions involving contact adult sexual or sexually motivated offences",
-                    "displayOrder": 15,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "ed495c57-21f3-4388-87e6-57017a6999b1",
-                    "questionCode": "64.1",
-                    "answerType": "numeric",
-                    "questionText": "Number of previous or current sanctions involving contact child sexual or sexually motivated offences",
-                    "displayOrder": 16,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually motivated offences\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "00a559e4-32d5-4ae7-aa21-247068a639ad",
-                    "questionCode": "65.1",
-                    "answerType": "numeric",
-                    "questionText": "Number of previous or current sanctions involving indecent child image sexual or sexually motivated offences",
-                    "displayOrder": 17,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "1b6c8f79-0fd9-45d4-ba50-309c3ccfdb2d",
-                    "questionCode": "66.1",
-                    "answerType": "numeric",
-                    "questionText": "Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences",
-                    "displayOrder": 18,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\",\"errorSummary\":\"Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "5cd344d4-acf3-45a9-9493-5dda5aa9dfa8",
-                    "questionCode": "60.1",
-                    "answerType": "date",
-                    "questionText": "Date of commencement of community sentence or earliest possible release from custody",
-                    "helpText": "For example, 12 11 2007",
-                    "displayOrder": 19,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Enter a date\",\"errorSummary\":\"Enter a date\"}}",
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "420c2ffe-8f2c-49b3-a523-674af3197b9e",
-                    "questionCode": "67.1",
-                    "answerType": "radio",
-                    "questionText": "Have you completed an interview with the individual?",
-                    "displayOrder": 20,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (completed an interview with the individual)\"}}",
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes",
-                        "conditionals": [
-                          {
-                            "conditional": "bd629547-eab9-46d5-910d-2416b431950f",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "3211a668-8878-4e88-8457-8250bfe65aea",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "574618c3-27f4-4dd2-94bb-6de74126ff22",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "5a90a38d-ee0a-4775-994c-addf3397b817",
-                            "displayInline": false
-                          },
-                          {
-                            "conditional": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
-                            "displayInline": false
-                          }
-                        ]
-                      },
-                      {
-                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "type": "group",
-                "groupId": "ebf96a74-c140-47d8-b37f-62cff68f41c0",
-                "groupCode": "needs",
-                "title": "Needs",
-                "displayOrder": 2,
-                "mandatory": true,
-                "contents": [
-                  {
-                    "type": "question",
-                    "questionId": "bd629547-eab9-46d5-910d-2416b431950f",
-                    "questionCode": "69.1",
-                    "answerType": "radio",
-                    "questionText": "Did the offence involve carrying or use of a weapon?",
-                    "displayOrder": 1,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (carrying or using weapon)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes",
-                        "conditionals": [
-                          {
-                            "conditional": "7f076a91-2702-438f-81ba-c15ebfab1b02",
-                            "displayInline": true
-                          }
-                        ]
-                      },
-                      {
-                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "7f076a91-2702-438f-81ba-c15ebfab1b02",
-                    "questionCode": "70.1",
-                    "answerType": "freetext",
-                    "questionText": "Specify which weapon",
-                    "displayOrder": 2,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Specify a weapon\",\"errorSummary\":\"Specify a weapon\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": []
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
-                    "questionCode": "75.1",
-                    "answerType": "radio",
-                    "questionText": "Is the individual living in suitable accommodation?",
-                    "displayOrder": 3,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (suitability of accommodation)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
-                        "answerSchemaCode": "no_problems",
-                        "value": "no problems",
-                        "text": "No problems"
-                      },
-                      {
-                        "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
-                        "answerSchemaCode": "some_problems",
-                        "value": "some problems",
-                        "text": "Some problems"
-                      },
-                      {
-                        "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
-                        "answerSchemaCode": "significant_problems",
-                        "value": "significant problems",
-                        "text": "Significant problems"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "3211a668-8878-4e88-8457-8250bfe65aea",
-                    "questionCode": "80.1",
-                    "answerType": "radio",
-                    "questionText": "Is the person unemployed or will be unemployed upon release?",
-                    "displayOrder": 4,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Enter yes or no (unemployed now or on release)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "d4c6ed05-73b4-4064-8255-7ccb96038988",
-                        "answerSchemaCode": "no",
-                        "value": "no",
-                        "text": "No"
-                      },
-                      {
-                        "answerSchemaUuid": "02c77c0c-f9fa-4c4c-a5dc-169aa33f5c86",
-                        "answerSchemaCode": "not_available_for_work",
-                        "value": "not available for work",
-                        "text": "Not available for work"
-                      },
-                      {
-                        "answerSchemaUuid": "f2619d17-2bda-40ce-9658-f6a7a371b3f2",
-                        "answerSchemaCode": "yes",
-                        "value": "yes",
-                        "text": "Yes"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
-                    "questionCode": "86.1",
-                    "answerType": "radio",
-                    "questionText": "What is the person's current relationship with their partner?",
-                    "displayOrder": 5,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current relationship with partner)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
-                        "answerSchemaCode": "no_problems",
-                        "value": "no problems",
-                        "text": "No problems"
-                      },
-                      {
-                        "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
-                        "answerSchemaCode": "some_problems",
-                        "value": "some problems",
-                        "text": "Some problems"
-                      },
-                      {
-                        "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
-                        "answerSchemaCode": "significant_problems",
-                        "value": "significant problems",
-                        "text": "Significant problems"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
-                    "questionCode": "87.1",
-                    "answerType": "radio",
-                    "questionText": "Is there evidence that the individual is a perpetrator of domestic abuse?",
-                    "displayOrder": 6,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (perpetrator of domestic  abuse?)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes",
-                        "conditionals": [
-                          {
-                            "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
-                            "displayInline": true
-                          },
-                          {
-                            "conditional": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
-                            "displayInline": true
-                          }
-                        ]
-                      },
-                      {
-                        "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
-                    "questionCode": "88.1",
-                    "answerType": "checkbox",
-                    "questionText": "Victim",
-                    "displayOrder": 7,
-                    "mandatory": false,
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "4b6d2415-b152-4ba0-b030-1d203b5b31dc",
-                        "answerSchemaCode": "victim",
-                        "value": "victim",
-                        "text": "Victim"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
-                    "questionCode": "88.2",
-                    "answerType": "checkbox",
-                    "questionText": "Perpetrator",
-                    "displayOrder": 8,
-                    "mandatory": false,
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "9a52b4dd-5648-41d3-8d0d-171228d98474",
-                        "answerSchemaCode": "perpetrator",
-                        "value": "perpetrator",
-                        "text": "Perpetrator"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
-                    "questionCode": "90.1",
-                    "answerType": "radio",
-                    "questionText": "Is the person's current use of alcohol a problem?",
-                    "displayOrder": 9,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current use of alcohol)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
-                        "answerSchemaCode": "no_problems",
-                        "value": "no problems",
-                        "text": "No problems"
-                      },
-                      {
-                        "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
-                        "answerSchemaCode": "some_problems",
-                        "value": "some problems",
-                        "text": "Some problems"
-                      },
-                      {
-                        "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
-                        "answerSchemaCode": "significant_problems",
-                        "value": "significant problems",
-                        "text": "Significant problems"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "574618c3-27f4-4dd2-94bb-6de74126ff22",
-                    "questionCode": "92.1",
-                    "answerType": "radio",
-                    "questionText": "Is there evidence of binge drinking or excessive use of alcohol in the last 6 months?",
-                    "displayOrder": 10,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (evidence of binge drinking or excessive alcohol use)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
-                        "answerSchemaCode": "no_problems",
-                        "value": "no problems",
-                        "text": "No problems"
-                      },
-                      {
-                        "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
-                        "answerSchemaCode": "some_problems",
-                        "value": "some problems",
-                        "text": "Some problems"
-                      },
-                      {
-                        "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
-                        "answerSchemaCode": "significant_problems",
-                        "value": "significant problems",
-                        "text": "Significant problems"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "5a90a38d-ee0a-4775-994c-addf3397b817",
-                    "questionCode": "113.1",
-                    "answerType": "radio",
-                    "questionText": "Is impulsivity a problem for the individual?",
-                    "displayOrder": 11,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (impulsivity)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
-                        "answerSchemaCode": "no_problems",
-                        "value": "no problems",
-                        "text": "No problems"
-                      },
-                      {
-                        "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
-                        "answerSchemaCode": "some_problems",
-                        "value": "some problems",
-                        "text": "Some problems"
-                      },
-                      {
-                        "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
-                        "answerSchemaCode": "significant_problems",
-                        "value": "significant problems",
-                        "text": "Significant problems"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "question",
-                    "questionId": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
-                    "questionCode": "115.1",
-                    "answerType": "radio",
-                    "questionText": "Is temper control a problem for the individual?",
-                    "displayOrder": 12,
-                    "mandatory": true,
-                    "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (temper control)\"}}",
-                    "readOnly": false,
-                    "conditional": true,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
-                        "answerSchemaCode": "no_problems",
-                        "value": "no problems",
-                        "text": "No problems"
-                      },
-                      {
-                        "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
-                        "answerSchemaCode": "some_problems",
-                        "value": "some problems",
-                        "text": "Some problems"
-                      },
-                      {
-                        "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
-                        "answerSchemaCode": "significant_problems",
-                        "value": "significant problems",
-                        "text": "Significant problems"
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "type": "group",
-            "groupId": "91a60f48-89d4-4106-8f8a-fe797edca111",
-            "groupCode": "rsr_only_risk_to_others",
-            "title": "Risk to others",
-            "displayOrder": 2,
-            "mandatory": true,
-            "contents": [
-              {
-                "type": "question",
-                "questionId": "0941c5b2-f42d-4120-ad79-44954674fe00",
-                "questionCode": "130.1",
-                "answerType": "inline-checkbox",
-                "questionText": "Murder/attempted murder/threat or conspiracy to murder/manslaughter",
-                "displayOrder": 1,
-                "mandatory": true,
-                "readOnly": false,
+                "readOnly": true,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "f988f76c-3d6c-4f45-aa29-7dc8d11198d7",
-                "questionCode": "131.1",
-                "answerType": "checkbox",
-                "questionText": "Wounding/GBH (Sections 18/20 Offences Against the Person Act 1861)",
+                "questionId": "54b03faa-efc0-49ef-9add-7581dca17d70",
+                "questionCode": "35.1.1",
+                "answerType": "freetext",
+                "questionText": "Offence",
                 "displayOrder": 2,
                 "mandatory": true,
-                "readOnly": false,
+                "readOnly": true,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "ad81d270-4acc-472c-a79e-01d0a422ce80",
-                "questionCode": "135.1",
-                "answerType": "checkbox",
-                "questionText": "Aggravated burglary",
+                "questionId": "91c83565-91dc-4876-97d7-f186ce04584c",
+                "questionCode": "35.1.2",
+                "answerType": "freetext",
+                "questionText": "Subcode",
                 "displayOrder": 3,
                 "mandatory": true,
-                "readOnly": false,
+                "readOnly": true,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "f8789074-1532-4b32-8995-780da18e273a",
-                "questionCode": "136.1",
-                "answerType": "checkbox",
-                "questionText": "Arson",
+                "questionId": "de19c962-bd78-428f-ad29-ab002e7ef25a",
+                "questionCode": "ui35.1.2",
+                "answerType": "presentation: divider",
                 "displayOrder": 4,
                 "mandatory": true,
-                "readOnly": false,
+                "readOnly": true,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "df5d635a-6765-42af-9007-6d6d333da5f2",
-                "questionCode": "137.1",
-                "answerType": "checkbox",
-                "questionText": "Criminal damage with intent to endanger life",
+                "questionId": "96d6c7fd-c755-4dad-b3be-8619674c8ad7",
+                "questionCode": "ui43.1",
+                "answerType": "presentation: heading_large",
+                "questionText": "RSR analysis",
                 "displayOrder": 5,
                 "mandatory": true,
-                "readOnly": false,
+                "readOnly": true,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "ee2763b4-fff9-42c3-a784-6e6fe6b1dea9",
-                "questionCode": "132.1",
-                "answerType": "checkbox",
-                "questionText": "Any sexual offence against a child",
+                "questionId": "5ca86a06-5472-4861-bd6a-a011780db49a",
+                "questionCode": "293.1",
+                "answerType": "date",
+                "questionText": "Date of first sanction",
                 "displayOrder": 6,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "06d5f00f-a5db-4cc5-b51e-a8c91e63686f",
-                "questionCode": "133.1",
-                "answerType": "checkbox",
-                "questionText": "Rape or serious sexual offence against an adult",
+                "questionId": "63099aab-f852-4dd9-9179-16ee2218d0c6",
+                "questionCode": "291.2",
+                "answerType": "numeric",
+                "questionText": "Age at first conviction, conditional or absolute discharge in years",
+                "helpText": "Record in years",
                 "displayOrder": 7,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "0dcc92ff-20d4-4ee1-b3d7-b124b6f32ae8",
-                "questionCode": "134.1",
-                "answerType": "checkbox",
-                "questionText": "Any other offence against a child",
+                "questionId": "8e83a0ad-2fcf-4afb-a0af-09d1e23d3c33",
+                "questionCode": "45.1",
+                "answerType": "numeric",
+                "questionText": "Total number of sanctions for all offences",
                 "displayOrder": 8,
                 "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the total number of sanctions\",\"errorSummary\":\"Enter the total number of sanctions\"}}",
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "c2b221b4-ee1f-41c8-8fc7-9d49998fab35",
-                "questionCode": "138.1",
-                "answerType": "checkbox",
-                "questionText": "Kidnapping/false imprisonment",
+                "questionId": "496587b9-81f3-47ad-a41e-77900fdca573",
+                "questionCode": "46.1",
+                "answerType": "numeric",
+                "questionText": "How many of the total number of sanctions involved violent offences?",
                 "displayOrder": 9,
                 "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Say how many sanctions involved violent offences\",\"errorSummary\":\"Say how many sanctions involved violent offences\"}}",
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "e887bcea-91d1-4c50-a25e-4335fa1e6ae5",
-                "questionCode": "139.1",
-                "answerType": "checkbox",
-                "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
+                "questionId": "f5d1dd7c-1774-4c76-89c2-a47240ad98ba",
+                "questionCode": "48.1",
+                "answerType": "date",
+                "questionText": "Date of current conviction",
+                "helpText": "For example, 12 11 2007",
                 "displayOrder": 10,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
-                    "value": "YES",
-                    "text": "Previous conviction"
-                  }
-                ]
+                "answerSchemas": []
               },
               {
                 "type": "question",
-                "questionId": "9692659a-778a-436a-bf4e-fe1924638e37",
-                "questionCode": "141.1",
-                "answerType": "checkbox",
-                "questionText": "Robbery",
+                "questionId": "58d3efd1-65a1-439b-952f-b2826ffa5e71",
+                "questionCode": "59.1",
+                "answerType": "radio",
+                "questionText": "Have they ever committed a sexual offence?",
                 "displayOrder": 11,
                 "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (sexual or sexually-motivated offence)\"}}",
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
+                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                    "answerSchemaCode": "yes",
                     "value": "YES",
-                    "text": "Previous conviction"
+                    "text": "Yes",
+                    "conditionals": [
+                      {
+                        "conditional": "3662710d-ce3e-4e45-bce3-caa4155872aa",
+                        "displayInline": true
+                      },
+                      {
+                        "conditional": "a00223d0-1c20-43b5-8076-8a292ca25773",
+                        "displayInline": true
+                      },
+                      {
+                        "conditional": "fc45b061-a4a6-44c3-937c-2949069e0926",
+                        "displayInline": true
+                      },
+                      {
+                        "conditional": "ed495c57-21f3-4388-87e6-57017a6999b1",
+                        "displayInline": true
+                      },
+                      {
+                        "conditional": "00a559e4-32d5-4ae7-aa21-247068a639ad",
+                        "displayInline": true
+                      },
+                      {
+                        "conditional": "1b6c8f79-0fd9-45d4-ba50-309c3ccfdb2d",
+                        "displayInline": true
+                      }
+                    ]
+                  },
+                  {
+                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
                   }
                 ]
               },
               {
                 "type": "question",
-                "questionId": "68e31f3a-5175-47e2-986b-d722ad78d893",
-                "questionCode": "142.1",
-                "answerType": "checkbox",
-                "questionText": "Any other offence involving possession and/or use of weapons",
+                "questionId": "3662710d-ce3e-4e45-bce3-caa4155872aa",
+                "questionCode": "292.1",
+                "answerType": "radio",
+                "questionText": "Does the current offence have a sexual motivation?",
                 "displayOrder": 12,
                 "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (current sexual offence)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes",
+                    "conditionals": [
+                      {
+                        "conditional": "86ee742c-4bfb-4e29-afca-04ad35a3abda",
+                        "displayInline": true
+                      }
+                    ]
+                  },
+                  {
+                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "86ee742c-4bfb-4e29-afca-04ad35a3abda",
+                "questionCode": "61.1",
+                "answerType": "radio",
+                "questionText": "Does the current offence involve a victim who was a stranger?",
+                "displayOrder": 13,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (contact against a stranger victim)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
+                  },
+                  {
+                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "a00223d0-1c20-43b5-8076-8a292ca25773",
+                "questionCode": "62.1",
+                "answerType": "date",
+                "questionText": "Date of most recent sanction involving a sexual or sexually motivated offence",
+                "helpText": "For example, 12 11 2007",
+                "displayOrder": 14,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\",\"errorSummary\":\"Enter the date of the most recent sanction involving a sexual or sexually motivated offence\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "fc45b061-a4a6-44c3-937c-2949069e0926",
+                "questionCode": "63.1",
+                "answerType": "numeric",
+                "questionText": "Number of previous or current sanctions involving contact adult sexual or sexually motivated offences",
+                "displayOrder": 15,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact adult sexual or sexually motivated offences\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "ed495c57-21f3-4388-87e6-57017a6999b1",
+                "questionCode": "64.1",
+                "answerType": "numeric",
+                "questionText": "Number of previous or current sanctions involving contact child sexual or sexually motivated offences",
+                "displayOrder": 16,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving contact child sexual or sexually motivated offences\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "00a559e4-32d5-4ae7-aa21-247068a639ad",
+                "questionCode": "65.1",
+                "answerType": "numeric",
+                "questionText": "Number of previous or current sanctions involving indecent child image sexual or sexually motivated offences",
+                "displayOrder": 17,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\",\"errorSummary\":\"Enter the number of previous or current sanctions involving indecent child image sexual or sexually motivated offences\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "1b6c8f79-0fd9-45d4-ba50-309c3ccfdb2d",
+                "questionCode": "66.1",
+                "answerType": "numeric",
+                "questionText": "Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences",
+                "displayOrder": 18,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\",\"errorSummary\":\"Number of previous or current sanctions involving other non-contact sexual or sexually motivated offences\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "5cd344d4-acf3-45a9-9493-5dda5aa9dfa8",
+                "questionCode": "60.1",
+                "answerType": "date",
+                "questionText": "Date of commencement of community sentence or earliest possible release from custody",
+                "helpText": "For example, 12 11 2007",
+                "displayOrder": 19,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Enter a date\",\"errorSummary\":\"Enter a date\"}}",
+                "readOnly": false,
+                "conditional": false,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              }
+            ]
+          },
+          {
+            "type": "group",
+            "groupId": "6d3a4377-2177-429e-a7fa-6aa2444d14dd",
+            "groupCode": "rsr_needs",
+            "title": "Needs",
+            "displayOrder": 2,
+            "mandatory": true,
+            "contents": [
+              {
+                "type": "question",
+                "questionId": "420c2ffe-8f2c-49b3-a523-674af3197b9e",
+                "questionCode": "67.1",
+                "answerType": "radio",
+                "questionText": "Have you completed an interview with the individual?",
+                "displayOrder": 1,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (completed an interview with the individual)\"}}",
                 "readOnly": false,
                 "conditional": false,
                 "referenceDataTargets": [],
                 "answerSchemas": [
                   {
-                    "answerSchemaUuid": "7846b56e-5004-47db-a59d-a84c85d7b69a",
-                    "answerSchemaCode": "previous_conviction",
+                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                    "answerSchemaCode": "yes",
                     "value": "YES",
-                    "text": "Previous conviction"
+                    "text": "Yes",
+                    "conditionals": [
+                      {
+                        "conditional": "bd629547-eab9-46d5-910d-2416b431950f",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "3211a668-8878-4e88-8457-8250bfe65aea",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "574618c3-27f4-4dd2-94bb-6de74126ff22",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "5a90a38d-ee0a-4775-994c-addf3397b817",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "91a60f48-89d4-4106-8f8a-fe797edca111",
+                        "displayInline": false
+                      }
+                    ]
+                  },
+                  {
+                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "bd629547-eab9-46d5-910d-2416b431950f",
+                "questionCode": "69.1",
+                "answerType": "radio",
+                "questionText": "Did the offence involve carrying or use of a weapon?",
+                "displayOrder": 2,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (carrying or using weapon)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes",
+                    "conditionals": [
+                      {
+                        "conditional": "7f076a91-2702-438f-81ba-c15ebfab1b02",
+                        "displayInline": true
+                      }
+                    ]
+                  },
+                  {
+                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "7f076a91-2702-438f-81ba-c15ebfab1b02",
+                "questionCode": "70.1",
+                "answerType": "freetext",
+                "questionText": "Specify which weapon",
+                "displayOrder": 3,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Specify a weapon\",\"errorSummary\":\"Specify a weapon\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
+                "questionCode": "75.1",
+                "answerType": "radio",
+                "questionText": "Is the individual living in suitable accommodation?",
+                "displayOrder": 4,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (suitability of accommodation)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+                    "answerSchemaCode": "no_problems",
+                    "value": "no problems",
+                    "text": "No problems"
+                  },
+                  {
+                    "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+                    "answerSchemaCode": "some_problems",
+                    "value": "some problems",
+                    "text": "Some problems"
+                  },
+                  {
+                    "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+                    "answerSchemaCode": "significant_problems",
+                    "value": "significant problems",
+                    "text": "Significant problems"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "3211a668-8878-4e88-8457-8250bfe65aea",
+                "questionCode": "80.1",
+                "answerType": "radio",
+                "questionText": "Is the person unemployed or will be unemployed upon release?",
+                "displayOrder": 5,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Enter yes or no (unemployed now or on release)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "d4c6ed05-73b4-4064-8255-7ccb96038988",
+                    "answerSchemaCode": "no",
+                    "value": "no",
+                    "text": "No"
+                  },
+                  {
+                    "answerSchemaUuid": "02c77c0c-f9fa-4c4c-a5dc-169aa33f5c86",
+                    "answerSchemaCode": "not_available_for_work",
+                    "value": "not available for work",
+                    "text": "Not available for work"
+                  },
+                  {
+                    "answerSchemaUuid": "f2619d17-2bda-40ce-9658-f6a7a371b3f2",
+                    "answerSchemaCode": "yes",
+                    "value": "yes",
+                    "text": "Yes"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
+                "questionCode": "86.1",
+                "answerType": "radio",
+                "questionText": "What is the person's current relationship with their partner?",
+                "displayOrder": 6,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current relationship with partner)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+                    "answerSchemaCode": "no_problems",
+                    "value": "no problems",
+                    "text": "No problems"
+                  },
+                  {
+                    "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+                    "answerSchemaCode": "some_problems",
+                    "value": "some problems",
+                    "text": "Some problems"
+                  },
+                  {
+                    "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+                    "answerSchemaCode": "significant_problems",
+                    "value": "significant problems",
+                    "text": "Significant problems"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
+                "questionCode": "87.1",
+                "answerType": "radio",
+                "questionText": "Is there evidence that the individual is a perpetrator of domestic abuse?",
+                "displayOrder": 7,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (perpetrator of domestic  abuse?)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes",
+                    "conditionals": [
+                      {
+                        "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
+                        "displayInline": true
+                      },
+                      {
+                        "conditional": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
+                        "displayInline": true
+                      }
+                    ]
+                  },
+                  {
+                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
+                "questionCode": "88.1",
+                "answerType": "checkbox",
+                "questionText": "Victim",
+                "displayOrder": 8,
+                "mandatory": false,
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "4b6d2415-b152-4ba0-b030-1d203b5b31dc",
+                    "answerSchemaCode": "victim",
+                    "value": "victim",
+                    "text": "Victim"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
+                "questionCode": "88.2",
+                "answerType": "checkbox",
+                "questionText": "Perpetrator",
+                "displayOrder": 9,
+                "mandatory": false,
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "9a52b4dd-5648-41d3-8d0d-171228d98474",
+                    "answerSchemaCode": "perpetrator",
+                    "value": "perpetrator",
+                    "text": "Perpetrator"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
+                "questionCode": "90.1",
+                "answerType": "radio",
+                "questionText": "Is the person's current use of alcohol a problem?",
+                "displayOrder": 10,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current use of alcohol)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+                    "answerSchemaCode": "no_problems",
+                    "value": "no problems",
+                    "text": "No problems"
+                  },
+                  {
+                    "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+                    "answerSchemaCode": "some_problems",
+                    "value": "some problems",
+                    "text": "Some problems"
+                  },
+                  {
+                    "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+                    "answerSchemaCode": "significant_problems",
+                    "value": "significant problems",
+                    "text": "Significant problems"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "574618c3-27f4-4dd2-94bb-6de74126ff22",
+                "questionCode": "92.1",
+                "answerType": "radio",
+                "questionText": "Is there evidence of binge drinking or excessive use of alcohol in the last 6 months?",
+                "displayOrder": 11,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (evidence of binge drinking or excessive alcohol use)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+                    "answerSchemaCode": "no_problems",
+                    "value": "no problems",
+                    "text": "No problems"
+                  },
+                  {
+                    "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+                    "answerSchemaCode": "some_problems",
+                    "value": "some problems",
+                    "text": "Some problems"
+                  },
+                  {
+                    "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+                    "answerSchemaCode": "significant_problems",
+                    "value": "significant problems",
+                    "text": "Significant problems"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "5a90a38d-ee0a-4775-994c-addf3397b817",
+                "questionCode": "113.1",
+                "answerType": "radio",
+                "questionText": "Is impulsivity a problem for the individual?",
+                "displayOrder": 12,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (impulsivity)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+                    "answerSchemaCode": "no_problems",
+                    "value": "no problems",
+                    "text": "No problems"
+                  },
+                  {
+                    "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+                    "answerSchemaCode": "some_problems",
+                    "value": "some problems",
+                    "text": "Some problems"
+                  },
+                  {
+                    "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+                    "answerSchemaCode": "significant_problems",
+                    "value": "significant problems",
+                    "text": "Significant problems"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
+                "questionCode": "115.1",
+                "answerType": "radio",
+                "questionText": "Is temper control a problem for the individual?",
+                "displayOrder": 13,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (temper control)\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+                    "answerSchemaCode": "no_problems",
+                    "value": "no problems",
+                    "text": "No problems"
+                  },
+                  {
+                    "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+                    "answerSchemaCode": "some_problems",
+                    "value": "some problems",
+                    "text": "Some problems"
+                  },
+                  {
+                    "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+                    "answerSchemaCode": "significant_problems",
+                    "value": "significant problems",
+                    "text": "Significant problems"
+                  }
+                ]
+              },
+              {
+                "type": "checkboxGroup",
+                "checkboxGroupId": "91a60f48-89d4-4106-8f8a-fe797edca111",
+                "checkboxGroupCode": "rsr_previous_offences",
+                "title": "Previous offences",
+                "contents": [
+                  {
+                    "type": "question",
+                    "questionId": "0941c5b2-f42d-4120-ad79-44954674fe00",
+                    "questionCode": "130.1",
+                    "answerType": "checkbox",
+                    "questionText": "Murder/attempted murder/threat or conspiracy to murder/manslaughter",
+                    "displayOrder": 1,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "f988f76c-3d6c-4f45-aa29-7dc8d11198d7",
+                    "questionCode": "131.1",
+                    "answerType": "checkbox",
+                    "questionText": "Wounding/GBH (Sections 18/20 Offences Against the Person Act 1861)",
+                    "displayOrder": 2,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "ad81d270-4acc-472c-a79e-01d0a422ce80",
+                    "questionCode": "135.1",
+                    "answerType": "checkbox",
+                    "questionText": "Aggravated burglary",
+                    "displayOrder": 3,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "f8789074-1532-4b32-8995-780da18e273a",
+                    "questionCode": "136.1",
+                    "answerType": "checkbox",
+                    "questionText": "Arson",
+                    "displayOrder": 4,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "df5d635a-6765-42af-9007-6d6d333da5f2",
+                    "questionCode": "137.1",
+                    "answerType": "checkbox",
+                    "questionText": "Criminal damage with intent to endanger life",
+                    "displayOrder": 5,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "c2b221b4-ee1f-41c8-8fc7-9d49998fab35",
+                    "questionCode": "138.1",
+                    "answerType": "checkbox",
+                    "questionText": "Kidnapping/false imprisonment",
+                    "displayOrder": 6,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "e887bcea-91d1-4c50-a25e-4335fa1e6ae5",
+                    "questionCode": "139.1",
+                    "answerType": "checkbox",
+                    "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
+                    "displayOrder": 7,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "9692659a-778a-436a-bf4e-fe1924638e37",
+                    "questionCode": "141.1",
+                    "answerType": "checkbox",
+                    "questionText": "Robbery",
+                    "displayOrder": 8,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "question",
+                    "questionId": "68e31f3a-5175-47e2-986b-d722ad78d893",
+                    "questionCode": "142.1",
+                    "answerType": "checkbox",
+                    "questionText": "Any other offence involving possession and/or use of weapons",
+                    "displayOrder": 9,
+                    "mandatory": true,
+                    "readOnly": false,
+                    "conditional": false,
+                    "referenceDataTargets": [],
+                    "answerSchemas": [
+                      {
+                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                        "answerSchemaCode": "yes",
+                        "value": "YES",
+                        "text": "Yes"
+                      },
+                      {
+                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                        "answerSchemaCode": "no",
+                        "value": "NO",
+                        "text": "No"
+                      }
+                    ]
                   }
                 ]
               }

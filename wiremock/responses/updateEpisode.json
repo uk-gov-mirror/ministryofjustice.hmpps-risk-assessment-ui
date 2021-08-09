@@ -1,0 +1,31 @@
+{
+  "episodeId": 1,
+  "episodeUuid": "22222222-2222-2222-2222-222222222222",
+  "assessmentUuid": "fb6b7c33-07fc-4c4c-a009-8d60f66952c4",
+  "reasonForChange": "new episode",
+  "created": "2019-11-14T08:11:53.177108",
+  "answers": {},
+  "predictors": [
+    {
+      "type": "RSR",
+      "scores": [
+        { "level": "HIGH", "score": 11.34, "isValid": true, "date": "2020-07-01T12:00:00" },
+        { "level": "HIGH", "score": 11.34, "isValid": true, "date": "2020-06-01T12:00:00" }
+      ]
+    },
+    {
+      "type": "OSP/C",
+      "scores": [
+        { "level": "MEDIUM", "isValid": true, "date": "2020-07-01T12:00:00" },
+        { "level": "MEDIUM", "isValid": true, "date": "2020-06-01T12:00:00" }
+      ]
+    },
+    {
+      "type": "OSP/I",
+      "scores": [
+        { "level": "LOW", "isValid": true, "date": "2020-07-01T12:00:00" },
+        { "level": "LOW", "isValid": true, "date": "2020-06-01T12:00:00" }
+      ]
+    }
+  ]
+}

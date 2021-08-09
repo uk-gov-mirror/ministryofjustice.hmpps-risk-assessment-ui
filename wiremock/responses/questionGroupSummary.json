@@ -338,5 +338,29 @@
         ]
       }
     ]
+  },
+  "RSR": {
+    "groupId": "b89429c8-9e3e-4989-b886-9caed4ed0a30",
+    "groupCode": "rsr_only",
+    "title": "RSR Only",
+    "contents": [
+      {
+        "groupId": "5d37254e-d956-488e-89be-1eaec8758ef7",
+        "groupCode": "rsr_offences_convictions_needs_risk_to_others",
+        "title": "Offences, convictions, needs and risk to others",
+        "contents": [
+          {
+            "groupId": "eb7b7324-f2a6-4902-91ef-709a8fab1f82",
+            "groupCode": "offences_and_convictions",
+            "title": "Offences and convictions"
+          },
+          {
+            "groupId": "6d3a4377-2177-429e-a7fa-6aa2444d14dd",
+            "groupCode": "rsr_needs",
+            "title": "Needs"
+          }
+        ]
+      }
+    ]
   }
 }
