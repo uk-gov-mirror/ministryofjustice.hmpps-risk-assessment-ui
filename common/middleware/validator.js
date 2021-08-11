@@ -10,9 +10,13 @@ const getFieldId = id => {
     totalSanctions: 'id-8e83a0ad-2fcf-4afb-a0af-09d1e23d3c33',
     violentOffences: 'id-496587b9-81f3-47ad-a41e-77900fdca573',
     currentConvictionDate: 'id-f5d1dd7c-1774-4c76-89c2-a47240ad98ba',
-    haveTheyCommittedASexualOffence: 'id-58d3efd1-65a1-439b-952f-b2826ffa5e7',
-    dateOfMostRecentSexualOffence: 'id-a00223d0-1c20-43b5-8076-8a292ca2577',
+    haveTheyCommittedASexualOffence: 'id-58d3efd1-65a1-439b-952f-b2826ffa5e71',
+    dateOfMostRecentSexualOffence: 'id-a00223d0-1c20-43b5-8076-8a292ca25773',
     dateOfCommencement: 'id-5cd344d4-acf3-45a9-9493-5dda5aa9dfa8',
+    numAdultSexual: 'id-fc45b061-a4a6-44c3-937c-2949069e0926',
+    numChildSexual: 'id-ed495c57-21f3-4388-87e6-57017a6999b1',
+    numIndecentImage: 'id-00a559e4-32d5-4ae7-aa21-247068a639ad',
+    numNonContactSexual: 'id-1b6c8f79-0fd9-45d4-ba50-309c3ccfdb2d',
   }
 
   if (fields[id]) {
@@ -36,8 +40,7 @@ const localValidationRules = async (req, res, next) => {
   } = res
   const validations = []
 
-  // todo: update assessmentType
-  if (assessmentType === 'RSR' && page === 0) {
+  if (assessmentType === 'RSR' && parseInt(page, 10) === 0) {
     /// ///////////////////////////////////////////////////
     // Date of first sanction:
     validations.push(
@@ -79,7 +82,7 @@ const localValidationRules = async (req, res, next) => {
     validations.push(
       body(getFieldId('violentOffences'))
         .isInt()
-        .withMessage({ error: 'PLACEHOLDER: Enter the number of violent offences' })
+        .withMessage({ error: 'Enter the number of violent offences' })
         .bail()
         .isInt({ min: 0, max: totalSanctions })
         .withMessage({ error: 'Cannot be greater than the total number of sanctions for all offences' }),
@@ -115,7 +118,7 @@ const localValidationRules = async (req, res, next) => {
               isAfter(parseISO(value), parseISO(reqBody[getFieldId('dateFirstSanction')]))
             )
           })
-          .withMessage({ error: 'PLACEHOLDER: Current conviction cannot be before the date at first sanction' }),
+          .withMessage({ error: 'Current conviction cannot be before the date of first conviction' }),
       )
     }
 
@@ -137,8 +140,28 @@ const localValidationRules = async (req, res, next) => {
           .custom(value => {
             return isAfter(parseISO(value), parseISO(offenderDateOfBirth))
           })
-          .withMessage({ error: 'Date must be later than the individual’s date of birth' })
-          .bail(),
+          .withMessage({ error: 'Date must be later than the individual’s date of birth' }),
+      )
+
+      validations.push(
+        body(getFieldId('numAdultSexual'))
+          .isInt({ min: 0, max: 99 })
+          .withMessage({ error: 'Enter a number' }),
+      )
+      validations.push(
+        body(getFieldId('numChildSexual'))
+          .isInt({ min: 0, max: 99 })
+          .withMessage({ error: 'Enter a number' }),
+      )
+      validations.push(
+        body(getFieldId('numIndecentImage'))
+          .isInt({ min: 0, max: 99 })
+          .withMessage({ error: 'Enter a number' }),
+      )
+      validations.push(
+        body(getFieldId('numNonContactSexual'))
+          .isInt({ min: 0, max: 99 })
+          .withMessage({ error: 'Enter a number' }),
       )
     }
 

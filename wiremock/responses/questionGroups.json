@@ -7540,8 +7540,8 @@
       {
         "type": "group",
         "groupId": "5d37254e-d956-488e-89be-1eaec8758ef7",
-        "groupCode": "rsr_offences_convictions_needs_risk_to_others",
-        "title": "Offences, convictions, needs and risk to others",
+        "groupCode": "risk_of_serious_recidivism_rsr_assessment",
+        "title": "Risk of Serious Recidivism (RSR) assessment",
         "displayOrder": 1,
         "mandatory": false,
         "contents": [
@@ -7553,71 +7553,6 @@
             "displayOrder": 1,
             "mandatory": true,
             "contents": [
-              {
-                "type": "question",
-                "questionId": "0bc681b4-7f70-477e-8ef5-0daaf8aa0495",
-                "questionCode": "ui35.1.1",
-                "answerType": "presentation: heading_large",
-                "questionText": "Main offence",
-                "helpText": "Primary or most serious offence as judged by assessor",
-                "displayOrder": 1,
-                "mandatory": true,
-                "readOnly": true,
-                "conditional": false,
-                "referenceDataTargets": [],
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "54b03faa-efc0-49ef-9add-7581dca17d70",
-                "questionCode": "35.1.1",
-                "answerType": "freetext",
-                "questionText": "Offence",
-                "displayOrder": 2,
-                "mandatory": true,
-                "readOnly": true,
-                "conditional": false,
-                "referenceDataTargets": [],
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "91c83565-91dc-4876-97d7-f186ce04584c",
-                "questionCode": "35.1.2",
-                "answerType": "freetext",
-                "questionText": "Subcode",
-                "displayOrder": 3,
-                "mandatory": true,
-                "readOnly": true,
-                "conditional": false,
-                "referenceDataTargets": [],
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "de19c962-bd78-428f-ad29-ab002e7ef25a",
-                "questionCode": "ui35.1.2",
-                "answerType": "presentation: divider",
-                "displayOrder": 4,
-                "mandatory": true,
-                "readOnly": true,
-                "conditional": false,
-                "referenceDataTargets": [],
-                "answerSchemas": []
-              },
-              {
-                "type": "question",
-                "questionId": "96d6c7fd-c755-4dad-b3be-8619674c8ad7",
-                "questionCode": "ui43.1",
-                "answerType": "presentation: heading_large",
-                "questionText": "RSR analysis",
-                "displayOrder": 5,
-                "mandatory": true,
-                "readOnly": true,
-                "conditional": false,
-                "referenceDataTargets": [],
-                "answerSchemas": []
-              },
               {
                 "type": "question",
                 "questionId": "5ca86a06-5472-4861-bd6a-a011780db49a",
@@ -7960,7 +7895,67 @@
                         "displayInline": false
                       },
                       {
-                        "conditional": "91a60f48-89d4-4106-8f8a-fe797edca111",
+                        "conditional": "551df80b-5368-4551-8fda-85b1c7a5f01f",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "86da001c-a703-4ef2-9c0d-e5c90336055c",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "47a94bc5-e71e-4327-9942-ad37d5163dee",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "0941c5b2-f42d-4120-ad79-44954674fe00",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "f988f76c-3d6c-4f45-aa29-7dc8d11198d7",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "ad81d270-4acc-472c-a79e-01d0a422ce80",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "f8789074-1532-4b32-8995-780da18e273a",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "df5d635a-6765-42af-9007-6d6d333da5f2",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "ee2763b4-fff9-42c3-a784-6e6fe6b1dea9",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "06d5f00f-a5db-4cc5-b51e-a8c91e63686f",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "0dcc92ff-20d4-4ee1-b3d7-b124b6f32ae8",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "c2b221b4-ee1f-41c8-8fc7-9d49998fab35",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "e887bcea-91d1-4c50-a25e-4335fa1e6ae5",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "9692659a-778a-436a-bf4e-fe1924638e37",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "66c3bdd2-6f47-4f13-aa7b-39d497d90a89",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "68e31f3a-5175-47e2-986b-d722ad78d893",
                         "displayInline": false
                       }
                     ]
@@ -8028,7 +8023,7 @@
                 "questionText": "Is the individual living in suitable accommodation?",
                 "displayOrder": 4,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (suitability of accommodation)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (suitability of accommodation)\"}}",
                 "readOnly": false,
                 "conditional": true,
                 "referenceDataTargets": [],
@@ -8061,7 +8056,7 @@
                 "questionText": "Is the person unemployed or will be unemployed upon release?",
                 "displayOrder": 5,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Enter yes or no (unemployed now or on release)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (unemployed now or on release)\"}}",
                 "readOnly": false,
                 "conditional": true,
                 "referenceDataTargets": [],
@@ -8094,7 +8089,7 @@
                 "questionText": "What is the person's current relationship with their partner?",
                 "displayOrder": 6,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current relationship with partner)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (current relationship with partner)\"}}",
                 "readOnly": false,
                 "conditional": true,
                 "referenceDataTargets": [],
@@ -8204,7 +8199,7 @@
                 "questionText": "Is the person's current use of alcohol a problem?",
                 "displayOrder": 10,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (current use of alcohol)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (current use of alcohol)\"}}",
                 "readOnly": false,
                 "conditional": true,
                 "referenceDataTargets": [],
@@ -8237,7 +8232,7 @@
                 "questionText": "Is there evidence of binge drinking or excessive use of alcohol in the last 6 months?",
                 "displayOrder": 11,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (evidence of binge drinking or excessive alcohol use)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (evidence of binge drinking or excessive alcohol use)\"}}",
                 "readOnly": false,
                 "conditional": true,
                 "referenceDataTargets": [],
@@ -8270,7 +8265,7 @@
                 "questionText": "Is impulsivity a problem for the individual?",
                 "displayOrder": 12,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (impulsivity)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (impulsivity)\"}}",
                 "readOnly": false,
                 "conditional": true,
                 "referenceDataTargets": [],
@@ -8303,7 +8298,7 @@
                 "questionText": "Is temper control a problem for the individual?",
                 "displayOrder": 13,
                 "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select the degree to which this is an issue\",\"errorSummary\":\"Select the degree to which this is an issue (temper control)\"}}",
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (temper control)\"}}",
                 "readOnly": false,
                 "conditional": true,
                 "referenceDataTargets": [],
@@ -8329,244 +8324,283 @@
                 ]
               },
               {
-                "type": "checkboxGroup",
-                "checkboxGroupId": "91a60f48-89d4-4106-8f8a-fe797edca111",
-                "checkboxGroupCode": "rsr_previous_offences",
-                "title": "Previous offences",
-                "contents": [
+                "type": "question",
+                "questionId": "551df80b-5368-4551-8fda-85b1c7a5f01f",
+                "questionCode": "ui_rsr_needs_1",
+                "answerType": "presentation: divider",
+                "displayOrder": 15,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "86da001c-a703-4ef2-9c0d-e5c90336055c",
+                "questionCode": "ui_rsr_needs_2",
+                "answerType": "presentation: heading_large",
+                "questionText": "Previous offences",
+                "displayOrder": 16,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "47a94bc5-e71e-4327-9942-ad37d5163dee",
+                "questionCode": "ui_rsr_needs_3",
+                "answerType": "presentation: body",
+                "questionText": "Has the individual previously been convicted of any of these offences?",
+                "displayOrder": 17,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "0941c5b2-f42d-4120-ad79-44954674fe00",
+                "questionCode": "130.1",
+                "answerType": "radio",
+                "questionText": "Murder/attempted murder/threat or conspiracy to murder/manslaughter",
+                "displayOrder": 18,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
                   {
-                    "type": "question",
-                    "questionId": "0941c5b2-f42d-4120-ad79-44954674fe00",
-                    "questionCode": "130.1",
-                    "answerType": "checkbox",
-                    "questionText": "Murder/attempted murder/threat or conspiracy to murder/manslaughter",
-                    "displayOrder": 1,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "f988f76c-3d6c-4f45-aa29-7dc8d11198d7",
-                    "questionCode": "131.1",
-                    "answerType": "checkbox",
-                    "questionText": "Wounding/GBH (Sections 18/20 Offences Against the Person Act 1861)",
-                    "displayOrder": 2,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "f988f76c-3d6c-4f45-aa29-7dc8d11198d7",
+                "questionCode": "131.1",
+                "answerType": "radio",
+                "questionText": "Wounding/GBH (Sections 18/20 Offences Against the Person Act 1861)",
+                "displayOrder": 19,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "ad81d270-4acc-472c-a79e-01d0a422ce80",
-                    "questionCode": "135.1",
-                    "answerType": "checkbox",
-                    "questionText": "Aggravated burglary",
-                    "displayOrder": 3,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "ad81d270-4acc-472c-a79e-01d0a422ce80",
+                "questionCode": "135.1",
+                "answerType": "radio",
+                "questionText": "Aggravated burglary",
+                "displayOrder": 20,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "f8789074-1532-4b32-8995-780da18e273a",
-                    "questionCode": "136.1",
-                    "answerType": "checkbox",
-                    "questionText": "Arson",
-                    "displayOrder": 4,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "f8789074-1532-4b32-8995-780da18e273a",
+                "questionCode": "136.1",
+                "answerType": "radio",
+                "questionText": "Arson",
+                "displayOrder": 21,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "df5d635a-6765-42af-9007-6d6d333da5f2",
-                    "questionCode": "137.1",
-                    "answerType": "checkbox",
-                    "questionText": "Criminal damage with intent to endanger life",
-                    "displayOrder": 5,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "df5d635a-6765-42af-9007-6d6d333da5f2",
+                "questionCode": "137.1",
+                "answerType": "radio",
+                "questionText": "Criminal damage with intent to endanger life",
+                "displayOrder": 22,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "c2b221b4-ee1f-41c8-8fc7-9d49998fab35",
-                    "questionCode": "138.1",
-                    "answerType": "checkbox",
-                    "questionText": "Kidnapping/false imprisonment",
-                    "displayOrder": 6,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "c2b221b4-ee1f-41c8-8fc7-9d49998fab35",
+                "questionCode": "138.1",
+                "answerType": "radio",
+                "questionText": "Kidnapping/false imprisonment",
+                "displayOrder": 23,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "e887bcea-91d1-4c50-a25e-4335fa1e6ae5",
-                    "questionCode": "139.1",
-                    "answerType": "checkbox",
-                    "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
-                    "displayOrder": 7,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "e887bcea-91d1-4c50-a25e-4335fa1e6ae5",
+                "questionCode": "139.1",
+                "answerType": "radio",
+                "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
+                "displayOrder": 24,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "9692659a-778a-436a-bf4e-fe1924638e37",
-                    "questionCode": "141.1",
-                    "answerType": "checkbox",
-                    "questionText": "Robbery",
-                    "displayOrder": 8,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "9692659a-778a-436a-bf4e-fe1924638e37",
+                "questionCode": "141.1",
+                "answerType": "radio",
+                "questionText": "Robbery",
+                "displayOrder": 25,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
                   },
                   {
-                    "type": "question",
-                    "questionId": "68e31f3a-5175-47e2-986b-d722ad78d893",
-                    "questionCode": "142.1",
-                    "answerType": "checkbox",
-                    "questionText": "Any other offence involving possession and/or use of weapons",
-                    "displayOrder": 9,
-                    "mandatory": true,
-                    "readOnly": false,
-                    "conditional": false,
-                    "referenceDataTargets": [],
-                    "answerSchemas": [
-                      {
-                        "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
-                        "answerSchemaCode": "yes",
-                        "value": "YES",
-                        "text": "Yes"
-                      },
-                      {
-                        "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
-                        "answerSchemaCode": "no",
-                        "value": "NO",
-                        "text": "No"
-                      }
-                    ]
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "68e31f3a-5175-47e2-986b-d722ad78d893",
+                "questionCode": "142.1",
+                "answerType": "radio",
+                "questionText": "Any other offence involving possession and/or use of weapons",
+                "displayOrder": 26,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
+                  },
+                  {
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
                   }
                 ]
               }

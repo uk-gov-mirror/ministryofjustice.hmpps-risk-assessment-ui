@@ -7,7 +7,7 @@ const {
 const { flattenCheckboxGroups } = require('../../common/middleware/questionGroups/checkboxGroups')
 
 const displayQuestionGroup = async (
-  { params: { assessmentId, groupId, subgroup }, body, errors = {}, errorSummary = null, user },
+  { params: { assessmentId, groupId, subgroup, page }, body, errors = {}, errorSummary = null, user },
   res,
 ) => {
   try {
@@ -29,6 +29,7 @@ const displayQuestionGroup = async (
       heading: questionGroup.title,
       subheading: questionGroup.contents[subIndex]?.title,
       groupId,
+      page,
       questions,
       errors,
       errorSummary,

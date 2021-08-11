@@ -50,19 +50,29 @@
                     {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId], '', requested_url) }}
                 {% endfor %}
 
-                <div class="questiongroup-action-buttons">
-                    {{ govukButton({
-                        text: 'Save and continue',
-                        classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
-                    }) }}
+    {% if groupId == 'RSR' and page == 0 %}
+        <div class="questiongroup-action-buttons">
+            {{ govukButton({
+                text: 'Continue',
+                classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+            }) }}
+        </div>
+    {% else %}
+        <div class="questiongroup-action-buttons">
+            {{ govukButton({
+                text: 'Save and continue',
+                classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+            }) }}
 
 
-                    {{ govukButton({
-                        text: 'Back to assessment progress',
-                        classes: 'govuk-button--secondary',
-                        href: '/' + assessmentId + '/questiongroup/' + groupId + '/summary'
-                    }) }}
-                </div>
+            {{ govukButton({
+                text: 'Back to assessment progress',
+                classes: 'govuk-button--secondary',
+                href: '/' + assessmentId + '/questiongroup/' + groupId + '/summary'
+            }) }}
+        </div>
+    {% endif %}
+
 
             </form>
         </div>
