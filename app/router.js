@@ -57,6 +57,7 @@ const {
 } = require('../common/config')
 const { displayPredictorScores } = require('./predictorScores/get.controller')
 const { submitPredictorScores } = require('./submitPredictorScores/get.controller')
+const logger = require('../common/logging/logger')
 
 const assessmentUrl = `/${devAssessmentId}/questiongroup/ROSH/summary`
 
@@ -191,15 +192,20 @@ module.exports = app => {
   app.post('/assessment-from-delius', startAssessmentFromForm)
   app.post('/assessment-from-delius/:assessmentSchemaCode/crn/:crn/event/:deliusEventId', startAssessmentFromCrn)
 
-  app.get('/episode/:episodeUuid/:assessmentType/scores', displayPredictorScores)
-  app.get('/episode/:episodeUuid/:assessmentType/scores/complete', submitPredictorScores)
+  app.get('/:assessmentUuid/episode/:episodeUuid/:assessmentType/scores', getOffenderDetails, displayPredictorScores)
+  app.get(
+    '/:assessmentUuid/episode/:episodeUuid/:assessmentType/scores/complete',
+    getOffenderDetails,
+    submitPredictorScores,
+  )
 
-  app.use((error, req, res, next) =>
+  app.use((error, req, res, next) => {
+    logger.info(`Unhandled exception received - ${error.message} ${error.stack}`)
     res.render('app/error', {
       subHeading: 'Something unexpected happened',
       error,
-    }),
-  )
+    })
+  })
 
   app.get('*', (req, res) =>
     res.status(404).render('app/error', {

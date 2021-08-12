@@ -2,7 +2,6 @@ const { saveQuestionGroup } = require('./post.controller')
 const { displayQuestionGroup } = require('./get.controller')
 const { assembleDates } = require('../../common/middleware/questionGroups/postHandlers')
 const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
-const { cachePredictorScoresForEpisode } = require('../../common/data/predictorScores')
 const questionGroupPointer = require('../../wiremock/responses/questionGroups.json')[
   '22222222-2222-2222-2222-222222222203'
 ]
@@ -11,19 +10,10 @@ jest.mock('../../common/data/hmppsAssessmentApi')
 jest.mock('./get.controller', () => ({
   displayQuestionGroup: jest.fn(),
 }))
-jest.mock('../../common/data/predictorScores', () => ({
-  cachePredictorScoresForEpisode: jest.fn(),
-}))
 
 let req
 const user = { token: 'mytoken', id: '1' }
 const episodeUuid = '22222222-2222-2222-2222-222222222222'
-const predictors = [
-  {
-    date: new Date().toISOString(),
-    scores: [{ type: 'RSR', score: 'MEDIUM' }],
-  },
-]
 
 describe('post answers', () => {
   const res = {
@@ -47,13 +37,11 @@ describe('post answers', () => {
     }
 
     displayQuestionGroup.mockReset()
-    cachePredictorScoresForEpisode.mockReset()
     res.render.mockReset()
   })
 
   it('should save the answers', async () => {
-    postAnswers.mockResolvedValue([true, { episodeUuid, predictors }])
-    cachePredictorScoresForEpisode.mockResolvedValue()
+    postAnswers.mockResolvedValue([true, { episodeUuid }])
 
     req.body = {
       '11111111-1111-1111-1111-111111111202': 'Hello',
@@ -74,13 +62,12 @@ describe('post answers', () => {
       user.token,
       user.id,
     )
-    expect(cachePredictorScoresForEpisode).toHaveBeenCalledWith(episodeUuid, predictors)
+
     expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/questiongroup/my/next/page')
   })
 
   it('should save the answers correctly when there are dates in the body', async () => {
-    postAnswers.mockResolvedValue([true, { episodeUuid, predictors }])
-    cachePredictorScoresForEpisode.mockResolvedValue()
+    postAnswers.mockResolvedValue([true, { episodeUuid }])
 
     req.body = {
       '11111111-1111-1111-1111-111111111205-day': '3',
@@ -114,7 +101,7 @@ describe('post answers', () => {
       user.token,
       user.id,
     )
-    expect(cachePredictorScoresForEpisode).toHaveBeenCalledWith(episodeUuid, predictors)
+
     expect(res.redirect).toHaveBeenCalledWith('/test-assessment-id/questiongroup/my/next/page')
   })
 
@@ -123,7 +110,6 @@ describe('post answers', () => {
 
     await saveQuestionGroup(req, res)
 
-    expect(cachePredictorScoresForEpisode).not.toHaveBeenCalled()
     expect(displayQuestionGroup).toHaveBeenCalledWith(req, res)
   })
 
@@ -144,7 +130,6 @@ describe('post answers', () => {
 
     await saveQuestionGroup(req, res)
 
-    expect(cachePredictorScoresForEpisode).not.toHaveBeenCalled()
     expect(res.render).toHaveBeenCalledWith(`app/error`, { error: theError })
   })
 })

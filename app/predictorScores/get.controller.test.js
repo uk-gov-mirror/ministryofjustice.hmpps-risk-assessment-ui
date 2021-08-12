@@ -1,35 +1,22 @@
 const { displayPredictorScores } = require('./get.controller')
-const { getPredictorScoresForEpisode } = require('../../common/data/predictorScores')
+const { postCompleteAssessment } = require('../../common/data/hmppsAssessmentApi')
 
-jest.mock('../../common/data/predictorScores', () => ({
-  getPredictorScoresForEpisode: jest.fn(),
+jest.mock('../../common/data/hmppsAssessmentApi', () => ({
+  postCompleteAssessment: jest.fn(),
 }))
 
+const assessmentUuid = '22222222-2222-2222-2222-222222222221'
 const episodeUuid = '22222222-2222-2222-2222-222222222222'
+const user = {
+  id: 'USER_ID',
+  token: 'USER_TOKEN',
+}
 
-const predictorScores = [
-  {
-    type: 'RSR',
-    scores: [
-      { level: 'HIGH', score: 11.34, isValid: true, date: '2021-07-23T12:00' },
-      { level: 'HIGH', score: 11.34, isValid: true, date: '2021-07-22T12:00' },
-    ],
-  },
-  {
-    type: 'OSP/C',
-    scores: [
-      { level: 'MEDIUM', score: 8.76, isValid: true, date: '2021-07-23T12:00' },
-      { level: 'MEDIUM', score: 8.76, isValid: true, date: '2021-07-22T12:00' },
-    ],
-  },
-  {
-    type: 'OSP/I',
-    scores: [
-      { level: 'LOW', score: 3.45, isValid: true, date: '2021-07-23T12:00' },
-      { level: 'LOW', score: 3.45, isValid: true, date: '2021-07-22T12:00' },
-    ],
-  },
-]
+const predictorScores = {
+  RSR: { level: 'HIGH', score: 11.34, isValid: true, date: '2021-07-23T12:00' },
+  'OSP/C': { level: 'MEDIUM', score: 8.76, isValid: true, date: '2021-07-23T12:00' },
+  'OSP/I': { level: 'LOW', score: 3.45, isValid: true, date: '2021-07-23T12:00' },
+}
 
 const formattedCurrentPredictorScore = {
   date: '23 Jul 2021 at 12:00',
@@ -40,21 +27,13 @@ const formattedCurrentPredictorScore = {
   },
 }
 
-const formattedHistoricalPredictorScores = [
-  {
-    date: '22 Jul 2021 at 12:00',
-    scores: {
-      RSR: { type: 'RSR', level: 'HIGH', score: 11.34 },
-      OSPC: { type: 'OSP/C', level: 'MEDIUM', score: 8.76 },
-      OSPI: { type: 'OSP/I', level: 'LOW', score: 3.45 },
-    },
-  },
-]
+const formattedHistoricalPredictorScores = []
 
 describe('display predictor scores', () => {
   const req = {
     params: {
-      episodeUuid: '22222222-2222-2222-2222-222222222222',
+      episodeUuid,
+      assessmentUuid,
       assessmentType: 'RSR',
     },
     session: {
@@ -65,6 +44,7 @@ describe('display predictor scores', () => {
         },
       },
     },
+    user,
   }
   const res = {
     render: jest.fn(),
@@ -77,15 +57,15 @@ describe('display predictor scores', () => {
   }
 
   beforeEach(() => {
-    getPredictorScoresForEpisode.mockReset()
+    postCompleteAssessment.mockReset()
   })
 
   it('displays predictor scores', async () => {
-    getPredictorScoresForEpisode.mockResolvedValue(predictorScores)
+    postCompleteAssessment.mockResolvedValue([true, { predictors: predictorScores }])
 
     await displayPredictorScores(req, res)
 
-    expect(getPredictorScoresForEpisode).toHaveBeenCalledWith(episodeUuid)
+    expect(postCompleteAssessment).toHaveBeenCalledWith(assessmentUuid, user.token, user.id)
     expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, {
       subheading: 'Risk of Serious Recidivism (RSR) assessment',
       heading: "Bob Ross's scores",
@@ -95,7 +75,7 @@ describe('display predictor scores', () => {
           url: '/foo/bar',
         },
         complete: {
-          url: '/episode/22222222-2222-2222-2222-222222222222/RSR/scores/complete',
+          url: '/22222222-2222-2222-2222-222222222221/episode/22222222-2222-2222-2222-222222222222/RSR/scores/complete',
         },
       },
       predictorScores: {
@@ -107,11 +87,11 @@ describe('display predictor scores', () => {
 
   it('catches exceptions and renders the error page', async () => {
     const theError = new Error('💥')
-    getPredictorScoresForEpisode.mockRejectedValue(theError)
+    postCompleteAssessment.mockRejectedValue(theError)
 
     await displayPredictorScores(req, res)
 
-    expect(getPredictorScoresForEpisode).toHaveBeenCalled()
+    expect(postCompleteAssessment).toHaveBeenCalled()
     expect(res.render).toHaveBeenCalledWith(`app/error`, { error: theError })
   })
 })

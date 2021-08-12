@@ -2,9 +2,7 @@ const superagent = require('superagent')
 
 const url = 'http://localhost:9191/__admin'
 
-const stubFor = mapping => {
-  Promise.all([superagent.post(`${url}/mappings`).send(mapping)])
-}
+const stubFor = mapping => Promise.all([superagent.post(`${url}/mappings`).send(mapping)])
 
 const getRequests = () => superagent.get(`${url}/requests`)
 

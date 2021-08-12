@@ -3,7 +3,6 @@ const { logger } = require('../../common/logging/logger')
 const { displayQuestionGroup } = require('./get.controller')
 const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
 const { formatValidationErrors } = require('../../common/middleware/questionGroups/postHandlers')
-const { cachePredictorScoresForEpisode } = require('../../common/data/predictorScores')
 
 const getErrorMessage = reason => {
   if (reason === 'OASYS_PERMISSION') {
@@ -32,10 +31,7 @@ const saveQuestionGroup = async (req, res) => {
     const [ok, response] = await postAnswers(assessmentId, 'current', { answers }, user?.token, user?.id)
 
     if (ok) {
-      const { episodeUuid, predictors: predictorScores = [] } = response
-      logger.info(`Received ${predictorScores.length} predictor scores for episode: ${episodeUuid}`)
-
-      await cachePredictorScoresForEpisode(episodeUuid, predictorScores)
+      const { episodeUuid } = response
 
       if (redirectsToScores(res.locals.questionGroup?.groupId)) {
         req.session.navigation = {
@@ -45,7 +41,7 @@ const saveQuestionGroup = async (req, res) => {
           },
         }
         req.session.save()
-        return res.redirect(`/episode/${episodeUuid}/${groupId}/scores`)
+        return res.redirect(`/${assessmentId}/episode/${episodeUuid}/${groupId}/scores`)
       }
 
       return res.redirect(`/${assessmentId}/questiongroup/${res.locals.navigation.next.url}`)

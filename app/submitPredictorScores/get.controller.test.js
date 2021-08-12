@@ -3,6 +3,7 @@ const { submitPredictorScores } = require('./get.controller')
 describe('display predictor scores', () => {
   const req = {
     params: {
+      assessmentUuid: '22222222-2222-2222-2222-222222222222',
       episodeUuid: '22222222-2222-2222-2222-222222222222',
       assessmentType: 'RSR',
     },
@@ -16,6 +17,10 @@ describe('display predictor scores', () => {
       },
     },
   }
+
+  beforeEach(() => {
+    res.render.mockReset()
+  })
 
   it('displays a message on submission', async () => {
     await submitPredictorScores(req, res)

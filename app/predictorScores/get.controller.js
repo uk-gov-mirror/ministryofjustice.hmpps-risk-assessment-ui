@@ -1,5 +1,5 @@
 const { format, parseISO } = require('date-fns')
-const { getPredictorScoresForEpisode } = require('../../common/data/predictorScores')
+const { postCompleteAssessment } = require('../../common/data/hmppsAssessmentApi')
 const logger = require('../../common/logging/logger')
 
 const formatDate = dateString => {
@@ -11,45 +11,22 @@ const formatDate = dateString => {
 
 const removeSpecialCharactersFrom = string => string.replace(/[^a-zA-Z]/g, '')
 
-const formatPredictorScores = predictorScores => ({
-  ...predictorScores,
-  date: formatDate(predictorScores.date),
-})
-
 const splitPredictorScores = predictorScores => {
-  const groupedScores = predictorScores
-    .flatMap(predictor =>
-      predictor.scores.map(predictorScore => ({
-        ...predictorScore,
-        type: predictor.type,
-      })),
-    )
-    .reduce((result, { level, score, type, date }) => {
-      const scoreType = [removeSpecialCharactersFrom(type)]
-      const groups = { ...result }
-      groups[date] = {
-        date,
-        scores: {
-          ...(result[date]?.scores || {}),
-          [scoreType]: {
-            level,
-            score,
-            type,
-          },
-        },
-      }
-      return groups
-    }, {})
+  const formattedScores = Object.entries(predictorScores).reduce((previous, [type, { level, score, date }]) => {
+    const updated = { ...previous, date: formatDate(date) }
+    const key = removeSpecialCharactersFrom(type)
 
-  const sortedScores = Object.values(groupedScores).sort((a, b) => (a.date > b.date ? -1 : 1))
+    updated.scores = {
+      ...(updated.scores || {}),
+      [key]: { level, score, type },
+    } // 🤔
 
-  const [currentScores, ...historicalScores] = sortedScores
+    return updated
+  }, {})
 
-  const formattedScore = currentScores ? formatPredictorScores(currentScores) : null
-  const formattedHistoricalScores = historicalScores.map(formatPredictorScores)
   return {
-    current: formattedScore,
-    historical: formattedHistoricalScores,
+    current: formattedScores,
+    historical: [], // TODO: 👈 Add some code to do these
   }
 }
 
@@ -61,27 +38,33 @@ const getSubheadingFor = assessmentType => {
 const displayPredictorScores = async (req, res) => {
   try {
     const {
-      params: { episodeUuid, assessmentType },
+      params: { episodeUuid, assessmentUuid, assessmentType },
+      user,
     } = req
 
-    logger.info(`Displaying predictor scores for episode: ${episodeUuid} of type: ${assessmentType}`)
+    const [ok, assessment] = await postCompleteAssessment(assessmentUuid, user?.token, user?.id)
+    if (!ok) return res.render('app/error', { error: new Error('Failed to complete the assessment') })
 
-    const predictorScores = await getPredictorScoresForEpisode(episodeUuid)
+    if (!assessment.predictors) {
+      return res.render('app/error', { error: new Error('Failed to get predictor scores') })
+    }
+
+    logger.info(`Received ${assessment.predictors.length} predictor scores for episode: ${episodeUuid}`)
 
     const { previousPage } = req.session.navigation
-
     const offenderName = res.locals.offenderDetails?.name || 'Offender'
 
     return res.render(`${__dirname}/index`, {
-      predictorScores: splitPredictorScores(predictorScores),
+      predictorScores: splitPredictorScores(assessment.predictors),
       heading: `${offenderName}'s scores`,
       subheading: getSubheadingFor(assessmentType),
       navigation: {
         previous: previousPage,
-        complete: { url: `/episode/${episodeUuid}/${assessmentType}/scores/complete` },
+        complete: { url: `/${assessmentUuid}/episode/${episodeUuid}/${assessmentType}/scores/complete` },
       },
     })
   } catch (error) {
+    logger.info(`Failed to display predictor scores - ${error.message} ${error.stack}`)
     return res.render('app/error', { error })
   }
 }

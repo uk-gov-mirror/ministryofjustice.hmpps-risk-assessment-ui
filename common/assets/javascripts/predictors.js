@@ -32,7 +32,7 @@ function attachListenerForToggleAllButton(button, sections) {
     for (var i = 0; i < sections.length; i++) {
       sections[i].classList.remove('predictor-timeline-section--hidden')
 
-      var openSectionButtons = sections[i].getElementsByClassName('predictor-timeline__toggle-section')
+      var openSectionButtons = sections[i].parentElement.getElementsByClassName('predictor-timeline__toggle-section')
 
       for (var j = 0; j < openSectionButtons.length; j++) {
         openSectionButtons[j].setAttribute('data-section-is-hidden', false)

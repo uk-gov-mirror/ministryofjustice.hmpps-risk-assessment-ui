@@ -129,6 +129,7 @@
                 </div>
             </div>
         </div>
+        {% if predictorScores.historical.length %}}
         <div id="predictor-scores-history" class="govuk-grid-column-one-third">
             <div class="govuk-body predictor-timeline__heading">
                 <h2 class="govuk-heading-l">Scores history</h2>
@@ -136,6 +137,7 @@
             </div>
             {{ predictorTimeline(predictorScores.historical) }}
         </div>
+        {% endif %}
     </div>
 
 {% endblock %}
