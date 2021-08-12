@@ -1,5 +1,5 @@
 const { body } = require('express-validator')
-const { isDate } = require('date-fns')
+const { isDate, format } = require('date-fns')
 const { dynamicMiddleware } = require('../../utils/util')
 const { logger } = require('../../logging/logger')
 const { extractCheckboxGroupAnswers } = require('./checkboxGroups')
@@ -26,7 +26,7 @@ const assembleDates = async (req, res, next) => {
           `${reqBody[`${dateKey}-year`]}-${reqBody[`${dateKey}-month`]}-${reqBody[`${dateKey}-day`]}`,
         )
         if (isDate(constructedDate)) {
-          constructedDate = constructedDate.toISOString()
+          constructedDate = format(constructedDate, 'yyyy-MM-dd')
         }
       }
     } catch {

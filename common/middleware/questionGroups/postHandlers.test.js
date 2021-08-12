@@ -253,7 +253,7 @@ describe('Assemble dates', () => {
 
     assembleDates(req, res, next)
 
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00']).toEqual(new Date('1989-01-19').toISOString())
+    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00']).toEqual('1989-01-19')
     // deletes the component fields
     expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00-day']).toBeUndefined()
     expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00-month']).toBeUndefined()
