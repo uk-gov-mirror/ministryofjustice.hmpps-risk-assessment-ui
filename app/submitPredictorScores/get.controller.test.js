@@ -3,8 +3,8 @@ const { submitPredictorScores } = require('./get.controller')
 describe('display predictor scores', () => {
   const req = {
     params: {
-      assessmentUuid: '22222222-2222-2222-2222-222222222222',
-      episodeUuid: '22222222-2222-2222-2222-222222222222',
+      assessmentId: '22222222-2222-2222-2222-222222222222',
+      episodeId: '22222222-2222-2222-2222-222222222222',
       assessmentType: 'RSR',
     },
   }

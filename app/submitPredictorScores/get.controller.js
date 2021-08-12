@@ -3,12 +3,12 @@ const { logger } = require('../../common/logging/logger')
 const submitPredictorScores = async (req, res) => {
   try {
     const {
-      params: { episodeUuid, assessmentType },
+      params: { assessmentId, assessmentType },
     } = req
 
     const offenderName = res.locals.offenderDetails?.name || 'the offender'
 
-    logger.info(`Creating final predictor scores for episode: ${episodeUuid} of type: ${assessmentType}`)
+    logger.info(`Creating final predictor scores for episode: ${assessmentId} of type: ${assessmentType}`)
 
     // TODO: create final predictor scores
 

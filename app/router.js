@@ -192,9 +192,9 @@ module.exports = app => {
   app.post('/assessment-from-delius', startAssessmentFromForm)
   app.post('/assessment-from-delius/:assessmentSchemaCode/crn/:crn/event/:deliusEventId', startAssessmentFromCrn)
 
-  app.get('/:assessmentUuid/episode/:episodeUuid/:assessmentType/scores', getOffenderDetails, displayPredictorScores)
+  app.get('/:assessmentId/episode/:episodeId/:assessmentType/scores', getOffenderDetails, displayPredictorScores)
   app.get(
-    '/:assessmentUuid/episode/:episodeUuid/:assessmentType/scores/complete',
+    '/:assessmentId/episode/:episodeId/:assessmentType/scores/complete',
     getOffenderDetails,
     submitPredictorScores,
   )

@@ -38,18 +38,18 @@ const getSubheadingFor = assessmentType => {
 const displayPredictorScores = async (req, res) => {
   try {
     const {
-      params: { episodeUuid, assessmentUuid, assessmentType },
+      params: { episodeId, assessmentId, assessmentType },
       user,
     } = req
 
-    const [ok, assessment] = await postCompleteAssessment(assessmentUuid, user?.token, user?.id)
+    const [ok, assessment] = await postCompleteAssessment(assessmentId, user?.token, user?.id)
     if (!ok) return res.render('app/error', { error: new Error('Failed to complete the assessment') })
 
     if (!assessment.predictors) {
       return res.render('app/error', { error: new Error('Failed to get predictor scores') })
     }
 
-    logger.info(`Received ${assessment.predictors.length} predictor scores for episode: ${episodeUuid}`)
+    logger.info(`Received ${assessment.predictors.length} predictor scores for episode: ${episodeId}`)
 
     const { previousPage } = req.session.navigation
     const offenderName = res.locals.offenderDetails?.name || 'Offender'
@@ -60,7 +60,7 @@ const displayPredictorScores = async (req, res) => {
       subheading: getSubheadingFor(assessmentType),
       navigation: {
         previous: previousPage,
-        complete: { url: `/${assessmentUuid}/episode/${episodeUuid}/${assessmentType}/scores/complete` },
+        complete: { url: `/${assessmentId}/episode/${episodeId}/${assessmentType}/scores/complete` },
       },
     })
   } catch (error) {

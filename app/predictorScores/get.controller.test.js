@@ -32,8 +32,8 @@ const formattedHistoricalPredictorScores = []
 describe('display predictor scores', () => {
   const req = {
     params: {
-      episodeUuid,
-      assessmentUuid,
+      episodeId: episodeUuid,
+      assessmentId: assessmentUuid,
       assessmentType: 'RSR',
     },
     session: {
