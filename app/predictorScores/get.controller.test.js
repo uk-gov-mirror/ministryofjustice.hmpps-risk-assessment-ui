@@ -13,13 +13,13 @@ const user = {
 }
 
 const predictorScores = {
-  RSR: { level: 'HIGH', score: 11.34, isValid: true, date: '2021-07-23T12:00' },
-  'OSP/C': { level: 'MEDIUM', score: 8.76, isValid: true, date: '2021-07-23T12:00' },
-  'OSP/I': { level: 'LOW', score: 3.45, isValid: true, date: '2021-07-23T12:00' },
+  RSR: { level: 'HIGH', score: 11.34, isValid: true, date: '2021-08-13 08:26:21' },
+  'OSP/C': { level: 'MEDIUM', score: 8.76, isValid: true, date: '2021-08-13 08:26:21' },
+  'OSP/I': { level: 'LOW', score: 3.45, isValid: true, date: '2021-08-13 08:26:21' },
 }
 
 const formattedCurrentPredictorScore = {
-  date: '23 Jul 2021 at 12:00',
+  date: '13 Aug 2021 at 08:26:21',
   scores: {
     RSR: { type: 'RSR', level: 'HIGH', score: 11.34 },
     OSPC: { type: 'OSP/C', level: 'MEDIUM', score: 8.76 },
