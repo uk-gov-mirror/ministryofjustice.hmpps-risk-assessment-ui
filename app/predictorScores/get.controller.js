@@ -49,10 +49,8 @@ const displayPredictorScores = async (req, res) => {
     if (!assessment.predictors) {
       return res.render('app/error', { error: new Error('Failed to get predictor scores') })
     }
-
-    logger.info(
-      `Received ${assessment.predictors.length} predictor scores ${assessment.predictors} for episode: ${episodeId}`,
-    )
+    logger.info(`Received ${assessment.predictors.length} predictor scores for episode: ${episodeId}`)
+    console.log(JSON.stringify(assessment.predictors, null, 2))
 
     const { previousPage } = req.session.navigation
     const offenderName = res.locals.offenderDetails?.name || 'Offender'
