@@ -13,16 +13,17 @@ const formatDate = dateString => {
 const removeSpecialCharactersFrom = string => string.replace(/[^a-zA-Z]/g, '')
 
 const splitPredictorScores = predictorScores => {
-  const formattedScores = Object.entries(predictorScores.scores).reduce((previous, [type, { level, score, date }]) => {
-    const updated = { ...previous, date: formatDate(date) }
-    const key = removeSpecialCharactersFrom(type)
+  const formattedScores = predictorScores.reduce((acc, scores) => {
+    return Object.entries(scores.scores).reduce((acc1, [type, { level, score, date }]) => {
+      const updated = { ...acc1, date: formatDate(date) }
+      const key = removeSpecialCharactersFrom(type)
+      updated.scores = {
+        ...(updated.scores || {}),
+        [key]: { level, score, type },
+      } // 🤔
 
-    updated.scores = {
-      ...(updated.scores || {}),
-      [key]: { level, score, type },
-    } // 🤔
-
-    return updated
+      return updated
+    }, {})
   }, {})
 
   return {
