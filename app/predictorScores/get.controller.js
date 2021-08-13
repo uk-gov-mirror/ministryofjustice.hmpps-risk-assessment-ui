@@ -3,6 +3,7 @@ const { postCompleteAssessment } = require('../../common/data/hmppsAssessmentApi
 const logger = require('../../common/logging/logger')
 
 const formatDate = dateString => {
+  logger.info(`Formating date and time - ${dateString}`)
   const date = parseISO(dateString)
   const datePart = format(date, 'd MMM y')
   const timePart = format(date, 'HH:mm:ss')
@@ -49,7 +50,9 @@ const displayPredictorScores = async (req, res) => {
       return res.render('app/error', { error: new Error('Failed to get predictor scores') })
     }
 
-    logger.info(`Received ${assessment.predictors.length} predictor scores for episode: ${episodeId}`)
+    logger.info(
+      `Received ${assessment.predictors.length} predictor scores ${assessment.predictors} for episode: ${episodeId}`,
+    )
 
     const { previousPage } = req.session.navigation
     const offenderName = res.locals.offenderDetails?.name || 'Offender'
