@@ -13,7 +13,7 @@ const needsPage = () => ({
 export default {
   verifyOnPage: predictorsPage,
   visit: () => {
-    cy.visit(`/fb6b7c33-07fc-4c4c-a009-8d60f66952c4/questiongroup/RSR/0/1`)
+    cy.visit(`/fb6b7c33-07fc-4c4c-a009-8d60f66952c4/questiongroup/RSR/0/2`)
     needsPage()
       .questions()
       .contains('Have you completed an interview with the individual?')

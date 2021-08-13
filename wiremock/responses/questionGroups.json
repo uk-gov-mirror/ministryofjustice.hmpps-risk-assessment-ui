@@ -7547,9 +7547,9 @@
         "contents": [
           {
             "type": "group",
-            "groupId": "eb7b7324-f2a6-4902-91ef-709a8fab1f82",
-            "groupCode": "offences_and_convictions",
-            "title": "Offences and convictions",
+            "groupId": "5606da47-8f27-49a0-a943-0f2696f66186",
+            "groupCode": "risk_of_serious_recidivism_rsr_assessment_landing",
+            "title": "Risk of Serious Recidivism (RSR) assessment",
             "displayOrder": 1,
             "mandatory": true,
             "contents": [
@@ -7565,7 +7565,17 @@
                 "conditional": false,
                 "referenceDataTargets": [],
                 "answerSchemas": []
-              },
+              }
+            ]
+          },
+          {
+            "type": "group",
+            "groupId": "eb7b7324-f2a6-4902-91ef-709a8fab1f82",
+            "groupCode": "offences_and_convictions",
+            "title": "Offences and convictions",
+            "displayOrder": 2,
+            "mandatory": true,
+            "contents": [
               {
                 "type": "question",
                 "questionId": "63099aab-f852-4dd9-9179-16ee2218d0c6",
@@ -7828,7 +7838,7 @@
             "groupId": "6d3a4377-2177-429e-a7fa-6aa2444d14dd",
             "groupCode": "rsr_needs",
             "title": "Needs",
-            "displayOrder": 2,
+            "displayOrder": 3,
             "mandatory": true,
             "contents": [
               {
@@ -7903,7 +7913,15 @@
                         "displayInline": false
                       },
                       {
+                        "conditional": "ccc2ecba-c441-477a-9f79-d44f0cab1567",
+                        "displayInline": false
+                      },
+                      {
                         "conditional": "47a94bc5-e71e-4327-9942-ad37d5163dee",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "35e3e63b-6598-4db3-b5a3-1f902f33f22c",
                         "displayInline": false
                       },
                       {
@@ -7947,11 +7965,19 @@
                         "displayInline": false
                       },
                       {
+                        "conditional": "97621b0d-5a64-42dd-9c8b-1484979e9145",
+                        "displayInline": false
+                      },
+                      {
                         "conditional": "9692659a-778a-436a-bf4e-fe1924638e37",
                         "displayInline": false
                       },
                       {
                         "conditional": "66c3bdd2-6f47-4f13-aa7b-39d497d90a89",
+                        "displayInline": false
+                      },
+                      {
+                        "conditional": "ba327713-e580-418d-b45b-09a8a3d1166a",
                         "displayInline": false
                       },
                       {
@@ -7970,44 +7996,11 @@
               },
               {
                 "type": "question",
-                "questionId": "bd629547-eab9-46d5-910d-2416b431950f",
-                "questionCode": "69.1",
-                "answerType": "radio",
-                "questionText": "Did the offence involve carrying or use of a weapon?",
-                "displayOrder": 2,
-                "mandatory": true,
-                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (carrying or using weapon)\"}}",
-                "readOnly": false,
-                "conditional": true,
-                "referenceDataTargets": [],
-                "answerSchemas": [
-                  {
-                    "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-                    "answerSchemaCode": "yes",
-                    "value": "YES",
-                    "text": "Yes",
-                    "conditionals": [
-                      {
-                        "conditional": "7f076a91-2702-438f-81ba-c15ebfab1b02",
-                        "displayInline": true
-                      }
-                    ]
-                  },
-                  {
-                    "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-                    "answerSchemaCode": "no",
-                    "value": "NO",
-                    "text": "No"
-                  }
-                ]
-              },
-              {
-                "type": "question",
                 "questionId": "7f076a91-2702-438f-81ba-c15ebfab1b02",
                 "questionCode": "70.1",
                 "answerType": "freetext",
                 "questionText": "Specify which weapon",
-                "displayOrder": 3,
+                "displayOrder": 2,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Specify a weapon\",\"errorSummary\":\"Specify a weapon\"}}",
                 "readOnly": false,
@@ -8021,7 +8014,7 @@
                 "questionCode": "75.1",
                 "answerType": "radio",
                 "questionText": "Is the individual living in suitable accommodation?",
-                "displayOrder": 4,
+                "displayOrder": 3,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (suitability of accommodation)\"}}",
                 "readOnly": false,
@@ -8054,7 +8047,7 @@
                 "questionCode": "80.1",
                 "answerType": "radio",
                 "questionText": "Is the person unemployed or will be unemployed upon release?",
-                "displayOrder": 5,
+                "displayOrder": 4,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (unemployed now or on release)\"}}",
                 "readOnly": false,
@@ -8087,7 +8080,7 @@
                 "questionCode": "86.1",
                 "answerType": "radio",
                 "questionText": "What is the person's current relationship with their partner?",
-                "displayOrder": 6,
+                "displayOrder": 5,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (current relationship with partner)\"}}",
                 "readOnly": false,
@@ -8120,7 +8113,7 @@
                 "questionCode": "87.1",
                 "answerType": "radio",
                 "questionText": "Is there evidence that the individual is a perpetrator of domestic abuse?",
-                "displayOrder": 7,
+                "displayOrder": 6,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (perpetrator of domestic  abuse?)\"}}",
                 "readOnly": false,
@@ -8157,7 +8150,7 @@
                 "questionCode": "88.1",
                 "answerType": "checkbox",
                 "questionText": "Victim",
-                "displayOrder": 8,
+                "displayOrder": 7,
                 "mandatory": false,
                 "readOnly": false,
                 "conditional": true,
@@ -8177,7 +8170,7 @@
                 "questionCode": "88.2",
                 "answerType": "checkbox",
                 "questionText": "Perpetrator",
-                "displayOrder": 9,
+                "displayOrder": 8,
                 "mandatory": false,
                 "readOnly": false,
                 "conditional": true,
@@ -8197,7 +8190,7 @@
                 "questionCode": "90.1",
                 "answerType": "radio",
                 "questionText": "Is the person's current use of alcohol a problem?",
-                "displayOrder": 10,
+                "displayOrder": 9,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (current use of alcohol)\"}}",
                 "readOnly": false,
@@ -8230,7 +8223,7 @@
                 "questionCode": "92.1",
                 "answerType": "radio",
                 "questionText": "Is there evidence of binge drinking or excessive use of alcohol in the last 6 months?",
-                "displayOrder": 11,
+                "displayOrder": 10,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (evidence of binge drinking or excessive alcohol use)\"}}",
                 "readOnly": false,
@@ -8263,7 +8256,7 @@
                 "questionCode": "113.1",
                 "answerType": "radio",
                 "questionText": "Is impulsivity a problem for the individual?",
-                "displayOrder": 12,
+                "displayOrder": 11,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (impulsivity)\"}}",
                 "readOnly": false,
@@ -8296,7 +8289,7 @@
                 "questionCode": "115.1",
                 "answerType": "radio",
                 "questionText": "Is temper control a problem for the individual?",
-                "displayOrder": 13,
+                "displayOrder": 12,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (temper control)\"}}",
                 "readOnly": false,
@@ -8326,8 +8319,34 @@
               {
                 "type": "question",
                 "questionId": "551df80b-5368-4551-8fda-85b1c7a5f01f",
-                "questionCode": "ui_rsr_needs_1",
+                "questionCode": "ui_rsr_needs_4",
                 "answerType": "presentation: divider",
+                "displayOrder": 13,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "ccc2ecba-c441-477a-9f79-d44f0cab1567",
+                "questionCode": "ui_rsr_needs_2",
+                "answerType": "presentation: heading_large",
+                "questionText": "Current offences",
+                "displayOrder": 14,
+                "mandatory": true,
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": []
+              },
+              {
+                "type": "question",
+                "questionId": "35e3e63b-6598-4db3-b5a3-1f902f33f22c",
+                "questionCode": "ui_rsr_needs_3",
+                "answerType": "presentation: body",
+                "questionText": "Has the individual been convicted of any of these offences?",
                 "displayOrder": 15,
                 "mandatory": true,
                 "readOnly": false,
@@ -8337,11 +8356,65 @@
               },
               {
                 "type": "question",
+                "questionId": "97621b0d-5a64-42dd-9c8b-1484979e9145",
+                "questionCode": "139.0",
+                "answerType": "radio",
+                "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
+                "displayOrder": 16,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
+                  },
+                  {
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
+                "questionId": "ba327713-e580-418d-b45b-09a8a3d1166a",
+                "questionCode": "142.0",
+                "answerType": "radio",
+                "questionText": "Any other offence involving possession and/or use of weapons",
+                "displayOrder": 17,
+                "mandatory": true,
+                "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
+                "readOnly": false,
+                "conditional": true,
+                "referenceDataTargets": [],
+                "answerSchemas": [
+                  {
+                    "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+                    "answerSchemaCode": "yes",
+                    "value": "YES",
+                    "text": "Yes"
+                  },
+                  {
+                    "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+                    "answerSchemaCode": "no",
+                    "value": "NO",
+                    "text": "No"
+                  }
+                ]
+              },
+              {
+                "type": "question",
                 "questionId": "86da001c-a703-4ef2-9c0d-e5c90336055c",
-                "questionCode": "ui_rsr_needs_2",
+                "questionCode": "ui_rsr_needs_5",
                 "answerType": "presentation: heading_large",
                 "questionText": "Previous offences",
-                "displayOrder": 16,
+                "displayOrder": 18,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": true,
@@ -8351,10 +8424,10 @@
               {
                 "type": "question",
                 "questionId": "47a94bc5-e71e-4327-9942-ad37d5163dee",
-                "questionCode": "ui_rsr_needs_3",
+                "questionCode": "ui_rsr_needs_6",
                 "answerType": "presentation: body",
                 "questionText": "Has the individual previously been convicted of any of these offences?",
-                "displayOrder": 17,
+                "displayOrder": 19,
                 "mandatory": true,
                 "readOnly": false,
                 "conditional": true,
@@ -8367,7 +8440,7 @@
                 "questionCode": "130.1",
                 "answerType": "radio",
                 "questionText": "Murder/attempted murder/threat or conspiracy to murder/manslaughter",
-                "displayOrder": 18,
+                "displayOrder": 20,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8394,7 +8467,7 @@
                 "questionCode": "131.1",
                 "answerType": "radio",
                 "questionText": "Wounding/GBH (Sections 18/20 Offences Against the Person Act 1861)",
-                "displayOrder": 19,
+                "displayOrder": 21,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8421,7 +8494,7 @@
                 "questionCode": "135.1",
                 "answerType": "radio",
                 "questionText": "Aggravated burglary",
-                "displayOrder": 20,
+                "displayOrder": 22,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8448,7 +8521,7 @@
                 "questionCode": "136.1",
                 "answerType": "radio",
                 "questionText": "Arson",
-                "displayOrder": 21,
+                "displayOrder": 23,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8475,7 +8548,7 @@
                 "questionCode": "137.1",
                 "answerType": "radio",
                 "questionText": "Criminal damage with intent to endanger life",
-                "displayOrder": 22,
+                "displayOrder": 24,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8502,7 +8575,7 @@
                 "questionCode": "138.1",
                 "answerType": "radio",
                 "questionText": "Kidnapping/false imprisonment",
-                "displayOrder": 23,
+                "displayOrder": 25,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8529,7 +8602,7 @@
                 "questionCode": "139.1",
                 "answerType": "radio",
                 "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
-                "displayOrder": 24,
+                "displayOrder": 26,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8556,7 +8629,7 @@
                 "questionCode": "141.1",
                 "answerType": "radio",
                 "questionText": "Robbery",
-                "displayOrder": 25,
+                "displayOrder": 27,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,
@@ -8583,7 +8656,7 @@
                 "questionCode": "142.1",
                 "answerType": "radio",
                 "questionText": "Any other offence involving possession and/or use of weapons",
-                "displayOrder": 26,
+                "displayOrder": 28,
                 "mandatory": true,
                 "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\"}}",
                 "readOnly": false,

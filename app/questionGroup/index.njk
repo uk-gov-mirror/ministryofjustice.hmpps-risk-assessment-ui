@@ -29,28 +29,67 @@
 {% block content %}
     {# include errorSummary partial #}
     {{ super() }}
-
-    <span class="govuk-caption-xl">{{ navigation.parent }}</span>
-    <h1 class="govuk-heading-xl">
-        {{ heading }}
-    </h1>
-
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-            <p class="govuk-body-l">{{ renderHelpLink(groupUuid) }}</p>
-        </div>
-    </div>
 
-    <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
+        {% if groupId == 'RSR' and page == 0 %}
+            <h1 class="govuk-heading-xl">
+                Risk of Serious Recidivism (RSR) assessment
+            </h1>
+            <h2 class="govuk-heading-l">
+                Calculate the RSR score for {{ offenderDetails.name }}
+            </h2>
+
+            <p class="govuk-hint">Your answers and the RSR score will be automatically added to OASys and nDelius.</p>
+
+            <div class="rsr-offence__details">
+                <table class="govuk-table no-bottom-margin">
+                    <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Offence</th>
+                        <td class="govuk-table__cell no-bottom-border">{{ offenderDetails.offence }}</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Subcode</th>
+                        <td class="govuk-table__cell no-bottom-border">{{ offenderDetails.subcode }}</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Sentence Date</th>
+                        <td class="govuk-table__cell no-bottom-border">{{ offenderDetails.sentence_date }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+
+            <span class="govuk-caption-xl">{{ navigation.parent }}</span>
+            <h1 class="govuk-heading-xl">
+                {{ heading }}
+            </h1>
+
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                    <p class="govuk-body-l">{{ renderHelpLink(groupUuid) }}</p>
+                </div>
+            </div>
 
             <form method="post" id="{{ groupId }}" novalidate>
 
                 {% for question in questions %}
                     {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId], '', requested_url) }}
                 {% endfor %}
-
+            {% endif %}
     {% if groupId == 'RSR' and page == 0 %}
+        <div class="questiongroup-action-buttons">
+            {{ govukButton({
+                text: "Start now",
+                href: "1",
+                classes: "govuk-!-margin-top-2 govuk-!-margin-bottom-8",
+                isStartButton: true
+            }) }}
+        </div>
+    {% elseif  groupId == 'RSR' and page == 1 %}
         <div class="questiongroup-action-buttons">
             {{ govukButton({
                 text: 'Continue',

@@ -40,7 +40,7 @@ const localValidationRules = async (req, res, next) => {
   } = res
   const validations = []
 
-  if (assessmentType === 'RSR' && parseInt(page, 10) === 0) {
+  if (assessmentType === 'RSR' && parseInt(page, 10) === 1) {
     /// ///////////////////////////////////////////////////
     // Date of first sanction:
     validations.push(
