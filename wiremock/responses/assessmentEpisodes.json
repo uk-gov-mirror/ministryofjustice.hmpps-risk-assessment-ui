@@ -64,8 +64,26 @@
     "f822b029-5907-4789-93e0-e52aac2acfac": [""]
   },
   "predictors": {
-    "RSR": { "level": "HIGH", "score": 11.34, "isValid": true, "date": "2021-07-23T12:00" },
-    "OSP/C": { "level": "MEDIUM", "score": 8.76, "isValid": true, "date": "2021-07-23T12:00" },
-    "OSP/I": { "level": "LOW", "score": 3.45, "isValid": true, "date": "2021-07-23T12:00" }
+    "type": "RSR",
+    "scores": {
+      "RSR": {
+        "level": "HIGH",
+        "score": 11.34,
+        "isValid": true,
+        "date": "2021-07-23T12:00"
+      },
+      "OSP/C": {
+        "level": "MEDIUM",
+        "score": 8.76,
+        "isValid": true,
+        "date": "2021-07-23T12:00"
+      },
+      "OSP/I": {
+        "level": "LOW",
+        "score": 3.45,
+        "isValid": true,
+        "date": "2021-07-23T12:00"
+      }
+    }
   }
 }
