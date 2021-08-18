@@ -29,6 +29,11 @@
         {% set barTypeClass = 'score-bar--small score-bar--small-fourths' %}
 {% endswitch %}
 
+{% if predictorScore.level === 'NOT_AVAILABLE' %}
+<div class="predictor-score govuk-body">
+    <p class="govuk-body">No relevent sexual offences</p>
+</div>
+{% else %}
 <div class="predictor-score govuk-body">
     <div class="score-label">
         <div class="{{ scoreLabelClass }}">
@@ -52,3 +57,4 @@
         {% endif %}
     </div>
 </div>
+{% endif %}
