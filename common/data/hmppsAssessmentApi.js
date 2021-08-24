@@ -69,12 +69,12 @@ const updateTableRow = (assessmentId, episodeId, tableName, tableRow, answers, a
   return postData(path, authorisationToken, userId, answers)
 }
 
-const getFilteredReferenceData = (assessmentId, episodeId, questionUuid, parentList, authorisationToken, userId) => {
+const getFilteredReferenceData = (assessmentId, episodeId, questionCode, parentList, authorisationToken, userId) => {
   const path = `${url}/referencedata/filtered`
   const requestBody = {
     assessmentUuid: assessmentId,
     episodeUuid: episodeId,
-    fieldName: questionUuid,
+    fieldName: questionCode,
     parentList,
   }
   return postData(path, authorisationToken, userId, requestBody)

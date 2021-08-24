@@ -39,7 +39,7 @@
             <form method="post" id="{{ groupId }}" novalidate>
 
                 {% for question in questions %}
-                    {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId], '', thisUrl) }}
+                    {{ renderQuestion(question, errors, bodyAnswers[question.questionCode], '', thisUrl) }}
                 {% endfor %}
 
                 <div class="questiongroup-action-buttons">

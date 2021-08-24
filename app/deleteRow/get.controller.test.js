@@ -44,19 +44,15 @@ describe('display delete table row page', () => {
   }
   const answers = {
     answers: {
-      '946091d2-4038-4e2b-9283-83cc4883cc1': ['Kerrie Manning', 'Kaydan Zhang', 'Kane Webster'],
-      '946091d2-4038-4e2b-9283-83cc4883cc2': ['12', '8', '11'],
-      '946091d2-4038-4e2b-9283-83cc4883cc3': [
+      '129.1': ['Kerrie Manning', 'Kaydan Zhang', 'Kane Webster'],
+      '129.2': ['12', '8', '11'],
+      '129.3': [
         '22 Constable Drive\nKT3 4RT',
         '100 Drive Street\nFlat 10\nLondon\nW12 8QT',
         '47 Exeter Avenue\nHuntstable\nCB4 2YH',
       ],
-      '946091d2-4038-4e2b-9283-83cc4883cc4': [
-        '1987-01-12T00:00:00.000Z',
-        '2018-09-01T00:00:00.000Z',
-        '2016-03-14T00:00:00.000Z',
-      ],
-      '946091d2-4038-4e2b-9283-83cc4883cc5': [['physical'], ['physical', 'mental'], ['emotional']],
+      '129.4': ['1987-01-12T00:00:00.000Z', '2018-09-01T00:00:00.000Z', '2016-03-14T00:00:00.000Z'],
+      '129.5': [['physical'], ['physical', 'mental'], ['emotional']],
     },
   }
 

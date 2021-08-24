@@ -7,13 +7,13 @@ const fetchFilteredReferenceData = async (req, res) => {
       body,
       user,
     } = req
-    const { questionUuid, targetValues } = body
+    const { questionCode, targetValues } = body
 
     // eslint-disable-next-line no-unused-vars
     const [_, response] = await getFilteredReferenceData(
       assessmentId,
       episodeId,
-      questionUuid,
+      questionCode,
       targetValues,
       user?.token,
       user?.id,

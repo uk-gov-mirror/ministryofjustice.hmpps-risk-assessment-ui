@@ -56,25 +56,25 @@ context('Basic questions display', () => {
   it('Show out of line conditional question', () => {
     const questionsPage = QuestionsPage1.goTo()
 
-    cy.get('#conditional-id-form-conditional-question-id-9911111').should('not.be.visible')
+    cy.get('#conditional-id-form-accommodation_type').should('not.be.visible')
 
     // show it
-    cy.get('#id-99111111-1111-1111-1111-111111111231[type="radio"]')
+    cy.get('#test_conditional_out_of_line[type="radio"]')
       .first()
       .check()
 
-    cy.get('#conditional-id-form-conditional-question-id-9911111').should('be.visible')
+    cy.get('#conditional-id-form-accommodation_type').should('be.visible')
 
     cy.checkA11y()
 
     // hide it
     questionsPage
       .questions()
-      .get('#id-99111111-1111-1111-1111-111111111231-2[type="radio"]')
+      .get('#test_conditional_out_of_line-2[type="radio"]')
       .first()
       .check()
 
-    cy.get('#conditional-id-form-conditional-question-id-9911111').should('not.be.visible')
+    cy.get('#conditional-id-form-accommodation_type').should('not.be.visible')
   })
 
   it('Post and see error summary and question error', () => {
@@ -148,19 +148,19 @@ context('Basic questions display', () => {
     const questionsPage = QuestionsPage1.goTo()
 
     // check to see conditional questions
-    cy.get('#id-4077c218-3a16-4b92-9f98-bdd33cee476b').check()
+    cy.get('#drug_misuse_behaviour').check()
 
     // check conditional questions are showing
-    cy.get('#id-ef018645-b846-4022-b290-1e7d3d380b4d').should('be.visible')
-    cy.get('#conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64').should('be.visible')
-    cy.get('#conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
+    cy.get('#drug_misuse_details').should('be.visible')
+    cy.get('#drug_misuse_details').should('be.visible')
+    cy.get('#drug_misuse_details').should('be.visible')
 
     questionsPage.save().click()
     // cy.get('#id-4077c218-3a16-4b92-9f98-bdd33cee476b').should('be.checked')
 
     // check they auto show after save and redisplay of page
     // cy.get('#id-ef018645-b846-4022-b290-1e7d3d380b4d').should('be.visible')
-    // cy.get('#conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64').should('be.visible')
-    // cy.get('#conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
+    // cy.get('#conditional-id-form-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64').should('be.visible')
+    // cy.get('#conditional-id-form-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab').should('be.visible')
   })
 })

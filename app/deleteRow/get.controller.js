@@ -20,7 +20,7 @@ const displayDeleteRow = async (
     let thisTableIdentifier
     if (thisTable) {
       thisTableIdentifier = thisTable.contents?.find(element => element.answerType.indexOf('presentation') === -1)
-        .questionId
+        .questionCode
     } else {
       throw new Error('No table with that name found in question group')
     }

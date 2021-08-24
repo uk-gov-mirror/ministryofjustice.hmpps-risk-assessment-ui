@@ -48,6 +48,7 @@
       "tableCode": "children",
       "title": "Children",
       "displayOrder": 2,
+      "formClasses": "govuk-input--pack-together",
       "contents": [
         {
           "type": "question",
@@ -140,8 +141,7 @@
             }
           ]
         }
-      ],
-      "formClasses": "govuk-input--pack-together"
+      ]
     },
     {
       "type": "question",
@@ -182,12 +182,12 @@
           "text": "Yes",
           "conditionals": [
             {
-              "conditional": "conditional-question-id-1111111",
+              "conditional": "further_information",
               "displayInline": true
             }
           ],
           "conditional": {
-            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label Further information govuk-label--m\" for=\"id-conditional-question-id-1111111\">Further information</label><div id=\"id-conditional-question-id-1111111-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"id-conditional-question-id-1111111\" name=\"id-conditional-question-id-1111111\" rows=\"5\" aria-describedby=\"id-conditional-question-id-1111111-info id-conditional-question-id-1111111-hint\"></textarea>\n</div><div id=\"id-conditional-question-id-1111111-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
+            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label further_information govuk-label--m\" for=\"further_information\">Further information</label><div id=\"further_information-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"further_information\" name=\"further_information\" rows=\"5\" aria-describedby=\"further_information-info further_information-hint\"></textarea>\n</div><div id=\"further_information-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
           }
         },
         {
@@ -201,7 +201,7 @@
     {
       "type": "question",
       "questionId": "99111111-1111-1111-1111-111111111231",
-      "questionCode": "no_fixed_abode",
+      "questionCode": "test_conditional_out_of_line",
       "answerType": "radio",
       "questionText": "Test question for displaying conditional out of line...",
       "displayOrder": "1",
@@ -214,13 +214,13 @@
           "text": "Yes",
           "conditionals": [
             {
-              "conditional": "conditional-question-id-9911111",
+              "conditional": "accommodation_type",
               "displayInline": false
             }
           ],
           "attributes": [
-            ["data-conditional", "conditional-question-id-9911111"],
-            ["data-aria-controls", "conditional-id-form-conditional-question-id-9911111"],
+            ["data-conditional", "accommodation_type"],
+            ["data-aria-controls", "conditional-id-form-accommodation_type"],
             ["aria-expanded", "false"]
           ]
         },
@@ -237,7 +237,7 @@
     {
       "type": "question",
       "questionId": "conditional-question-id-9911111",
-      "questionCode": "78.1",
+      "questionCode": "accommodation_type",
       "answerType": "radio",
       "questionText": "Accommodation type",
       "displayOrder": 4,
@@ -268,7 +268,7 @@
       "isConditional": true,
       "attributes": [
         ["data-outofline", "true"],
-        ["data-base-id", "conditional-question-id-9911111"]
+        ["data-base-question-code", "accommodation_type"]
       ]
     },
     {
@@ -328,7 +328,7 @@
     {
       "type": "question",
       "questionId": "4077c218-3a16-4b92-9f98-bdd33cee476b",
-      "questionCode": "96.1",
+      "questionCode": "drug_misuse_behaviour",
       "answerType": "radio",
       "questionText": "Is drug misuse linked to offending behaviour?",
       "displayOrder": 23,
@@ -342,26 +342,26 @@
           "text": "Yes",
           "conditionals": [
             {
-              "conditional": "ef018645-b846-4022-b290-1e7d3d380b4d",
+              "conditional": "drug_misuse_details",
               "displayInline": true
             },
             {
-              "conditional": "0419944f-ad54-4035-bef0-dca3bda4ff64",
+              "conditional": "drug_misuse_frequency",
               "displayInline": false
             },
             {
-              "conditional": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
+              "conditional": "drug_misuse_motivation",
               "displayInline": false
             }
           ],
           "conditional": {
-            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label 97.1 govuk-label--m\" for=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\">Give details</label><div id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" name=\"id-ef018645-b846-4022-b290-1e7d3d380b4d\" rows=\"5\" aria-describedby=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-info id-ef018645-b846-4022-b290-1e7d3d380b4d-hint\"></textarea>\n</div><div id=\"id-ef018645-b846-4022-b290-1e7d3d380b4d-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
+            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label drug_misuse_details govuk-label--m\" for=\"drug_misuse_details\">Give details</label><div id=\"drug_misuse_details-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"drug_misuse_details\" name=\"drug_misuse_details\" rows=\"5\" aria-describedby=\"drug_misuse_details-info drug_misuse_details-hint\"></textarea>\n</div><div id=\"drug_misuse_details-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
           },
           "attributes": [
-            ["data-conditional", "0419944f-ad54-4035-bef0-dca3bda4ff64 db85cfb1-bf5e-4852-bfe8-137f44570cab"],
+            ["data-conditional", "drug_misuse_frequency drug_misuse_motivation"],
             [
               "data-aria-controls",
-              "conditional-id-form-0419944f-ad54-4035-bef0-dca3bda4ff64 conditional-id-form-db85cfb1-bf5e-4852-bfe8-137f44570cab"
+              "conditional-id-form-drug_misuse_frequency conditional-id-form-drug_misuse_motivation"
             ],
             ["aria-expanded", "false"]
           ]
@@ -379,7 +379,7 @@
     {
       "type": "question",
       "questionId": "0419944f-ad54-4035-bef0-dca3bda4ff64",
-      "questionCode": "98.1",
+      "questionCode": "drug_misuse_frequency",
       "answerType": "radio",
       "questionText": "Is there current or recent drug misuse on a daily or weekly basis?",
       "displayOrder": 25,
@@ -393,12 +393,12 @@
           "text": "Yes",
           "conditionals": [
             {
-              "conditional": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec",
+              "conditional": "give_details",
               "displayInline": true
             }
           ],
           "conditional": {
-            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label 99.1 govuk-label--m\" for=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\">Give details</label><div id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" name=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec\" rows=\"5\" aria-describedby=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-info id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-hint\"></textarea>\n</div><div id=\"id-36b63eb5-eb30-4f91-9b7f-91b0b70771ec-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
+            "html": " <div class=\"govuk-character-count\" data-module=\"govuk-character-count\" data-maxlength=\"4000\"><div class=\"govuk-form-group\"><label class=\"govuk-label give_details govuk-label--m\" for=\"give_details\">Give details</label><div id=\"give_details-hint\" class=\"govuk-hint\"></div><textarea class=\"govuk-textarea govuk-js-character-count\" id=\"give_details\" name=\"give_details\" rows=\"5\" aria-describedby=\"give_details-info give_details-hint\"></textarea>\n</div><div id=\"give_details-info\" class=\"govuk-hint govuk-character-count__message\" aria-live=\"polite\">You can enter up to 4000 characters\n</div></div>"
           }
         },
         {
@@ -412,13 +412,13 @@
       "isConditional": true,
       "attributes": [
         ["data-outofline", "true"],
-        ["data-base-id", "0419944f-ad54-4035-bef0-dca3bda4ff64"]
+        ["data-base-question-code", "drug_misuse_frequency"]
       ]
     },
     {
       "type": "question",
       "questionId": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
-      "questionCode": "100.1",
+      "questionCode": "drug_misuse_motivation",
       "answerType": "freetext",
       "questionText": "Is the individual motivated to tackle drugs misuse?",
       "displayOrder": 27,
@@ -430,7 +430,7 @@
       "isConditional": true,
       "attributes": [
         ["data-outofline", "true"],
-        ["data-base-id", "db85cfb1-bf5e-4852-bfe8-137f44570cab"]
+        ["data-base-question-code", "drug_misuse_motivation"]
       ]
     },
     {
@@ -536,5 +536,6 @@
   ],
   "errors": {},
   "errorSummary": null,
-  "groupUuid": "22222222-2222-2222-2222-222222222205"
+  "groupUuid": "22222222-2222-2222-2222-222222222205",
+  "page": 0
 }

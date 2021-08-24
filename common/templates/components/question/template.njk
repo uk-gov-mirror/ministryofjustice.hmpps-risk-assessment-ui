@@ -49,7 +49,7 @@
 
 {# templates for each question type #}
 {% set questionAnswer = bodyAnswer or question.answer or '' %}
-{% set errorMessage = thisErrorMessage or errors['id-' + question.questionId] %}
+{% set errorMessage = thisErrorMessage or errors[question.questionCode] %}
 
 {% if question.type == 'group' %}
   <h2 class="govuk-heading-m">
@@ -58,7 +58,7 @@
 
 
   {% for question in question.contents %}
-      {{ renderQuestion(question, errors, bodyAnswers['id-' + question.questionId]) }}
+      {{ renderQuestion(question, errors, bodyAnswers[question.questionCode]) }}
   {% endfor %}
 {% endif %}
 
@@ -128,7 +128,7 @@
 {% if question.attributes.readonly == true and (question.questionCode).slice(0, 2) != 'ui'%}
   {% if question.questionText or question.questionAnswer %}
 
-  <!-- {{ question.questionId }} rendered as readonly -->
+  <!-- {{ question.questionCode }} rendered as readonly -->
   {{ govukSummaryList({
     classes: 'govuk-summary-list--no-border govuk-summary-list--no-bottom-margin',
     rows: [
@@ -165,15 +165,15 @@
 
   {% switch qType %}
     {% case 'presentation: heading' %}
-      <h2 id="conditional-id-form-{{ question.questionId }}" class="govuk-heading-m">{{ question.questionText }}</h2>
+      <h2 id="conditional-id-form-{{ question.questionCode }}" class="govuk-heading-m">{{ question.questionText }}</h2>
     {% case 'presentation: heading_large' %}
-      <h2 id="conditional-id-form-{{ question.questionId }}" class="govuk-heading-l">{{ question.questionText }}</h2>
+      <h2 id="conditional-id-form-{{ question.questionCode }}" class="govuk-heading-l">{{ question.questionText }}</h2>
     {% case 'presentation: divider' %}
-      <hr id="conditional-id-form-{{ question.questionId }}" class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      <hr id="conditional-id-form-{{ question.questionCode }}" class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     {% case 'presentation: body' %}
-      <p id="conditional-id-form-{{ question.questionId }}" class="govuk-text ">{{ question.questionText }}</p>
+      <p id="conditional-id-form-{{ question.questionCode }}" class="govuk-text ">{{ question.questionText }}</p>
     {% case 'presentation: link' %}
-      <div id="conditional-id-form-{{ question.questionId }}" class="body-link__container"><a href="{{ linkTarget }}" class="govuk-link body-link">{{ question.questionText }}</a></div>
+      <div id="conditional-id-form-{{ question.questionCode }}" class="body-link__container"><a href="{{ linkTarget }}" class="govuk-link body-link">{{ question.questionText }}</a></div>
     {% case 'presentation: buttonlink' %}
       {{ govukButton({
         text: question.questionText,
@@ -181,11 +181,11 @@
         href: linkTarget
       }) }}
     {% case 'presentation: inset' %}
-      <div id="conditional-id-form-{{ question.questionId }}" class="govuk-inset-text">{{ question.questionText }}</div>
+      <div id="conditional-id-form-{{ question.questionCode }}" class="govuk-inset-text">{{ question.questionText }}</div>
     {% case 'noinput' %}
       {{ govukInput({
-        id: 'id-' + question.questionId,
-        name: 'id-' + question.questionId,
+        id: question.questionCode,
+        name: question.questionCode,
         formGroup : {
           classes: formClass or question.formClasses
         },
@@ -203,8 +203,8 @@
       }) }}
     {% case 'freetext' %}
       {{ govukInput({
-        id: 'id-' + question.questionId,
-        name: 'id-' + question.questionId,
+        id: question.questionCode,
+        name: question.questionCode,
         value: questionAnswer | encodeHtml | safe,
         formGroup : {
           classes: formClass or question.formClasses
@@ -222,8 +222,8 @@
       }) }}
     {% case 'textarea' %}
     {{ govukCharacterCount({
-      name:'id-' + question.questionId,
-      id: 'id-' + question.questionId,
+      name:question.questionCode,
+      id: question.questionCode,
       maxlength: 4000,
       value: questionAnswer | encodeHtml | safe,
       label: {
@@ -243,8 +243,8 @@
 
   {% case 'radio' %}
       {{ govukRadios({
-        idPrefix: 'id-' + question.questionId,
-        name: 'id-' + question.questionId,
+        idPrefix: question.questionCode,
+        name: question.questionCode,
         formGroup : {
           classes: question.formClasses
         },
@@ -264,8 +264,8 @@
       }) }}
     {% case 'checkbox' %}
       {{ govukCheckboxes({
-        idPrefix: 'id-' + question.questionId,
-        name: 'id-' + question.questionId,
+        idPrefix: question.questionCode,
+        name: question.questionCode,
         formGroup : {
           classes: question.formClasses
         },
@@ -286,8 +286,8 @@
 
     {% case 'checkboxGroup' %}
       {{ govukCheckboxes({
-        idPrefix: 'id-' + question.questionId,
-        name: 'id-' + question.questionId,
+        idPrefix: question.questionCode,
+        name: question.questionCode,
         formGroup : {
           classes: question.formClasses
         },
@@ -308,8 +308,8 @@
 
     {% case 'dropdown' %}
       {{ govukSelect({
-        id: 'id-' + question.questionId,
-        name: 'id-' + question.questionId,
+        id: question.questionCode,
+        name: question.questionCode,
         formGroup : {
           classes: question.formClasses
         },
@@ -338,8 +338,8 @@
       {% endif %}
 
       {{ govukDateInput({
-        id: 'id-' + question.questionId,
-        namePrefix: 'id-' + question.questionId,
+        id: question.questionCode,
+        namePrefix: question.questionCode,
         fieldset: {
           legend: {
             text: question.questionText,
@@ -372,6 +372,6 @@
       }) }}
 
     {% default %}
-      <!-- {{ question.questionId }} - {{ question.answerType }} questions are not currently rendered -->
+      <!-- {{ question.questionCode }} - {{ question.answerType }} questions are not currently rendered -->
   {% endswitch %}
 {% endif %}

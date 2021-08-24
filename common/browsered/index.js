@@ -51,7 +51,7 @@ window.outOflineConditionalRadios = function() {
   // add id to outofline conditional questions
   var $outofline = document.querySelectorAll('[data-outofline]')
   nodeListForEach($outofline, function($outoflineConditional) {
-    var baseId = $outoflineConditional.getAttribute('data-base-id')
+    var baseId = $outoflineConditional.getAttribute('data-base-question-code')
     var questionFormGroup = $outoflineConditional.closest('.govuk-radios__conditional--no-indent')
     if (questionFormGroup) {
       questionFormGroup.setAttribute('id', 'conditional-id-form-' + baseId)

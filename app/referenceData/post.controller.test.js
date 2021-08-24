@@ -38,9 +38,9 @@ describe('fetch filtered reference data', () => {
     })
 
     req.body = {
-      questionUuid: 'bbbbbbbb-cccc-dddd-eeee-ffffffffffff',
+      questionCode: 'dependent_question_code',
       targetValues: {
-        'cccccccc-dddd-eeee-ffff-gggggggggggg': 'some-value',
+        target_question_code: 'some-value',
       },
     }
 
@@ -49,8 +49,8 @@ describe('fetch filtered reference data', () => {
     expect(getFilteredReferenceData).toHaveBeenCalledWith(
       'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
       'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
-      'bbbbbbbb-cccc-dddd-eeee-ffffffffffff',
-      { 'cccccccc-dddd-eeee-ffff-gggggggggggg': 'some-value' },
+      'dependent_question_code',
+      { target_question_code: 'some-value' },
       user.token,
       user.id,
     )
@@ -73,9 +73,9 @@ describe('fetch filtered reference data', () => {
     /* eslint-enable */
 
     req.body = {
-      questionUuid: 'bbbbbbbb-cccc-dddd-eeee-ffffffffffff',
+      questionCode: 'dependent_question_code',
       targetValues: {
-        'cccccccc-dddd-eeee-ffff-gggggggggggg': 'some-value',
+        target_question_code: 'some-value',
       },
     }
 

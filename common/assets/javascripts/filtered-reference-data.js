@@ -62,15 +62,15 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
 
       var radioInput = document.createElement('input')
       radioInput.type = 'radio'
-      radioInput.id = 'id-' + radioGroup.dataset.questionUuid + '-' + (1 + i)
+      radioInput.id = radioGroup.dataset.questionCode + '-' + (1 + i)
       radioInput.className = 'govuk-radios__input'
-      radioInput.name = 'id-' + radioGroup.dataset.questionUuid
+      radioInput.name = radioGroup.dataset.questionCode
       radioInput.value = option.value
 
       var label = document.createElement('label')
       label.className = 'govuk-label govuk-radios__label'
       label.innerHTML = option.text
-      label.setAttribute('for', 'id-' + radioGroup.dataset.questionUuid + '-' + (1 + i))
+      label.setAttribute('for', radioGroup.dataset.questionCode + '-' + (1 + i))
 
       radioItem.appendChild(radioInput)
       radioItem.appendChild(label)
@@ -99,7 +99,7 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
     return
   }
 
-  function fetchReferenceData(state, element, callback) {
+  function fetchReferenceData(state, element) {
     if (targetHasValues(state)) {
       var req = new XMLHttpRequest()
       req.open('POST', '/' + assessmentUuid + '/episode/' + episodeUuid + '/referencedata/filtered')
@@ -121,9 +121,9 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
   }
 
   function addListenerToTarget(targetElement, element, state) {
-    var questionUuid = targetElement.dataset.questionUuid
+    var questionCode = targetElement.dataset.questionCode
     targetElement.addEventListener('change', function(event) {
-      state.targetValues[questionUuid] = event.target.value
+      state.targetValues[questionCode] = event.target.value
 
       fetchReferenceData(state, element)
     })
@@ -131,36 +131,36 @@ function addFilteredReferenceDataListeners(assessmentUuid, episodeUuid) {
 
   for (var i = 0; i < dynamicElements.length; i++) {
     var element = dynamicElements[i]
-    var questionUuid = element.dataset.questionUuid
+    var questionCode = element.dataset.questionCode
     var targets = JSON.parse(element.dataset.referenceDataTargets)
 
-    state[questionUuid] = { questionUuid: questionUuid, targetValues: {}, requiredValues: {} }
+    state[questionCode] = { questionCode: questionCode, targetValues: {}, requiredValues: {} }
 
     for (var j = 0; j < targets.length; j++) {
       var target = targets[j]
 
-      if (target.uuid === questionUuid) {
+      if (target.questionCode === questionCode) {
         continue
       }
 
-      state[questionUuid].targetValues[target.uuid] = null
-      state[questionUuid].requiredValues[target.uuid] = target.isRequired
+      state[questionCode].targetValues[target.questionCode] = null
+      state[questionCode].requiredValues[target.questionCode] = target.isRequired
 
-      var targetElements = document.querySelectorAll('[data-question-uuid="' + target.uuid + '"]')
+      var targetElements = document.querySelectorAll('[data-question-code="' + target.questionCode + '"]')
 
       for (var k = 0; k < targetElements.length; k++) {
         var targetElement = targetElements[k]
-        var targetElementUuid = targetElement.dataset.questionUuid
+        var targetElementQuestionCode = targetElement.dataset.questionCode
 
         if (isRadio(targetElement)) {
           selectFirstRadio(targetElement)
         }
 
-        state[questionUuid].targetValues[targetElementUuid] = targetElement.value
-        addListenerToTarget(targetElement, element, state[questionUuid])
+        state[questionCode].targetValues[targetElementQuestionCode] = targetElement.value
+        addListenerToTarget(targetElement, element, state[questionCode])
       }
     }
 
-    fetchReferenceData(state[questionUuid], element)
+    fetchReferenceData(state[questionCode], element)
   }
 }

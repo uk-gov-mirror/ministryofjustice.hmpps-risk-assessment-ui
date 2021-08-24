@@ -361,11 +361,12 @@ describe('getQuestionGroup middleware', () => {
                   type: 'question',
                   answerType: 'radio',
                   questionId: 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee',
+                  questionCode: 'test_question',
                   questionText: 'Test Question',
                   referenceDataCategory: 'FILTERED_REFERENCE_DATA',
                   referenceDataTargets: [
                     {
-                      questionSchemaUuid: 'eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa',
+                      questionCode: 'test_question',
                       isRequired: false,
                     },
                   ],
@@ -385,7 +386,7 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',
         questionText: 'Test Question',
-        attributes: { 'data-question-uuid': 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee' },
+        attributes: { 'data-question-code': 'test_question' },
       })
     })
 
@@ -410,7 +411,7 @@ describe('getQuestionGroup middleware', () => {
         type: 'question',
         questionText: 'Test Question',
         attributes: {
-          'data-reference-data-targets': '[{"uuid":"eeeeeeee-dddd-cccc-bbbb-aaaaaaaaaaaa","isRequired":false}]',
+          'data-reference-data-targets': '[{"questionCode":"test_question","isRequired":false}]',
         },
       })
     })

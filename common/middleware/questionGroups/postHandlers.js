@@ -74,7 +74,7 @@ const questionGroupValidationRules = async (req, res, next) => {
       // check if this is a conditional question with a parent
       if (question.conditional) {
         let conditionalParentAnswer = ''
-        const conditionalQuestionToFind = question.questionId
+        const conditionalQuestionToFind = question.questionCode
         const parentQuestion = currentQuestions.filter(thisQuestion => {
           let foundParent = false
           thisQuestion.answerSchemas?.forEach(schema => {
@@ -90,12 +90,12 @@ const questionGroupValidationRules = async (req, res, next) => {
 
         if (parentQuestion[0]) {
           // if parent question answer submitted does not match the triggering answer, skip this validation
-          const answerId = `id-${parentQuestion[0].questionId}`
-          if (reqBody[answerId] !== conditionalParentAnswer) {
+          const answerKey = `${parentQuestion[0].questionCode}`
+          if (reqBody[answerKey] !== conditionalParentAnswer) {
             addThisValidation = false
           }
         } else {
-          logger.error(`No parent question found for conditional question ${question.questionId}`)
+          logger.error(`No parent question found for conditional question ${question.questionCode}`)
           addThisValidation = false
         }
       }
@@ -104,7 +104,7 @@ const questionGroupValidationRules = async (req, res, next) => {
         const validation = JSON.parse(question.validation)
         if (validation) {
           Object.entries(validation).forEach(([validationType, feedback]) => {
-            validatorsToSend.push(constructValidationRule(`id-${question.questionId}`, validationType, feedback))
+            validatorsToSend.push(constructValidationRule(`${question.questionCode}`, validationType, feedback))
           })
         }
       }
@@ -119,11 +119,11 @@ function formatValidationErrors(serverErrors, pageErrors) {
   const errorSummary = []
   if (serverErrors) {
     for (let i = 0; i < Object.entries(serverErrors).length; i += 1) {
-      const [id, msg] = Object.entries(serverErrors)[i]
-      errors[`id-${id}`] = { text: msg[0] }
+      const [questionCode, msg] = Object.entries(serverErrors)[i]
+      errors[`${questionCode}`] = { text: msg[0] }
       errorSummary.push({
         text: msg[msg.length === 2 ? 1 : 0],
-        href: `#id-${id}-error`,
+        href: `#${questionCode}-error`,
       })
     }
   }
@@ -144,8 +144,7 @@ function extractAnswers(req, res, next) {
   const currentQuestions = questionGroup.contents
 
   const shapedAnswers = Object.entries(reqBody).reduce((answers, [key, value]) => {
-    const trimmedKey = key.replace(/^id-/, '')
-    return Object.assign(answers, { [trimmedKey]: value })
+    return Object.assign(answers, { [key]: value })
   }, {})
 
   const answers = extractCheckboxGroupAnswers(currentQuestions, shapedAnswers)

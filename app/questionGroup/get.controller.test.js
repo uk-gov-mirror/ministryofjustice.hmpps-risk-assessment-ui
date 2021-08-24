@@ -30,6 +30,7 @@ describe('display question group and answers', () => {
       assessmentId: 'test-assessment-id',
       groupId: '22222222-2222-2222-2222-222222222204',
       subgroup: 0,
+      page: 0,
     },
   }
   const res = {
@@ -48,6 +49,7 @@ describe('display question group and answers', () => {
     expectedForThisTest = JSON.parse(JSON.stringify(expected))
     req.params.subgroup = 0
     getAnswers.mockReset()
+    res.render.mockReset()
   })
 
   it('should render the page with the correct structure', async () => {
@@ -66,8 +68,8 @@ describe('display question group and answers', () => {
     expectedWithAnswers.questions[1].answer = surnameAnswer
     getAnswers.mockReturnValueOnce({
       answers: {
-        '11111111-1111-1111-1111-111111111201': [surnameAnswer],
-        '11111111-1111-1111-1111-111111111202': [forenameAnswer],
+        surname: [surnameAnswer],
+        forename: [forenameAnswer],
       },
     })
     await displayQuestionGroup(req, res)
@@ -80,8 +82,8 @@ describe('display question group and answers', () => {
     expectedWithAnswers.questions[1].answer = ''
     getAnswers.mockReturnValueOnce({
       answers: {
-        '11111111-1111-1111-1111-111111111201': [],
-        '11111111-1111-1111-1111-111111111202': [],
+        surname: [],
+        forename: [],
       },
     })
 

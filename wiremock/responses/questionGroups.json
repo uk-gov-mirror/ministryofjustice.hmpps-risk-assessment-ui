@@ -291,7 +291,7 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "conditional-question-id-1111111",
+                        "conditional": "further_information",
                         "displayInline": true
                       }
                     ]
@@ -307,7 +307,7 @@
               {
                 "type": "question",
                 "questionId": "conditional-question-id-1111111",
-                "questionCode": "Further information",
+                "questionCode": "further_information",
                 "answerType": "textarea",
                 "questionText": "Further information",
                 "displayOrder": "1",
@@ -320,7 +320,7 @@
               {
                 "type": "question",
                 "questionId": "99111111-1111-1111-1111-111111111231",
-                "questionCode": "no_fixed_abode",
+                "questionCode": "test_conditional_out_of_line",
                 "answerType": "radio",
                 "questionText": "Test question for displaying conditional out of line...",
                 "displayOrder": "1",
@@ -333,7 +333,7 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "conditional-question-id-9911111",
+                        "conditional": "accommodation_type",
                         "displayInline": false
                       }
                     ]
@@ -349,7 +349,7 @@
               {
                 "type": "question",
                 "questionId": "conditional-question-id-9911111",
-                "questionCode": "78.1",
+                "questionCode": "accommodation_type",
                 "answerType": "radio",
                 "questionText": "Accommodation type",
                 "displayOrder": 4,
@@ -432,7 +432,7 @@
               {
                 "type": "question",
                 "questionId": "4077c218-3a16-4b92-9f98-bdd33cee476b",
-                "questionCode": "96.1",
+                "questionCode": "drug_misuse_behaviour",
                 "answerType": "radio",
                 "questionText": "Is drug misuse linked to offending behaviour?",
                 "displayOrder": 23,
@@ -446,15 +446,15 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "ef018645-b846-4022-b290-1e7d3d380b4d",
+                        "conditional": "drug_misuse_details",
                         "displayInline": true
                       },
                       {
-                        "conditional": "0419944f-ad54-4035-bef0-dca3bda4ff64",
+                        "conditional": "drug_misuse_frequency",
                         "displayInline": false
                       },
                       {
-                        "conditional": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
+                        "conditional": "drug_misuse_motivation",
                         "displayInline": false
                       }
                     ]
@@ -470,7 +470,7 @@
               {
                 "type": "question",
                 "questionId": "ef018645-b846-4022-b290-1e7d3d380b4d",
-                "questionCode": "97.1",
+                "questionCode": "drug_misuse_details",
                 "answerType": "textarea",
                 "questionText": "Give details",
                 "displayOrder": 24,
@@ -481,7 +481,7 @@
               {
                 "type": "question",
                 "questionId": "0419944f-ad54-4035-bef0-dca3bda4ff64",
-                "questionCode": "98.1",
+                "questionCode": "drug_misuse_frequency",
                 "answerType": "radio",
                 "questionText": "Is there current or recent drug misuse on a daily or weekly basis?",
                 "displayOrder": 25,
@@ -495,7 +495,7 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec",
+                        "conditional": "give_details",
                         "displayInline": true
                       }
                     ]
@@ -511,7 +511,7 @@
               {
                 "type": "question",
                 "questionId": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec",
-                "questionCode": "99.1",
+                "questionCode": "give_details",
                 "answerType": "textarea",
                 "questionText": "Give details",
                 "displayOrder": 26,
@@ -522,7 +522,7 @@
               {
                 "type": "question",
                 "questionId": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
-                "questionCode": "100.1",
+                "questionCode": "drug_misuse_motivation",
                 "answerType": "freetext",
                 "questionText": "Is the individual motivated to tackle drugs misuse?",
                 "displayOrder": 27,
@@ -720,7 +720,7 @@
                 "referenceDataCategory": "FILTERED_REFERENCE_DATA",
                 "referenceDataTargets": [
                   {
-                    "questionSchemaUuid": "11111111-1111-1111-1111-111111111202",
+                    "questionCode": "assessor_office",
                     "isRequired": true
                   }
                 ],
@@ -1928,7 +1928,7 @@
               {
                 "type": "question",
                 "questionId": "d9846a60-5ba6-450f-9934-2c9646771f9d",
-                "questionCode": "299.1",
+                "questionCode": "2give_details",
                 "answerType": "textarea",
                 "questionText": "Give details",
                 "displayOrder": 2,
@@ -2315,47 +2315,47 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "bd629547-eab9-46d5-910d-2416b431950f",
+                        "conditional": "offence_involve_use_of_weapon",
                         "displayInline": false
                       },
                       {
-                        "conditional": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
+                        "conditional": "living_in_suitable_accommodation",
                         "displayInline": false
                       },
                       {
-                        "conditional": "3211a668-8878-4e88-8457-8250bfe65aea",
+                        "conditional": "employed_on_release",
                         "displayInline": false
                       },
                       {
-                        "conditional": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
+                        "conditional": "current_relationship_with_partner",
                         "displayInline": false
                       },
                       {
-                        "conditional": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
+                        "conditional": "evidence_of_domestic_abuse",
                         "displayInline": false
                       },
                       {
-                        "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
+                        "conditional": "evidence_of_domestic_abuse_role",
                         "displayInline": false
                       },
                       {
-                        "conditional": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
+                        "conditional": "alcohol_problem",
                         "displayInline": false
                       },
                       {
-                        "conditional": "574618c3-27f4-4dd2-94bb-6de74126ff22",
+                        "conditional": "binge_drinking_in_last_six_months",
                         "displayInline": false
                       },
                       {
-                        "conditional": "5a90a38d-ee0a-4775-994c-addf3397b817",
+                        "conditional": "impulsivity_issues",
                         "displayInline": false
                       },
                       {
-                        "conditional": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
+                        "conditional": "temper_control",
                         "displayInline": false
                       },
                       {
-                        "conditional": "2f1b543b-1e69-4f7e-a61c-6d21ff967432",
+                        "conditional": "pro_criminal_attitude",
                         "displayInline": false
                       }
                     ]
@@ -2371,7 +2371,7 @@
               {
                 "type": "question",
                 "questionId": "bd629547-eab9-46d5-910d-2416b431950f",
-                "questionCode": "69.1",
+                "questionCode": "offence_involve_use_of_weapon",
                 "answerType": "radio",
                 "questionText": "Did the offence involve carrying or use of a weapon?",
                 "displayOrder": 2,
@@ -2388,7 +2388,7 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "7f076a91-2702-438f-81ba-c15ebfab1b02",
+                        "conditional": "specify_which_weapon",
                         "displayInline": true
                       }
                     ]
@@ -2404,7 +2404,7 @@
               {
                 "type": "question",
                 "questionId": "7f076a91-2702-438f-81ba-c15ebfab1b02",
-                "questionCode": "70.1",
+                "questionCode": "specify_which_weapon",
                 "answerType": "freetext",
                 "questionText": "Specify which weapon",
                 "displayOrder": 3,
@@ -2417,7 +2417,7 @@
               {
                 "type": "question",
                 "questionId": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
-                "questionCode": "75.1",
+                "questionCode": "living_in_suitable_accommodation",
                 "answerType": "radio",
                 "questionText": "Is the individual living in suitable accommodation?",
                 "displayOrder": 4,
@@ -2456,7 +2456,7 @@
               {
                 "type": "question",
                 "questionId": "3211a668-8878-4e88-8457-8250bfe65aea",
-                "questionCode": "80.1",
+                "questionCode": "employed_on_release",
                 "answerType": "radio",
                 "questionText": "Is the person unemployed or will be unemployed upon release?",
                 "displayOrder": 5,
@@ -2495,7 +2495,7 @@
               {
                 "type": "question",
                 "questionId": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
-                "questionCode": "86.1",
+                "questionCode": "current_relationship_with_partner",
                 "answerType": "radio",
                 "questionText": "What is the person's current relationship with their partner?",
                 "displayOrder": 6,
@@ -2534,7 +2534,7 @@
               {
                 "type": "question",
                 "questionId": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
-                "questionCode": "87.1",
+                "questionCode": "evidence_of_domestic_abuse",
                 "answerType": "radio",
                 "questionText": "Is there evidence that the individual is a perpetrator of domestic abuse?",
                 "displayOrder": 7,
@@ -2551,7 +2551,7 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
+                        "conditional": "evidence_of_domestic_abuse_role",
                         "displayInline": true
                       }
                     ]
@@ -2567,7 +2567,7 @@
               {
                 "type": "question",
                 "questionId": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
-                "questionCode": "88.1",
+                "questionCode": "evidence_of_domestic_abuse_role",
                 "answerType": "radio",
                 "questionText": "Victim or perpetrator",
                 "displayOrder": 8,
@@ -2594,7 +2594,7 @@
               {
                 "type": "question",
                 "questionId": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
-                "questionCode": "90.1",
+                "questionCode": "alcohol_problem",
                 "answerType": "radio",
                 "questionText": "Is the person's current use of alcohol a problem?",
                 "displayOrder": 9,
@@ -2627,7 +2627,7 @@
               {
                 "type": "question",
                 "questionId": "574618c3-27f4-4dd2-94bb-6de74126ff22",
-                "questionCode": "92.1",
+                "questionCode": "binge_drinking_in_last_six_months",
                 "answerType": "radio",
                 "questionText": "Is there evidence of binge drinking or excessive use of alcohol in the last 6 months?",
                 "displayOrder": 10,
@@ -2666,7 +2666,7 @@
               {
                 "type": "question",
                 "questionId": "5a90a38d-ee0a-4775-994c-addf3397b817",
-                "questionCode": "113.1",
+                "questionCode": "impulsivity_issues",
                 "answerType": "radio",
                 "questionText": "Is impulsivity a problem for the individual?",
                 "displayOrder": 11,
@@ -2699,7 +2699,7 @@
               {
                 "type": "question",
                 "questionId": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
-                "questionCode": "115.1",
+                "questionCode": "temper_control",
                 "answerType": "radio",
                 "questionText": "Is temper control a problem for the individual?",
                 "displayOrder": 12,
@@ -2732,7 +2732,7 @@
               {
                 "type": "question",
                 "questionId": "2f1b543b-1e69-4f7e-a61c-6d21ff967432",
-                "questionCode": "116.1",
+                "questionCode": "pro_criminal_attitude",
                 "answerType": "radio",
                 "questionText": "Does the individual have pro-criminal attitudes?",
                 "displayOrder": 13,
@@ -2765,7 +2765,7 @@
               {
                 "type": "question",
                 "questionId": "4dab51be-e9f8-4ca1-8765-b58e07e137ba",
-                "questionCode": "128.1",
+                "questionCode": "completing_a_risk_assessment",
                 "answerType": "radio",
                 "questionText": "Are you completing a risk assessment?",
                 "displayOrder": 14,
@@ -4590,7 +4590,7 @@
               {
                 "type": "question",
                 "questionId": "bd694469-173a-4388-b1c3-eadea9aa1a75",
-                "questionCode": "199.1",
+                "questionCode": "1give_details",
                 "answerType": "radio",
                 "questionText": "Give details of relevant factors and situations, if not covered previously",
                 "displayOrder": 4,
@@ -7119,7 +7119,7 @@
               {
                 "type": "question",
                 "questionId": "99111111-1111-1111-1111-111111111231",
-                "questionCode": "no_fixed_abode",
+                "questionCode": "test_conditional_out_of_line",
                 "answerType": "radio",
                 "questionText": "Test question for displaying conditional out of line...",
                 "displayOrder": "1",
@@ -7148,7 +7148,7 @@
               {
                 "type": "question",
                 "questionId": "conditional-question-id-9911111",
-                "questionCode": "78.1",
+                "questionCode": "accommodation_type",
                 "answerType": "radio",
                 "questionText": "Accommodation type",
                 "displayOrder": 4,
@@ -7231,7 +7231,7 @@
               {
                 "type": "question",
                 "questionId": "4077c218-3a16-4b92-9f98-bdd33cee476b",
-                "questionCode": "96.1",
+                "questionCode": "drug_misuse_behaviour",
                 "answerType": "radio",
                 "questionText": "Is drug misuse linked to offending behaviour?",
                 "displayOrder": 23,
@@ -7245,15 +7245,15 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "ef018645-b846-4022-b290-1e7d3d380b4d",
+                        "conditional": "drug_misuse_details",
                         "displayInline": true
                       },
                       {
-                        "conditional": "0419944f-ad54-4035-bef0-dca3bda4ff64",
+                        "conditional": "drug_misuse_frequency",
                         "displayInline": false
                       },
                       {
-                        "conditional": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
+                        "conditional": "drug_misuse_motivation",
                         "displayInline": false
                       }
                     ]
@@ -7269,7 +7269,7 @@
               {
                 "type": "question",
                 "questionId": "ef018645-b846-4022-b290-1e7d3d380b4d",
-                "questionCode": "97.1",
+                "questionCode": "drug_misuse_details",
                 "answerType": "textarea",
                 "questionText": "Give details",
                 "displayOrder": 24,
@@ -7280,7 +7280,7 @@
               {
                 "type": "question",
                 "questionId": "0419944f-ad54-4035-bef0-dca3bda4ff64",
-                "questionCode": "98.1",
+                "questionCode": "drug_misuse_frequency",
                 "answerType": "radio",
                 "questionText": "Is there current or recent drug misuse on a daily or weekly basis?",
                 "displayOrder": 25,
@@ -7294,7 +7294,7 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec",
+                        "conditional": "give_details",
                         "displayInline": true
                       }
                     ]
@@ -7310,7 +7310,7 @@
               {
                 "type": "question",
                 "questionId": "36b63eb5-eb30-4f91-9b7f-91b0b70771ec",
-                "questionCode": "99.1",
+                "questionCode": "give_details",
                 "answerType": "textarea",
                 "questionText": "Give details",
                 "displayOrder": 26,
@@ -7321,7 +7321,7 @@
               {
                 "type": "question",
                 "questionId": "db85cfb1-bf5e-4852-bfe8-137f44570cab",
-                "questionCode": "100.1",
+                "questionCode": "drug_misuse_motivation",
                 "answerType": "freetext",
                 "questionText": "Is the individual motivated to tackle drugs misuse?",
                 "displayOrder": 27,
@@ -7856,7 +7856,7 @@
               {
                 "type": "question",
                 "questionId": "420c2ffe-8f2c-49b3-a523-674af3197b9e",
-                "questionCode": "67.1",
+                "questionCode": "completed_an_interview",
                 "answerType": "radio",
                 "questionText": "Have you completed an interview with the individual?",
                 "displayOrder": 1,
@@ -7873,127 +7873,107 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "bd629547-eab9-46d5-910d-2416b431950f",
+                        "conditional": "living_in_suitable_accommodation",
                         "displayInline": false
                       },
                       {
-                        "conditional": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
+                        "conditional": "unemployed_on_release",
                         "displayInline": false
                       },
                       {
-                        "conditional": "3211a668-8878-4e88-8457-8250bfe65aea",
+                        "conditional": "relationship_with_partner",
                         "displayInline": false
                       },
                       {
-                        "conditional": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
+                        "conditional": "perpetrator_of_domestic_abuse",
                         "displayInline": false
                       },
                       {
-                        "conditional": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
+                        "conditional": "domestic_abuse_victim",
                         "displayInline": false
                       },
                       {
-                        "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
+                        "conditional": "domestic_abuse_perpetrator",
                         "displayInline": false
                       },
                       {
-                        "conditional": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
+                        "conditional": "alcohol_problem",
                         "displayInline": false
                       },
                       {
-                        "conditional": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
+                        "conditional": "binge_drinking_in_last_six_months",
                         "displayInline": false
                       },
                       {
-                        "conditional": "574618c3-27f4-4dd2-94bb-6de74126ff22",
+                        "conditional": "impulsivity",
                         "displayInline": false
                       },
                       {
-                        "conditional": "5a90a38d-ee0a-4775-994c-addf3397b817",
+                        "conditional": "temper_control",
                         "displayInline": false
                       },
                       {
-                        "conditional": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
+                        "conditional": "ui_rsr_needs_4",
                         "displayInline": false
                       },
                       {
-                        "conditional": "551df80b-5368-4551-8fda-85b1c7a5f01f",
+                        "conditional": "ui_rsr_needs_5",
                         "displayInline": false
                       },
                       {
-                        "conditional": "86da001c-a703-4ef2-9c0d-e5c90336055c",
+                        "conditional": "ui_rsr_needs_2",
                         "displayInline": false
                       },
                       {
-                        "conditional": "ccc2ecba-c441-477a-9f79-d44f0cab1567",
+                        "conditional": "ui_rsr_needs_6",
                         "displayInline": false
                       },
                       {
-                        "conditional": "47a94bc5-e71e-4327-9942-ad37d5163dee",
+                        "conditional": "ui_rsr_needs_3",
                         "displayInline": false
                       },
                       {
-                        "conditional": "35e3e63b-6598-4db3-b5a3-1f902f33f22c",
+                        "conditional": "murder_or_attempted_murder_or_conspiracy_of",
                         "displayInline": false
                       },
                       {
-                        "conditional": "0941c5b2-f42d-4120-ad79-44954674fe00",
+                        "conditional": "wounding_or_gbh",
                         "displayInline": false
                       },
                       {
-                        "conditional": "f988f76c-3d6c-4f45-aa29-7dc8d11198d7",
+                        "conditional": "aggravated_burglary",
                         "displayInline": false
                       },
                       {
-                        "conditional": "ad81d270-4acc-472c-a79e-01d0a422ce80",
+                        "conditional": "arson",
                         "displayInline": false
                       },
                       {
-                        "conditional": "f8789074-1532-4b32-8995-780da18e273a",
+                        "conditional": "criminal_damage_with_intent",
                         "displayInline": false
                       },
                       {
-                        "conditional": "df5d635a-6765-42af-9007-6d6d333da5f2",
+                        "conditional": "kidnapping",
                         "displayInline": false
                       },
                       {
-                        "conditional": "ee2763b4-fff9-42c3-a784-6e6fe6b1dea9",
+                        "conditional": "possession_of_firearm",
                         "displayInline": false
                       },
                       {
-                        "conditional": "06d5f00f-a5db-4cc5-b51e-a8c91e63686f",
+                        "conditional": "possession_of_firearm_with_intent",
                         "displayInline": false
                       },
                       {
-                        "conditional": "0dcc92ff-20d4-4ee1-b3d7-b124b6f32ae8",
+                        "conditional": "robbery",
                         "displayInline": false
                       },
                       {
-                        "conditional": "c2b221b4-ee1f-41c8-8fc7-9d49998fab35",
+                        "conditional": "possession_of_weapons_other",
                         "displayInline": false
                       },
                       {
-                        "conditional": "e887bcea-91d1-4c50-a25e-4335fa1e6ae5",
-                        "displayInline": false
-                      },
-                      {
-                        "conditional": "97621b0d-5a64-42dd-9c8b-1484979e9145",
-                        "displayInline": false
-                      },
-                      {
-                        "conditional": "9692659a-778a-436a-bf4e-fe1924638e37",
-                        "displayInline": false
-                      },
-                      {
-                        "conditional": "66c3bdd2-6f47-4f13-aa7b-39d497d90a89",
-                        "displayInline": false
-                      },
-                      {
-                        "conditional": "ba327713-e580-418d-b45b-09a8a3d1166a",
-                        "displayInline": false
-                      },
-                      {
-                        "conditional": "68e31f3a-5175-47e2-986b-d722ad78d893",
+                        "conditional": "possession_of_weapon_other_other",
                         "displayInline": false
                       }
                     ]
@@ -8023,7 +8003,7 @@
               {
                 "type": "question",
                 "questionId": "ed0e988a-38a4-4f9f-9691-08fb695cbed9",
-                "questionCode": "75.1",
+                "questionCode": "living_in_suitable_accommodation",
                 "answerType": "radio",
                 "questionText": "Is the individual living in suitable accommodation?",
                 "displayOrder": 3,
@@ -8056,7 +8036,7 @@
               {
                 "type": "question",
                 "questionId": "3211a668-8878-4e88-8457-8250bfe65aea",
-                "questionCode": "80.1",
+                "questionCode": "unemployed_on_release",
                 "answerType": "radio",
                 "questionText": "Is the person unemployed or will be unemployed upon release?",
                 "displayOrder": 4,
@@ -8089,7 +8069,7 @@
               {
                 "type": "question",
                 "questionId": "1970ba5e-91cb-4ad3-9f04-64d5b5b7157b",
-                "questionCode": "86.1",
+                "questionCode": "relationship_with_partner",
                 "answerType": "radio",
                 "questionText": "What is the person's current relationship with their partner?",
                 "displayOrder": 5,
@@ -8122,7 +8102,7 @@
               {
                 "type": "question",
                 "questionId": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
-                "questionCode": "87.1",
+                "questionCode": "perpetrator_of_domestic_abuse",
                 "answerType": "radio",
                 "questionText": "Is there evidence that the individual is a perpetrator of domestic abuse?",
                 "displayOrder": 6,
@@ -8139,11 +8119,11 @@
                     "text": "Yes",
                     "conditionals": [
                       {
-                        "conditional": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
+                        "conditional": "domestic_abuse_victim",
                         "displayInline": true
                       },
                       {
-                        "conditional": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
+                        "conditional": "domestic_abuse_perpetrator",
                         "displayInline": true
                       }
                     ]
@@ -8159,7 +8139,7 @@
               {
                 "type": "question",
                 "questionId": "fb98f8b1-58ed-4aac-85b1-404f84270b95",
-                "questionCode": "88.1",
+                "questionCode": "domestic_abuse_victim",
                 "answerType": "checkbox",
                 "questionText": "Victim",
                 "displayOrder": 7,
@@ -8179,7 +8159,7 @@
               {
                 "type": "question",
                 "questionId": "38b3a40a-df23-4ea1-872e-c04a8b03ee05",
-                "questionCode": "88.2",
+                "questionCode": "domestic_abuse_perpetrator",
                 "answerType": "checkbox",
                 "questionText": "Perpetrator",
                 "displayOrder": 8,
@@ -8199,7 +8179,7 @@
               {
                 "type": "question",
                 "questionId": "f0416e89-3a71-46d1-8fa2-aebd886dcb34",
-                "questionCode": "90.1",
+                "questionCode": "alcohol_problem",
                 "answerType": "radio",
                 "questionText": "Is the person's current use of alcohol a problem?",
                 "displayOrder": 9,
@@ -8232,7 +8212,7 @@
               {
                 "type": "question",
                 "questionId": "574618c3-27f4-4dd2-94bb-6de74126ff22",
-                "questionCode": "92.1",
+                "questionCode": "binge_drinking_in_last_six_months",
                 "answerType": "radio",
                 "questionText": "Is there evidence of binge drinking or excessive use of alcohol in the last 6 months?",
                 "displayOrder": 10,
@@ -8265,7 +8245,7 @@
               {
                 "type": "question",
                 "questionId": "5a90a38d-ee0a-4775-994c-addf3397b817",
-                "questionCode": "113.1",
+                "questionCode": "impulsivity",
                 "answerType": "radio",
                 "questionText": "Is impulsivity a problem for the individual?",
                 "displayOrder": 11,
@@ -8298,7 +8278,7 @@
               {
                 "type": "question",
                 "questionId": "d0619e6b-cc90-4031-90c6-ab15e06cc779",
-                "questionCode": "115.1",
+                "questionCode": "temper_control",
                 "answerType": "radio",
                 "questionText": "Is temper control a problem for the individual?",
                 "displayOrder": 12,
@@ -8381,7 +8361,7 @@
               {
                 "type": "question",
                 "questionId": "97621b0d-5a64-42dd-9c8b-1484979e9145",
-                "questionCode": "139.0",
+                "questionCode": "possession_of_firearm_with_intent",
                 "answerType": "radio",
                 "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
                 "displayOrder": 17,
@@ -8408,7 +8388,7 @@
               {
                 "type": "question",
                 "questionId": "ba327713-e580-418d-b45b-09a8a3d1166a",
-                "questionCode": "142.0",
+                "questionCode": "possession_of_weapons_other",
                 "answerType": "radio",
                 "questionText": "Any other offence involving possession and/or use of weapons",
                 "displayOrder": 18,
@@ -8461,7 +8441,7 @@
               {
                 "type": "question",
                 "questionId": "0941c5b2-f42d-4120-ad79-44954674fe00",
-                "questionCode": "130.1",
+                "questionCode": "murder_or_attempted_murder_or_conspiracy_of",
                 "answerType": "radio",
                 "questionText": "Murder/attempted murder/threat or conspiracy to murder/manslaughter",
                 "displayOrder": 21,
@@ -8488,7 +8468,7 @@
               {
                 "type": "question",
                 "questionId": "f988f76c-3d6c-4f45-aa29-7dc8d11198d7",
-                "questionCode": "131.1",
+                "questionCode": "wounding_or_gbh",
                 "answerType": "radio",
                 "questionText": "Wounding/GBH (Sections 18/20 Offences Against the Person Act 1861)",
                 "displayOrder": 22,
@@ -8515,7 +8495,7 @@
               {
                 "type": "question",
                 "questionId": "ad81d270-4acc-472c-a79e-01d0a422ce80",
-                "questionCode": "135.1",
+                "questionCode": "aggravated_burglary",
                 "answerType": "radio",
                 "questionText": "Aggravated burglary",
                 "displayOrder": 23,
@@ -8542,7 +8522,7 @@
               {
                 "type": "question",
                 "questionId": "f8789074-1532-4b32-8995-780da18e273a",
-                "questionCode": "136.1",
+                "questionCode": "arson",
                 "answerType": "radio",
                 "questionText": "Arson",
                 "displayOrder": 24,
@@ -8569,7 +8549,7 @@
               {
                 "type": "question",
                 "questionId": "df5d635a-6765-42af-9007-6d6d333da5f2",
-                "questionCode": "137.1",
+                "questionCode": "criminal_damage_with_intent",
                 "answerType": "radio",
                 "questionText": "Criminal damage with intent to endanger life",
                 "displayOrder": 25,
@@ -8596,7 +8576,7 @@
               {
                 "type": "question",
                 "questionId": "c2b221b4-ee1f-41c8-8fc7-9d49998fab35",
-                "questionCode": "138.1",
+                "questionCode": "kidnapping",
                 "answerType": "radio",
                 "questionText": "Kidnapping/false imprisonment",
                 "displayOrder": 26,
@@ -8623,7 +8603,7 @@
               {
                 "type": "question",
                 "questionId": "e887bcea-91d1-4c50-a25e-4335fa1e6ae5",
-                "questionCode": "139.1",
+                "questionCode": "possession_of_firearm",
                 "answerType": "radio",
                 "questionText": "Possession of a firearm with intent to endanger life or resist arrest",
                 "displayOrder": 27,
@@ -8650,7 +8630,7 @@
               {
                 "type": "question",
                 "questionId": "9692659a-778a-436a-bf4e-fe1924638e37",
-                "questionCode": "141.1",
+                "questionCode": "robbery",
                 "answerType": "radio",
                 "questionText": "Robbery",
                 "displayOrder": 28,
@@ -8677,7 +8657,7 @@
               {
                 "type": "question",
                 "questionId": "68e31f3a-5175-47e2-986b-d722ad78d893",
-                "questionCode": "142.1",
+                "questionCode": "possession_of_weapon_other_other",
                 "answerType": "radio",
                 "questionText": "Any other offence involving possession and/or use of weapons",
                 "displayOrder": 29,

@@ -33,11 +33,11 @@ const editTableRow = async (
 
     // if this question is in answers, change answer to just the one for this row
     thisTable.contents.forEach(question => {
-      if (answers[question.questionId] && answers[question.questionId].length > tableRow) {
-        if (Array.isArray(answers[question.questionId][tableRow])) {
-          answers[question.questionId] = answers[question.questionId][tableRow]
+      if (answers[question.questionCode] && answers[question.questionCode].length > tableRow) {
+        if (Array.isArray(answers[question.questionCode][tableRow])) {
+          answers[question.questionCode] = answers[question.questionCode][tableRow]
         } else {
-          answers[question.questionId] = [answers[question.questionId][tableRow]]
+          answers[question.questionCode] = [answers[question.questionCode][tableRow]]
         }
       }
     })

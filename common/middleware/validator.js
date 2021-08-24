@@ -4,23 +4,23 @@ const { validationResult } = require('express-validator')
 const { removeBlankErrors, formatErrors, formatErrorSummary } = require('../utils/formatErrors')
 const { isEmptyObject, dynamicMiddleware } = require('../utils/util')
 
-const getFieldId = id => {
+const getFieldFor = code => {
   const fields = {
-    dateFirstSanction: 'id-5ca86a06-5472-4861-bd6a-a011780db49a',
-    totalSanctions: 'id-8e83a0ad-2fcf-4afb-a0af-09d1e23d3c33',
-    violentOffences: 'id-496587b9-81f3-47ad-a41e-77900fdca573',
-    currentConvictionDate: 'id-f5d1dd7c-1774-4c76-89c2-a47240ad98ba',
-    haveTheyCommittedASexualOffence: 'id-58d3efd1-65a1-439b-952f-b2826ffa5e71',
-    dateOfMostRecentSexualOffence: 'id-a00223d0-1c20-43b5-8076-8a292ca25773',
-    dateOfCommencement: 'id-5cd344d4-acf3-45a9-9493-5dda5aa9dfa8',
-    numAdultSexual: 'id-fc45b061-a4a6-44c3-937c-2949069e0926',
-    numChildSexual: 'id-ed495c57-21f3-4388-87e6-57017a6999b1',
-    numIndecentImage: 'id-00a559e4-32d5-4ae7-aa21-247068a639ad',
-    numNonContactSexual: 'id-1b6c8f79-0fd9-45d4-ba50-309c3ccfdb2d',
+    dateFirstSanction: 'date_first_sanction',
+    totalSanctions: 'total_sanctions',
+    violentOffences: 'total_violent_offences',
+    currentConvictionDate: 'date_current_conviction',
+    haveTheyCommittedASexualOffence: 'any_sexual_offences',
+    dateOfMostRecentSexualOffence: 'most_recent_sexual_offence_date',
+    dateOfCommencement: 'earliest_release_date',
+    numAdultSexual: 'total_sexual_offences_adult',
+    numChildSexual: 'total_sexual_offences_child',
+    numIndecentImage: 'total_sexual_offences_child_image',
+    numNonContactSexual: 'total_non_sexual_offences',
   }
 
-  if (fields[id]) {
-    return fields[id]
+  if (fields[code]) {
+    return fields[code]
   }
   return false
 }
@@ -44,7 +44,7 @@ const localValidationRules = async (req, res, next) => {
     /// ///////////////////////////////////////////////////
     // Date of first sanction:
     validations.push(
-      body(getFieldId('dateFirstSanction'))
+      body(getFieldFor('dateFirstSanction'))
         .custom(value => {
           return value && isDate(parseISO(value))
         })
@@ -72,15 +72,15 @@ const localValidationRules = async (req, res, next) => {
     /// ///////////////////////////////////////////////////
     // total sanctions:
     validations.push(
-      body(getFieldId('totalSanctions'))
+      body(getFieldFor('totalSanctions'))
         .isInt({ min: 1, max: 999 })
         .withMessage({ error: 'Enter a number between 1 and 999' }),
     )
     /// ///////////////////////////////////////////////////
     // violent offences:
-    const totalSanctions = parseInt(reqBody[getFieldId('totalSanctions')], 10)
+    const totalSanctions = parseInt(reqBody[getFieldFor('totalSanctions')], 10)
     validations.push(
-      body(getFieldId('violentOffences'))
+      body(getFieldFor('violentOffences'))
         .isInt()
         .withMessage({ error: 'Enter the number of violent offences' })
         .bail()
@@ -90,7 +90,7 @@ const localValidationRules = async (req, res, next) => {
     /// ///////////////////////////////////////////////////
     // date of current conviction:
     validations.push(
-      body(getFieldId('currentConvictionDate'))
+      body(getFieldFor('currentConvictionDate'))
         .custom(value => {
           return value && isDate(parseISO(value))
         })
@@ -109,13 +109,13 @@ const localValidationRules = async (req, res, next) => {
 
     // offender’s age at Date of Current Conviction CANNOT BE LESS than the offender’s age at first conviction
     // i.e. current conviction date cannot be less than first conviction date
-    if (reqBody[getFieldId('dateFirstSanction')] && isDate(parseISO(reqBody[getFieldId('dateFirstSanction')]))) {
+    if (reqBody[getFieldFor('dateFirstSanction')] && isDate(parseISO(reqBody[getFieldFor('dateFirstSanction')]))) {
       validations.push(
-        body(getFieldId('currentConvictionDate'))
+        body(getFieldFor('currentConvictionDate'))
           .custom(value => {
             return (
-              isEqual(parseISO(value), parseISO(reqBody[getFieldId('dateFirstSanction')])) ||
-              isAfter(parseISO(value), parseISO(reqBody[getFieldId('dateFirstSanction')]))
+              isEqual(parseISO(value), parseISO(reqBody[getFieldFor('dateFirstSanction')])) ||
+              isAfter(parseISO(value), parseISO(reqBody[getFieldFor('dateFirstSanction')]))
             )
           })
           .withMessage({ error: 'Current conviction cannot be before the date of first conviction' }),
@@ -124,9 +124,9 @@ const localValidationRules = async (req, res, next) => {
 
     /// ///////////////////////////////////////////////////
     // Date of most recent sanction involving a sexual or sexually motivated offence:
-    if (reqBody[getFieldId('haveTheyCommittedASexualOffence')] === 'YES') {
+    if (reqBody[getFieldFor('haveTheyCommittedASexualOffence')] === 'YES') {
       validations.push(
-        body(getFieldId('dateOfMostRecentSexualOffence'))
+        body(getFieldFor('dateOfMostRecentSexualOffence'))
           .custom(value => {
             return value && isDate(parseISO(value))
           })
@@ -144,29 +144,29 @@ const localValidationRules = async (req, res, next) => {
       )
 
       validations.push(
-        body(getFieldId('numAdultSexual'))
+        body(getFieldFor('numAdultSexual'))
           .isInt({ min: 0, max: 99 })
           .withMessage({ error: 'Enter a number' }),
       )
       validations.push(
-        body(getFieldId('numChildSexual'))
+        body(getFieldFor('numChildSexual'))
           .isInt({ min: 0, max: 99 })
           .withMessage({ error: 'Enter a number' }),
       )
       validations.push(
-        body(getFieldId('numIndecentImage'))
+        body(getFieldFor('numIndecentImage'))
           .isInt({ min: 0, max: 99 })
           .withMessage({ error: 'Enter a number' }),
       )
       validations.push(
-        body(getFieldId('numNonContactSexual'))
+        body(getFieldFor('numNonContactSexual'))
           .isInt({ min: 0, max: 99 })
           .withMessage({ error: 'Enter a number' }),
       )
     }
 
     validations.push(
-      body(getFieldId('dateOfCommencement'))
+      body(getFieldFor('dateOfCommencement'))
         .custom(value => {
           return value && isDate(parseISO(value))
         })

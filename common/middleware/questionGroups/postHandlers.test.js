@@ -27,7 +27,7 @@ const questionGroupWithConditional = {
     {
       type: 'question',
       questionId: 'b9065f11-0955-416d-bd58-c234d8b6ffb5',
-      questionCode: '123',
+      questionCode: 'dependency_subject',
       answerType: 'radio',
       questionText: 'Dependency subject',
       displayOrder: 1,
@@ -44,7 +44,7 @@ const questionGroupWithConditional = {
           text: 'Yes',
           conditionals: [
             {
-              conditional: '4d3e9793-e24f-4ccc-94c8-39b2f507e649',
+              conditional: 'dependency_target',
               displayInline: true,
             },
           ],
@@ -66,7 +66,7 @@ const questionGroupWithConditional = {
     {
       type: 'question',
       questionId: '4d3e9793-e24f-4ccc-94c8-39b2f507e649',
-      questionCode: '124',
+      questionCode: 'dependency_target',
       answerType: 'freetext',
       questionText: 'Dependency target',
       displayOrder: 2,
@@ -89,7 +89,7 @@ const questionGroupWithOrphanConditional = {
     {
       type: 'question',
       questionId: '4d3e9793-e24f-4ccc-94c8-39b2f507e649',
-      questionCode: '124',
+      questionCode: 'dependency_target',
       answerType: 'freetext',
       questionText: 'Dependency target',
       displayOrder: 2,
@@ -112,7 +112,7 @@ const questionGroupWithNoConditional = {
     {
       type: 'question',
       questionId: '4d3e9793-e24f-4ccc-94c8-39b2f507e649',
-      questionCode: '124',
+      questionCode: 'dependency_target',
       answerType: 'freetext',
       questionText: 'Dependency target',
       displayOrder: 2,
@@ -146,7 +146,7 @@ describe('Question group validation rules', () => {
     const req = {
       params: {},
       body: {
-        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'YES',
+        dependency_subject: 'YES',
       },
     }
 
@@ -171,7 +171,7 @@ describe('Question group validation rules', () => {
     const req = {
       params: {},
       body: {
-        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'NO',
+        some_random_question: 'NO',
       },
     }
 
@@ -196,7 +196,7 @@ describe('Question group validation rules', () => {
     const req = {
       params: {},
       body: {
-        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'NO',
+        question_with_no_parent: 'NO',
       },
     }
 
@@ -221,7 +221,7 @@ describe('Question group validation rules', () => {
     const req = {
       params: {},
       body: {
-        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'NO',
+        non_conditional_question: 'NO',
       },
     }
 
@@ -245,77 +245,77 @@ describe('Assemble dates', () => {
     const res = {}
     const req = {
       body: {
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-day': 19,
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-month': 1,
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-year': 1989,
+        'some_date_field-day': 19,
+        'some_date_field-month': 1,
+        'some_date_field-year': 1989,
       },
     }
 
     assembleDates(req, res, next)
 
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00']).toEqual('1989-01-19')
+    expect(req.body.some_date_field).toEqual('1989-01-19')
     // deletes the component fields
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00-day']).toBeUndefined()
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00-month']).toBeUndefined()
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00-year']).toBeUndefined()
+    expect(req.body['some_date_field-day']).toBeUndefined()
+    expect(req.body['some_date_field-month']).toBeUndefined()
+    expect(req.body['some_date_field-year']).toBeUndefined()
   })
 
   it('does not assemble the date if the day is missing', () => {
     const res = {}
     const req = {
       body: {
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-month': 1,
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-year': 1989,
+        'some_date_field-month': 1,
+        'some_date_field-year': 1989,
       },
     }
 
     assembleDates(req, res, next)
 
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00']).toBeUndefined()
+    expect(req.body.some_date_field).toBeUndefined()
   })
 
   it('does not assemble the date if the month is missing', () => {
     const res = {}
     const req = {
       body: {
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-day': 19,
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-year': 1989,
+        'some_date_field-day': 19,
+        'some_date_field-year': 1989,
       },
     }
 
     assembleDates(req, res, next)
 
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00']).toEqual('')
+    expect(req.body.some_date_field).toEqual('')
   })
 
   it('does not assemble the date if the year is missing', () => {
     const res = {}
     const req = {
       body: {
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-day': 19,
-        '0ee3f843-d04f-4f0c-bc32-b421f5864c00-month': 1,
+        'some_date_field-day': 19,
+        'some_date_field-month': 1,
       },
     }
 
     assembleDates(req, res, next)
 
-    expect(req.body['0ee3f843-d04f-4f0c-bc32-b421f5864c00']).toEqual('')
+    expect(req.body.some_date_field).toEqual('')
   })
 })
 
 describe('Format validation errors', () => {
   it('formats server errors when passed', () => {
     const serverErrors = {
-      '4d3e9793-e24f-4ccc-94c8-39b2f507e649': ['Must not be null'],
+      some_field: ['Must not be null'],
     }
     const pageErrors = []
 
     const [errors, errorSummary] = formatValidationErrors(serverErrors, pageErrors)
 
     expect(errors).toEqual({
-      'id-4d3e9793-e24f-4ccc-94c8-39b2f507e649': { text: 'Must not be null' },
+      some_field: { text: 'Must not be null' },
     })
-    expect(errorSummary).toEqual([{ text: 'Must not be null', href: '#id-4d3e9793-e24f-4ccc-94c8-39b2f507e649-error' }])
+    expect(errorSummary).toEqual([{ text: 'Must not be null', href: '#some_field-error' }])
   })
 
   it('formats page errors when passed', () => {
@@ -343,7 +343,7 @@ describe('Extract answers', () => {
   it('formats answers that are passed to it', () => {
     const req = {
       body: {
-        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'YES',
+        some_question_code: 'YES',
       },
     }
 
@@ -359,13 +359,13 @@ describe('Extract answers', () => {
 
     extractAnswers(req, res, next)
 
-    expect(req.body['b9065f11-0955-416d-bd58-c234d8b6ffb5']).toEqual('YES')
+    expect(req.body.some_question_code).toEqual('YES')
   })
 
   it('handles when no answers are passed', () => {
     const req = {
       body: {
-        'id-b9065f11-0955-416d-bd58-c234d8b6ffb5': 'YES',
+        some_random_question: 'YES',
       },
     }
 
