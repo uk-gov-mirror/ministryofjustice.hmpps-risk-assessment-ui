@@ -17,8 +17,8 @@ const predictorScores = [
     type: 'RSR',
     scores: {
       RSR: { level: 'HIGH', score: 11.34, isValid: true, date: '2021-08-13 08:26:21' },
-      'OSP/C': { level: 'MEDIUM', score: 8.76, isValid: true, date: '2021-08-13 08:26:21' },
-      'OSP/I': { level: 'LOW', score: 3.45, isValid: true, date: '2021-08-13 08:26:21' },
+      OSPC: { level: 'MEDIUM', score: 8.76, isValid: true, date: '2021-08-13 08:26:21' },
+      OSPI: { level: 'LOW', score: 3.45, isValid: true, date: '2021-08-13 08:26:21' },
     },
   },
 ]
