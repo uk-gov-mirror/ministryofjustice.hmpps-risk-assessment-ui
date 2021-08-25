@@ -16,7 +16,7 @@ const getFieldFor = code => {
     numAdultSexual: 'total_sexual_offences_adult',
     numChildSexual: 'total_sexual_offences_child',
     numIndecentImage: 'total_sexual_offences_child_image',
-    numNonContactSexual: 'total_non_sexual_offences',
+    numNonContactSexual: 'total_non_contact_sexual_offences',
   }
 
   if (fields[code]) {
