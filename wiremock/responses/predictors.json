@@ -1,0 +1,25 @@
+[
+  {
+    "type": "RSR",
+    "scores": {
+      "RSR": {
+        "level": "HIGH",
+        "score": 11.34,
+        "isValid": true,
+        "date": "2021-07-23T12:00"
+      },
+      "OSPC": {
+        "level": "MEDIUM",
+        "score": 8.76,
+        "isValid": true,
+        "date": "2021-07-23T12:00"
+      },
+      "OSPI": {
+        "level": "LOW",
+        "score": 3.45,
+        "isValid": true,
+        "date": "2021-07-23T12:00"
+      }
+    }
+  }
+]
