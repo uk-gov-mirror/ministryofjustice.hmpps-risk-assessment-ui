@@ -1,5 +1,6 @@
 const { stubFor } = require('./wiremock')
 const questionGroups = require('./responses/questionGroups.json')
+const assessmentQuestions = require('./responses/assessmentQuestions.json')
 const questionAnswers = require('./responses/questionAnswers.json')
 const questionGroupSummaries = require('./responses/questionGroupSummary.json')
 const questionList = require('./responses/questionList.json')
@@ -101,6 +102,22 @@ const stubQuestionGroup = groupId => {
       },
       status: 200,
       jsonBody: questionGroups[groupId],
+    },
+  })
+}
+
+const stubAssessmentQuestions = (assessmentCode, version = 1) => {
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/reference/assessment/${assessmentCode}/${version}/questions`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: assessmentQuestions[assessmentCode],
     },
   })
 }
@@ -288,6 +305,8 @@ const stubQuestions = async () => {
   await stubQuestionGroup('pre_sentence_assessment')
   await stubQuestionGroup('12222222-2222-2222-2222-222222222203')
   await stubQuestionGroup('RSR')
+
+  await stubAssessmentQuestions('RSR', 1)
   // await stubAllInternalQuestionGroups(questionGroups['65a3924c-4130-4140-b7f4-cc39a52603bb'])
   // await stubAllInternalQuestionGroups(questionGroups['22222222-2222-2222-2222-222222222203'])
 }
@@ -355,5 +374,6 @@ module.exports = {
   stubGetQuestionGroup,
   stubRemoveTableRow,
   stubErrors,
+  stubAssessmentQuestions,
   stubPredictors,
 }

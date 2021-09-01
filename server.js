@@ -7,6 +7,7 @@ const { join } = require('path')
 // Npm dependencies
 const express = require('express')
 const favicon = require('serve-favicon')
+const cookieParser = require('cookie-parser')
 const { json, urlencoded } = require('body-parser')
 const loggingMiddleware = require('morgan')
 const compression = require('compression')
@@ -107,6 +108,7 @@ function initialiseGlobalMiddleware(app) {
     next()
   })
 
+  app.use(cookieParser())
   app.use(
     session({
       store: new RedisStore({ client: redis.client }),

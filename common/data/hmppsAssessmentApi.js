@@ -29,6 +29,11 @@ const getQuestionGroupSummary = (groupId, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
+const getFlatAssessmentQuestions = (assessmentCode, version = 1, authorisationToken, userId) => {
+  const path = `${url}/reference/assessment/${assessmentCode}/${version}/questions`
+  return getData(path, authorisationToken, userId)
+}
+
 const getAssessmentSummary = (assessmentSchemaCode, authorisationToken, userId) => {
   const path = `${url}/assessments/schema/${assessmentSchemaCode}/summary`
   return getData(path, authorisationToken, userId)
@@ -161,5 +166,6 @@ module.exports = {
   postTableRow,
   deleteTableRow,
   updateEditedTableRow: updateTableRow,
+  getFlatAssessmentQuestions,
   getDraftPredictorScore,
 }

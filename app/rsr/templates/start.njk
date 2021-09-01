@@ -1,0 +1,56 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "common/templates/components/question-wizard/macro.njk" import renderQuestion %}
+
+{% block pageTitle %}
+{{ heading }}
+{% endblock %}
+
+{% block beforeContent %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-three-quarters">
+        <h1 class="govuk-heading-xl">
+            {{ options.journeyPageTitle }}
+        </h1>
+        <h2 class="govuk-heading-l">
+            Calculate the RSR score for {{ assessment.subject.name | default('offender') }}
+        </h2>
+
+        <p class="govuk-hint">Your answers and the RSR score will be automatically added to OASys and nDelius.</p>
+
+        <div class="rsr-offence__details">
+            <table class="govuk-table no-bottom-margin">
+                <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Offence</th>
+                    <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.offence }}</td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Subcode</th>
+                    <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.subCode }}</td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Sentence Date</th>
+                    <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.sentenceDate }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="questiongroup-action-buttons">
+            <form method="post" action="{{ action }}">
+                <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+
+                {{ govukButton({
+                    text: 'Start',
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                }) }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
