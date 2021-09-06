@@ -3,7 +3,11 @@ const { processReplacements } = require('../utils/util')
 const logger = require('../logging/logger')
 const { compileInlineConditionalQuestions } = require('./questionGroups/getHandlers')
 
-module.exports = async ({ params: { assessmentCode = 'RSR', assessmentVersion = 1 }, user }, res, next) => {
+module.exports = async (
+  { params: { assessmentId, assessmentCode = 'RSR', assessmentVersion = 1 }, user },
+  res,
+  next,
+) => {
   try {
     let questions = await getFlatAssessmentQuestions(assessmentCode, assessmentVersion, user?.token, user?.id)
 
@@ -14,6 +18,7 @@ module.exports = async ({ params: { assessmentCode = 'RSR', assessmentVersion = 
     questions.forEach(q => {
       questionLookup[q.questionCode] = q
     })
+    res.locals.assessmentId = assessmentId
     res.locals.questions = questionLookup
 
     return next()
