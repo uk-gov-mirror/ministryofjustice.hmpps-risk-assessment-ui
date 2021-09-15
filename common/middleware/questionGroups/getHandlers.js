@@ -9,7 +9,7 @@ const isPresentationOnlyFor = answerType => typeof answerType === 'string' && an
 let conditionalQuestionsToRemove = []
 const outOfLineConditionalQuestions = []
 
-const annotateWithAnswers = (questions, answers, body) => {
+const annotateWithAnswers = (questions, answers, body, tables = {}) => {
   return questions.map(questionSchema => {
     if (questionSchema.type === 'group') {
       return {
@@ -26,9 +26,25 @@ const annotateWithAnswers = (questions, answers, body) => {
     }
 
     if (questionSchema.type === 'table' || questionSchema.type === 'tableGroup') {
+      const tableAnswers = tables[questionSchema.tableCode] || []
+      const numberOfEntries = tableAnswers.size
+      const initialiseColumnAnswers = () => Array.from(Array(numberOfEntries)).map(() => '')
+
+      const transformedAnswers = tableAnswers.reduce(([a, tableRow], tableRowPosition) => {
+        const updated = { ...a }
+        Object.entries(tableRow).forEach(([tableColumnName, tableColumnValue]) => {
+          if (updated[tableColumnName] && Array.isArray(updated[tableColumnName])) {
+            updated[tableColumnName][tableRowPosition] = tableColumnValue
+          } else {
+            updated[tableColumnName] = initialiseColumnAnswers()
+          }
+        })
+        return updated
+      }, {})
+
       return {
         ...questionSchema,
-        contents: annotateWithAnswers(questionSchema.contents, answers, body),
+        contents: annotateWithAnswers(questionSchema.contents, transformedAnswers, body),
       }
     }
 

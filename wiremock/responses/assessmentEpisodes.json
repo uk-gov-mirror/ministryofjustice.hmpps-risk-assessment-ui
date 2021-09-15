@@ -4,6 +4,9 @@
   "assessmentUuid": "fb6b7c33-07fc-4c4c-a009-8d60f66952c4",
   "reasonForChange": "new episode",
   "created": "2019-11-14T08:11:53.177108",
+  "tables": {
+    "children_at_risk_of_serious_harm": {}
+  },
   "answers": {
     "33923c1e-e3ba-4c02-ba42-3b8d828f9e18": ["Hart"],
     "81cbd5f5-f8ec-430e-b18a-c48fdf660216": ["None"],

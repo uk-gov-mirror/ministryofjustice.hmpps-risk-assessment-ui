@@ -26,21 +26,14 @@ const editTableRow = async (
     }
     res.locals.assessmentUuid = assessmentId
 
-    const { answers } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
+    const { tables = {} } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
 
     // update answers to just appropriate ones for this table row
     // go through questions
 
     // if this question is in answers, change answer to just the one for this row
-    thisTable.contents.forEach(question => {
-      if (answers[question.questionCode] && answers[question.questionCode].length > tableRow) {
-        if (Array.isArray(answers[question.questionCode][tableRow])) {
-          answers[question.questionCode] = answers[question.questionCode][tableRow]
-        } else {
-          answers[question.questionCode] = [answers[question.questionCode][tableRow]]
-        }
-      }
-    })
+    const tableEntries = tables[tableName] || []
+    const answers = tableEntries.length > tableRow ? tableEntries[tableRow] : {}
 
     let questions = annotateWithAnswers(thisTable.contents, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)

@@ -231,11 +231,39 @@ const stubQuestionsList = () => {
     },
   })
 }
-const stubDeleteTableRow = () => {
+const stubAddTableRow = () => {
+  stubFor({
+    request: {
+      method: 'POST',
+      urlPattern: `/assessments/.+?/episodes/.+?/table/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+    },
+  })
+}
+const stubUpdateTableRow = () => {
+  stubFor({
+    request: {
+      method: 'PUT',
+      urlPattern: `/assessments/.+?/episodes/.+?/table/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+    },
+  })
+}
+const stubRemoveTableRow = () => {
   stubFor({
     request: {
       method: 'DELETE',
-      urlPattern: `/assessments/.+?/episodes/.+?/.+?`,
+      urlPattern: `/assessments/.+?/episodes/.+?/table/.+?`,
     },
     response: {
       headers: {
@@ -335,8 +363,10 @@ const stubEpisodes = async () => {
 const stubSupervision = async () => {
   await stubAssessmentSupervision()
 }
-const stubRemoveTableRow = async () => {
-  await stubDeleteTableRow()
+const stubTableActions = async () => {
+  await stubAddTableRow()
+  await stubUpdateTableRow()
+  await stubRemoveTableRow()
 }
 
 const stubErrors = () => {
@@ -372,7 +402,7 @@ module.exports = {
   stubAssessmentComplete,
   stubGetAssessments,
   stubGetQuestionGroup,
-  stubRemoveTableRow,
+  stubTableActions,
   stubErrors,
   stubAssessmentQuestions,
   stubPredictors,

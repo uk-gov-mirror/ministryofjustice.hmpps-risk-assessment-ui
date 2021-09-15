@@ -60,18 +60,18 @@ const postAnswers = (assessmentId, episodeId, answers, authorisationToken, userI
 }
 
 const postTableRow = (assessmentId, episodeId, tableName, answers, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}`
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/table/${tableName}`
   return postData(path, authorisationToken, userId, answers)
 }
 
 const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}/${tableRow}`
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/table/${tableName}/${tableRow}`
   return deleteData(path, authorisationToken, userId)
 }
 
 const updateTableRow = (assessmentId, episodeId, tableName, tableRow, answers, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/${tableName}/${tableRow}`
-  return postData(path, authorisationToken, userId, answers)
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/table/${tableName}/${tableRow}`
+  return putData(path, authorisationToken, userId, answers)
 }
 
 const getDraftPredictorScore = (episodeUuid, authorisationToken, userId) => {
@@ -104,6 +104,12 @@ const postData = (path, authorisationToken, userId, data) => {
   logger.info(`Calling hmppsAssessments API with POST: ${path}`)
 
   return action(superagent.post(path).send(data), authorisationToken, userId)
+}
+
+const putData = (path, authorisationToken, userId, data) => {
+  logger.info(`Calling hmppsAssessments API with PUT: ${path}`)
+
+  return action(superagent.put(path).send(data), authorisationToken, userId)
 }
 
 const deleteData = (path, authorisationToken, userId) => {

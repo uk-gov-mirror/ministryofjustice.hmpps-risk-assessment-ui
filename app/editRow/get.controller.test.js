@@ -56,6 +56,7 @@ describe('display table group and answers', () => {
   it('should render the page with the correct structure', async () => {
     getAnswers.mockReturnValueOnce({
       answers: {},
+      tables: {},
     })
     await editTableRow(req, res)
     expect(res.render).toHaveBeenCalledWith(`${__dirname}/index`, expectedForThisTest)
