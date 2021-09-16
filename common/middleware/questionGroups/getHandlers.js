@@ -9,6 +9,22 @@ const isPresentationOnlyFor = answerType => typeof answerType === 'string' && an
 let conditionalQuestionsToRemove = []
 const outOfLineConditionalQuestions = []
 
+const transformTableEntries = tableEntries => {
+  const numberOfEntries = tableEntries.length
+  const initialiseColumnAnswers = n => Array(n).fill('')
+
+  return tableEntries.reduce((previousAnswers, tableEntry, tableEntryPosition) => {
+    const currentAnswers = { ...previousAnswers }
+    Object.entries(tableEntry).forEach(([name, value]) => {
+      if (!Array.isArray(currentAnswers[name])) {
+        currentAnswers[name] = initialiseColumnAnswers(numberOfEntries)
+      }
+      currentAnswers[name][tableEntryPosition] = value
+    })
+    return currentAnswers
+  }, {})
+}
+
 const annotateWithAnswers = (questions, answers, body, tables = {}) => {
   return questions.map(questionSchema => {
     if (questionSchema.type === 'group') {
@@ -26,25 +42,12 @@ const annotateWithAnswers = (questions, answers, body, tables = {}) => {
     }
 
     if (questionSchema.type === 'table' || questionSchema.type === 'tableGroup') {
-      const tableAnswers = tables[questionSchema.tableCode] || []
-      const numberOfEntries = tableAnswers.size
-      const initialiseColumnAnswers = () => Array.from(Array(numberOfEntries)).map(() => '')
-
-      const transformedAnswers = tableAnswers.reduce(([a, tableRow], tableRowPosition) => {
-        const updated = { ...a }
-        Object.entries(tableRow).forEach(([tableColumnName, tableColumnValue]) => {
-          if (updated[tableColumnName] && Array.isArray(updated[tableColumnName])) {
-            updated[tableColumnName][tableRowPosition] = tableColumnValue
-          } else {
-            updated[tableColumnName] = initialiseColumnAnswers()
-          }
-        })
-        return updated
-      }, {})
+      const tableEntries = tables[questionSchema.tableCode] || []
+      const tableAnswers = transformTableEntries(tableEntries)
 
       return {
         ...questionSchema,
-        contents: annotateWithAnswers(questionSchema.contents, transformedAnswers, body),
+        contents: annotateWithAnswers(questionSchema.contents, tableAnswers, body),
       }
     }
 
@@ -313,4 +316,4 @@ const grabAnswers = (assessmentId, episodeId, token, userId) => {
   }
 }
 
-module.exports = { compileInlineConditionalQuestions, annotateWithAnswers, grabAnswers }
+module.exports = { compileInlineConditionalQuestions, annotateWithAnswers, grabAnswers, transformTableEntries }
