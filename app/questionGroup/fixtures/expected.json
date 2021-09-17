@@ -61,8 +61,7 @@
           "readOnly": true,
           "conditional": false,
           "referenceDataTargets": [],
-          "answerSchemas": [],
-          "answer": ""
+          "answerSchemas": []
         },
         {
           "type": "question",
@@ -75,8 +74,7 @@
           "readOnly": true,
           "conditional": false,
           "referenceDataTargets": [],
-          "answerSchemas": [],
-          "answer": ""
+          "answerSchemas": []
         },
         {
           "type": "question",

@@ -47,7 +47,24 @@ const annotateWithAnswers = (questions, answers, body, tables = {}) => {
 
       return {
         ...questionSchema,
-        contents: annotateWithAnswers(questionSchema.contents, tableAnswers, body),
+        contents: questionSchema.contents.map(tableQuestion => {
+          if (isPresentationOnlyFor(tableQuestion.answerType)) {
+            return tableQuestion
+          }
+          if (isMultipleChoiceAnswerFor(tableQuestion.answerType)) {
+            return {
+              ...tableQuestion,
+              answerSchemas: annotateAnswerSchemas(
+                tableQuestion.answerSchemas,
+                tableAnswers[tableQuestion.questionCode] || [],
+              ),
+            }
+          }
+          return {
+            ...tableQuestion,
+            answer: tableAnswers[tableQuestion.questionCode] || '',
+          }
+        }),
       }
     }
 
