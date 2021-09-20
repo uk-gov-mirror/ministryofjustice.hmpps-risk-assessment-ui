@@ -633,7 +633,7 @@
       "mandatory": true,
       "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an option (current use of alcohol)\"}}",
       "readOnly": false,
-      "conditional": true,
+      "conditional": false,
       "referenceDataTargets": [],
       "answerSchemas": [
         {

@@ -1,27 +1,53 @@
-const { getFlatAssessmentQuestions } = require('../data/hmppsAssessmentApi')
+const { getFlatAssessmentQuestions, getAnswers } = require('../data/hmppsAssessmentApi')
 const { processReplacements } = require('../utils/util')
 const logger = require('../logging/logger')
-const { compileInlineConditionalQuestions } = require('./questionGroups/getHandlers')
+const { compileInlineConditionalQuestions, annotateWithAnswers } = require('./questionGroups/getHandlers')
 
-module.exports = async (
-  { params: { assessmentId, assessmentCode = 'RSR', assessmentVersion = 1 }, user },
-  res,
-  next,
-) => {
+const formatWizardValidationErrors = validationErrors => {
+  const errors = {}
+  const errorSummary = []
+  if (validationErrors) {
+    for (let i = 0; i < Object.entries(validationErrors).length; i += 1) {
+      const { key, message, headerMessage } = Object.entries(validationErrors)[i][1]
+      errors[`${key}`] = { text: message }
+      errorSummary.push({
+        text: headerMessage || message,
+        href: `#${key}-error`,
+      })
+    }
+  }
+  return [errors, errorSummary]
+}
+
+module.exports = async (req, res, next) => {
+  const {
+    params: { assessmentCode = 'RSR', assessmentVersion = 1 },
+    user,
+    sessionModel,
+  } = req
   try {
     let questions = await getFlatAssessmentQuestions(assessmentCode, assessmentVersion, user?.token, user?.id)
+    const userAnswers = sessionModel.get('answers')
 
-    questions = compileInlineConditionalQuestions(questions, {})
+    const answers = await getAnswers(assessmentCode, 'current', user?.token, user?.id)
+    questions = annotateWithAnswers(questions, answers, userAnswers)
+
+    const errors = sessionModel.get('errors')
+
+    const [validationErrors, errorSummary] = formatWizardValidationErrors(errors)
+    res.locals.errors = validationErrors
+    res.locals.errorSummary = errorSummary
+
+    questions = compileInlineConditionalQuestions(questions, res.locals.errors)
     questions = processReplacements(questions, res.locals.offenderDetails)
 
     const questionLookup = {}
     questions.forEach(q => {
       questionLookup[q.questionCode] = q
     })
-    res.locals.assessmentId = assessmentId
     res.locals.questions = questionLookup
 
-    return next()
+    return questionLookup
   } catch (error) {
     logger.error(
       `Could not retrieve questions for assessment ${assessmentCode} version ${assessmentVersion}, error: ${error}`,

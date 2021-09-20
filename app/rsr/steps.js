@@ -15,7 +15,22 @@ module.exports = {
   '/offences-and-convictions': {
     pageTitle: 'Offences and convictions',
     controller: SaveAndContinue,
-    fields: ['completed_interview'], // Fields omitted for brevity
+    fields: [
+      'date_first_sanction',
+      'age_first_conviction',
+      'total_sanctions',
+      'total_violent_offences',
+      'date_current_conviction',
+      'any_sexual_offences',
+      'current_sexual_offence',
+      'most_recent_sexual_offence_date',
+      'total_sexual_offences_adult',
+      'total_sexual_offences_child',
+      'total_sexual_offences_child_image',
+      'total_non_contact_sexual_offences',
+      'earliest_release_date',
+      'completed_interview',
+    ],
     next: [
       {
         // Skip the needs section if an interview has not been conducted
@@ -30,7 +45,27 @@ module.exports = {
   '/needs': {
     pageTitle: 'Needs',
     controller: SaveAndContinue,
-    fields: [], // Fields omitted for brevity
+    fields: [
+      'suitable_accommodation',
+      'unemployed_on_release',
+      'current_relationship_with_partner',
+      'evidence_domestic_violence',
+      'use_of_alcohol',
+      'binge_drinking',
+      'impulsivity_issues',
+      'temper_control_issues',
+      'pro_criminal_attitudes',
+      'current_possession_firearm',
+      'current_offence_weapon',
+      'previous_murder_attempt',
+      'previous_wounding',
+      'previous_aggravated_burglary',
+      'previous_arson',
+      'previous_criminal_damage',
+      'previous_possession_firearm',
+      'previous_robbery',
+      'previous_offence_weapon',
+    ],
     next: 'predictor-scores',
     template: `${__dirname}/templates/needs`,
   },

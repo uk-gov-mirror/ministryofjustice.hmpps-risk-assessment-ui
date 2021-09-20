@@ -327,10 +327,11 @@
       }) }}
 
     {% case 'date' %}
-      {% if question.answer.length > 0 %}
-        {% set answerDay = question.answer | date("DD") %}
-        {% set answerMonth = question.answer | date("MM") %}
-        {% set answerYear = question.answer | date("YYYY") %}
+    {% set dateAnswer = question.answer.split('-') %}
+      {% if dateAnswer.length > 0 %}
+        {% set answerDay = dateAnswer[2] %}
+        {% set answerMonth = dateAnswer[1] %}
+        {% set answerYear = dateAnswer[0] %}
       {% else %}
         {% set answerDay = '' %}
         {% set answerMonth = '' %}

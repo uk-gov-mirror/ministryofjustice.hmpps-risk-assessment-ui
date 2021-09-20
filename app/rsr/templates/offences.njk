@@ -2,6 +2,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 
 {% block pageTitle %}
 {{ pageTitle }}
@@ -22,6 +23,10 @@
     {{ pageTitle }}
 </h1>
 
+{% if errorSummary | length %}
+  {% include "common/templates/partials/errorSummary.njk" %}
+{% endif %}
+
 <div class="body-link__container govuk-!-margin-bottom-8"><a href="#help-section" class="govuk-link body-link">Do you need help to answer the questions?</a></div>
 
 <div class="govuk-grid-row">
@@ -29,15 +34,15 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['date_first_sanction']) }}
-            {{ renderQuestion(questions['age_first_conviction']) }}
-            {{ renderQuestion(questions['total_sanctions']) }}
-            {{ renderQuestion(questions['total_violent_offences']) }}
-            {{ renderQuestion(questions['date_current_conviction']) }}
-            {{ renderQuestion(questions['any_sexual_offences']) }}
-            {{ renderQuestion(questions['total_non_contact_sexual_offences']) }}
-            {{ renderQuestion(questions['earliest_release_date']) }}
-            {{ renderQuestion(questions['completed_interview']) }}
+            {{ renderQuestion(questions['date_first_sanction'], errors) }}
+            {{ renderQuestion(questions['age_first_conviction'], errors) }}
+            {{ renderQuestion(questions['total_sanctions'], errors) }}
+            {{ renderQuestion(questions['total_violent_offences'], errors) }}
+            {{ renderQuestion(questions['date_current_conviction'], errors) }}
+            {{ renderQuestion(questions['any_sexual_offences'], errors) }}
+            {{ renderQuestion(questions['total_non_contact_sexual_offences'], errors) }}
+            {{ renderQuestion(questions['earliest_release_date'], errors) }}
+            {{ renderQuestion(questions['completed_interview'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({

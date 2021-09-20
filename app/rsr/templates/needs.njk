@@ -2,6 +2,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 
 {% block pageTitle %}
 {{ pageTitle }}
@@ -22,6 +23,10 @@
     {{ pageTitle }}
 </h1>
 
+{% if errorSummary | length %}
+  {% include "common/templates/partials/errorSummary.njk" %}
+{% endif %}
+
 <div class="body-link__container govuk-!-margin-bottom-8"><a href="#help-section" class="govuk-link body-link">Do you need help to answer the questions?</a></div>
 
 <div class="govuk-grid-row">
@@ -29,15 +34,15 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['suitable_accommodation']) }}
-            {{ renderQuestion(questions['unemployed_on_release']) }}
-            {{ renderQuestion(questions['current_relationship_with_partner']) }}
-            {{ renderQuestion(questions['evidence_domestic_violence']) }}
-            {{ renderQuestion(questions['use_of_alcohol']) }}
-            {{ renderQuestion(questions['binge_drinking']) }}
-            {{ renderQuestion(questions['impulsivity_issues']) }}
-            {{ renderQuestion(questions['temper_control_issues']) }}
-            {{ renderQuestion(questions['pro_criminal_attitudes']) }}
+            {{ renderQuestion(questions['suitable_accommodation'], errors) }}
+            {{ renderQuestion(questions['unemployed_on_release'], errors) }}
+            {{ renderQuestion(questions['current_relationship_with_partner'], errors) }}
+            {{ renderQuestion(questions['evidence_domestic_violence'], errors) }}
+            {{ renderQuestion(questions['use_of_alcohol'], errors) }}
+            {{ renderQuestion(questions['binge_drinking'], errors) }}
+            {{ renderQuestion(questions['impulsivity_issues'], errors) }}
+            {{ renderQuestion(questions['temper_control_issues'], errors) }}
+            {{ renderQuestion(questions['pro_criminal_attitudes'], errors) }}
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
           <h2 class="govuk-heading-l govuk-!-margin-top-8">
@@ -45,22 +50,22 @@
           </h2>
           <p class="govuk-body">Has the individual been convicted of any of these offences?</p>
 
-            {{ renderQuestion(questions['current_possession_firearm']) }}
-            {{ renderQuestion(questions['current_offence_weapon']) }}
+            {{ renderQuestion(questions['current_possession_firearm'], errors) }}
+            {{ renderQuestion(questions['current_offence_weapon'], errors) }}
 
           <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
           <h2 class="govuk-heading-l govuk-!-margin-top-8">
             Previous offences
           </h2>
           <p class="govuk-body">Has the individual previously been convicted of any of these offences?</p>
-            {{ renderQuestion(questions['previous_murder_attempt']) }}
-            {{ renderQuestion(questions['previous_wounding']) }}
-            {{ renderQuestion(questions['previous_aggravated_burglary']) }}
-            {{ renderQuestion(questions['previous_arson']) }}
-            {{ renderQuestion(questions['previous_criminal_damage']) }}
-            {{ renderQuestion(questions['previous_possession_firearm']) }}
-            {{ renderQuestion(questions['previous_robbery']) }}
-            {{ renderQuestion(questions['previous_offence_weapon']) }}
+            {{ renderQuestion(questions['previous_murder_attempt'], errors) }}
+            {{ renderQuestion(questions['previous_wounding'], errors) }}
+            {{ renderQuestion(questions['previous_aggravated_burglary'], errors) }}
+            {{ renderQuestion(questions['previous_arson'], errors) }}
+            {{ renderQuestion(questions['previous_criminal_damage'], errors) }}
+            {{ renderQuestion(questions['previous_possession_firearm'], errors) }}
+            {{ renderQuestion(questions['previous_robbery'], errors) }}
+            {{ renderQuestion(questions['previous_offence_weapon'], errors) }}
 
 
             <div class="questiongroup-action-buttons">

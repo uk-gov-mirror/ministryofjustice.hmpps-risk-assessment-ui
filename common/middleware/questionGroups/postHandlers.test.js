@@ -285,7 +285,7 @@ describe('Assemble dates', () => {
 
     assembleDates(req, res, next)
 
-    expect(req.body.some_date_field).toEqual('')
+    expect(req.body.some_date_field).toEqual(null)
   })
 
   it('does not assemble the date if the year is missing', () => {

@@ -43,8 +43,6 @@ const { startAssessmentFromCrn, startAssessmentFromForm } = require('./assessmen
 
 const { validate, localValidationRules } = require('../common/middleware/validator')
 
-const getAssessmentQuestions = require('../common/middleware/getAssessmentQuestions')
-
 const {
   checkUserIsAuthenticated,
   handleLoginCallback,
@@ -204,7 +202,8 @@ module.exports = app => {
     submitPredictorScores,
   )
 
-  app.use('/:assessmentId/rsr', getOffenderDetails, getAssessmentQuestions, rsrWorkflow)
+  // app.use('/:assessmentId/rsr', saveAssessmentId, rsrWorkflow)
+  app.use('/:assessmentId/rsr', rsrWorkflow)
 
   app.use((error, req, res, next) => {
     logger.info(`Unhandled exception received - ${error.message} ${error.stack}`)

@@ -2,6 +2,9 @@ const { Controller } = require('hmpo-form-wizard')
 const { postAnswers } = require('../../../common/data/hmppsAssessmentApi')
 const { formatValidationErrors, assembleDates } = require('../../../common/middleware/questionGroups/postHandlers')
 const { logger } = require('../../../common/logging/logger')
+const { customValidations } = require('../fields')
+const getOffenderDetails = require('../../../common/middleware/getOffenderDetails')
+const getAssessmentQuestions = require('../../../common/middleware/getAssessmentQuestions')
 
 const getErrorMessage = reason => {
   if (reason === 'OASYS_PERMISSION') {
@@ -12,14 +15,44 @@ const getErrorMessage = reason => {
 }
 
 class SaveAndContinue extends Controller {
-  validate(req, res, next) {
-    super.validate(req, res, next)
-  }
-
-  locals(req, res, next) {
+  // GET steps
+  async locals(req, res, next) {
     res.locals.csrfToken = res.locals['csrf-token']
     delete res.locals['csrf-token']
+
+    // get questions
+    await getAssessmentQuestions(req, res, next)
+
     super.locals(req, res, next)
+  }
+
+  // POST steps
+  async configure(req, res, next) {
+    await assembleDates(req, res, () => {})
+    super.configure(req, res, next)
+  }
+
+  process(req, res, next) {
+    req.sessionModel.set('answers', req.form.values)
+    super.process(req, res, next)
+  }
+
+  async validateFields(req, res, next) {
+    // at this point makes changes to sessionModel fields to add in context specific validations
+    const { date_first_sanction = '', total_sanctions = '' } = req.form.values
+    await getOffenderDetails(req, res, next)
+    const offenderDob = res.locals.offenderDetails.dob
+    req.sessionModel.options.fields = customValidations(
+      req.sessionModel.options.fields,
+      offenderDob,
+      date_first_sanction,
+      total_sanctions,
+    )
+    super.validateFields(req, res, next)
+  }
+
+  validate(req, res, next) {
+    super.validate(req, res, next)
   }
 
   async saveValues(req, res, next) {

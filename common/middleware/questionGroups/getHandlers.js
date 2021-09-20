@@ -25,7 +25,7 @@ const transformTableEntries = tableEntries => {
   }, {})
 }
 
-const annotateWithAnswers = (questions, answers, body, tables = {}) => {
+const annotateWithAnswers = (questions, answers, body = {}, tables = {}) => {
   return questions.map(questionSchema => {
     if (questionSchema.type === 'group') {
       return {
@@ -223,7 +223,9 @@ const updateAnswerSchemasWithInlineConditionals = ({
       if (conditionalDisplay.displayInline) {
         let thisError
 
-        const errorString = errors[`${conditionalQuestions[subjectCode].questionCode}`]?.text
+        const errorString =
+          errors[`${conditionalQuestions[subjectCode].questionCode}`]?.text ||
+          errors[`${conditionalQuestions[subjectCode].questionCode}`]?.message
 
         if (errorString) {
           thisError = `{text:'${errorString}'}`
