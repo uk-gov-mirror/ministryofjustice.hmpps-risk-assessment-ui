@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
     sessionModel,
   } = req
   try {
-    let questions = await getFlatAssessmentQuestions(assessmentCode, assessmentVersion, user?.token, user?.id)
+    let questions = await getFlatAssessmentQuestions(assessmentCode, user?.token, user?.id)
     const userAnswers = sessionModel.get('answers')
 
     const answers = await getAnswers(assessmentCode, 'current', user?.token, user?.id)
