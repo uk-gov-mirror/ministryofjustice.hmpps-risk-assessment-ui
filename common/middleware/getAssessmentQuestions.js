@@ -21,7 +21,7 @@ const formatWizardValidationErrors = validationErrors => {
 
 module.exports = async (req, res, next) => {
   const {
-    params: { assessmentCode = 'RSR', assessmentVersion = 1 },
+    params: { assessmentCode = 'RSR' },
     user,
     sessionModel,
   } = req
@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
     let questions = await getFlatAssessmentQuestions(assessmentCode, user?.token, user?.id)
     const userAnswers = sessionModel.get('answers')
 
-    const answers = await getAnswers(assessmentCode, 'current', user?.token, user?.id)
+    const answers = await getAnswers(req.session?.assessment?.uuid, 'current', user?.token, user?.id)
     questions = annotateWithAnswers(questions, answers, userAnswers)
 
     const errors = sessionModel.get('errors')
@@ -47,9 +47,7 @@ module.exports = async (req, res, next) => {
 
     return questionLookup
   } catch (error) {
-    logger.error(
-      `Could not retrieve questions for assessment ${assessmentCode} version ${assessmentVersion}, error: ${error}`,
-    )
+    logger.error(`Could not retrieve questions for assessment ${assessmentCode}, error: ${error}`)
     return res.render('app/error', { error })
   }
 }
