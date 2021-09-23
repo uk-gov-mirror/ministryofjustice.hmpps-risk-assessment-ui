@@ -1,25 +1,42 @@
-{% if offenderDetails and not hideOffenderDetails %}
+{% if not hideOffenderDetails %}
+  {% if assessment.subject %}
+        {% set subjectName = assessment.subject.name %}
+        {% set subjectCrn = assessment.subject.crn %}
+        {% set subjectPnc = assessment.subject.pnc %}
+        {% set subjectDob = assessment.subject.dob %}
+        {% set subjectAge = assessment.subject.age %}
+        {% set offenderDetailsExists = true %}
+  {% elif offenderDetails %}
+        {% set subjectName = offenderDetails.name %}
+        {% set subjectCrn = offenderDetails.crn %}
+        {% set subjectPnc = offenderDetails.pnc %}
+        {% set subjectDob = offenderDetails.dob %}
+        {% set subjectAge = offenderDetails.age %}
+        {% set offenderDetailsExists = true %}
+  {% endif %}
+  {% if offenderDetailsExists %}
   <section class="key-details-bar" aria-label="Key details">
-  <div class="moj-primary-navigation__container govuk-width-container--app-extra-wide">
-
-    <div class="key-details-bar__top-block moj-context-header">
-      <dl>
-        <dd class="key-details-bar__name">{{ offenderDetails.name }}</dd>
-        {% if offenderDetails.crn %}
-          <dt class="govuk-body key-details-bar__divider ">CRN:</dt>
-          <dd class="govuk-body ">{{ offenderDetails.crn }}</dd>
-        {% endif %}
-        {% if offenderDetails.pnc %}
-          <dt class="govuk-body key-details-bar__divider ">PNC:</dt>
-          <dd class="govuk-body ">{{ offenderDetails.pnc }}</dd>
-        {% endif %}
-        {% if offenderDetails.dob %}
-          <dt class="govuk-body key-details-bar__divider ">Date of birth:</dt>
-          <dd class="govuk-body ">{{ offenderDetails.dob | date("DD MMMM YYYY") }} ({{ offenderDetails.age }}
-            years old)
-          </dd>
-        {% endif %}
-      </dl>
-    </div></div>
+    <div class="moj-primary-navigation__container govuk-width-container--app-extra-wide">
+      <div class="key-details-bar__top-block moj-context-header">
+        <dl>
+          <dd class="key-details-bar__name">{{ subjectName }}</dd>
+          {% if subjectCrn %}
+            <dt class="govuk-body key-details-bar__divider ">CRN:</dt>
+            <dd class="govuk-body ">{{ subjectCrn }}</dd>
+          {% endif %}
+          {% if subjectPnc %}
+            <dt class="govuk-body key-details-bar__divider ">PNC:</dt>
+            <dd class="govuk-body ">{{ subjectPnc }}</dd>
+          {% endif %}
+          {% if subjectDob %}
+            <dt class="govuk-body key-details-bar__divider ">Date of birth:</dt>
+            <dd class="govuk-body ">{{ subjectDob | date("DD MMMM YYYY") }} ({{ subjectAge }}
+              years old)
+            </dd>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
   </section>
+  {% endif %}
 {% endif %}

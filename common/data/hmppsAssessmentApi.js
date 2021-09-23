@@ -44,6 +44,16 @@ const getAnswers = (assessmentId, episodeId, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
+const getEpisode = (assessmentId, episodeId, authorisationToken, userId) => {
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
+  return getData(path, authorisationToken, userId)
+}
+
+const getCurrentEpisode = (assessmentId, authorisationToken, userId) => {
+  const path = `${url}/assessments/${assessmentId}/episodes/current`
+  return getData(path, authorisationToken, userId)
+}
+
 const getAssessmentsList = (authorisationToken, userId) => {
   const path = `${url}/questions/list`
   return getData(path, authorisationToken, userId)
@@ -174,4 +184,6 @@ module.exports = {
   updateEditedTableRow: updateTableRow,
   getFlatAssessmentQuestions,
   getDraftPredictorScore,
+  getEpisode,
+  getCurrentEpisode,
 }

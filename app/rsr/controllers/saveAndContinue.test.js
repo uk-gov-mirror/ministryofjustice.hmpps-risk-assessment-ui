@@ -15,9 +15,6 @@ describe('post answers', () => {
   const res = {
     redirect: jest.fn(),
     render: jest.fn(),
-    locals: {
-      assessmentId: 'test-assessment-id',
-    },
   }
 
   beforeEach(() => {
@@ -27,6 +24,9 @@ describe('post answers', () => {
       sessionModel: {
         set: () => {},
         unset: () => {},
+      },
+      session: {
+        assessment: { uuid: 'test-assessment-id' },
       },
       form: {
         values: {},

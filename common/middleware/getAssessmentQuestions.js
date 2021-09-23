@@ -39,12 +39,10 @@ module.exports = async (req, res, next) => {
     res.locals.errorSummary = errorSummary
 
     questions = compileInlineConditionalQuestions(questions, res.locals.errors)
-    questions = processReplacements(questions, res.locals.offenderDetails)
+    questions = processReplacements(questions, req.session?.assessment?.subject)
 
-    const questionLookup = {}
-    questions.forEach(q => {
-      questionLookup[q.questionCode] = q
-    })
+    const byQuestionCode = (a, q) => ({ ...a, [q.questionCode]: q })
+    const questionLookup = questions.reduce(byQuestionCode, {})
     res.locals.questions = questionLookup
 
     return questionLookup

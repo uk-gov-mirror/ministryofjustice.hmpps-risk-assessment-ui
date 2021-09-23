@@ -3,7 +3,6 @@ const { postAnswers } = require('../../../common/data/hmppsAssessmentApi')
 const { formatValidationErrors, assembleDates } = require('../../../common/middleware/questionGroups/postHandlers')
 const { logger } = require('../../../common/logging/logger')
 const { customValidations } = require('../fields')
-const getOffenderDetails = require('../../../common/middleware/getOffenderDetails')
 const getAssessmentQuestions = require('../../../common/middleware/getAssessmentQuestions')
 
 const getErrorMessage = reason => {
@@ -22,6 +21,7 @@ class SaveAndContinue extends Controller {
 
     // get questions
     await getAssessmentQuestions(req, res, next)
+    res.locals.assessment = req.session.assessment || {}
 
     super.locals(req, res, next)
   }
@@ -40,8 +40,7 @@ class SaveAndContinue extends Controller {
   async validateFields(req, res, next) {
     // at this point makes changes to sessionModel fields to add in context specific validations
     const { date_first_sanction = '', total_sanctions = '' } = req.form.values
-    await getOffenderDetails(req, res, next)
-    const offenderDob = res.locals.offenderDetails.dob
+    const offenderDob = req.session?.assessment?.subject?.dob
     req.sessionModel.options.fields = customValidations(
       req.sessionModel.options.fields,
       offenderDob,
@@ -60,7 +59,13 @@ class SaveAndContinue extends Controller {
 
     try {
       await assembleDates(req, res, () => {})
-      const [ok, response] = await postAnswers(res.locals.assessmentId, 'current', { answers }, user?.token, user?.id)
+      const [ok, response] = await postAnswers(
+        req.session?.assessment?.uuid,
+        'current',
+        { answers },
+        user?.token,
+        user?.id,
+      )
 
       if (ok) {
         return super.saveValues(req, res, next)
@@ -74,7 +79,7 @@ class SaveAndContinue extends Controller {
       }
       return res.render('app/error', { subHeading: getErrorMessage(response.reason) })
     } catch (error) {
-      logger.error(`Could not save to assessment ${res.locals.assessmentId}, current episode, error: ${error}`)
+      logger.error(`Could not save to assessment ${req.session?.assessment?.uuid}, current episode, error: ${error}`)
       return res.render('app/error', { error })
     }
   }

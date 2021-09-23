@@ -41,5 +41,10 @@
         "pre_sentence_previous_child_protection_registration": ["neglect", "physical", "sexual", "emotional"]
       }
     ]
+  },
+  "offence": {
+    "offence": "OFFENCE_CODE",
+    "subCode": "OFFENCE_SUB_CODE",
+    "sentenceDate": "1st January 2020"
   }
 }

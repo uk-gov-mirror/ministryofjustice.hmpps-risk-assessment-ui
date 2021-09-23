@@ -124,5 +124,10 @@
         }
       }
     }
-  ]
+  ],
+  "offence": {
+    "offence": "OFFENCE_CODE",
+    "subCode": "OFFENCE_SUB_CODE",
+    "sentenceDate": "1st January 2020"
+  }
 }
