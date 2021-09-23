@@ -54,8 +54,10 @@ describe('startAssessment', () => {
   it('stores assessment details in the session', async () => {
     const assessmentUuid = 'ASSESSMENT_UUID'
     const episodeUuid = 'EPISODE_UUID'
-    const offenceCode = 'OFFENCE_CODE'
-    const offenceSubCode = 'OFFENCE_SUB_CODE'
+    const offenceCode = '00'
+    const codeDescription = 'Offence'
+    const offenceSubCode = '00'
+    const subCodeDescription = 'Sub Offence'
     const subject = {
       name: 'Test Offender',
       dateOfBirth: '1980-01-01',
@@ -68,7 +70,9 @@ describe('startAssessment', () => {
       episodeUuid,
       offence: {
         offenceCode,
+        codeDescription,
         offenceSubCode,
+        subCodeDescription,
         sentenceDate: '2020-01-01',
       },
     })
@@ -93,7 +97,9 @@ describe('startAssessment', () => {
         episodeUuid,
         offence: {
           offence: offenceCode,
+          offenceDescription: codeDescription,
           subCode: offenceSubCode,
+          subCodeDescription,
           sentenceDate: '1st January 2020',
         },
         subject: {

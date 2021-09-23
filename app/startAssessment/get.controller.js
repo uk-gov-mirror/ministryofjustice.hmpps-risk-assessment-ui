@@ -45,7 +45,9 @@ const getOffenceDetailsFor = episode => {
 
   return {
     offence: episode?.offence?.offenceCode,
+    offenceDescription: episode?.offence?.codeDescription,
     subCode: episode?.offence?.offenceSubCode,
+    subCodeDescription: episode?.offence?.subCodeDescription,
     sentenceDate: sentenceDate && format(new Date(sentenceDate), 'do MMMM y'),
   }
 }
