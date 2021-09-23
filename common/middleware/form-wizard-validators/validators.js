@@ -1,4 +1,4 @@
-const { isDate, isFuture, parseISO, isAfter, intervalToDuration } = require('date-fns')
+const { isDate, isFuture, parseISO, isAfter, isEqual, intervalToDuration } = require('date-fns')
 
 const range = function range(value, lowerBound, higherBound) {
   return value >= lowerBound && value <= higherBound
@@ -14,6 +14,10 @@ const validDate = function validDate(date) {
 
 const dateIsAfter = function dateIsAfter(date1, date2) {
   return isAfter(parseISO(date1), parseISO(date2))
+}
+
+const dateIsAfterOrEqual = function dateIsAfterOrEqual(date1, date2) {
+  return isAfter(parseISO(date1), parseISO(date2)) || isEqual(parseISO(date1), parseISO(date2))
 }
 
 const yearsBetweenGreaterThan = function yearsBetween(date1, date2, years) {
@@ -32,4 +36,12 @@ const yearsBetweenLessThan = function yearsBetween(date1, date2, years) {
   return Math.abs(duration.years) <= years
 }
 
-module.exports = { range, notInFuture, validDate, dateIsAfter, yearsBetweenGreaterThan, yearsBetweenLessThan }
+module.exports = {
+  range,
+  notInFuture,
+  validDate,
+  dateIsAfter,
+  dateIsAfterOrEqual,
+  yearsBetweenGreaterThan,
+  yearsBetweenLessThan,
+}

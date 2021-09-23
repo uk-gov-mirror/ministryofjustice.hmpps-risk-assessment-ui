@@ -1,5 +1,6 @@
 const {
   dateIsAfter,
+  dateIsAfterOrEqual,
   yearsBetweenGreaterThan,
   yearsBetweenLessThan,
   range,
@@ -29,7 +30,7 @@ const customValidations = (fields, offenderDob, dateFirstSanction, totalSanction
     message: 'Date must be later than the individual’s date of birth',
   })
   fields.date_current_conviction.validate.push({
-    fn: dateIsAfter,
+    fn: dateIsAfterOrEqual,
     arguments: [dateFirstSanction],
     message: 'Current conviction cannot be before the date of first conviction',
   })

@@ -3,6 +3,7 @@ const {
   notInFuture,
   validDate,
   dateIsAfter,
+  dateIsAfterOrEqual,
   yearsBetweenLessThan,
   yearsBetweenGreaterThan,
 } = require('./validators')
@@ -63,7 +64,13 @@ describe('checks dates are valid', () => {
 describe('checks order of dates', () => {
   it('checks dates', () => {
     expect(dateIsAfter('2020-03-26', '2020-03-27')).toEqual(false)
+    expect(dateIsAfter('2020-03-26', '2020-03-26')).toEqual(false)
     expect(dateIsAfter('2020-03-28', '2020-03-27')).toEqual(true)
+  })
+  it('checks dates', () => {
+    expect(dateIsAfterOrEqual('2020-03-26', '2020-03-27')).toEqual(false)
+    expect(dateIsAfterOrEqual('2020-03-26', '2020-03-26')).toEqual(true)
+    expect(dateIsAfterOrEqual('2020-03-28', '2020-03-27')).toEqual(true)
   })
 })
 
