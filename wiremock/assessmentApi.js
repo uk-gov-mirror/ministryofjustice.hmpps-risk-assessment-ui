@@ -106,11 +106,11 @@ const stubQuestionGroup = groupId => {
   })
 }
 
-const stubAssessmentQuestions = (assessmentCode, version = 1) => {
+const stubAssessmentQuestions = assessmentCode => {
   stubFor({
     request: {
       method: 'GET',
-      urlPattern: `/reference/assessment/${assessmentCode}/${version}/questions`,
+      urlPattern: `/assessments/schema/${assessmentCode}/questions`,
     },
     response: {
       headers: {

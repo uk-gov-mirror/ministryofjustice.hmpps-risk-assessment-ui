@@ -29,8 +29,8 @@ const getQuestionGroupSummary = (groupId, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
-const getFlatAssessmentQuestions = (assessmentCode, version = 1, authorisationToken, userId) => {
-  const path = `${url}/reference/assessment/${assessmentCode}/${version}/questions`
+const getFlatAssessmentQuestions = (assessmentCode, authorisationToken, userId) => {
+  const path = `${url}/assessments/schema/${assessmentCode}/questions`
   return getData(path, authorisationToken, userId)
 }
 
