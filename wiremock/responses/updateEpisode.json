@@ -43,8 +43,10 @@
     ]
   },
   "offence": {
-    "offence": "OFFENCE_CODE",
-    "subCode": "OFFENCE_SUB_CODE",
-    "sentenceDate": "1st January 2020"
+    "offenceCode": "00",
+    "codeDescription": "Offence",
+    "offenceSubCode": "00",
+    "subCodeDescription": "Sub Offence",
+    "sentenceDate": "2020-01-01"
   }
 }
