@@ -318,7 +318,7 @@ const stubPredictors = () => {
         'Content-Type': 'application/json;charset=UTF-8',
       },
       status: 200,
-      jsonBody: predictors,
+      jsonBody: predictors.default,
     },
   })
 }

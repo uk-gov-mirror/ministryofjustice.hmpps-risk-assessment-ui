@@ -27,7 +27,8 @@
     <div  id="predictor-scores"  class="govuk-grid-column-two-thirds">
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
-                <h2 class="govuk-heading-l">RSR score</h2>
+                <h2 class="govuk-heading-l score-header">RSR score</h2>
+                <p class="scoretype-indicator">{% if scoreType == 'DYNAMIC' %}Dynamic{% else %}Static{% endif %}</p>
                 {{ predictorScore(predictorScores.current.scores.RSR) }}
                 <details class="govuk-details" data-module="govuk-details">
                     <summary class="govuk-details__summary">
@@ -57,13 +58,14 @@
                 </details>
             </div>
         </div>
+    {% if scoreType == 'DYNAMIC' %}
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-one-half">
-                <h2 class="govuk-heading-l">OSP/C score</h2>
+                <h2 class="govuk-heading-l score-header">OSP/C score</h2>
                 {{ predictorScore(predictorScores.current.scores.OSPC) }}
             </div>
             <div class="govuk-grid-column-one-half">
-                <h2 class="govuk-heading-l">OSP/I score</h2>
+                <h2 class="govuk-heading-l score-header">OSP/I score</h2>
                 {{ predictorScore(predictorScores.current.scores.OSPI) }}
             </div>
         </div>
@@ -110,6 +112,7 @@
                 </details>
             </div>
         </div>
+    {% endif %}
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
                 <div class="govuk-button-group">
@@ -127,7 +130,7 @@
             </div>
         </div>
     </div>
-    {% if predictorScores.historical.length %}}
+    {% if predictorScores.historical.length %}
     <div id="predictor-scores-history" class="govuk-grid-column-one-third">
         <div class="govuk-body predictor-timeline__heading">
             <h2 class="govuk-heading-l">Scores history</h2>
