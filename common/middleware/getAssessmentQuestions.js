@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
     let questions = await getFlatAssessmentQuestions(assessmentCode, user?.token, user?.id)
     const userAnswers = sessionModel.get('answers')
 
-    const answers = await getAnswers(req.session?.assessment?.uuid, 'current', user?.token, user?.id)
+    const { answers } = await getAnswers(req.session?.assessment?.uuid, 'current', user?.token, user?.id)
     questions = annotateWithAnswers(questions, answers, userAnswers)
 
     const errors = sessionModel.get('errors')
