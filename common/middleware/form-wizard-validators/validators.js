@@ -1,7 +1,7 @@
 const { isDate, isFuture, parseISO, isAfter, isEqual, intervalToDuration } = require('date-fns')
 
 const range = function range(value, lowerBound, higherBound) {
-  return value >= lowerBound && value <= higherBound
+  return Number(value) >= Number(lowerBound) && Number(value) <= Number(higherBound)
 }
 
 const notInFuture = function inFuture(value) {

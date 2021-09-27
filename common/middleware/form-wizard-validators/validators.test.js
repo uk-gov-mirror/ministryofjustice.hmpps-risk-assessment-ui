@@ -24,6 +24,10 @@ describe('checks numbers are in range', () => {
   it('is at the top of the range', () => {
     expect(range(10, 1, 10)).toEqual(true)
   })
+  it('converts strings to numbers', () => {
+    expect(range('10', 0, '9')).toEqual(false)
+    expect(range('9', 0, '10')).toEqual(true)
+  })
 })
 
 describe('checks date is not in the future', () => {
