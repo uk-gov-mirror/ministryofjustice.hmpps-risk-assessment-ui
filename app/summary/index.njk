@@ -5,9 +5,13 @@
 {% from "moj/components/banner/macro.njk" import mojBanner %}
 
 {% set heading = 'Assessment progress' %}
+{% set hideBackLink = true %}
 
 {% set errorHeading = "Error - " + heading %}
 
+{% block header %}
+    {% include "common/templates/partials/header.njk" %}
+{% endblock %}
 
 {% block pageTitle %}
     {% if errors %}
@@ -17,13 +21,6 @@
     {% endif %}
 {% endblock %}
 
-{% block beforeContent %}
-{#    <div role="navigation" aria-label="back">#}
-{#        {{ govukBackLink({#}
-{#            href: "/" + assessmentId + "/assessments"#}
-{#        }) }}#}
-{#    </div>#}
-{% endblock %}
 
 {% block content %}
 

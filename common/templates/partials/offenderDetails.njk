@@ -19,7 +19,6 @@
     <div class="moj-primary-navigation__container govuk-width-container--app-extra-wide">
       <div class="key-details-bar__top-block moj-context-header">
         <dl>
-          <dd class="key-details-bar__name">{{ subjectName }}</dd>
           {% if subjectCrn %}
             <dt class="govuk-body key-details-bar__divider ">CRN:</dt>
             <dd class="govuk-body ">{{ subjectCrn }}</dd>
@@ -30,11 +29,12 @@
           {% endif %}
           {% if subjectDob %}
             <dt class="govuk-body key-details-bar__divider ">Date of birth:</dt>
-            <dd class="govuk-body ">{{ subjectDob | date("DD MMMM YYYY") }} ({{ subjectAge }}
-              years old)
+            <dd class="govuk-body ">{{ subjectDob | date("DD MMMM YYYY") }}
             </dd>
           {% endif %}
         </dl>
+        <div class="key-details-bar__name">{{ subjectName }}</div>
+        <hr class="key-details-bar__section-break govuk-section-break govuk-section-break--m govuk-section-break--visible">
       </div>
     </div>
   </section>

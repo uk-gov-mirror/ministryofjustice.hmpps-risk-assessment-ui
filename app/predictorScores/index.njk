@@ -8,13 +8,10 @@
     {{ heading }}
 {% endblock %}
 
-{% block beforeContent %}
-    <div role="navigation" aria-label="back">
-        {{ govukBackLink({
-            href: navigation.previous.url,
-            text: "Back to " + navigation.previous.name
-        }) }}
-    </div>
+{% block header %}
+    {% set backLink = navigation.previous.url %}
+    {% set backText = "Back to " + navigation.previous.name %}
+    {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
 {% block content %}

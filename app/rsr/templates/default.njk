@@ -7,13 +7,9 @@
 {{ pageTitle }}
 {% endblock %}
 
-{% block beforeContent %}
-<div role="navigation" aria-label="back">
-    {{ govukBackLink({
-        href: backLink,
-        text: "Back"
-    }) }}
-</div>
+{% block header %}
+    {% set backText = "Back" %}
+    {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
 {% block content %}

@@ -14,18 +14,11 @@ $white-transparent: rgba(255, 255, 255, 0.25);
 }
 
 .key-details-bar {
-  background-color: #1d70b8;
-  color: #fff;
-  padding: 30px;
-}
-
-.key-details-bar__divider {
-  color: #fff;
-  font-size: 19px;
+  padding: 30px 30px 0 30px;
 }
 
 .key-details-bar__name {
-  font-size: 24px !important;
+  font-size: 36px !important;
   font-family: 'GDS Transport', Arial, sans-serif !important;
   font-weight: 700 !important;
 }
@@ -44,24 +37,26 @@ p {
 
 .moj-context-header dt,
 .moj-context-header dd {
-  color: govuk-colour('white');
+  color: govuk-colour('dark-grey');
   padding-top: 0;
   display: inline-block;
   margin: govuk-spacing(1);
 }
 
-.moj-context-header dt {
-  @extend .govuk-heading-s;
-
+.moj-context-header dt:not(:first-child) {
   padding: 0 0 0 govuk-spacing(2) !important;
 }
 
-.moj-context-header dd {
-  @extend .govuk-body-s;
+.moj-context-header dt:first-child {
+  margin-left: 0;
 }
 
-.moj-context-header__block dt {
-  border-left: 1px solid govuk-colour('white');
+.key-details-bar__divider:not(:first-child) {
+  border-left: 1px solid;
+}
+
+.key-details-bar__section-break {
+  border-bottom-width: 2px;
 }
 
 .moj-context-header__block dt:first-of-type {
@@ -74,7 +69,6 @@ p {
   @extend .govuk-width-container;
 
   padding-bottom: govuk-spacing(1);
-  border-top: 1px solid govuk-colour('white');
 }
 
 .moj-context-header__top-block {

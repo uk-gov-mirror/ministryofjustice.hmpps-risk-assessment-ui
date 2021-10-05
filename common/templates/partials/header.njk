@@ -43,4 +43,16 @@
 </header>
 
 
+{% if not hideBackLink %}
+  <div class="moj-primary-navigation__container govuk-width-container--app-extra-wide">
+    <div role="navigation" aria-label="back">
+      {{ govukBackLink({
+        href: backLink,
+        text: backText or "Back"
+      }) }}
+    </div>
+  </div>
+
+{% endif %}
+
 {% include "./offenderDetails.njk" %}

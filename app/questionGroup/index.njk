@@ -9,21 +9,18 @@
 
 {% set errorHeading = "Error - " + heading %}
 
+{% block header %}
+    {% set backLink = "/" + assessmentId + "/questiongroup/" + navigation.previous.url %}
+    {% set backText = "Back to " + navigation.previous.name %}
+    {% include "common/templates/partials/header.njk" %}
+{% endblock %}
+
 {% block pageTitle %}
     {% if errors | length %}
         {{ errorHeading }}
     {% else %}
         {{ heading }}
     {% endif %}
-{% endblock %}
-
-{% block beforeContent %}
-    <div role="navigation" aria-label="back">
-        {{ govukBackLink({
-            href: "/" + assessmentId + "/questiongroup/" + navigation.previous.url,
-            text: "Back to " + navigation.previous.name
-        }) }}
-    </div>
 {% endblock %}
 
 {% block content %}

@@ -3,11 +3,14 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
 
+{% set hideBackLink = true %}
+
 {% block pageTitle %}
 {{ heading }}
 {% endblock %}
 
-{% block beforeContent %}
+{% block header %}
+    {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
 {% block content %}

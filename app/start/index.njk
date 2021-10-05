@@ -1,6 +1,10 @@
 {% extends "common/templates/layout.njk" %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
+{% block header %}
+    {% set hideBackLink = true %}
+    {% include "common/templates/partials/header.njk" %}
+{% endblock %}
 
 {% block content %}
     <h1 class="govuk-heading-l">
