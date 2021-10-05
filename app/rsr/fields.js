@@ -9,42 +9,42 @@ const {
 } = require('../../common/middleware/form-wizard-validators/validators')
 
 const customValidations = (fields, offenderDob, dateFirstSanction, totalSanctions) => {
-  fields.date_first_sanction.validate.push({
+  fields.date_first_sanction?.validate.push({
     fn: dateIsAfter,
     arguments: [offenderDob],
     message: 'Date must be later than the individual’s date of birth',
   })
-  fields.date_first_sanction.validate.push({
+  fields.date_first_sanction?.validate.push({
     fn: yearsBetweenGreaterThan,
     arguments: [offenderDob, 8],
     message: 'The individual must be aged 8 or older on the date of first sanction',
   })
-  fields.total_violent_offences.validate.push({
+  fields.total_violent_offences?.validate.push({
     fn: range,
     arguments: [0, totalSanctions],
     message: 'Cannot be greater than the total number of sanctions for all offences',
   })
-  fields.date_current_conviction.validate.push({
+  fields.date_current_conviction?.validate.push({
     fn: dateIsAfter,
     arguments: [offenderDob],
     message: 'Date must be later than the individual’s date of birth',
   })
-  fields.date_current_conviction.validate.push({
+  fields.date_current_conviction?.validate.push({
     fn: dateIsAfterOrEqual,
     arguments: [dateFirstSanction],
     message: 'Current conviction cannot be before the date of first conviction',
   })
-  fields.most_recent_sexual_offence_date.validate.push({
+  fields.most_recent_sexual_offence_date?.validate.push({
     fn: dateIsAfter,
     arguments: [offenderDob],
     message: 'Date must be later than the individual’s date of birth',
   })
-  fields.earliest_release_date.validate.push({
+  fields.earliest_release_date?.validate.push({
     fn: dateIsAfter,
     arguments: [offenderDob],
     message: 'Date must be later than the individual’s date of birth',
   })
-  fields.earliest_release_date.validate.push({
+  fields.earliest_release_date?.validate.push({
     fn: yearsBetweenLessThan,
     arguments: [offenderDob, 110],
     message: 'The individual must be aged 110 or younger on commencement',
