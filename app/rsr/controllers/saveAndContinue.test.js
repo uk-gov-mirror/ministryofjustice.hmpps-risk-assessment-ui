@@ -79,7 +79,7 @@ describe('SaveAndContinueController', () => {
     processReplacements.mockReset()
 
     processReplacements.mockImplementation(questions => questions)
-    getAnswers.mockResolvedValue({})
+    getAnswers.mockResolvedValue({ answers: {} })
   })
 
   describe('locals', () => {
@@ -258,13 +258,16 @@ describe('SaveAndContinueController', () => {
         answers: {
           first_question: 'SUBMITTED_FOO',
           second_question: 'SUBMITTED_BAR',
+          third_question: '',
         },
       })
 
       getAnswers.mockResolvedValue({
-        first_question: ['PREVIOUS_FOO'],
-        second_question: ['PREVIOUS_BAR'],
-        third_question: ['PREVIOUS_BAZ'],
+        answers: {
+          first_question: ['PREVIOUS_FOO'],
+          second_question: ['PREVIOUS_BAR'],
+          third_question: ['PREVIOUS_BAZ'],
+        },
       })
 
       await controller.locals(req, res, () => {})
