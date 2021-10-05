@@ -287,8 +287,8 @@ class SaveAndContinue extends Controller {
     res.locals.errorSummary = errorSummary
 
     const previousAnswers = await getAnswers(
-      req.assessment?.uuid,
-      req.assessment?.episodeUuid,
+      req.session.assessment?.uuid,
+      req.session.assessment?.episodeUuid,
       req.user?.token,
       req.user?.id,
     )
@@ -370,7 +370,7 @@ class SaveAndContinue extends Controller {
     try {
       const [ok, response] = await postAnswers(
         req.session?.assessment?.uuid,
-        'current',
+        req.session?.assessment?.episodeUuid,
         { answers },
         user?.token,
         user?.id,

@@ -13,6 +13,7 @@ jest.mock('../fields')
 
 let req
 const user = { token: 'mytoken', id: '1' }
+const assessmentUuid = '22222222-2222-2222-2222-222222222221'
 const episodeUuid = '22222222-2222-2222-2222-222222222222'
 
 const controller = new SaveAndContinueController({
@@ -51,7 +52,8 @@ describe('SaveAndContinueController', () => {
       },
       session: {
         assessment: {
-          uuid: 'test-assessment-id',
+          uuid: assessmentUuid,
+          episodeUuid,
           subject: { dob: '1980-01-01' },
         },
       },
@@ -266,6 +268,13 @@ describe('SaveAndContinueController', () => {
       })
 
       await controller.locals(req, res, () => {})
+
+      expect(getAnswers).toHaveBeenCalledWith(
+        req.session.assessment.uuid,
+        req.session.assessment.episodeUuid,
+        req.user.token,
+        req.user.id,
+      )
 
       expect(res.locals.questions).toEqual({
         first_question: {
@@ -482,8 +491,8 @@ describe('SaveAndContinueController', () => {
 
       expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
       expect(postAnswers).toHaveBeenCalledWith(
-        'test-assessment-id',
-        'current',
+        assessmentUuid,
+        episodeUuid,
         {
           answers: {
             some_field: ['foo'],
@@ -512,13 +521,7 @@ describe('SaveAndContinueController', () => {
       const theError = 'Something went wrong'
 
       expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
-      expect(postAnswers).toHaveBeenCalledWith(
-        req.session.assessment.uuid,
-        'current',
-        { answers: {} },
-        user.token,
-        user.id,
-      )
+      expect(postAnswers).toHaveBeenCalledWith(assessmentUuid, episodeUuid, { answers: {} }, user.token, user.id)
       expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
 
