@@ -286,12 +286,7 @@ class SaveAndContinue extends Controller {
     res.locals.errors = validationErrors
     res.locals.errorSummary = errorSummary
 
-    const previousAnswers = await getAnswers(
-      req.session.assessment?.uuid,
-      req.session.assessment?.episodeUuid,
-      req.user?.token,
-      req.user?.id,
-    )
+    const previousAnswers = await getAnswers(req.session.assessment?.uuid, 'current', req.user?.token, req.user?.id)
     const submittedAnswers = req.sessionModel.get('answers') || {}
 
     const questions = Object.entries(req.form.options.fields)
@@ -370,7 +365,7 @@ class SaveAndContinue extends Controller {
     try {
       const [ok, response] = await postAnswers(
         req.session?.assessment?.uuid,
-        req.session?.assessment?.episodeUuid,
+        'current',
         { answers },
         user?.token,
         user?.id,
