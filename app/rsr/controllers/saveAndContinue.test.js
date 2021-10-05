@@ -34,6 +34,8 @@ describe('SaveAndContinueController', () => {
     })
   }
 
+  const inputWithName = name => new RegExp(`<input[^>]*?name=(["\\'])?${name}((?:.(?!\\1|>))*.?)\\1?`)
+
   const res = {
     redirect: jest.fn(),
     render: jest.fn(),
@@ -143,8 +145,7 @@ describe('SaveAndContinueController', () => {
       await controller.locals(req, res, () => {})
 
       const [yesAnswer] = res.locals.questions.first_question.answerSchemas
-      expect(yesAnswer.conditional?.html).toBeDefined()
-      // TODO: additional assertions
+      expect(yesAnswer.conditional?.html).toMatch(inputWithName('second_question'))
     })
 
     it('pre-renders nested conditional questions', async () => {
@@ -190,8 +191,8 @@ describe('SaveAndContinueController', () => {
       await controller.locals(req, res, () => {})
 
       const [yesAnswer] = res.locals.questions.first_question.answerSchemas
-      expect(yesAnswer.conditional?.html).toBeDefined()
-      // TODO: additional assertions
+      expect(yesAnswer.conditional?.html).toMatch(inputWithName('second_question'))
+      expect(yesAnswer.conditional?.html).toMatch(inputWithName('third_question'))
     })
 
     it('maps answers on to questions', async () => {
