@@ -23,6 +23,7 @@ module.exports = {
       'date_current_conviction',
       'any_sexual_offences',
       'current_sexual_offence',
+      'current_offence_victim_stranger',
       'most_recent_sexual_offence_date',
       'total_sexual_offences_adult',
       'total_sexual_offences_child',

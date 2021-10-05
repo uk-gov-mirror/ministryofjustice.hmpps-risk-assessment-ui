@@ -108,6 +108,15 @@ const fields = {
       },
     ],
   },
+  current_offence_victim_stranger: {
+    dependent: { field: 'current_sexual_offence', value: 'YES' },
+    validate: [
+      {
+        type: 'required',
+        message: 'Select yes or no',
+      },
+    ],
+  },
   most_recent_sexual_offence_date: {
     dependent: { field: 'any_sexual_offences', value: 'YES' },
     validate: [
