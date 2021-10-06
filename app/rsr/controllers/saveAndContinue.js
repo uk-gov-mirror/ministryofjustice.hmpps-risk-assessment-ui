@@ -160,13 +160,14 @@ const combineDateFields = (formValues = {}) => {
 }
 
 const answerDtoFrom = formValues =>
-  Object.keys(formValues).reduce(
-    (otherFields, fieldName) => ({
+  Object.keys(formValues).reduce((otherFields, fieldName) => {
+    const answer = formValues[fieldName] !== '' ? formValues[fieldName] : []
+    const answerAsArray = Array.isArray(answer) ? answer : [answer]
+    return {
       ...otherFields,
-      [fieldName]: Array.isArray(formValues[fieldName]) ? formValues[fieldName] : [formValues[fieldName]],
-    }),
-    {},
-  )
+      [fieldName]: answerAsArray,
+    }
+  }, {})
 
 const renderConditionalQuestion = (
   questions,

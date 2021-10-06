@@ -258,7 +258,7 @@ describe('SaveAndContinueController', () => {
       mockSessionModel({
         answers: {
           first_question: 'SUBMITTED_FOO',
-          second_question: 'SUBMITTED_BAR',
+          second_question: '',
           third_question: '',
         },
       })
@@ -266,8 +266,8 @@ describe('SaveAndContinueController', () => {
       getAnswers.mockResolvedValue({
         answers: {
           first_question: ['PREVIOUS_FOO'],
-          second_question: ['PREVIOUS_BAR'],
-          third_question: ['PREVIOUS_BAZ'],
+          second_question: [],
+          third_question: ['PREVIOUS_BAR'],
         },
       })
 
@@ -284,12 +284,12 @@ describe('SaveAndContinueController', () => {
         second_question: {
           questionCode: 'second_question',
           answerType: 'numeric',
-          answer: 'SUBMITTED_BAR',
+          answer: '',
         },
         third_question: {
           questionCode: 'third_question',
           answerType: 'numeric',
-          answer: 'PREVIOUS_BAZ',
+          answer: 'PREVIOUS_BAR',
         },
       })
     })
@@ -483,6 +483,8 @@ describe('SaveAndContinueController', () => {
         answers: {
           some_field: 'foo',
           some_selection_field: ['bar'],
+          some_empty_selection_field: [],
+          some_empty_field: '',
         },
       })
 
@@ -496,6 +498,8 @@ describe('SaveAndContinueController', () => {
           answers: {
             some_field: ['foo'],
             some_selection_field: ['bar'],
+            some_empty_selection_field: [],
+            some_empty_field: [],
           },
         },
         user.token,
