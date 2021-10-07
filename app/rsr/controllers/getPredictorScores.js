@@ -17,6 +17,9 @@ class GetPredictorScores extends Controller {
 
     logger.info(`Received ${predictors.length} predictor scores for episode: ${episodeId}`)
 
+    // debugging
+    logger.info(predictors)
+
     res.locals.predictorScores = splitPredictorScores(predictors)
     res.locals.scoreType = predictors[0].scoreType
 
