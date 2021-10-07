@@ -366,7 +366,14 @@ class SaveAndContinue extends Controller {
 
   async saveValues(req, res, next) {
     const { user } = req
-    const answers = answerDtoFrom(req.sessionModel.get('answers'))
+    let answers = answerDtoFrom(req.sessionModel.get('answers'))
+
+    // if 'evidence_domestic_violence' = yes, set 'perpetrator_domestic_violence' to yes
+    // todo: update this when OASys is updated with the new domestic violence question and subsequent calculator change
+    // for the moment we need to set 'perpetrator_domestic_violence' for the calculator to work
+    if (answers.evidence_domestic_violence === ['YES']) {
+      answers = { ...answers, perpetrator_domestic_violence: ['YES'] }
+    }
 
     try {
       const [ok, response] = await postAnswers(
