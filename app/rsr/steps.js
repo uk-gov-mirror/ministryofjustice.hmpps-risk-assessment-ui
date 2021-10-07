@@ -63,6 +63,7 @@ module.exports = {
       'previous_aggravated_burglary',
       'previous_arson',
       'previous_criminal_damage',
+      'previous_kidnapping',
       'previous_possession_firearm',
       'previous_robbery',
       'previous_offence_weapon',

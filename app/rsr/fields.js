@@ -327,6 +327,14 @@ const fields = {
       },
     ],
   },
+  previous_kidnapping: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select yes or no',
+      },
+    ],
+  },
   previous_possession_firearm: {
     validate: [
       {
