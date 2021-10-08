@@ -3,7 +3,7 @@
         <h3>{{ predictorScore.level }}</h3>
         <p>{{ predictorScore.type }}</p>
     </div>
-    {% if predictorScore.score %}
+    {% if showScore and predictorScore.score %}
     <div class="score-label__card-bottom">
         <p>{{ predictorScore.score }}</p>
     </div>

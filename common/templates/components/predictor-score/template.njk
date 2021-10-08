@@ -23,10 +23,13 @@
 {% switch predictorScore.type %}
     {% case 'RSR' %}
         {% set barTypeClass = 'score-bar'%}
+        {% set showScore = true %}
     {% case 'OSP/I' %}
         {% set barTypeClass = 'score-bar--small'%}
+        {% set showScore = false %}
     {% case 'OSP/C' %}
         {% set barTypeClass = 'score-bar--small score-bar--small-fourths' %}
+        {% set showScore = false %}
 {% endswitch %}
 
 {% if predictorScore.level === 'NOT APPLICABLE' %}
@@ -37,7 +40,7 @@
 <div class="predictor-score govuk-body">
     <div class="score-label">
         <div class="{{ scoreLabelClass }}">
-            {{ predictorIndicator(predictorScore) }}
+            {{ predictorIndicator(predictorScore, showScore) }}
         </div>
     </div>
     <div class="{{ barTypeClass }}">
@@ -49,7 +52,7 @@
         </div>
         <div>
             <span></span>
-        </div>        
+        </div>
         {% if predictorScore.type === 'OSP/C' %}
         <div>
             <span></span>
