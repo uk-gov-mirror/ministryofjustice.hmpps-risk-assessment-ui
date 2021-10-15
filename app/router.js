@@ -59,6 +59,7 @@ const { displayPredictorScores } = require('./predictorScores/get.controller')
 const { submitPredictorScores } = require('./submitPredictorScores/get.controller')
 
 const rsrWorkflow = require('./rsr')
+const upwWorkflow = require('./upw')
 
 const logger = require('../common/logging/logger')
 const { startAssessment } = require('./startAssessment/get.controller')
@@ -205,6 +206,7 @@ module.exports = app => {
 
   app.get('/start-assessment', startAssessment)
   app.use('/rsr', rsrWorkflow)
+  app.use('/upw', upwWorkflow)
 
   app.use((error, req, res, next) => {
     logger.info(`Unhandled exception received - ${error.message} ${error.stack}`)

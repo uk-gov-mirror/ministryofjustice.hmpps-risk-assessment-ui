@@ -1,0 +1,55 @@
+{%- from "govuk/components/tag/macro.njk" import govukTag -%}
+<ol class="task-list">
+  {%- for section in params.sections %}
+  <li {% for attribute, value in section.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+    <h{{ section.heading.headingLevel | default(2) }} class="task-list__section {{- ' ' + section.heading.classes if section.heading.classes }}" {% for attribute, value in section.heading.attributes %} {{ attribute }}="{{ value }}"{% endfor %}>
+      {{- section.heading.html | safe if section.heading.html else section.heading.text -}}
+    </h{{ section.heading.headingLevel | default(2) }}>
+    <ul class="task-list__items">
+      {%- for item in section.items %}
+      <li class="task-list__item">
+        <span class="task-list__task-name">
+          {% if item.status != 'CANNOT_START' %}
+          <a class="govuk-link" href="{{ item.href }}">
+            {{- item.html | safe if item.html else item.text -}}
+          </a>
+          {% else %}
+          {{- item.html | safe if item.html else item.text -}}
+          {% endif %}
+        </span>
+        {%- if item.status == 'COMPLETE' %}
+        {{ govukTag({
+          text: "completed",
+          classes: 'govuk-tag task-list__tag'
+        }) }}
+        {% endif -%}
+        {%- if item.status == 'INCOMPLETE' %}
+        {{ govukTag({
+          text: "incomplete",
+          classes: 'govuk-tag govuk-tag--grey task-list__tag'
+        }) }}
+        {% endif -%}
+        {%- if item.status == 'NOT_STARTED' %}
+        {{ govukTag({
+          text: "not started yet",
+          classes: 'govuk-tag govuk-tag--grey task-list__tag'
+        }) }}
+        {% endif -%}
+        {%- if item.status == 'IN_PROGRESS' %}
+          {{ govukTag({
+            text: "in progress",
+            classes: 'govuk-tag govuk-tag--blue task-list__tag'
+          }) }}
+        {% endif -%}
+        {%- if item.status == 'CANNOT_START' %}
+          {{ govukTag({
+            text: "cannot start yet",
+            classes: 'govuk-tag govuk-tag--red task-list__tag'
+          }) }}
+        {% endif -%}
+      </li>
+      {% endfor -%}
+    </ul>
+  </li>
+  {% endfor -%}
+</ol>
