@@ -1,6 +1,6 @@
 const StartRsrAssessment = require('./controllers/start')
 const SaveAndContinue = require('./controllers/saveAndContinue')
-const GetPredictorScores = require('./controllers/getPredictorScores')
+const PredictorScores = require('./controllers/predictorScores')
 const CompleteRsrAssessment = require('./controllers/completeRsrAssessment')
 
 module.exports = {
@@ -73,9 +73,8 @@ module.exports = {
   },
   '/predictor-scores': {
     pageTitle: 'Scores',
-    controller: GetPredictorScores,
+    controller: PredictorScores,
     next: 'complete',
-    noPost: true,
     template: `${__dirname}/templates/scores`,
   },
   '/complete': {

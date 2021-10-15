@@ -110,18 +110,20 @@
     {% endif %}
         <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
-                <div class="govuk-button-group">
-                    {{ govukButton({
-                        text: "Submit scores to Delius",
-                        href: options.next
-                    }) }}
+                <form method="post" action="{{ action }}">
+                    <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+                    <div class="govuk-button-group">
+                        {{ govukButton({
+                            text: "Submit scores to Delius"
+                        }) }}
 
-                    {{ govukButton({
-                        text: "Return to questions",
-                        classes: "govuk-button--secondary",
-                        href: '/rsr/offences-and-convictions'
-                    }) }}
-                </div>
+                        {{ govukButton({
+                            text: "Return to questions",
+                            classes: "govuk-button--secondary",
+                            href: '/rsr/offences-and-convictions'
+                        }) }}
+                    </div>
+                </form>
             </div>
         </div>
     </div>
