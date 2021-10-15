@@ -1,22 +1,22 @@
 version: 2.1
 
 orbs:
-  hmpps: ministryofjustice/hmpps@3.0.0
-  snyk: snyk/snyk@0.0.10
-
-executors:
-  image-scan:
-    docker:
-      - image: circleci/python:3
-    working_directory: ~/app
-  builder:
-    docker:
-      - image: circleci/node:14-buster-browsers
-    working_directory: ~/app
+  hmpps: ministryofjustice/hmpps@3.11
+  slack: circleci/slack@4.4.2
+  
+parameters:
+  alerts-slack-channel:
+    type: string
+    default: "hmpps-assessments-dev"
+  node-version:
+    type: string
+    default: 14.17-browsers
 
 jobs:
   build:
-    executor: builder
+    executor:
+      name: hmpps/node
+      tag: << pipeline.parameters.node-version >>
     steps:
       - checkout
       - run:
@@ -45,9 +45,33 @@ jobs:
             - node_modules
             - assets/stylesheets
             - .cache/Cypress
+  
+  check_outdated:
+    executor:
+      name: hmpps/node
+      tag: << pipeline.parameters.node-version >>
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: install-npm
+          command: 'npm ci --no-audit'
+      - run:
+          name: Check version
+          command: 'npm --version'
+      - run:
+          name: Run check
+          command: 'npm outdated typescript govuk-frontend'
+      - slack/notify:
+          event: fail
+          channel: << pipeline.parameters.alerts-slack-channel >>
+          template: basic_fail_1
 
   test:
-    executor: builder
+    executor:
+      name: hmpps/node
+      tag: << pipeline.parameters.node-version >>
     steps:
       - checkout
       - restore_cache:
@@ -63,9 +87,10 @@ jobs:
 
   cypress_integration_tests:
     working_directory: ~/app
-    docker:
-      - image: circleci/node:14-buster-browsers
-      - image: circleci/redis:buster
+    executor:
+      name: hmpps/node_redis
+      node_tag: << pipeline.parameters.node-version >>
+      redis_tag: buster
     resource_class: xlarge
     steps:
       - checkout
@@ -85,9 +110,6 @@ jobs:
           keys:
             - dependency-cache-${CACHE_VERSION}-{{ checksum "package.json" }}
       - run:
-          name: Install cypress
-          command: npx cypress install
-      - run:
           name: Run the node app
           command: npm run start:cypress
           background: true
@@ -100,30 +122,6 @@ jobs:
           path: integration-tests/videos
       - store_artifacts:
           path: integration-tests/screenshots
-
-  app-scan:
-    executor: builder
-    steps:
-      - checkout
-      - snyk/scan:
-          fail-on-issues: false
-          monitor-on-build: true
-          project: '${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}'
-          organization: 'digital-probation-services'
-
-  image-scan:
-    executor: image-scan
-    steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - snyk/scan:
-          docker-image-name: 'quay.io/hmpps/risk-assessment-ui:latest'
-          target-file: 'Dockerfile'
-          fail-on-issues: false
-          monitor-on-build: true
-          project: '${CIRCLE_PROJECT_REPONAME}/latest'
-          organization: 'digital-probation-services'
 
 workflows:
   version: 2
@@ -184,3 +182,42 @@ workflows:
 #          requires:
 #            - request-prod-approval
 
+  security:
+    triggers:
+      - schedule:
+          cron: "7 6 * * 1-5"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - check_outdated:
+          context:
+            - hmpps-common-vars
+      - hmpps/npm_security_audit:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          context:
+            - hmpps-common-vars
+      - hmpps/trivy_latest_scan:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          context:
+            - hmpps-common-vars
+      - hmpps/veracode_pipeline_scan:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          context:
+            - veracode-credentials
+            - hmpps-common-vars
+  security-weekly:
+    triggers:
+      - schedule:
+          cron: "50 5 * * 1"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - hmpps/veracode_policy_scan:
+          slack_channel: << pipeline.parameters.alerts-slack-channel >>
+          context:
+            - veracode-credentials
+            - hmpps-common-vars
