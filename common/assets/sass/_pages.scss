@@ -43,10 +43,18 @@
   }
 }
 
-// RSR landing page
-.rsr-offence__details {
+.rsr-offence__details,
+.landing-page__offence-details {
   background: #e0eef8;
   padding: 20px;
+  th,
+  td {
+    font-size: 24px;
+  }
+}
+
+.landing-page__heading {
+  margin-bottom: 30px;
 }
 
 #conditional-id-form-86da001c-a703-4ef2-9c0d-e5c90336055c {
@@ -77,4 +85,8 @@
   .govuk-radios {
     @extend .govuk-radios--inline;
   }
+}
+
+.questiongroup-action-buttons__start {
+  margin-top: 10px;
 }

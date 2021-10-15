@@ -6,7 +6,7 @@
 {% set hideBackLink = true %}
 
 {% block pageTitle %}
-{{ heading }}
+{{ pageTitle }}
 {% endblock %}
 
 {% block header %}
@@ -16,9 +16,7 @@
 {% block content %}
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
-        <h1 class="govuk-heading-xl">
-            {{ options.journeyPageTitle }}
-        </h1>
+        <h1 class="govuk-heading-xl landing-page__heading">{{ options.journeyPageTitle }}</h1>
 
         {# {% if pageTitle %}
         <h2 class="govuk-heading-l">
@@ -26,9 +24,9 @@
         </h2>
         {% endif %} #}
 
-        <p class="govuk-hint">{{ pageDescription }}</p>
+        <p class="govuk-hint hint__large">{{ pageDescription }}</p>
 
-        <div class="rsr-offence__details">
+        <div class="landing-page__offence-details">
             <table class="govuk-table no-bottom-margin">
                 <tbody class="govuk-table__body">
                 <tr class="govuk-table__row">
@@ -47,13 +45,14 @@
             </table>
         </div>
 
-        <div class="questiongroup-action-buttons">
+        <div class="questiongroup-action-buttons__start">
             <form method="post" action="{{ action }}">
                 <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
                 {{ govukButton({
-                    text: 'Start',
-                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                    text: 'Start now',
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1',
+                    isStartButton: true
                 }) }}
             </form>
         </div>

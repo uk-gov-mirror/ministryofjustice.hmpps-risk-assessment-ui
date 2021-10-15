@@ -5,7 +5,7 @@ const SaveAndContinue = require('./controllers/saveAndContinue')
 
 module.exports = {
   '/start': {
-    pageTitle: 'Start',
+    pageTitle: 'Community payback assessment start',
     controller: StartRsrAssessment,
     reset: true,
     entryPoint: true,
