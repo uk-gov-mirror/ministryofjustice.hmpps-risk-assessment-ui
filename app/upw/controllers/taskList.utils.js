@@ -52,6 +52,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
       items: [
         getTask(answers, baseUrl, steps, 'cultural-and-religious-adjustments'),
         getTask(answers, baseUrl, steps, 'placement-preferences'),
+        getTask(answers, baseUrl, steps, 'options-gender-identity'),
       ],
     },
     {

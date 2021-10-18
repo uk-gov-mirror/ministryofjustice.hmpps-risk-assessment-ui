@@ -88,7 +88,7 @@ const fieldFrom = (localField, questionSchemaDto = {}) => {
   const validationRules = [...(localField.validate || [])]
   if (
     questionSchemaDto.mandatory &&
-    localField.validate.filter(validationRule => validationRule.type === 'required').length === 0
+    localField.validate?.filter(validationRule => validationRule.type === 'required').length === 0
   ) {
     const remoteValidationRules = questionSchemaDto.validation ? JSON.parse(questionSchemaDto.validation) : {}
     const { mandatory = {} } = remoteValidationRules

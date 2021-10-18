@@ -1,4 +1,2167 @@
 {
+  "UPW": [
+    {
+      "type": "question",
+      "questionId": "5cefd241-cc51-4128-a343-cb7c438a9048",
+      "questionCode": "upw_cultural_religious_adjustment",
+      "answerType": "radio",
+      "questionText": "Cultural or religious adjustments?",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes",
+          "conditionals": [
+            {
+              "conditional": "upw_cultural_religious_adjustment_details",
+              "displayInline": true
+            }
+          ]
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "e7f8205b-1f2a-4578-943c-154d2a6ee11e",
+      "questionCode": "upw_cultural_religious_adjustment_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": true,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "0238fbc4-e488-4e1e-858d-856532d1cf56",
+      "questionCode": "upw_cultural_religious_adjustment_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "4b62bf80-9801-49cd-b3da-fe8961571302",
+      "questionCode": "upw_placement_preference",
+      "answerType": "radio",
+      "questionText": "Does the individual have any placement preferences?",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes",
+          "conditionals": [
+            {
+              "conditional": "upw_placement_preferences",
+              "displayInline": true
+            }
+          ]
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "56da5e97-a871-4ac8-ad1e-5ca6001633d2",
+      "questionCode": "upw_placement_preferences",
+      "answerType": "checkbox",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": true,
+      "referenceDataCategory": "PLACEMENT_PREFERENCES",
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "e8689a6c-2b53-4d6c-b9bf-3bbb0b4a6f85",
+          "answerSchemaCode": "individual",
+          "value": "INDIVIDUAL",
+          "text": "Individual"
+        },
+        {
+          "answerSchemaUuid": "dfaaa874-928b-4bd8-987a-5cdac16e8dba",
+          "answerSchemaCode": "mixed_group",
+          "value": "MIXED_GROUP",
+          "text": "Mixed group"
+        },
+        {
+          "answerSchemaUuid": "66646d01-19a5-4b9f-bfaf-a2f162897336",
+          "answerSchemaCode": "female_only_group",
+          "value": "FEMALE_ONLY_GROUP",
+          "text": "Female only group"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "d1d849fe-1240-49db-bf60-692967a9e55e",
+      "questionCode": "upw_placement_preference_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "b2af0358-56fb-4e45-be76-b661ce829138",
+      "questionCode": "upw_placement_preference_by_gender_details",
+      "answerType": "textarea",
+      "questionText": "Discuss placement options with the individual, based on their gender identity",
+      "helpText": "Record their preference and the details of the conversation.",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "980f7936-682c-4174-91b6-3dcfc684c494",
+      "questionCode": "upw_placement_preference_by_gender_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "3fb1a17b-6657-4239-b020-512fa8f57a52",
+      "questionCode": "upw_maturity_assessment_details",
+      "answerType": "textarea",
+      "questionText": "Maturity assessment",
+      "helpText": "What action needs to be taken to support engagement or compliance with the community payback requirement?",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "7f4435a1-3d39-4758-aa56-67989e54d7d2",
+      "questionCode": "upw_maturity_assessment_details_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "30851ffd-90a3-430d-8239-0386076de177",
+      "questionCode": "upw_violent_offences",
+      "answerType": "radio",
+      "questionText": "Violent offences?",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "9feb81fc-3437-4762-88e1-b147db676c66",
+      "questionCode": "upw_violent_offences_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "6d18c3e9-a921-4b3b-aad3-a1c1f68d51c9",
+      "questionCode": "upw_frequent_dishonesty",
+      "answerType": "radio",
+      "questionText": "Frequent Dishonesty?",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "34db66d2-e95b-4ff5-b82d-d1c99fd8b80b",
+      "questionCode": "upw_frequent_dishonesty_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "2ef3e974-245e-485a-9dfb-2107fdde53a7",
+      "questionCode": "upw_sgo_identifier",
+      "answerType": "radio",
+      "questionText": "Has the individual been involved in serious group offending (SGO)?",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "3f964fd8-4677-4658-bddd-00ebeedcb932",
+      "questionCode": "upw_sgo_identifier_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 6,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "832e7462-f9db-4b01-832c-71ad21e5d70a",
+      "questionCode": "upw_control_issues",
+      "answerType": "radio",
+      "questionText": "Control issues or disruptive behaviour?",
+      "displayOrder": 7,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "77451565-e9a3-47f2-880d-53f9db3e7225",
+      "questionCode": "upw_control_issues_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 8,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "b446b9db-d57a-4a29-9674-37099bdf1a00",
+      "questionCode": "upw_hate_based_behaviour",
+      "answerType": "radio",
+      "questionText": "Hate-based behaviour?",
+      "helpText": "For example, homophobic or racially motivated",
+      "displayOrder": 9,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "6ee5fa07-767d-46a5-8b56-dd05b7f21f45",
+      "questionCode": "upw_hate_based_behaviour_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 10,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "cc19e283-3ece-4f4b-af2f-c9f2b71e4947",
+      "questionCode": "upw_high_profile_person",
+      "answerType": "radio",
+      "questionText": "Is the individual vulnerable because they are a high-profile person?",
+      "helpText": "For example, they are prominent on social media or are well-known in a particular area.",
+      "displayOrder": 11,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "11f2b571-209d-49b0-b650-0ab7b6b0cde7",
+      "questionCode": "upw_high_profile_person_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 12,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "1f72a9d5-da65-4d9e-a49e-5e1150198ee6",
+      "questionCode": "upw_additional_rosh_info",
+      "answerType": "radio",
+      "questionText": "Additional risk of harm assessment information?",
+      "helpText": "",
+      "displayOrder": 13,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "1fcbd1c4-1458-4bb2-a3bd-c02cc0e996dd",
+      "questionCode": "upw_additional_rosh_info_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 14,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "e457d288-aa0e-4000-8906-140bbd9d5b17",
+      "questionCode": "upw_rosh_community_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 15,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "42a18789-c039-4fe4-87f0-9943fde800ad",
+      "questionCode": "upw_location_exclusion_criteria",
+      "answerType": "radio",
+      "questionText": "Location restricted by victim exclusion criteria?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "e3807492-5efa-4576-af84-d6d0957a6b95",
+      "questionCode": "upw_location_exclusion_criteria_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "1a6e8d30-99da-4c65-bcc6-986f0b39780a",
+      "questionCode": "upw_restricted_placement",
+      "answerType": "radio",
+      "questionText": "Close supervision or restricted placement recommended?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "4f1c3ea4-6d1a-4d65-8068-e2916d1c6b7b",
+      "questionCode": "upw_restricted_placement_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "2ab8cd7c-2286-4269-8274-d85af97b6eab",
+      "questionCode": "upw_no_female_supervisor",
+      "answerType": "radio",
+      "questionText": "Recommend not to place with female supervisor?",
+      "helpText": "",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "f65d8471-cb53-4ec0-9b47-b63e09b6923a",
+      "questionCode": "upw_no_female_supervisor_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 6,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "2aba061a-fcab-495e-9fec-675e1348a11d",
+      "questionCode": "upw_no_male_supervisor",
+      "answerType": "radio",
+      "questionText": "Recommend not to place with male supervisor?",
+      "helpText": "",
+      "displayOrder": 7,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "802678ea-c1e2-4fbb-abe1-ef6e6a06fedd",
+      "questionCode": "upw_no_male_supervisor_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 8,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "abb832b7-bb05-46c9-8c60-4dabc0a8cf98",
+      "questionCode": "upw_restrictive_orders",
+      "answerType": "radio",
+      "questionText": "Restrictive orders? (non-molestation, injunction etc.)",
+      "helpText": "",
+      "displayOrder": 9,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "2aa628ae-a84f-4b15-8051-574bbbd4bb81",
+      "questionCode": "upw_restrictive_orders_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 10,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "642ac889-4a8a-4530-a98b-ca495d8c25f3",
+      "questionCode": "upw_risk_management_issues_individual",
+      "answerType": "radio",
+      "questionText": "Are there any risk management issues for an individual placement?",
+      "helpText": "",
+      "displayOrder": 11,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "75a2d1f0-cb1a-4614-a7bd-28b0f9fcd14b",
+      "questionCode": "upw_risk_management_issues_individual_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 12,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "20284f6e-7971-431f-a2f9-f5251afa1bf0",
+      "questionCode": "upw_risk_management_issues_supervised_group",
+      "answerType": "radio",
+      "questionText": "Are there any risk management issues if working in a supervised group?",
+      "helpText": "",
+      "displayOrder": 13,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "5c6922af-df8d-4bb6-af80-c9e68a913048",
+      "questionCode": "upw_risk_management_issues_supervised_group_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 14,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "3300e680-11c3-4069-8b38-081576553931",
+      "questionCode": "upw_alcohol_drug_issues",
+      "answerType": "radio",
+      "questionText": "Alcohol or drug issues with health and safety impact?",
+      "helpText": "",
+      "displayOrder": 15,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7318f4d3-068f-4e62-bbf8-cc430c096dd7",
+      "questionCode": "upw_alcohol_drug_issues_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 16,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "e8cc7779-498e-494b-8280-8cb088b3c6e9",
+      "questionCode": "upw_managing_risk_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 17,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "c11154bb-5675-4822-91ce-d870cdbcd46c",
+      "questionCode": "upw_allergies",
+      "answerType": "radio",
+      "questionText": "Allergies?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "d20a594b-bff3-4520-a3cf-d95e49779a73",
+      "questionCode": "upw_allergies_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "1c34a46a-a094-4903-8c93-362b1dcb5718",
+      "questionCode": "upw_loss_consciousness",
+      "answerType": "radio",
+      "questionText": "Sudden loss of consciousness?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "a148acf6-881f-4aed-8927-d22fef8e422b",
+      "questionCode": "upw_loss_consciousness_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "988aabc4-5a74-489c-be96-349197cada51",
+      "questionCode": "upw_epilepsy",
+      "answerType": "radio",
+      "questionText": "Epilepsy?",
+      "helpText": "",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "265ca722-9edd-4a6c-94c5-3d071582e952",
+      "questionCode": "upw_epilepsy_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 6,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "f79d4e3e-4855-4db2-9fec-7d628c2257ba",
+      "questionCode": "upw_other_health_issues",
+      "answerType": "radio",
+      "questionText": "Any other health issues?",
+      "helpText": "",
+      "displayOrder": 7,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7e8e8a40-426f-4489-8447-fbcd562d65fb",
+      "questionCode": "upw_other_health_issues_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 8,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "fb0d6e10-9a10-40e4-8ebc-ffcb2c46ffbb",
+      "questionCode": "upw_pregnancy",
+      "answerType": "radio",
+      "questionText": "Pregnant or recently given birth?",
+      "helpText": "",
+      "displayOrder": 9,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "c9e7ff29-a9bf-47ea-81b2-c0a8f025ade8",
+      "questionCode": "upw_pregnancy_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 10,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "155e1596-9f83-4e0a-8fa7-e36f9ed2b2e5",
+      "questionCode": "upw_health_issues_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 11,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "d35335af-4747-4842-8fbc-42ddca5bc78c",
+      "questionCode": "upw_disabilities",
+      "answerType": "radio",
+      "questionText": "Do any of the above affect the individual’s ability to engage with Community Payback?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "c773474d-d5b1-4747-a866-b6e6bd42c96e",
+      "questionCode": "upw_disabilities_details",
+      "answerType": "textarea",
+      "questionText": "Suggest  adjustments, if known [optional]",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "69e64e83-ce81-4796-8907-84b5dfac59f3",
+      "questionCode": "upw_disabilities_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "20a3e6c7-f4a3-4598-ab49-c9cea084921a",
+      "questionCode": "upw_travel_information",
+      "answerType": "radio",
+      "questionText": "Does the individual have any travel issues that will affect their placement?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "c47786e4-0c3d-4ea4-b81c-8547254ab12a",
+      "questionCode": "upw_travel_information_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "9bb13ffd-c4c5-494e-a519-90857bfbdb3f",
+      "questionCode": "upw_driving_licence",
+      "answerType": "radio",
+      "questionText": "Does the individual have a valid driving licence?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "381330bc-ac08-42b5-b092-d28950106854",
+      "questionCode": "upw_vehicle",
+      "answerType": "radio",
+      "questionText": "Do they have access to a vehicle?",
+      "helpText": "",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "6d4aac44-9681-4a2f-81af-57b1f78f6779",
+      "questionCode": "upw_public_transport",
+      "answerType": "radio",
+      "questionText": "Is public transport available and accessible to the individual?",
+      "helpText": "",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "1dabae67-1b71-4190-ba31-aae51d575f31",
+      "questionCode": "upw_travel_information_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 6,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "1661fcd6-996c-449f-aaa5-69451424be74",
+      "questionCode": "upw_caring_commitments",
+      "answerType": "radio",
+      "questionText": "Are there carer commitments?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "bd383ed7-ba4a-42da-abc0-aacd8ff3e14f",
+      "questionCode": "upw_caring_commitments_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "7f7896f3-62b2-455a-9565-08538085ced5",
+      "questionCode": "upw_caring_commitments_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "548f23e4-7975-46bf-b801-26d1c81738f4",
+      "questionCode": "upw_reading_writing_difficulties",
+      "answerType": "radio",
+      "questionText": "Does the individual have any difficulties with reading or writing?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "0e3e35d4-2dbc-4234-8fa0-2f7d7a0f5409",
+      "questionCode": "upw_reading_writing_difficulties_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "594ecb57-e8f5-4cda-b0d3-05abe8e01c30",
+      "questionCode": "upw_work_skills",
+      "answerType": "radio",
+      "questionText": "Does the individual have any work skills or experience that could be used while carrying out Community Payback?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "59236813-d351-4fe9-a150-8b9e40e11248",
+      "questionCode": "upw_work_skills_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "620e586c-5573-40b1-bf35-9df68bc97bf8",
+      "questionCode": "upw_future_work_plans",
+      "answerType": "radio",
+      "questionText": "Does the individual have future work plans that could be supported through a Community Payback placement?",
+      "helpText": "For example: retail, gardening etc",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "6b738b3c-b935-4aff-b56f-e62d0c74fe0a",
+      "questionCode": "upw_future_work_plans_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 6,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "e2529cda-e57b-44c6-bf08-466caf8be43d",
+      "questionCode": "upw_employment_education_skills_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 7,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "d2a47e6c-06eb-4ebd-abe2-786edd916acd",
+      "questionCode": "upw_education_training_need",
+      "answerType": "radio",
+      "questionText": "Does the individual have an education, training or employment-related need?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "4fce15f3-6d62-4ade-aa26-b0fc886e28cb",
+      "questionCode": "upw_education_training_need_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "c0371601-e15b-48c4-a736-a59cbf804669",
+      "questionCode": "upw_individual_commitment",
+      "answerType": "radio",
+      "questionText": "Does the individual agree to use the maximum entitlement of their hours on this activity?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "4dfb15ae-0d58-4672-98ec-494773e9a701",
+      "questionCode": "upw_individual_commitment_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "315db0b1-66ac-4a3e-93bb-f9b7545fddb4",
+      "questionCode": "upw_employment_training_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "e7d21b47-6653-48be-845e-8a28f529bf9e",
+      "questionCode": "upw_eligibility_intensive_working",
+      "answerType": "radio",
+      "questionText": "Is the individual eligible for intensive working?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "303568a9-7f7c-42ac-a7e9-cc78531528af",
+      "questionCode": "upw_eligibility_intensive_working_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "d097ddde-337a-4777-a34b-ff3ab15cb698",
+      "questionCode": "upw_recommended_hours_start_order",
+      "answerType": "numeric",
+      "questionText": "Recommended hours per week in addition to statutory minimum, at the start of the order",
+      "helpText": "7 hours is the standard working day. Maximum of 21 additional hours per week.",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "fbf62e33-03c3-4893-8ff6-92aa05827c40",
+      "questionCode": "upw_recommended_hours_midpoint_order",
+      "answerType": "numeric",
+      "questionText": "Recommended hours per week in addition to statutory minimum, at the midpoint of the order",
+      "helpText": "7 hours is the standard working day. Maximum of 21 additional hours per week.",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "6beae16e-7f58-4270-8e2c-f88aa5ca9fd4",
+      "questionCode": "upw_twenty_eight_hours_working_week_details",
+      "answerType": "textarea",
+      "questionText": "At what point should the individual be expected to reach a 28-hour working week?",
+      "helpText": "",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "fbee7d2a-3c6a-4aa7-bf7f-067674f07a8e",
+      "questionCode": "upw_eligibility_intensive_working_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 6,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7816fe5c-3beb-46d1-b2af-4a0a8f30aca0",
+      "questionCode": "upw_individual_availability",
+      "answerType": "checkbox",
+      "questionText": "When is the individual available for  work?",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataCategory": "INDIVIDUAL_AVAILABILITY",
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "034a8964-7a54-4773-8224-87bb6c6a5ed8",
+          "answerSchemaCode": "monday_morning",
+          "value": "MONDAY_MORNING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "78384548-62df-403f-99bb-4dd267ee0cc2",
+          "answerSchemaCode": "monday_afternoon",
+          "value": "MONDAY_AFTERNOON",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "74103423-a881-4572-810b-6993d58ff443",
+          "answerSchemaCode": "monday_evening",
+          "value": "MONDAY_EVENING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "53acdc58-94ab-4049-8ebf-c4b2ba08f4f5",
+          "answerSchemaCode": "tuesday_morning",
+          "value": "TUESDAY_MORNING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "bb7226bc-a231-43a7-a272-2d4d9a9d3d0b",
+          "answerSchemaCode": "tuesday_afternoon",
+          "value": "TUESDAY_AFTERNOON",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "5ed93e3e-67d6-402f-8de9-3b86d94d4f24",
+          "answerSchemaCode": "tuesday_evening",
+          "value": "TUESDAY_EVENING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "4ab83101-e739-4618-b010-6983652585ae",
+          "answerSchemaCode": "wednesday_morning",
+          "value": "WEDNESDAY_MORNING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "2d2fd1e4-2998-45ad-a7cf-e88f8570b4c2",
+          "answerSchemaCode": "wednesday_afternoon",
+          "value": "WEDNESDAY_AFTERNOON",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "f2147823-0211-4f05-bff7-84b445145d51",
+          "answerSchemaCode": "wednesday_evening",
+          "value": "WEDNESDAY_EVENING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "4479a057-3159-49c5-9599-180f36428a78",
+          "answerSchemaCode": "thursday_morning",
+          "value": "THURSDAY_MORNING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "1893becf-bf31-4697-b15e-d992dbf1812a",
+          "answerSchemaCode": "thursday_afternoon",
+          "value": "THURSDAY_AFTERNOON",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "a87c0229-1a9e-48a1-a319-d7a5101b0f43",
+          "answerSchemaCode": "thursday_evening",
+          "value": "THURSDAY_EVENING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "29fdfd16-700c-4196-9c6e-58bf695e55f0",
+          "answerSchemaCode": "friday_morning",
+          "value": "FRIDAY_MORNING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "d7ac7df6-d922-41a5-8b5d-379dca5250c7",
+          "answerSchemaCode": "friday_afternoon",
+          "value": "FRIDAY_AFTERNOON",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "d202e29b-ec9e-4192-98a4-345b07c653f1",
+          "answerSchemaCode": "friday_evening",
+          "value": "FRIDAY_EVENING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "c3b508b5-0241-4c67-8d87-9fe364290c2d",
+          "answerSchemaCode": "saturday_morning",
+          "value": "SATURDAY_MORNING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "59bb90b0-6216-4920-bc3b-b47a62bda837",
+          "answerSchemaCode": "saturday_afternoon",
+          "value": "SATURDAY_AFTERNOON",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "c072a9ff-fbda-42ae-a5e6-b79616b3bc55",
+          "answerSchemaCode": "saturday_evening",
+          "value": "SATURDAY_EVENING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "6398406e-f323-474a-a5aa-cb65a1da75c7",
+          "answerSchemaCode": "sunday_morning",
+          "value": "SUNDAY_MORNING",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "0acb7955-6e01-4bd6-b47f-438b87db4cc0",
+          "answerSchemaCode": "sunday_afternoon",
+          "value": "SUNDAY_AFTERNOON",
+          "text": ""
+        },
+        {
+          "answerSchemaUuid": "976e41ce-ef5b-431f-8cc7-cd5ea2d8c619",
+          "answerSchemaCode": "sunday_evening",
+          "value": "SUNDAY_EVENING",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "54c8c012-847d-44c7-b9d0-3f45874c96b5",
+      "questionCode": "upw_individual_availability_details",
+      "answerType": "textarea",
+      "questionText": "Additional availability information [Optional]",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "b75f9b88-6e52-4543-a280-18866938d1bc",
+      "questionCode": "upw_individual_availability_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "97258aa2-be8b-4a7a-a9e5-67c9c1965274",
+      "questionCode": "upw_male_female_clothing",
+      "answerType": "radio",
+      "questionText": "Male or female clothing required?",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataCategory": "CLOTHING",
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "b34622fb-6c97-488e-8e13-96f2f43bbecf",
+          "answerSchemaCode": "male",
+          "value": "MALE",
+          "text": "Male"
+        },
+        {
+          "answerSchemaUuid": "623581c2-9b99-4421-8a96-df51f0136e06",
+          "answerSchemaCode": "female",
+          "value": "FEMALE",
+          "text": "Female"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "fe4efc12-0a84-4875-a90f-317e96e320b5",
+      "questionCode": "upw_waterproof_clothing",
+      "answerType": "radio",
+      "questionText": "Waterproof clothing",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataCategory": "WATERPROOF_CLOTHING",
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "bb427a45-d7d4-44a3-8b68-de2428fd92ea",
+          "answerSchemaCode": "xs",
+          "value": "XS",
+          "text": "X-Small"
+        },
+        {
+          "answerSchemaUuid": "afe91b9f-0d1d-43ab-9dbe-7b81a73d67fa",
+          "answerSchemaCode": "s",
+          "value": "S",
+          "text": "Small"
+        },
+        {
+          "answerSchemaUuid": "d0d33422-17fd-4c9c-a90b-df4bab850363",
+          "answerSchemaCode": "m",
+          "value": "M",
+          "text": "Medium"
+        },
+        {
+          "answerSchemaUuid": "121bd2a4-b57a-4ac5-b2bf-a676767dc264",
+          "answerSchemaCode": "l",
+          "value": "L",
+          "text": "Large"
+        },
+        {
+          "answerSchemaUuid": "c51f6a7f-e8be-4147-a479-24f9019d30c2",
+          "answerSchemaCode": "xl",
+          "value": "XL",
+          "text": "X-Large"
+        },
+        {
+          "answerSchemaUuid": "b1942513-23fa-4800-96bf-4933edef3cfa",
+          "answerSchemaCode": "xxl",
+          "value": "XXL",
+          "text": "XX-Large"
+        },
+        {
+          "answerSchemaUuid": "924c187c-5904-436a-9670-205d0b7dc646",
+          "answerSchemaCode": "xxxl",
+          "value": "XXXL",
+          "text": "XXX-Large"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "451f6e52-a314-4e7d-83ca-afd8dfc6dc43",
+      "questionCode": "upw_footwear_size",
+      "answerType": "dropdown",
+      "questionText": "Footwear",
+      "helpText": "Size (UK)",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataCategory": "FOOTWEAR_SIZE",
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "aead43e0-ee10-4271-ba01-83a35428e996",
+          "answerSchemaCode": "3",
+          "value": "3",
+          "text": "Size 3"
+        },
+        {
+          "answerSchemaUuid": "442d529a-750e-46e1-a7ec-869645c147c8",
+          "answerSchemaCode": "4",
+          "value": "4",
+          "text": "Size 4"
+        },
+        {
+          "answerSchemaUuid": "794f872a-5348-450f-a84c-b5a3d9ecdd9f",
+          "answerSchemaCode": "5",
+          "value": "5",
+          "text": "Size 5"
+        },
+        {
+          "answerSchemaUuid": "5e715a2e-b394-46b6-9cd1-bcf8009e66a4",
+          "answerSchemaCode": "6",
+          "value": "6",
+          "text": "Size 6"
+        },
+        {
+          "answerSchemaUuid": "fbf22a78-bb07-44ca-813c-78ff4f09cdd3",
+          "answerSchemaCode": "7",
+          "value": "7",
+          "text": "Size 7"
+        },
+        {
+          "answerSchemaUuid": "1e1c93be-d8a9-4257-8f9c-096af3ea7887",
+          "answerSchemaCode": "8",
+          "value": "8",
+          "text": "Size 8"
+        },
+        {
+          "answerSchemaUuid": "5f6c70df-8f7e-4f69-813a-3b197a5366f4",
+          "answerSchemaCode": "9",
+          "value": "9",
+          "text": "Size 9"
+        },
+        {
+          "answerSchemaUuid": "e97658a5-5526-4d54-84ad-d4f562076cb7",
+          "answerSchemaCode": "10",
+          "value": "10",
+          "text": "Size 10"
+        },
+        {
+          "answerSchemaUuid": "caec7137-e7a7-4e48-aa42-fc2ec84df89d",
+          "answerSchemaCode": "11",
+          "value": "11",
+          "text": "Size 11"
+        },
+        {
+          "answerSchemaUuid": "8ee47349-1a3d-4b03-a802-87f43765a6af",
+          "answerSchemaCode": "12",
+          "value": "12",
+          "text": "Size 12"
+        },
+        {
+          "answerSchemaUuid": "caf6773d-50b2-4fa5-a802-333b37298b95",
+          "answerSchemaCode": "13",
+          "value": "13",
+          "text": "Size 13"
+        },
+        {
+          "answerSchemaUuid": "90e91ab7-9919-409b-81a9-21ef4c62e2d1",
+          "answerSchemaCode": "14",
+          "value": "14",
+          "text": "Size 14"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "5b1046e3-53f1-44d8-97db-5fd543f4382c",
+      "questionCode": "upw_equipment_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7beed4f4-0f3b-4b16-85f0-90377a350f1e",
+      "questionCode": "upw_declaration_confirmation",
+      "answerType": "checkbox",
+      "questionText": "I confirm the individual has received details of their Community Payback Induction Session",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataCategory": "",
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    }
+  ],
   "RSR": [
     {
       "type": "question",
@@ -18,7 +2181,7 @@
       "questionId": "63099aab-f852-4dd9-9179-16ee2218d0c6",
       "questionCode": "age_first_conviction",
       "answerType": "numeric",
-      "questionText": "Age at first conviction, conditional or absolute discharge in years",
+      "questionText": "Age at first sanction",
       "helpText": "Record in years",
       "displayOrder": 7,
       "mandatory": true,
@@ -74,7 +2237,7 @@
       "questionId": "58d3efd1-65a1-439b-952f-b2826ffa5e71",
       "questionCode": "any_sexual_offences",
       "answerType": "radio",
-      "questionText": "Have they ever committed a sexual offence?",
+      "questionText": "Have they ever committed a sexual or sexually motivated offence?",
       "displayOrder": 11,
       "mandatory": true,
       "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (sexual or sexually-motivated offence)\"}}",
@@ -160,7 +2323,7 @@
       "questionId": "86ee742c-4bfb-4e29-afca-04ad35a3abda",
       "questionCode": "current_offence_victim_stranger",
       "answerType": "radio",
-      "questionText": "Does the current offence involve a victim who was a stranger?",
+      "questionText": "Does the current offence involve actual/attempted contact against a victim who was a stranger?",
       "displayOrder": 13,
       "mandatory": true,
       "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (contact against a stranger victim)\"}}",
@@ -312,133 +2475,7 @@
           "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
-          "text": "Yes",
-          "conditionals": [
-            {
-              "conditional": "suitable_accommodation",
-              "displayInline": false
-            },
-            {
-              "conditional": "unemployed_on_release",
-              "displayInline": false
-            },
-            {
-              "conditional": "current_relationship_with_partner",
-              "displayInline": false
-            },
-            {
-              "conditional": "evidence_domestic_violence",
-              "displayInline": false
-            },
-            {
-              "conditional": "victim_domestic_violence",
-              "displayInline": false
-            },
-            {
-              "conditional": "perpetrator_domestic_violence",
-              "displayInline": false
-            },
-            {
-              "conditional": "use_of_alcohol",
-              "displayInline": false
-            },
-            {
-              "conditional": "binge_drinking",
-              "displayInline": false
-            },
-            {
-              "conditional": "impulsivity_issues",
-              "displayInline": false
-            },
-            {
-              "conditional": "temper_control_issues",
-              "displayInline": false
-            },
-            {
-              "conditional": "pro_criminal_attitudes",
-              "displayInline": false
-            },
-            {
-              "conditional": "divider_rsr_needs_2",
-              "displayInline": false
-            },
-            {
-              "conditional": "ui_rsr_needs_5",
-              "displayInline": false
-            },
-            {
-              "conditional": "heading_current_offences",
-              "displayInline": false
-            },
-            {
-              "conditional": "heading_convicted_2",
-              "displayInline": false
-            },
-            {
-              "conditional": "heading_convicted_1",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_murder_attempt",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_wounding",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_aggravated_burglary",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_arson",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_criminal_damage",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_sexual_offence_child",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_sexual_offence_Adult",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_offence_child",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_kidnapping",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_possession_firearm",
-              "displayInline": false
-            },
-            {
-              "conditional": "current_possession_firearm",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_robbery",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_racial_offence",
-              "displayInline": false
-            },
-            {
-              "conditional": "current_offence_weapon",
-              "displayInline": false
-            },
-            {
-              "conditional": "previous_offence_weapon",
-              "displayInline": false
-            }
-          ]
+          "text": "Yes"
         },
         {
           "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
@@ -464,19 +2501,19 @@
         {
           "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
-          "value": "no problems",
+          "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
           "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
-          "value": "some problems",
+          "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
           "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
-          "value": "significant problems",
+          "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
         }
       ]
@@ -496,19 +2533,19 @@
         {
           "answerSchemaUuid": "d4c6ed05-73b4-4064-8255-7ccb96038988",
           "answerSchemaCode": "no",
-          "value": "no",
+          "value": "NO",
           "text": "No"
         },
         {
           "answerSchemaUuid": "02c77c0c-f9fa-4c4c-a5dc-169aa33f5c86",
           "answerSchemaCode": "not_available_for_work",
-          "value": "not available for work",
+          "value": "NOT_AVAILABLE_FOR_WORK",
           "text": "Not available for work"
         },
         {
           "answerSchemaUuid": "f2619d17-2bda-40ce-9658-f6a7a371b3f2",
           "answerSchemaCode": "yes",
-          "value": "yes",
+          "value": "YES",
           "text": "Yes"
         }
       ]
@@ -529,19 +2566,19 @@
         {
           "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
-          "value": "no problems",
+          "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
           "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
-          "value": "some problems",
+          "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
           "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
-          "value": "significant problems",
+          "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
         }
       ]
@@ -551,7 +2588,7 @@
       "questionId": "f04dd882-0a0d-49f5-9736-91eeadbff9e7",
       "questionCode": "evidence_domestic_violence",
       "answerType": "radio",
-      "questionText": "Is there evidence that the individual is a perpetrator of domestic abuse?",
+      "questionText": "Is there evidence of current/previous partner abuse?",
       "displayOrder": 5,
       "mandatory": true,
       "validation": "{\"mandatory\":{\"errorMessage\":\"Select yes or no\",\"errorSummary\":\"Select yes or no (perpetrator of domestic  abuse?)\"}}",
@@ -639,19 +2676,19 @@
         {
           "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
-          "value": "no problems",
+          "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
           "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
-          "value": "some problems",
+          "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
           "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
-          "value": "significant problems",
+          "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
         }
       ]
@@ -672,19 +2709,19 @@
         {
           "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
-          "value": "no problems",
+          "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
           "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
-          "value": "some problems",
+          "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
           "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
-          "value": "significant problems",
+          "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
         }
       ]
@@ -705,19 +2742,19 @@
         {
           "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
-          "value": "no problems",
+          "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
           "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
-          "value": "some problems",
+          "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
           "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
-          "value": "significant problems",
+          "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
         }
       ]
@@ -738,19 +2775,19 @@
         {
           "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
-          "value": "no problems",
+          "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
           "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
-          "value": "some problems",
+          "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
           "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
-          "value": "significant problems",
+          "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
         }
       ]
@@ -771,19 +2808,19 @@
         {
           "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
-          "value": "no problems",
+          "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
           "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
-          "value": "some problems",
+          "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
           "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
-          "value": "significant problems",
+          "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
         }
       ]

@@ -150,7 +150,7 @@ const processReplacements = (input, replacementDetails) => {
   let newInput = JSON.stringify(input)
 
   // replace name
-  if (replacementDetails.name) {
+  if (replacementDetails?.name) {
     newInput = newInput.split('[Name of person]').join(replacementDetails.name)
   }
 

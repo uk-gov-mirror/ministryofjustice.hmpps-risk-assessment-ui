@@ -2,7 +2,6 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
-
 {% set backLink = 'task-list' %}
 
 {% block pageTitle %}
@@ -14,20 +13,21 @@
 {% endblock %}
 
 {% block content %}
-<span class="govuk-caption-xl">{{ options.journeyPageTitle }}</span>
-<h1 class="govuk-heading-xl">
-    {{ pageTitle }}
-</h1>
+{# include errorSummary partial #}
+{{ super() }}
+
+<span class="govuk-caption-xl">Diversity information</span>
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
-            
-            {% for questionCode, questionSchema in questions %}
-            {{ renderQuestion(questionSchema, errors) }}
-            {% endfor %}
-            
+            {{ renderQuestion(questions['upw_placement_preference_by_gender_details'], errors) }}
+
+
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
+            {{ renderQuestion(questions['section-complete-options-gender-identity'], errors) }}
+
             <div class="questiongroup-action-buttons">
                 {{ govukButton({
                     text: buttonText | default('Save and continue'),

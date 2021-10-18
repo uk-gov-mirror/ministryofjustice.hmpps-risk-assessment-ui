@@ -1,6 +1,7 @@
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
 {% from 'moj/components/header/macro.njk' import mojHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 
 {% extends "govuk/template.njk" %}
 
@@ -30,7 +31,7 @@
 {% endblock %}
 
 {%  block content %}
-  {% if errorSummary %}
+  {% if errorSummary and errorSummary.length > 0 %}
     {% include "./partials/errorSummary.njk" %}
   {% endif %}
 {% endblock %}
