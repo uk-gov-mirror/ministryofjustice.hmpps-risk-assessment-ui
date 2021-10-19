@@ -71,7 +71,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
       items: [
         getTask(answers, baseUrl, steps, 'disabilities-and-mental-health'),
         getTask(answers, baseUrl, steps, 'health-issues'),
-        getTask(answers, baseUrl, steps, 'travel'),
+        getTask(answers, baseUrl, steps, 'travel-information'),
         getTask(answers, baseUrl, steps, 'caring-commitments'),
       ],
     },

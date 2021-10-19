@@ -56,8 +56,11 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
 
   if (fieldProperties.answerType === 'radio') {
     const checkedAnswer = answerFor(fieldName)
+    const [selectedAnswer] = fieldProperties.answerSchemas.filter(answerSchema => answerSchema.value === checkedAnswer)
+    const displayAnswer = selectedAnswer?.text || ''
     return {
       ...fieldProperties,
+      answer: displayAnswer,
       answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
         ...answerSchema,
         checked: checkedAnswer === answerSchema.value,
@@ -67,8 +70,14 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
 
   if (fieldProperties.answerType === 'checkbox') {
     const selected = submittedAnswers[fieldName] || previousAnswers[fieldName] || []
+    const displayAnswers = fieldProperties.answerSchemas
+      .filter(answerSchema => selected.includes(answerSchema.value))
+      .map(answerSchema => answerSchema.text)
+      .join(', ')
+
     return {
       ...fieldProperties,
+      answer: displayAnswers,
       answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
         ...answerSchema,
         checked: selected.includes(answerSchema.value),
@@ -111,6 +120,11 @@ const fieldFrom = (localField, questionSchemaDto = {}) => {
 const keysByQuestionCode = (otherQuestions, currentQuestion) => ({
   ...otherQuestions,
   [currentQuestion.questionCode]: currentQuestion,
+})
+
+const answersByQuestionCode = (otherQuestions, currentQuestion) => ({
+  ...otherQuestions,
+  [currentQuestion.questionCode]: currentQuestion.answer,
 })
 
 const combinedLocalFieldsWith = remoteQuestions => (otherFields, [questionCode, localQuestion]) => ({
@@ -274,4 +288,5 @@ module.exports = {
   combineDateFields,
   combinedLocalFieldsWith,
   answerDtoFrom,
+  answersByQuestionCode,
 }

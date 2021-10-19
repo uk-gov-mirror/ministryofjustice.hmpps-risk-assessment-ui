@@ -113,7 +113,7 @@ describe('SaveAndContinueController', () => {
     })
 
     it('pre-renders conditional questions', async () => {
-      req.form.options.fields = {
+      const fields = {
         first_question: {
           questionCode: 'first_question',
           questionText: 'First Question',
@@ -134,6 +134,9 @@ describe('SaveAndContinueController', () => {
         },
       }
 
+      req.form.options.fields = fields
+      req.form.options.allFields = fields
+
       mockSessionModel({
         answers: {
           first_question: 'YES',
@@ -147,7 +150,7 @@ describe('SaveAndContinueController', () => {
     })
 
     it('pre-renders nested conditional questions', async () => {
-      req.form.options.fields = {
+      const fields = {
         first_question: {
           questionCode: 'first_question',
           questionText: 'First Question',
@@ -179,6 +182,9 @@ describe('SaveAndContinueController', () => {
         },
       }
 
+      req.form.options.fields = fields
+      req.form.options.allFields = fields
+
       mockSessionModel({
         answers: {
           first_question: 'YES',
@@ -194,7 +200,7 @@ describe('SaveAndContinueController', () => {
     })
 
     it('maps answers on to questions', async () => {
-      req.form.options.fields = {
+      const fields = {
         first_question: {
           questionCode: 'first_question',
           answerType: 'numeric',
@@ -215,6 +221,9 @@ describe('SaveAndContinueController', () => {
           second_question: 'BAR',
         },
       })
+
+      req.form.options.fields = fields
+      req.form.options.allFields = fields
 
       await controller.locals(req, res, () => {})
 
@@ -238,7 +247,7 @@ describe('SaveAndContinueController', () => {
     })
 
     it('prefers local answers to remote when mapping on to questions', async () => {
-      req.form.options.fields = {
+      const fields = {
         first_question: {
           questionCode: 'first_question',
           answerType: 'numeric',
@@ -260,6 +269,9 @@ describe('SaveAndContinueController', () => {
           third_question: '',
         },
       })
+
+      req.form.options.fields = fields
+      req.form.options.allFields = fields
 
       getAnswers.mockResolvedValue({
         answers: {
@@ -299,12 +311,15 @@ describe('SaveAndContinueController', () => {
     })
 
     it('stores questions in locals', async () => {
-      req.form.options.fields = {
+      const fields = {
         date_first_sanction: {
           questionCode: 'date_first_sanction',
           answerType: 'date',
         },
       }
+
+      req.form.options.fields = fields
+      req.form.options.allFields = fields
 
       mockSessionModel()
 

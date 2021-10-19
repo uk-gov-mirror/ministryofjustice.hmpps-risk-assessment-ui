@@ -123,6 +123,58 @@ let fields = {
     dependent: { field: 'upw_alcohol_drug_issues', value: 'YES' },
     ...requireEnterDetails,
   },
+  upw_disabilities: requireYesOrNo,
+  upw_disabilities_details: {
+    dependent: { field: 'upw_disabilities', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_allergies: requireYesOrNo,
+  upw_allergies_details: {
+    dependent: { field: 'upw_allergies', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_loss_consciousness: requireYesOrNo,
+  upw_loss_consciousness_details: {
+    dependent: { field: 'upw_loss_consciousness', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_epilepsy: requireYesOrNo,
+  upw_epilepsy_details: {
+    dependent: { field: 'upw_epilepsy', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_other_health_issues: requireYesOrNo,
+  upw_other_health_issues_details: {
+    dependent: { field: 'upw_other_health_issues', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_pregnancy: requireYesOrNo,
+  upw_pregnancy_details: {
+    dependent: { field: 'upw_pregnancy', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_travel_information: requireYesOrNo,
+  upw_travel_information_details: {
+    dependent: { field: 'upw_travel_information', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_driving_licence: {
+    dependent: { field: 'upw_travel_information', value: 'YES' },
+    ...requireYesOrNo,
+  },
+  upw_vehicle: {
+    dependent: { field: 'upw_travel_information', value: 'YES' },
+    ...requireYesOrNo,
+  },
+  upw_public_transport: {
+    dependent: { field: 'upw_travel_information', value: 'YES' },
+    ...requireYesOrNo,
+  },
+  upw_caring_commitments: requireYesOrNo,
+  upw_caring_commitments_details: {
+    dependent: { field: 'upw_caring_commitments', value: 'YES' },
+    ...requireEnterDetails,
+  },
 }
 
 Array.from([
@@ -134,7 +186,7 @@ Array.from([
   'managing-risk',
   'disabilities-and-mental-health',
   'health-issues',
-  'travel',
+  'travel-information',
   'caring-commitments',
   'employment-education-and-skills',
   'training-and-employment-opportunities',

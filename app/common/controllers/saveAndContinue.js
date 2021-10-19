@@ -11,6 +11,7 @@ const {
   combineDateFields,
   combinedLocalFieldsWith,
   answerDtoFrom,
+  answersByQuestionCode,
 } = require('./saveAndContinue.utils')
 
 class SaveAndContinue extends BaseController {
@@ -28,10 +29,11 @@ class SaveAndContinue extends BaseController {
     )
     const submittedAnswers = req.sessionModel.get('answers') || {}
 
-    const questions = Object.entries(req.form.options.fields)
+    const questions = Object.entries(req.form.options.allFields)
     const questionsWithMappedAnswers = questions.map(withAnswersFrom(previousAnswers, submittedAnswers))
+
     const questionWithPreCompiledConditionals = compileConditionalQuestions(
-      questionsWithMappedAnswers,
+      questionsWithMappedAnswers.filter(questionSchema => req.form.options.fields[questionSchema.questionCode]),
       validationErrors,
     )
 
@@ -41,6 +43,7 @@ class SaveAndContinue extends BaseController {
     )
 
     res.locals.questions = questionsWithReplacements.reduce(keysByQuestionCode, {})
+    res.locals.answers = questionsWithMappedAnswers.reduce(answersByQuestionCode, {})
 
     super.locals(req, res, next)
   }
