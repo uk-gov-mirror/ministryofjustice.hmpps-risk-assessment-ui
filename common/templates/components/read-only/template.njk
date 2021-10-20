@@ -1,0 +1,60 @@
+{%- from "node_modules/govuk-frontend/govuk/components/summary-list/macro.njk" import govukSummaryList -%}
+
+{% if params.title %}
+<div class="upw-read-only__header">
+    <h2 class="govuk-heading-m upw-read-only__heading">{{ params.title }}</h2>
+    {% if params.editUrl %}
+    <a href="{{params.editUrl}}" class="govuk-link upw-read-only__link">
+        Change<span class="govuk-visually-hidden"> {{params.title}}</span>
+    </a>
+    {% endif %}
+</div>
+{% endif %}
+{% if params.rows %}
+{{ govukSummaryList({
+    classes: 'upw-summary-list--top-border upw-summary-list--bottom-margin',
+    rows: params.rows
+}) }}
+{% elif params.field.key %}
+    {% set fieldValue = 'No data' %}
+    {% if params.answers[params.field.key] %}{% set fieldValue = params.answers[params.field.key] %}{% endif %}
+    {% if params.conditional.key and fieldValue == params.conditional.value %}
+        {% set conditionalFieldValue = 'No details' %}
+        {% if params.answers[params.conditional.key] %}{% set conditionalFieldValue = params.answers[params.conditional.key] %}{% endif %}
+        {{ govukSummaryList({
+            classes: 'upw-summary-list--top-border upw-summary-list--bottom-margin',
+            rows: [
+                {
+                    key: {
+                        text: params.field.text
+                    },
+                    value: {
+                        html: fieldValue
+                    }
+                },
+                {
+                    key: {
+                        text: params.conditional.text
+                    },
+                    value: {
+                        html: conditionalFieldValue
+                    }
+                }
+            ]
+        }) }}
+    {% else %}
+        {{ govukSummaryList({
+            classes: 'upw-summary-list--top-border upw-summary-list--bottom-margin',
+            rows: [
+                {
+                    key: {
+                        text: params.field.text
+                    },
+                    value: {
+                        html: fieldValue
+                    }
+                }
+            ]
+        }) }}
+    {% endif %}
+{% endif %}

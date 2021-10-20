@@ -1,0 +1,82 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "common/templates/components/read-only/macro.njk" import readOnly %}
+{% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
+
+{% set backLink = 'task-list' %}
+
+{% block pageTitle %}
+{{ pageTitle }}
+{% endblock %}
+
+{% block header %}
+{% include "common/templates/partials/header.njk" %}
+{% endblock %}
+
+{% block content %}
+{# include errorSummary partial #}
+{{ super() }}
+
+<span class="govuk-caption-xl">Placement restrictions due to health and other needs</span>
+<h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" action="{{ action }}">
+            <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+            {% if answers['upw_gp_name'] %}{% set gpName = answers['upw_gp_name'] %}{% else %}{% set gpName = 'No data' %}{%endif%}
+            {% if answers['upw_gp_phone_number'] %}{% set gpPhoneNumber = answers['upw_gp_phone_number'] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
+
+            {{ readOnly({
+                title: 'Details of GP (if needed to verify information)',
+                rows: [
+                    {
+                        key: {
+                            text: 'Name'
+                        },
+                        value: {
+                            html: gpName
+                        }
+                    },{
+                        key: {
+                            text: 'Address'
+                        },
+                        value: {
+                            html: readOnlyAddress({ 
+                                buildingName: answers['upw_gp_building_name'],
+                                houseNumber: answers['upw_gp_address_house_number'],
+                                streetName: answers['upw_gp_address_street_name'],
+                                district: answers['upw_gp_address_district'],
+                                townOrCity: answers['upw_gp_address_town_or_city'],
+                                county: answers['upw_gp_address_county'],
+                                postcode: answers['upw_gp_address_postcode']
+                            })
+                        }
+                    },{
+                        key: {
+                            text: 'Phone number'
+                        },
+                        value: {
+                            html: gpPhoneNumber
+                        }
+                    }
+                ]
+            }) }}
+
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
+            
+            {{ renderQuestion(questions['section-complete-gp-details'], errors) }}
+
+            <div class="questiongroup-action-buttons">
+                {{ govukButton({
+                    text: buttonText | default('Save and continue'),
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                }) }}
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

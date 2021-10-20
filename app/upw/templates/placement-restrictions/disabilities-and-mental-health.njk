@@ -2,6 +2,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "common/templates/components/read-only/macro.njk" import readOnly %}
 
 {% set backLink = 'task-list' %}
 
@@ -24,7 +25,57 @@
     <div class="govuk-grid-column-two-thirds">
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
-            
+
+            <h2 class="govuk-heading-m">Does the individual have any of the following?</h2>
+
+            {{ readOnly({
+                field: {
+                    key: 'upw_physical_disability',
+                    text: 'Physical disability'
+                },
+                conditional: {
+                    key: 'upw_physical_disability_details',
+                    value: 'Yes'
+                },
+                answers: answers
+            }) }}
+
+            {{ readOnly({
+                field: {
+                    key: 'upw_learning_disability',
+                    text: 'Learning disability'
+                },
+                conditional: {
+                    key: 'upw_learning_disability_details',
+                    value: 'Yes'
+                },
+                answers: answers
+            }) }}
+
+            {{ readOnly({
+                field: {
+                    key: 'upw_learning_difficulty',
+                    text: 'Learning difficulty'
+                },
+                conditional: {
+                    key: 'upw_learning_difficulty_details',
+                    value: 'Yes'
+                },
+                answers: answers
+            }) }}
+
+            {{ readOnly({
+                field: {
+                    key: 'upw_mental_health_condition',
+                    text: 'Mental health condition'
+                },
+                conditional: {
+                    key: 'upw_mental_health_condition_details',
+                    value: 'Yes'
+                },
+                answers: answers
+            }) }}
+
             {{ renderQuestion(questions['upw_disabilities'], errors) }}
             {{ renderQuestion(questions['upw_disabilities_complete'], errors) }}
 

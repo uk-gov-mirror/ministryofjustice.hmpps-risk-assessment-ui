@@ -98,7 +98,15 @@
     "c993ef11-7b97-4dd6-a811-455ce9d675b9": [""],
     "caf15de3-7f1a-4ba4-b4b4-0b1856ae88bc": [""],
     "d9846a60-5ba6-450f-9934-2c9646771f9d": [""],
-    "f822b029-5907-4789-93e0-e52aac2acfac": [""]
+    "f822b029-5907-4789-93e0-e52aac2acfac": [""],
+    "upw_physical_disability": ["YES"],
+    "upw_physical_disability_details": ["Some further information about this"],
+    "upw_learning_disability": ["NO"],
+    "upw_learning_disability_details": ["Some further information about this"],
+    "upw_gp_address_house_number": ["123"],
+    "upw_gp_address_street_name": ["Some street"],
+    "upw_gp_address_district": ["In a district"],
+    "upw_gp_address_postcode": ["ABC 123"]
   },
   "predictors": [
     {

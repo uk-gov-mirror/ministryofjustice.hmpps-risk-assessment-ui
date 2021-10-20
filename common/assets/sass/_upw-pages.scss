@@ -12,6 +12,20 @@
   margin-top: 50px;
 }
 
+.upw-read-only__header {
+  @include govuk-clearfix;
+}
+
+.upw-read-only__heading {
+  float: left;
+}
+
+.upw-read-only__link {
+  font-size: 1.25rem;
+  float: right;
+  margin-bottom: govuk-spacing(4);
+}
+
 .upw-summary-list--top-border {
   border-top: 1px solid #b1b4b6;
 }

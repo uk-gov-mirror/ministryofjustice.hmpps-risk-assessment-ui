@@ -18,6 +18,8 @@ const requireEnterDetails = {
   ],
 }
 
+const readOnly = { readOnly: true }
+
 let fields = {
   declaration: {
     questionText: '[PLACEHOLDER]',
@@ -123,6 +125,14 @@ let fields = {
     dependent: { field: 'upw_alcohol_drug_issues', value: 'YES' },
     ...requireEnterDetails,
   },
+  upw_physical_disability: readOnly,
+  upw_physical_disability_details: readOnly,
+  upw_learning_disability: readOnly,
+  upw_learning_disability_details: readOnly,
+  upw_learning_difficulty: readOnly,
+  upw_learning_difficulty_details: readOnly,
+  upw_mental_health_condition: readOnly,
+  upw_mental_health_condition_details: readOnly,
   upw_disabilities: requireYesOrNo,
   upw_disabilities_details: {
     dependent: { field: 'upw_disabilities', value: 'YES' },
@@ -153,6 +163,15 @@ let fields = {
     dependent: { field: 'upw_pregnancy', value: 'YES' },
     ...requireEnterDetails,
   },
+  upw_gp_name: readOnly,
+  upw_gp_address_building_name: readOnly,
+  upw_gp_address_house_number: readOnly,
+  upw_gp_address_street_name: readOnly,
+  upw_gp_address_district: readOnly,
+  upw_gp_address_town_or_city: readOnly,
+  upw_gp_address_county: readOnly,
+  upw_gp_address_postcode: readOnly,
+  upw_gp_phone_number: readOnly,
   upw_travel_information: requireYesOrNo,
   upw_travel_information_details: {
     dependent: { field: 'upw_travel_information', value: 'YES' },
@@ -229,6 +248,7 @@ Array.from([
   'risk-of-harm-in-the-community',
   'managing-risk',
   'disabilities-and-mental-health',
+  'gp-details',
   'health-issues',
   'travel-information',
   'caring-commitments',

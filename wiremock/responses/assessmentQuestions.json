@@ -206,36 +206,11 @@
     },
     {
       "type": "question",
-      "questionId": "816fc7fe-030b-47cf-9fae-a56a6216a162",
-      "questionCode": "upw_history_sexual_offending",
-      "answerType": "radio",
-      "questionText": "History of sexual offending?",
-      "displayOrder": 1,
-      "mandatory": true,
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerSchemas": [
-        {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-          "answerSchemaCode": "yes",
-          "value": "YES",
-          "text": "Yes"
-        },
-        {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-          "answerSchemaCode": "no",
-          "value": "NO",
-          "text": "No"
-        }
-      ]
-    },
-    {
-      "type": "question",
-      "questionId": "a80651d6-1ae1-4fd4-95c6-8104f194d756",
-      "questionCode": "upw_history_sexual_offending_details",
+      "questionId": "3fb1a17b-6657-4239-b020-512fa8f57a52",
+      "questionCode": "upw_maturity_assessment_details",
       "answerType": "textarea",
-      "questionText": "Give details",
+      "questionText": "Maturity assessment",
+      "helpText": "What action needs to be taken to support engagement or compliance with the community payback requirement?",
       "displayOrder": 1,
       "mandatory": true,
       "readOnly": false,
@@ -245,42 +220,30 @@
     },
     {
       "type": "question",
-      "questionId": "08b35618-f0b6-466e-93e1-712e5e5c3f58",
-      "questionCode": "upw_poses_risk_to_children",
+      "questionId": "7f4435a1-3d39-4758-aa56-67989e54d7d2",
+      "questionCode": "upw_maturity_assessment_details_complete",
       "answerType": "radio",
-      "questionText": "Individual poses a risk to children?",
-      "displayOrder": 1,
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 2,
       "mandatory": true,
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
       "answerSchemas": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-          "answerSchemaCode": "no",
-          "value": "NO",
-          "text": "No"
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
         }
       ]
-    },
-    {
-      "type": "question",
-      "questionId": "a342a2fb-b5d8-410b-a6ef-f99bfe3da532",
-      "questionCode": "upw_poses_risk_to_children_details",
-      "answerType": "textarea",
-      "questionText": "Give details",
-      "displayOrder": 1,
-      "mandatory": true,
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerSchemas": []
     },
     {
       "type": "question",
@@ -324,9 +287,9 @@
     {
       "type": "question",
       "questionId": "6d18c3e9-a921-4b3b-aad3-a1c1f68d51c9",
-      "questionCode": "upw_acquisitive_offending",
+      "questionCode": "upw_frequent_dishonesty",
       "answerType": "radio",
-      "questionText": "History of acquisitive offending?",
+      "questionText": "Frequent Dishonesty?",
       "displayOrder": 3,
       "mandatory": true,
       "readOnly": false,
@@ -350,7 +313,7 @@
     {
       "type": "question",
       "questionId": "34db66d2-e95b-4ff5-b82d-d1c99fd8b80b",
-      "questionCode": "upw_acquisitive_offending_details",
+      "questionCode": "upw_frequent_dishonesty_details",
       "answerType": "textarea",
       "questionText": "Give details",
       "displayOrder": 4,
@@ -443,7 +406,7 @@
       "questionId": "b446b9db-d57a-4a29-9674-37099bdf1a00",
       "questionCode": "upw_hate_based_behaviour",
       "answerType": "radio",
-      "questionText": "History of hate-based attitudes or behaviours?",
+      "questionText": "Hate-based behaviour?",
       "helpText": "For example, homophobic or racially motivated",
       "displayOrder": 9,
       "mandatory": true,
@@ -523,7 +486,7 @@
       "questionId": "1f72a9d5-da65-4d9e-a49e-5e1150198ee6",
       "questionCode": "upw_additional_rosh_info",
       "answerType": "radio",
-      "questionText": "Additional risk assessment information relevant to Community Payback?",
+      "questionText": "Additional risk of harm assessment information?",
       "helpText": "",
       "displayOrder": 13,
       "mandatory": true,
@@ -566,33 +529,6 @@
       "questionText": "Mark this section as complete?",
       "helpText": "",
       "displayOrder": 15,
-      "mandatory": true,
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerSchemas": [
-        {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
-          "answerSchemaCode": "yes",
-          "value": "YES",
-          "text": "Yes"
-        },
-        {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
-          "answerSchemaCode": "no_ill_come_back_later",
-          "value": "NO_ILL_COME_BACK_LATER",
-          "text": "No, I’ll come back later"
-        }
-      ]
-    },
-    {
-      "type": "question",
-      "questionId": "e8cc7779-498e-494b-8280-8cb088b3c6e9",
-      "questionCode": "upw_managing_risk_complete",
-      "answerType": "radio",
-      "questionText": "Mark this section as complete?",
-      "helpText": "",
-      "displayOrder": 17,
       "mandatory": true,
       "readOnly": false,
       "conditional": false,
@@ -934,12 +870,199 @@
     },
     {
       "type": "question",
+      "questionId": "e8cc7779-498e-494b-8280-8cb088b3c6e9",
+      "questionCode": "upw_managing_risk_complete",
+      "answerType": "radio",
+      "questionText": "Mark this section as complete?",
+      "helpText": "",
+      "displayOrder": 17,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7503ab1a-ea03-41f3-8d0a-b75da9830909",
+      "questionCode": "upw_physical_disability",
+      "answerType": "radio",
+      "questionText": "Physical disability",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "4a97f15f-1a1e-44d5-83f7-ef5b2ad67246",
+      "questionCode": "upw_physical_disability_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 2,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "ce7451a2-5f75-42a8-95ad-377dee4d99bf",
+      "questionCode": "upw_learning_disability",
+      "answerType": "radio",
+      "questionText": "Learning disability",
+      "helpText": "",
+      "displayOrder": 3,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "637efa3b-264b-42f5-91d3-2985576e9614",
+      "questionCode": "upw_learning_disability_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 4,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "5c70e49d-92e1-4ee3-b934-380dca6e326a",
+      "questionCode": "upw_learning_difficulty",
+      "answerType": "radio",
+      "questionText": "Learning difficulty",
+      "helpText": "",
+      "displayOrder": 5,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "3c73385e-fafb-4df8-a668-8a8ab2e90625",
+      "questionCode": "upw_learning_difficulty_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 6,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "a349c303-b5e3-4c72-9540-fb17c1b6753a",
+      "questionCode": "upw_mental_health_condition",
+      "answerType": "radio",
+      "questionText": "Mental health condition",
+      "helpText": "",
+      "displayOrder": 7,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "c97bb3af-993d-45f3-a349-27ba547310c6",
+      "questionCode": "upw_mental_health_condition_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "displayOrder": 8,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
       "questionId": "d35335af-4747-4842-8fbc-42ddca5bc78c",
       "questionCode": "upw_disabilities",
       "answerType": "radio",
       "questionText": "Do any of the above affect the individual’s ability to engage with Community Payback?",
       "helpText": "",
-      "displayOrder": 1,
+      "displayOrder": 9,
       "mandatory": true,
       "readOnly": false,
       "conditional": false,
@@ -965,7 +1088,7 @@
       "questionCode": "upw_disabilities_details",
       "answerType": "textarea",
       "questionText": "Suggest  adjustments, if known [optional]",
-      "displayOrder": 2,
+      "displayOrder": 10,
       "mandatory": true,
       "readOnly": false,
       "conditional": false,
@@ -979,7 +1102,7 @@
       "answerType": "radio",
       "questionText": "Mark this section as complete?",
       "helpText": "",
-      "displayOrder": 3,
+      "displayOrder": 11,
       "mandatory": true,
       "readOnly": false,
       "conditional": false,
@@ -1225,6 +1348,123 @@
           "text": "No, I’ll come back later"
         }
       ]
+    },
+    {
+      "type": "question",
+      "questionId": "d403b86e-cdcc-41c9-b3cb-8780d361986e",
+      "questionCode": "upw_gp_name",
+      "answerType": "freetext",
+      "questionText": "Give details",
+      "displayOrder": 12,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "9b7a4455-5bdf-4e28-af57-f2fdbfb54805",
+      "questionCode": "upw_gp_address_building_name",
+      "answerType": "freetext",
+      "questionText": "Building name",
+      "displayOrder": 13,
+      "mandatory": false,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "b869ab87-bd5d-4df0-b563-a3830bf7d364",
+      "questionCode": "upw_gp_address_house_number",
+      "answerType": "freetext",
+      "questionText": "House number",
+      "displayOrder": 14,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "2d8430b1-475d-4120-8e34-27db208fbc0d",
+      "questionCode": "upw_gp_address_street_name",
+      "answerType": "freetext",
+      "questionText": "Street name",
+      "displayOrder": 15,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "8e64be03-72df-4196-8684-a8f71fe51e76",
+      "questionCode": "upw_gp_address_district",
+      "answerType": "freetext",
+      "questionText": "District",
+      "displayOrder": 16,
+      "mandatory": false,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "f78e069b-3b77-44bf-a698-ae0392e918b5",
+      "questionCode": "upw_gp_address_town_or_city",
+      "answerType": "freetext",
+      "questionText": "Town/city",
+      "displayOrder": 17,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "80c3c97d-02dc-4d5c-ab3c-fff2f33b0b63",
+      "questionCode": "upw_gp_address_county",
+      "answerType": "freetext",
+      "questionText": "County",
+      "displayOrder": 18,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "333088a1-ce0a-4365-b4db-f594e34bcfb5",
+      "questionCode": "upw_gp_address_postcode",
+      "answerType": "freetext",
+      "questionText": "Postcode",
+      "displayOrder": 19,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "7e3f0e77-7e91-4b11-928b-97e79390fe7f",
+      "questionCode": "upw_gp_phone_number",
+      "answerType": "freetext",
+      "questionText": "Give details",
+      "displayOrder": 20,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": []
     },
     {
       "type": "question",

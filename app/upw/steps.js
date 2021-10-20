@@ -127,6 +127,13 @@ module.exports = {
       'section-complete-health-issues',
     ],
   },
+  '/gp-details': {
+    pageTitle: 'GP Details',
+    controller: SaveAndContinue,
+    template: `${__dirname}/templates/placement-restrictions/gp-details.njk`,
+    next: 'task-list',
+    fields: ['section-complete-gp-details'],
+  },
   '/travel-information': {
     pageTitle: 'Travel information',
     controller: SaveAndContinue,

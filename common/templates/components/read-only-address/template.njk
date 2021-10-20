@@ -1,0 +1,33 @@
+{% if 
+    not params.buildingName 
+    and not params.houseNumber 
+    and not params.streetName 
+    and not params.district 
+    and not params.townOrCity 
+    and not params.county 
+    and not params.postcode 
+%}
+    No Data
+{% else %}
+    {% if params.buildingName %}
+        {{ params.buildingName }},<br/>
+    {% endif %}
+    {% if params.houseNumber %}
+        {{ params.houseNumber }},<br/>
+    {% endif %}
+    {% if params.streetName %}
+        {{ params.streetName }},<br/>
+    {% endif %}
+    {% if params.district %}
+        {{ params.district }},<br/>
+    {% endif %}
+    {% if params.townOrCity %}
+        {{ params.townOrCity }},<br/>
+    {% endif %}
+    {% if params.county %}
+        {{ params.county }},<br/>
+    {% endif %}
+    {% if params.postcode %}
+        {{ params.postcode }}
+    {% endif %}
+{% endif %}
