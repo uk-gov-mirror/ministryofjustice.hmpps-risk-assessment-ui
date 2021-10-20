@@ -12,21 +12,27 @@
     {% if params.buildingName %}
         {{ params.buildingName }},<br/>
     {% endif %}
-    {% if params.houseNumber %}
+
+    {% if params.houseNumber and params.streetName %}
+        {{ params.houseNumber }} {{ params.streetName }},</br>
+    {% elif params.houseNumber %}
         {{ params.houseNumber }},<br/>
-    {% endif %}
-    {% if params.streetName %}
+    {% elif params.streetName %}
         {{ params.streetName }},<br/>
     {% endif %}
+
     {% if params.district %}
         {{ params.district }},<br/>
     {% endif %}
+
     {% if params.townOrCity %}
         {{ params.townOrCity }},<br/>
     {% endif %}
+
     {% if params.county %}
         {{ params.county }},<br/>
     {% endif %}
+    
     {% if params.postcode %}
         {{ params.postcode }}
     {% endif %}

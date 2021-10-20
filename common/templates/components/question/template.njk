@@ -8,6 +8,14 @@
 {%- from "node_modules/govuk-frontend/govuk/components/button/macro.njk" import govukButton -%}
 {%- from "node_modules/govuk-frontend/govuk/components/character-count/macro.njk" import govukCharacterCount -%}
 
+{% set labelClasses = '' %}
+{% if not options.useSmallLabel %}
+{% set labelClasses = labelClasses + ' govuk-label--m' %}
+{% endif %}
+{% if options.labelClasses %}
+{% set labelClasses = labelClasses + ' ' + options.labelClasses %}
+{% endif %}
+
 {% macro compileMultiValueAnswer(answerSchema, selectedAnswers) %}
   {% if selectedAnswers %}
     {% set newAnswerSchema = [] %}
@@ -198,7 +206,7 @@
         label: {
           text: question.questionText,
           isPageHeading: false,
-          classes: question.questionCode + ' govuk-label--m'
+          classes: question.questionCode + labelClasses
         },
         hint: {
           text: question.helpText
@@ -217,12 +225,13 @@
         label: {
           text: question.questionText,
           isPageHeading: false,
-          classes: question.questionCode + ' govuk-label--m'
+          classes: question.questionCode + labelClasses
         },
         hint: {
           text: question.helpText
         },
-        errorMessage: errorMessage
+        errorMessage: errorMessage,
+        classes: options.classes
       }) }}
     {% case 'textarea' %}
     {{ govukCharacterCount({
@@ -233,7 +242,7 @@
       label: {
         text: question.questionText,
         isPageHeading: false,
-        classes: question.questionCode + ' govuk-label--m'
+        classes: question.questionCode + labelClasses
       },
       formGroup : {
         classes: question.formClasses
@@ -256,7 +265,7 @@
         fieldset: {
           legend: {
             text: question.questionText,
-            classes: question.questionCode + ' govuk-label--m'
+            classes: question.questionCode + labelClasses
           }
         },
         items: question.answerSchemas,
@@ -277,7 +286,7 @@
         fieldset: {
           legend: {
             text: question.questionText,
-            classes: question.questionCode + ' govuk-label--m'
+            classes: question.questionCode + labelClasses
           }
         },
         items: question.answerSchemas,
@@ -299,7 +308,7 @@
         fieldset: {
           legend: {
             text: question.questionText,
-            classes: question.questionCode + ' govuk-label--m'
+            classes: question.questionCode + labelClasses
           }
         },
         items: question.answerSchemas,
@@ -319,7 +328,7 @@
         },
         label: {
           text: question.questionText,
-          classes: question.questionCode + ' govuk-label--m'
+          classes: question.questionCode + labelClasses
         },
         attributes: question.attributes,
         items: question.answerSchemas,
@@ -349,7 +358,7 @@
           legend: {
             text: question.questionText,
             isPageHeading: false,
-            classes: question.questionCode + ' govuk-label--m'
+            classes: question.questionCode + labelClasses
           }
         },
         hint: {

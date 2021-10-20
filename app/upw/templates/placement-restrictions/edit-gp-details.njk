@@ -26,19 +26,46 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['upw_gp_name'], errors) }}
-            {{ renderQuestion(questions['upw_gp_address_building_name'], errors) }}
-            {{ renderQuestion(questions['upw_gp_address_house_number'], errors) }}
-            {{ renderQuestion(questions['upw_gp_address_street_name'], errors) }}
-            {{ renderQuestion(questions['upw_gp_address_district'], errors) }}
-            {{ renderQuestion(questions['upw_gp_address_town_or_city'], errors) }}
-            {{ renderQuestion(questions['upw_gp_address_county'], errors) }}
-            {{ renderQuestion(questions['upw_gp_address_postcode'], errors) }}
+            {{ renderQuestion(questions['upw_gp_name'], errors, null, null, null, {
+                classes: 'govuk-!-width-two-thirds'
+            }) }}
+
+            <h2 class="govuk-heading-m">Address</h2>
+
+            {{ renderQuestion(questions['upw_gp_address_building_name'], errors, null, null, null, { 
+                useSmallLabel: true,
+                classes: 'govuk-!-width-two-thirds'
+            }) }}
+            {{ renderQuestion(questions['upw_gp_address_house_number'], errors, null, null, null, { 
+                useSmallLabel: true,
+                classes: 'govuk-!-width-one-quarter'
+            }) }}
+            {{ renderQuestion(questions['upw_gp_address_street_name'], errors, null, null, null, { 
+                useSmallLabel: true
+            }) }}
+            {{ renderQuestion(questions['upw_gp_address_district'], errors, null, null, null, { 
+                useSmallLabel: true
+            }) }}
+            {{ renderQuestion(questions['upw_gp_address_town_or_city'], errors, null, null, null, { 
+                useSmallLabel: true,
+                classes: 'govuk-!-width-two-thirds'
+            }) }}
+            {{ renderQuestion(questions['upw_gp_address_county'], errors, null, null, null, { 
+                useSmallLabel: true,
+                classes: 'govuk-!-width-two-thirds'
+            }) }}
+            {{ renderQuestion(questions['upw_gp_address_postcode'], errors, null, null, null, { 
+                useSmallLabel: true,
+                classes: 'govuk-!-width-one-third'
+            }) }}
+
             {{ renderQuestion(questions['upw_gp_phone_number'], errors) }}
             
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
             
-            {{ renderQuestion(questions['section-complete-edit-gp-details'], errors) }}
+            {{ renderQuestion(questions['section-complete-edit-gp-details'], errors, null, null, null, {
+                classes: 'govuk-!-width-one-half'
+            }) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({
