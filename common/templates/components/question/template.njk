@@ -32,7 +32,11 @@
   {% endfor %}
 {% endmacro %}
 
-{% macro renderReadonlyField(question, row='0') %}
+{%- macro getQuestionText(question) -%}
+  {{ question.questionText }}
+{%- endmacro -%}
+
+{%- macro getQuestionAnswer(question, row='0') -%}
   {% if question.answer | isArr %}
     {% set value = question.answer[row] %}
   {% else %}
@@ -44,7 +48,7 @@
     {% case 'checkbox' %}{{ compileMultiValueAnswer(question.answerSchemas, value) }}
     {% default %}{{ value }}
   {% endswitch %}
-{% endmacro %}
+{%- endmacro -%}
 
 
 {# templates for each question type #}
@@ -107,14 +111,14 @@
     <tr class="govuk-table__row">
       {% for column in range(0, numColumns) %}
         {% if 'presentation:' not in  question.contents[column].answerType %}
-          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}{{ renderReadonlyField(question.contents[column], row) }}</td>
+          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}{{ getQuestionAnswer(question.contents[column], row) }}</td>
         {% endif %}{% endif %}
       {% endfor %}
       <td class="govuk-table__cell">
         <ul class="govuk-list">
           {% if not defaultAnswer %}
-            <li><a class="govuk-link--no-visited-state" aria-label="Edit {{ renderReadonlyField(question.contents[firstDataColumn], row) }}" href="{{ requested_url }}/edit/{{ question.tableCode }}/{{ loop.index0 }}">Edit</a></li>
-            <li><a class="govuk-link--no-visited-state" aria-label="Delete {{ renderReadonlyField(question.contents[firstDataColumn], row) }}"href="{{ requested_url }}/delete/{{ question.tableCode }}/{{ loop.index0 }}">Remove</a></li>
+            <li><a class="govuk-link--no-visited-state" aria-label="Edit {{ getQuestionAnswer(question.contents[firstDataColumn], row) }}" href="{{ requested_url }}/edit/{{ question.tableCode }}/{{ loop.index0 }}">Edit</a></li>
+            <li><a class="govuk-link--no-visited-state" aria-label="Delete {{ getQuestionAnswer(question.contents[firstDataColumn], row) }}"href="{{ requested_url }}/delete/{{ question.tableCode }}/{{ loop.index0 }}">Remove</a></li>
           {% endif %}
         </ul>
       </td>

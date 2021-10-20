@@ -1443,10 +1443,71 @@
     },
     {
       "type": "question",
+      "questionId": "01704ebe-886e-4d66-805d-9b84e529783c",
+      "questionCode": "upw_employment_education",
+      "answerType": "radio",
+      "questionText": "Is the individual in employment or education?",
+      "helpText": "",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "f606340b-8413-4012-b11d-ba3c26d02f0d",
+          "answerSchemaCode": "fulltime_education_employment",
+          "value": "FULLTIME_EDUCATION_EMPLOYMENT",
+          "text": "Full-time education or employment"
+        },
+        {
+          "answerSchemaUuid": "a8a1df6a-a48b-4904-a11b-a5e179205b30",
+          "answerSchemaCode": "parttime_education_employment",
+          "value": "PARTTIME_EDUCATION_EMPLOYMENT",
+          "text": "Part-time education or employment"
+        },
+        {
+          "answerSchemaUuid": "e57e81aa-f5b1-4bde-9c16-410ccc5d9391",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "1bb85754-aee6-4bb7-885b-5f1d010541a5",
+      "questionCode": "upw_employment_education_details_fulltime",
+      "answerType": "textarea",
+      "questionText": "Employment or education details (working days, hours etc)",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataCategory": "true",
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
+      "questionId": "2ac6d05f-b8a3-4cdc-9cdc-3feaa05f62d1",
+      "questionCode": "upw_employment_education_details_parttime",
+      "answerType": "textarea",
+      "questionText": "Employment or education details (working days, hours etc)",
+      "displayOrder": 1,
+      "mandatory": true,
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataCategory": "true",
+      "referenceDataTargets": [],
+      "answerSchemas": []
+    },
+    {
+      "type": "question",
       "questionId": "548f23e4-7975-46bf-b801-26d1c81738f4",
       "questionCode": "upw_reading_writing_difficulties",
       "answerType": "radio",
-      "questionText": "Does the individual have any difficulties with reading or writing?",
+      "questionText": "Does the individual have any difficulties with reading, writing or numbers?",
       "helpText": "",
       "displayOrder": 1,
       "mandatory": true,
@@ -1478,6 +1539,7 @@
       "mandatory": true,
       "readOnly": false,
       "conditional": false,
+      "referenceDataCategory": "true",
       "referenceDataTargets": [],
       "answerSchemas": []
     },

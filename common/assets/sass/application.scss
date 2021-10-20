@@ -53,6 +53,10 @@ p {
   margin-left: 0;
 }
 
+.key-details-bar__divider {
+  margin-right: 0 !important;
+}
+
 .key-details-bar__divider:not(:first-child) {
   border-left: 1px solid;
 }

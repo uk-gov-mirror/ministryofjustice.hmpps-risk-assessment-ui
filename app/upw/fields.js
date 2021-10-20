@@ -175,6 +175,50 @@ let fields = {
     dependent: { field: 'upw_caring_commitments', value: 'YES' },
     ...requireEnterDetails,
   },
+  upw_employment_education: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select an option',
+      },
+    ],
+  },
+  upw_employment_education_details_fulltime: {
+    dependent: { field: 'upw_employment_education', value: 'FULLTIME_EDUCATION_EMPLOYMENT' },
+    ...requireEnterDetails,
+  },
+  upw_employment_education_details_parttime: {
+    dependent: { field: 'upw_employment_education', value: 'PARTTIME_EDUCATION_EMPLOYMENT' },
+    ...requireEnterDetails,
+  },
+  upw_reading_writing_difficulties: requireYesOrNo,
+  upw_reading_writing_difficulties_details: {
+    dependent: { field: 'upw_reading_writing_difficulties', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_work_skills: requireYesOrNo,
+  upw_work_skills_details: {
+    dependent: { field: 'upw_work_skills', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_future_work_plans: requireYesOrNo,
+  upw_future_work_plans_details: {
+    dependent: { field: 'upw_future_work_plans', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_education_training_need: requireYesOrNo,
+  upw_education_training_need_details: {
+    dependent: { field: 'upw_education_training_need', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_individual_commitment: {
+    dependent: { field: 'upw_education_training_need', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_individual_commitment_details: {
+    dependent: { field: 'upw_individual_commitment', value: 'YES' },
+    ...requireEnterDetails,
+  },
 }
 
 Array.from([

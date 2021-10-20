@@ -27,7 +27,7 @@ module.exports = {
   '/cultural-and-religious-adjustments': {
     pageTitle: 'Cultural and religious adjustments',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/diversity-information/cultural-and-religious-adjustments.njk`,
+    template: `${__dirname}/templates/diversity-information/cultural-and-religious-adjustments`,
     next: 'task-list',
     fields: [
       'upw_cultural_religious_adjustment',
@@ -38,21 +38,21 @@ module.exports = {
   '/placement-preferences': {
     pageTitle: 'Placement preferences',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/diversity-information/placement-preferences.njk`,
+    template: `${__dirname}/templates/diversity-information/placement-preferences`,
     next: 'task-list',
     fields: ['upw_placement_preference', 'upw_placement_preferences', 'section-complete-placement-preferences'],
   },
   '/options-gender-identity': {
     pageTitle: 'Discuss options based on gender identity',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/diversity-information/options-gender-identity.njk`,
+    template: `${__dirname}/templates/diversity-information/options-gender-identity`,
     next: 'task-list',
     fields: ['upw_placement_preference_by_gender_details', 'section-complete-options-gender-identity'],
   },
   '/risk-of-harm-in-the-community': {
     pageTitle: 'Risk of harm in the community',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/risk-information/risk-of-harm-in-the-community.njk`,
+    template: `${__dirname}/templates/risk-information/risk-of-harm-in-the-community`,
     next: 'task-list',
     fields: [
       'upw_history_sexual_offending',
@@ -79,7 +79,7 @@ module.exports = {
   '/managing-risk': {
     pageTitle: 'Managing risk',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/risk-information/managing-risk.njk`,
+    template: `${__dirname}/templates/risk-information/managing-risk`,
     next: 'task-list',
     fields: [
       'upw_location_exclusion_criteria',
@@ -151,16 +151,34 @@ module.exports = {
   '/employment-education-and-skills': {
     pageTitle: 'Employment, education and skills',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/default`,
+    template: `${__dirname}/templates/employment-education-skills/employment-education-skills`,
     next: 'task-list',
-    fields: ['section-complete-employment-education-and-skills'],
+    fields: [
+      'upw_employment_education',
+      'upw_employment_education_details_fulltime',
+      'upw_employment_education_details_parttime',
+      'upw_reading_writing_difficulties',
+      'upw_reading_writing_difficulties_details',
+      'upw_work_skills',
+      'upw_work_skills_details',
+      'upw_future_work_plans',
+      'upw_future_work_plans_details',
+      'upw_employment_education_skills_complete',
+      'section-complete-employment-education-and-skills',
+    ],
   },
   '/training-and-employment-opportunities': {
-    pageTitle: 'Training and employment opportunities',
+    pageTitle: 'Training & employment opportunities',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/default`,
+    template: `${__dirname}/templates/employment-education-skills/training-employment-opportunities`,
     next: 'task-list',
-    fields: ['section-complete-training-and-employment-opportunities'],
+    fields: [
+      'upw_education_training_need',
+      'upw_education_training_need_details',
+      'upw_individual_commitment',
+      'upw_individual_commitment_details',
+      'section-complete-training-and-employment-opportunities',
+    ],
   },
   '/availability': {
     pageTitle: 'Availability',
