@@ -134,6 +134,23 @@ module.exports = {
     next: 'task-list',
     fields: ['section-complete-gp-details'],
   },
+  '/edit-gp-details': {
+    pageTitle: 'Details of GP',
+    controller: SaveAndContinue,
+    template: `${__dirname}/templates/placement-restrictions/edit-gp-details.njk`,
+    next: 'gp-details',
+    fields: [
+      'upw_gp_name',
+      'upw_gp_address_building_name',
+      'upw_gp_address_house_number',
+      'upw_gp_address_street_name',
+      'upw_gp_address_district',
+      'upw_gp_address_town_or_city',
+      'upw_gp_address_county',
+      'upw_gp_address_postcode',
+      'upw_gp_phone_number',
+    ],
+  },
   '/travel-information': {
     pageTitle: 'Travel information',
     controller: SaveAndContinue,

@@ -163,15 +163,33 @@ let fields = {
     dependent: { field: 'upw_pregnancy', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_gp_name: readOnly,
-  upw_gp_address_building_name: readOnly,
-  upw_gp_address_house_number: readOnly,
-  upw_gp_address_street_name: readOnly,
-  upw_gp_address_district: readOnly,
-  upw_gp_address_town_or_city: readOnly,
-  upw_gp_address_county: readOnly,
-  upw_gp_address_postcode: readOnly,
-  upw_gp_phone_number: readOnly,
+  upw_gp_name: {
+    validate: [{ type: 'required', message: 'Name is required' }],
+  },
+  upw_gp_address_building_name: {
+    validate: [{ type: 'required', message: 'Building name is required' }],
+  },
+  upw_gp_address_house_number: {
+    validate: [{ type: 'required', message: 'House number is required' }],
+  },
+  upw_gp_address_street_name: {
+    validate: [{ type: 'required', message: 'Street name is required' }],
+  },
+  upw_gp_address_district: {
+    validate: [{ type: 'required', message: 'District is required' }],
+  },
+  upw_gp_address_town_or_city: {
+    validate: [{ type: 'required', message: 'Town/City is required' }],
+  },
+  upw_gp_address_county: {
+    validate: [{ type: 'required', message: 'County is required' }],
+  },
+  upw_gp_address_postcode: {
+    validate: [{ type: 'required', message: 'Postcode is required' }],
+  },
+  upw_gp_phone_number: {
+    validate: [{ type: 'required', message: 'Phone number is required' }],
+  },
   upw_travel_information: requireYesOrNo,
   upw_travel_information_details: {
     dependent: { field: 'upw_travel_information', value: 'YES' },

@@ -31,6 +31,7 @@
 
             {{ readOnly({
                 title: 'Details of GP (if needed to verify information)',
+                editUrl: 'edit-gp-details',
                 rows: [
                     {
                         key: {
@@ -45,7 +46,7 @@
                         },
                         value: {
                             html: readOnlyAddress({ 
-                                buildingName: answers['upw_gp_building_name'],
+                                buildingName: answers['upw_gp_address_building_name'],
                                 houseNumber: answers['upw_gp_address_house_number'],
                                 streetName: answers['upw_gp_address_street_name'],
                                 district: answers['upw_gp_address_district'],
