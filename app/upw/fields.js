@@ -36,8 +36,12 @@ let fields = {
     answerType: 'checkbox',
     answerSchemas: [{ text: 'Complete', value: 'COMPLETE' }],
   },
-  first_name_aliases: {},
-  family_name_aliases: {},
+  first_name_aliases: {
+    answerType: 'textarea',
+  },
+  family_name_aliases: {
+    answerType: 'textarea',
+  },
   gender_identity: requireSelectOption,
   sex_change: requireYesOrNo,
   sex_change_details: requireEnterDetails,
@@ -70,10 +74,10 @@ let fields = {
   contact_mobile_phone_number: {
     validate: [{ type: 'required', message: 'Mobile phone number is required' }],
   },
-  contact_address_name: {
+  emergency_contact_name: {
     validate: [{ type: 'required', message: 'Name is required' }],
   },
-  emergency_contact_address_relationship: {
+  emergency_contact_relationship: {
     validate: [{ type: 'required', message: 'Emergency contact relationship is required' }],
   },
   emergency_contact_address_building_name: {
