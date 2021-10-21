@@ -90,8 +90,8 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
         text: 'Placement details',
       },
       items: [
-        getTask(answers, baseUrl, steps, 'availability'),
         getTask(answers, baseUrl, steps, 'intensive-working'),
+        getTask(answers, baseUrl, steps, 'availability'),
         getTask(answers, baseUrl, steps, 'equipment'),
       ],
     },

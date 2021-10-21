@@ -26,10 +26,70 @@
   margin-bottom: govuk-spacing(4);
 }
 
+.upw-summary-list--bottom-margin {
+  margin-bottom: govuk-spacing(8);
+}
+
 .upw-summary-list--top-border {
   border-top: 1px solid #b1b4b6;
 }
 
-.upw-summary-list--bottom-margin {
-  margin-bottom: govuk-spacing(8);
+// availability matrix table
+.upw-availability-table {
+  margin-top: 25px;
+}
+
+.upw-availability-table__header {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 15px 5px 15px 5px;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  width: 90px;
+}
+
+.upw-availability-table__rowheader {
+  background: #505a5f;
+  padding: 10px 5px 10px 5px;
+  font-size: 14px;
+  color: #fff;
+  line-height: 16px;
+  text-align: center;
+  vertical-align: middle;
+  border-top: 0;
+  width: 90px !important;
+}
+
+.govuk-checkboxes__label::before {
+  left: 38px;
+}
+
+.govuk-checkboxes__label::after {
+  left: 43px !important;
+}
+
+.upw-availability-table__column {
+  border-left: 1px solid #b1b4b6;
+  border-right: 1px solid #b1b4b6;
+}
+
+.upw-availability-table__column > :last-child {
+  border-right: 0;
+}
+
+.upw-availability-table__item-18,
+.upw-availability-table__item-19,
+.upw-availability-table__item-20,
+.no-right-border {
+  border-right: 0;
+}
+
+.upw-availability-table__item-2,
+.upw-availability-table__item-5,
+.upw-availability-table__item-8,
+.upw-availability-table__item-11,
+.upw-availability-table__item-14,
+.upw-availability-table__item-17,
+.upw-availability-table__item-20 {
+  border-bottom: 0;
 }

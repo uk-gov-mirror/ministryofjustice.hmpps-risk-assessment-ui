@@ -1,5 +1,14 @@
 const { addSectionCompleteField } = require('./utils')
 
+const requireSelectOption = {
+  validate: [
+    {
+      type: 'required',
+      message: 'Select an option',
+    },
+  ],
+}
+
 const requireYesOrNo = {
   validate: [
     {
@@ -256,6 +265,28 @@ let fields = {
     dependent: { field: 'upw_individual_commitment', value: 'YES' },
     ...requireEnterDetails,
   },
+  upw_eligibility_intensive_working: requireYesOrNo,
+  upw_eligibility_intensive_working_details: {
+    dependent: { field: 'upw_eligibility_intensive_working', value: 'NO' },
+    ...requireEnterDetails,
+  },
+  upw_recommended_hours_start_order: {
+    dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_recommended_hours_midpoint_order: {
+    dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_twenty_eight_hours_working_week_details: {
+    dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  upw_individual_availability: requireSelectOption,
+  upw_individual_availability_details: {},
+  upw_male_female_clothing: requireSelectOption,
+  upw_waterproof_clothing: requireSelectOption,
+  upw_footwear_size: requireSelectOption,
 }
 
 Array.from([
