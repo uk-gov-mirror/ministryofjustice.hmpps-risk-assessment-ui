@@ -1,0 +1,164 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "common/templates/components/read-only/macro.njk" import readOnly %}
+{% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
+
+{% set backLink = 'task-list' %}
+
+{% block pageTitle %}
+{{ pageTitle }}
+{% endblock %}
+
+{% block header %}
+{% include "common/templates/partials/header.njk" %}
+{% endblock %}
+
+{% block content %}
+{# include errorSummary partial #}
+{{ super() }}
+
+{%- macro replaceLineBreaks(string) -%}
+    {{ string | striptags(true) | escape | nl2br }}
+{%- endmacro -%}
+
+<h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" action="{{ action }}">
+
+            {{ readOnly({
+                title: 'Personal details',
+                editUrl: 'edit-personal-details',
+                rows: [
+                    {
+                        key: {
+                            text: 'First name aliases'
+                        },
+                        value: {
+                            html: replaceLineBreaks(answers['first_name_aliases'])
+                        }
+                    },
+                    {
+                        key: {
+                            text: 'Family name aliases'
+                        },
+                        value: {
+                            html: replaceLineBreaks(answers['family_name_aliases'])
+                        }
+                    }
+                ]
+            }) }}
+
+            {{ readOnly({
+                title: 'Contact details',
+                editUrl: 'edit-contact-details',
+                rows: [
+                    {
+                        key: {
+                            text: 'Address'
+                        },
+                        value: {
+                            html: readOnlyAddress({ 
+                                buildingName: answers['contact_address_building_name'],
+                                houseNumber: answers['contact_address_house_number'],
+                                streetName: answers['contact_address_street_name'],
+                                district: answers['contact_address_district'],
+                                townOrCity: answers['contact_address_town_or_city'],
+                                county: answers['contact_address_county'],
+                                postcode: answers['contact_address_postcode']
+                            })
+                        }
+                    }, {
+                        key: {
+                            text: 'Mobile number'
+                        },
+                        value: {
+                            html: answers['contact_mobile_phone_number']
+                        }
+                    }, {
+                        key: {
+                            text: 'Phone number'
+                        },
+                        value: {
+                            html: answers['contact_phone_number']
+                        }
+                    }, {
+                        key: {
+                            text: 'Email'
+                        },
+                        value: {
+                            html: answers['contact_phone_number']
+                        }
+                    }
+                ]
+            }) }}
+
+            {{ readOnly({
+                title: 'Emergency contact details',
+                editUrl: 'edit-emergency-contact-details',
+                rows: [
+                    {
+                        key: {
+                            text: 'Name'
+                        },
+                        value: {
+                            html: answers['emergency_contact_name']
+                        }
+                    }, {
+                        key: {
+                            text: 'Relationship to the individual'
+                        },
+                        value: {
+                            html: answers['emergency_contact_relationship']
+                        }
+                    }, {
+                        key: {
+                            text: 'Address'
+                        },
+                        value: {
+                            html: readOnlyAddress({ 
+                                buildingName: answers['emergency_contact_address_building_name'],
+                                houseNumber: answers['emergency_contact_address_house_number'],
+                                streetName: answers['emergency_contact_address_street_name'],
+                                district: answers['emergency_contact_address_district'],
+                                townOrCity: answers['emergency_contact_address_town_or_city'],
+                                county: answers['emergency_contact_address_county'],
+                                postcode: answers['emergency_contact_address_postcode']
+                            })
+                        }
+                    }, {
+                        key: {
+                            text: 'Mobile number'
+                        },
+                        value: {
+                            html: answers['emergency_contact_phone_number']
+                        }
+                    }, {
+                        key: {
+                            text: 'Phone number'
+                        },
+                        value: {
+                            html: answers['emergency_contact_mobile_phone_number']
+                        }
+                    }
+                ]
+            }) }}
+
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
+            
+            {{ renderQuestion(questions['section-complete-individuals-details'], errors) }}
+
+            <div class="questiongroup-action-buttons">
+                {{ govukButton({
+                    text: buttonText | default('Save'),
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                }) }}
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

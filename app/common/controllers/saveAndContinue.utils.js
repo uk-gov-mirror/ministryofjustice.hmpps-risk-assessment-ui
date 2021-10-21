@@ -47,8 +47,7 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     if (submittedAnswer) {
       answer = submittedAnswer
     } else if (Array.isArray(previousAnswer) && previousAnswer.length > 0) {
-      const [firstAnswer] = previousAnswer
-      answer = firstAnswer
+      answer = previousAnswer.join('\n')
     }
 
     return answer

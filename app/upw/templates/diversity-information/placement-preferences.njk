@@ -2,6 +2,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
+
 {% set backLink = 'task-list' %}
 
 {% block pageTitle %}
@@ -30,7 +31,7 @@
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({
-                    text: buttonText | default('Save and continue'),
+                    text: buttonText | default('Save'),
                     classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
                 }) }}
             </div>

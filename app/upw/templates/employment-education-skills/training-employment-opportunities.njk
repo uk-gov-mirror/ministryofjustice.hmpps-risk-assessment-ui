@@ -5,6 +5,7 @@
 {% from "common/templates/components/question/template.njk" import getQuestionText %}
 {% from "common/templates/components/question/template.njk" import getQuestionAnswer %}
 {%- from "node_modules/govuk-frontend/govuk/components/summary-list/macro.njk" import govukSummaryList -%}
+
 {% set backLink = 'task-list' %}
 
 {% block pageTitle %}
@@ -36,7 +37,7 @@
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({
-                    text: buttonText | default('Save and continue'),
+                    text: buttonText | default('Save'),
                     classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
                 }) }}
             </div>

@@ -20,7 +20,7 @@ module.exports = {
   '/individuals-details': {
     pageTitle: "Individual's details",
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/default`,
+    template: `${__dirname}/templates/individuals-details/individuals-details.njk`,
     next: 'task-list',
     fields: ['section-complete-individuals-details'],
   },

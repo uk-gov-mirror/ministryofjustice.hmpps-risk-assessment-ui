@@ -36,6 +36,73 @@ let fields = {
     answerType: 'checkbox',
     answerSchemas: [{ text: 'Complete', value: 'COMPLETE' }],
   },
+  first_name_aliases: {},
+  family_name_aliases: {},
+  gender_identity: requireSelectOption,
+  sex_change: requireYesOrNo,
+  sex_change_details: requireEnterDetails,
+  intersex_or_dsd: requireYesOrNo,
+  transgender: requireYesOrNo,
+  contact_address_building_name: {
+    validate: [{ type: 'required', message: 'Building name is required' }],
+  },
+  contact_address_house_number: {
+    validate: [{ type: 'required', message: 'House number is required' }],
+  },
+  contact_address_street_name: {
+    validate: [{ type: 'required', message: 'Street name is required' }],
+  },
+  contact_address_district: {
+    validate: [{ type: 'required', message: 'District is required' }],
+  },
+  contact_address_town_or_city: {
+    validate: [{ type: 'required', message: 'Town/City is required' }],
+  },
+  contact_address_county: {
+    validate: [{ type: 'required', message: 'County is required' }],
+  },
+  contact_address_postcode: {
+    validate: [{ type: 'required', message: 'Postcode is required' }],
+  },
+  contact_phone_number: {
+    validate: [{ type: 'required', message: 'Phone number is required' }],
+  },
+  contact_mobile_phone_number: {
+    validate: [{ type: 'required', message: 'Mobile phone number is required' }],
+  },
+  contact_address_name: {
+    validate: [{ type: 'required', message: 'Name is required' }],
+  },
+  emergency_contact_address_relationship: {
+    validate: [{ type: 'required', message: 'Emergency contact relationship is required' }],
+  },
+  emergency_contact_address_building_name: {
+    validate: [{ type: 'required', message: 'Building name is required' }],
+  },
+  emergency_contact_address_house_number: {
+    validate: [{ type: 'required', message: 'House number is required' }],
+  },
+  emergency_contact_address_street_name: {
+    validate: [{ type: 'required', message: 'Street name is required' }],
+  },
+  emergency_contact_address_district: {
+    validate: [{ type: 'required', message: 'District is required' }],
+  },
+  emergency_contact_address_town_or_city: {
+    validate: [{ type: 'required', message: 'Town/City is required' }],
+  },
+  emergency_contact_address_county: {
+    validate: [{ type: 'required', message: 'County is required' }],
+  },
+  emergency_contact_address_postcode: {
+    validate: [{ type: 'required', message: 'Postcode is required' }],
+  },
+  emergency_contact_phone_number: {
+    validate: [{ type: 'required', message: 'Phone number is required' }],
+  },
+  emergency_contact_mobile_phone_number: {
+    validate: [{ type: 'required', message: 'Mobile phone number is required' }],
+  },
   upw_cultural_religious_adjustment: requireYesOrNo,
   upw_cultural_religious_adjustment_details: {
     dependent: { field: 'upw_cultural_religious_adjustment', value: 'YES' },
