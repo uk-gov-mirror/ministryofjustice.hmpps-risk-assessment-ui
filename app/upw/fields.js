@@ -74,6 +74,9 @@ let fields = {
   contact_mobile_phone_number: {
     validate: [{ type: 'required', message: 'Mobile phone number is required' }],
   },
+  contact_email_addresses: {
+    validate: [{ type: 'required', message: 'Email address is required' }],
+  },
   emergency_contact_name: {
     validate: [{ type: 'required', message: 'Name is required' }],
   },

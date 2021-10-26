@@ -46,6 +46,7 @@ module.exports = {
       'contact_address_postcode',
       'contact_phone_number',
       'contact_mobile_phone_number',
+      'contact_email_addresses',
     ],
   },
   '/edit-emergency-contact-details': {
