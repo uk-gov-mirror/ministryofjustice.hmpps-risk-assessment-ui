@@ -23,6 +23,13 @@
     {{ string | striptags(true) | escape | nl2br }}
 {%- endmacro -%}
 
+{%- macro renderAliases(firstNames, familyNames) -%}
+    {% for firstName in firstNames %}
+        {%- set familyName = familyNames[loop.index - 1] -%}
+        {{ firstName }} {{ familyName }}<br />
+    {% endfor %}
+{%- endmacro %}
+
 <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
 
 <div class="govuk-grid-row">
@@ -32,22 +39,13 @@
 
             {{ readOnly({
                 title: 'Personal details',
-                editUrl: 'edit-personal-details',
                 rows: [
                     {
                         key: {
-                            text: 'First name aliases'
+                            text: 'Aliases'
                         },
                         value: {
-                            html: replaceLineBreaks(answers['first_name_aliases'])
-                        }
-                    },
-                    {
-                        key: {
-                            text: 'Family name aliases'
-                        },
-                        value: {
-                            html: replaceLineBreaks(answers['family_name_aliases'])
+                            html: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases'])
                         }
                     }
                 ]
