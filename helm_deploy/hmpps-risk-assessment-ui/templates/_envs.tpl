@@ -67,4 +67,7 @@ env:
   - name: SHOW_DETAILED_ERRORS
     value: {{ .Values.env.SHOW_DETAILED_ERRORS | quote }}
 
+  - name: PDF_CONVERTER_ENDPOINT
+    value: {{ .Values.env.PDF_CONVERTER_ENDPOINT | quote }}
+
 {{- end -}}

@@ -69,5 +69,13 @@ services:
       - OAUTH_ENDPOINT_URL=http://oauth:9090/auth
       - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=DEBUG
 
+  gotenberg:
+    image: thecodingmachine/gotenberg:7
+    restart: always
+    networks:
+      - hmpps
+    ports:
+      - "9099:3000"
+
 networks:
   hmpps:

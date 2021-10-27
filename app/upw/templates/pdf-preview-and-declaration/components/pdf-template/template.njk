@@ -1,0 +1,771 @@
+{% from "common/templates/components/moj-crest/macro.njk" import renderMojCrest %}
+{% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
+
+{%- macro renderTableHeading(heading, description) -%}
+    <p><strong>{{ heading }}<strong></p>
+    {% if description %}
+    <p>{{ description }}</p>
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro renderTable(table) -%}
+        <table class="upw-pdf-table">
+        <caption>
+            <h2 class="govuk-heading-m">{{ table.caption }}</h2>
+            <p>{{ table.captionDescription }}</p>
+        </caption>
+        <tbody>
+            {% for row in table.rows %}
+            {%- if row.condition or row.condition == undefined -%}
+            <tr>
+                <th>{{ renderTableHeading(row.heading, row.description) }}</th>
+                <td>{{ row.data }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{%- endmacro -%}
+
+{%- macro renderValue(value, description, condition) -%}
+    <p>{{ value | default("No data", true) }}</p>
+    {% if description and (not condition or condition and value == condition) %}
+    <p>{{ description }}</p>
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro renderOffence(code, description) -%}
+    <p>{% if code %}{{ code }} - {% endif %}{{ description }}</p>
+{%- endmacro -%}
+
+{%- macro renderGpDetails(name, phoneNumber, address) -%}
+    {% if name %}<p>{{ name }}</p>{% endif %}
+    {% if address %}<p>{{ address }}</p>{% endif %}
+    {% if phoneNumber %}<p>{{ phoneNumber }}</p>{% endif %}
+{%- endmacro -%}
+
+<div class="govuk-body upw-pdf">
+    <div class="upw-pdf-header">
+        <div class="upw-pdf-header__left">
+
+            {{ renderMojCrest(60) }}
+            
+            <span>Ministry of Justice</span>
+            <span>HMPPS Unpaid work assessment</span>
+        </div>
+        <div class="upw-pdf-header__right">
+            <span class="govuk-tag upw-pdf-header__right-tag">Official Sensitive</span>
+        </div>
+    </div>
+
+    <h1 class="govuk-heading-l">Supervised individual</h1>    
+
+    {{ renderTable({
+        caption: "Offence details",
+        rows: [
+            { heading: "Offence", data: renderOffence(assessment.offence.offence, assessment.offence.offenceDescription) },
+            { heading: "Subcode", data: renderOffence(assessment.offence.subCode, assessment.offence.subCodeDescription) },
+            { heading: "Sentence date", data: renderValue(assessment.offence.sentenceDate) }
+        ]
+    }) }}
+
+    {{ renderTable({
+        caption: "Personal details",
+        rows: [
+            { heading: "Family name", data: renderValue(rawAnswers["family_name"]) },
+            { heading: "First name", data: renderValue(rawAnswers["first_name"]) },
+            { heading: "Date of birth", data: renderValue(rawAnswers["dob"]) },
+            { heading: "CRN", data: renderValue(rawAnswers["crn"]) },
+            { heading: "PNC", data: renderValue(rawAnswers["pnc"]) },
+            { heading: "Alias", data: renderValue(rawAnswers["alias"]) },
+            { heading: "Ethnicity", data: renderValue(rawAnswers["ethnicity"]) }
+        ]
+    }) }}
+
+    {{ renderTable({
+        caption: "Gender information",
+        rows: [
+            { heading: "Gender identity", data: renderValue(answers["gender_identity"]) },
+            {
+                heading: "Has the individual gone through any part of a process to change the sex they were assigned at birth to the gender they now identify with, or do they intend to?",
+                data: renderValue(answers["sex_change"])
+            },
+            {
+                heading: "Is the individual intersex or do they have a Difference in Sexual Development (DSD)?",
+                data: renderValue(answers["intersex_or_dsd"])
+            },
+            {
+                heading: "Do they consider themselves to be transgender or have a transgender history?",
+                description: "This could include their name, appearance, the way they dress, taking hormones, or having gender-confrming surgery.",
+                data: renderValue(answers["transgender"])
+            }
+        ]
+    }) }}
+
+    {{ renderTable({
+        caption: "Contact details",
+        rows: [
+            {
+                heading: "Address",
+                data: readOnlyAddress({
+                    buildingName: answers["contact_address_building_name"],
+                    houseNumber: answers["contact_address_house_number"],
+                    streetName: answers["contact_address_street_name"],
+                    district: answers["contact_address_district"],
+                    townOrCity: answers["contact_address_town_or_city"],
+                    county: answers["contact_address_county"],
+                    postcode: answers["contact_address_postcode"]
+                })
+            },
+            { heading: "Mobile", data: renderValue(answers["contact_mobile_phone_number"]) },
+            { heading: "Phone number", data: renderValue(answers["contact_phone_number"]) },
+            { heading: "Email", data: renderValue(answers["contact_email_addresses"]) }
+        ]
+    }) }}
+
+    {{ renderTable({
+        caption: "Emergency contact details",
+        rows: [
+            { heading: "Name", data: renderValue(answers["emergency_contact_name"]) },
+            { heading: "Relationship to individual", data: renderValue(answers["emergency_contact_relationship"]) },
+            {
+                heading: "Address",
+                data: readOnlyAddress({
+                    buildingName: answers["emergency_contact_address_building_name"],
+                    houseNumber: answers["emergency_contact_address_house_number"],
+                    streetName: answers["emergency_contact_address_street_name"],
+                    district: answers["emergency_contact_address_district"],
+                    townOrCity: answers["emergency_contact_address_town_or_city"],
+                    county: answers["emergency_contact_address_county"],
+                    postcode: answers["emergency_contact_address_postcode"]
+                })
+            },
+            { heading: "Mobile", data: renderValue(answers["emergency_contact_phone_number"]) },
+            { heading: "Phone number", data: renderValue(answers["emergency_contact_mobile_phone_number"]) }
+        ]
+    }) }}
+
+    <h1 class="govuk-heading-l">Risk of Serious Harm in the community</h1>    
+
+    {# TODO: ROSH Widget #}
+
+    {{ renderTable({
+        rows: [
+            { heading: "Delius risk flags (registers)", data: renderValue("TODO: find mapping for this field") },
+            {
+                heading: "History of sexual offending?", 
+                data: renderValue(
+                    answers["upw_history_sexual_offending"],
+                    answers["upw_history_sexual_offending_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Individual poses a risk to children?", 
+                data: renderValue(
+                    answers["upw_poses_risk_to_children"],
+                    answers["upw_poses_risk_to_children_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Violent offences?", 
+                data: renderValue(
+                    answers["upw_violent_offences"],
+                    answers["upw_violent_offences_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "History of acquisitive offending?", 
+                data: renderValue(
+                    answers["upw_acquisitive_offending"],
+                    answers["upw_acquisitive_offending_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Has the individual been involved in serious group offending (SGO)?", 
+                data: renderValue(
+                    answers["upw_sgo_identifier"],
+                    answers["upw_sgo_identifier_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Control issues or disruptive behaviour?", 
+                data: renderValue(
+                    answers["upw_control_issues"],
+                    answers["upw_control_issues_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Hate-based behaviour?",
+                description: "For example, homophobic or racially motivated",
+                data: renderValue(
+                    answers["upw_hate_based_behaviour"],
+                    answers["upw_hate_based_behaviour_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Is the individual vulnerable because they are a high-profile person?",
+                description: "For example, they are prominent on social media or are well-known in a particular area.",
+                data: renderValue(
+                    answers["upw_high_profile_person"],
+                    answers["upw_high_profile_person_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Additional risk of harm assessment information?",
+                data: renderValue(
+                    answers["upw_additional_rosh_info"],
+                    answers["upw_high_profile_persoupw_additional_rosh_info_detailsn_details"],
+                    "Yes"
+                ) 
+            }
+        ]
+    }) }}
+
+    <h1 class="govuk-heading-l">Management of risk</h1>
+
+    {# TODO: Mappa Widget #}
+
+    {{ renderTable({
+        rows: [
+            { heading: "MAPPA nominal?", data: renderValue("TODO: find mapping for this field") },
+            {
+                heading: "Location restricted by victim exclusion criteria?", 
+                data: renderValue(
+                    answers["upw_location_exclusion_criteria"],
+                    answers["upw_location_exclusion_criteria_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Close supervision or restricted placement recommended?", 
+                data: renderValue(
+                    answers["upw_restricted_placement"],
+                    answers["upw_restricted_placement_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Recommend not to place with female supervisor?",
+                data: renderValue(
+                    answers["upw_no_female_supervisor"],
+                    answers["upw_no_female_supervisor_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Recommend not to place with male supervisor?", 
+                data: renderValue(
+                    answers["upw_no_male_supervisor"],
+                    answers["upw_no_male_supervisor_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Restrictive orders?",
+                data: renderValue(
+                    answers["upw_restrictive_orders"],
+                    answers["upw_restrictive_orders_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Are there any risk management issues for an individual placement?",
+                data: renderValue(
+                    answers["upw_risk_management_issues_individual"],
+                    answers["upw_risk_management_issues_individual_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Are there any risk management issues if working in a supervised group?",
+                data: renderValue(
+                    answers["upw_risk_management_issues_supervised_group"],
+                    answers["upw_risk_management_issues_supervised_group_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Alcohol or drug issues with health and safety impact?",
+                data: renderValue(
+                    answers["upw_alcohol_drug_issues"],
+                    answers["upw_alcohol_drug_issues_details"],
+                    "Yes"
+                ) 
+            }
+        ]
+    }) }}
+
+    <h1 class="govuk-heading-l">Diversity information</h1>
+
+    {%- set showPlacementPreferences = rawAnswers["gender"] == "Female" and answers["upw_placement_preference"] == "Yes" -%}
+    {%- set showPlacementPreferencesByGender = answers["sex_change"] == "Yes" -%}
+    {# TODO: we also need to calculate age add check if age >= 18 and <=25 #}
+    {%- set showMaturityAssessmentDetails = rawAnswers["gender"] == "Male" -%}
+
+    {{ renderTable({
+        rows: [
+            { heading: "Preferred language", data: renderValue("TODO: find mapping for this field") },
+            { heading: "Interpreter required?", data: renderValue("TODO: find mapping for this field") },
+            {
+                heading: "Cultural or religious adjustments", 
+                data: renderValue(
+                    answers["upw_cultural_religious_adjustment"],
+                    answers["upw_cultural_religious_adjustment_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Does the individual have any placement preferences?",
+                condition: showPlacementPreferences,
+                data: renderValue(answers["upw_placement_preferences"]) 
+            },
+            {
+                heading: "Discuss placement options with the individual, based on their gender identity",
+                description: "Record their preference and the details of the conversation.",
+                condition: showPlacementPreferencesByGender,
+                data: renderValue(answers["upw_placement_preference_by_gender_details"]) 
+            },
+            {
+                heading: "Maturity assessment",
+                description: "What action needs to be taken to support engagement or compliance with the community payback requirement?",
+                condition: showMaturityAssessmentDetails,
+                data: renderValue(answers["upw_maturity_assessment_details"]) 
+            }
+        ]
+    }) }}
+
+    <h1 class="govuk-heading-l">Placement restrictions due to health and other needs</h1>
+
+    {{ renderTable({
+        caption: "Disabilities and mental health",
+        captionDescription: "Does the Supervised individual have any of the following?",
+        rows: [
+            {
+                heading: "Physical disability", 
+                data: renderValue(
+                    answers["upw_physical_disability"],
+                    answers["upw_physical_disability_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Learning disability", 
+                data: renderValue(
+                    answers["upw_learning_disability"],
+                    answers["upw_learning_disability_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Learning difficulty", 
+                data: renderValue(
+                    answers["upw_learning_difficulty"],
+                    answers["upw_learning_difficulty_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Mental health condition", 
+                data: renderValue(
+                    answers["upw_mental_health_condition"],
+                    answers["upw_mental_health_condition_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Do any of the above affect the individual’s ability to engage with Community Payback?",
+                description: "Suggest adjustments, if known",
+                data: renderValue(
+                    answers["upw_disabilities"],
+                    answers["upw_disabilities_details"],
+                    "Yes"
+                ) 
+            }
+        ]
+    }) }}
+
+    {{ renderTable({
+        caption: "Are there any other health issues that may affect ability to work?",
+        rows: [
+            {
+                heading: "Allergies?", 
+                data: renderValue(
+                    answers["upw_allergies"],
+                    answers["upw_allergies_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Sudden loss of consciousness?", 
+                data: renderValue(
+                    answers["upw_loss_consciousness"],
+                    answers["upw_loss_consciousness_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Epilepsy?", 
+                data: renderValue(
+                    answers["upw_epilepsy"],
+                    answers["upw_epilepsy_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Any other health issues?", 
+                data: renderValue(
+                    answers["upw_other_health_issues"],
+                    answers["upw_other_health_issues_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Details of GP (if needed to verify information)", 
+                data: renderGpDetails(
+                    answers["upw_gp_name"],
+                    answers["upw_gp_phone_number"],
+                    readOnlyAddress({ 
+                        buildingName: answers["upw_gp_address_building_name"],
+                        houseNumber: answers["upw_gp_address_house_number"],
+                        streetName: answers["upw_gp_address_street_name"],
+                        district: answers["upw_gp_address_district"],
+                        townOrCity: answers["upw_gp_address_town_or_city"],
+                        county: answers["upw_gp_address_county"],
+                        postcode: answers["upw_gp_address_postcode"]
+                    })
+                )
+            }
+        ]
+    }) }}
+
+    {%- set hasTravelIssues = answers["upw_travel_information"] == "Yes" -%}
+
+    {{ renderTable({
+        caption: "Travel information",
+        rows: [
+            {
+                heading: "Does the individual have any travel issues that will affect their placement?", 
+                data: renderValue(
+                    answers["upw_travel_information"],
+                    answers["upw_travel_information_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Does the individual have a valid driving licence?", 
+                condition: hasTravelIssues,
+                data: renderValue(answers["upw_driving_licence"])
+            },
+            {
+                heading: "Do they have access to a vehicle?", 
+                condition: hasTravelIssues,
+                data: renderValue(answers["upw_vehicle"]) 
+            },
+            {
+                heading: "Is public transport available and accessible to the individual?", 
+                condition: hasTravelIssues,
+                data: renderValue(answers["upw_public_transport"])
+            }
+        ]
+    }) }}
+
+    {{ renderTable({
+        caption: "Carer commitments",
+        rows: [
+            {
+                heading: "Are there carer commitments?",
+                data: renderValue(
+                    answers["upw_caring_commitments"],
+                    answers["upw_caring_commitments_details"],
+                    "Yes"
+                ) 
+            }
+        ]
+    }) }}
+
+    <h1 class="govuk-heading-l">Employment, Education and skills</h1>
+
+    {%- if answers["upw_employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
+        {%- set employmentDetails = answers["upw_employment_education_details_fulltime"] -%}
+    {%- elif answers["upw_employment_education"] == "PARTTIME_EDUCATION_EMPLOYMENT" -%}
+        {%- set employmentDetails = answers["upw_employment_education_details_parttime"] -%}
+    {%- endif -%}
+
+    {{ renderTable({
+        rows: [
+            {
+                heading: "Employment or education?", 
+                data: renderValue(answers["upw_employment_education"])
+            },
+            {
+                heading: "Employment or education details (working days, hours etc)", 
+                data: renderValue(employmentDetails)
+            },
+            {
+                heading: "Does the individual have any difficulties with reading or writing?", 
+                data: renderValue(
+                    answers["upw_reading_writing_difficulties"],
+                    answers["upw_reading_writing_difficulties_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Does the individual have any work skills or experience that could be used while carrying out Community Payback?", 
+                data: renderValue(
+                    answers["upw_work_skills"],
+                    answers["upw_work_skills_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Does the individual have future work plans that could be supported through a Community Payback placement?",
+                description: "For example: retail, gardening etc",
+                data: renderValue(
+                    answers["upw_future_work_plans"],
+                    answers["upw_future_work_plans_details"],
+                    "Yes"
+                ) 
+            }
+        ]
+    }) }}
+
+    {%- set showIndividualCommitment = answers["upw_education_training_need"] == "Yes" -%}
+
+    {{ renderTable ({
+        caption: "Training & Employment Opportunities",
+        captionDescription: "Supervised individuals who are unemployed, at risk of unemployment or whose offending reflects employment related needs are eligible to use up to 20% of their Community Payback hours on education, training and pre-employment activity.",
+        rows: [
+            {
+                heading: "Does the individual have an education, training or employment-related need?",
+                data: renderValue(
+                    answers["upw_education_training_need"],
+                    answers["upw_education_training_need_details"],
+                    "Yes"
+                ) 
+            },
+            {
+                heading: "Does the individual agree to use the maximum entitlement of their hours on this activity?",
+                condition: showIndividualCommitment,
+                data: renderValue(
+                    answers["upw_individual_commitment"],
+                    answers["upw_individual_commitment_details"],
+                    "Yes"
+                ) 
+            }
+        ] 
+    }) }}
+
+    <h1 class="govuk-heading-l">Placement details</h1>
+
+    {%- if answers["upw_employment_education"] == "No" -%}
+
+        {%- set eligibleForIntensiveWorking = answers["upw_eligibility_intensive_working"] == "Yes" %}
+
+        {%- if eligibleForIntensiveWorking -%}
+            {% set recommendedHoursStartOrder = answers["upw_recommended_hours_start_order"] | default("0") %}
+            {% set recommendedHoursMidpointOrder = answers["upw_recommended_hours_start_order"] | default("0") %}
+        {%- endif -%}
+
+        {{ renderTable({
+            caption: "Intensive working",
+            rows: [
+                {
+                    heading: "Is the individual eligible for intensive working?",
+                    data: renderValue(
+                        answers["upw_eligibility_intensive_working"],
+                        answers["upw_eligibility_intensive_working_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Recommended hours per week in addition to statutory minimum, at the start of the order",
+                    condition: eligibleForIntensiveWorking,
+                    data: renderValue(recommendedHoursStartOrder)
+                },
+                {
+                    heading: "Recommended hours per week in addition to statutory minimum, at the midpoint of the order",
+                    condition: eligibleForIntensiveWorking,
+                    data: renderValue(recommendedHoursMidpointOrder)
+                },
+                {
+                    heading: "At what point should the individual be expected to reach a 28-hour working week?",
+                    condition: eligibleForIntensiveWorking,
+                    data: renderValue(answers["upw_twenty_eight_hours_working_week_details"])
+                }
+            ]
+        }) }}
+
+    {%- endif -%}
+
+    <h2 class="govuk-heading-m">Availability for Community Payback</h2>
+
+    {% macro ifAnswerHasValue(answer, value, text) %}
+        {% if value in answer %}
+            {{ text }}
+        {% endif %}
+    {% endmacro %}
+
+    <table class="upw-pdf-chart">
+        <caption class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom" colspan="8">When is the individual available for unpaid work?</caption>            
+        <tbody>
+            <tr>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right  upw-pdf-chart__cell--border-left"></th>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Mon</th>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Tues</th>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Wed</th>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Thurs</th>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Fri</th>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Sat</th>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Sun</th>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Morning</th>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "MONDAY_MORNING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "TUESDAY_MORNING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "WEDNESDAY_MORNING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "THURSDAY_MORNING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "FRIDAY_MORNING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "SATURDAY_MORNING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "SUNDAY_MORNING", "✓") }}</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Afternoon</th>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "MONDAY_AFTERNOON", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "TUESDAY_AFTERNOON", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "WEDNESDAY_AFTERNOON", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "THURSDAY_AFTERNOON", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "FRIDAY_AFTERNOON", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "SATURDAY_AFTERNOON", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "SUNDAY_AFTERNOON", "✓") }}</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Evening</th>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "MONDAY_EVENING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "TUESDAY_EVENING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "WEDNESDAY_EVENING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "THURSDAY_EVENING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "FRIDAY_EVENING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "SATURDAY_EVENING", "✓") }}</td>
+                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["upw_individual_availability"], "SUNDAY_EVENING", "✓") }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ renderTable({
+        rows: [
+            {
+                heading: "Additional availability information",
+                data: renderValue(answers["upw_individual_availability_details"])
+            }
+        ]
+    }) }}
+
+    {{ renderTable({
+        caption: "Equipment",
+        rows: [
+            {
+                heading: "Male or female clothing required?",
+                data: renderValue(answers["upw_male_female_clothing"])
+            },
+            {
+                heading: "Waterproof clothing size",
+                data: renderValue(answers["upw_waterproof_clothing"])
+            },
+            {
+                heading: "Footwear size (UK)",
+                data: renderValue(answers["upw_footwear_size"])
+            }
+        ]
+    }) }}
+
+    <h1 class="govuk-heading-l">Placement details</h1>
+
+    {{ renderTable({
+        rows: [
+            {
+                heading: "I confirm the individual has received details of their Community Payback Induction Session",
+                data: renderValue(answers["declaration"])
+            }
+        ]
+    }) }}
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <h2 class="govuk-heading-m">How long will it take for the individual to complete their hours?</h2>
+
+    <table class="upw-pdf-chart">
+        <tbody>
+            <tr>
+                <td class="upw-pdf-chart__cell--empty"></td>
+                <td class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top" colspan="4">If the individual works…</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right" rowspan="2">Number of hours to complete</th>
+                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">1 day per week</th>
+                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">2 days per week</th>
+                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">3 days per week</th>
+                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top">4 days per week</th>
+            </tr>
+            <tr>
+                <td class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top" colspan="4">…they will complete their hours in this many weeks*</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">50</th>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">7</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">4</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">3</td>
+                <td class="upw-pdf-chart__cell--border-top">2</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">100</th>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">15</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">8</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">5</td>
+                <td class="upw-pdf-chart__cell--border-top">4</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">150</th>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">22</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">11</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">8</td>
+                <td class="upw-pdf-chart__cell--border-top">6</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">200</th>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">29</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">15</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">10</td>
+                <td class="upw-pdf-chart__cell--border-top">8</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">250</th>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">36</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">18</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">12</td>
+                <td class="upw-pdf-chart__cell--border-top">9</td>
+            </tr>
+            <tr>
+                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">300</th>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">43</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">22</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">15</td>
+                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom">11</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="upw-pdf-chart__footer">*Figures are approximate and based on the individual completing 7 hours of work each day</p>
+
+    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+
+    <p class="upw-pdf-footer">Strictly NO unauthorised disclosure without following the approved disclosure process. Handle as per Government Security Classifications. The information contained in this document remains the property of HMPPS. Dispose of as <strong>OFFICIAL SENSITIVE</strong> waste.</p>
+
+</div>

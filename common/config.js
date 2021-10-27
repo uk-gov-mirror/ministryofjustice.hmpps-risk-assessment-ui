@@ -57,6 +57,9 @@ module.exports = {
         verifyToken: get('OAUTH_VERIFY_TOKEN', true),
       },
     },
+    pdfConverter: {
+      url: get('PDF_CONVERTER_ENDPOINT', 'http://localhost:9099/forms/chromium/convert/html'),
+    },
   },
   domain: `${get('INGRESS_URL', 'http://localhost:3000', true)}`,
   https: production,

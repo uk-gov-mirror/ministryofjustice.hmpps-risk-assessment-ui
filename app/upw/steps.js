@@ -2,6 +2,7 @@ const StartUpwAssessment = require('./controllers/start')
 const TaskList = require('./controllers/taskList')
 const BaseSaveAndContinue = require('../common/controllers/saveAndContinue')
 const SaveAndContinue = require('./controllers/saveAndContinue')
+const ConvertPdf = require('./controllers/convertPdf')
 
 module.exports = {
   '/start': {
@@ -282,5 +283,19 @@ module.exports = {
     template: `${__dirname}/templates/default`,
     fields: ['declaration'],
     next: 'task-list',
+  },
+  '/pdf-preview': {
+    pageTitle: 'PDF preview',
+    controller: SaveAndContinue,
+    template: `${__dirname}/templates/pdf-preview-and-declaration/pdf-preview.njk`,
+    fields: [],
+    next: 'pdf-preview-and-declaration',
+  },
+  '/pdf-download': {
+    pageTitle: 'PDF preview',
+    controller: ConvertPdf,
+    noPost: true,
+    template: `${__dirname}/templates/default.njk`,
+    next: 'pdf-preview-and-declaration',
   },
 }

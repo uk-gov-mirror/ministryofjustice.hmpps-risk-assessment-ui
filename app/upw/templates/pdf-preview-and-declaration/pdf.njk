@@ -1,0 +1,22 @@
+{% extends "common/templates/layout.njk" %}
+{% from "app/upw/templates/pdf-preview-and-declaration/components/pdf-template/macro.njk" import renderPdfTemplate %}
+
+{% set backLink = 'pdf-preview-and-declaration' %}
+
+{% block pageTitle %}
+{{ pageTitle }}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+{# include errorSummary partial #}
+{{ super() }}
+
+{{ renderPdfTemplate(assessment, answers, rawAnswers) }}
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
