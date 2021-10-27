@@ -23,7 +23,7 @@ module.exports = {
     controller: SaveAndContinue,
     template: `${__dirname}/templates/individuals-details/individuals-details.njk`,
     next: 'task-list',
-    fields: ['section-complete-individuals-details'],
+    fields: ['upw_individual_details_complete'],
   },
   '/edit-personal-details': {
     pageTitle: 'Personal details',
@@ -77,7 +77,7 @@ module.exports = {
     fields: [
       'upw_cultural_religious_adjustment',
       'upw_cultural_religious_adjustment_details',
-      'section-complete-cultural-and-religious-adjustments',
+      'upw_cultural_religious_adjustment_complete',
     ],
   },
   '/placement-preferences': {
@@ -85,14 +85,14 @@ module.exports = {
     controller: SaveAndContinue,
     template: `${__dirname}/templates/diversity-information/placement-preferences`,
     next: 'task-list',
-    fields: ['upw_placement_preference', 'upw_placement_preferences', 'section-complete-placement-preferences'],
+    fields: ['upw_placement_preference', 'upw_placement_preferences', 'upw_placement_preference_complete'],
   },
   '/options-gender-identity': {
     pageTitle: 'Discuss options based on gender identity',
     controller: SaveAndContinue,
     template: `${__dirname}/templates/diversity-information/options-gender-identity`,
     next: 'task-list',
-    fields: ['upw_placement_preference_by_gender_details', 'section-complete-options-gender-identity'],
+    fields: ['upw_placement_preference_by_gender_details', 'upw_placement_preference_by_gender_complete'],
   },
   '/risk-of-harm-in-the-community': {
     pageTitle: 'Risk of harm in the community',
@@ -118,7 +118,7 @@ module.exports = {
       'upw_high_profile_person_details',
       'upw_additional_rosh_info',
       'upw_additional_rosh_info_details,',
-      'section-complete-risk-of-harm-in-the-community',
+      'upw_rosh_community_complete',
     ],
   },
   '/managing-risk': {
@@ -143,7 +143,7 @@ module.exports = {
       'upw_risk_management_issues_supervised_group_details',
       'upw_alcohol_drug_issues',
       'upw_alcohol_drug_issues_details',
-      'section-complete-managing-risk',
+      'upw_managing_risk_complete',
     ],
   },
   '/disabilities-and-mental-health': {
@@ -151,7 +151,7 @@ module.exports = {
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/disabilities-and-mental-health.njk`,
     next: 'task-list',
-    fields: ['upw_disabilities', 'upw_disabilities_details', 'section-complete-disabilities-and-mental-health'],
+    fields: ['upw_disabilities', 'upw_disabilities_details', 'upw_disabilities_complete'],
   },
   '/health-issues': {
     pageTitle: 'Are there any other health issues that may affect ability to work?',
@@ -169,7 +169,7 @@ module.exports = {
       'upw_other_health_issues_details',
       'upw_pregnancy',
       'upw_pregnancy_details',
-      'section-complete-health-issues',
+      'upw_health_issues_complete',
     ],
   },
   '/gp-details': {
@@ -177,7 +177,7 @@ module.exports = {
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/gp-details.njk`,
     next: 'task-list',
-    fields: ['section-complete-gp-details'],
+    fields: ['upw_gp_details_complete'],
   },
   '/edit-gp-details': {
     pageTitle: 'Details of GP',
@@ -207,7 +207,7 @@ module.exports = {
       'upw_driving_licence',
       'upw_vehicle',
       'upw_public_transport',
-      'section-complete-travel-information',
+      'upw_travel_information_complete',
     ],
   },
   '/caring-commitments': {
@@ -215,7 +215,7 @@ module.exports = {
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/caring-commitments.njk`,
     next: 'task-list',
-    fields: ['upw_caring_commitments', 'upw_caring_commitments_details', 'section-complete-caring-commitments'],
+    fields: ['upw_caring_commitments', 'upw_caring_commitments_details', 'upw_caring_commitments_complete'],
   },
   '/employment-education-and-skills': {
     pageTitle: 'Employment, education and skills',
@@ -233,7 +233,6 @@ module.exports = {
       'upw_future_work_plans',
       'upw_future_work_plans_details',
       'upw_employment_education_skills_complete',
-      'section-complete-employment-education-and-skills',
     ],
   },
   '/training-and-employment-opportunities': {
@@ -246,7 +245,7 @@ module.exports = {
       'upw_education_training_need_details',
       'upw_individual_commitment',
       'upw_individual_commitment_details',
-      'section-complete-training-and-employment-opportunities',
+      'upw_employment_training_complete',
     ],
   },
   '/intensive-working': {
@@ -260,7 +259,7 @@ module.exports = {
       'upw_recommended_hours_start_order',
       'upw_recommended_hours_midpoint_order',
       'upw_twenty_eight_hours_working_week_details',
-      'section-complete-intensive-working',
+      'upw_eligibility_intensive_working_complete',
     ],
   },
   '/availability': {
@@ -268,14 +267,18 @@ module.exports = {
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-details/availability`,
     next: 'task-list',
-    fields: ['upw_individual_availability', 'upw_individual_availability_details', 'section-complete-availability'],
+    fields: [
+      'upw_individual_availability',
+      'upw_individual_availability_details',
+      'upw_individual_availability_complete',
+    ],
   },
   '/equipment': {
     pageTitle: 'Equipment',
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-details/equipment`,
     next: 'task-list',
-    fields: ['upw_male_female_clothing', 'upw_waterproof_clothing', 'upw_footwear_size', 'section-complete-equipment'],
+    fields: ['upw_male_female_clothing', 'upw_waterproof_clothing', 'upw_footwear_size', 'upw_equipment_complete'],
   },
   '/pdf-preview-and-declaration': {
     pageTitle: 'PDF preview and declaration',

@@ -1,5 +1,3 @@
-const { addSectionCompleteField } = require('./utils')
-
 const requireSelectOption = {
   validate: [
     {
@@ -29,7 +27,7 @@ const requireEnterDetails = {
 
 const readOnly = { readOnly: true }
 
-let fields = {
+const fields = {
   declaration: {
     questionText: '[PLACEHOLDER]',
     questionCode: 'declaration',
@@ -361,28 +359,23 @@ let fields = {
   upw_male_female_clothing: requireSelectOption,
   upw_waterproof_clothing: requireSelectOption,
   upw_footwear_size: requireSelectOption,
+  upw_individual_details_complete: requireSelectOption,
+  upw_cultural_religious_adjustment_complete: requireSelectOption,
+  upw_placement_preference_complete: requireSelectOption,
+  upw_placement_preference_by_gender_complete: requireSelectOption,
+  upw_rosh_community_complete: requireSelectOption,
+  upw_managing_risk_complete: requireSelectOption,
+  upw_disabilities_complete: requireSelectOption,
+  upw_health_issues_complete: requireSelectOption,
+  upw_gp_details_complete: requireSelectOption,
+  upw_travel_information_complete: requireSelectOption,
+  upw_caring_commitments_complete: requireSelectOption,
+  upw_employment_education_skills_complete: requireSelectOption,
+  upw_employment_training_complete: requireSelectOption,
+  upw_eligibility_intensive_working_complete: requireSelectOption,
+  upw_individual_availability_complete: requireSelectOption,
+  upw_equipment_complete: requireSelectOption,
 }
-
-Array.from([
-  'individuals-details',
-  'cultural-and-religious-adjustments',
-  'placement-preferences',
-  'options-gender-identity',
-  'risk-of-harm-in-the-community',
-  'managing-risk',
-  'disabilities-and-mental-health',
-  'gp-details',
-  'health-issues',
-  'travel-information',
-  'caring-commitments',
-  'employment-education-and-skills',
-  'training-and-employment-opportunities',
-  'availability',
-  'intensive-working',
-  'equipment',
-]).forEach(sectionName => {
-  fields = addSectionCompleteField(fields, sectionName)
-})
 
 // const customValidations = (fields, answers) => {
 //   return fields

@@ -29,11 +29,11 @@ const getDeclarationTask = (answers, baseUrl, steps, taskName, otherSections, de
   }
 }
 
-const getTask = (answers, baseUrl, steps, taskName) => {
+const getTask = (answers, baseUrl, steps, taskName, completionField) => {
   return {
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}` || '#',
-    status: answers[`section-complete-${taskName}`] === 'YES' ? 'COMPLETE' : 'INCOMPLETE',
+    status: answers[completionField] === 'YES' ? 'COMPLETE' : 'INCOMPLETE',
   }
 }
 
@@ -43,16 +43,22 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
       heading: {
         text: "Individual's details",
       },
-      items: [getTask(answers, baseUrl, steps, 'individuals-details')],
+      items: [getTask(answers, baseUrl, steps, 'individuals-details', 'upw_individual_details_complete')],
     },
     {
       heading: {
         text: 'Diversity information',
       },
       items: [
-        getTask(answers, baseUrl, steps, 'cultural-and-religious-adjustments'),
-        getTask(answers, baseUrl, steps, 'placement-preferences'),
-        getTask(answers, baseUrl, steps, 'options-gender-identity'),
+        getTask(
+          answers,
+          baseUrl,
+          steps,
+          'cultural-and-religious-adjustments',
+          'upw_cultural_religious_adjustment_complete',
+        ),
+        getTask(answers, baseUrl, steps, 'placement-preferences', 'upw_placement_preference_complete'),
+        getTask(answers, baseUrl, steps, 'options-gender-identity', 'upw_placement_preference_by_gender_complete'),
       ],
     },
     {
@@ -60,8 +66,8 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
         text: 'Risk information',
       },
       items: [
-        getTask(answers, baseUrl, steps, 'risk-of-harm-in-the-community'),
-        getTask(answers, baseUrl, steps, 'managing-risk'),
+        getTask(answers, baseUrl, steps, 'risk-of-harm-in-the-community', 'upw_rosh_community_complete'),
+        getTask(answers, baseUrl, steps, 'managing-risk', 'upw_managing_risk_complete'),
       ],
     },
     {
@@ -69,11 +75,11 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
         text: 'Placement restrictions due to health and other needs',
       },
       items: [
-        getTask(answers, baseUrl, steps, 'disabilities-and-mental-health'),
-        getTask(answers, baseUrl, steps, 'health-issues'),
-        getTask(answers, baseUrl, steps, 'gp-details'),
-        getTask(answers, baseUrl, steps, 'travel-information'),
-        getTask(answers, baseUrl, steps, 'caring-commitments'),
+        getTask(answers, baseUrl, steps, 'disabilities-and-mental-health', 'upw_disabilities_complete'),
+        getTask(answers, baseUrl, steps, 'health-issues', 'upw_health_issues_complete'),
+        getTask(answers, baseUrl, steps, 'gp-details', 'upw_gp_details_complete'),
+        getTask(answers, baseUrl, steps, 'travel-information', 'upw_travel_information_complete'),
+        getTask(answers, baseUrl, steps, 'caring-commitments', 'upw_caring_commitments_complete'),
       ],
     },
     {
@@ -81,8 +87,8 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
         text: 'Employment, education and skills information',
       },
       items: [
-        getTask(answers, baseUrl, steps, 'employment-education-and-skills'),
-        getTask(answers, baseUrl, steps, 'training-and-employment-opportunities'),
+        getTask(answers, baseUrl, steps, 'employment-education-and-skills', 'upw_employment_education_skills_complete'),
+        getTask(answers, baseUrl, steps, 'training-and-employment-opportunities', 'upw_employment_training_complete'),
       ],
     },
     {
@@ -90,9 +96,9 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
         text: 'Placement details',
       },
       items: [
-        getTask(answers, baseUrl, steps, 'intensive-working'),
-        getTask(answers, baseUrl, steps, 'availability'),
-        getTask(answers, baseUrl, steps, 'equipment'),
+        getTask(answers, baseUrl, steps, 'intensive-working', 'upw_eligibility_intensive_working_complete'),
+        getTask(answers, baseUrl, steps, 'availability', 'upw_individual_availability_complete'),
+        getTask(answers, baseUrl, steps, 'equipment', 'upw_equipment_complete'),
       ],
     },
   ]
