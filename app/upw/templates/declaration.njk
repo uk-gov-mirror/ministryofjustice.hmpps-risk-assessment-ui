@@ -1,0 +1,61 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "common/templates/components/read-only/macro.njk" import readOnly %}
+{% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
+
+{% set backLink = "individuals-details" %}
+
+{% block pageTitle %}
+{{ pageTitle }}
+{% endblock %}
+
+{% block header %}
+{% include "common/templates/partials/header.njk" %}
+{% endblock %}
+
+{% block content %}
+{# include errorSummary partial #}
+{{ super() }}
+
+<h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="post" action="{{ action }}">
+            <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+
+            <p class="govuk-body-l">You can preview the PDF's content before submitting the assessment</p>
+
+            {{ govukButton({
+                text: "Preview",
+                classes: "govuk-button--secondary",
+                href: "/UPW/pdf-preview"
+            }) }}
+
+            {%- set declarationSigned = rawAnswers["upw_declaration_confirmation"] == questions["upw_declaration_confirmation"].answerSchemas[0].value -%}
+
+            {{ renderQuestion({
+                questionCode: questions["upw_declaration_confirmation"].questionCode,
+                answerType: questions["upw_declaration_confirmation"].answerType,
+                answerSchemas: [
+                    {
+                        answerSchemaCode: questions["upw_declaration_confirmation"].answerSchemas[0].answerSchemaCode,
+                        value: questions["upw_declaration_confirmation"].answerSchemas[0].value,
+                        text: "I confirm the individual has received details of their Community Payback Induction Session",
+                        checked: declarationSigned
+                    }
+                ]
+            }, errors) }}
+
+            <div class="questiongroup-action-buttons">
+                {{ govukButton({
+                    text: buttonText | default("Save"),
+                    classes: "govuk-!-margin-bottom-3 govuk-!-margin-right-1"
+                }) }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

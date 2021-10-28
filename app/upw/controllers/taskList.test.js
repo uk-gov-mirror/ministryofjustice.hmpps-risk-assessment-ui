@@ -93,6 +93,6 @@ describe('TaskListController', () => {
     controller.locals(req, res, next)
 
     expect(getTaskList).toHaveBeenCalledWith('/UPW', req.form.options.steps, answers)
-    expect(res.locals.taskListItems).toBe('FOO TASK LIST')
+    expect(res.locals.taskList).toBe('FOO TASK LIST')
   })
 })

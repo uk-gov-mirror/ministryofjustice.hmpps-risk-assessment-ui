@@ -17,6 +17,7 @@ module.exports = {
     pageTitle: 'Community payback assessment',
     controller: TaskList,
     template: `${__dirname}/templates/taskList`,
+    next: 'confirmation',
   },
   '/individuals-details': {
     pageTitle: "Individual's details",
@@ -281,10 +282,10 @@ module.exports = {
     fields: ['upw_male_female_clothing', 'upw_waterproof_clothing', 'upw_footwear_size', 'upw_equipment_complete'],
   },
   '/pdf-preview-and-declaration': {
-    pageTitle: 'PDF preview and declaration',
+    pageTitle: 'Declaration',
     controller: BaseSaveAndContinue,
-    template: `${__dirname}/templates/default`,
-    fields: ['declaration'],
+    template: `${__dirname}/templates/declaration`,
+    fields: ['upw_declaration_confirmation'],
     next: 'task-list',
   },
   '/pdf-preview': {
@@ -300,5 +301,10 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/default.njk`,
     next: 'pdf-preview-and-declaration',
+  },
+  '/confirmation': {
+    pageTitle: 'Confirmation',
+    noPost: true,
+    template: `${__dirname}/templates/confirmation.njk`,
   },
 }

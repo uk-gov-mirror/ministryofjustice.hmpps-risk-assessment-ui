@@ -10,7 +10,7 @@ class TaskList extends BaseController {
     const steps = req.form?.options?.steps || {}
     const answers = req.sessionModel.get('answers') || {}
 
-    res.locals.taskListItems = getTaskList(`/${journeyName}`, steps, answers)
+    res.locals.taskList = getTaskList(`/${journeyName}`, steps, answers)
 
     super.locals(req, res, next)
   }

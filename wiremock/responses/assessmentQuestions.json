@@ -2965,7 +2965,14 @@
       "conditional": false,
       "referenceDataCategory": "",
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerSchemas": [
+        {
+          "answerSchemaUuid": "4f121212-5a7f-4ddf-9286-0843b9cdd913",
+          "answerSchemaCode": "signed",
+          "value": "SIGNED",
+          "text": "Sign declaration"
+        }
+      ]
     }
   ],
   "RSR": [

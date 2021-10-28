@@ -2,7 +2,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
-{% from "common/templates/components/form-wizard-task-list/macro.njk" import taskList %}
+{% from "common/templates/components/form-wizard-task-list/macro.njk" import renderTaskList %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 
 {% block pageTitle %}
@@ -23,23 +23,21 @@
         {% if pageDescription %}
         <p class="govuk-caption-l  govuk-!-margin-bottom-7">{{ pageDescription }}</p>
         {% endif %}
-
-        {% if taskList %}
-        <div>
-            {{ taskList(taskListItems) }}
-        </div>
-        {% endif %}
         
+        <div>
+            {{ renderTaskList(taskList) }}
+        </div>
+
         <div class="govuk-button-group">
-            {{ govukButton({
-                text: "Submit",
-                href: navigation.next
-            }) }}
-            {{ govukButton({
-                text: "Cancel",
-                classes: "govuk-button--secondary",
-                href: navigation.cancel
-            }) }}
+            <form method="post" action="{{ action }}">
+                <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+                {% if taskList.allowedToSubmit %}
+                {{ govukButton({
+                    text: "Submit"
+                }) }}
+                {% endif %}
+                <a class="govuk-button govuk-button--secondary" href="javascript:window.close();">Save and close</a>
+            </form>
         </div>
     </div>
     <div class="govuk-grid-column-one-third">

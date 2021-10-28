@@ -18,7 +18,7 @@ const getDeclarationStatus = (answers, tasks, fieldName) => {
     return 'CANNOT_START'
   }
 
-  return checkDeclarationIsSigned(answers, fieldName, 'COMPLETE') ? 'COMPLETE' : 'INCOMPLETE'
+  return checkDeclarationIsSigned(answers, fieldName, 'SIGNED') ? 'COMPLETE' : 'INCOMPLETE'
 }
 
 const getDeclarationTask = (answers, baseUrl, steps, taskName, otherSections, declarationFieldName) => {
@@ -105,12 +105,16 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
 
   const declaration = {
     heading: {
-      text: 'PDF preview and declaration',
+      text: 'Declaration',
     },
-    items: [getDeclarationTask(answers, baseUrl, steps, 'pdf-preview-and-declaration', tasks, 'declaration')],
+    items: [
+      getDeclarationTask(answers, baseUrl, steps, 'pdf-preview-and-declaration', tasks, 'upw_declaration_confirmation'),
+    ],
   }
 
-  return { sections: [...tasks, declaration] }
+  const allSections = [...tasks, declaration]
+
+  return { sections: allSections, allowedToSubmit: checkAllTasksAreComplete(allSections) }
 }
 
 module.exports = {

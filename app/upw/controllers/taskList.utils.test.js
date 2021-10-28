@@ -92,7 +92,7 @@ describe('taskList.util', () => {
 
     it('returns "COMPLETE" when the declaration is signed', () => {
       const answers = {
-        declaration: 'COMPLETE',
+        declaration: 'SIGNED',
       }
 
       const sections = [

@@ -1,4 +1,5 @@
 //styles related to specific questions and elements in the unpaid work assessment
+@use 'sass:math';
 
 /* stylelint-disable selector-class-pattern */
 .upw_cultural_religious_adjustment,
@@ -94,4 +95,13 @@
 .upw-availability-table__item-17,
 .upw-availability-table__item-20 {
   border-bottom: 0;
+}
+
+label[for=upw_declaration_confirmation] {
+  width: percentage(math.div(2, 3));
+  font-weight: bold;
+}
+
+.upw-confirmation-panel {
+  margin-bottom: govuk-spacing(9);
 }

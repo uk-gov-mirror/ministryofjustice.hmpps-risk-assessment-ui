@@ -12,7 +12,19 @@ class ConvertPdf extends SaveAndContinue {
         ...res.locals,
         css_path: 'application.min.css',
       })
-      res.set('content-type', 'application/pdf')
+
+      const firstName = res.locals.rawAnswers.first_name || ''
+      const familyName = res.locals.rawAnswers.family_name || ''
+      const crn = res.locals.rawAnswers.crn || ''
+
+      const fileName = [firstName, familyName, crn]
+        .filter(s => s !== '')
+        .join('-')
+        .toLowerCase()
+
+      res.set('Content-Type', 'application/pdf')
+      res.set('Content-Disposition', `attachment; filename="upw-${fileName}.pdf"`)
+
       return superagent
         .post(apis?.pdfConverter?.url)
         .accept('application/json')
