@@ -37,7 +37,9 @@
                     key: 'upw_physical_disability_details',
                     value: 'Yes'
                 },
-                answers: answers
+                answers: answers,
+                ifValuePresent: true,
+                ifNotPresent: "No"
             }) }}
 
             {{ readOnly({
@@ -49,7 +51,9 @@
                     key: 'upw_learning_disability_details',
                     value: 'Yes'
                 },
-                answers: answers
+                answers: answers,
+                ifValuePresent: true,
+                ifNotPresent: "No"
             }) }}
 
             {{ readOnly({
@@ -61,7 +65,9 @@
                     key: 'upw_learning_difficulty_details',
                     value: 'Yes'
                 },
-                answers: answers
+                answers: answers,
+                ifValuePresent: true,
+                ifNotPresent: "No"
             }) }}
 
             {{ readOnly({
@@ -73,7 +79,9 @@
                     key: 'upw_mental_health_condition_details',
                     value: 'Yes'
                 },
-                answers: answers
+                answers: answers,
+                ifValuePresent: true,
+                ifNotPresent: "No"
             }) }}
 
             {{ renderQuestion(questions['upw_disabilities'], errors) }}

@@ -12,17 +12,21 @@
 {% endif %}
 {% if params.rows %}
 {{ govukSummaryList({
-    classes: 'upw-summary-list--top-border upw-summary-list--bottom-margin',
+    classes: "upw-summary-list--top-border upw-summary-list--bottom-margin",
     rows: params.rows
 }) }}
 {% elif params.field.key %}
-    {% set fieldValue = 'No data' %}
-    {% if params.answers[params.field.key] %}{% set fieldValue = params.answers[params.field.key] %}{% endif %}
+    {% set fieldValue = params.ifNotPresent | default("No data") %}
+    {% if params.ifValuePresent %}
+        {% if params.answers[params.field.key] %}{% set fieldValue = params.conditional.value  %}{% endif %}
+    {% elif params.answers[params.field.key] %}
+        {% set fieldValue = params.answers[params.field.key] %}
+    {% endif %}
     {% if params.conditional.key and fieldValue == params.conditional.value %}
-        {% set conditionalFieldValue = 'No details' %}
+        {% set conditionalFieldValue = "No details" %}
         {% if params.answers[params.conditional.key] %}{% set conditionalFieldValue = params.answers[params.conditional.key] %}{% endif %}
         {{ govukSummaryList({
-            classes: 'upw-summary-list--top-border upw-summary-list--bottom-margin',
+            classes: "upw-summary-list--top-border upw-summary-list--bottom-margin",
             rows: [
                 {
                     key: {
@@ -44,7 +48,7 @@
         }) }}
     {% else %}
         {{ govukSummaryList({
-            classes: 'upw-summary-list--top-border upw-summary-list--bottom-margin',
+            classes: "upw-summary-list--top-border upw-summary-list--bottom-margin",
             rows: [
                 {
                     key: {

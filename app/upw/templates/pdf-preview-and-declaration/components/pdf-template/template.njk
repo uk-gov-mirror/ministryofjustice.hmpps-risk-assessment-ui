@@ -44,6 +44,15 @@
     {% if phoneNumber %}<p>{{ phoneNumber }}</p>{% endif %}
 {%- endmacro -%}
 
+{%- macro renderAliases(firstNames, familyNames) -%}
+    <p>
+        {% for firstName in firstNames %}
+            {%- set familyName = familyNames[loop.index - 1] -%}
+            {{ firstName }} {{ familyName }}<br />
+        {% endfor %}
+    </p>
+{%- endmacro %}
+
 <div class="govuk-body upw-pdf">
     <div class="upw-pdf-header">
         <div class="upw-pdf-header__left">
@@ -77,7 +86,7 @@
             { heading: "Date of birth", data: renderValue(rawAnswers["dob"]) },
             { heading: "CRN", data: renderValue(rawAnswers["crn"]) },
             { heading: "PNC", data: renderValue(rawAnswers["pnc"]) },
-            { heading: "Alias", data: renderValue(rawAnswers["alias"]) },
+            { heading: "Alias", data: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases']) },
             { heading: "Ethnicity", data: renderValue(rawAnswers["ethnicity"]) }
         ]
     }) }}
@@ -232,76 +241,80 @@
     <h1 class="govuk-heading-l">Management of risk</h1>
 
     {# TODO: Mappa Widget #}
+    {%- set mappaNominal = "NO" -%}
 
-    {{ renderTable({
-        rows: [
-            { heading: "MAPPA nominal?", data: renderValue("TODO: find mapping for this field") },
-            {
-                heading: "Location restricted by victim exclusion criteria?", 
-                data: renderValue(
-                    answers["upw_location_exclusion_criteria"],
-                    answers["upw_location_exclusion_criteria_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Close supervision or restricted placement recommended?", 
-                data: renderValue(
-                    answers["upw_restricted_placement"],
-                    answers["upw_restricted_placement_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Recommend not to place with female supervisor?",
-                data: renderValue(
-                    answers["upw_no_female_supervisor"],
-                    answers["upw_no_female_supervisor_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Recommend not to place with male supervisor?", 
-                data: renderValue(
-                    answers["upw_no_male_supervisor"],
-                    answers["upw_no_male_supervisor_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Restrictive orders?",
-                data: renderValue(
-                    answers["upw_restrictive_orders"],
-                    answers["upw_restrictive_orders_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Are there any risk management issues for an individual placement?",
-                data: renderValue(
-                    answers["upw_risk_management_issues_individual"],
-                    answers["upw_risk_management_issues_individual_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Are there any risk management issues if working in a supervised group?",
-                data: renderValue(
-                    answers["upw_risk_management_issues_supervised_group"],
-                    answers["upw_risk_management_issues_supervised_group_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Alcohol or drug issues with health and safety impact?",
-                data: renderValue(
-                    answers["upw_alcohol_drug_issues"],
-                    answers["upw_alcohol_drug_issues_details"],
-                    "Yes"
-                ) 
-            }
-        ]
-    }) }}
+    {%- if mappaNominal == "YES" -%}
+    {%- elif mappaNominal == "NO" -%}
+        {{ renderTable({
+            rows: [
+                { heading: "MAPPA nominal?", data: renderValue("TODO: find mapping for this field") },
+                {
+                    heading: "Location restricted by victim exclusion criteria?",
+                    data: renderValue(
+                        answers["upw_location_exclusion_criteria"],
+                        answers["upw_location_exclusion_criteria_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Close supervision or restricted placement recommended?",
+                    data: renderValue(
+                        answers["upw_restricted_placement"],
+                        answers["upw_restricted_placement_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Recommend not to place with female supervisor?",
+                    data: renderValue(
+                        answers["upw_no_female_supervisor"],
+                        answers["upw_no_female_supervisor_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Recommend not to place with male supervisor?",
+                    data: renderValue(
+                        answers["upw_no_male_supervisor"],
+                        answers["upw_no_male_supervisor_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Restrictive orders?",
+                    data: renderValue(
+                        answers["upw_restrictive_orders"],
+                        answers["upw_restrictive_orders_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Are there any risk management issues for an individual placement?",
+                    data: renderValue(
+                        answers["upw_risk_management_issues_individual"],
+                        answers["upw_risk_management_issues_individual_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Are there any risk management issues if working in a supervised group?",
+                    data: renderValue(
+                        answers["upw_risk_management_issues_supervised_group"],
+                        answers["upw_risk_management_issues_supervised_group_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Alcohol or drug issues with health and safety impact?",
+                    data: renderValue(
+                        answers["upw_alcohol_drug_issues"],
+                        answers["upw_alcohol_drug_issues_details"],
+                        "Yes"
+                    )
+                }
+            ]
+        }) }}
+    {%- endif -%}
 
     <h1 class="govuk-heading-l">Diversity information</h1>
 
@@ -312,8 +325,8 @@
 
     {{ renderTable({
         rows: [
-            { heading: "Preferred language", data: renderValue("TODO: find mapping for this field") },
-            { heading: "Interpreter required?", data: renderValue("TODO: find mapping for this field") },
+            { heading: "Preferred language", data: renderValue(rawAnswers["language"]) },
+            { heading: "Interpreter required?", data: renderValue(rawAnswers["requires_interpreter"]) },
             {
                 heading: "Cultural or religious adjustments", 
                 data: renderValue(
@@ -344,6 +357,14 @@
 
     <h1 class="govuk-heading-l">Placement restrictions due to health and other needs</h1>
 
+    {%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
+        {%- if answer -%}
+            {{ textIfPresent }}
+        {%- else -%}
+            {{ textIfNotPresent }}
+        {%- endif -%}
+    {%- endmacro -%}
+
     {{ renderTable({
         caption: "Disabilities and mental health",
         captionDescription: "Does the Supervised individual have any of the following?",
@@ -351,7 +372,7 @@
             {
                 heading: "Physical disability", 
                 data: renderValue(
-                    answers["upw_physical_disability"],
+                    ifAnswerIsPresent(answers["upw_physical_disability"], "Yes", "No"),
                     answers["upw_physical_disability_details"],
                     "Yes"
                 ) 
@@ -359,7 +380,7 @@
             {
                 heading: "Learning disability", 
                 data: renderValue(
-                    answers["upw_learning_disability"],
+                    ifAnswerIsPresent(answers["upw_learning_disability"], "Yes", "No"),
                     answers["upw_learning_disability_details"],
                     "Yes"
                 ) 
@@ -367,7 +388,7 @@
             {
                 heading: "Learning difficulty", 
                 data: renderValue(
-                    answers["upw_learning_difficulty"],
+                    ifAnswerIsPresent(answers["upw_learning_difficulty"], "Yes", "No"),
                     answers["upw_learning_difficulty_details"],
                     "Yes"
                 ) 
@@ -375,7 +396,7 @@
             {
                 heading: "Mental health condition", 
                 data: renderValue(
-                    answers["upw_mental_health_condition"],
+                    ifAnswerIsPresent(answers["upw_mental_health_condition"], "Yes", "No"),
                     answers["upw_mental_health_condition_details"],
                     "Yes"
                 ) 
@@ -486,7 +507,7 @@
                     answers["upw_caring_commitments"],
                     answers["upw_caring_commitments_details"],
                     "Yes"
-                ) 
+                )
             }
         ]
     }) }}
@@ -532,7 +553,7 @@
                     answers["upw_future_work_plans"],
                     answers["upw_future_work_plans_details"],
                     "Yes"
-                ) 
+                )
             }
         ]
     }) }}
@@ -608,7 +629,7 @@
     <h2 class="govuk-heading-m">Availability for Community Payback</h2>
 
     {% macro ifAnswerHasValue(answer, value, text) %}
-        {% if value in answer %}
+        {% if answer and value in answer %}
             {{ text }}
         {% endif %}
     {% endmacro %}
