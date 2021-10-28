@@ -3,4 +3,4 @@ name: gotenberg
 description: A Helm chart Gotenberg
 type: application
 version: 0.1.0
-appVersion: '6.4.4'
+appVersion: '7'
