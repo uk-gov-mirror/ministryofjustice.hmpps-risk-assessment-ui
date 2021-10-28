@@ -51,7 +51,7 @@ class SaveAndContinue extends BaseSaveAndContinue {
   locals(req, res, next) {
     super.locals(req, res, next)
 
-    const answers = req.sessionModel.get('answers')
+    const answers = req.sessionModel.get('answers') || {}
     const updatedAnswers = setDefaultCompletedAnswers(answers, completionFields)
     req.sessionModel.set('answers', updatedAnswers)
   }
