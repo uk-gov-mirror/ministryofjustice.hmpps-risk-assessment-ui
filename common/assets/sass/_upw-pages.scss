@@ -60,12 +60,14 @@
   width: 90px !important;
 }
 
-.govuk-checkboxes__label::before {
-  left: 38px;
-}
+.upw-checkbox-item__availability {
+  .govuk-checkboxes__label::before {
+    left: 38px;
+  }
 
-.govuk-checkboxes__label::after {
-  left: 43px !important;
+  .govuk-checkboxes__label::after {
+    left: 43px !important;
+  }
 }
 
 .upw-availability-table__column {
