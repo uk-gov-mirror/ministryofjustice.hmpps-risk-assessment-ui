@@ -97,7 +97,11 @@
             { heading: "Gender identity", data: renderValue(answers["gender_identity"]) },
             {
                 heading: "Has the individual gone through any part of a process to change the sex they were assigned at birth to the gender they now identify with, or do they intend to?",
-                data: renderValue(answers["sex_change"])
+                data: renderValue(
+                    answers["sex_change"],
+                    answers["sex_change_details"],
+                    "Yes"
+                )
             },
             {
                 heading: "Is the individual intersex or do they have a Difference in Sexual Development (DSD)?",

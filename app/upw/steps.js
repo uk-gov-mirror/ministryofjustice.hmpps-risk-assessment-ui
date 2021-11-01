@@ -88,12 +88,19 @@ module.exports = {
     next: 'task-list',
     fields: ['upw_placement_preference', 'upw_placement_preferences', 'upw_placement_preference_complete'],
   },
-  '/options-gender-identity': {
-    pageTitle: 'Discuss options based on gender identity',
+  '/gender-information': {
+    pageTitle: 'Gender information',
     controller: SaveAndContinue,
-    template: `${__dirname}/templates/diversity-information/options-gender-identity`,
+    template: `${__dirname}/templates/diversity-information/gender-information`,
     next: 'task-list',
-    fields: ['upw_placement_preference_by_gender_details', 'upw_placement_preference_by_gender_complete'],
+    fields: [
+      'gender_identity',
+      'sex_change',
+      'sex_change_details',
+      'intersex_or_dsd',
+      'transgender',
+      'upw_placement_preference_by_gender_complete',
+    ],
   },
   '/risk-of-harm-in-the-community': {
     pageTitle: 'Risk of harm in the community',

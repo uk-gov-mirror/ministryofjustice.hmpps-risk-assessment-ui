@@ -50,6 +50,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
         text: 'Diversity information',
       },
       items: [
+        getTask(answers, baseUrl, steps, 'gender-information', 'upw_placement_preference_by_gender_complete'),
         getTask(
           answers,
           baseUrl,
@@ -58,7 +59,6 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
           'upw_cultural_religious_adjustment_complete',
         ),
         getTask(answers, baseUrl, steps, 'placement-preferences', 'upw_placement_preference_complete'),
-        getTask(answers, baseUrl, steps, 'options-gender-identity', 'upw_placement_preference_by_gender_complete'),
       ],
     },
     {

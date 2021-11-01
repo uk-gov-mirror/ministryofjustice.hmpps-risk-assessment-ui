@@ -42,7 +42,10 @@ const fields = {
   },
   gender_identity: requireSelectOption,
   sex_change: requireYesOrNo,
-  sex_change_details: requireEnterDetails,
+  sex_change_details: {
+    dependent: { field: 'sex_change', value: 'YES' },
+    ...requireEnterDetails,
+  },
   intersex_or_dsd: requireYesOrNo,
   transgender: requireYesOrNo,
   contact_address_building_name: {
@@ -375,7 +378,14 @@ const fields = {
   upw_eligibility_intensive_working_complete: requireSelectOption,
   upw_individual_availability_complete: requireSelectOption,
   upw_equipment_complete: requireSelectOption,
-  upw_declaration_confirmation: {},
+  upw_declaration_confirmation: {
+    validate: [
+      {
+        type: 'required',
+        message: 'You must tick the confirmation',
+      },
+    ],
+  },
 }
 
 // const customValidations = (fields, answers) => {

@@ -18,12 +18,19 @@
 {{ super() }}
 
 <span class="govuk-caption-xl">Diversity information</span>
+<h1 class="govuk-heading-xl">
+    {{ pageTitle }}
+</h1>
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
-            {{ renderQuestion(questions['upw_placement_preference_by_gender_details'], errors) }}
+
+            {{ renderQuestion(questions['gender_identity'], errors) }}
+            {{ renderQuestion(questions['sex_change'], errors) }}
+            {{ renderQuestion(questions['intersex_or_dsd'], errors) }}
+            {{ renderQuestion(questions['transgender'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
 
