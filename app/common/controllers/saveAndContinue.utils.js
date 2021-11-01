@@ -84,6 +84,38 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     }
   }
 
+  if (fieldProperties.answerType === 'dropdown') {
+    const checkedAnswer = answerFor(fieldName)
+    const [selectedAnswer] = fieldProperties.answerSchemas.filter(answerSchema => answerSchema.value === checkedAnswer)
+    const displayAnswer = selectedAnswer?.text || ''
+
+    if (!checkedAnswer || checkedAnswer === '') {
+      return {
+        ...fieldProperties,
+        answer: displayAnswer,
+        answerSchemas: [
+          {
+            value: '',
+            text: 'Select',
+            disabled: true,
+            selected: true,
+            attributes: { hidden: true },
+          },
+          ...fieldProperties.answerSchemas,
+        ],
+      }
+    }
+
+    return {
+      ...fieldProperties,
+      answer: displayAnswer,
+      answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
+        ...answerSchema,
+        selected: checkedAnswer === answerSchema.value,
+      })),
+    }
+  }
+
   const answer = answerFor(fieldName)
 
   return {
