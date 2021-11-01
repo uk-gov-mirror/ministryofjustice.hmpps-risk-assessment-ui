@@ -220,7 +220,6 @@ const fields = {
   upw_disabilities: requireYesOrNo,
   upw_disabilities_details: {
     dependent: { field: 'upw_disabilities', value: 'YES' },
-    ...requireEnterDetails,
   },
   upw_allergies: requireYesOrNo,
   upw_allergies_details: {
