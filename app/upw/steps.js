@@ -125,7 +125,7 @@ module.exports = {
       'upw_high_profile_person',
       'upw_high_profile_person_details',
       'upw_additional_rosh_info',
-      'upw_additional_rosh_info_details,',
+      'upw_additional_rosh_info_details',
       'upw_rosh_community_complete',
     ],
   },
