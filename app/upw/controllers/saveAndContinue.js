@@ -1,24 +1,5 @@
 const BaseSaveAndContinue = require('../../common/controllers/saveAndContinue')
 
-const completionFields = [
-  'upw_individual_details_complete',
-  'upw_cultural_religious_adjustment_complete',
-  'upw_placement_preference_complete',
-  'upw_placement_preference_by_gender_complete',
-  'upw_rosh_community_complete',
-  'upw_managing_risk_complete',
-  'upw_disabilities_complete',
-  'upw_health_issues_complete',
-  'upw_gp_details_complete',
-  'upw_travel_information_complete',
-  'upw_caring_commitments_complete',
-  'upw_employment_education_skills_complete',
-  'upw_employment_training_complete',
-  'upw_eligibility_intensive_working_complete',
-  'upw_individual_availability_complete',
-  'upw_equipment_complete',
-]
-
 const removeAnswers = fieldsToRemove => answers =>
   Object.entries(answers).reduce((modifiedAnswers, [fieldName, answer]) => {
     if (fieldsToRemove.includes(fieldName)) {
@@ -34,7 +15,7 @@ const removeAnswers = fieldsToRemove => answers =>
     }
   }, {})
 
-const setDefaultCompletedAnswers = (answers, fields) => {
+const setDefaultSectionCompleteAnswers = (answers, fields) => {
   const newAnswers = answers
   fields.forEach(field => {
     if (!newAnswers[field] || newAnswers[field] === '') {
@@ -45,15 +26,29 @@ const setDefaultCompletedAnswers = (answers, fields) => {
   return newAnswers
 }
 
+const invalidateSectionCompleteAnswers = (answers, fields) => {
+  return Object.entries(answers)
+    .map(([key, value]) => (fields.includes(key) ? [key, ''] : [key, value]))
+    .reduce((a, [key, value]) => ({ ...a, [key]: value }), {})
+}
+
 const invalidateDeclarations = removeAnswers(['declaration'])
 
 class SaveAndContinue extends BaseSaveAndContinue {
   locals(req, res, next) {
     super.locals(req, res, next)
 
-    const answers = req.sessionModel.get('answers') || {}
-    const updatedAnswers = setDefaultCompletedAnswers(answers, completionFields)
-    req.sessionModel.set('answers', updatedAnswers)
+    let answers = req.sessionModel.get('answers') || {}
+
+    const validationErrors = Object.keys(req.form.errors)
+    const sectionCompleteFields = Object.keys(req.form?.options?.fields).filter(key => key.match(/^\w+_complete$/))
+
+    if (validationErrors.length > 0) {
+      answers = invalidateSectionCompleteAnswers(answers, sectionCompleteFields)
+    }
+
+    answers = setDefaultSectionCompleteAnswers(answers, sectionCompleteFields)
+    req.sessionModel.set('answers', answers)
   }
 
   saveValues(req, res, next) {
