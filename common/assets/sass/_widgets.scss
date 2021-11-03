@@ -1,0 +1,85 @@
+$low-score-colour: #485b10;
+$medium-score-colour: #a34e00;
+$high-score-colour: #942514;
+$mappa-colour: #4c2c92;
+
+.rosh-widget {
+  border: 2px solid govuk-colour('black');
+  padding: govuk-spacing(4);
+  margin-bottom: govuk-spacing(4);
+
+  & h3 {
+    margin-bottom: govuk-spacing(1);
+    font-weight: 400;
+  }
+}
+
+.rosh-widget--low {
+  border: 2px solid $low-score-colour;
+
+  & h3 {
+    color: $low-score-colour;
+  }
+}
+
+.rosh-widget--medium {
+  border: 2px solid $medium-score-colour;
+
+  & h3 {
+    color: $medium-score-colour;
+  }
+}
+
+.rosh-widget--high {
+  border: 2px solid $high-score-colour;
+
+  & h3 {
+    color: $high-score-colour;
+  }
+}
+
+.rosh-widget__table {
+  text-align: left;
+  margin: 0;
+
+  & tbody {
+    & th {
+      font-weight: 400;
+    }
+
+    & td {
+      font-weight: bold;
+    }
+  }
+}
+
+.rosh-widget__risk--low {
+  color: $low-score-colour;
+}
+
+.rosh-widget__risk--medium {
+  color: $medium-score-colour;
+}
+
+.rosh-widget__risk--high {
+  color: $high-score-colour;
+}
+
+.mappa-widget {
+  border: 2px solid $mappa-colour;
+  padding: govuk-spacing(4);
+  margin-bottom: govuk-spacing(4);
+
+  & h3 {
+    color: $mappa-colour;
+    margin-bottom: govuk-spacing(1);
+    font-weight: 400;
+  }
+}
+
+.risk-flag-widget {
+  border: 2px solid #93afc3;
+  background-color: #ebf7ff;
+  padding: govuk-spacing(4);
+  margin-bottom: govuk-spacing(4);
+}

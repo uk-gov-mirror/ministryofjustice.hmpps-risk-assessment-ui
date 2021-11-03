@@ -1,0 +1,7 @@
+{% from "common/templates/components/rosh-widget/macro.njk" import roshWidget %}
+{% from "common/templates/components/mappa-widget/macro.njk" import mappaWidget %}
+{% from "common/templates/components/risk-flag-widget/macro.njk" import riskFlagWidget %}
+
+{{ roshWidget(params.rosh) }}
+{{ mappaWidget(params.mappa) }}
+{{ riskFlagWidget(params.risks) }}
