@@ -1,4 +1,5 @@
 const BaseSaveAndContinue = require('../../common/controllers/saveAndContinue')
+const { getRegistrations } = require('./common.utils')
 
 const removeAnswers = fieldsToRemove => answers =>
   Object.entries(answers).reduce((modifiedAnswers, [fieldName, answer]) => {
@@ -35,7 +36,9 @@ const invalidateSectionCompleteAnswers = (answers, fields) => {
 const invalidateDeclarations = removeAnswers(['declaration'])
 
 class SaveAndContinue extends BaseSaveAndContinue {
-  locals(req, res, next) {
+  async locals(req, res, next) {
+    res.locals.widgetData = await getRegistrations(res.locals.assessment?.subject?.crn, req.user)
+
     super.locals(req, res, next)
 
     let answers = req.sessionModel.get('answers') || {}
