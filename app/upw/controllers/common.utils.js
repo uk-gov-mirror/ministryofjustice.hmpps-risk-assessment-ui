@@ -36,38 +36,38 @@ const formatMappaResponse = mappaResponse => ({
 const formatFlag = flag => flag.description || null
 
 const getRegistrations = async (crn, user) => {
-  const [ok, response] = await getRegistrationsForCrn(crn, user?.token, user?.id)
+  try {
+    const [, response] = await getRegistrationsForCrn(crn, user?.token, user?.id)
 
-  if (!ok) {
+    return {
+      mappa: formatMappaResponse(response.mappa),
+      flags: response.flags.map(formatFlag).filter(whereStringNotNull),
+    }
+  } catch (error) {
     logger.info(`Failed to fetch registrations for CRN ${crn}`)
     return { flags: [] }
-  }
-
-  return {
-    mappa: formatMappaResponse(response.mappa),
-    flags: response.flags.map(formatFlag).filter(whereStringNotNull),
   }
 }
 
 const getRoshRiskSummary = async (crn, user) => {
-  const [ok, response] = await getRoshRiskSummaryForCrn(crn, user?.token, user?.id)
+  try {
+    const [, response] = await getRoshRiskSummaryForCrn(crn, user?.token, user?.id)
 
-  if (!ok) {
+    const nullIfNotKnown = s => (s === 'NOT_KNOWN' ? null : s)
+
+    return {
+      roshRiskSummary: {
+        overallRisk: nullIfNotKnown(response.overallRisk),
+        riskToChildren: nullIfNotKnown(response.riskToChildrenInCommunity),
+        riskToPublic: nullIfNotKnown(response.riskToPublicInCommunity),
+        riskToKnownAdult: nullIfNotKnown(response.riskToKnownAdultInCommunity),
+        riskToStaff: nullIfNotKnown(response.riskToStaffInCommunity),
+        lastUpdated: formatDate(response.lastUpdated),
+      },
+    }
+  } catch (error) {
     logger.info(`Failed to fetch ROSH risk summary for CRN ${crn}`)
     return { roshRiskSummary: null }
-  }
-
-  const nullIfNotKnown = s => (s === 'NOT_KNOWN' ? null : s)
-
-  return {
-    roshRiskSummary: {
-      overallRisk: nullIfNotKnown(response.overallRisk),
-      riskToChildren: nullIfNotKnown(response.riskToChildrenInCommunity),
-      riskToPublic: nullIfNotKnown(response.riskToPublicInCommunity),
-      riskToKnownAdult: nullIfNotKnown(response.riskToKnownAdultInCommunity),
-      riskToStaff: nullIfNotKnown(response.riskToStaffInCommunity),
-      lastUpdated: formatDate(response.lastUpdated),
-    },
   }
 }
 
