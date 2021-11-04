@@ -1,11 +1,11 @@
 {% set roshWidgetClass = '' %}
 
-{% if params.level == 'HIGH' %}
-    {% set roshRiskLevelClass = 'rosh-widget--high' %}
-{% elif params.level == 'MEDIUM' %}
-    {% set roshRiskLevelClass = 'rosh-widget--medium' %}
-{% elif params.level == 'LOW' %}
-    {% set roshRiskLevelClass = 'rosh-widget--low'%}
+{% if params.overallRisk == 'HIGH' %}
+    {% set roshWidgetClass = 'rosh-widget--high' %}
+{% elif params.overallRisk == 'MEDIUM' %}
+    {% set roshWidgetClass = 'rosh-widget--medium' %}
+{% elif params.overallRisk == 'LOW' %}
+    {% set roshWidgetClass = 'rosh-widget--low'%}
 {% endif %}
 
 {% macro getLevelClass(level) %}
@@ -18,9 +18,9 @@ rosh-widget__risk--low
 {% endif %}
 {% endmacro %}
 
-{% if params.roshCompleted %}
+{% if params and params.overallRisk %}
 <div class="rosh-widget {{ roshWidgetClass }}">
-    <h3 class="govuk-heading-m"><strong>{{ params.level }}</strong> RoSH</h3>
+    <h3 class="govuk-heading-m"><strong>{{ params.overallRisk }}</strong> RoSH</h3>
     <p class="govuk-body-m">Risk of serious harm</p>
     <p class="govuk-hint govuk-body-m">Last updated: {{ params.lastUpdated | default("Not known") }}</p>
 

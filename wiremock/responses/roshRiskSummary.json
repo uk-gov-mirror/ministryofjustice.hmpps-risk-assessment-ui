@@ -1,0 +1,8 @@
+{
+  "overallRisk": "HIGH",
+  "riskToChildrenInCommunity": "LOW",
+  "riskToPublicInCommunity": "HIGH",
+  "riskToKnownAdultInCommunity": "MEDIUM",
+  "riskToStaffInCommunity": "HIGH",
+  "lastUpdated": "2021-10-10"
+}

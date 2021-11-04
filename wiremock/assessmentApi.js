@@ -10,6 +10,7 @@ const assessmentSupervision = require('./responses/assessmentSupervision.json')
 const updateEpisode = require('./responses/updateEpisode.json')
 const predictors = require('./responses/predictors.json')
 const registrations = require('./responses/registrations.json')
+const roshRiskSummary = require('./responses/roshRiskSummary.json')
 
 const stubGetAssessments = () => {
   stubFor({
@@ -340,6 +341,22 @@ const stubRegistrations = () => {
   })
 }
 
+const stubRoshRiskSummary = () => {
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/assessments/.+?/ROSH/summary`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: roshRiskSummary,
+    },
+  })
+}
+
 const stubQuestions = async () => {
   await stubQuestionGroup('1234')
   await stubQuestionGroup('22222222-2222-2222-2222-222222222203')
@@ -425,4 +442,5 @@ module.exports = {
   stubAssessmentQuestions,
   stubPredictors,
   stubRegistrations,
+  stubRoshRiskSummary,
 }

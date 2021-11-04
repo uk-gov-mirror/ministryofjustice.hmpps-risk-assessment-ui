@@ -1,5 +1,5 @@
 const BaseController = require('../../common/controllers/baseController')
-const { getRegistrations } = require('./common.utils')
+const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
 const { getTaskList } = require('./taskList.utils')
 
 class TaskList extends BaseController {
@@ -12,7 +12,14 @@ class TaskList extends BaseController {
     const answers = req.sessionModel.get('answers') || {}
 
     res.locals.taskList = getTaskList(`/${journeyName}`, steps, answers)
-    res.locals.widgetData = await getRegistrations(res.locals.assessment?.subject?.crn, req.user)
+
+    const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
+    const roshRiskSummary = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
+
+    res.locals.widgetData = {
+      ...deliusRegistrations,
+      ...roshRiskSummary,
+    }
 
     super.locals(req, res, next)
   }

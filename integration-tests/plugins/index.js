@@ -15,6 +15,7 @@ const {
   stubErrors,
   stubPredictors,
   stubRegistrations,
+  stubRoshRiskSummary,
 } = require('../../wiremock/assessmentApi')
 const { stubReferenceData } = require('../../wiremock/referenceData')
 const { stubAuth, getLoginUrl } = require('../../wiremock/auth')
@@ -47,6 +48,7 @@ module.exports = on => {
         stubOasysUser(),
         stubPredictors(),
         stubRegistrations(),
+        stubRoshRiskSummary(),
       ]),
     stubGetUserProfileWithSingleArea: () => Promise.all([stubGetUserProfileWithSingleArea()]),
     stubGetUserProfileWithMultipleAreas: () => Promise.all([stubGetUserProfile()]),

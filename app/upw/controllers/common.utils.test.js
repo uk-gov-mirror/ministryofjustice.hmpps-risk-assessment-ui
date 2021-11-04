@@ -1,5 +1,5 @@
-const { getRegistrationsForCrn } = require('../../../common/data/hmppsAssessmentApi')
-const { getRegistrations } = require('./common.utils')
+const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
+const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 
@@ -158,6 +158,62 @@ describe('GetRegistrations', () => {
       mappa: {
         level: null,
         lastUpdated: null,
+      },
+    })
+  })
+})
+
+describe('GetRegistrations', () => {
+  it('returns ROSH risk data', async () => {
+    getRoshRiskSummaryForCrn.mockResolvedValue([
+      true,
+      {
+        overallRisk: 'HIGH',
+        riskToChildrenInCommunity: 'LOW',
+        riskToPublicInCommunity: 'HIGH',
+        riskToKnownAdultInCommunity: 'MEDIUM',
+        riskToStaffInCommunity: 'HIGH',
+        lastUpdated: '2021-10-10',
+      },
+    ])
+
+    const riskSummary = await getRoshRiskSummary('A123456', user)
+
+    expect(riskSummary).toEqual({
+      roshRiskSummary: {
+        lastUpdated: '10th October 2021',
+        overallRisk: 'HIGH',
+        riskToChildren: 'LOW',
+        riskToKnownAdult: 'MEDIUM',
+        riskToPublic: 'HIGH',
+        riskToStaff: 'HIGH',
+      },
+    })
+  })
+
+  it('returns null when "NOT_KNOWN" risk', async () => {
+    getRoshRiskSummaryForCrn.mockResolvedValue([
+      true,
+      {
+        overallRisk: 'NOT_KNOWN',
+        riskToChildrenInCommunity: 'NOT_KNOWN',
+        riskToPublicInCommunity: 'NOT_KNOWN',
+        riskToKnownAdultInCommunity: 'NOT_KNOWN',
+        riskToStaffInCommunity: 'NOT_KNOWN',
+        lastUpdated: '2021-10-10',
+      },
+    ])
+
+    const riskSummary = await getRoshRiskSummary('A123456', user)
+
+    expect(riskSummary).toEqual({
+      roshRiskSummary: {
+        lastUpdated: '10th October 2021',
+        overallRisk: null,
+        riskToChildren: null,
+        riskToKnownAdult: null,
+        riskToPublic: null,
+        riskToStaff: null,
       },
     })
   })

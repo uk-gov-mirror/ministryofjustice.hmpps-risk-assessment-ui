@@ -98,6 +98,13 @@ const getRegistrationsForCrn = (crn, authorisationToken, userId) => {
   return action(superagent.get(path), authorisationToken, userId)
 }
 
+const getRoshRiskSummaryForCrn = (crn, authorisationToken, userId) => {
+  const path = `${url}/assessments/${crn}/ROSH/summary`
+  logger.info(`Calling hmppsAssessments API with GET: ${path}`)
+
+  return action(superagent.get(path), authorisationToken, userId)
+}
+
 const getFilteredReferenceData = (assessmentId, episodeId, questionCode, parentList, authorisationToken, userId) => {
   const path = `${url}/referencedata/filtered`
   const requestBody = {
@@ -194,4 +201,5 @@ module.exports = {
   getEpisode,
   getCurrentEpisode,
   getRegistrationsForCrn,
+  getRoshRiskSummaryForCrn,
 }

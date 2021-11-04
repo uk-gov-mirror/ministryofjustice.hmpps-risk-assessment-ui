@@ -1,5 +1,5 @@
 const { format } = require('date-fns')
-const { getRegistrationsForCrn } = require('../../../common/data/hmppsAssessmentApi')
+const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
 const logger = require('../../../common/logging/logger')
 
 const whereStringNotNull = s => s !== null
@@ -49,6 +49,29 @@ const getRegistrations = async (crn, user) => {
   }
 }
 
+const getRoshRiskSummary = async (crn, user) => {
+  const [ok, response] = await getRoshRiskSummaryForCrn(crn, user?.token, user?.id)
+
+  if (!ok) {
+    logger.info(`Failed to fetch ROSH risk summary for CRN ${crn}`)
+    return { roshRiskSummary: null }
+  }
+
+  const nullIfNotKnown = s => (s === 'NOT_KNOWN' ? null : s)
+
+  return {
+    roshRiskSummary: {
+      overallRisk: nullIfNotKnown(response.overallRisk),
+      riskToChildren: nullIfNotKnown(response.riskToChildrenInCommunity),
+      riskToPublic: nullIfNotKnown(response.riskToPublicInCommunity),
+      riskToKnownAdult: nullIfNotKnown(response.riskToKnownAdultInCommunity),
+      riskToStaff: nullIfNotKnown(response.riskToStaffInCommunity),
+      lastUpdated: formatDate(response.lastUpdated),
+    },
+  }
+}
+
 module.exports = {
   getRegistrations,
+  getRoshRiskSummary,
 }
