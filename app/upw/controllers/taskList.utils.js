@@ -33,7 +33,7 @@ const getTask = (answers, baseUrl, steps, taskName, completionField) => {
   return {
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}` || '#',
-    status: answers[completionField] === 'YES' || ['YES'] ? 'COMPLETE' : 'INCOMPLETE',
+    status: answers[completionField] === 'YES' || answers[completionField] === ['YES'] ? 'COMPLETE' : 'INCOMPLETE',
   }
 }
 
