@@ -68,7 +68,9 @@ const startAssessment = async (req, res, next) => {
     validateCRN(crn)
     validateAssessmentType(assessmentType)
 
-    const assessment = await createAssessment(req.user, crn, eventId, assessmentType)
+    const assessmentCode = assessmentType === 'UNPAID_WORK' ? 'UPW' : assessmentType
+
+    const assessment = await createAssessment(req.user, crn, eventId, assessmentCode)
     const currentEpisode = await getCurrentEpisode(assessment.assessmentUuid, req.user?.token, req.user?.id)
 
     req.session.assessment = {
@@ -80,7 +82,7 @@ const startAssessment = async (req, res, next) => {
 
     req.session.save()
 
-    res.redirect(`/${assessmentType}/start`)
+    res.redirect(`/${assessmentCode}/start`)
   } catch (e) {
     next(e)
   }
