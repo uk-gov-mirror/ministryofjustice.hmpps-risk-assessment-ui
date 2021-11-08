@@ -97,9 +97,7 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
           {
             value: '',
             text: 'Select',
-            disabled: true,
             selected: true,
-            attributes: { hidden: true },
           },
           ...fieldProperties.answerSchemas,
         ],
