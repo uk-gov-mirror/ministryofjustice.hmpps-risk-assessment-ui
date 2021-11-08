@@ -1,6 +1,11 @@
 $low-score-colour: #485b10;
+$low-score-border-colour: #85994b;
 $medium-score-colour: #a34e00;
+$medium-score-border-colour: #f47738;
 $high-score-colour: #942514;
+$high-score-border-colour: #d4351c;
+$very-high-score-colour: #711a0d;
+$very-high-score-border-colour: #942514;
 $mappa-colour: #4c2c92;
 
 .rosh-widget {
@@ -15,7 +20,7 @@ $mappa-colour: #4c2c92;
 }
 
 .rosh-widget--low {
-  border: 2px solid $low-score-colour;
+  border: 2px solid $low-score-border-colour;
 
   & h3 {
     color: $low-score-colour;
@@ -23,7 +28,7 @@ $mappa-colour: #4c2c92;
 }
 
 .rosh-widget--medium {
-  border: 2px solid $medium-score-colour;
+  border: 2px solid $medium-score-border-colour;
 
   & h3 {
     color: $medium-score-colour;
@@ -31,10 +36,18 @@ $mappa-colour: #4c2c92;
 }
 
 .rosh-widget--high {
-  border: 2px solid $high-score-colour;
+  border: 2px solid $high-score-border-colour;
 
   & h3 {
     color: $high-score-colour;
+  }
+}
+
+.rosh-widget--very-high {
+  border: 2px solid $very-high-score-border-colour;
+
+  & h3 {
+    color: $very-high-score-colour;
   }
 }
 
@@ -63,6 +76,10 @@ $mappa-colour: #4c2c92;
 
 .rosh-widget__risk--high {
   color: $high-score-colour;
+}
+
+.rosh-widget__risk--very-high {
+  color: $very-high-score-colour;
 }
 
 .mappa-widget {

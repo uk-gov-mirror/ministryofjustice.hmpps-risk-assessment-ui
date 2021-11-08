@@ -1,15 +1,31 @@
-{% set roshWidgetClass = '' %}
-
-{% if params.overallRisk == 'HIGH' %}
-    {% set roshWidgetClass = 'rosh-widget--high' %}
-{% elif params.overallRisk == 'MEDIUM' %}
-    {% set roshWidgetClass = 'rosh-widget--medium' %}
-{% elif params.overallRisk == 'LOW' %}
-    {% set roshWidgetClass = 'rosh-widget--low'%}
+{% macro getOverallRiskLevelClass(level) %}
+{% if level == 'VERY_HIGH' %}
+rosh-widget--very-high
+{% elif level == 'HIGH' %}
+rosh-widget--high
+{% elif level == 'MEDIUM' %}
+rosh-widget--medium
+{% elif level == 'LOW' %}
+rosh-widget--low
 {% endif %}
+{% endmacro %}
 
-{% macro getLevelClass(level) %}
-{% if level == 'HIGH' %}
+{% macro getRiskLevelText(level) %}
+{% if level == 'VERY_HIGH' %}
+Very high
+{% elif level == 'HIGH' %}
+High
+{% elif level == 'MEDIUM' %}
+Medium
+{% elif level == 'LOW' %}
+Low
+{% endif %}
+{% endmacro %}
+
+{% macro getRiskLevelClass(level) %}
+{% if level == 'VERY_HIGH' %}
+rosh-widget__risk--very-high
+{% elif level == 'HIGH' %}
 rosh-widget__risk--high
 {% elif level == 'MEDIUM' %}
 rosh-widget__risk--medium
@@ -19,8 +35,8 @@ rosh-widget__risk--low
 {% endmacro %}
 
 {% if params and params.overallRisk %}
-<div class="rosh-widget {{ roshWidgetClass }}">
-    <h3 class="govuk-heading-m"><strong>{{ params.overallRisk }}</strong> RoSH</h3>
+<div class="rosh-widget {{ getOverallRiskLevelClass(params.overallRisk) }}">
+    <h3 class="govuk-heading-m"><strong>{{ getRiskLevelText(params.overallRisk) | upper }}</strong> RoSH</h3>
     <p class="govuk-body-m">Risk of serious harm</p>
     <p class="govuk-hint govuk-body-m">Last updated: {{ params.lastUpdated | default("Not known") }}</p>
 
@@ -34,19 +50,19 @@ rosh-widget__risk--low
         <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
                 <th class="govuk-table__header">Children</th>
-                <td class="govuk-table__cell {{ getLevelClass(params.riskToChildren) }}">{{ params.riskToChildren | default("No data") }}</td>
+                <td class="govuk-table__cell {{ getRiskLevelClass(params.riskToChildren) }}">{{ getRiskLevelText(params.riskToChildren) | default("No data") }}</td>
             </tr>
             <tr>
                 <th class="govuk-table__header">Public</th>
-                <td class="govuk-table__cell {{ getLevelClass(params.riskToPublic) }}">{{ params.riskToPublic | default("No data") }}</td>
+                <td class="govuk-table__cell {{ getRiskLevelClass(params.riskToPublic) }}">{{ getRiskLevelText(params.riskToPublic) | default("No data") }}</td>
             </tr>
             <tr>
                 <th class="govuk-table__header">Known adult</th>
-                <td class="govuk-table__cell {{ getLevelClass(params.riskToKnownAdult) }}">{{ params.riskToKnownAdult | default("No data") }}</td>
+                <td class="govuk-table__cell {{ getRiskLevelClass(params.riskToKnownAdult) }}">{{ getRiskLevelText(params.riskToKnownAdult) | default("No data") }}</td>
             </tr>
             <tr>
                 <th class="govuk-table__header">Staff</th>
-                <td class="govuk-table__cell {{ getLevelClass(params.riskToStaff) }}">{{ params.riskToStaff | default("No data") }}</td>
+                <td class="govuk-table__cell {{ getRiskLevelClass(params.riskToStaff) }}">{{ getRiskLevelText(params.riskToStaff) | default("No data") }}</td>
             </tr>
         </tbody>
     </table>

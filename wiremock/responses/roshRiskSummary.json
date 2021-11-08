@@ -1,7 +1,7 @@
 {
-  "overallRisk": "HIGH",
+  "overallRisk": "VERY_HIGH",
   "riskToChildrenInCommunity": "LOW",
-  "riskToPublicInCommunity": "HIGH",
+  "riskToPublicInCommunity": "VERY_HIGH",
   "riskToKnownAdultInCommunity": "MEDIUM",
   "riskToStaffInCommunity": "HIGH",
   "lastUpdated": "2021-10-10"
