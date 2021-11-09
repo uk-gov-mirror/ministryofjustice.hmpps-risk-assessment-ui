@@ -47,7 +47,7 @@ const {
   checkForTokenRefresh,
 } = require('../common/middleware/auth')
 
-const { checkUserHasAreaSelected } = require('../common/middleware/area-selection')
+const { checkUserHasAreaSelected, checkAssessmentType } = require('../common/middleware/area-selection')
 
 const {
   dev: { devAssessmentId },
@@ -104,17 +104,17 @@ module.exports = app => {
     })
   })
 
-  app.use(checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
+  app.use(checkAssessmentType(), checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
 
   app.get(`/`, (req, res) => {
     res.redirect('/start')
   })
-  app.get(`/start`, checkUserHasAreaSelected(assessmentUrl), startController)
+  app.get(`/start`, checkAssessmentType(), checkUserHasAreaSelected(assessmentUrl), startController)
 
   app.get(`/area-selection`, areaSelectionController)
   app.post('/area-selection', redirectToAssessmentList)
 
-  app.get('*', checkUserHasAreaSelected())
+  app.get('*', checkAssessmentType(), checkUserHasAreaSelected())
   app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 
   app.get(`/:assessmentId/questiongroup/:assessmentSchemaCode/summary`, getOffenderDetails, displayOverview)

@@ -1,47 +1,58 @@
 const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
+const jwtDecode = require('jwt-decode')
 const { addSeconds } = require('date-fns')
 const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
 const { getUserByEmail } = require('../data/offenderAssessmentApi')
-const { cacheUserDetails, getCachedUserDetails } = require('../data/userDetailsCache')
+const { cacheUserDetails, getCachedUserDetails, cacheOasysUserDetails } = require('../data/userDetailsCache')
 const config = require('../config')
 const logger = require('../logging/logger')
 const User = require('../models/user')
 const { SIXTY_SECONDS } = require('../utils/constants')
 const { AuthenticationError } = require('../utils/errors')
 
-const getAndCacheUserDetails = async user => {
+const getAndCacheUserDetails = async (user, standaloneAssessment = false) => {
   if (!user.email) {
     const email = await getUserEmail(user.token)
     const apiToken = await getApiToken()
-    const oasysUser = await getUserByEmail(email, apiToken)
 
-    const userDetails = await cacheUserDetails(user.id, oasysUser)
+    let userDetails
 
-    if (!userDetails.isActive) {
-      throw new AuthenticationError('OASys account not active')
+    // do not get OASys user details for standalone assessments
+    if (!standaloneAssessment) {
+      const oasysUser = await getUserByEmail(email, apiToken)
+      userDetails = await cacheOasysUserDetails(user.id, oasysUser)
+      if (!userDetails.isActive) {
+        throw new AuthenticationError('OASys account not active')
+      }
+    } else {
+      userDetails = await cacheUserDetails(jwtDecode(user.token))
     }
+
     return userDetails
   }
   return user.getDetails()
 }
 
-passport.serializeUser(async (user, done) => {
+passport.serializeUser(async (req, user, done) => {
   try {
-    await getAndCacheUserDetails(user)
+    await getAndCacheUserDetails(user, req.session?.standaloneAssessment)
     done(null, user.getSession())
   } catch (error) {
     done(error)
   }
 })
 
-passport.deserializeUser(async (serializedUser, done) => {
+passport.deserializeUser(async (req, serializedUser, done) => {
   try {
     const user = User.from(serializedUser)
     const serializedDetails = await getCachedUserDetails(user.id)
 
-    const details = serializedDetails !== null ? serializedDetails : await getAndCacheUserDetails(user)
+    const details =
+      serializedDetails !== null
+        ? serializedDetails
+        : await getAndCacheUserDetails(user, req.session?.standaloneAssessment)
 
     user.withDetails(details)
     done(null, user)

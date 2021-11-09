@@ -152,7 +152,7 @@ const action = async (agent, authorisationToken, userId) => {
     return await agent
       .auth(authorisationToken, { type: 'bearer' })
       .set('x-correlation-id', getCorrelationId())
-      .set('x-user-area', cachedDetails?.areaCode)
+      .set('x-user-area', cachedDetails?.areaCode || '')
       .timeout(timeout)
       .then(response => {
         return [true, response.body]

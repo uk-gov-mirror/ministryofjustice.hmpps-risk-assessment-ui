@@ -1,5 +1,7 @@
-const { cacheUserDetails, getCachedUserDetails } = require('./userDetailsCache')
+const jwtDecode = require('jwt-decode')
+const { cacheOasysUserDetails, getCachedUserDetails, cacheUserDetails } = require('./userDetailsCache')
 const redis = require('./redis')
+const authUser = require('../middleware/testSupportFiles/user_token.json')
 
 jest.mock('../data/redis', () => ({
   get: jest.fn(),
@@ -12,7 +14,7 @@ describe('Auth', () => {
     redis.set.mockReset()
   })
   describe('cache user details', () => {
-    it('adds the user details to redis cache', async () => {
+    it('adds the OASys user details to redis cache', async () => {
       const oasysUser = {
         oasysUserCode: 'USER_CODE',
         userForename1: 'Test',
@@ -21,7 +23,7 @@ describe('Auth', () => {
         accountStatus: 'ACTIVE',
       }
 
-      await cacheUserDetails(1, oasysUser)
+      await cacheOasysUserDetails(1, oasysUser)
       // Persist user details to Redis and key by the user's ID
       expect(redis.set).toHaveBeenCalledWith(
         'user:1',
@@ -29,6 +31,14 @@ describe('Auth', () => {
         'EX',
         43200,
       )
+    })
+
+    it('adds the standalone user details to redis cache', async () => {
+      const user = jwtDecode(authUser.token)
+
+      await cacheUserDetails(user)
+      // Persist user details to Redis and key by the user's ID
+      expect(redis.set).toHaveBeenCalledWith('user:1', '{"username":"ITAG_USER"}', 'EX', 43200)
     })
 
     it('get the user details from redis cache', async () => {
