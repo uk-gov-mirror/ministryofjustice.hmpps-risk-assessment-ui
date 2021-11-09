@@ -242,8 +242,12 @@ const fields = {
     ...requireEnterDetails,
   },
   upw_pregnancy: requireYesOrNo,
-  upw_pregnancy_details: {
-    dependent: { field: 'upw_pregnancy', value: 'YES' },
+  upw_pregnancy_pregnant_details: {
+    dependent: { field: 'upw_pregnancy', value: 'PREGNANT' },
+    ...requireEnterDetails,
+  },
+  upw_pregnancy_recently_given_birth_details: {
+    dependent: { field: 'upw_pregnancy', value: 'RECENTLY_GIVEN_BIRTH' },
     ...requireEnterDetails,
   },
   upw_gp_name: {
