@@ -24,14 +24,21 @@ const validateCRN = crn => {
   }
 }
 
-const createAssessment = async (user, crn, deliusEventId = '0', assessmentSchemaCode = 'RSR') => {
+const createAssessment = async (
+  user,
+  crn,
+  deliusEventId = '0',
+  assessmentSchemaCode = 'RSR',
+  deliusEventType = null,
+) => {
   logger.info(`Creating ${assessmentSchemaCode} assessment for CRN: ${crn}`)
 
-  const [ok, response] = await assessmentSupervision(
-    { crn, deliusEventId, assessmentSchemaCode },
-    user?.token,
-    user?.id,
-  )
+  const assessmentParams = { crn, deliusEventId, assessmentSchemaCode }
+  if (deliusEventType) {
+    assessmentParams.deliusEventType = deliusEventType
+  }
+
+  const [ok, response] = await assessmentSupervision(assessmentParams, user?.token, user?.id)
 
   if (!ok) {
     throw new Error(getErrorMessageFor(user, response.reason))
@@ -69,8 +76,9 @@ const startAssessment = async (req, res, next) => {
     validateAssessmentType(assessmentType)
 
     const assessmentCode = assessmentType === 'UNPAID_WORK' ? 'UPW' : assessmentType
+    const deliusEventType = assessmentType === 'UNPAID_WORK' ? 'EVENT_ID' : null
 
-    const assessment = await createAssessment(req.user, crn, eventId, assessmentCode)
+    const assessment = await createAssessment(req.user, crn, eventId, assessmentCode, deliusEventType)
     const currentEpisode = await getCurrentEpisode(assessment.assessmentUuid, req.user?.token, req.user?.id)
 
     req.session.assessment = {

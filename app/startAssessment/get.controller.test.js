@@ -90,6 +90,16 @@ describe('startAssessment', () => {
 
     await startAssessment(req, res, next)
 
+    expect(assessmentSupervision).toHaveBeenCalledWith(
+      {
+        assessmentSchemaCode: 'RSR',
+        crn: '123456',
+        deliusEventId: 1,
+      },
+      'USER_TOKEN',
+      1,
+    )
+
     expect(req.session).toEqual({
       ...baseSession,
       assessment: {
@@ -114,6 +124,55 @@ describe('startAssessment', () => {
     })
 
     jest.useRealTimers()
+  })
+
+  it('calls create assessment create endpoint correctly for unpaid work', async () => {
+    const assessmentUuid = 'ASSESSMENT_UUID'
+    const episodeUuid = 'EPISODE_UUID'
+    const offenceCode = '00'
+    const codeDescription = 'Offence'
+    const offenceSubCode = '00'
+    const subCodeDescription = 'Sub Offence'
+    const subject = {
+      name: 'Test Offender',
+      dateOfBirth: '1980-01-01',
+      pnc: '1234567',
+      crn: '1234567',
+      subjectUuid: 'SUBJECT_UUID',
+    }
+    assessmentSupervision.mockResolvedValue([true, { assessmentUuid, subject }])
+    getCurrentEpisode.mockResolvedValue({
+      episodeUuid,
+      offence: {
+        offenceCode,
+        codeDescription,
+        offenceSubCode,
+        subCodeDescription,
+        sentenceDate: '2020-01-01',
+      },
+    })
+
+    const req = {
+      ...baseReq,
+      query: {
+        crn: '123456',
+        eventId: 1,
+        assessmentType: 'UNPAID_WORK',
+      },
+    }
+
+    await startAssessment(req, res, next)
+
+    expect(assessmentSupervision).toHaveBeenCalledWith(
+      {
+        assessmentSchemaCode: 'UPW',
+        crn: '123456',
+        deliusEventId: 1,
+        deliusEventType: 'EVENT_ID',
+      },
+      'USER_TOKEN',
+      1,
+    )
   })
 
   it('returns an error when passed no CRN', async () => {
