@@ -26,7 +26,11 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['upw_gp_name'], errors, null, null, null, {
+            {{ renderQuestion(questions['upw_gp_first_name'], errors, null, null, null, {
+                classes: 'govuk-!-width-two-thirds'
+            }) }}
+
+            {{ renderQuestion(questions['upw_gp_family_name'], errors, null, null, null, {
                 classes: 'govuk-!-width-two-thirds'
             }) }}
 

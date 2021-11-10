@@ -31,6 +31,10 @@
     {% endfor %}
 {%- endmacro %}
 
+{%- macro renderName(firstName, familyName) -%}
+{{ firstName }} {{ familyName }}
+{%- endmacro -%}
+
 <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
 
 <div class="govuk-grid-row">
@@ -105,7 +109,7 @@
                             text: 'Name'
                         },
                         value: {
-                            html: answers['emergency_contact_name']
+                            html: renderName(answers['emergency_contact_first_name'], answers['emergency_contact_family_name'])
                         }
                     }, {
                         key: {

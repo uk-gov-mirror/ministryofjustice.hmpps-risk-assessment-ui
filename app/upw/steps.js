@@ -57,7 +57,8 @@ module.exports = {
     template: `${__dirname}/templates/individuals-details/edit-emergency-contact-details.njk`,
     next: 'individuals-details',
     fields: [
-      'emergency_contact_name',
+      'emergency_contact_first_name',
+      'emergency_contact_family_name',
       'emergency_contact_relationship',
       'emergency_contact_address_building_name',
       'emergency_contact_address_house_number',
@@ -194,7 +195,8 @@ module.exports = {
     template: `${__dirname}/templates/placement-restrictions/edit-gp-details.njk`,
     next: 'gp-details',
     fields: [
-      'upw_gp_name',
+      'upw_gp_first_name',
+      'upw_gp_family_name',
       'upw_gp_address_building_name',
       'upw_gp_address_house_number',
       'upw_gp_address_street_name',

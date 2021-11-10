@@ -26,7 +26,8 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['emergency_contact_name'], errors) }}
+            {{ renderQuestion(questions['emergency_contact_first_name'], errors) }}
+            {{ renderQuestion(questions['emergency_contact_family_name'], errors) }}
             {{ renderQuestion(questions['emergency_contact_relationship'], errors) }}
             
             <h2 class="govuk-heading-m">Address</h2>
