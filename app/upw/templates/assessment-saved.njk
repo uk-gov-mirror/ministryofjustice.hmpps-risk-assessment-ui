@@ -15,21 +15,13 @@
 {# include errorSummary partial #}
 {{ super() }}
 
+<h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-
-        {{ govukPanel({
-            titleText: "You have completed the Community Payback assessment",
-            classes: "upw-confirmation-panel"
-        }) }}
-
         <p class="govuk-body">
-            The assessment PDF has been saved to Delius. You can now close this window.
+            You can close this window. If you want to return to this assessment you can do so from Delius.
         </p>
-
-        <div class="govuk-button-group">
-            <a class="govuk-button" href="/UPW/pdf-download" download>Download the PDF</a>            
-        </div>
     </div>
 </div>
 {% endblock %}

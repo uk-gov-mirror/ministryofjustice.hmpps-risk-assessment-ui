@@ -12,6 +12,7 @@ class TaskList extends BaseController {
     const answers = req.sessionModel.get('answers') || {}
 
     res.locals.taskList = getTaskList(`/${journeyName}`, steps, answers)
+    res.locals.saveAssessmentUrl = `/${journeyName}/assessment-saved`
 
     const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
     const roshRiskSummary = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)

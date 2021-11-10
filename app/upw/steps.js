@@ -317,4 +317,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/confirmation.njk`,
   },
+  '/assessment-saved': {
+    pageTitle: 'Your assessment has been saved',
+    noPost: true,
+    template: `${__dirname}/templates/assessment-saved.njk`,
+  },
 }
