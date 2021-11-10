@@ -16,8 +16,17 @@ const requireYesOrNo = {
   ],
 }
 
+const noSpace = function noSpace(value) {
+  if (value.length === 0) return true
+  return value.trim().length > 0
+}
+
 const requireEnterDetails = {
   validate: [
+    {
+      fn: noSpace,
+      message: 'Enter details',
+    },
     {
       type: 'required',
       message: 'Enter details',

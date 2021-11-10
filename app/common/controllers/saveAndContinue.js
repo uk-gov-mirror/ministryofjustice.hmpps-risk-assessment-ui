@@ -46,6 +46,8 @@ class SaveAndContinue extends BaseController {
     res.locals.answers = questionsWithMappedAnswers.reduce(answersByQuestionCode, {})
     res.locals.rawAnswers = { ...previousAnswers, ...submittedAnswers }
 
+    req.sessionModel.set('errors', {})
+
     super.locals(req, res, next)
   }
 
