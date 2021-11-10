@@ -131,7 +131,7 @@ const fields = {
   upw_placement_preference: requireYesOrNo,
   upw_placement_preferences: {
     dependent: { field: 'upw_placement_preference', value: 'YES' },
-    ...requireEnterDetails,
+    ...requireSelectOption,
   },
   upw_placement_preference_by_gender_details: {
     ...requireEnterDetails,
