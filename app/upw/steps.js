@@ -163,7 +163,7 @@ module.exports = {
     fields: ['upw_disabilities', 'upw_disabilities_details', 'upw_disabilities_complete'],
   },
   '/health-issues': {
-    pageTitle: 'Are there any other health issues that may affect ability to work?',
+    pageTitle: 'Health issues',
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/health-issues.njk`,
     next: 'task-list',
@@ -208,7 +208,7 @@ module.exports = {
     ],
   },
   '/travel-information': {
-    pageTitle: 'Travel information',
+    pageTitle: 'Travel',
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/travel-information.njk`,
     next: 'task-list',
@@ -274,7 +274,7 @@ module.exports = {
     ],
   },
   '/availability': {
-    pageTitle: 'Availability for Community Payback work',
+    pageTitle: 'Availability',
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-details/availability`,
     next: 'task-list',
@@ -292,7 +292,7 @@ module.exports = {
     fields: ['upw_male_female_clothing', 'upw_waterproof_clothing', 'upw_footwear_size', 'upw_equipment_complete'],
   },
   '/pdf-preview-and-declaration': {
-    pageTitle: 'Declaration',
+    pageTitle: 'PDF preview and declaration',
     controller: BaseSaveAndContinue,
     template: `${__dirname}/templates/declaration`,
     fields: ['upw_declaration_confirmation'],
