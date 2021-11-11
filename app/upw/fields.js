@@ -1,3 +1,5 @@
+const { range, noSpace } = require('../../common/middleware/form-wizard-validators/validators')
+
 const requireSelectOption = {
   validate: [
     {
@@ -14,11 +16,6 @@ const requireYesOrNo = {
       message: 'Select yes or no',
     },
   ],
-}
-
-const noSpace = function noSpace(value) {
-  if (value.length === 0) return true
-  return value.trim().length > 0
 }
 
 const requireEnterDetails = {
@@ -365,11 +362,39 @@ const fields = {
   },
   upw_recommended_hours_start_order: {
     dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter a number between 0 and 21',
+      },
+      {
+        fn: noSpace,
+        message: 'Enter a number between 0 and 21',
+      },
+      {
+        fn: range,
+        arguments: [0, 21],
+        message: 'Enter a number between 0 and 21',
+      },
+    ],
   },
   upw_recommended_hours_midpoint_order: {
     dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter a number between 0 and 21',
+      },
+      {
+        fn: noSpace,
+        message: 'Enter a number between 0 and 21',
+      },
+      {
+        fn: range,
+        arguments: [0, 21],
+        message: 'Enter a number between 0 and 21',
+      },
+    ],
   },
   upw_twenty_eight_hours_working_week_details: {
     dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },

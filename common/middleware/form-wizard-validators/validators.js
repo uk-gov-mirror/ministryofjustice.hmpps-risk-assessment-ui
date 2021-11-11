@@ -36,6 +36,11 @@ const yearsBetweenLessThan = function yearsBetween(date1, date2, years) {
   return Math.abs(duration.years) <= years
 }
 
+const noSpace = function noSpace(value) {
+  if (value.length === 0) return true
+  return value.trim().length > 0
+}
+
 module.exports = {
   range,
   notInFuture,
@@ -44,4 +49,5 @@ module.exports = {
   dateIsAfterOrEqual,
   yearsBetweenGreaterThan,
   yearsBetweenLessThan,
+  noSpace,
 }
