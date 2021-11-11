@@ -19,10 +19,10 @@
 {# include errorSummary partial #}
 {{ super() }}
 
-<h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
-
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+        
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
             

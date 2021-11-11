@@ -2,6 +2,7 @@
 {% from "common/templates/components/mappa-widget/macro.njk" import mappaWidget %}
 {% from "common/templates/components/risk-flag-widget/macro.njk" import riskFlagWidget %}
 
+<h3 class="govuk-heading-m">Risk information</h3>
 {{ roshWidget(params.roshRiskSummary) }}
 {{ mappaWidget(params.mappa) }}
 {{ riskFlagWidget(params.flags) }}

@@ -18,10 +18,9 @@
 {# include errorSummary partial #}
 {{ super() }}
 
-<span class="govuk-caption-xl">Placement restrictions due to health and other needs</span>
-
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
+        <span class="govuk-caption-xl">Placement restrictions due to health and other needs</span>
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 

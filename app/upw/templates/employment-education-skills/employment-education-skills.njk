@@ -21,12 +21,13 @@
 {# include errorSummary partial #}
 {{ super() }}
 
-<span class="govuk-caption-xl">Employment, education and skills information</span>
-<h1 class="govuk-heading-xl">
-    {{ pageTitle }}
-</h1>
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
+        <div class="govuk-grid-column-three-quarters">
+        <span class="govuk-caption-xl">Employment, education and skills information</span>
+        <h1 class="govuk-heading-xl">
+            {{ pageTitle }}
+        </h1>
+        
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 

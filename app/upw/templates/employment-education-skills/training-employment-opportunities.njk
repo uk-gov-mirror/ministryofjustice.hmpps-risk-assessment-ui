@@ -21,12 +21,13 @@
 {# include errorSummary partial #}
 {{ super() }}
 
-<span class="govuk-caption-xl">Employment, education and skills information</span>
-<h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
-    {{ pageTitle }}
-</h1>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
+        <span class="govuk-caption-xl">Employment, education and skills information</span>
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
+            {{ pageTitle }}
+        </h1>
+
         <p class="govuk-body govuk-!-margin-bottom-6">Supervised individuals who are unemployed, at risk of unemployment or whose offending reflects employment related needs are eligible to use up to 20% of their Community Payback hours on education, training and pre-employment activity.</p>
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">

@@ -4,6 +4,7 @@
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
 {% from "common/templates/components/read-only/macro.njk" import readOnly %}
 {% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
+{% from "common/templates/components/widgets/macro.njk" import widgets %}
 
 {% set backLink = "task-list" %}
 
@@ -19,10 +20,10 @@
 {# include errorSummary partial #}
 {{ super() }}
 
-<h1 class="govuk-heading-xl">Declaration</h1>
-
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Declaration</h1>
+
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
@@ -56,6 +57,9 @@
                 }) }}
             </div>
         </form>
+    </div>
+    <div class="govuk-grid-column-one-quarter">
+        {{ widgets(widgetData) }}
     </div>
 </div>
 {% endblock %}

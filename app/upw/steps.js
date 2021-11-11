@@ -1,8 +1,8 @@
 const StartUpwAssessment = require('./controllers/start')
 const TaskList = require('./controllers/taskList')
-const BaseSaveAndContinue = require('../common/controllers/saveAndContinue')
 const SaveAndContinue = require('./controllers/saveAndContinue')
 const ConvertPdf = require('./controllers/convertPdf')
+const Declaration = require('./controllers/declaration')
 
 module.exports = {
   '/start': {
@@ -293,7 +293,7 @@ module.exports = {
   },
   '/pdf-preview-and-declaration': {
     pageTitle: 'PDF preview and declaration',
-    controller: BaseSaveAndContinue,
+    controller: Declaration,
     template: `${__dirname}/templates/declaration`,
     fields: ['upw_declaration_confirmation'],
     next: 'task-list',
