@@ -22,9 +22,11 @@
         </h1>
 
         {% if pageDescription %}
-        <p class="govuk-caption-l  govuk-!-margin-bottom-7">{{ pageDescription }}</p>
+        <p class="govuk-caption-l  govuk-!-margin-bottom-2">{{ pageDescription }}</p>
         {% endif %}
-        
+
+        <p class="govuk-link govuk-!-margin-bottom-7"><a href='/downloads/upw/Community Payback help.pdf'>Help with the assessment (pdf)</a></p>
+
         <div>
             {{ renderTaskList(taskList) }}
         </div>
