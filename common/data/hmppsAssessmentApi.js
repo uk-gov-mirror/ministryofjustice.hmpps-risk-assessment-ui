@@ -133,9 +133,10 @@ const uploadPdfDocumentToDelius = async (assessmentUuid, episodeUuid, pdf, user)
       .set('x-correlation-id', getCorrelationId())
       .set('x-user-area', userDetails?.areaCode || '')
       .accept('application/json')
-      .attach('fileData', pdf.document, pdf.fieldName)
+      .attach('fileData', pdf.document, pdf.fileName)
       .then(({ ok, body, status }) => ({ ok, response: body, status }))
   } catch (e) {
+    logError(e)
     const { response, status } = e
     return { ok: false, response, status }
   }

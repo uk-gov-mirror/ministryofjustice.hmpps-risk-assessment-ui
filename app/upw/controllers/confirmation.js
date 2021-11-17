@@ -5,11 +5,12 @@ const logger = require('../../../common/logging/logger')
 const { uploadPdfDocumentToDelius } = require('../../../common/data/hmppsAssessmentApi')
 const { convertHtmlToPdf } = require('../../../common/data/pdf')
 
-const createFileNameFrom = (...parts) => {
-  return parts
+const createFileNameFrom = (type, ...parts) => {
+  const fileName = parts
     .filter(s => s !== '')
     .join('-')
     .toLowerCase()
+  return `${fileName}.${type}`
 }
 
 class Confirmation extends SaveAndContinue {
@@ -24,7 +25,7 @@ class Confirmation extends SaveAndContinue {
       const familyName = res.locals.rawAnswers.family_name || ''
       const crn = res.locals.rawAnswers.crn || ''
 
-      const fileName = createFileNameFrom(firstName, familyName, crn)
+      const fileName = createFileNameFrom('pdf', firstName, familyName, crn)
 
       const pdfConvertResponse = await convertHtmlToPdf(renderedHtml)
 
