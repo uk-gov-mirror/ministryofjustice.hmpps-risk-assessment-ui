@@ -37,7 +37,7 @@ class Confirmation extends SaveAndContinue {
       const deliusUploadResponse = await uploadPdfDocumentToDelius(
         req.session?.assessment?.uuid,
         req.session?.assessment?.episodeUuid,
-        { document: pdfConvertResponse.body, fileName },
+        { document: pdfConvertResponse.response, fileName },
         req.user,
       )
 
