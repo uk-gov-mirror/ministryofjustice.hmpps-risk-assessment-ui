@@ -10,6 +10,10 @@ const getErrorMessageFor = (user, reason) => {
     return `The offender is showing as a possible duplicate record under ${user.areaName}. Log into OASys to manage the duplication. If you need help, contact the OASys Application Support team`
   }
 
+  if (reason === 'LAO_PERMISSION') {
+    return 'You do not have the permissions needed to access this record'
+  }
+
   return 'Something went wrong' // Unhandled exception
 }
 const validateAssessmentType = assessmentType => {
@@ -24,13 +28,7 @@ const validateCRN = crn => {
   }
 }
 
-const createAssessment = async (
-  user,
-  crn,
-  deliusEventId = '0',
-  assessmentSchemaCode = 'RSR',
-  deliusEventType = null,
-) => {
+const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode = 'RSR', deliusEventType = null) => {
   logger.info(`Creating ${assessmentSchemaCode} assessment for CRN: ${crn}`)
 
   const assessmentParams = { crn, deliusEventId, assessmentSchemaCode }
@@ -38,13 +36,7 @@ const createAssessment = async (
     assessmentParams.deliusEventType = deliusEventType
   }
 
-  const [ok, response] = await assessmentSupervision(assessmentParams, user?.token, user?.id)
-
-  if (!ok) {
-    throw new Error(getErrorMessageFor(user, response.reason))
-  }
-
-  return response
+  return assessmentSupervision(assessmentParams, user?.token, user?.id)
 }
 
 const getOffenceDetailsFor = episode => {
@@ -78,21 +70,36 @@ const startAssessment = async (req, res, next) => {
     const assessmentCode = assessmentType === 'UNPAID_WORK' ? 'UPW' : assessmentType
     const deliusEventType = assessmentType === 'UNPAID_WORK' ? 'EVENT_ID' : null
 
-    const assessment = await createAssessment(req.user, crn, eventId, assessmentCode, deliusEventType)
-    const currentEpisode = await getCurrentEpisode(assessment.assessmentUuid, req.user?.token, req.user?.id)
+    const [assessmentCreated, createAssessmentResponse] = await createAssessment(
+      req.user,
+      crn,
+      eventId,
+      assessmentCode,
+      deliusEventType,
+    )
+
+    if (!assessmentCreated) {
+      return res.render('app/error', { subHeading: getErrorMessageFor(req.user, createAssessmentResponse.reason) })
+    }
+
+    const currentEpisode = await getCurrentEpisode(
+      createAssessmentResponse.assessmentUuid,
+      req.user?.token,
+      req.user?.id,
+    )
 
     req.session.assessment = {
-      uuid: assessment?.assessmentUuid,
+      uuid: createAssessmentResponse?.assessmentUuid,
       episodeUuid: currentEpisode?.episodeUuid,
       offence: getOffenceDetailsFor(currentEpisode),
-      subject: getSubjectDetailsFor(assessment),
+      subject: getSubjectDetailsFor(createAssessmentResponse),
     }
 
     req.session.save()
 
-    res.redirect(`/${assessmentCode}/start`)
+    return res.redirect(`/${assessmentCode}/start`)
   } catch (e) {
-    next(e)
+    return next(e)
   }
 }
 

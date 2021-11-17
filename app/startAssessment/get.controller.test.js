@@ -19,12 +19,14 @@ describe('startAssessment', () => {
   }
   const res = {
     redirect: jest.fn(),
+    render: jest.fn(),
   }
   const next = jest.fn()
 
   beforeEach(() => {
     assessmentSupervision.mockReset()
     res.redirect.mockReset()
+    res.render.mockReset()
     next.mockReset()
     baseSession.save.mockReset()
 
@@ -217,6 +219,6 @@ describe('startAssessment', () => {
 
     await startAssessment(req, res, next)
 
-    expect(next).toHaveBeenCalledWith(new Error('Something went wrong'))
+    expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: 'Something went wrong' })
   })
 })
