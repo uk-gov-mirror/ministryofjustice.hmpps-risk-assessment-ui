@@ -19,7 +19,7 @@ const removeAnswers = fieldsToRemove => answers =>
 const setDefaultSectionCompleteAnswers = (answers, fields) => {
   const newAnswers = answers
   fields.forEach(field => {
-    if (!newAnswers[field] || newAnswers[field] === '') {
+    if (newAnswers[field]?.toString().toUpperCase() !== 'YES') {
       newAnswers[field] = 'NO_ILL_COME_BACK_LATER'
     }
   })

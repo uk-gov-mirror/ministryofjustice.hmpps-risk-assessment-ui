@@ -120,7 +120,9 @@
     "upw_gp_address_house_number": ["123"],
     "upw_gp_address_street_name": ["Some street"],
     "upw_gp_address_district": ["In a district"],
-    "upw_gp_address_postcode": ["ABC 123"]
+    "upw_gp_address_postcode": ["ABC 123"],
+    "upw_placement_preference": ["NO"],
+    "upw_placement_preference_complete": ["YES"]
   },
   "predictors": [
     {

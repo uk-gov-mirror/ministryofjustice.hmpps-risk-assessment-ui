@@ -1,7 +1,9 @@
 const TaskList = require('./taskList')
 const { getTaskList } = require('./taskList.utils')
+const { getAnswers } = require('../../../common/data/hmppsAssessmentApi')
 
 jest.mock('./taskList.utils')
+jest.mock('../../../common/data/hmppsAssessmentApi')
 
 let req
 const user = { token: 'mytoken', id: '1' }
@@ -74,6 +76,7 @@ describe('TaskListController', () => {
     next.mockReset()
 
     getTaskList.mockReset()
+    getAnswers.mockReset()
   })
 
   it('sets the page description', () => {
@@ -82,15 +85,20 @@ describe('TaskListController', () => {
     expect(res.locals.pageDescription).toBeDefined()
   })
 
-  it('it creates a task list and stores in locals', () => {
+  it('it creates a task list and stores in locals', async () => {
     const answers = {
       foo: 'bar',
     }
 
+    getAnswers.mockReturnValueOnce({
+      answers: {},
+      tables: {},
+    })
+
     getTaskList.mockReturnValue('FOO TASK LIST')
     mockSessionModel({ answers })
 
-    controller.locals(req, res, next)
+    await controller.locals(req, res, next)
 
     expect(getTaskList).toHaveBeenCalledWith('/UPW', req.form.options.steps, answers)
     expect(res.locals.taskList).toBe('FOO TASK LIST')

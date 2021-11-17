@@ -58,7 +58,7 @@
     "start:cypress": "npm run clean && npm run build && npm run setupStubs && NODE_ENV=local PORT=3008 INGRESS_URL=http://localhost:3008 npm run server",
     "lint-sass": "stylelint '**/*.scss'",
     "lint-sass:fix": "stylelint '**/*.scss' --fix",
-    "test": "jest",
+    "test": "jest --forceExit",
     "lint": "eslint . --cache --max-warnings 0 && stylelint '**/*.scss' --cache --max-warnings 0",
     "watch:sass": "nodemon -e scss -x \"npm run build:css\"",
     "watch": "npm run watch:sass",
