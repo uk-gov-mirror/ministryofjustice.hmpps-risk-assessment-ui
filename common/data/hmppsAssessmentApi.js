@@ -116,6 +116,31 @@ const getFilteredReferenceData = (assessmentId, episodeId, questionCode, parentL
   return postData(path, authorisationToken, userId, requestBody)
 }
 
+const uploadPdfDocumentToDelius = async (assessmentUuid, episodeUuid, pdf, user) => {
+  if (user.token === undefined) {
+    throw new Error('No authorisation token found when calling hmppsAssessments API')
+  }
+
+  const endpoint = `/assessments/${assessmentUuid}/episode/${episodeUuid}/document`
+
+  logger.info(`Calling hmppsAssessments API with POST: ${endpoint}`)
+
+  const userDetails = await getCachedUserDetails(user.id)
+  try {
+    return await superagent
+      .post(url + endpoint)
+      .auth(user.token, { type: 'bearer' })
+      .set('x-correlation-id', getCorrelationId())
+      .set('x-user-area', userDetails?.areaCode || '')
+      .accept('application/json')
+      .attach('fileData', pdf.document, pdf.fieldName)
+      .then(({ ok, body, status }) => ({ ok, response: body, status }))
+  } catch (e) {
+    const { response, status } = e
+    return { ok: false, response, status }
+  }
+}
+
 const getData = (path, authorisationToken, userId) => {
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
 
@@ -202,4 +227,5 @@ module.exports = {
   getCurrentEpisode,
   getRegistrationsForCrn,
   getRoshRiskSummaryForCrn,
+  uploadPdfDocumentToDelius,
 }

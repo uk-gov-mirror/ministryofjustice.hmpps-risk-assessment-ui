@@ -357,6 +357,22 @@ const stubRoshRiskSummary = () => {
   })
 }
 
+const stubDocumentUpload = () => {
+  stubFor({
+    request: {
+      method: 'POST',
+      urlPattern: `/assessments/.+?/episode/.+?/document`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: {},
+    },
+  })
+}
+
 const stubQuestions = async () => {
   await stubQuestionGroup('1234')
   await stubQuestionGroup('22222222-2222-2222-2222-222222222203')
@@ -443,4 +459,5 @@ module.exports = {
   stubPredictors,
   stubRegistrations,
   stubRoshRiskSummary,
+  stubDocumentUpload,
 }

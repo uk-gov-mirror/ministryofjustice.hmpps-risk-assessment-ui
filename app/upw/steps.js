@@ -3,6 +3,7 @@ const TaskList = require('./controllers/taskList')
 const SaveAndContinue = require('./controllers/saveAndContinue')
 const ConvertPdf = require('./controllers/convertPdf')
 const Declaration = require('./controllers/declaration')
+const Confirmation = require('./controllers/confirmation')
 
 module.exports = {
   '/start': {
@@ -314,8 +315,14 @@ module.exports = {
   },
   '/confirmation': {
     pageTitle: 'Confirmation',
+    controller: Confirmation,
     noPost: true,
     template: `${__dirname}/templates/confirmation.njk`,
+  },
+  '/delius-error': {
+    pageTitle: 'There is a problem with the service',
+    noPost: true,
+    template: `${__dirname}/templates/delius-error.njk`,
   },
   '/assessment-saved': {
     pageTitle: 'Your assessment has been saved',
