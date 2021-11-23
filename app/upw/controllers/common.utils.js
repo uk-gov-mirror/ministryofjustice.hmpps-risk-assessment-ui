@@ -28,8 +28,9 @@ const formatMappaCodes = ({ category, level } = {}) => {
   return [formatMappaCode(category, 'CAT'), formatMappaCode(level, 'LEVEL')].filter(whereStringNotNull).join('/')
 }
 
-const formatMappaResponse = mappaResponse => ({
+const formatMappaResponse = (mappaResponse = {}) => ({
   level: formatMappaCodes(mappaResponse),
+  isNominal: mappaResponse.level ? mappaResponse.level === 'M0' : null,
   lastUpdated: formatDate(mappaResponse?.startDate),
 })
 

@@ -1,5 +1,7 @@
 {% from "common/templates/components/moj-crest/macro.njk" import renderMojCrest %}
 {% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
+{% from "common/templates/components/rosh-widget/macro.njk" import roshWidget %}
+{% from "common/templates/components/mappa-widget/macro.njk" import mappaWidget %}
 
 {%- macro renderTableHeading(heading, description) -%}
     <p><strong>{{ heading }}<strong></p>
@@ -10,10 +12,12 @@
 
 {%- macro renderTable(table) -%}
         <table class="upw-pdf-table">
+        {%- if table.caption -%}
         <caption>
             <h2 class="govuk-heading-m">{{ table.caption }}</h2>
             <p>{{ table.captionDescription }}</p>
         </caption>
+        {%- endif -%}
         <tbody>
             {% for row in table.rows %}
             {%- if row.condition or row.condition == undefined -%}
@@ -34,6 +38,14 @@
     {% endif %}
 {%- endmacro -%}
 
+{%- macro renderDate(value) -%}
+    {% if value %}
+    <p>{{ value | prettyDate }}</p>
+    {% else %}
+    <p>No data</p>
+    {% endif %}
+{%- endmacro -%}
+
 {%- macro renderOffence(code, description) -%}
     <p>{% if code %}{{ code }} - {% endif %}{{ description }}</p>
 {%- endmacro -%}
@@ -44,14 +56,30 @@
     {% if phoneNumber %}<p>{{ phoneNumber }}</p>{% endif %}
 {%- endmacro -%}
 
+{%- macro renderName(firstName, familyName) -%}
+{{ firstName }} {{ familyName }}
+{%- endmacro -%}
+
 {%- macro renderAliases(firstNames, familyNames) -%}
     <p>
         {% for firstName in firstNames %}
             {%- set familyName = familyNames[loop.index - 1] -%}
-            {{ firstName }} {{ familyName }}<br />
+            {{ renderName(firstName, familyName)}} <br />
         {% endfor %}
     </p>
-{%- endmacro %}
+{%- endmacro -%}
+
+{%- macro renderRiskFlags(flags) -%}
+    {% if flags %}
+    <ul class="govuk-list">
+        {% for risk in flags %}
+            <li>{{ risk }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No flags</p>
+    {% endif %}
+{%- endmacro -%}
 
 <div class="govuk-body upw-pdf">
     <div class="upw-pdf-header">
@@ -67,7 +95,7 @@
         </div>
     </div>
 
-    <h1 class="govuk-heading-l">Supervised individual</h1>    
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Supervised individual</h1>    
 
     {{ renderTable({
         caption: "Offence details",
@@ -83,7 +111,7 @@
         rows: [
             { heading: "Family name", data: renderValue(rawAnswers["family_name"]) },
             { heading: "First name", data: renderValue(rawAnswers["first_name"]) },
-            { heading: "Date of birth", data: renderValue(rawAnswers["dob"]) },
+            { heading: "Date of birth", data: renderDate(rawAnswers["dob"]) },
             { heading: "CRN", data: renderValue(rawAnswers["crn"]) },
             { heading: "PNC", data: renderValue(rawAnswers["pnc"]) },
             { heading: "Alias", data: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases']) },
@@ -91,17 +119,21 @@
         ]
     }) }}
 
+    {% set showSexChangeDetails = rawAnswers["sex_change"] == "YES" %}
+
     {{ renderTable({
         caption: "Gender information",
         rows: [
             { heading: "Gender identity", data: renderValue(answers["gender_identity"]) },
             {
                 heading: "Has the individual gone through any part of a process to change the sex they were assigned at birth to the gender they now identify with, or do they intend to?",
-                data: renderValue(
-                    answers["sex_change"],
-                    answers["sex_change_details"],
-                    "Yes"
-                )
+                data: renderValue(answers["sex_change"])
+            },
+            { 
+                heading: "Give details and discuss placement options with the individual, based on their gender identity.",
+                description: "Record their preference and the details of the conversation.",
+                condition: showSexChangeDetails,
+                data: renderValue(answers["sex_change_details"])
             },
             {
                 heading: "Is the individual intersex or do they have a Difference in Sexual Development (DSD)?",
@@ -158,13 +190,13 @@
         ]
     }) }}
 
-    <h1 class="govuk-heading-l">Risk of Serious Harm in the community</h1>    
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of Serious Harm in the community</h1>
 
-    {# TODO: ROSH Widget #}
+    {{ roshWidget(widgets.roshRiskSummary) }}
 
     {{ renderTable({
         rows: [
-            { heading: "Delius risk flags (registers)", data: renderValue("TODO: find mapping for this field") },
+            { heading: "Delius risk flags (registers)", data: renderRiskFlags(widgets.flags) },
             {
                 heading: "History of sexual offending?", 
                 data: renderValue(
@@ -214,7 +246,7 @@
                 ) 
             },
             {
-                heading: "Hate-based behaviour?",
+                heading: "History of hate-based attitudes or behaviours?",
                 description: "For example, homophobic or racially motivated",
                 data: renderValue(
                     answers["upw_hate_based_behaviour"],
@@ -232,7 +264,7 @@
                 ) 
             },
             {
-                heading: "Additional risk of harm assessment information?",
+                heading: "Additional risk assessment information?",
                 data: renderValue(
                     answers["upw_additional_rosh_info"],
                     answers["upw_high_profile_persoupw_additional_rosh_info_detailsn_details"],
@@ -242,16 +274,21 @@
         ]
     }) }}
 
-    <h1 class="govuk-heading-l">Management of risk</h1>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h1>
 
-    {# TODO: Mappa Widget #}
-    {%- set mappaNominal = "NO" -%}
+    {{ mappaWidget(widgets.mappa) }}
 
-    {%- if mappaNominal == "YES" -%}
-    {%- elif mappaNominal == "NO" -%}
+    {%- if widgets.mappa.isNominal %}
+    {%- set mappaNominal = "Yes" -%}
+    {% else %}
+    {%- set mappaNominal = "No" -%}
+    {% endif %}
+
+    {%- if mappaNominal == "Yes" -%}
+    {%- elif mappaNominal == "No" -%}
         {{ renderTable({
             rows: [
-                { heading: "MAPPA nominal?", data: renderValue("TODO: find mapping for this field") },
+                { heading: "MAPPA nominal?", data: renderValue(mappaNominal) },
                 {
                     heading: "Location restricted by victim exclusion criteria?",
                     data: renderValue(
@@ -320,16 +357,21 @@
         }) }}
     {%- endif -%}
 
-    <h1 class="govuk-heading-l">Diversity information</h1>
-    {%- set showPlacementPreferences = rawAnswers["gender_identity"] != "MALE" and answers["upw_placement_preference"] == "Yes" -%}
-    {%- set showPlacementPreferencesByGender = answers["sex_change"] == "Yes" -%}
-    {# TODO: we also need to calculate age add check if age >= 18 and <=25 #}
-    {%- set showMaturityAssessmentDetails = rawAnswers["gender_identity"] == "MALE" -%}
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h1>
+
+    {%- set showPlacementPreferences = rawAnswers["gender_identity"] != "MALE" and rawAnswers["upw_placement_preference"] == "YES" -%}
+    {%- set showPlacementPreferencesByGender = rawAnswers["sex_change"] == "YES" -%}
+
+    {%- if rawAnswers["requires_interpreter"] == "true" -%}
+    {%- set requiresInterpreter = "Yes" -%}
+    {%- elif rawAnswers["requires_interpreter"] == "false" -%}
+    {%- set requiresInterpreter = "No" -%}
+    {%- endif -%}
 
     {{ renderTable({
         rows: [
             { heading: "Preferred language", data: renderValue(rawAnswers["language"]) },
-            { heading: "Interpreter required?", data: renderValue(rawAnswers["requires_interpreter"]) },
+            { heading: "Interpreter required?", data: renderValue(requiresInterpreter) },
             {
                 heading: "Cultural or religious adjustments", 
                 data: renderValue(
@@ -348,17 +390,11 @@
                 description: "Record their preference and the details of the conversation.",
                 condition: showPlacementPreferencesByGender,
                 data: renderValue(answers["upw_placement_preference_by_gender_details"]) 
-            },
-            {
-                heading: "Maturity assessment",
-                description: "What action needs to be taken to support engagement or compliance with the community payback requirement?",
-                condition: showMaturityAssessmentDetails,
-                data: renderValue(answers["upw_maturity_assessment_details"]) 
             }
         ]
     }) }}
 
-    <h1 class="govuk-heading-l">Placement restrictions due to health and other needs</h1>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h1>
 
     {%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
         {%- if answer -%}
@@ -370,7 +406,7 @@
 
     {{ renderTable({
         caption: "Disabilities and mental health",
-        captionDescription: "Does the Supervised individual have any of the following?",
+        captionDescription: "Does the individual have any of the following?",
         rows: [
             {
                 heading: "Physical disability", 
@@ -416,6 +452,15 @@
         ]
     }) }}
 
+    {%- macro renderPregnancyQuestion(value, pregnantDescription, recentlyGivenBirthDescription) -%}
+        <p>{{ value | default("No data", true) }}</p>
+        {% if pregnantDescription and value == "Pregnant" %}
+        <p>{{ pregnantDescription }}</p>
+        {% elif recentlyGivenBirthDescription and value == "Recently given birth" %}
+        <p>{{ recentlyGivenBirthDescription }}</p>
+        {% endif %}
+    {%- endmacro -%}
+
     {{ renderTable({
         caption: "Are there any other health issues that may affect ability to work?",
         rows: [
@@ -449,6 +494,14 @@
                     answers["upw_other_health_issues"],
                     answers["upw_other_health_issues_details"],
                     "Yes"
+                ) 
+            },
+            {
+                heading: "Pregnant or recently given birth?", 
+                data: renderPregnancyQuestion(
+                    answers["upw_pregnancy"],
+                    answers["upw_pregnancy_pregnant_details"],
+                    answers["upw_pregnancy_recently_given_birth_details"]
                 ) 
             },
             {
@@ -515,11 +568,11 @@
         ]
     }) }}
 
-    <h1 class="govuk-heading-l">Employment, Education and skills</h1>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h1>
 
-    {%- if answers["upw_employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
+    {%- if rawAnswers["upw_employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
         {%- set employmentDetails = answers["upw_employment_education_details_fulltime"] -%}
-    {%- elif answers["upw_employment_education"] == "PARTTIME_EDUCATION_EMPLOYMENT" -%}
+    {%- elif rawAnswers["upw_employment_education"] == "PARTTIME_EDUCATION_EMPLOYMENT" -%}
         {%- set employmentDetails = answers["upw_employment_education_details_parttime"] -%}
     {%- endif -%}
 
@@ -530,8 +583,9 @@
                 data: renderValue(answers["upw_employment_education"])
             },
             {
-                heading: "Employment or education details (working days, hours etc)", 
-                data: renderValue(employmentDetails)
+                heading: "Employment or education details (working days, hours etc)",
+                data: renderValue(employmentDetails),
+                condition: employmentDetails
             },
             {
                 heading: "Does the individual have any difficulties with reading or writing?", 
@@ -587,17 +641,18 @@
         ] 
     }) }}
 
-    <h1 class="govuk-heading-l">Placement details</h1>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement details</h1>
 
-    {%- if answers["upw_employment_education"] == "No" -%}
-
-        {%- set eligibleForIntensiveWorking = answers["upw_eligibility_intensive_working"] == "Yes" %}
+    {%- set showIntensiveWorkingSection = rawAnswers["upw_employment_education"] == "NO" -%}
+    {%- if showIntensiveWorkingSection -%}
+        
+        {%- set eligibleForIntensiveWorking = rawAnswers["upw_eligibility_intensive_working"] == "YES" -%}
 
         {%- if eligibleForIntensiveWorking -%}
             {% set recommendedHoursStartOrder = answers["upw_recommended_hours_start_order"] | default("0") %}
             {% set recommendedHoursMidpointOrder = answers["upw_recommended_hours_start_order"] | default("0") %}
         {%- endif -%}
-
+        
         {{ renderTable({
             caption: "Intensive working",
             rows: [
@@ -626,7 +681,6 @@
                 }
             ]
         }) }}
-
     {%- endif -%}
 
     <h2 class="govuk-heading-m">Availability for Community Payback</h2>
@@ -638,7 +692,7 @@
     {% endmacro %}
 
     <table class="upw-pdf-chart">
-        <caption class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom" colspan="8">When is the individual available for unpaid work?</caption>            
+        <caption class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom" colspan="8">When is the individual available for community payback work?</caption>
         <tbody>
             <tr>
                 <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right  upw-pdf-chart__cell--border-left"></th>
@@ -710,7 +764,7 @@
         ]
     }) }}
 
-    <h1 class="govuk-heading-l">Placement details</h1>
+    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Declaration</h1>
 
     {{ renderTable({
         rows: [

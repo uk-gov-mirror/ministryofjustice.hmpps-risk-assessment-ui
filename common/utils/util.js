@@ -1,5 +1,6 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
+const { format, differenceInYears } = require('date-fns')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
 
@@ -157,6 +158,9 @@ const processReplacements = (input, replacementDetails) => {
   return JSON.parse(newInput)
 }
 
+const prettyDate = s => s && format(new Date(s), 'do MMMM y')
+const ageFrom = (dateOfBirth, today = new Date()) => dateOfBirth && differenceInYears(new Date(dateOfBirth), today)
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -174,4 +178,6 @@ module.exports = {
   extractLink,
   doReplace,
   updateJsonValue,
+  prettyDate,
+  ageFrom,
 }

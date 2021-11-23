@@ -29,7 +29,7 @@ const noCache = require('./common/utils/no-cache')
 const { mdcSetup } = require('./common/logging/logger-mdc')
 const { updateCorrelationId } = require('./common/middleware/updateCorrelationId')
 const { applicationInsights } = require('./common/config')
-const { encodeHTML, extractLink, doReplace, updateJsonValue } = require('./common/utils/util')
+const { encodeHTML, extractLink, doReplace, updateJsonValue, prettyDate, ageFrom } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
 const redis = require('./common/data/redis')
@@ -156,6 +156,8 @@ function initialiseTemplateEngine(app) {
   // add custom nunjucks filters
   nunjucksEnvironment.addFilter('date', dateFilter)
   nunjucksEnvironment.addFilter('mojDate', mojDate)
+  nunjucksEnvironment.addFilter('prettyDate', prettyDate)
+  nunjucksEnvironment.addFilter('ageFrom', ageFrom)
 
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise

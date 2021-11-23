@@ -27,6 +27,7 @@ describe('GetRegistrations', () => {
       flags: [],
       mappa: {
         lastUpdated: '10th October 2021',
+        isNominal: false,
         level: 'CAT 2/LEVEL 1',
       },
     })
@@ -46,6 +47,7 @@ describe('GetRegistrations', () => {
       flags: [],
       mappa: {
         level: null,
+        isNominal: null,
         lastUpdated: null,
       },
     })
@@ -70,6 +72,7 @@ describe('GetRegistrations', () => {
       flags: [],
       mappa: {
         level: 'LEVEL 1',
+        isNominal: false,
         lastUpdated: '10th October 2021',
       },
     })
@@ -94,6 +97,7 @@ describe('GetRegistrations', () => {
       flags: [],
       mappa: {
         level: 'CAT 2',
+        isNominal: null,
         lastUpdated: '10th October 2021',
       },
     })
@@ -119,6 +123,7 @@ describe('GetRegistrations', () => {
       flags: [],
       mappa: {
         level: 'CAT 2/LEVEL 1',
+        isNominal: false,
         lastUpdated: null,
       },
     })
@@ -138,6 +143,7 @@ describe('GetRegistrations', () => {
       flags: ['Hate Crime'],
       mappa: {
         level: null,
+        isNominal: null,
         lastUpdated: null,
       },
     })
@@ -157,6 +163,7 @@ describe('GetRegistrations', () => {
       flags: [],
       mappa: {
         level: null,
+        isNominal: null,
         lastUpdated: null,
       },
     })
