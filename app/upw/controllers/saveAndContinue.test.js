@@ -15,8 +15,8 @@ describe('SaveAndContinueController (UPW)', () => {
       switch (key) {
         case 'errors':
           return values.errors || []
-        case 'answers':
-          return values.answers || {}
+        case 'formAnswers':
+          return values.formAnswers || {}
         default:
           return undefined
       }
@@ -68,7 +68,7 @@ describe('SaveAndContinueController (UPW)', () => {
 
   it('it invalidates declarations when saving', () => {
     mockSessionModel({
-      answers: {
+      formAnswers: {
         declaration: 'COMPLETED',
         foo: 'bar',
       },

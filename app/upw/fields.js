@@ -54,12 +54,8 @@ const fields = {
   },
   intersex_or_dsd: requireYesOrNo,
   transgender: requireYesOrNo,
-  contact_address_building_name: {
-    validate: [{ type: 'required', message: 'Building name is required' }],
-  },
-  contact_address_house_number: {
-    validate: [{ type: 'required', message: 'House number is required' }],
-  },
+  contact_address_building_name: {},
+  contact_address_house_number: {},
   contact_address_street_name: {
     validate: [{ type: 'required', message: 'Street name is required' }],
   },
@@ -93,12 +89,8 @@ const fields = {
   emergency_contact_relationship: {
     validate: [{ type: 'required', message: 'Emergency contact relationship is required' }],
   },
-  emergency_contact_address_building_name: {
-    validate: [{ type: 'required', message: 'Building name is required' }],
-  },
-  emergency_contact_address_house_number: {
-    validate: [{ type: 'required', message: 'House number is required' }],
-  },
+  emergency_contact_address_building_name: {},
+  emergency_contact_address_house_number: {},
   emergency_contact_address_street_name: {
     validate: [{ type: 'required', message: 'Street name is required' }],
   },
@@ -265,12 +257,8 @@ const fields = {
   upw_gp_family_name: {
     validate: [{ type: 'required', message: 'Family name is required' }],
   },
-  upw_gp_address_building_name: {
-    validate: [{ type: 'required', message: 'Building name is required' }],
-  },
-  upw_gp_address_house_number: {
-    validate: [{ type: 'required', message: 'House number is required' }],
-  },
+  upw_gp_address_building_name: {},
+  upw_gp_address_house_number: {},
   upw_gp_address_street_name: {
     validate: [{ type: 'required', message: 'Street name is required' }],
   },
@@ -421,14 +409,7 @@ const fields = {
   upw_eligibility_intensive_working_complete: requireSelectOption,
   upw_individual_availability_complete: requireSelectOption,
   upw_equipment_complete: requireSelectOption,
-  upw_declaration_confirmation: {
-    validate: [
-      {
-        type: 'required',
-        message: 'You must tick the confirmation',
-      },
-    ],
-  },
+  upw_declaration_confirmation: {},
 }
 
 // const customValidations = (fields, answers) => {

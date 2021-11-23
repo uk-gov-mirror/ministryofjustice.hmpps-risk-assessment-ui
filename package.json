@@ -40,6 +40,7 @@
     ]
   },
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "build": "npm run build:copy & npm run build:css & npm run build:js",
     "clean": "rimraf public",
     "build:copy": "npm run copy-govuk-assets && npm run copy-assets",
@@ -162,5 +163,8 @@
       "stylelint '**/*.scss' --cache --fix",
       "git add"
     ]
+  },
+  "resolutions": {
+    "ansi-regex": "5.0.1"
   }
 }

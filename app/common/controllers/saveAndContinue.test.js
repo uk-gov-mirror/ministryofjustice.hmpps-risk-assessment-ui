@@ -399,7 +399,7 @@ describe('SaveAndContinueController', () => {
         date_field: '',
       })
 
-      expect(req.sessionModel.set).toHaveBeenCalledWith('answers', req.form.values)
+      expect(req.sessionModel.set).toHaveBeenCalledWith('formAnswers', req.form.values)
     })
 
     it('returns empty when the date has no month component', async () => {
@@ -422,7 +422,7 @@ describe('SaveAndContinueController', () => {
         date_field: '',
       })
 
-      expect(req.sessionModel.set).toHaveBeenCalledWith('answers', req.form.values)
+      expect(req.sessionModel.set).toHaveBeenCalledWith('formAnswers', req.form.values)
     })
 
     it('returns empty when the date has no year component', async () => {
@@ -445,7 +445,7 @@ describe('SaveAndContinueController', () => {
         date_field: '',
       })
 
-      expect(req.sessionModel.set).toHaveBeenCalledWith('answers', req.form.values)
+      expect(req.sessionModel.set).toHaveBeenCalledWith('formAnswers', req.form.values)
     })
   })
 

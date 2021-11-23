@@ -1,4 +1,5 @@
 const nunjucks = require('nunjucks')
+const { SECTION_INCOMPLETE, SECTION_COMPLETE } = require('../../../common/utils/constants')
 
 const nullOrEmpty = s => !s || s === ''
 
@@ -54,9 +55,15 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
   }
 
   if (fieldProperties.answerType === 'radio') {
-    const checkedAnswer = answerFor(fieldName)
+    let checkedAnswer = answerFor(fieldName)
     const [selectedAnswer] = fieldProperties.answerSchemas.filter(answerSchema => answerSchema.value === checkedAnswer)
     const displayAnswer = selectedAnswer?.text || ''
+
+    if (fieldProperties.questionCode.match(/^\w+_complete$/)) {
+      if (checkedAnswer !== SECTION_COMPLETE) {
+        checkedAnswer = SECTION_INCOMPLETE
+      }
+    }
     return {
       ...fieldProperties,
       answer: displayAnswer,

@@ -321,11 +321,10 @@
     {%- endif -%}
 
     <h1 class="govuk-heading-l">Diversity information</h1>
-
-    {%- set showPlacementPreferences = rawAnswers["gender"] == "Female" and answers["upw_placement_preference"] == "Yes" -%}
+    {%- set showPlacementPreferences = rawAnswers["gender_identity"] != "MALE" and answers["upw_placement_preference"] == "Yes" -%}
     {%- set showPlacementPreferencesByGender = answers["sex_change"] == "Yes" -%}
     {# TODO: we also need to calculate age add check if age >= 18 and <=25 #}
-    {%- set showMaturityAssessmentDetails = rawAnswers["gender"] == "Male" -%}
+    {%- set showMaturityAssessmentDetails = rawAnswers["gender_identity"] == "MALE" -%}
 
     {{ renderTable({
         rows: [

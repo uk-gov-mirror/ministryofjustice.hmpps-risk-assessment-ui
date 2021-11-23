@@ -79,8 +79,8 @@ describe('TaskListController', () => {
     getAnswers.mockReset()
   })
 
-  it('sets the page description', () => {
-    controller.locals(req, res, next)
+  it('sets the page description', async () => {
+    await controller.locals(req, res, next)
 
     expect(res.locals.pageDescription).toBeDefined()
   })

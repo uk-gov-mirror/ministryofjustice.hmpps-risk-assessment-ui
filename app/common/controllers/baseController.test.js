@@ -58,14 +58,14 @@ describe('BaseController', () => {
     next.mockReset()
   })
 
-  it('puts the CSRF token in the locals', () => {
-    controller.locals(req, res, next)
+  it('puts the CSRF token in the locals', async () => {
+    await controller.locals(req, res, next)
 
     expect(res.locals.csrfToken).toBe('CSRF_TOKEN')
   })
 
-  it('puts the assessment in locals from the session', () => {
-    controller.locals(req, res, next)
+  it('puts the assessment in locals from the session', async () => {
+    await controller.locals(req, res, next)
 
     expect(res.locals.assessment).toStrictEqual(req.session.assessment)
   })

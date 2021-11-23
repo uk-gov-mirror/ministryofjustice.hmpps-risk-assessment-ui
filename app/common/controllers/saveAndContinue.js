@@ -1,4 +1,5 @@
 const BaseController = require('./baseController')
+const { SECTION_INCOMPLETE } = require('../../../common/utils/constants')
 const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
 const { logger } = require('../../../common/logging/logger')
 const { processReplacements } = require('../../../common/utils/util')
@@ -27,7 +28,9 @@ class SaveAndContinue extends BaseController {
       req.user?.token,
       req.user?.id,
     )
-    const submittedAnswers = req.sessionModel.get('answers') || {}
+
+    const submittedAnswers =
+      errorSummary.length === 0 ? req.sessionModel.get('answers') || {} : req.sessionModel.get('formAnswers') || {}
 
     const questions = Object.entries(req.form.options.allFields)
     const questionsWithMappedAnswers = questions.map(withAnswersFrom(previousAnswers, submittedAnswers))
@@ -90,8 +93,20 @@ class SaveAndContinue extends BaseController {
     const answersWithFormattedDates = combineDateFields(requestBody)
     const answersInSession = req.sessionModel.get('answers')
     const filteredAnswers = filterAnswersByFields(req.form?.options?.fields, answersWithFormattedDates)
+
+    // if user has selected 'I'll come back later for this page, remove field validations for unanswered fields
+    const sectionCompleteField = Object.keys(req.form?.options?.fields).find(key => key.match(/^\w+_complete$/))
+    if (filteredAnswers[sectionCompleteField] === SECTION_INCOMPLETE) {
+      Object.keys(filteredAnswers).forEach(key => {
+        if (filteredAnswers[key] === '') {
+          req.form.options.fields[key].validate = []
+        }
+      })
+    }
+
     req.form.values = { ...answersInSession, ...filteredAnswers }
-    req.sessionModel.set('answers', req.form?.values || {})
+
+    req.sessionModel.set('formAnswers', req.form?.values || {})
     super.process(req, res, next)
   }
 

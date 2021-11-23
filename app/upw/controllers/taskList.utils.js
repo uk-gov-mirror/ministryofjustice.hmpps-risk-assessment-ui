@@ -1,3 +1,5 @@
+const { SECTION_COMPLETE } = require('../../../common/utils/constants')
+
 const checkAllTasksAreComplete = sections => {
   return sections.every(section => {
     const tasks = section.items || []
@@ -33,7 +35,7 @@ const getTask = (answers, baseUrl, steps, taskName, completionField) => {
   return {
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}` || '#',
-    status: answers[completionField]?.toString().toUpperCase() === 'YES' ? 'COMPLETE' : 'INCOMPLETE',
+    status: answers[completionField]?.toString().toUpperCase() === SECTION_COMPLETE ? 'COMPLETE' : 'INCOMPLETE',
   }
 }
 
@@ -102,6 +104,22 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
       ],
     },
   ]
+
+  if (answers.gender_identity === 'MALE') {
+    // find section with an item with text: placement preferences, and remove from task list
+    let taskIndex
+    let itemIndex
+    tasks.forEach((task, taskNumber) => {
+      task.items?.forEach((item, taskItemNumber) => {
+        if (item.text === 'Placement preferences') {
+          taskIndex = taskNumber
+          itemIndex = taskItemNumber
+        }
+      })
+    }, tasks)
+
+    if (taskIndex && itemIndex) delete tasks[taskIndex].items[itemIndex]
+  }
 
   const declaration = {
     heading: {

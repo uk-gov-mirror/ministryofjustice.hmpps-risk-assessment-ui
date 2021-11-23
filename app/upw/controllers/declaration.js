@@ -11,7 +11,22 @@ class Declaration extends BaseSaveAndContinue {
       ...roshRiskSummary,
     }
 
-    super.locals(req, res, next)
+    await super.locals(req, res, next)
+
+    const validationErrors = Object.keys(req.form.errors)
+
+    const { answers } = res.locals
+    if (validationErrors.length > 0) {
+      req.sessionModel.set('formAnswers', answers)
+    }
+    res.locals.answers = answers
+  }
+
+  saveValues(req, res, next) {
+    const answers = req.sessionModel.get('formAnswers') || {}
+    req.sessionModel.set('answers', answers)
+
+    super.saveValues(req, res, next)
   }
 }
 
