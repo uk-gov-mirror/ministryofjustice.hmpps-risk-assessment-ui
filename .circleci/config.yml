@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   hmpps: ministryofjustice/hmpps@3.11
   slack: circleci/slack@4.4.2
-  
+
 parameters:
   alerts-slack-channel:
     type: string
@@ -45,7 +45,7 @@ jobs:
             - node_modules
             - assets/stylesheets
             - .cache/Cypress
-  
+
   check_outdated:
     executor:
       name: hmpps/node
@@ -160,16 +160,18 @@ workflows:
             - test
             - cypress_integration_tests
             - build_docker
-#      - request-preprod-approval:
-#          type: approval
-#          requires:
-#            - deploy_dev
-#      - hmpps/deploy_env:
-#          name: deploy_preprod
-#          env: "preprod"
-#          context: risk-assessment-ui-preprod
-#          requires:
-#            - request-preprod-approval
+      - request-preprod-approval:
+          type: approval
+          requires:
+            - deploy_dev
+      - hmpps/deploy_env:
+          name: deploy_preprod
+          env: "preprod"
+          context:
+            - hmpps-common-vars
+            - hmpps-assessments-preprod
+          requires:
+            - request-preprod-approval
 #      - request-prod-approval:
 #          type: approval
 #          requires:
