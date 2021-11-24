@@ -171,7 +171,7 @@
     {{ renderTable({
         caption: "Emergency contact details",
         rows: [
-            { heading: "Name", data: renderValue(answers["emergency_contact_name"]) },
+            { heading: "Name", data: renderName(answers['emergency_contact_first_name'], answers['emergency_contact_family_name']) },
             { heading: "Relationship to individual", data: renderValue(answers["emergency_contact_relationship"]) },
             {
                 heading: "Address",
@@ -267,7 +267,7 @@
                 heading: "Additional risk assessment information?",
                 data: renderValue(
                     answers["upw_additional_rosh_info"],
-                    answers["upw_high_profile_persoupw_additional_rosh_info_detailsn_details"],
+                    answers["upw_additional_rosh_info_details"],
                     "Yes"
                 ) 
             }
@@ -770,7 +770,7 @@
         rows: [
             {
                 heading: "I confirm the individual has received details of their Community Payback Induction Session",
-                data: renderValue(answers["declaration"])
+                data: renderValue(answers["upw_declaration_confirmation"])
             }
         ]
     }) }}
