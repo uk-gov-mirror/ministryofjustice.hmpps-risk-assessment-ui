@@ -83,4 +83,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/complete`,
   },
+  '/privacy': {
+    pageTitle: 'Privacy notice - placeholder page',
+    noPost: true,
+    template: `${__dirname}/templates/privacy.njk`,
+  },
 }

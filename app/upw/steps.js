@@ -329,4 +329,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/assessment-saved.njk`,
   },
+  '/privacy': {
+    pageTitle: 'Privacy notice',
+    noPost: true,
+    template: `${__dirname}/templates/privacy.njk`,
+  },
 }
