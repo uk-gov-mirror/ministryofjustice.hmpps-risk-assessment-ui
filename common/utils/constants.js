@@ -6,6 +6,14 @@ const STANDALONE_ASSESSMENTS = ['UPW', 'RSR', 'UNPAID_WORK']
 const SECTION_INCOMPLETE = 'NO_ILL_COME_BACK_LATER'
 const SECTION_COMPLETE = 'YES'
 
+const EVENTS = {
+  ARN_NO_ROSH_DATA_AVAILABLE: 'arnNoRoshDataAvailable',
+  ARN_SESSION_STARTED: 'arnSessionStarted',
+  ARN_PDF_DOWNLOAD: 'arnPdfDownload',
+  ARN_SECTION_STARTED: 'arnSectionStarted',
+  ARN_SECTION_COMPLETED: 'arnSectionCompleted',
+}
+
 module.exports = Object.freeze({
   UUID_REGEX,
   REFRESH_TOKEN_LIFETIME_SECONDS,
@@ -14,4 +22,5 @@ module.exports = Object.freeze({
   STANDALONE_ASSESSMENTS,
   SECTION_INCOMPLETE,
   SECTION_COMPLETE,
+  EVENTS,
 })

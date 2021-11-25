@@ -53,6 +53,7 @@
     "copy-govuk-assets": "copyfiles -u 1 node_modules/govuk-frontend/govuk/assets/fonts/**/* -f public/assets/fonts && copyfiles -u 1 node_modules/govuk-frontend/govuk/assets/images/**/* -f public/assets/images",
     "compile-sass": "sass --load-path node_modules/ common/assets/sass:public/stylesheets",
     "cssmin": "cleancss -o public/stylesheets/application.min.css public/stylesheets/application.css",
+    "security_audit": "npm audit",
     "server": "node ./start.js",
     "start": "npm run clean && npm run build && node ./start.js",
     "start:local": "npm run clean && npm run build && npm run setupStubs && NODE_ENV=local node ./start.js & npm run watch",
@@ -165,6 +166,7 @@
     ]
   },
   "resolutions": {
-    "ansi-regex": "5.0.1"
+    "ansi-regex": "5.0.1",
+    "json-schema": "^0.4.0"
   }
 }

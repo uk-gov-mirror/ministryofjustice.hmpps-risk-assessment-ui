@@ -4,10 +4,14 @@ const nunjucks = require('nunjucks')
 const superagent = require('superagent')
 const SaveAndContinue = require('./saveAndContinue')
 const { apis } = require('../../../common/config')
+const { trackEvent } = require('../../../common/logging/app-insights')
+const { EVENTS } = require('../../../common/utils/constants')
 
 class ConvertPdf extends SaveAndContinue {
   async render(req, res, next) {
     try {
+      trackEvent(EVENTS.ARN_PDF_DOWNLOAD, req)
+
       const rendered = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
         ...res.locals,
         css_path: 'application.min.css',
