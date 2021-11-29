@@ -32,7 +32,7 @@
         
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">            
-            {% if answers['upw_gp_phone_number'] %}{% set gpPhoneNumber = answers['upw_gp_phone_number'] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
+            {% if answers['gp_phone_number'] %}{% set gpPhoneNumber = answers['gp_phone_number'] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
 
             {{ readOnly({
                 title: 'Details of GP (if needed to verify information)',
@@ -43,7 +43,7 @@
                             text: 'Name'
                         },
                         value: {
-                            html: renderGpName(answers['upw_gp_first_name'], answers['upw_gp_family_name'])
+                            html: renderGpName(answers['gp_first_name'], answers['gp_family_name'])
                         }
                     },{
                         key: {
@@ -51,13 +51,13 @@
                         },
                         value: {
                             html: readOnlyAddress({ 
-                                buildingName: answers['upw_gp_address_building_name'],
-                                houseNumber: answers['upw_gp_address_house_number'],
-                                streetName: answers['upw_gp_address_street_name'],
-                                district: answers['upw_gp_address_district'],
-                                townOrCity: answers['upw_gp_address_town_or_city'],
-                                county: answers['upw_gp_address_county'],
-                                postcode: answers['upw_gp_address_postcode']
+                                buildingName: answers['gp_address_building_name'],
+                                houseNumber: answers['gp_address_house_number'],
+                                streetName: answers['gp_address_street_name'],
+                                district: answers['gp_address_district'],
+                                townOrCity: answers['gp_address_town_or_city'],
+                                county: answers['gp_address_county'],
+                                postcode: answers['gp_address_postcode']
                             })
                         }
                     },{
@@ -73,7 +73,7 @@
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
             
-            {{ renderQuestion(questions['upw_gp_details_complete'], errors) }}
+            {{ renderQuestion(questions['gp_details_complete'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({

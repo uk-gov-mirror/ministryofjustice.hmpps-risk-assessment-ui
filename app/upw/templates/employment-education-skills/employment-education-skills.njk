@@ -31,13 +31,13 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['upw_employment_education'], errors) }}
-            {{ renderQuestion(questions['upw_reading_writing_difficulties'], errors) }}
-            {{ renderQuestion(questions['upw_work_skills'], errors) }}
-            {{ renderQuestion(questions['upw_future_work_plans'], errors) }}
+            {{ renderQuestion(questions['employment_education'], errors) }}
+            {{ renderQuestion(questions['reading_writing_difficulties'], errors) }}
+            {{ renderQuestion(questions['work_skills'], errors) }}
+            {{ renderQuestion(questions['future_work_plans'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
-            {{ renderQuestion(questions['upw_employment_education_skills_complete'], errors) }}
+            {{ renderQuestion(questions['employment_education_skills_complete'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({

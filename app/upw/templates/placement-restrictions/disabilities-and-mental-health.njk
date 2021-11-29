@@ -31,11 +31,11 @@
 
             {{ readOnly({
                 field: {
-                    key: 'upw_physical_disability',
+                    key: 'physical_disability',
                     text: 'Physical disability'
                 },
                 conditional: {
-                    key: 'upw_physical_disability_details',
+                    key: 'physical_disability_details',
                     value: 'Yes'
                 },
                 answers: answers,
@@ -45,11 +45,11 @@
 
             {{ readOnly({
                 field: {
-                    key: 'upw_learning_disability',
+                    key: 'learning_disability',
                     text: 'Learning disability'
                 },
                 conditional: {
-                    key: 'upw_learning_disability_details',
+                    key: 'learning_disability_details',
                     value: 'Yes'
                 },
                 answers: answers,
@@ -59,11 +59,11 @@
 
             {{ readOnly({
                 field: {
-                    key: 'upw_learning_difficulty',
+                    key: 'learning_difficulty',
                     text: 'Learning difficulty'
                 },
                 conditional: {
-                    key: 'upw_learning_difficulty_details',
+                    key: 'learning_difficulty_details',
                     value: 'Yes'
                 },
                 answers: answers,
@@ -73,11 +73,11 @@
 
             {{ readOnly({
                 field: {
-                    key: 'upw_mental_health_condition',
+                    key: 'mental_health_condition',
                     text: 'Mental health condition'
                 },
                 conditional: {
-                    key: 'upw_mental_health_condition_details',
+                    key: 'mental_health_condition_details',
                     value: 'Yes'
                 },
                 answers: answers,
@@ -85,11 +85,11 @@
                 ifNotPresent: "No"
             }) }}
 
-            {{ renderQuestion(questions['upw_disabilities'], errors) }}
+            {{ renderQuestion(questions['disabilities'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
 
-            {{ renderQuestion(questions['upw_disabilities_complete'], errors) }}
+            {{ renderQuestion(questions['disabilities_complete'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({

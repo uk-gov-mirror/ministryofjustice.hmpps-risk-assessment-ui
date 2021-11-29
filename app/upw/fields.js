@@ -112,194 +112,194 @@ const fields = {
   emergency_contact_mobile_phone_number: {
     validate: [{ type: 'required', message: 'Mobile phone number is required' }],
   },
-  upw_cultural_religious_adjustment: requireYesOrNo,
-  upw_cultural_religious_adjustment_details: {
-    dependent: { field: 'upw_cultural_religious_adjustment', value: 'YES' },
+  cultural_religious_adjustment: requireYesOrNo,
+  cultural_religious_adjustment_details: {
+    dependent: { field: 'cultural_religious_adjustment', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_placement_preference: requireYesOrNo,
-  upw_placement_preferences: {
-    dependent: { field: 'upw_placement_preference', value: 'YES' },
+  placement_preference: requireYesOrNo,
+  placement_preferences: {
+    dependent: { field: 'placement_preference', value: 'YES' },
     ...requireSelectOption,
   },
-  upw_placement_preference_by_gender_details: {
+  placement_preference_by_gender_details: {
     ...requireEnterDetails,
   },
-  upw_history_sexual_offending: requireYesOrNo,
-  upw_history_sexual_offending_details: {
-    dependent: { field: 'upw_history_sexual_offending', value: 'YES' },
+  history_sexual_offending: requireYesOrNo,
+  history_sexual_offending_details: {
+    dependent: { field: 'history_sexual_offending', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_poses_risk_to_children: requireYesOrNo,
-  upw_poses_risk_to_children_details: {
-    dependent: { field: 'upw_poses_risk_to_children', value: 'YES' },
+  poses_risk_to_children: requireYesOrNo,
+  poses_risk_to_children_details: {
+    dependent: { field: 'poses_risk_to_children', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_violent_offences: requireYesOrNo,
-  upw_violent_offences_details: {
-    dependent: { field: 'upw_violent_offences', value: 'YES' },
+  violent_offences: requireYesOrNo,
+  violent_offences_details: {
+    dependent: { field: 'violent_offences', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_acquisitive_offending: requireYesOrNo,
-  upw_acquisitive_offending_details: {
-    dependent: { field: 'upw_acquisitive_offending', value: 'YES' },
+  acquisitive_offending: requireYesOrNo,
+  acquisitive_offending_details: {
+    dependent: { field: 'acquisitive_offending', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_sgo_identifier: requireYesOrNo,
-  upw_sgo_identifier_details: {
-    dependent: { field: 'upw_sgo_identifier', value: 'YES' },
+  sgo_identifier: requireYesOrNo,
+  sgo_identifier_details: {
+    dependent: { field: 'sgo_identifier', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_control_issues: requireYesOrNo,
-  upw_control_issues_details: {
-    dependent: { field: 'upw_control_issues', value: 'YES' },
+  control_issues: requireYesOrNo,
+  control_issues_details: {
+    dependent: { field: 'control_issues', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_hate_based_behaviour: requireYesOrNo,
-  upw_hate_based_behaviour_details: {
-    dependent: { field: 'upw_hate_based_behaviour', value: 'YES' },
+  history_of_hate_based_behaviour: requireYesOrNo,
+  history_of_hate_based_behaviour_details: {
+    dependent: { field: 'history_of_hate_based_behaviour', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_high_profile_person: requireYesOrNo,
-  upw_high_profile_person_details: {
-    dependent: { field: 'upw_high_profile_person', value: 'YES' },
+  high_profile_person: requireYesOrNo,
+  high_profile_person_details: {
+    dependent: { field: 'high_profile_person', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_additional_rosh_info: requireYesOrNo,
-  upw_additional_rosh_info_details: {
-    dependent: { field: 'upw_additional_rosh_info', value: 'YES' },
+  additional_rosh_info: requireYesOrNo,
+  additional_rosh_info_details: {
+    dependent: { field: 'additional_rosh_info', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_location_exclusion_criteria: requireYesOrNo,
-  upw_location_exclusion_criteria_details: {
-    dependent: { field: 'upw_location_exclusion_criteria', value: 'YES' },
+  location_exclusion_criteria: requireYesOrNo,
+  location_exclusion_criteria_details: {
+    dependent: { field: 'location_exclusion_criteria', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_restricted_placement: requireYesOrNo,
-  upw_restricted_placement_details: {
-    dependent: { field: 'upw_restricted_placement', value: 'YES' },
+  restricted_placement: requireYesOrNo,
+  restricted_placement_details: {
+    dependent: { field: 'restricted_placement', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_no_female_supervisor: requireYesOrNo,
-  upw_no_female_supervisor_details: {
-    dependent: { field: 'upw_no_female_supervisor', value: 'YES' },
+  no_female_supervisor: requireYesOrNo,
+  no_female_supervisor_details: {
+    dependent: { field: 'no_female_supervisor', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_no_male_supervisor: requireYesOrNo,
-  upw_no_male_supervisor_details: {
-    dependent: { field: 'upw_no_male_supervisor', value: 'YES' },
+  no_male_supervisor: requireYesOrNo,
+  no_male_supervisor_details: {
+    dependent: { field: 'no_male_supervisor', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_restrictive_orders: requireYesOrNo,
-  upw_restrictive_orders_details: {
-    dependent: { field: 'upw_restrictive_orders', value: 'YES' },
+  restrictive_orders: requireYesOrNo,
+  restrictive_orders_details: {
+    dependent: { field: 'restrictive_orders', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_risk_management_issues_individual: requireYesOrNo,
-  upw_risk_management_issues_individual_details: {
-    dependent: { field: 'upw_risk_management_issues_individual', value: 'YES' },
+  risk_management_issues_individual: requireYesOrNo,
+  risk_management_issues_individual_details: {
+    dependent: { field: 'risk_management_issues_individual', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_risk_management_issues_supervised_group: requireYesOrNo,
-  upw_risk_management_issues_supervised_group_details: {
-    dependent: { field: 'upw_risk_management_issues_supervised_group', value: 'YES' },
+  risk_management_issues_supervised_group: requireYesOrNo,
+  risk_management_issues_supervised_group_details: {
+    dependent: { field: 'risk_management_issues_supervised_group', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_alcohol_drug_issues: requireYesOrNo,
-  upw_alcohol_drug_issues_details: {
-    dependent: { field: 'upw_alcohol_drug_issues', value: 'YES' },
+  alcohol_drug_issues: requireYesOrNo,
+  alcohol_drug_issues_details: {
+    dependent: { field: 'alcohol_drug_issues', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_physical_disability: readOnly,
-  upw_physical_disability_details: readOnly,
-  upw_learning_disability: readOnly,
-  upw_learning_disability_details: readOnly,
-  upw_learning_difficulty: readOnly,
-  upw_learning_difficulty_details: readOnly,
-  upw_mental_health_condition: readOnly,
-  upw_mental_health_condition_details: readOnly,
-  upw_disabilities: requireYesOrNo,
-  upw_disabilities_details: {
-    dependent: { field: 'upw_disabilities', value: 'YES' },
+  physical_disability: readOnly,
+  physical_disability_details: readOnly,
+  learning_disability: readOnly,
+  learning_disability_details: readOnly,
+  learning_difficulty: readOnly,
+  learning_difficulty_details: readOnly,
+  mental_health_condition: readOnly,
+  mental_health_condition_details: readOnly,
+  disabilities: requireYesOrNo,
+  disabilities_details: {
+    dependent: { field: 'disabilities', value: 'YES' },
   },
-  upw_allergies: requireYesOrNo,
-  upw_allergies_details: {
-    dependent: { field: 'upw_allergies', value: 'YES' },
+  allergies: requireYesOrNo,
+  allergies_details: {
+    dependent: { field: 'allergies', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_loss_consciousness: requireYesOrNo,
-  upw_loss_consciousness_details: {
-    dependent: { field: 'upw_loss_consciousness', value: 'YES' },
+  loss_consciousness: requireYesOrNo,
+  loss_consciousness_details: {
+    dependent: { field: 'loss_consciousness', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_epilepsy: requireYesOrNo,
-  upw_epilepsy_details: {
-    dependent: { field: 'upw_epilepsy', value: 'YES' },
+  epilepsy: requireYesOrNo,
+  epilepsy_details: {
+    dependent: { field: 'epilepsy', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_other_health_issues: requireYesOrNo,
-  upw_other_health_issues_details: {
-    dependent: { field: 'upw_other_health_issues', value: 'YES' },
+  other_health_issues: requireYesOrNo,
+  other_health_issues_details: {
+    dependent: { field: 'other_health_issues', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_pregnancy: requireYesOrNo,
-  upw_pregnancy_pregnant_details: {
-    dependent: { field: 'upw_pregnancy', value: 'PREGNANT' },
+  pregnancy: requireYesOrNo,
+  pregnancy_pregnant_details: {
+    dependent: { field: 'pregnancy', value: 'PREGNANT' },
     ...requireEnterDetails,
   },
-  upw_pregnancy_recently_given_birth_details: {
-    dependent: { field: 'upw_pregnancy', value: 'RECENTLY_GIVEN_BIRTH' },
+  pregnancy_recently_given_birth_details: {
+    dependent: { field: 'pregnancy', value: 'RECENTLY_GIVEN_BIRTH' },
     ...requireEnterDetails,
   },
-  upw_gp_first_name: {
+  gp_first_name: {
     validate: [{ type: 'required', message: 'First name is required' }],
   },
-  upw_gp_family_name: {
+  gp_family_name: {
     validate: [{ type: 'required', message: 'Family name is required' }],
   },
-  upw_gp_address_building_name: {},
-  upw_gp_address_house_number: {},
-  upw_gp_address_street_name: {
+  gp_address_building_name: {},
+  gp_address_house_number: {},
+  gp_address_street_name: {
     validate: [{ type: 'required', message: 'Street name is required' }],
   },
-  upw_gp_address_district: {
+  gp_address_district: {
     validate: [{ type: 'required', message: 'District is required' }],
   },
-  upw_gp_address_town_or_city: {
+  gp_address_town_or_city: {
     validate: [{ type: 'required', message: 'Town/City is required' }],
   },
-  upw_gp_address_county: {
+  gp_address_county: {
     validate: [{ type: 'required', message: 'County is required' }],
   },
-  upw_gp_address_postcode: {
+  gp_address_postcode: {
     validate: [{ type: 'required', message: 'Postcode is required' }],
   },
-  upw_gp_phone_number: {
+  gp_phone_number: {
     validate: [{ type: 'required', message: 'Phone number is required' }],
   },
-  upw_travel_information: requireYesOrNo,
-  upw_travel_information_details: {
-    dependent: { field: 'upw_travel_information', value: 'YES' },
+  travel_information: requireYesOrNo,
+  travel_information_details: {
+    dependent: { field: 'travel_information', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_driving_licence: {
-    dependent: { field: 'upw_travel_information', value: 'YES' },
+  driving_licence: {
+    dependent: { field: 'travel_information', value: 'YES' },
     ...requireYesOrNo,
   },
-  upw_vehicle: {
-    dependent: { field: 'upw_travel_information', value: 'YES' },
+  vehicle: {
+    dependent: { field: 'travel_information', value: 'YES' },
     ...requireYesOrNo,
   },
-  upw_public_transport: {
-    dependent: { field: 'upw_travel_information', value: 'YES' },
+  public_transport: {
+    dependent: { field: 'travel_information', value: 'YES' },
     ...requireYesOrNo,
   },
-  upw_caring_commitments: requireYesOrNo,
-  upw_caring_commitments_details: {
-    dependent: { field: 'upw_caring_commitments', value: 'YES' },
+  caring_commitments: requireYesOrNo,
+  caring_commitments_details: {
+    dependent: { field: 'caring_commitments', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_employment_education: {
+  employment_education: {
     validate: [
       {
         type: 'required',
@@ -307,49 +307,49 @@ const fields = {
       },
     ],
   },
-  upw_employment_education_details_fulltime: {
-    dependent: { field: 'upw_employment_education', value: 'FULLTIME_EDUCATION_EMPLOYMENT' },
+  employment_education_details_fulltime: {
+    dependent: { field: 'employment_education', value: 'FULLTIME_EDUCATION_EMPLOYMENT' },
     ...requireEnterDetails,
   },
-  upw_employment_education_details_parttime: {
-    dependent: { field: 'upw_employment_education', value: 'PARTTIME_EDUCATION_EMPLOYMENT' },
+  employment_education_details_parttime: {
+    dependent: { field: 'employment_education', value: 'PARTTIME_EDUCATION_EMPLOYMENT' },
     ...requireEnterDetails,
   },
-  upw_reading_writing_difficulties: requireYesOrNo,
-  upw_reading_writing_difficulties_details: {
-    dependent: { field: 'upw_reading_writing_difficulties', value: 'YES' },
+  reading_writing_difficulties: requireYesOrNo,
+  reading_writing_difficulties_details: {
+    dependent: { field: 'reading_writing_difficulties', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_work_skills: requireYesOrNo,
-  upw_work_skills_details: {
-    dependent: { field: 'upw_work_skills', value: 'YES' },
+  work_skills: requireYesOrNo,
+  work_skills_details: {
+    dependent: { field: 'work_skills', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_future_work_plans: requireYesOrNo,
-  upw_future_work_plans_details: {
-    dependent: { field: 'upw_future_work_plans', value: 'YES' },
+  future_work_plans: requireYesOrNo,
+  future_work_plans_details: {
+    dependent: { field: 'future_work_plans', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_education_training_need: requireYesOrNo,
-  upw_education_training_need_details: {
-    dependent: { field: 'upw_education_training_need', value: 'YES' },
+  education_training_need: requireYesOrNo,
+  education_training_need_details: {
+    dependent: { field: 'education_training_need', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_individual_commitment: {
-    dependent: { field: 'upw_education_training_need', value: 'YES' },
+  individual_commitment: {
+    dependent: { field: 'education_training_need', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_individual_commitment_details: {
-    dependent: { field: 'upw_individual_commitment', value: 'YES' },
+  individual_commitment_details: {
+    dependent: { field: 'individual_commitment', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_eligibility_intensive_working: requireYesOrNo,
-  upw_eligibility_intensive_working_details: {
-    dependent: { field: 'upw_eligibility_intensive_working', value: 'NO' },
+  eligibility_intensive_working: requireYesOrNo,
+  eligibility_intensive_working_details: {
+    dependent: { field: 'eligibility_intensive_working', value: 'NO' },
     ...requireEnterDetails,
   },
-  upw_recommended_hours_start_order: {
-    dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
+  recommended_hours_start_order: {
+    dependent: { field: 'eligibility_intensive_working', value: 'YES' },
     validate: [
       {
         type: 'required',
@@ -366,8 +366,8 @@ const fields = {
       },
     ],
   },
-  upw_recommended_hours_midpoint_order: {
-    dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
+  recommended_hours_midpoint_order: {
+    dependent: { field: 'eligibility_intensive_working', value: 'YES' },
     validate: [
       {
         type: 'required',
@@ -384,32 +384,32 @@ const fields = {
       },
     ],
   },
-  upw_twenty_eight_hours_working_week_details: {
-    dependent: { field: 'upw_eligibility_intensive_working', value: 'YES' },
+  twenty_eight_hours_working_week_details: {
+    dependent: { field: 'eligibility_intensive_working', value: 'YES' },
     ...requireEnterDetails,
   },
-  upw_individual_availability: requireSelectOption,
-  upw_individual_availability_details: {},
-  upw_male_female_clothing: requireSelectOption,
-  upw_waterproof_clothing: requireSelectOption,
-  upw_footwear_size: requireSelectOption,
-  upw_individual_details_complete: requireSelectOption,
-  upw_cultural_religious_adjustment_complete: requireSelectOption,
-  upw_placement_preference_complete: requireSelectOption,
-  upw_placement_preference_by_gender_complete: requireSelectOption,
-  upw_rosh_community_complete: requireSelectOption,
-  upw_managing_risk_complete: requireSelectOption,
-  upw_disabilities_complete: requireSelectOption,
-  upw_health_issues_complete: requireSelectOption,
-  upw_gp_details_complete: requireSelectOption,
-  upw_travel_information_complete: requireSelectOption,
-  upw_caring_commitments_complete: requireSelectOption,
-  upw_employment_education_skills_complete: requireSelectOption,
-  upw_employment_training_complete: requireSelectOption,
-  upw_eligibility_intensive_working_complete: requireSelectOption,
-  upw_individual_availability_complete: requireSelectOption,
-  upw_equipment_complete: requireSelectOption,
-  upw_declaration_confirmation: {},
+  individual_availability: requireSelectOption,
+  individual_availability_details: {},
+  male_female_clothing: requireSelectOption,
+  waterproof_clothing: requireSelectOption,
+  footwear_size: requireSelectOption,
+  individual_details_complete: requireSelectOption,
+  cultural_religious_adjustment_complete: requireSelectOption,
+  placement_preference_complete: requireSelectOption,
+  placement_preference_by_gender_complete: requireSelectOption,
+  rosh_community_complete: requireSelectOption,
+  managing_risk_complete: requireSelectOption,
+  disabilities_complete: requireSelectOption,
+  health_issues_complete: requireSelectOption,
+  gp_details_complete: requireSelectOption,
+  travel_information_complete: requireSelectOption,
+  caring_commitments_complete: requireSelectOption,
+  employment_education_skills_complete: requireSelectOption,
+  employment_training_complete: requireSelectOption,
+  eligibility_intensive_working_complete: requireSelectOption,
+  individual_availability_complete: requireSelectOption,
+  equipment_complete: requireSelectOption,
+  declaration_confirmation: {},
 }
 
 // const customValidations = (fields, answers) => {

@@ -164,7 +164,7 @@ describe('taskList.util', () => {
 
     it('returns "INCOMPLETE" when "Mark this sections as complete?" is answered "NO"', () => {
       const answers = {
-        upw_first_task_complete: 'NO',
+        first_task_complete: 'NO',
       }
 
       const steps = {
@@ -173,14 +173,14 @@ describe('taskList.util', () => {
         },
       }
 
-      const task = getTask(answers, '/UPW', steps, 'first-task', 'upw_first_task_complete')
+      const task = getTask(answers, '/UPW', steps, 'first-task', 'first_task_complete')
 
       expect(task.href).toStrictEqual('/UPW/first-task')
     })
 
     it('returns "COMPLETE" when "Mark this sections as complete?" is answered "YES"', () => {
       const answers = {
-        upw_first_task_complete: 'YES',
+        first_task_complete: 'YES',
       }
 
       const steps = {
@@ -189,7 +189,7 @@ describe('taskList.util', () => {
         },
       }
 
-      const task = getTask(answers, '/UPW', steps, 'first-task', 'upw_first_task_complete')
+      const task = getTask(answers, '/UPW', steps, 'first-task', 'first_task_complete')
 
       expect(task.status).toStrictEqual('COMPLETE')
     })

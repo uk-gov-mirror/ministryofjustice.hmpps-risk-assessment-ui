@@ -27,17 +27,17 @@
         
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
-            {{ renderQuestion(questions['upw_location_exclusion_criteria'], errors) }}
-            {{ renderQuestion(questions['upw_restricted_placement'], errors) }}
-            {{ renderQuestion(questions['upw_no_female_supervisor'], errors) }}
-            {{ renderQuestion(questions['upw_no_male_supervisor'], errors) }}
-            {{ renderQuestion(questions['upw_restrictive_orders'], errors) }}
-            {{ renderQuestion(questions['upw_risk_management_issues_individual'], errors) }}
-            {{ renderQuestion(questions['upw_risk_management_issues_supervised_group'], errors) }}
-            {{ renderQuestion(questions['upw_alcohol_drug_issues'], errors) }}
+            {{ renderQuestion(questions['location_exclusion_criteria'], errors) }}
+            {{ renderQuestion(questions['restricted_placement'], errors) }}
+            {{ renderQuestion(questions['no_female_supervisor'], errors) }}
+            {{ renderQuestion(questions['no_male_supervisor'], errors) }}
+            {{ renderQuestion(questions['restrictive_orders'], errors) }}
+            {{ renderQuestion(questions['risk_management_issues_individual'], errors) }}
+            {{ renderQuestion(questions['risk_management_issues_supervised_group'], errors) }}
+            {{ renderQuestion(questions['alcohol_drug_issues'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
-            {{ renderQuestion(questions['upw_managing_risk_complete'], errors) }}
+            {{ renderQuestion(questions['managing_risk_complete'], errors) }}
 
 
             <div class="questiongroup-action-buttons">

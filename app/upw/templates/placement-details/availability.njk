@@ -19,15 +19,15 @@
 {{ super() }}
 
 {%- macro getAvailabilityValue(index) -%}
-    {{ questions['upw_individual_availability'].answerSchemas[index].value }}
+    {{ questions['individual_availability'].answerSchemas[index].value }}
 {%- endmacro -%}
 
 {%- macro getAvailabilityText(index) -%}
-    {{ questions['upw_individual_availability'].answerSchemas[index].text }}
+    {{ questions['individual_availability'].answerSchemas[index].text }}
 {%- endmacro -%}
 
 {%- macro getAvailabilityChecked(index) -%}
-    {%- if questions['upw_individual_availability'].answer == "" -%}checked{%- elseif questions['upw_individual_availability'].answerSchemas[index].checked == true -%}
+    {%- if questions['individual_availability'].answer == "" -%}checked{%- elseif questions['individual_availability'].answerSchemas[index].checked == true -%}
         checked
     {%- endif -%}
 {%- endmacro -%}
@@ -35,8 +35,8 @@
 {%- macro availabilityOption(optionNumber) -%}
     <td class="govuk-table__cell upw-availability-table__column upw-availability-table__item-{{ optionNumber }}">
         <div class="govuk-checkboxes__item govuk-checkboxes govuk-checkboxes--small upw-checkbox-item__availability">
-            <input class="govuk-checkboxes__input" name="{{ questions['upw_individual_availability'].questionCode }}" id="{{ questions['upw_individual_availability'].questionCode }}-{{ optionNumber}}" name="organisation" type="checkbox" value="{{ getAvailabilityValue(optionNumber) }}" {{ getAvailabilityChecked(optionNumber) }}>
-            <label class="govuk-label govuk-checkboxes__label" for="{{ questions['upw_individual_availability'].questionCode }}-{{ optionNumber }}"><span class='govuk-visually-hidden'>{{ getAvailabilityText(optionNumber) }}</span></label>
+            <input class="govuk-checkboxes__input" name="{{ questions['individual_availability'].questionCode }}" id="{{ questions['individual_availability'].questionCode }}-{{ optionNumber}}" name="organisation" type="checkbox" value="{{ getAvailabilityValue(optionNumber) }}" {{ getAvailabilityChecked(optionNumber) }}>
+            <label class="govuk-label govuk-checkboxes__label" for="{{ questions['individual_availability'].questionCode }}-{{ optionNumber }}"><span class='govuk-visually-hidden'>{{ getAvailabilityText(optionNumber) }}</span></label>
         </div>
     </td>
 {%- endmacro -%}
@@ -51,9 +51,9 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-        <fieldset class="govuk-fieldset" aria-describedby="upw_individual_availability-hint">
-            <legend class="govuk-fieldset__legend upw_individual_availability govuk-label--m">
-                {{ questions['upw_individual_availability'].questionText }}
+        <fieldset class="govuk-fieldset" aria-describedby="individual_availability-hint">
+            <legend class="govuk-fieldset__legend individual_availability govuk-label--m">
+                {{ questions['individual_availability'].questionText }}
             </legend>
 
             <table class="govuk-table upw-availability-table">
@@ -104,11 +104,11 @@
             </table>
         </fieldset>
 
-{#            {{ renderQuestion(questions['upw_individual_availability'], errors) }}#}
-            {{ renderQuestion(questions['upw_individual_availability_details'], errors) }}
+{#            {{ renderQuestion(questions['individual_availability'], errors) }}#}
+            {{ renderQuestion(questions['individual_availability_details'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
-            {{ renderQuestion(questions['upw_individual_availability_complete'], errors) }}
+            {{ renderQuestion(questions['individual_availability_complete'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({

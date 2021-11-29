@@ -26,15 +26,15 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['upw_allergies'], errors) }}
-            {{ renderQuestion(questions['upw_loss_consciousness'], errors) }}
-            {{ renderQuestion(questions['upw_epilepsy'], errors) }}
-            {{ renderQuestion(questions['upw_pregnancy'], errors) }}
-            {{ renderQuestion(questions['upw_other_health_issues'], errors) }}
+            {{ renderQuestion(questions['allergies'], errors) }}
+            {{ renderQuestion(questions['loss_consciousness'], errors) }}
+            {{ renderQuestion(questions['epilepsy'], errors) }}
+            {{ renderQuestion(questions['pregnancy'], errors) }}
+            {{ renderQuestion(questions['other_health_issues'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
             
-            {{ renderQuestion(questions['upw_health_issues_complete'], errors) }}
+            {{ renderQuestion(questions['health_issues_complete'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({

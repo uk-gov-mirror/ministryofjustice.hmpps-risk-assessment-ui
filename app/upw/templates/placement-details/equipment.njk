@@ -28,12 +28,12 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['upw_male_female_clothing'], errors) }}
-            {{ renderQuestion(questions['upw_waterproof_clothing'], errors) }}
-            {{ renderQuestion(questions['upw_footwear_size'], errors) }}
+            {{ renderQuestion(questions['male_female_clothing'], errors) }}
+            {{ renderQuestion(questions['waterproof_clothing'], errors) }}
+            {{ renderQuestion(questions['footwear_size'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
-            {{ renderQuestion(questions['upw_equipment_complete'], errors) }}
+            {{ renderQuestion(questions['equipment_complete'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({

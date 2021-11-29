@@ -26,11 +26,11 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderQuestion(questions['upw_travel_information'], errors) }}
+            {{ renderQuestion(questions['travel_information'], errors) }}
             
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
 
-            {{ renderQuestion(questions['upw_travel_information_complete'], errors) }}
+            {{ renderQuestion(questions['travel_information_complete'], errors) }}
 
             <div class="questiongroup-action-buttons">
                 {{ govukButton({
