@@ -4,6 +4,8 @@
   "assessmentUuid": "fb6b7c33-07fc-4c4c-a009-8d60f66952c4",
   "reasonForChange": "new episode",
   "created": "2019-11-14T08:11:53.177108",
+  "userFullName": "Test User",
+  "lastEditedDate": "2021-11-29T14:17:00.000000",
   "tables": {
     "children_at_risk_of_serious_harm": [
       {

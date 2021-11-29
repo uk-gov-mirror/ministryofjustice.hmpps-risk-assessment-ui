@@ -159,6 +159,7 @@ const processReplacements = (input, replacementDetails) => {
 }
 
 const prettyDate = s => s && format(new Date(s), 'do MMMM y')
+const prettyDateAndTime = s => s && format(new Date(s), 'eeee eo MMMM y H:m')
 const ageFrom = (dateOfBirth, today = new Date()) => dateOfBirth && differenceInYears(new Date(dateOfBirth), today)
 
 module.exports = {
@@ -179,5 +180,6 @@ module.exports = {
   doReplace,
   updateJsonValue,
   prettyDate,
+  prettyDateAndTime,
   ageFrom,
 }

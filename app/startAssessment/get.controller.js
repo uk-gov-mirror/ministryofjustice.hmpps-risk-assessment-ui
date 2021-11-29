@@ -91,6 +91,8 @@ const startAssessment = async (req, res, next) => {
     req.session.assessment = {
       uuid: createAssessmentResponse?.assessmentUuid,
       episodeUuid: currentEpisode?.episodeUuid,
+      lastEditedBy: currentEpisode?.userFullName,
+      lastEditedDate: currentEpisode?.lastEditedDate,
       offence: getOffenceDetailsFor(currentEpisode),
       subject: getSubjectDetailsFor(createAssessmentResponse),
     }
