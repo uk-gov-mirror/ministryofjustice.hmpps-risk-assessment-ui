@@ -1,4 +1,9 @@
 {% extends "common/templates/layout.njk" %}
+{% set hideBackLink = true %}
+
+{% block header %}
+  {% include "common/templates/partials/header.njk" %}
+{% endblock %}
 
 {% block pageTitle %}
   error

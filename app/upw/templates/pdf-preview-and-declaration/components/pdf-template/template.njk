@@ -276,86 +276,22 @@
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h1>
 
-    {{ mappaWidget(widgets.mappa) }}
+    {%- set mappaDataRows = [ { heading: "MAPPA nominal?", data: renderValue("No") },
+        { heading: "Location restricted by victim exclusion criteria?", data: renderValue( answers["location_exclusion_criteria"], answers["location_exclusion_criteria_details"], "Yes" ) },
+        { heading: "Close supervision or restricted placement recommended?", data: renderValue( answers["restricted_placement"], answers["restricted_placement_details"], "Yes" ) },
+        { heading: "Recommend not to place with female supervisor?", data: renderValue( answers["no_female_supervisor"], answers["no_female_supervisor_details"], "Yes" ) },
+        { heading: "Recommend not to place with male supervisor?", data: renderValue( answers["no_male_supervisor"], answers["no_male_supervisor_details"], "Yes" ) },
+        { heading: "Restrictive orders?", data: renderValue( answers["restrictive_orders"], answers["restrictive_orders_details"], "Yes" ) },
+        { heading: "Are there any risk management issues for an individual placement?", data: renderValue( answers["risk_management_issues_individual"], answers["risk_management_issues_individual_details"], "Yes" ) },
+        { heading: "Are there any risk management issues if working in a supervised group?", data: renderValue( answers["risk_management_issues_supervised_group"], answers["risk_management_issues_supervised_group_details"], "Yes" ) },
+        { heading: "Alcohol or drug issues with health and safety impact?", data: renderValue( answers["alcohol_drug_issues"], answers["alcohol_drug_issues_details"], "Yes" ) } ] -%}
 
     {%- if widgets.mappa.isNominal %}
-    {%- set mappaNominal = "Yes" -%}
-    {% else %}
-    {%- set mappaNominal = "No" -%}
+        {{ mappaWidget(widgets.mappa) }}
+        {% set mappaDataRows = mappaDataRows | shiftArray %}
     {% endif %}
 
-    {%- if mappaNominal == "Yes" -%}
-    {%- elif mappaNominal == "No" -%}
-        {{ renderTable({
-            rows: [
-                { heading: "MAPPA nominal?", data: renderValue(mappaNominal) },
-                {
-                    heading: "Location restricted by victim exclusion criteria?",
-                    data: renderValue(
-                        answers["location_exclusion_criteria"],
-                        answers["location_exclusion_criteria_details"],
-                        "Yes"
-                    ) 
-                },
-                {
-                    heading: "Close supervision or restricted placement recommended?",
-                    data: renderValue(
-                        answers["restricted_placement"],
-                        answers["restricted_placement_details"],
-                        "Yes"
-                    ) 
-                },
-                {
-                    heading: "Recommend not to place with female supervisor?",
-                    data: renderValue(
-                        answers["no_female_supervisor"],
-                        answers["no_female_supervisor_details"],
-                        "Yes"
-                    ) 
-                },
-                {
-                    heading: "Recommend not to place with male supervisor?",
-                    data: renderValue(
-                        answers["no_male_supervisor"],
-                        answers["no_male_supervisor_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Restrictive orders?",
-                    data: renderValue(
-                        answers["restrictive_orders"],
-                        answers["restrictive_orders_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Are there any risk management issues for an individual placement?",
-                    data: renderValue(
-                        answers["risk_management_issues_individual"],
-                        answers["risk_management_issues_individual_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Are there any risk management issues if working in a supervised group?",
-                    data: renderValue(
-                        answers["risk_management_issues_supervised_group"],
-                        answers["risk_management_issues_supervised_group_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Alcohol or drug issues with health and safety impact?",
-                    data: renderValue(
-                        answers["alcohol_drug_issues"],
-                        answers["alcohol_drug_issues_details"],
-                        "Yes"
-                    )
-                }
-            ]
-        }) }}
-    {%- endif -%}
+    {{ renderTable({ rows: mappaDataRows }) }}
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h1>
 
@@ -383,13 +319,13 @@
             {
                 heading: "Does the individual have any placement preferences?",
                 condition: showPlacementPreferences,
-                data: renderValue(answers["placement_preferences"]) 
+                data: renderValue(answers["placement_preferences"])
             },
             {
                 heading: "Discuss placement options with the individual, based on their gender identity",
                 description: "Record their preference and the details of the conversation.",
                 condition: showPlacementPreferencesByGender,
-                data: renderValue(answers["placement_preference_by_gender_details"]) 
+                data: renderValue(answers["placement_preference_by_gender_details"])
             }
         ]
     }) }}
@@ -461,6 +397,7 @@
         {% endif %}
     {%- endmacro -%}
 
+    {% set gpName = answers['gp_first_name'] + ' ' + answers['gp_family_name'] %}
     {{ renderTable({
         caption: "Are there any other health issues that may affect ability to work?",
         rows: [
@@ -507,7 +444,7 @@
             {
                 heading: "Details of GP (if needed to verify information)", 
                 data: renderGpDetails(
-                    answers["gp_name"],
+                    gpName,
                     answers["gp_phone_number"],
                     readOnlyAddress({ 
                         buildingName: answers["gp_address_building_name"],
@@ -544,7 +481,7 @@
             {
                 heading: "Do they have access to a vehicle?", 
                 condition: hasTravelIssues,
-                data: renderValue(answers["vehicle"]) 
+                data: renderValue(answers["vehicle"])
             },
             {
                 heading: "Is public transport available and accessible to the individual?", 
@@ -765,12 +702,17 @@
     }) }}
 
     <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Declaration</h1>
+    {% if answers["declaration_confirmation"] === 'Sign declaration' %}
+        {% set declarationAnswer = 'Yes' %}
+    {% else %}
+        {% set declarationAnswer = '' %}
+    {% endif %}
 
     {{ renderTable({
         rows: [
             {
                 heading: "I confirm the individual has received details of their Community Payback Induction Session",
-                data: renderValue(answers["declaration_confirmation"])
+                data: renderValue(declarationAnswer)
             }
         ]
     }) }}

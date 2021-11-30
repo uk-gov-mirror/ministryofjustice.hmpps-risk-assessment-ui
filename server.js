@@ -178,6 +178,9 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('updateJsonValue', (jsonObj, keyToChange, newValue) =>
     updateJsonValue(jsonObj, keyToChange, newValue),
   )
+  nunjucksEnvironment.addFilter('shiftArray', arr => {
+    return arr.slice(1)
+  })
 
   // Set view engine
   app.set('view engine', 'njk')

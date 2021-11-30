@@ -42,11 +42,11 @@ class Confirmation extends SaveAndContinue {
       )
 
       if (!deliusUploadResponse.ok) {
-        if (deliusUploadResponse.status >= 500) {
+        logger.error(`Failed to upload the PDF, status=${deliusUploadResponse.status}`)
+        if (deliusUploadResponse.status >= 400) {
           return res.redirect('/UPW/delius-error')
         }
 
-        logger.error(`Failed to upload the PDF, status=${deliusUploadResponse.status}`)
         throw new Error('Failed to upload the PDF')
       }
 
