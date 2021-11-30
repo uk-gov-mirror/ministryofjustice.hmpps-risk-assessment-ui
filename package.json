@@ -107,7 +107,8 @@
     "throng": "4.0.x",
     "uuid": "^8.3.2",
     "winston": "^3.3.3",
-    "winston-azure-application-insights": "^2.0.0"
+    "winston-azure-application-insights": "^2.0.0",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",

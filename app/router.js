@@ -6,6 +6,7 @@
 // } = require('../common/config')
 
 const passport = require('passport')
+const xss = require('xss-clean')
 
 const getOffenderDetails = require('../common/middleware/getOffenderDetails')
 const getQuestionGroup = require('../common/middleware/questionGroups/getQuestionGroup')
@@ -115,6 +116,7 @@ module.exports = app => {
   app.post('/area-selection', redirectToAssessmentList)
 
   app.get('*', checkAssessmentType(), checkUserHasAreaSelected())
+  app.post('*', xss())
   app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
 
   app.get(`/:assessmentId/questiongroup/:assessmentSchemaCode/summary`, getOffenderDetails, displayOverview)
