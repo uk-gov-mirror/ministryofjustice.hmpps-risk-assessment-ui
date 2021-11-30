@@ -286,7 +286,7 @@
         { heading: "Are there any risk management issues if working in a supervised group?", data: renderValue( answers["risk_management_issues_supervised_group"], answers["risk_management_issues_supervised_group_details"], "Yes" ) },
         { heading: "Alcohol or drug issues with health and safety impact?", data: renderValue( answers["alcohol_drug_issues"], answers["alcohol_drug_issues_details"], "Yes" ) } ] -%}
 
-    {%- if widgets.mappa.isNominal %}
+    {%- if widgets.mappa.isNominal != null %}
         {{ mappaWidget(widgets.mappa) }}
         {% set mappaDataRows = mappaDataRows | shiftArray %}
     {% endif %}
