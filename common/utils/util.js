@@ -1,6 +1,6 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
-const { format, differenceInYears } = require('date-fns')
+const { format, differenceInYears, isValid, parseISO } = require('date-fns')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
 
@@ -158,9 +158,18 @@ const processReplacements = (input, replacementDetails) => {
   return JSON.parse(newInput)
 }
 
-const prettyDate = s => s && format(new Date(s), 'do MMMM y')
-const prettyDateAndTime = s => s && format(new Date(s), 'eeee do MMMM y H:m')
-const ageFrom = (dateOfBirth, today = new Date()) => dateOfBirth && differenceInYears(new Date(dateOfBirth), today)
+const formatDateWith = pattern => isoString => {
+  const parsedDate = parseISO(isoString)
+  return isValid(parsedDate) ? format(parsedDate, pattern) : null
+}
+
+const prettyDate = formatDateWith('do MMMM y')
+const prettyDateAndTime = formatDateWith('eeee do MMMM y H:mm')
+
+const ageFrom = (dateOfBirth, today = new Date()) => {
+  const parsedDate = parseISO(dateOfBirth)
+  return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
+}
 
 module.exports = {
   getYearMonthFromDate,

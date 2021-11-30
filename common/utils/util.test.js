@@ -8,6 +8,9 @@ const {
   encodeHTML,
   processReplacements,
   extractLink,
+  prettyDateAndTime,
+  prettyDate,
+  ageFrom,
 } = require('./util')
 
 const inputText = "There is a green hill far away - and I shouldn't tell you that really"
@@ -155,5 +158,58 @@ describe('extractLink', () => {
   it('ignores badly formatted link target', () => {
     const input = 'pres: link("/update-assessment")'
     expect(extractLink(input)).toEqual(null)
+  })
+})
+
+describe('prettyDate', () => {
+  it('formats date', () => {
+    expect(prettyDate('2021-11-30T07:05:20+0000')).toEqual('30th November 2021')
+  })
+
+  it('handles invalid dates', () => {
+    expect(prettyDate('Some invalid input')).toBeNull()
+    expect(prettyDate('')).toBeNull()
+    expect(prettyDate(null)).toBeNull()
+    expect(prettyDate(undefined)).toBeNull()
+  })
+
+  it('handles empty input', () => {
+    expect(prettyDate()).toBeNull()
+  })
+})
+
+describe('prettyDateAndTime', () => {
+  it('formats date and time', () => {
+    expect(prettyDateAndTime('2021-11-30T07:05:20+0000')).toEqual('Tuesday 30th November 2021 7:05')
+  })
+
+  it('handles invalid dates', () => {
+    expect(prettyDateAndTime('Some invalid input')).toBeNull()
+    expect(prettyDateAndTime('')).toBeNull()
+    expect(prettyDateAndTime(null)).toBeNull()
+    expect(prettyDateAndTime(undefined)).toBeNull()
+  })
+
+  it('handles empty input', () => {
+    expect(prettyDateAndTime()).toBeNull()
+  })
+})
+
+describe('ageFrom', () => {
+  const mockNow = new Date('2021-11-30T00:00:00+0000')
+
+  it('returns the difference in years between the provided date and now', () => {
+    expect(ageFrom('1989-01-19T00:00:00+0000', mockNow)).toEqual(32)
+  })
+
+  it('handles invalid dates', () => {
+    expect(ageFrom('Some invalid input', mockNow)).toBeNull()
+    expect(ageFrom('', mockNow)).toBeNull()
+    expect(ageFrom(null, mockNow)).toBeNull()
+    expect(ageFrom(undefined, mockNow)).toBeNull()
+  })
+
+  it('handles empty input', () => {
+    expect(ageFrom()).toBeNull()
   })
 })
