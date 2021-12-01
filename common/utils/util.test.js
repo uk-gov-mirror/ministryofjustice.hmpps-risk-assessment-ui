@@ -164,6 +164,7 @@ describe('extractLink', () => {
 describe('prettyDate', () => {
   it('formats date', () => {
     expect(prettyDate('2021-11-30T07:05:20+0000')).toEqual('30th November 2021')
+    expect(prettyDate('2021-11-30')).toEqual('30th November 2021')
   })
 
   it('handles invalid dates', () => {

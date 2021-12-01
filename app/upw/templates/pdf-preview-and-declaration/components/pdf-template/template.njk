@@ -109,13 +109,13 @@
     {{ renderTable({
         caption: "Personal details",
         rows: [
-            { heading: "Family name", data: renderValue(rawAnswers["family_name"]) },
-            { heading: "First name", data: renderValue(rawAnswers["first_name"]) },
-            { heading: "Date of birth", data: renderDate(rawAnswers["dob"]) },
-            { heading: "CRN", data: renderValue(rawAnswers["crn"]) },
-            { heading: "PNC", data: renderValue(rawAnswers["pnc"]) },
+            { heading: "Family name", data: renderValue(rawAnswers["family_name"][0]) },
+            { heading: "First name", data: renderValue(rawAnswers["first_name"][0]) },
+            { heading: "Date of birth", data: renderDate(rawAnswers["dob"][0]) },
+            { heading: "CRN", data: renderValue(rawAnswers["crn"][0]) },
+            { heading: "PNC", data: renderValue(rawAnswers["pnc"][0]) },
             { heading: "Alias", data: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases']) },
-            { heading: "Ethnicity", data: renderValue(rawAnswers["ethnicity"]) }
+            { heading: "Ethnicity", data: renderValue(rawAnswers["ethnicity"][0]) }
         ]
     }) }}
 
