@@ -513,16 +513,22 @@
         {%- set employmentDetails = answers["employment_education_details_parttime"] -%}
     {%- endif -%}
 
+    {%- if employmentDetails -%}
+        {%- set showEmploymentDetails = true -%}
+    {%- else -%}
+        {%- set showEmploymentDetails = false -%}
+    {%- endif -%}
+
     {{ renderTable({
         rows: [
             {
-                heading: "Employment or education?", 
+                heading: "Employment or education?",
                 data: renderValue(answers["employment_education"])
             },
             {
                 heading: "Employment or education details (working days, hours etc)",
                 data: renderValue(employmentDetails),
-                condition: employmentDetails
+                condition: showEmploymentDetails
             },
             {
                 heading: "Does the individual have any difficulties with reading or writing?", 
