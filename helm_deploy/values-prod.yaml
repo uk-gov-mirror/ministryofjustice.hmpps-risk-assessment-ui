@@ -58,3 +58,8 @@ allow_list:
 
 gotenberg:
   replicaCount: 2
+
+generic-prometheus-alerts:
+  enabled: true
+  targetApplication: hmpps-risk-assessment-ui
+  alertSeverity: hmpps-assess-risks-and-needs

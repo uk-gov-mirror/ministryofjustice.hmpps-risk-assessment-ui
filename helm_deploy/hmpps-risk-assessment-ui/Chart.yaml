@@ -7,3 +7,7 @@ version: 0.1.0
 dependencies:
   - name: gotenberg
     version: 0.1.0
+  - name: generic-prometheus-alerts
+    version: 0.1.4
+    repository: https://ministryofjustice.github.io/hmpps-helm-charts
+    condition: generic-prometheus-alerts.enabled

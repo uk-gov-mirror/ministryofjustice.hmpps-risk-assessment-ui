@@ -58,3 +58,6 @@ allow_list:
 
 gotenberg:
   replicaCount: 1
+
+generic-prometheus-alerts:
+  enabled: false
