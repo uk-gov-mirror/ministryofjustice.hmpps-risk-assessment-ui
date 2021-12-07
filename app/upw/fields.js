@@ -89,23 +89,6 @@ const fields = {
   emergency_contact_relationship: {
     validate: [{ type: 'required', message: 'Emergency contact relationship is required' }],
   },
-  emergency_contact_address_building_name: {},
-  emergency_contact_address_house_number: {},
-  emergency_contact_address_street_name: {
-    validate: [{ type: 'required', message: 'Street name is required' }],
-  },
-  emergency_contact_address_district: {
-    validate: [{ type: 'required', message: 'District is required' }],
-  },
-  emergency_contact_address_town_or_city: {
-    validate: [{ type: 'required', message: 'Town/City is required' }],
-  },
-  emergency_contact_address_county: {
-    validate: [{ type: 'required', message: 'County is required' }],
-  },
-  emergency_contact_address_postcode: {
-    validate: [{ type: 'required', message: 'Postcode is required' }],
-  },
   emergency_contact_phone_number: {
     validate: [{ type: 'required', message: 'Phone number is required' }],
   },
