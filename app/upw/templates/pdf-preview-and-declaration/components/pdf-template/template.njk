@@ -173,18 +173,6 @@
         rows: [
             { heading: "Name", data: renderName(answers['emergency_contact_first_name'], answers['emergency_contact_family_name']) },
             { heading: "Relationship to individual", data: renderValue(answers["emergency_contact_relationship"]) },
-            {
-                heading: "Address",
-                data: readOnlyAddress({
-                    buildingName: answers["emergency_contact_address_building_name"],
-                    houseNumber: answers["emergency_contact_address_house_number"],
-                    streetName: answers["emergency_contact_address_street_name"],
-                    district: answers["emergency_contact_address_district"],
-                    townOrCity: answers["emergency_contact_address_town_or_city"],
-                    county: answers["emergency_contact_address_county"],
-                    postcode: answers["emergency_contact_address_postcode"]
-                })
-            },
             { heading: "Mobile", data: renderValue(answers["emergency_contact_phone_number"]) },
             { heading: "Phone number", data: renderValue(answers["emergency_contact_mobile_phone_number"]) }
         ]
