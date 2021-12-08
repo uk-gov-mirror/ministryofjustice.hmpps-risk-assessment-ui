@@ -42,6 +42,8 @@ describe('SaveAndContinueController', () => {
     },
   }
 
+  const next = jest.fn()
+
   beforeEach(() => {
     req = {
       user,
@@ -72,6 +74,8 @@ describe('SaveAndContinueController', () => {
     req.sessionModel.set.mockReset()
     req.form.options.fields = {}
     req.form.options.allFields = {}
+
+    next.mockReset()
 
     getAnswers.mockReset()
     postAnswers.mockReset()
@@ -341,7 +345,7 @@ describe('SaveAndContinueController', () => {
         { questionCode: 'age_first_conviction', questionText: 'Age at first sanction' },
       ])
 
-      await controller.configure(req, res, () => {})
+      await controller.configure(req, res, next)
 
       expect(getFlatAssessmentQuestions).toHaveBeenCalledWith('RSR', user.token, user.id)
     })
@@ -351,9 +355,17 @@ describe('SaveAndContinueController', () => {
         { questionCode: 'age_first_conviction', questionText: 'Age at first sanction' },
       ])
 
-      await controller.configure(req, res, () => {})
+      await controller.configure(req, res, next)
 
       expect(getFlatAssessmentQuestions).toHaveBeenCalledWith('RSR', user.token, user.id)
+    })
+
+    it('displays an error when no assessment is selected', async () => {
+      delete req.session.assessment
+
+      await controller.configure(req, res, next)
+
+      expect(next).toHaveBeenCalledWith(new Error('No assessment selected'))
     })
   })
 
@@ -372,7 +384,7 @@ describe('SaveAndContinueController', () => {
         'date_field-year': '2018',
       }
 
-      await controller.process(req, res, () => {})
+      await controller.process(req, res, next)
 
       expect(req.form.values).toEqual({
         date_field: '2018-09-02',
@@ -393,7 +405,7 @@ describe('SaveAndContinueController', () => {
         'date_field-year': '2018',
       }
 
-      await controller.process(req, res, () => {})
+      await controller.process(req, res, next)
 
       expect(req.form.values).toEqual({
         date_field: '',
@@ -416,7 +428,7 @@ describe('SaveAndContinueController', () => {
         'date_field-year': '2018',
       }
 
-      await controller.process(req, res, () => {})
+      await controller.process(req, res, next)
 
       expect(req.form.values).toEqual({
         date_field: '',
@@ -439,7 +451,7 @@ describe('SaveAndContinueController', () => {
         'date_field-year': '',
       }
 
-      await controller.process(req, res, () => {})
+      await controller.process(req, res, next)
 
       expect(req.form.values).toEqual({
         date_field: '',
@@ -461,7 +473,7 @@ describe('SaveAndContinueController', () => {
         },
       })
 
-      await controller.saveValues(req, res, () => {})
+      await controller.saveValues(req, res, next)
 
       expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
       expect(postAnswers).toHaveBeenCalledWith(
@@ -492,7 +504,7 @@ describe('SaveAndContinueController', () => {
       ])
       mockSessionModel()
 
-      await controller.saveValues(req, res, () => {})
+      await controller.saveValues(req, res, next)
 
       const theError = 'Something went wrong'
 
@@ -505,7 +517,7 @@ describe('SaveAndContinueController', () => {
       postAnswers.mockResolvedValue([false, { status: 403, reason: 'OASYS_PERMISSION' }])
       mockSessionModel()
 
-      await controller.saveValues(req, res, () => {})
+      await controller.saveValues(req, res, next)
 
       const theError =
         'You do not have permission to update this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
@@ -519,7 +531,7 @@ describe('SaveAndContinueController', () => {
       postAnswers.mockRejectedValue(theError)
       mockSessionModel()
 
-      await controller.saveValues(req, res, () => {})
+      await controller.saveValues(req, res, next)
 
       expect(res.render).toHaveBeenCalledWith(`app/error`, { error: theError })
     })
