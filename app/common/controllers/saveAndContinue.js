@@ -55,10 +55,7 @@ class SaveAndContinue extends BaseController {
   }
 
   async configure(req, res, next) {
-    if (!req.session.assessment) {
-      return next(new Error('No assessment selected'))
-    }
-
+    super.configure(req, res, next)
     const combineLocalAndRemoteFields = (fields, remoteFields) =>
       Object.entries(fields).reduce(combinedLocalFieldsWith(remoteFields), {})
     const grabQuestions = async request => {
@@ -73,8 +70,6 @@ class SaveAndContinue extends BaseController {
     const questionMap = questions.reduce(keysByQuestionCode, {})
     req.form.options.allFields = combineLocalAndRemoteFields(req.form.options.allFields, questionMap)
     req.form.options.fields = combineLocalAndRemoteFields(req.form.options.fields, questionMap)
-
-    return super.configure(req, res, next)
   }
 
   async process(req, res, next) {

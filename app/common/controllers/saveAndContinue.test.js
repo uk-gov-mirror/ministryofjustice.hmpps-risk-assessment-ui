@@ -359,14 +359,6 @@ describe('SaveAndContinueController', () => {
 
       expect(getFlatAssessmentQuestions).toHaveBeenCalledWith('RSR', user.token, user.id)
     })
-
-    it('displays an error when no assessment is selected', async () => {
-      delete req.session.assessment
-
-      await controller.configure(req, res, next)
-
-      expect(next).toHaveBeenCalledWith(new Error('No assessment selected'))
-    })
   })
 
   describe('process', () => {
