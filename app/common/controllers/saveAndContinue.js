@@ -24,7 +24,7 @@ class SaveAndContinue extends BaseController {
 
     const { answers: previousAnswers } = await getAnswers(
       req.session.assessment?.uuid,
-      'current',
+      req.session.assessment?.episodeUuid,
       req.user?.token,
       req.user?.id,
     )
@@ -121,7 +121,7 @@ class SaveAndContinue extends BaseController {
     try {
       const [ok, response] = await postAnswers(
         req.session?.assessment?.uuid,
-        'current',
+        req.session?.assessment?.episodeUuid,
         { answers },
         user?.token,
         user?.id,

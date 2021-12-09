@@ -287,7 +287,12 @@ describe('SaveAndContinueController', () => {
 
       await controller.locals(req, res, () => {})
 
-      expect(getAnswers).toHaveBeenCalledWith(req.session.assessment.uuid, 'current', req.user.token, req.user.id)
+      expect(getAnswers).toHaveBeenCalledWith(
+        req.session.assessment.uuid,
+        req.session.assessment.episodeUuid,
+        req.user.token,
+        req.user.id,
+      )
 
       expect(res.locals.questions).toEqual({
         first_question: {
@@ -478,7 +483,7 @@ describe('SaveAndContinueController', () => {
       expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
-        'current',
+        episodeUuid,
         {
           answers: {
             some_field: ['foo'],
@@ -509,7 +514,7 @@ describe('SaveAndContinueController', () => {
       const theError = 'Something went wrong'
 
       expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
-      expect(postAnswers).toHaveBeenCalledWith(assessmentUuid, 'current', { answers: {} }, user.token, user.id)
+      expect(postAnswers).toHaveBeenCalledWith(assessmentUuid, episodeUuid, { answers: {} }, user.token, user.id)
       expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
 

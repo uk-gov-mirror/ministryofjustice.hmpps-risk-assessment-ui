@@ -15,7 +15,7 @@ class TaskList extends BaseController {
 
       const { answers: previousAnswers } = await getAnswers(
         req.session.assessment?.uuid,
-        'current',
+        req.session.assessment?.episodeUuid,
         req.user?.token,
         req.user?.id,
       )
