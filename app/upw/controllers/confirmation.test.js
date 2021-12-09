@@ -189,20 +189,6 @@ describe('ConfirmationController', () => {
       expect(superMethod).toHaveBeenCalled()
     })
 
-    it('removes the assessment from the session', async () => {
-      const file = createTestFile()
-
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessment.mockResolvedValue([true])
-
-      await controller.render(req, res, next)
-
-      expect(req.session.assessment).toBeUndefined()
-      expect(req.session.save).toHaveBeenCalled()
-      expect(superMethod).toHaveBeenCalled()
-    })
-
     it('displays an error when unable to complete the assessment', async () => {
       const file = createTestFile()
 
