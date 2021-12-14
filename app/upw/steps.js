@@ -4,6 +4,7 @@ const SaveAndContinue = require('./controllers/saveAndContinue')
 const ConvertPdf = require('./controllers/convertPdf')
 const Declaration = require('./controllers/declaration')
 const Confirmation = require('./controllers/confirmation')
+const CloseAssessment = require('./controllers/closeAssessment')
 
 module.exports = {
   '/start': {
@@ -322,5 +323,11 @@ module.exports = {
     pageTitle: 'Privacy notice',
     noPost: true,
     template: `${__dirname}/templates/privacy.njk`,
+  },
+  '/close-assessment': {
+    pageTitle: 'Assessment closed',
+    controller: CloseAssessment,
+    noPost: true,
+    template: `${__dirname}/templates/close-assessment.njk`,
   },
 }

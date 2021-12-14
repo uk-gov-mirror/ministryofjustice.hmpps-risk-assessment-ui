@@ -69,6 +69,13 @@ const postAnswers = (assessmentId, episodeId, answers, authorisationToken, userI
   return postData(path, authorisationToken, userId, answers)
 }
 
+const closeAssessment = (assessmentId, episodeId, user) => {
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/close`
+
+  logger.info(`Calling hmppsAssessments API with GET: ${path}`)
+  return action(superagent.get(path), user?.token, user?.id)
+}
+
 const postTableRow = (assessmentId, episodeId, tableName, answers, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/table/${tableName}`
   return postData(path, authorisationToken, userId, answers)
@@ -229,4 +236,5 @@ module.exports = {
   getRegistrationsForCrn,
   getRoshRiskSummaryForCrn,
   uploadPdfDocumentToDelius,
+  closeAssessment,
 }

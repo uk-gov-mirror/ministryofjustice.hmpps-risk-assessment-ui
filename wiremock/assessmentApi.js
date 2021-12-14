@@ -373,6 +373,21 @@ const stubDocumentUpload = () => {
   })
 }
 
+const stubCloseAssessment = () => {
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/assessments/.+?/episodes/.+?/close`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+    },
+  })
+}
+
 const stubQuestions = async () => {
   await stubQuestionGroup('1234')
   await stubQuestionGroup('22222222-2222-2222-2222-222222222203')
@@ -460,4 +475,5 @@ module.exports = {
   stubRegistrations,
   stubRoshRiskSummary,
   stubDocumentUpload,
+  stubCloseAssessment,
 }
