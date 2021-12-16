@@ -7,6 +7,12 @@ const { apis } = require('../../../common/config')
 const { trackEvent } = require('../../../common/logging/app-insights')
 const { EVENTS } = require('../../../common/utils/constants')
 
+const {
+  headerHtml,
+  footerHtml,
+  pdfOptions: { marginTop, marginRight, marginBottom, marginLeft },
+} = require('../templates/pdf-preview-and-declaration/components/print-pdf-header-footer')
+
 class ConvertPdf extends SaveAndContinue {
   async render(req, res, next) {
     try {
@@ -33,6 +39,12 @@ class ConvertPdf extends SaveAndContinue {
         .post(apis?.pdfConverter?.url)
         .accept('application/json')
         .attach('files', Buffer.from(rendered), 'index.html')
+        .attach('files', Buffer.from(headerHtml), 'header.html')
+        .attach('files', Buffer.from(footerHtml), 'footer.html')
+        .field('marginTop', marginTop)
+        .field('marginBottom', marginBottom)
+        .field('marginLeft', marginLeft)
+        .field('marginRight', marginRight)
         .attach('files', fs.readFileSync('public/stylesheets/application.min.css'), 'application.min.css')
         .pipe(res)
     } catch (e) {

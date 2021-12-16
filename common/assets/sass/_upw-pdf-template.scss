@@ -1,5 +1,24 @@
 @use 'sass:math';
 
+@media print {
+  .page-break-after {
+    page-break-after: always;
+  }
+  .upw-pdf-header,
+  .upw-pdf-footer {
+    display: none;
+  }
+  .upw-pdf-table,
+  .upw-pdf-chart,
+  .upw-avoid-break {
+    break-inside: avoid;
+  }
+  h1,
+  h2 {
+    break-after: avoid-page;
+  }
+}
+
 .upw-pdf {
   @media print {
     &,

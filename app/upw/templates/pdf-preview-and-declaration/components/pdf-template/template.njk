@@ -4,7 +4,7 @@
 {% from "common/templates/components/mappa-widget/macro.njk" import mappaWidget %}
 
 {%- macro renderTableHeading(heading, description) -%}
-    <p><strong>{{ heading }}<strong></p>
+    <p><strong>{{ heading }}</strong></p>
     {% if description %}
     <p>{{ description }}</p>
     {% endif %}
@@ -94,18 +94,18 @@
             <span class="govuk-tag upw-pdf-header__right-tag">Official Sensitive</span>
         </div>
     </div>
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Supervised individual</h1>
 
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Supervised individual</h1>    
-
-    {{ renderTable({
-        caption: "Offence details",
-        rows: [
-            { heading: "Offence", data: renderOffence(assessment.offence.offence, assessment.offence.offenceDescription) },
-            { heading: "Subcode", data: renderOffence(assessment.offence.subCode, assessment.offence.subCodeDescription) },
-            { heading: "Sentence date", data: renderValue(assessment.offence.sentenceDate) }
-        ]
-    }) }}
-
+        {{ renderTable({
+            caption: "Offence details",
+            rows: [
+                { heading: "Offence", data: renderOffence(assessment.offence.offence, assessment.offence.offenceDescription) },
+                { heading: "Subcode", data: renderOffence(assessment.offence.subCode, assessment.offence.subCodeDescription) },
+                { heading: "Sentence date", data: renderValue(assessment.offence.sentenceDate) }
+            ]
+        }) }}
+    </div>
     {{ renderTable({
         caption: "Personal details",
         rows: [
@@ -177,10 +177,11 @@
             { heading: "Phone number", data: renderValue(answers["emergency_contact_mobile_phone_number"]) }
         ]
     }) }}
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of Serious Harm in the community</h1>
 
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of Serious Harm in the community</h1>
-
-    {{ roshWidget(widgets.roshRiskSummary) }}
+        {{ roshWidget(widgets.roshRiskSummary) }}
+    </div>
 
     {{ renderTable({
         rows: [
@@ -261,120 +262,124 @@
             }
         ]
     }) }}
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h1>
 
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h1>
+        {%- set mappaDataRows = [ { heading: "MAPPA nominal?", data: renderValue("No") },
+            { heading: "Location restricted by victim exclusion criteria?", data: renderValue( answers["location_exclusion_criteria"], answers["location_exclusion_criteria_details"], "Yes" ) },
+            { heading: "Close supervision or restricted placement recommended?", data: renderValue( answers["restricted_placement"], answers["restricted_placement_details"], "Yes" ) },
+            { heading: "Recommend not to place with female supervisor?", data: renderValue( answers["no_female_supervisor"], answers["no_female_supervisor_details"], "Yes" ) },
+            { heading: "Recommend not to place with male supervisor?", data: renderValue( answers["no_male_supervisor"], answers["no_male_supervisor_details"], "Yes" ) },
+            { heading: "Restrictive orders?", data: renderValue( answers["restrictive_orders"], answers["restrictive_orders_details"], "Yes" ) },
+            { heading: "Are there any risk management issues for an individual placement?", data: renderValue( answers["risk_management_issues_individual"], answers["risk_management_issues_individual_details"], "Yes" ) },
+            { heading: "Are there any risk management issues if working in a supervised group?", data: renderValue( answers["risk_management_issues_supervised_group"], answers["risk_management_issues_supervised_group_details"], "Yes" ) },
+            { heading: "Alcohol or drug issues with health and safety impact?", data: renderValue( answers["alcohol_drug_issues"], answers["alcohol_drug_issues_details"], "Yes" ) } ] -%}
 
-    {%- set mappaDataRows = [ { heading: "MAPPA nominal?", data: renderValue("No") },
-        { heading: "Location restricted by victim exclusion criteria?", data: renderValue( answers["location_exclusion_criteria"], answers["location_exclusion_criteria_details"], "Yes" ) },
-        { heading: "Close supervision or restricted placement recommended?", data: renderValue( answers["restricted_placement"], answers["restricted_placement_details"], "Yes" ) },
-        { heading: "Recommend not to place with female supervisor?", data: renderValue( answers["no_female_supervisor"], answers["no_female_supervisor_details"], "Yes" ) },
-        { heading: "Recommend not to place with male supervisor?", data: renderValue( answers["no_male_supervisor"], answers["no_male_supervisor_details"], "Yes" ) },
-        { heading: "Restrictive orders?", data: renderValue( answers["restrictive_orders"], answers["restrictive_orders_details"], "Yes" ) },
-        { heading: "Are there any risk management issues for an individual placement?", data: renderValue( answers["risk_management_issues_individual"], answers["risk_management_issues_individual_details"], "Yes" ) },
-        { heading: "Are there any risk management issues if working in a supervised group?", data: renderValue( answers["risk_management_issues_supervised_group"], answers["risk_management_issues_supervised_group_details"], "Yes" ) },
-        { heading: "Alcohol or drug issues with health and safety impact?", data: renderValue( answers["alcohol_drug_issues"], answers["alcohol_drug_issues_details"], "Yes" ) } ] -%}
-
-    {%- if widgets.mappa.isNominal != null %}
-        {{ mappaWidget(widgets.mappa) }}
-        {% set mappaDataRows = mappaDataRows | shiftArray %}
-    {% endif %}
+        {%- if widgets.mappa.isNominal != null %}
+            {{ mappaWidget(widgets.mappa) }}
+            {% set mappaDataRows = mappaDataRows | shiftArray %}
+        {% endif %}
+    </div>
 
     {{ renderTable({ rows: mappaDataRows }) }}
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h1>
 
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h1>
+        {%- set showPlacementPreferences = rawAnswers["gender_identity"] != "MALE" and rawAnswers["placement_preference"] == "YES" -%}
+        {%- set showPlacementPreferencesByGender = rawAnswers["sex_change"] == "YES" -%}
 
-    {%- set showPlacementPreferences = rawAnswers["gender_identity"] != "MALE" and rawAnswers["placement_preference"] == "YES" -%}
-    {%- set showPlacementPreferencesByGender = rawAnswers["sex_change"] == "YES" -%}
-
-    {%- if rawAnswers["requires_interpreter"] == "true" -%}
-    {%- set requiresInterpreter = "Yes" -%}
-    {%- elif rawAnswers["requires_interpreter"] == "false" -%}
-    {%- set requiresInterpreter = "No" -%}
-    {%- endif -%}
-
-    {{ renderTable({
-        rows: [
-            { heading: "Preferred language", data: renderValue(rawAnswers["language"]) },
-            { heading: "Interpreter required?", data: renderValue(requiresInterpreter) },
-            {
-                heading: "Cultural or religious adjustments", 
-                data: renderValue(
-                    answers["cultural_religious_adjustment"],
-                    answers["cultural_religious_adjustment_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Does the individual have any placement preferences?",
-                condition: showPlacementPreferences,
-                data: renderValue(answers["placement_preferences"])
-            },
-            {
-                heading: "Discuss placement options with the individual, based on their gender identity",
-                description: "Record their preference and the details of the conversation.",
-                condition: showPlacementPreferencesByGender,
-                data: renderValue(answers["placement_preference_by_gender_details"])
-            }
-        ]
-    }) }}
-
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h1>
-
-    {%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
-        {%- if answer -%}
-            {{ textIfPresent }}
-        {%- else -%}
-            {{ textIfNotPresent }}
+        {%- if rawAnswers["requires_interpreter"] == "true" -%}
+        {%- set requiresInterpreter = "Yes" -%}
+        {%- elif rawAnswers["requires_interpreter"] == "false" -%}
+        {%- set requiresInterpreter = "No" -%}
         {%- endif -%}
-    {%- endmacro -%}
 
-    {{ renderTable({
-        caption: "Disabilities and mental health",
-        captionDescription: "Does the individual have any of the following?",
-        rows: [
-            {
-                heading: "Physical disability", 
-                data: renderValue(
-                    ifAnswerIsPresent(answers["physical_disability"], "Yes", "No"),
-                    answers["physical_disability_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Learning disability", 
-                data: renderValue(
-                    ifAnswerIsPresent(answers["learning_disability"], "Yes", "No"),
-                    answers["learning_disability_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Learning difficulty", 
-                data: renderValue(
-                    ifAnswerIsPresent(answers["learning_difficulty"], "Yes", "No"),
-                    answers["learning_difficulty_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Mental health condition", 
-                data: renderValue(
-                    ifAnswerIsPresent(answers["mental_health_condition"], "Yes", "No"),
-                    answers["mental_health_condition_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Do any of the above affect the individual’s ability to engage with Community Payback?",
-                description: "Suggest adjustments, if known",
-                data: renderValue(
-                    answers["disabilities"],
-                    answers["disabilities_details"],
-                    "Yes"
-                ) 
-            }
-        ]
-    }) }}
+        {{ renderTable({
+            rows: [
+                { heading: "Preferred language", data: renderValue(rawAnswers["language"]) },
+                { heading: "Interpreter required?", data: renderValue(requiresInterpreter) },
+                {
+                    heading: "Cultural or religious adjustments",
+                    data: renderValue(
+                        answers["cultural_religious_adjustment"],
+                        answers["cultural_religious_adjustment_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Does the individual have any placement preferences?",
+                    condition: showPlacementPreferences,
+                    data: renderValue(answers["placement_preferences"])
+                },
+                {
+                    heading: "Discuss placement options with the individual, based on their gender identity",
+                    description: "Record their preference and the details of the conversation.",
+                    condition: showPlacementPreferencesByGender,
+                    data: renderValue(answers["placement_preference_by_gender_details"])
+                }
+            ]
+        }) }}
+    </div>
+
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h1>
+
+        {%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
+            {%- if answer -%}
+                {{ textIfPresent }}
+            {%- else -%}
+                {{ textIfNotPresent }}
+            {%- endif -%}
+        {%- endmacro -%}
+
+        {{ renderTable({
+            caption: "Disabilities and mental health",
+            captionDescription: "Does the individual have any of the following?",
+            rows: [
+                {
+                    heading: "Physical disability",
+                    data: renderValue(
+                        ifAnswerIsPresent(answers["physical_disability"], "Yes", "No"),
+                        answers["physical_disability_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Learning disability",
+                    data: renderValue(
+                        ifAnswerIsPresent(answers["learning_disability"], "Yes", "No"),
+                        answers["learning_disability_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Learning difficulty",
+                    data: renderValue(
+                        ifAnswerIsPresent(answers["learning_difficulty"], "Yes", "No"),
+                        answers["learning_difficulty_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Mental health condition",
+                    data: renderValue(
+                        ifAnswerIsPresent(answers["mental_health_condition"], "Yes", "No"),
+                        answers["mental_health_condition_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Do any of the above affect the individual’s ability to engage with Community Payback?",
+                    description: "Suggest adjustments, if known",
+                    data: renderValue(
+                        answers["disabilities"],
+                        answers["disabilities_details"],
+                        "Yes"
+                    )
+                }
+            ]
+        }) }}
+    </div>
 
     {%- macro renderPregnancyQuestion(value, pregnantDescription, recentlyGivenBirthDescription) -%}
         <p>{{ value | default("No data", true) }}</p>
@@ -493,58 +498,60 @@
         ]
     }) }}
 
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h1>
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h1>
 
-    {%- if rawAnswers["employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
-        {%- set employmentDetails = answers["employment_education_details_fulltime"] -%}
-    {%- elif rawAnswers["employment_education"] == "PARTTIME_EDUCATION_EMPLOYMENT" -%}
-        {%- set employmentDetails = answers["employment_education_details_parttime"] -%}
-    {%- endif -%}
+        {%- if rawAnswers["employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
+            {%- set employmentDetails = answers["employment_education_details_fulltime"] -%}
+        {%- elif rawAnswers["employment_education"] == "PARTTIME_EDUCATION_EMPLOYMENT" -%}
+            {%- set employmentDetails = answers["employment_education_details_parttime"] -%}
+        {%- endif -%}
 
-    {%- if employmentDetails -%}
-        {%- set showEmploymentDetails = true -%}
-    {%- else -%}
-        {%- set showEmploymentDetails = false -%}
-    {%- endif -%}
+        {%- if employmentDetails -%}
+            {%- set showEmploymentDetails = true -%}
+        {%- else -%}
+            {%- set showEmploymentDetails = false -%}
+        {%- endif -%}
 
-    {{ renderTable({
-        rows: [
-            {
-                heading: "Employment or education?",
-                data: renderValue(answers["employment_education"])
-            },
-            {
-                heading: "Employment or education details (working days, hours etc)",
-                data: renderValue(employmentDetails),
-                condition: showEmploymentDetails
-            },
-            {
-                heading: "Does the individual have any difficulties with reading or writing?", 
-                data: renderValue(
-                    answers["reading_writing_difficulties"],
-                    answers["reading_writing_difficulties_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Does the individual have any work skills or experience that could be used while carrying out Community Payback?", 
-                data: renderValue(
-                    answers["work_skills"],
-                    answers["work_skills_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Does the individual have future work plans that could be supported through a Community Payback placement?",
-                description: "For example: retail, gardening etc",
-                data: renderValue(
-                    answers["future_work_plans"],
-                    answers["future_work_plans_details"],
-                    "Yes"
-                )
-            }
-        ]
-    }) }}
+        {{ renderTable({
+            rows: [
+                {
+                    heading: "Employment or education?",
+                    data: renderValue(answers["employment_education"])
+                },
+                {
+                    heading: "Employment or education details (working days, hours etc)",
+                    data: renderValue(employmentDetails),
+                    condition: showEmploymentDetails
+                },
+                {
+                    heading: "Does the individual have any difficulties with reading or writing?",
+                    data: renderValue(
+                        answers["reading_writing_difficulties"],
+                        answers["reading_writing_difficulties_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Does the individual have any work skills or experience that could be used while carrying out Community Payback?",
+                    data: renderValue(
+                        answers["work_skills"],
+                        answers["work_skills_details"],
+                        "Yes"
+                    )
+                },
+                {
+                    heading: "Does the individual have future work plans that could be supported through a Community Payback placement?",
+                    description: "For example: retail, gardening etc",
+                    data: renderValue(
+                        answers["future_work_plans"],
+                        answers["future_work_plans_details"],
+                        "Yes"
+                    )
+                }
+            ]
+        }) }}
+    </div>
 
     {%- set showIndividualCommitment = answers["education_training_need"] == "Yes" -%}
 
@@ -572,102 +579,105 @@
         ] 
     }) }}
 
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement details</h1>
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement details</h1>
 
-    {%- set showIntensiveWorkingSection = rawAnswers["employment_education"] == "NO" -%}
-    {%- if showIntensiveWorkingSection -%}
-        
-        {%- set eligibleForIntensiveWorking = rawAnswers["eligibility_intensive_working"] == "YES" -%}
+        {%- set showIntensiveWorkingSection = rawAnswers["employment_education"] == "NO" -%}
+        {%- if showIntensiveWorkingSection -%}
 
-        {%- if eligibleForIntensiveWorking -%}
-            {% set recommendedHoursStartOrder = answers["recommended_hours_start_order"] | default("0") %}
-            {% set recommendedHoursMidpointOrder = answers["recommended_hours_start_order"] | default("0") %}
+            {%- set eligibleForIntensiveWorking = rawAnswers["eligibility_intensive_working"] == "YES" -%}
+
+            {%- if eligibleForIntensiveWorking -%}
+                {% set recommendedHoursStartOrder = answers["recommended_hours_start_order"] | default("0") %}
+                {% set recommendedHoursMidpointOrder = answers["recommended_hours_start_order"] | default("0") %}
+            {%- endif -%}
+
+            {{ renderTable({
+                caption: "Intensive working",
+                rows: [
+                    {
+                        heading: "Is the individual eligible for intensive working?",
+                        data: renderValue(
+                            answers["eligibility_intensive_working"],
+                            answers["eligibility_intensive_working_details"],
+                            "Yes"
+                        )
+                    },
+                    {
+                        heading: "Recommended hours per week in addition to statutory minimum, at the start of the order",
+                        condition: eligibleForIntensiveWorking,
+                        data: renderValue(recommendedHoursStartOrder)
+                    },
+                    {
+                        heading: "Recommended hours per week in addition to statutory minimum, at the midpoint of the order",
+                        condition: eligibleForIntensiveWorking,
+                        data: renderValue(recommendedHoursMidpointOrder)
+                    },
+                    {
+                        heading: "At what point should the individual be expected to reach a 28-hour working week?",
+                        condition: eligibleForIntensiveWorking,
+                        data: renderValue(answers["twenty_eight_hours_working_week_details"])
+                    }
+                ]
+            }) }}
         {%- endif -%}
-        
-        {{ renderTable({
-            caption: "Intensive working",
-            rows: [
-                {
-                    heading: "Is the individual eligible for intensive working?",
-                    data: renderValue(
-                        answers["eligibility_intensive_working"],
-                        answers["eligibility_intensive_working_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Recommended hours per week in addition to statutory minimum, at the start of the order",
-                    condition: eligibleForIntensiveWorking,
-                    data: renderValue(recommendedHoursStartOrder)
-                },
-                {
-                    heading: "Recommended hours per week in addition to statutory minimum, at the midpoint of the order",
-                    condition: eligibleForIntensiveWorking,
-                    data: renderValue(recommendedHoursMidpointOrder)
-                },
-                {
-                    heading: "At what point should the individual be expected to reach a 28-hour working week?",
-                    condition: eligibleForIntensiveWorking,
-                    data: renderValue(answers["twenty_eight_hours_working_week_details"])
-                }
-            ]
-        }) }}
-    {%- endif -%}
+    </div>
 
-    <h2 class="govuk-heading-m">Availability for Community Payback</h2>
+    <div class='upw-avoid-break'>
+        <h2 class="govuk-heading-m">Availability for Community Payback</h2>
 
-    {% macro ifAnswerHasValue(answer, value, text) %}
-        {% if answer and value in answer %}
-            {{ text }}
-        {% endif %}
-    {% endmacro %}
+        {% macro ifAnswerHasValue(answer, value, text) %}
+            {% if answer and value in answer %}
+                {{ text }}
+            {% endif %}
+        {% endmacro %}
 
-    <table class="upw-pdf-chart">
-        <caption class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom" colspan="8">When is the individual available for community payback work?</caption>
-        <tbody>
-            <tr>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right  upw-pdf-chart__cell--border-left"></th>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Mon</th>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Tues</th>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Wed</th>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Thurs</th>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Fri</th>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Sat</th>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Sun</th>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Morning</th>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_MORNING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_MORNING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_MORNING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_MORNING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_MORNING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_MORNING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_MORNING", "✓") }}</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Afternoon</th>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_AFTERNOON", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_AFTERNOON", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_AFTERNOON", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_AFTERNOON", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_AFTERNOON", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_AFTERNOON", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_AFTERNOON", "✓") }}</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Evening</th>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_EVENING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_EVENING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_EVENING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_EVENING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_EVENING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_EVENING", "✓") }}</td>
-                <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_EVENING", "✓") }}</td>
-            </tr>
-        </tbody>
-    </table>
-
+        <table class="upw-pdf-chart">
+            <caption class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom" colspan="8">When is the individual available for community payback work?</caption>
+            <tbody>
+                <tr>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right  upw-pdf-chart__cell--border-left"></th>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Mon</th>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Tues</th>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Wed</th>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Thurs</th>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Fri</th>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Sat</th>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">Sun</th>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Morning</th>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_MORNING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_MORNING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_MORNING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_MORNING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_MORNING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_MORNING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_MORNING", "✓") }}</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Afternoon</th>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_AFTERNOON", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_AFTERNOON", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_AFTERNOON", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_AFTERNOON", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_AFTERNOON", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_AFTERNOON", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_AFTERNOON", "✓") }}</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Evening</th>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_EVENING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_EVENING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_EVENING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_EVENING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_EVENING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_EVENING", "✓") }}</td>
+                    <td class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_EVENING", "✓") }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     {{ renderTable({
         rows: [
             {
@@ -695,90 +705,94 @@
         ]
     }) }}
 
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Declaration</h1>
-    {% if answers["declaration_confirmation"] === 'Sign declaration' %}
-        {% set declarationAnswer = 'Yes' %}
-    {% else %}
-        {% set declarationAnswer = '' %}
-    {% endif %}
+    <div class='upw-avoid-break'>
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Declaration</h1>
+        {% if answers["declaration_confirmation"] === 'Sign declaration' %}
+            {% set declarationAnswer = 'Yes' %}
+        {% else %}
+            {% set declarationAnswer = '' %}
+        {% endif %}
 
-    {{ renderTable({
-        rows: [
-            {
-                heading: "I confirm the individual has received details of their Community Payback Induction Session",
-                data: renderValue(declarationAnswer)
-            }
-        ]
-    }) }}
+        {{ renderTable({
+            rows: [
+                {
+                    heading: "I confirm the individual has received details of their Community Payback Induction Session",
+                    data: renderValue(declarationAnswer)
+                }
+            ]
+        }) }}
 
-    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+    </div>
 
-    <h2 class="govuk-heading-m">How long will it take for the individual to complete their hours?</h2>
+    <div class='upw-avoid-break'>
+        <h2 class="govuk-heading-m">How long will it take for the individual to complete their hours?</h2>
 
-    <table class="upw-pdf-chart">
-        <tbody>
-            <tr>
-                <td class="upw-pdf-chart__cell--empty"></td>
-                <td class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top" colspan="4">If the individual works…</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right" rowspan="2">Number of hours to complete</th>
-                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">1 day per week</th>
-                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">2 days per week</th>
-                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">3 days per week</th>
-                <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top">4 days per week</th>
-            </tr>
-            <tr>
-                <td class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top" colspan="4">…they will complete their hours in this many weeks*</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">50</th>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">7</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">4</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">3</td>
-                <td class="upw-pdf-chart__cell--border-top">2</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">100</th>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">15</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">8</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">5</td>
-                <td class="upw-pdf-chart__cell--border-top">4</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">150</th>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">22</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">11</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">8</td>
-                <td class="upw-pdf-chart__cell--border-top">6</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">200</th>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">29</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">15</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">10</td>
-                <td class="upw-pdf-chart__cell--border-top">8</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">250</th>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">36</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">18</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">12</td>
-                <td class="upw-pdf-chart__cell--border-top">9</td>
-            </tr>
-            <tr>
-                <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">300</th>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">43</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">22</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">15</td>
-                <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom">11</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="upw-pdf-chart">
+            <tbody>
+                <tr>
+                    <td class="upw-pdf-chart__cell--empty"></td>
+                    <td class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top" colspan="4">If the individual works…</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right" rowspan="2">Number of hours to complete</th>
+                    <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">1 day per week</th>
+                    <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">2 days per week</th>
+                    <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">3 days per week</th>
+                    <th class="upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-top">4 days per week</th>
+                </tr>
+                <tr>
+                    <td class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top" colspan="4">…they will complete their hours in this many weeks*</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">50</th>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">7</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">4</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">3</td>
+                    <td class="upw-pdf-chart__cell--border-top">2</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">100</th>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">15</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">8</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">5</td>
+                    <td class="upw-pdf-chart__cell--border-top">4</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">150</th>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">22</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">11</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">8</td>
+                    <td class="upw-pdf-chart__cell--border-top">6</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">200</th>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">29</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">15</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">10</td>
+                    <td class="upw-pdf-chart__cell--border-top">8</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">250</th>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">36</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">18</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right">12</td>
+                    <td class="upw-pdf-chart__cell--border-top">9</td>
+                </tr>
+                <tr>
+                    <th class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">300</th>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">43</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">22</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-bottom">15</td>
+                    <td class="upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom">11</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <p class="upw-pdf-chart__footer">*Figures are approximate and based on the individual completing 7 hours of work each day</p>
+        <p class="upw-pdf-chart__footer">*Figures are approximate and based on the individual completing 7 hours of work each day</p>
 
-    <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+    </div>
 
     <p class="upw-pdf-footer">Strictly NO unauthorised disclosure without following the approved disclosure process. Handle as per Government Security Classifications. The information contained in this document remains the property of HMPPS. Dispose of as <strong>OFFICIAL SENSITIVE</strong> waste.</p>
 
