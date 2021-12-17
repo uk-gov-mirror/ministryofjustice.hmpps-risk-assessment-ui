@@ -1,3 +1,6 @@
+// Always load Application Insights before anything else (Needs to be before Winston for log collection to work)
+require('applicationinsights')
+
 const throng = require('throng')
 const { readFileSync, unlink, writeFileSync } = require('fs')
 const { join } = require('path')

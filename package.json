@@ -107,7 +107,6 @@
     "throng": "4.0.x",
     "uuid": "^8.3.2",
     "winston": "^3.3.3",
-    "winston-azure-application-insights": "^2.0.0",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
@@ -123,7 +122,7 @@
     "concat": "^1.0.3",
     "copyfiles": "^2.4.1",
     "cypress": "^8.5.0",
-    "cypress-audit": "^0.3.0",
+    "cypress-audit": "^1.1.0",
     "cypress-file-upload": "^4.0.7",
     "cypress-multi-reporters": "^1.4.0",
     "envfile": "^3.0.0",
