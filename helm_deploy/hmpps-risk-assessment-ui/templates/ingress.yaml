@@ -12,7 +12,7 @@ metadata:
     heritage: {{ .Release.Service }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    external-dns.alpha.kubernetes.io/set-identifier: {{ $fullName }}-{{ .Release.namespace }}-blue
+    external-dns.alpha.kubernetes.io/set-identifier: {{ $fullName }}-{{ .Release.Namespace }}-blue
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     {{ if .Values.ingress.enable_allow_list }}nginx.ingress.kubernetes.io/whitelist-source-range: {{ include "app.joinListWithComma" .Values.allow_list | quote }}{{ end }}
 spec:
