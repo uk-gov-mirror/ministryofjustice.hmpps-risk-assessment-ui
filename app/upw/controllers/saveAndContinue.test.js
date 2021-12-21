@@ -17,6 +17,8 @@ describe('SaveAndContinueController (UPW)', () => {
           return values.errors || []
         case 'formAnswers':
           return values.formAnswers || {}
+        case 'answers':
+          return values.formAnswers || {}
         default:
           return undefined
       }

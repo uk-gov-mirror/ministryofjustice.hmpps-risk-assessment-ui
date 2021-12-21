@@ -6,10 +6,13 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
+    "node": "16.13.1",
+    "npm": "8.1.2"
   },
   "jest": {
+    "setupFilesAfterEnv": [
+      "./test-helpers/setup.js"
+    ],
     "collectCoverageFrom": [
       "common/**/*.js"
     ],
@@ -139,6 +142,7 @@
     "nock": "^13.1.0",
     "nodemon": "^2.0.7",
     "prettier": "^1.18.2",
+    "redis-mock": "^0.56.3",
     "rimraf": "^3.0.2",
     "sass": "^1.35.1",
     "set-value": ">=4.0.1",
