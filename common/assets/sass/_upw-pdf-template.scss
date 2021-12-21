@@ -1,5 +1,65 @@
 @use 'sass:math';
 
+@media screen {
+  .upw-pdf-title-page {
+    display: none;
+  }
+}
+
+@media print {
+  .page-break-after {
+    page-break-after: always;
+  }
+  .upw-pdf-header,
+  .upw-pdf-footer {
+    display: none;
+  }
+  .upw-pdf-table,
+  .upw-pdf-chart,
+  .upw-avoid-break {
+    break-inside: avoid;
+  }
+  h1,
+  h2 {
+    break-after: avoid-page;
+  }
+}
+
+.upw-pdf-title__strapline {
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
+.upw-pdf-title__mojlogo {
+  margin-right: 30px;
+  margin-top: 150px;
+}
+
+.upw-pdf-title__divider {
+  margin-top: 20px;
+  margin-bottom: 15px;
+  width: 440px;
+  border: 1px solid #626a6e;
+}
+
+.upw-pdf__details p {
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.upw-pdf-title-page__body {
+  margin-top: 60px;
+}
+
+.upw-pdf-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 48px;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
 @media print {
   .page-break-after {
     page-break-after: always;

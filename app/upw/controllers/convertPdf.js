@@ -46,6 +46,8 @@ class ConvertPdf extends SaveAndContinue {
         .field('marginLeft', marginLeft)
         .field('marginRight', marginRight)
         .attach('files', fs.readFileSync('public/stylesheets/application.min.css'), 'application.min.css')
+        .attach('files', fs.readFileSync('public/images/community-payback-logo.jpg'), 'community-payback-logo.jpg')
+        .attach('files', fs.readFileSync('public/images/MOJ_logo_large.png'), 'MOJ_logo_large.png')
         .pipe(res)
     } catch (e) {
       return res.send(e.message)

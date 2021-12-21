@@ -94,6 +94,31 @@
             <span class="govuk-tag upw-pdf-header__right-tag">Official Sensitive</span>
         </div>
     </div>
+
+    <div class='govuk-grid-row upw-pdf-title-page'>
+        <div class='govuk-grid-column-two-thirds'>
+
+            <div class='title-page-logos'>
+                <img class="upw-pdf-title__mojlogo" src="MOJ_logo_large.png" height='95' />
+                <img src="community-payback-logo.jpg" height='95' />
+            </div>
+
+            <div class='upw-pdf-title-page__body page-break-after'>
+
+                <p class='upw-pdf-title__strapline'>Her Majesty’s Prison & Probation Service</p>
+                <h1 class='upw-pdf-title'>Community payback assessment</h1>
+                <div class='upw-pdf-title__divider'></div>
+                <div class='upw-pdf__details'>
+                    <p>Prepared by:
+                    <p><strong>{{ username }}</strong>
+                    <p><strong>{{ empty | todayPretty }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Supervised individual</h1>
 

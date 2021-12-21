@@ -178,6 +178,43 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('shiftArray', arr => {
     return arr.slice(1)
   })
+  nunjucksEnvironment.addFilter('todayPretty', () => {
+    const nth = dateDay => {
+      if (dateDay > 3 && dateDay < 21) return 'th'
+      switch (dateDay % 10) {
+        case 1:
+          return 'st'
+        case 2:
+          return 'nd'
+        case 3:
+          return 'rd'
+        default:
+          return 'th'
+      }
+    }
+
+    const dateObj = new Date()
+    const date = dateObj.getDate()
+    const month = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ][dateObj.getMonth()]
+    const year = dateObj.getFullYear()
+
+    const dateString = `${date + nth(date)} ${month} ${year}`
+
+    return dateString
+  })
 
   // Set view engine
   app.set('view engine', 'njk')
