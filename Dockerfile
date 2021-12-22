@@ -3,7 +3,7 @@ LABEL maintainer="HMPPS Digital Studio <info@digital.justice.gov.uk>"
 ARG BUILD_NUMBER
 ARG GIT_REF
 
-RUN apt-get update && apt-get install -y make python
+RUN apt-get update && apt-get install -y make python3
 RUN apt-get install -y curl
 RUN apt-get install build-essential -y
 
