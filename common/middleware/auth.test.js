@@ -397,7 +397,8 @@ describe('Auth', () => {
           JSON.stringify({
             isActive: true,
             oasysUserCode: 'SUPPORT1',
-            username: 'Foo',
+            username: 'FBAR',
+            name: 'Foo Bar',
             email: 'foo@bar.baz',
             areaCode: 'HFS',
             areaName: 'Hertfordshire',
@@ -411,7 +412,8 @@ describe('Auth', () => {
         User.from({
           id: 1,
           token: 'FOO_TOKEN',
-          username: 'Foo',
+          username: 'FBAR',
+          name: 'Foo Bar',
           email: 'foo@bar.baz',
           isActive: true,
           oasysUserCode: 'SUPPORT1',
@@ -426,7 +428,8 @@ describe('Auth', () => {
 
       expect(error).toBeNull()
       expect(user.getDetails()).toEqual({
-        username: 'Foo',
+        username: 'FBAR',
+        name: 'Foo Bar',
         email: 'foo@bar.baz',
         isActive: true,
         oasysUserCode: 'SUPPORT1',
@@ -448,7 +451,8 @@ describe('Auth', () => {
       getCachedUserDetails.mockResolvedValue(null)
       cacheOasysUserDetails.mockResolvedValue({
         oasysUserCode: 'USER_CODE',
-        username: 'Test User',
+        username: 'FBAR',
+        name: 'Foo Bar',
         email: 'foo@bar.baz',
         isActive: true,
       })
@@ -474,7 +478,8 @@ describe('Auth', () => {
 
       expect(error).toBeNull()
       expect(user.getDetails()).toEqual({
-        username: 'Test User',
+        username: 'FBAR',
+        name: 'Foo Bar',
         email: 'foo@bar.baz',
         isActive: true,
         oasysUserCode: 'USER_CODE',

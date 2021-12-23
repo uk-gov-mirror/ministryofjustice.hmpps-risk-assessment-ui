@@ -6,7 +6,7 @@ describe('Put keycloak header information into session', () => {
   let res
   beforeEach(() => {
     req = {
-      user: { username: 'James' },
+      user: { username: 'JBOND', name: 'James Bond' },
     }
     res = {
       locals: {},
@@ -15,13 +15,7 @@ describe('Put keycloak header information into session', () => {
 
   test('should add user name to locals', done => {
     addUserInformation(req, res, done)
-    expect(res.locals.username).toEqual('James')
+    expect(res.locals.username).toEqual('JBOND')
+    expect(res.locals.userFullName).toEqual('James Bond')
   })
-
-  // test('should throw an error if "x-auth-name" is not in session', () => {
-  //   req.headers = {}
-  //   expect(() => {
-  //     addUserInformation(req, res, () => {})
-  //   }).toThrowError('Username (x-auth-name) not found in session')
-  // })
 })

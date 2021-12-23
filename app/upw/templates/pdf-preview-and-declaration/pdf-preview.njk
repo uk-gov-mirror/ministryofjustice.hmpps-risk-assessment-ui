@@ -15,7 +15,7 @@
 {# include errorSummary partial #}
 {{ super() }}
 
-{{ renderPdfTemplate(assessment, answers, rawAnswers, widgetData, username, {
+{{ renderPdfTemplate(assessment, answers, rawAnswers, widgetData, userFullName, {
     imageAssetPath: "/assets/images/"
 }) }}
 

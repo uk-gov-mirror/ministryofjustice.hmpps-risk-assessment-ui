@@ -17,7 +17,8 @@ const cacheOasysUserDetails = async (userId, oasysUser) => {
 
 const cacheUserDetails = async user => {
   const userDetails = {
-    username: `${user?.user_name}`,
+    username: user?.user_name,
+    name: user?.name,
   }
 
   await redis.set(`user:${user?.user_id}`, JSON.stringify(userDetails), 'EX', REFRESH_TOKEN_LIFETIME_SECONDS)
