@@ -35,7 +35,7 @@ const convertHtmlToPdf = async renderedHtml => {
 
     // Gotenberg generated PDF
     const response = await request
-    return { ok: response.ok, body: response.body, status: response.status }
+    return { ok: response.ok, response: response.body, status: response.status }
   } catch (e) {
     const { response, status } = e
     return { ok: false, response, status }
