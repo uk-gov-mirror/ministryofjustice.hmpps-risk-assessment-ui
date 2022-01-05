@@ -15,11 +15,11 @@ image:
 ingress:
   enabled: true
   enable_allow_list: true
-  host: preprod.hmpps-assessments.service.justice.gov.uk
+  host: hmpps-assessments.service.justice.gov.uk
   cert_secret: hmpps-assessments-cert
   path: /
-  identifier: green
-  weighting: 0
+  identifier: blue
+  weighting: 100
 
 redis:
   secret: hmpps-assessments-elasticache-redis
@@ -29,10 +29,10 @@ apiClientSecretName: hmpps-assessments-api
 authClientSecretName: hmpps-risk-assessment-ui
 
 env:
-  HMPPS_ASSESSMENT_API_URL: http://hmpps-assessments-api.hmpps-assessments-preprod.svc.cluster.local
-  OFFENDER_ASSESSMENT_API_URL: https://offender-prprod.aks-live-1.studio-hosting.service.justice.gov.uk
-  OAUTH_ENDPOINT_URL: https://sign-in-preprod.hmpps.service.justice.gov.uk/auth
-  PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-preprod.svc.cluster.local/forms/chromium/convert/html
+  HMPPS_ASSESSMENT_API_URL: http://hmpps-assessments-api.hmpps-assessments-prod.svc.cluster.local
+  OFFENDER_ASSESSMENT_API_URL: https://offender-prod.aks-live-1.studio-hosting.service.justice.gov.uk
+  OAUTH_ENDPOINT_URL: https://sign-in.hmpps.service.justice.gov.uk/auth
+  PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-prod.svc.cluster.local/forms/chromium/convert/html
   SHOW_DETAILED_ERRORS: false
   DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
 
@@ -62,4 +62,6 @@ gotenberg:
   replicaCount: 2
 
 generic-prometheus-alerts:
-  enabled: false
+  enabled: true
+  targetApplication: hmpps-risk-assessment-ui
+  alertSeverity: hmpps-assess-risks-and-needs

@@ -18,6 +18,8 @@ ingress:
   host: hmpps-assessments.service.justice.gov.uk
   cert_secret: hmpps-assessments-cert
   path: /
+  identifier: green
+  weighting: 0
 
 redis:
   secret: hmpps-assessments-elasticache-redis

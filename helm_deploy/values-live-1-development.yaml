@@ -1,7 +1,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 2
+replicaCount: 1
 minReadySeconds: 10
 maxSurge: 100%
 maxUnavailable: 50%
@@ -15,11 +15,11 @@ image:
 ingress:
   enabled: true
   enable_allow_list: true
-  host: preprod.hmpps-assessments.service.justice.gov.uk
+  host: dev.hmpps-assessments.service.justice.gov.uk
   cert_secret: hmpps-assessments-cert
   path: /
-  identifier: green
-  weighting: 0
+  identifier: blue
+  weighting: 100
 
 redis:
   secret: hmpps-assessments-elasticache-redis
@@ -29,11 +29,11 @@ apiClientSecretName: hmpps-assessments-api
 authClientSecretName: hmpps-risk-assessment-ui
 
 env:
-  HMPPS_ASSESSMENT_API_URL: http://hmpps-assessments-api.hmpps-assessments-preprod.svc.cluster.local
-  OFFENDER_ASSESSMENT_API_URL: https://offender-prprod.aks-live-1.studio-hosting.service.justice.gov.uk
-  OAUTH_ENDPOINT_URL: https://sign-in-preprod.hmpps.service.justice.gov.uk/auth
-  PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-preprod.svc.cluster.local/forms/chromium/convert/html
-  SHOW_DETAILED_ERRORS: false
+  HMPPS_ASSESSMENT_API_URL: http://hmpps-assessments-api.hmpps-assessments-dev.svc.cluster.local
+  OFFENDER_ASSESSMENT_API_URL: https://offender-dev.aks-dev-1.studio-hosting.service.justice.gov.uk
+  OAUTH_ENDPOINT_URL: https://sign-in-dev.hmpps.service.justice.gov.uk/auth
+  PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-dev.svc.cluster.local/forms/chromium/convert/html
+  SHOW_DETAILED_ERRORS: true
   DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
 
 allow_list:
@@ -59,7 +59,7 @@ allow_list:
   cloudplatform-live1-3: "35.177.252.54/32"
 
 gotenberg:
-  replicaCount: 2
+  replicaCount: 1
 
 generic-prometheus-alerts:
   enabled: false

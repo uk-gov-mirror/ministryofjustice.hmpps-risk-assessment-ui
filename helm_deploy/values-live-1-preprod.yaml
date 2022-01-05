@@ -18,8 +18,8 @@ ingress:
   host: preprod.hmpps-assessments.service.justice.gov.uk
   cert_secret: hmpps-assessments-cert
   path: /
-  identifier: green
-  weighting: 0
+  identifier: blue
+  weighting: 100
 
 redis:
   secret: hmpps-assessments-elasticache-redis
