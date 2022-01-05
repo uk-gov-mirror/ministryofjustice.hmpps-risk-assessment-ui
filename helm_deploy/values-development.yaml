@@ -19,7 +19,7 @@ ingress:
   cert_secret: hmpps-assessments-cert
   path: /
   identifier: green
-  weighting: 0
+  weighting: 100
 
 redis:
   secret: hmpps-assessments-elasticache-redis

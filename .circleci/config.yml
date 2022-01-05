@@ -148,19 +148,6 @@ workflows:
               only:
                 - main
       - hmpps/deploy_env:
-          name: deploy_live_1_dev
-          env: "live-1-development"
-          chart_name: hmpps-risk-assessment-ui
-          filters:
-            branches:
-              only:
-                - main
-          requires:
-            - helm_lint
-            - test
-            - cypress_integration_tests
-            - build_docker
-      - hmpps/deploy_env:
           name: deploy_dev
           env: "development"
           chart_name: hmpps-risk-assessment-ui
@@ -179,10 +166,18 @@ workflows:
       - request-preprod-approval:
           type: approval
           requires:
-            - deploy_live_1_dev
+            - deploy_dev
+      - hmpps/deploy_env:
+          name: deploy_preprod
+          env: "preprod"
+          context:
+            - hmpps-common-vars
+            - hmpps-assessments-preprod-live
+          requires:
+            - request-preprod-approval
       - hmpps/deploy_env:
           name: deploy_live_1_preprod
-          env: "preprod"
+          env: "live-1-preprod"
           context:
             - hmpps-common-vars
             - hmpps-assessments-preprod
