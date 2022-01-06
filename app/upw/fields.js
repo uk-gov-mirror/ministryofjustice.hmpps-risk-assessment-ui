@@ -320,7 +320,7 @@ const fields = {
   },
   individual_commitment: {
     dependent: { field: 'education_training_need', value: 'YES' },
-    ...requireEnterDetails,
+    ...requireYesOrNo,
   },
   individual_commitment_details: {
     dependent: { field: 'individual_commitment', value: 'YES' },
