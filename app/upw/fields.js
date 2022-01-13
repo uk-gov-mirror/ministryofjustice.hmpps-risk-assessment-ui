@@ -220,11 +220,6 @@ const fields = {
     dependent: { field: 'epilepsy', value: 'YES' },
     ...requireEnterDetails,
   },
-  other_health_issues: requireYesOrNo,
-  other_health_issues_details: {
-    dependent: { field: 'other_health_issues', value: 'YES' },
-    ...requireEnterDetails,
-  },
   pregnancy: requireYesOrNo,
   pregnancy_pregnant_details: {
     dependent: { field: 'pregnancy', value: 'PREGNANT' },
@@ -232,6 +227,11 @@ const fields = {
   },
   pregnancy_recently_given_birth_details: {
     dependent: { field: 'pregnancy', value: 'RECENTLY_GIVEN_BIRTH' },
+    ...requireEnterDetails,
+  },
+  other_health_issues: requireYesOrNo,
+  other_health_issues_details: {
+    dependent: { field: 'other_health_issues', value: 'YES' },
     ...requireEnterDetails,
   },
   gp_first_name: {
