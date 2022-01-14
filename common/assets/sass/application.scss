@@ -225,3 +225,7 @@ p {
 .hint__large {
   font-size: 24px;
 }
+
+.govuk-radios__conditional .govuk-label--m {
+  @extend .govuk-label;
+}
