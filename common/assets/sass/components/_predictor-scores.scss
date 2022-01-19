@@ -128,7 +128,7 @@ $predictor-score-background-colour: #f3f2f1;
 
 .predictor-score {
   width: 100%;
-  padding: 30px 40px 10px 40px;
+  padding: 30px 40px 10px;
   box-sizing: border-box;
   background-color: $predictor-score-background-colour;
 }
@@ -230,7 +230,7 @@ $predictor-score-background-colour: #f3f2f1;
 .score-label__card {
   width: 78px;
   bottom: 30px;
-  margin: 0 auto 0;
+  margin: 0 auto;
   background-color: govuk-colour('white');
   border: 2px solid govuk-colour('black');
 }

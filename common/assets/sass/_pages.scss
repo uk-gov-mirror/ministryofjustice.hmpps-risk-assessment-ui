@@ -1,6 +1,5 @@
-//styles related to specific elements that will be generated
+/* styles related to specific elements that will be generated */
 
-// testing
 #id-11111111-1111-1111-1111-111111111201,
 #id-11111111-1111-1111-1111-111111111202 {
   @extend .govuk-input--width-20;
@@ -16,7 +15,7 @@
   }
 }
 
-//RSR Needs page
+/* RSR Needs page */
 .govuk-fieldset[aria-describedby='current_possession_firearm-hint'],
 .govuk-fieldset[aria-describedby='current_offence_weapon-hint'],
 .govuk-fieldset[aria-describedby='previous_murder_attempt-hint'],
@@ -75,7 +74,7 @@
   white-space: pre-wrap;
 }
 
-// 'add a child' page
+/* 'add a child' page */
 #id-23c3e984-54c7-480f-b06c-7d000e2fb87c {
   @extend .govuk-input--width-20;
 }
