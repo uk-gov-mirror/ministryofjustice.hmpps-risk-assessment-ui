@@ -21,18 +21,34 @@ services:
     ports:
       - "6379:6379"
 
-  oauth:
+  hmpps-auth:
     image: quay.io/hmpps/hmpps-auth:latest
     networks:
       - hmpps
-    container_name: oauth
+    container_name: hmpps-auth
+    depends_on: [nomis-user-roles-api]
     ports:
-      - "9090:9090"
+      - "9090:8080"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9090/auth/health"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/health" ]
     environment:
-      - SERVER_PORT=9090
+      - SPRING_PROFILES_ACTIVE=dev,nomis
+      - APPLICATION_AUTHENTICATION_UI_ALLOWLIST=0.0.0.0/0
+      - NOMIS_ENDPOINT_URL=http://nomis-user-roles-api:8080
+
+  nomis-user-roles-api:
+    image: quay.io/hmpps/nomis-user-roles-api:latest
+    networks:
+      - hmpps
+    container_name: nomis-user-roles-api
+    ports:
+      - "8102:8080"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/health/ping" ]
+    environment:
+      - SERVER_PORT=8080
       - SPRING_PROFILES_ACTIVE=dev
+      - API_BASE_URL_OAUTH=http://hmpps-auth:8080/auth
 
   offender-assessment-api:
     image: quay.io/hmpps/offender-assessments-api:latest
@@ -40,8 +56,7 @@ services:
     networks:
       - hmpps
     container_name: offender-assessment-api
-    depends_on:
-      - oauth
+    depends_on: [hmpps-auth]
     ports:
       - "8081:8080"
     healthcheck:
@@ -57,8 +72,7 @@ services:
     networks:
       - hmpps
     container_name: hmpps-assessment-api
-    depends_on:
-      - oauth
+    depends_on: [hmpps-auth]
     ports:
       - "8082:8080"
     healthcheck:
