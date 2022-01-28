@@ -229,3 +229,12 @@ p {
 .govuk-radios__conditional .govuk-label--m {
   @extend .govuk-label;
 }
+
+.feedback-banner {
+  background: $govuk-brand-colour;
+  padding: govuk-spacing(3);
+}
+
+.upw-feedback-banner__text {
+  color: #fff;
+}

@@ -37,8 +37,16 @@
 {% endblock %}
 
 {% block footer %}
+
+  <div style="background: {{ feedbackBannerBackground or '#fff' }}" class="govuk-!-display-none-print">
+    <div class="govuk-width-container {{ containerClasses }}">
+      {% include "../templates/components/feedbackBanner/feedbackBanner.njk" %}
+    </div>
+  </div>
+
   {{
     govukFooter({
+      containerClasses: containerClasses,
       meta: {
         items: [
           {
