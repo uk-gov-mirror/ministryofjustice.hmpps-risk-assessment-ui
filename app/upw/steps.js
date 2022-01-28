@@ -330,4 +330,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/close-assessment.njk`,
   },
+  '/cookies': {
+    pageTitle: 'Cookies',
+    noPost: true,
+    template: `${__dirname}/templates/cookies.njk`,
+  },
 }

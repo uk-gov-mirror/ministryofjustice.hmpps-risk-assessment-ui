@@ -88,4 +88,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/privacy.njk`,
   },
+  '/cookies': {
+    pageTitle: 'Cookies',
+    noPost: true,
+    template: `${__dirname}/templates/cookies.njk`,
+  },
 }
