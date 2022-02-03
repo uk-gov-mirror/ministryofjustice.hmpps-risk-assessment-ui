@@ -21,6 +21,12 @@ $ npm run start:local
 
 Then go to [http://localhost:3000/](http://localhost:3000/) to see it in action.
 
+Links to assessments types:
+
+- [UPW](http://localhost:3000/start-assessment?crn=D002548&assessmentType=UPW&eventId=1)
+- [RSR](http://localhost:3000/start-assessment?crn=D002548&assessmentType=RSR&eventId=1)
+
+
 When running in this 'local' mode the service will attempt to stub out some API responses in wiremock at startup. It is assumed the wiremock server is running on port 9191. You can start up an instance of wiremock using docker-compose:
 
 ```
