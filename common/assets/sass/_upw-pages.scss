@@ -1,5 +1,5 @@
 /*  styles related to specific questions and elements in the unpaid work assessment */
-@use 'sass:math';
+@use "sass:math";
 
 /* stylelint-disable selector-class-pattern */
 .cultural_religious_adjustment,
@@ -97,8 +97,8 @@
   border-bottom: 0;
 }
 
-label[for='declaration_confirmation'] {
-  width: percentage(math.div(2, 3));
+label[for="declaration_confirmation"] {
+  width: math.percentage(math.div(2, 3));
   font-weight: bold;
 }
 

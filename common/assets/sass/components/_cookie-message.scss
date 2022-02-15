@@ -2,7 +2,9 @@
   box-sizing: border-box;
   width: 100%;
   padding: govuk-spacing(3);
-  background-color: lighten(desaturate(govuk-colour('light-blue'), 8.46), 42.55);
+  /* stylelint-disable scss/no-global-function-names */
+  background-color: lighten(desaturate(govuk-colour("light-blue"), 8.46), 42.55);
+  /* stylelint-enable scss/no-global-function-names */
 
   &--hide {
     display: none;

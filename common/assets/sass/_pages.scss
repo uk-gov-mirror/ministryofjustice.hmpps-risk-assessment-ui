@@ -9,34 +9,34 @@
   @extend .govuk-input--width-3;
 }
 
-.govuk-fieldset[aria-describedby='id-420c2ffe-8f2c-49b3-a523-674af3197b9e-hint'] {
+.govuk-fieldset[aria-describedby="id-420c2ffe-8f2c-49b3-a523-674af3197b9e-hint"] {
   .govuk-radios {
     @extend .govuk-radios--inline;
   }
 }
 
 /* RSR Needs page */
-.govuk-fieldset[aria-describedby='current_possession_firearm-hint'],
-.govuk-fieldset[aria-describedby='current_offence_weapon-hint'],
-.govuk-fieldset[aria-describedby='previous_murder_attempt-hint'],
-.govuk-fieldset[aria-describedby='previous_wounding-hint'],
-.govuk-fieldset[aria-describedby='previous_aggravated_burglary-hint'],
-.govuk-fieldset[aria-describedby='previous_arson-hint'],
-.govuk-fieldset[aria-describedby='previous_criminal_damage-hint'],
-.govuk-fieldset[aria-describedby='previous_kidnapping-hint'],
-.govuk-fieldset[aria-describedby='previous_possession_firearm-hint'],
-.govuk-fieldset[aria-describedby='previous_robbery-hint'],
-.govuk-fieldset[aria-describedby='previous_offence_weapon-hint'],
-.govuk-fieldset[aria-describedby='id-4dab51be-e9f8-4ca1-8765-b58e07e137ba-hint'],
-.govuk-fieldset[aria-describedby='id-0941c5b2-f42d-4120-ad79-44954674fe00-hint'],
-.govuk-fieldset[aria-describedby='id-f988f76c-3d6c-4f45-aa29-7dc8d11198d7-hint'],
-.govuk-fieldset[aria-describedby='id-ad81d270-4acc-472c-a79e-01d0a422ce80-hint'],
-.govuk-fieldset[aria-describedby='id-f8789074-1532-4b32-8995-780da18e273a-hint'],
-.govuk-fieldset[aria-describedby='id-df5d635a-6765-42af-9007-6d6d333da5f2-hint'],
-.govuk-fieldset[aria-describedby='id-c2b221b4-ee1f-41c8-8fc7-9d49998fab35-hint'],
-.govuk-fieldset[aria-describedby='id-e887bcea-91d1-4c50-a25e-4335fa1e6ae5-hint'],
-.govuk-fieldset[aria-describedby='id-9692659a-778a-436a-bf4e-fe1924638e37-hint'],
-.govuk-fieldset[aria-describedby='id-68e31f3a-5175-47e2-986b-d722ad78d893-hint'] {
+.govuk-fieldset[aria-describedby="current_possession_firearm-hint"],
+.govuk-fieldset[aria-describedby="current_offence_weapon-hint"],
+.govuk-fieldset[aria-describedby="previous_murder_attempt-hint"],
+.govuk-fieldset[aria-describedby="previous_wounding-hint"],
+.govuk-fieldset[aria-describedby="previous_aggravated_burglary-hint"],
+.govuk-fieldset[aria-describedby="previous_arson-hint"],
+.govuk-fieldset[aria-describedby="previous_criminal_damage-hint"],
+.govuk-fieldset[aria-describedby="previous_kidnapping-hint"],
+.govuk-fieldset[aria-describedby="previous_possession_firearm-hint"],
+.govuk-fieldset[aria-describedby="previous_robbery-hint"],
+.govuk-fieldset[aria-describedby="previous_offence_weapon-hint"],
+.govuk-fieldset[aria-describedby="id-4dab51be-e9f8-4ca1-8765-b58e07e137ba-hint"],
+.govuk-fieldset[aria-describedby="id-0941c5b2-f42d-4120-ad79-44954674fe00-hint"],
+.govuk-fieldset[aria-describedby="id-f988f76c-3d6c-4f45-aa29-7dc8d11198d7-hint"],
+.govuk-fieldset[aria-describedby="id-ad81d270-4acc-472c-a79e-01d0a422ce80-hint"],
+.govuk-fieldset[aria-describedby="id-f8789074-1532-4b32-8995-780da18e273a-hint"],
+.govuk-fieldset[aria-describedby="id-df5d635a-6765-42af-9007-6d6d333da5f2-hint"],
+.govuk-fieldset[aria-describedby="id-c2b221b4-ee1f-41c8-8fc7-9d49998fab35-hint"],
+.govuk-fieldset[aria-describedby="id-e887bcea-91d1-4c50-a25e-4335fa1e6ae5-hint"],
+.govuk-fieldset[aria-describedby="id-9692659a-778a-436a-bf4e-fe1924638e37-hint"],
+.govuk-fieldset[aria-describedby="id-68e31f3a-5175-47e2-986b-d722ad78d893-hint"] {
   .govuk-radios {
     @extend .govuk-radios--inline;
   }
@@ -46,6 +46,7 @@
 .landing-page__offence-details {
   background: #e0eef8;
   padding: 20px;
+
   th,
   td {
     font-size: 24px;
@@ -65,6 +66,7 @@
     font-size: 19px;
     font-weight: 400;
   }
+
   input {
     @extend .govuk-input--width-10;
   }
@@ -79,8 +81,8 @@
   @extend .govuk-input--width-20;
 }
 
-.govuk-fieldset[aria-describedby='id-ecb880ef-02c7-4ffc-8726-7e0f60f1191c-hint'],
-.govuk-fieldset[aria-describedby='id-775cd8bf-fe1b-4625-9937-ae8a238a8402-hint'] {
+.govuk-fieldset[aria-describedby="id-ecb880ef-02c7-4ffc-8726-7e0f60f1191c-hint"],
+.govuk-fieldset[aria-describedby="id-775cd8bf-fe1b-4625-9937-ae8a238a8402-hint"] {
   .govuk-radios {
     @extend .govuk-radios--inline;
   }

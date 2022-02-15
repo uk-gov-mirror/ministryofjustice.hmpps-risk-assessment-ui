@@ -1,15 +1,17 @@
-@import 'govuk-frontend/govuk/all';
-@import '@ministryofjustice/frontend/moj/all';
-@import 'accessible-autocomplete/dist/accessible-autocomplete.min';
-@import 'components/accessible-autocomplete';
-@import 'components/cookie-message';
-@import 'components/task-list';
-@import 'components/form-wizard-task-list';
-@import 'components/predictor-scores';
-@import 'pages';
-@import 'upw-pages';
-@import 'upw-pdf-template';
-@import 'widgets';
+@import "govuk-frontend/govuk/all";
+@import "@ministryofjustice/frontend/moj/all";
+/* stylelint-disable scss/at-import-partial-extension */
+@import "accessible-autocomplete/dist/accessible-autocomplete.min";
+/* stylelint-enable scss/at-import-partial-extension */
+@import "components/accessible-autocomplete";
+@import "components/cookie-message";
+@import "components/task-list";
+@import "components/form-wizard-task-list";
+@import "components/predictor-scores";
+@import "pages";
+@import "upw-pages";
+@import "upw-pdf-template";
+@import "widgets";
 
 $white-transparent: rgb(255 255 255 / 25%);
 
@@ -23,14 +25,14 @@ $white-transparent: rgb(255 255 255 / 25%);
 
 .key-details-bar__name {
   font-size: 36px !important;
-  font-family: 'GDS Transport', Arial, sans-serif !important;
+  font-family: "GDS Transport", Arial, sans-serif !important;
   font-weight: 700 !important;
 }
 
 .moj-header__link,
 .moj-header__navigation-link {
   &:focus {
-    background-color: govuk-colour('yellow');
+    background-color: govuk-colour("yellow");
     outline: 0;
   }
 }
@@ -41,7 +43,7 @@ p {
 
 .moj-context-header dt,
 .moj-context-header dd {
-  color: govuk-colour('dark-grey');
+  color: govuk-colour("dark-grey");
   padding-top: 0;
   display: inline-block;
   margin: govuk-spacing(1);
@@ -167,12 +169,12 @@ p {
 }
 
 .moj-task-list__task-completed {
-  background-color: govuk-colour('green');
+  background-color: govuk-colour("green");
 }
 
 .moj-task-list__task--not-started {
-  color: govuk-colour('dark-grey');
-  background-color: govuk-colour('light-grey');
+  color: govuk-colour("dark-grey");
+  background-color: govuk-colour("light-grey");
 }
 
 .moj-task-list__task {
