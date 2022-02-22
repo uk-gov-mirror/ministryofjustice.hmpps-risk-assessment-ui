@@ -24,12 +24,23 @@
         }) }}
 
         <p class="govuk-body">
-            The assessment PDF has been saved to Delius. You can now close this window.
+            The assessment PDF has been saved to Delius.
         </p>
 
         <div class="govuk-button-group">
             <a class="govuk-button" href="/UPW/pdf-download" download>Download the PDF</a>            
         </div>
+
+        <div class="govuk-body">
+        <a href="{{ feedbackUrl }}" class="govuk-link" target="_blank" rel="noopener noreferrer">
+        What did you think of the service?</a> 
+        (takes 1 minute)
+        </div>
+       
+       <br>
+        <p class="govuk-body">
+            You can now close this window.
+        </p> 
     </div>
 </div>
 {% endblock %}
