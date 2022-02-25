@@ -1,4 +1,4 @@
-FROM node:16.13.1-bullseye-slim
+FROM node:17-bullseye-slim
 LABEL maintainer="HMPPS Digital Studio <info@digital.justice.gov.uk>"
 ARG BUILD_NUMBER
 ARG GIT_REF
@@ -37,6 +37,6 @@ EXPOSE 3000
 
 RUN chown -R appuser:appgroup /app
 ENV NODE_ENV='production'
-USER 2000
+USER 2000docker
 
 CMD [ "npm", "start" ]
