@@ -1,0 +1,6 @@
+# Suppress all Debian vulnerabilities as we are not upgrading the node image 16.13.1-bullseye-slim as it is MoJ approved
+CVE-2022-25235
+CVE-2022-25236
+CVE-2022-25315
+CVE-2022-25313
+CVE-2022-25314
