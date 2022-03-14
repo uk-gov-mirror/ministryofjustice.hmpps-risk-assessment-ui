@@ -171,6 +171,15 @@ const ageFrom = (dateOfBirth, today = new Date()) => {
   return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
 }
 
+const clearAnswers = questions => {
+  const pageQuestions = Object.keys(questions)
+  pageQuestions.forEach(question => {
+    // eslint-disable-next-line no-param-reassign
+    questions[question].answer = ''
+  })
+  return questions
+}
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -191,4 +200,5 @@ module.exports = {
   prettyDate,
   prettyDateAndTime,
   ageFrom,
+  clearAnswers,
 }

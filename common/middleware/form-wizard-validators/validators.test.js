@@ -7,6 +7,7 @@ const {
   yearsBetweenLessThan,
   yearsBetweenGreaterThan,
   noSpace,
+  onePresent,
 } = require('./validators')
 
 describe('checks numbers are in range', () => {
@@ -100,5 +101,17 @@ describe('does not allow only spaces', () => {
     expect(noSpace('')).toEqual(true)
     expect(noSpace('  abc')).toEqual(true)
     expect(noSpace('abc    ')).toEqual(true)
+  })
+})
+
+describe('checks if at least one of the values is present', () => {
+  it('checks if a value is present', () => {
+    expect(onePresent('a', 'b')).toEqual(true)
+    expect(onePresent('a', '')).toEqual(true)
+    expect(onePresent('', 'b')).toEqual(true)
+    expect(onePresent('', '')).toEqual(false)
+    expect(onePresent(undefined, undefined)).toEqual(false)
+    expect(onePresent(undefined, '  ')).toEqual(false)
+    expect(onePresent(null, null)).toEqual(false)
   })
 })

@@ -1,6 +1,12 @@
 const StartUpwAssessment = require('./controllers/start')
 const TaskList = require('./controllers/taskList')
 const SaveAndContinue = require('./controllers/saveAndContinue')
+const individualsDetailsSaveAndContinue = require('./controllers/individualsDetailsSaveAndContinue')
+const editEmergencyContactsSaveAndContinue = require('./controllers/editEmergencyContactsSaveAndContinue')
+const removeEmergencyContactsSaveAndContinue = require('./controllers/removeEmergencyContactsSaveAndContinue')
+const gpDetailsSaveAndContinue = require('./controllers/gpDetailsSaveAndContinue')
+const editGpDetailsSaveAndContinue = require('./controllers/editGpDetailsSaveAndContinue')
+const removeGpDetailsSaveAndContinue = require('./controllers/removeGpDetailsSaveAndContinue')
 const ConvertPdf = require('./controllers/convertPdf')
 const Declaration = require('./controllers/declaration')
 const Confirmation = require('./controllers/confirmation')
@@ -23,10 +29,10 @@ module.exports = {
   },
   '/individuals-details': {
     pageTitle: "Individual's details",
-    controller: SaveAndContinue,
+    controller: individualsDetailsSaveAndContinue,
     template: `${__dirname}/templates/individuals-details/individuals-details.njk`,
     next: 'task-list',
-    fields: ['individual_details_complete'],
+    fields: ['individual_details_complete', 'emergency_contact_declined'],
   },
   '/edit-personal-details': {
     pageTitle: 'Personal details',
@@ -53,9 +59,9 @@ module.exports = {
       'contact_email_addresses',
     ],
   },
-  '/edit-emergency-contact-details': {
+  '/edit-emergency-contact/*': {
     pageTitle: 'Emergency contact details',
-    controller: SaveAndContinue,
+    controller: editEmergencyContactsSaveAndContinue,
     template: `${__dirname}/templates/individuals-details/edit-emergency-contact-details.njk`,
     next: 'individuals-details',
     fields: [
@@ -65,6 +71,11 @@ module.exports = {
       'emergency_contact_phone_number',
       'emergency_contact_mobile_phone_number',
     ],
+  },
+  '/remove-emergency-contact/*': {
+    pageTitle: 'Remove emergency contact',
+    controller: removeEmergencyContactsSaveAndContinue,
+    next: 'individuals-details',
   },
   '/cultural-and-religious-adjustments': {
     pageTitle: 'Cultural and religious adjustments',
@@ -179,14 +190,14 @@ module.exports = {
   },
   '/gp-details': {
     pageTitle: 'GP Details',
-    controller: SaveAndContinue,
+    controller: gpDetailsSaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/gp-details.njk`,
     next: 'task-list',
     fields: ['gp_details_complete'],
   },
-  '/edit-gp-details': {
+  '/edit-gp-details/*': {
     pageTitle: 'Details of GP',
-    controller: SaveAndContinue,
+    controller: editGpDetailsSaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/edit-gp-details.njk`,
     next: 'gp-details',
     fields: [
@@ -201,6 +212,11 @@ module.exports = {
       'gp_address_postcode',
       'gp_phone_number',
     ],
+  },
+  '/remove-gp-details/*': {
+    pageTitle: 'Remove GP details',
+    controller: removeGpDetailsSaveAndContinue,
+    next: 'gp-details',
   },
   '/travel-information': {
     pageTitle: 'Travel',

@@ -1,5 +1,12 @@
 const { isDate, isFuture, parseISO, isAfter, isEqual, intervalToDuration } = require('date-fns')
 
+const onePresent = function range(value, otherValue) {
+  const valueCheck = value != null && value.trim().length !== 0
+  const otherValueCheck = otherValue != null && otherValue.trim().length !== 0
+
+  return valueCheck || otherValueCheck
+}
+
 const range = function range(value, lowerBound, higherBound) {
   return Number(value) >= Number(lowerBound) && Number(value) <= Number(higherBound)
 }
@@ -50,4 +57,5 @@ module.exports = {
   yearsBetweenGreaterThan,
   yearsBetweenLessThan,
   noSpace,
+  onePresent,
 }

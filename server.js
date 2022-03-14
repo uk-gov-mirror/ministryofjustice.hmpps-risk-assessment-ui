@@ -35,6 +35,7 @@ const {
   prettyDate,
   ageFrom,
   prettyDateAndTime,
+  clearAnswers,
 } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
@@ -164,6 +165,7 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('prettyDate', prettyDate)
   nunjucksEnvironment.addFilter('prettyDateAndTime', prettyDateAndTime)
   nunjucksEnvironment.addFilter('ageFrom', ageFrom)
+  nunjucksEnvironment.addFilter('clearAnswers', clearAnswers)
 
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise
