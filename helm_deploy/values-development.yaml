@@ -46,6 +46,8 @@ allow_list:
   cloudplatform-live1-2: "3.8.51.207/32"
   cloudplatform-live1-3: "35.177.252.54/32"
   global-protect: "35.176.93.186/32"
+  capita-vpn-1: 82.203.33.128/28
+  capita-vpn-2: 82.203.33.112/28
 
 gotenberg:
   replicaCount: 1
