@@ -30,6 +30,37 @@ const customValidationsEditGpDetails = (fields, emergencyContactPhoneNumber, eme
   return fields
 }
 
+const customValidationsEditContactDetails = (
+  fields,
+  contactPhoneNumber,
+  contactMobileNumber,
+  contactAddressBuildingName,
+  contactAddressHouseNumber,
+) => {
+  fields.contact_phone_number?.validate.push({
+    fn: onePresent,
+    arguments: [contactMobileNumber],
+    message: 'You must provide details for Mobile or Phone number',
+  })
+  fields.contact_mobile_phone_number?.validate.push({
+    fn: onePresent,
+    arguments: [contactPhoneNumber],
+    message: 'You must provide details for Mobile or Phone number',
+  })
+  fields.contact_address_building_name?.validate.push({
+    fn: onePresent,
+    arguments: [contactAddressHouseNumber],
+    message: 'You must provide details for Building name or House number',
+  })
+  fields.contact_address_house_number?.validate.push({
+    fn: onePresent,
+    arguments: [contactAddressBuildingName],
+    message: 'You must provide details for Building name or House number',
+  })
+
+  return fields
+}
+
 const requireSelectOption = {
   validate: [
     {
@@ -101,12 +132,8 @@ const fields = {
   contact_address_postcode: {
     validate: [{ type: 'required', message: 'Postcode is required' }],
   },
-  contact_phone_number: {
-    validate: [{ type: 'required', message: 'Phone number is required' }],
-  },
-  contact_mobile_phone_number: {
-    validate: [{ type: 'required', message: 'Mobile phone number is required' }],
-  },
+  contact_phone_number: {},
+  contact_mobile_phone_number: {},
   contact_email_addresses: {
     validate: [{ type: 'required', message: 'Email address is required' }],
   },
@@ -459,4 +486,5 @@ module.exports = {
   fields,
   customValidationsEditEmergencyContact,
   customValidationsEditGpDetails,
+  customValidationsEditContactDetails,
 }

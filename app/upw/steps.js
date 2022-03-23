@@ -11,6 +11,7 @@ const ConvertPdf = require('./controllers/convertPdf')
 const Declaration = require('./controllers/declaration')
 const Confirmation = require('./controllers/confirmation')
 const CloseAssessment = require('./controllers/closeAssessment')
+const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
 
 module.exports = {
   '/start': {
@@ -43,7 +44,7 @@ module.exports = {
   },
   '/edit-contact-details': {
     pageTitle: 'Contact details',
-    controller: SaveAndContinue,
+    controller: editContactDetailsSaveAndContinue,
     template: `${__dirname}/templates/individuals-details/edit-contact-details.njk`,
     next: 'individuals-details',
     fields: [

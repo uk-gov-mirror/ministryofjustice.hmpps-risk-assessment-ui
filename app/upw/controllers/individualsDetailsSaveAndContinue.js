@@ -16,7 +16,7 @@ const customValidationsIndividualsDetails = (fields, emergencyContacts, individu
 
   return fields
 }
-
+// need to overide validateFields function
 class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // make changes to sessionModel fields to add in context specific validations
