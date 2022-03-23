@@ -120,15 +120,11 @@ const fields = {
   contact_address_street_name: {
     validate: [{ type: 'required', message: 'Street name is required' }],
   },
-  contact_address_district: {
-    validate: [{ type: 'required', message: 'District is required' }],
-  },
+  contact_address_district: {},
   contact_address_town_or_city: {
     validate: [{ type: 'required', message: 'Town/City is required' }],
   },
-  contact_address_county: {
-    validate: [{ type: 'required', message: 'County is required' }],
-  },
+  contact_address_county: {},
   contact_address_postcode: {
     validate: [{ type: 'required', message: 'Postcode is required' }],
   },
