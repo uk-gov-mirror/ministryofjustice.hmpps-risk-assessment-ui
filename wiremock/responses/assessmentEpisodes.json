@@ -119,39 +119,14 @@
     "learning_disability_details": [],
     "physical_disability_details": ["Hearing Difficulties"],
     "mental_health_condition_details": ["Mental Illness"],
+    "gp_address_house_number": ["123"],
+    "gp_address_street_name": ["Some street"],
+    "gp_address_district": ["In a district"],
+    "gp_address_postcode": ["ABC 123"],
     "placement_preference": ["NO"],
     "placement_preference_complete": ["YES"],
-    "emergency_contacts": [
-      {
-        "emergency_contact_first_name": ["George"],
-        "emergency_contact_family_name": ["Costanza"],
-        "emergency_contact_phone_number": ["018749284"],
-        "emergency_contact_mobile_phone_number": ["074928433"]
-      },
-      {
-        "emergency_contact_first_name": ["Alan"],
-        "emergency_contact_family_name": ["Moore"],
-        "emergency_contact_relationship": ["Father"],
-        "emergency_contact_phone_number": ["012345678"],
-        "emergency_contact_mobile_phone_number": ["0712345678"]
-      }
-    ],
-    "gp_details": [
-      {
-        "gp_first_name": ["GP1 first name"],
-        "gp_family_name": ["GP1 family name"],
-        "gp_address_building_name": ["GP1 address building name"],
-        "gp_address_district": ["GP1 district"],
-        "gp_phone_number": ["0123456789"]
-      },
-      {
-        "gp_first_name": ["GP2 first name"],
-        "gp_family_name": ["GP2 family name"],
-        "gp_address_building_name": [""],
-        "gp_address_district": ["GP2 district"],
-        "gp_phone_number": ["09876654321"]
-      }
-    ]
+
+    "placement_preference_complete": ["YES"]
   },
   "predictors": [
     {

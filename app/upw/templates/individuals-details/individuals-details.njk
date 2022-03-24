@@ -6,8 +6,6 @@
 {% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
 
-{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
-
 
 {% set backLink = 'task-list' %}
 
@@ -38,19 +36,11 @@
 {{ firstName }} {{ familyName }}
 {%- endmacro -%}
 
-{% set addEmergencyContact %}
-    {{ govukButton({
-        text: "Add contact",
-        href: 'edit-emergency-contact/new',
-        classes: "govuk-button--secondary"
-    }) }}
-{% endset %}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
         <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
 
-        <h2 class="govuk-heading-l">Personal details</h2>
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
@@ -58,7 +48,7 @@
                 rows: [
                     {
                         key: {
-                            text: 'Alias'
+                            text: 'Aliases'
                         },
                         value: {
                             html: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases'])
@@ -111,69 +101,41 @@
                 ]
             }) }}
 
-            <h2 class="govuk-heading-l">Emergency contacts</h2>
-
-            {% if rawAnswers['emergency_contact_first_name'].length != 0 %}
-                {% for item in rawAnswers['emergency_contact_first_name'] %}
-                    {{ readOnly({
-                        title: 'Emergency contact ' + [loop.index],
-                        editUrl: 'edit-emergency-contact/' + [loop.index0],
-                        removeUrl: 'remove-emergency-contact/' + [loop.index0],
-                        rows: [
-                            {
-                                key: {
-                                text: 'Name'
-                            },
-                                value: {
-                                html: renderName(rawAnswers['emergency_contact_first_name'][loop.index0], rawAnswers['emergency_contact_family_name'][loop.index0])
-                            }
-                            }, {
-                                key: {
-                                    text: 'Relationship to the individual'
-                                },
-                                value: {
-                                    html: rawAnswers['emergency_contact_relationship'][loop.index0]
-                                }
-                            }, {
-                                key: {
-                                    text: 'Mobile number'
-                                },
-                                value: {
-                                    html: rawAnswers['emergency_contact_mobile_phone_number'][loop.index0]
-                                }
-                            }, {
-                                key: {
-                                    text: 'Phone number'
-                                },
-                                value: {
-                                    html: rawAnswers['emergency_contact_phone_number'][loop.index0]
-                                }
-                            }
-                        ]
-                    }) }}
-                {% endfor %}
-
-                {{ addEmergencyContact | safe }}
-            {% else %}
-
-            <p class='govuk-body'>No emergency contact details currently in Delius</p>
-
-            {{ addEmergencyContact | safe }}
-
-            {{ govukCheckboxes({
-                idPrefix: "emergency_contact_declined",
-                name: "emergency_contact_declined",
-                errorMessage: errors['emergency_contact_declined'],
-                items: [
+            {{ readOnly({
+                title: 'Emergency contact details',
+                editUrl: 'edit-emergency-contact-details',
+                rows: [
                     {
-                        value: "declined",
-                        text: "Individual declined to give an emergency contact",
-                        checked: rawAnswers['emergency_contact_declined']
+                        key: {
+                            text: 'Name'
+                        },
+                        value: {
+                            html: renderName(answers['emergency_contact_first_name'], answers['emergency_contact_family_name'])
+                        }
+                    }, {
+                        key: {
+                            text: 'Relationship to the individual'
+                        },
+                        value: {
+                            html: answers['emergency_contact_relationship']
+                        }
+                    }, {
+                        key: {
+                            text: 'Mobile number'
+                        },
+                        value: {
+                            html: answers['emergency_contact_mobile_phone_number']
+                        }
+                    }, {
+                        key: {
+                            text: 'Phone number'
+                        },
+                        value: {
+                            html: answers['emergency_contact_phone_number']
+                        }
                     }
                 ]
             }) }}
-
-            {% endif %}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
             

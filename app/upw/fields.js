@@ -1,34 +1,34 @@
 const { range, noSpace, onePresent } = require('../../common/middleware/form-wizard-validators/validators')
 
-const customValidationsEditEmergencyContact = (fields, emergencyContactPhoneNumber, emergencyContactMobileNumber) => {
-  fields.emergency_contact_phone_number?.validate.push({
-    fn: onePresent,
-    arguments: [emergencyContactMobileNumber],
-    message: 'A phone number is required',
-  })
-  fields.emergency_contact_mobile_phone_number?.validate.push({
-    fn: onePresent,
-    arguments: [emergencyContactPhoneNumber],
-    message: 'A phone number is required',
-  })
+// const customValidationsEditEmergencyContact = (fields, emergencyContactPhoneNumber, emergencyContactMobileNumber) => {
+//   fields.emergency_contact_phone_number?.validate.push({
+//     fn: onePresent,
+//     arguments: [emergencyContactMobileNumber],
+//     message: 'A phone number is required',
+//   })
+//   fields.emergency_contact_mobile_phone_number?.validate.push({
+//     fn: onePresent,
+//     arguments: [emergencyContactPhoneNumber],
+//     message: 'A phone number is required',
+//   })
+//
+//   return fields
+// }
 
-  return fields
-}
-
-const customValidationsEditGpDetails = (fields, emergencyContactPhoneNumber, emergencyContactMobileNumber) => {
-  fields.emergency_contact_phone_number?.validate.push({
-    fn: onePresent,
-    arguments: [emergencyContactMobileNumber],
-    message: 'A phone number is required',
-  })
-  fields.emergency_contact_mobile_phone_number?.validate.push({
-    fn: onePresent,
-    arguments: [emergencyContactPhoneNumber],
-    message: 'A phone number is required',
-  })
-
-  return fields
-}
+// const customValidationsEditGpDetails = (fields, emergencyContactPhoneNumber, emergencyContactMobileNumber) => {
+//   fields.emergency_contact_phone_number?.validate.push({
+//     fn: onePresent,
+//     arguments: [emergencyContactMobileNumber],
+//     message: 'A phone number is required',
+//   })
+//   fields.emergency_contact_mobile_phone_number?.validate.push({
+//     fn: onePresent,
+//     arguments: [emergencyContactPhoneNumber],
+//     message: 'A phone number is required',
+//   })
+//
+//   return fields
+// }
 
 const customValidationsEditContactDetails = (
   fields,
@@ -134,29 +134,20 @@ const fields = {
     validate: [{ type: 'required', message: 'Email address is required' }],
   },
   emergency_contact_first_name: {
-    type: 'multiple',
-    answerGroup: 'emergency_contacts',
     validate: [{ type: 'required', message: 'First name is required' }],
   },
   emergency_contact_family_name: {
-    type: 'multiple',
-    answerGroup: 'emergency_contacts',
     validate: [{ type: 'required', message: 'Family name is required' }],
   },
   emergency_contact_relationship: {
-    type: 'multiple',
-    answerGroup: 'emergency_contacts',
     validate: [{ type: 'required', message: 'Emergency contact relationship is required' }],
   },
   emergency_contact_phone_number: {
-    type: 'multiple',
-    answerGroup: 'emergency_contacts',
+    validate: [{ type: 'required', message: 'Phone number is required' }],
   },
   emergency_contact_mobile_phone_number: {
-    type: 'multiple',
-    answerGroup: 'emergency_contacts',
+    validate: [{ type: 'required', message: 'Mobile phone number is required' }],
   },
-  emergency_contact_declined: {},
   cultural_religious_adjustment: requireYesOrNo,
   cultural_religious_adjustment_details: {
     dependent: { field: 'cultural_religious_adjustment', value: 'YES' },
@@ -298,47 +289,30 @@ const fields = {
   },
   gp_first_name: {
     validate: [{ type: 'required', message: 'First name is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
   gp_family_name: {
     validate: [{ type: 'required', message: 'Family name is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
-  gp_address_building_name: { type: 'multiple', answerGroup: 'gp_details' },
-  gp_address_house_number: { type: 'multiple', answerGroup: 'gp_details' },
+  gp_address_building_name: {},
+  gp_address_house_number: {},
   gp_address_street_name: {
     validate: [{ type: 'required', message: 'Street name is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
   gp_address_district: {
     validate: [{ type: 'required', message: 'District is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
   gp_address_town_or_city: {
     validate: [{ type: 'required', message: 'Town/City is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
   gp_address_county: {
     validate: [{ type: 'required', message: 'County is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
   gp_address_postcode: {
     validate: [{ type: 'required', message: 'Postcode is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
   gp_phone_number: {
     validate: [{ type: 'required', message: 'Phone number is required' }],
-    type: 'multiple',
-    answerGroup: 'gp_details',
   },
-  gp_details_declined: {},
   travel_information: requireYesOrNo,
   travel_information_details: {
     dependent: { field: 'travel_information', value: 'YES' },
@@ -480,7 +454,5 @@ const fields = {
 
 module.exports = {
   fields,
-  customValidationsEditEmergencyContact,
-  customValidationsEditGpDetails,
   customValidationsEditContactDetails,
 }

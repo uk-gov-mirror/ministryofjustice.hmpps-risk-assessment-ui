@@ -29,34 +29,10 @@ class SaveAndContinue extends BaseController {
       req.user?.id,
     )
 
-    // get a list of fields with multiple answers in the form [fieldName, answerGroup]
-    // 'answerGroup' is the top level key that the API will use to send repeating groups of answers
-    const questions = Object.entries(req.form.options.allFields)
-    const multipleFields = questions
-      .filter(value => {
-        return value[1].type === 'multiple'
-      })
-      .map(field => {
-        return [field[0], field[1].answerGroup]
-      })
-
-    // now for each field construct an array containing all the collected answers for this field,
-    multipleFields.forEach(field => {
-      const answers = []
-
-      const receivedAnswersForThisGroup = previousAnswers[field[1]]
-
-      receivedAnswersForThisGroup?.forEach((answerSet, index) => {
-        const tempAnswer = answerSet[field[0]]
-        answers[index] = tempAnswer ? tempAnswer[0] : ''
-      })
-
-      previousAnswers[field[0]] = answers
-    })
-
     const submittedAnswers =
       errorSummary.length === 0 ? req.sessionModel.get('answers') || {} : req.sessionModel.get('formAnswers') || {}
 
+    const questions = Object.entries(req.form.options.allFields)
     const questionsWithMappedAnswers = questions.map(withAnswersFrom(previousAnswers, submittedAnswers))
 
     const questionWithPreCompiledConditionals = compileConditionalQuestions(
@@ -73,31 +49,7 @@ class SaveAndContinue extends BaseController {
     res.locals.answers = questionsWithMappedAnswers.reduce(answersByQuestionCode, {})
     res.locals.rawAnswers = { ...previousAnswers, ...submittedAnswers }
 
-    // if editing a single 'record' from a multiples collection, add just that one to locals
-    if (res.locals.editMultiple && res.locals.multipleToEdit) {
-      multipleFields
-        .filter(field => field[1] === res.locals.editMultiple)
-        .forEach(field => {
-          const thisAnswer = previousAnswers[res.locals.editMultiple]?.[res.locals.multipleToEdit]?.[field[0]] || ''
-          res.locals.questions[field[0]].answer = thisAnswer[0] || ''
-        })
-    }
-
-    // if editing a 'new' record from a multiples collection and nothing is yet submitted, clear the answers
-    if (res.locals.editMultiple && res.locals.addingNewMultiple && errorSummary.length === 0) {
-      res.locals.clearQuestionAnswers = true
-    }
-    if (res.locals.editMultiple) req.sessionModel.set('rawAnswers', { ...previousAnswers, ...submittedAnswers })
     req.sessionModel.set('errors', {})
-
-    const submittedErrors = res.locals.errors || {}
-    if (Object.keys(submittedErrors).length > 0) {
-      const questionsForThisPage = res.locals.questions
-      Object.entries(questionsForThisPage).forEach(([key]) => {
-        questionsForThisPage[key].answer = req.form.values[key]
-      })
-      res.locals.questions = questionsForThisPage
-    }
 
     super.locals(req, res, next)
   }

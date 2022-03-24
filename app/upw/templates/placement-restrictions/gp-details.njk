@@ -6,8 +6,6 @@
 {% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
 
-{% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
-
 {% set backLink = 'task-list' %}
 
 {% block pageTitle %}
@@ -26,14 +24,6 @@
 {{ firstName }} {{ familyName }}
 {%- endmacro -%}
 
-{% set addGpDetails %}
-    {{ govukButton({
-        text: "Add GP",
-        href: 'edit-gp-details/new',
-        classes: "govuk-button--secondary"
-    }) }}
-{% endset %}
-
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-three-quarters">
@@ -42,70 +32,45 @@
         
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+            {% if answers['gp_phone_number'] %}{% set gpPhoneNumber = answers['gp_phone_number'] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
 
-            {% if rawAnswers['gp_phone_number'].length != 0 %}
-                {% for item in rawAnswers['gp_phone_number'] %}
+            {{ readOnly({
+                title: 'Details of GP (if needed to verify information)',
+                editUrl: 'edit-gp-details',
+                rows: [
+                    {
+                        key: {
+                        text: 'Name'
+                    },
+                        value: {
+                        html: renderGpName(answers['gp_first_name'], answers['gp_family_name'])
+                    }
+                    },{
+                        key: {
+                            text: 'Address'
+                        },
+                        value: {
+                            html: readOnlyAddress({
+                                buildingName: answers['gp_address_building_name'],
+                                houseNumber: answers['gp_address_house_number'],
+                                streetName: answers['gp_address_street_name'],
+                                district: answers['gp_address_district'],
+                                townOrCity: answers['gp_address_town_or_city'],
+                                county: answers['gp_address_county'],
+                                postcode: answers['gp_address_postcode']
+                            })
+                        }
+                    },{
+                        key: {
+                            text: 'Phone number'
+                        },
+                        value: {
+                            html: gpPhoneNumber
 
-                    {% if rawAnswers['gp_phone_number'][loop.index0] %}{% set gpPhoneNumber = rawAnswers['gp_phone_number'][loop.index0] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
-
-                    {{ readOnly({
-                        title: 'GP details',
-                        editUrl: 'edit-gp-details/' + [loop.index0],
-                        removeUrl: 'remove-gp-details/' + [loop.index0],
-                        rows: [
-                            {
-                                key: {
-                                text: 'Name'
-                            },
-                                value: {
-                                html: renderGpName(rawAnswers['gp_first_name'][loop.index0], rawAnswers['gp_family_name'][loop.index0])
-                            }
-                            },{
-                                key: {
-                                    text: 'Address'
-                                },
-                                value: {
-                                    html: readOnlyAddress({
-                                        buildingName: rawAnswers['gp_address_building_name'][loop.index0],
-                                        houseNumber: rawAnswers['gp_address_house_number'][loop.index0],
-                                        streetName: rawAnswers['gp_address_street_name'][loop.index0],
-                                        district: rawAnswers['gp_address_district'][loop.index0],
-                                        townOrCity: rawAnswers['gp_address_town_or_city'][loop.index0],
-                                        county: rawAnswers['gp_address_county'][loop.index0],
-                                        postcode: rawAnswers['gp_address_postcode'][loop.index0]
-                                    })
-                                }
-                            },{
-                                key: {
-                                    text: 'Phone number'
-                                },
-                                value: {
-                                    html: gpPhoneNumber
-                                }
-                            }
-                        ]
-                    }) }}
-
-
-                {% endfor %}
-                {{ addGpDetails | safe }}
-            {% else %}
-                <p class='govuk-body'>No GP details currently in Delius</p>
-                {{ addGpDetails | safe }}
-
-                {{ govukCheckboxes({
-                    idPrefix: "gp_details_declined",
-                    name: "gp_details_declined",
-                    errorMessage: errors['gp_details_declined'],
-                    items: [
-                        {
-                            value: "declined",
-                            text: "Individual declined to give GP details",
-                            checked: rawAnswers['gp_details_declined']
+                        }
                         }
                     ]
                 }) }}
-            {% endif %}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
             

@@ -45,7 +45,7 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     const submittedAnswer = someValueFrom(submittedAnswers[f])
     const previousAnswer = someValueFrom(previousAnswers[f])
 
-    if (submittedAnswer || submittedAnswer === '') {
+    if (submittedAnswer) {
       answer = submittedAnswer
     } else if (Array.isArray(previousAnswer) && previousAnswer.length > 0) {
       answer = previousAnswer.join('\n')
