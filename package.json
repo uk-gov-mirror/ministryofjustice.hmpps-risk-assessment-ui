@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "16.13.1",
+    "node": "16.14.2",
     "npm": "8.1.2"
   },
   "jest": {
@@ -170,9 +170,5 @@
       "stylelint '**/*.scss' --cache --fix",
       "git add"
     ]
-  },
-  "resolutions": {
-    "ansi-regex": "5.0.1",
-    "json-schema": "^0.4.0"
   }
 }
