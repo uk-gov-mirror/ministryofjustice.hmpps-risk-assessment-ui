@@ -5,7 +5,9 @@ const questionAnswers = require('./responses/questionAnswers.json')
 const questionGroupSummaries = require('./responses/questionGroupSummary.json')
 const questionList = require('./responses/questionList.json')
 const assessmentEpisodes = require('./responses/assessmentEpisodes.json')
+const currentEpisodeByCrn = require('./responses/currentEpisodeByCrn.json')
 const offenderDetails = require('./responses/offenderDetails.json')
+const offenderAndOffenceDetails = require('./responses/offenderAndOffenceDetails.json')
 const assessmentSupervision = require('./responses/assessmentSupervision.json')
 const updateEpisode = require('./responses/updateEpisode.json')
 const predictors = require('./responses/predictors.json')
@@ -56,6 +58,36 @@ const stubOffenderDetails = () => {
       },
       status: 200,
       jsonBody: offenderDetails,
+    },
+  })
+}
+
+const stubOffenderAndOffenceDetails = () => {
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/offender/crn/.+?/eventType/.+?/eventId/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: offenderAndOffenceDetails,
+    },
+  })
+
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/offender/crn/.+?/eventId/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: offenderAndOffenceDetails,
     },
   })
 }
@@ -279,6 +311,20 @@ const stubAssessmentEpisodes = () => {
   stubFor({
     request: {
       method: 'GET',
+      urlPattern: `/assessments/subject/.+?/episodes/current`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: currentEpisodeByCrn,
+    },
+  })
+
+  stubFor({
+    request: {
+      method: 'GET',
       urlPattern: `/assessments/.+?/episodes/.+?`,
     },
     response: {
@@ -463,6 +509,7 @@ module.exports = {
   stubAnswers,
   stubEpisodes,
   stubOffenderDetails,
+  stubOffenderAndOffenceDetails,
   stubQuestionSummaries,
   stubAssessmentTypeSummaries,
   stubAssessmentComplete,

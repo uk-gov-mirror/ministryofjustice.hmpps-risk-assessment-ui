@@ -1,0 +1,22 @@
+{
+  "offenderId": 101,
+  "firstName": "John",
+  "surname": "Smith",
+  "dateOfBirth": "1979-08-18",
+  "gender": "Male",
+  "crn": "DX5678A",
+  "pncNumber": "A/1234560BA",
+  "croNumber": null,
+  "offence": {
+    "convictionId": 2500000223,
+    "convictionIndex": 1,
+    "offenceCode": "046",
+    "codeDescription": "Stealing from shops and stalls (shoplifting)",
+    "offenceSubCode": "00",
+    "subCodeDescription": "Stealing from shops and stalls (shoplifting)",
+    "sentenceDate": "2020-08-25"
+  },
+  "address": null,
+  "firstNameAliases": ["John", "Jonny"],
+  "surnameAliases": ["Smithy"]
+}

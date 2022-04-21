@@ -171,6 +171,21 @@ const ageFrom = (dateOfBirth, today = new Date()) => {
   return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
 }
 
+const getErrorMessageFor = (user, reason) => {
+  if (reason === 'OASYS_PERMISSION') {
+    return 'You do not have permission to create this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
+  }
+  if (reason === 'DUPLICATE_OFFENDER_RECORD') {
+    return `The offender is showing as a possible duplicate record under ${user.areaName}. Log into OASys to manage the duplication. If you need help, contact the OASys Application Support team`
+  }
+
+  if (reason === 'LAO_PERMISSION') {
+    return 'You do not have the permissions needed to access this record'
+  }
+
+  return 'Something went wrong' // Unhandled exception
+}
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -191,4 +206,5 @@ module.exports = {
   prettyDate,
   prettyDateAndTime,
   ageFrom,
+  getErrorMessageFor,
 }

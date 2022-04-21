@@ -7,6 +7,7 @@ const {
   stubAnswers,
   stubEpisodes,
   stubOffenderDetails,
+  stubOffenderAndOffenceDetails,
   stubAssessmentComplete,
   stubGetAssessments,
   stubGetQuestionGroup,
@@ -59,6 +60,7 @@ async function stub() {
   await stubOasysUser()
   await stubTableActions()
   await stubOffenderDetails()
+  await stubOffenderAndOffenceDetails()
   await stubGetUserProfile()
   await stubAssessmentQuestions()
   await stubPredictors()

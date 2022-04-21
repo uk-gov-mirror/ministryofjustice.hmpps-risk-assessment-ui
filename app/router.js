@@ -60,7 +60,7 @@ const rsrWorkflow = require('./rsr')
 const upwWorkflow = require('./upw')
 
 const logger = require('../common/logging/logger')
-const { startAssessment } = require('./startAssessment/get.controller')
+const { verifyAssessment } = require('./startAssessment/get.controller')
 
 const assessmentUrl = `/${devAssessmentId}/questiongroup/ROSH/summary`
 
@@ -199,7 +199,7 @@ module.exports = app => {
     submitPredictorScores,
   )
 
-  app.get(['/start-assessment', '/assessment-from-delius'], startAssessment)
+  app.get(['/start-assessment', '/assessment-from-delius'], verifyAssessment)
   app.use('/rsr', rsrWorkflow)
   app.use('/upw', upwWorkflow)
 

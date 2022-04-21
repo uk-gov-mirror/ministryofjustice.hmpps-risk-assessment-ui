@@ -25,6 +25,9 @@ class Confirmation extends SaveAndContinue {
       const familyName = res.locals.rawAnswers.family_name || ''
       const crn = res.locals.rawAnswers.crn || ''
 
+      const assessmentId = req.session?.assessment?.uuid
+      const episodeId = req.session?.assessment?.episodeUuid
+
       const fileName = createFileNameFrom('pdf', firstName, familyName, crn)
 
       const pdfConvertResponse = await convertHtmlToPdf(renderedHtml)
@@ -35,8 +38,8 @@ class Confirmation extends SaveAndContinue {
       }
 
       const deliusUploadResponse = await uploadPdfDocumentToDelius(
-        req.session?.assessment?.uuid,
-        req.session?.assessment?.episodeUuid,
+        assessmentId,
+        episodeId,
         { document: pdfConvertResponse.response, fileName },
         req.user,
       )
@@ -48,15 +51,14 @@ class Confirmation extends SaveAndContinue {
         }
 
         throw new Error('Failed to upload the PDF')
+      } else {
+        logger.info(`PDF uploaded for CRN ${crn}, episode ${episodeId}`)
       }
 
-      const [assessmentCompleted] = await postCompleteAssessment(
-        req.session?.assessment?.uuid,
-        req.user?.token,
-        req.user?.id,
-      )
+      const [assessmentCompleted] = await postCompleteAssessment(assessmentId, req.user?.token, req.user?.id)
 
       if (!assessmentCompleted) {
+        logger.error(`Could not close assessment: ${assessmentId} for CRN: ${crn}`)
         throw new Error('Failed to complete the assessment')
       }
 

@@ -1,12 +1,14 @@
-const { assessmentSupervision, getCurrentEpisode } = require('../../common/data/hmppsAssessmentApi')
-const { startAssessment } = require('./get.controller')
+const { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } = require('../../common/data/hmppsAssessmentApi')
+const { verifyAssessment } = require('./get.controller')
+const offenderAndOffenceDetails = require('../../wiremock/responses/offenderAndOffenceDetails.json')
+const currentEpisodeDetails = require('../../wiremock/responses/currentEpisodeByCrn.json')
 
 jest.mock('../../common/data/hmppsAssessmentApi', () => ({
-  assessmentSupervision: jest.fn(),
-  getCurrentEpisode: jest.fn(),
+  getCurrentEpisodeForCrn: jest.fn(),
+  getOffenderAndOffenceDetails: jest.fn(),
 }))
 
-describe('startAssessment', () => {
+describe('verifyAssessment', () => {
   const baseReq = {
     user: {
       id: 1,
@@ -24,7 +26,8 @@ describe('startAssessment', () => {
   const next = jest.fn()
 
   beforeEach(() => {
-    assessmentSupervision.mockReset()
+    getCurrentEpisodeForCrn.mockReset()
+    getOffenderAndOffenceDetails.mockReset()
     res.redirect.mockReset()
     res.render.mockReset()
     next.mockReset()
@@ -33,94 +36,66 @@ describe('startAssessment', () => {
     baseReq.session = { ...baseSession }
   })
 
-  it('creates an assessment then redirects', async () => {
-    const assessmentUuid = 'ASSESSMENT_UUID'
-    const episodeUuid = 'EPISODE_UUID'
-    assessmentSupervision.mockResolvedValue([true, { assessmentUuid }])
-    getCurrentEpisode.mockResolvedValue({ episodeUuid })
+  it('gets offender and offence details then redirects', async () => {
+    getCurrentEpisodeForCrn.mockResolvedValue(currentEpisodeDetails)
+    getOffenderAndOffenceDetails.mockResolvedValue(offenderAndOffenceDetails)
 
     const req = {
       ...baseReq,
       query: {
         crn: '123456',
         eventId: 1,
-        assessmentType: 'RSR',
+        assessmentType: 'UPW',
       },
     }
 
-    await startAssessment(req, res, next)
+    await verifyAssessment(req, res, next)
+
+    expect(getCurrentEpisodeForCrn).toHaveBeenCalledWith('123456', 'USER_TOKEN', 1)
+    expect(getOffenderAndOffenceDetails).toHaveBeenCalledWith('123456', 1, 'UPW', null, 'USER_TOKEN', 1)
 
     expect(res.redirect).toHaveBeenCalledWith(`/${req.query.assessmentType}/start`)
   })
 
-  it('stores assessment details in the session', async () => {
-    const assessmentUuid = 'ASSESSMENT_UUID'
-    const episodeUuid = 'EPISODE_UUID'
-    const offenceCode = '00'
-    const codeDescription = 'Offence'
-    const offenceSubCode = '00'
-    const subCodeDescription = 'Sub Offence'
-    const subject = {
-      name: 'Test Offender',
-      dateOfBirth: '1980-01-01',
-      pnc: '1234567',
-      crn: '1234567',
-      subjectUuid: 'SUBJECT_UUID',
-    }
-    assessmentSupervision.mockResolvedValue([true, { assessmentUuid, subject }])
-    getCurrentEpisode.mockResolvedValue({
-      episodeUuid,
-      offence: {
-        offenceCode,
-        codeDescription,
-        offenceSubCode,
-        subCodeDescription,
-        sentenceDate: '2020-01-01',
-      },
-    })
+  it('stores offender, offence and last edited details in the session', async () => {
+    getCurrentEpisodeForCrn.mockResolvedValue(currentEpisodeDetails)
+    getOffenderAndOffenceDetails.mockResolvedValue(offenderAndOffenceDetails)
 
     const req = {
       ...baseReq,
       query: {
         crn: '123456',
         eventId: 1,
-        assessmentType: 'RSR',
+        assessmentType: 'UPW',
       },
     }
 
     jest.useFakeTimers('modern').setSystemTime(new Date('2020-01-01').getTime())
 
-    await startAssessment(req, res, next)
-
-    expect(assessmentSupervision).toHaveBeenCalledWith(
-      {
-        assessmentSchemaCode: 'RSR',
-        crn: '123456',
-        deliusEventId: 1,
-      },
-      'USER_TOKEN',
-      1,
-    )
+    await verifyAssessment(req, res, next)
 
     expect(req.session).toEqual({
       ...baseSession,
       assessment: {
-        uuid: assessmentUuid,
-        episodeUuid,
+        assessmentCode: 'UPW',
+        deliusEventType: null,
+        eventId: 1,
+        lastEditedBy: 'A Alonso',
+        lastEditedDate: '2022-04-01T09:00',
         offence: {
-          offence: offenceCode,
-          offenceDescription: codeDescription,
-          subCode: offenceSubCode,
-          subCodeDescription,
-          sentenceDate: '1st January 2020',
+          offence: '046',
+          offenceDescription: 'Stealing from shops and stalls (shoplifting)',
+          sentenceDate: '25th August 2020',
+          subCode: '00',
+          subCodeDescription: 'Stealing from shops and stalls (shoplifting)',
         },
         subject: {
-          crn: subject.crn,
-          dob: subject.dateOfBirth,
           age: 40,
-          name: subject.name,
-          pnc: subject.pnc,
-          subjectUuid: subject.subjectUuid,
+          crn: 'DX5678A',
+          dob: '1979-08-18',
+          name: 'John Smith',
+          pnc: 'A/1234560BA',
+          subjectUuid: 101,
         },
       },
     })
@@ -128,53 +103,27 @@ describe('startAssessment', () => {
     jest.useRealTimers()
   })
 
-  it('calls create assessment create endpoint correctly for unpaid work', async () => {
-    const assessmentUuid = 'ASSESSMENT_UUID'
-    const episodeUuid = 'EPISODE_UUID'
-    const offenceCode = '00'
-    const codeDescription = 'Offence'
-    const offenceSubCode = '00'
-    const subCodeDescription = 'Sub Offence'
-    const subject = {
-      name: 'Test Offender',
-      dateOfBirth: '1980-01-01',
-      pnc: '1234567',
-      crn: '1234567',
-      subjectUuid: 'SUBJECT_UUID',
-    }
-    assessmentSupervision.mockResolvedValue([true, { assessmentUuid, subject }])
-    getCurrentEpisode.mockResolvedValue({
-      episodeUuid,
-      offence: {
-        offenceCode,
-        codeDescription,
-        offenceSubCode,
-        subCodeDescription,
-        sentenceDate: '2020-01-01',
-      },
-    })
+  it('stores details in the session when there is no previous episode', async () => {
+    getCurrentEpisodeForCrn.mockResolvedValue({})
+    getOffenderAndOffenceDetails.mockResolvedValue(offenderAndOffenceDetails)
 
     const req = {
       ...baseReq,
       query: {
         crn: '123456',
         eventId: 1,
-        assessmentType: 'UNPAID_WORK',
+        assessmentType: 'UPW',
       },
     }
 
-    await startAssessment(req, res, next)
+    jest.useFakeTimers('modern').setSystemTime(new Date('2020-01-01').getTime())
 
-    expect(assessmentSupervision).toHaveBeenCalledWith(
-      {
-        assessmentSchemaCode: 'UPW',
-        crn: '123456',
-        deliusEventId: 1,
-        deliusEventType: 'EVENT_ID',
-      },
-      'USER_TOKEN',
-      1,
-    )
+    await verifyAssessment(req, res, next)
+
+    expect(req.session.lastEditedBy).toEqual(undefined)
+    expect(req.session.lastEditedDate).toEqual(undefined)
+
+    jest.useRealTimers()
   })
 
   it('returns an error when passed no CRN', async () => {
@@ -186,7 +135,7 @@ describe('startAssessment', () => {
       },
     }
 
-    await startAssessment(req, res, next)
+    await verifyAssessment(req, res, next)
 
     expect(next).toHaveBeenCalledWith(new Error('CRN is mandatory'))
   })
@@ -200,25 +149,8 @@ describe('startAssessment', () => {
       },
     }
 
-    await startAssessment(req, res, next)
+    await verifyAssessment(req, res, next)
 
     expect(next).toHaveBeenCalledWith(new Error('Assessment type is mandatory'))
-  })
-
-  it('returns an error when unable to create an assessment', async () => {
-    assessmentSupervision.mockResolvedValue([false, { reason: 'SOME_ERROR' }])
-
-    const req = {
-      ...baseReq,
-      query: {
-        crn: '123456',
-        eventId: 1,
-        assessmentType: 'RSR',
-      },
-    }
-
-    await startAssessment(req, res, next)
-
-    expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: 'Something went wrong' })
   })
 })
