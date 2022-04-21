@@ -99,7 +99,7 @@ describe('ConfirmationController', () => {
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
       hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessment.mockResolvedValue([true])
+      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
 
       await controller.render(req, res, next)
 
@@ -181,11 +181,16 @@ describe('ConfirmationController', () => {
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
       hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessment.mockResolvedValue([true])
+      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
 
       await controller.render(req, res, next)
 
-      expect(hmppsAssessmentsApiClient.postCompleteAssessment).toHaveBeenCalledWith(assessmentUuid, user.token, user.id)
+      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode).toHaveBeenCalledWith(
+        assessmentUuid,
+        episodeUuid,
+        user.token,
+        user.id,
+      )
       expect(superMethod).toHaveBeenCalled()
     })
 
@@ -194,11 +199,16 @@ describe('ConfirmationController', () => {
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
       hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessment.mockResolvedValue([false])
+      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([false])
 
       await controller.render(req, res, next)
 
-      expect(hmppsAssessmentsApiClient.postCompleteAssessment).toHaveBeenCalledWith(assessmentUuid, user.token, user.id)
+      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode).toHaveBeenCalledWith(
+        assessmentUuid,
+        episodeUuid,
+        user.token,
+        user.id,
+      )
       expect(next).toHaveBeenCalledWith(new Error('Failed to complete the assessment'))
       expect(superMethod).not.toHaveBeenCalled()
     })

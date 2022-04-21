@@ -122,6 +122,20 @@ const stubAssessmentComplete = () => {
       jsonBody: assessmentEpisodes,
     },
   })
+
+  stubFor({
+    request: {
+      method: 'POST',
+      urlPattern: '/assessments/.+?/episodes/.+?/complete',
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: assessmentEpisodes,
+    },
+  })
 }
 
 const stubQuestionGroup = groupId => {

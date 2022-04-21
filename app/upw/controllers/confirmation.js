@@ -2,7 +2,7 @@
 const nunjucks = require('nunjucks')
 const SaveAndContinue = require('./saveAndContinue')
 const logger = require('../../../common/logging/logger')
-const { uploadPdfDocumentToDelius, postCompleteAssessment } = require('../../../common/data/hmppsAssessmentApi')
+const { uploadPdfDocumentToDelius, postCompleteAssessmentEpisode } = require('../../../common/data/hmppsAssessmentApi')
 const { convertHtmlToPdf } = require('../../../common/data/pdf')
 
 const createFileNameFrom = (type, ...parts) => {
@@ -55,7 +55,12 @@ class Confirmation extends SaveAndContinue {
         logger.info(`PDF uploaded for CRN ${crn}, episode ${episodeId}`)
       }
 
-      const [assessmentCompleted] = await postCompleteAssessment(assessmentId, req.user?.token, req.user?.id)
+      const [assessmentCompleted] = await postCompleteAssessmentEpisode(
+        assessmentId,
+        episodeId,
+        req.user?.token,
+        req.user?.id,
+      )
 
       if (!assessmentCompleted) {
         logger.error(`Could not close assessment: ${assessmentId} for CRN: ${crn}`)

@@ -73,8 +73,14 @@ const getAssessmentsList = (authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
+// this endpoint is now deprecated - use postCompleteAssessmentEpisode below which is idempotent
 const postCompleteAssessment = (assessmentId, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/complete`
+  return postData(path, authorisationToken, userId)
+}
+
+const postCompleteAssessmentEpisode = (assessmentId, episodeId, authorisationToken, userId) => {
+  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/complete`
   return postData(path, authorisationToken, userId)
 }
 
@@ -253,4 +259,5 @@ module.exports = {
   uploadPdfDocumentToDelius,
   closeAssessment,
   getOffenderAndOffenceDetails,
+  postCompleteAssessmentEpisode,
 }
