@@ -11,6 +11,7 @@ const {
   prettyDateAndTime,
   prettyDate,
   ageFrom,
+  updateJsonValue,
 } = require('./util')
 
 const inputText = "There is a green hill far away - and I shouldn't tell you that really"
@@ -212,5 +213,37 @@ describe('ageFrom', () => {
 
   it('handles empty input', () => {
     expect(ageFrom()).toBeNull()
+  })
+})
+
+// unit tests for updateJsonValue object
+
+describe('tests for the updateJsonValue function', () => {
+  it('creates a json object when json object is null and createNewObject is true', () => {
+    const results = updateJsonValue(null, 'key', 'value', false)
+    expect(results).toEqual({}) // a new json object is created
+  })
+
+  it('creates an empty object when json object is null', () => {
+    const results = updateJsonValue(null, 'key', 'value', true)
+    expect(results).toEqual({ key: 'value' })
+  })
+
+  it('updates the keys value if it already exist', () => {
+    const myObject = { one: '1', two: '2', key: 'value' }
+    const results = updateJsonValue(myObject, 'key', 'newValue', false)
+    expect(results).toEqual({ one: '1', two: '2', key: 'newValue' })
+  })
+
+  it('updates the key value', () => {
+    const myObject = { one: '1', two: '2' }
+    const results = updateJsonValue(myObject, 'key', 'newValue', false)
+    expect(results).toEqual({ one: '1', two: '2', key: 'newValue' })
+  })
+
+  it('if a key is not defined, return a json object', () => {
+    const myObject = { one: '1', two: '2' }
+    const results = updateJsonValue(myObject, null, 'value', false)
+    expect(results).toEqual(myObject)
   })
 })

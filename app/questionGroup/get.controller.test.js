@@ -3,12 +3,13 @@ const { configure } = require('nunjucks')
 
 const nunjucksEnvironment = configure({}, {})
 const dateFilter = require('nunjucks-date-filter')
-const { encodeHTML } = require('../../common/utils/util')
+const { encodeHTML, updateJsonValue } = require('../../common/utils/util')
 const { mojDate } = require('../../node_modules/@ministryofjustice/frontend/moj/filters/all')()
 // add custom nunjucks filters
 nunjucksEnvironment.addFilter('date', dateFilter)
 nunjucksEnvironment.addFilter('mojDate', mojDate)
 nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
+nunjucksEnvironment.addFilter('addSpellcheck', jsonObj => updateJsonValue(jsonObj, 'spellcheck', true, true))
 
 const { displayQuestionGroup } = require('./get.controller')
 const { getAnswers } = require('../../common/data/hmppsAssessmentApi')

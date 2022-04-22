@@ -172,6 +172,7 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('doReplace', (str, target, replacement) => doReplace(str, target, replacement))
   // typeof for array, using native JS Array.isArray()
   nunjucksEnvironment.addFilter('isArr', str => Array.isArray(str))
+  nunjucksEnvironment.addFilter('addSpellcheck', jsonObj => updateJsonValue(jsonObj, 'spellcheck', true, true))
   nunjucksEnvironment.addFilter('updateJsonValue', (jsonObj, keyToChange, newValue) =>
     updateJsonValue(jsonObj, keyToChange, newValue),
   )

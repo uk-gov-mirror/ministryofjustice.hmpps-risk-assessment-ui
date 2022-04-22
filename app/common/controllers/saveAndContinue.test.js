@@ -1,10 +1,11 @@
 const { configure } = require('nunjucks')
 const SaveAndContinueController = require('./saveAndContinue')
 const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
-const { processReplacements, encodeHTML } = require('../../../common/utils/util')
+const { processReplacements, encodeHTML, updateJsonValue } = require('../../../common/utils/util')
 
 const nunjucksEnvironment = configure({}, {})
 nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
+nunjucksEnvironment.addFilter('addSpellcheck', jsonObj => updateJsonValue(jsonObj, 'spellcheck', true, true))
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 jest.mock('../../../common/utils/util')

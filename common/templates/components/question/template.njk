@@ -221,7 +221,7 @@
         formGroup : {
           classes: formClass or question.formClasses
         },
-        attributes: question.attributes,
+        attributes: question.attributes | addSpellcheck,
         label: {
           text: question.questionText,
           isPageHeading: false,
@@ -247,7 +247,7 @@
       formGroup : {
         classes: question.formClasses
       },
-      attributes: question.attributes,
+      attributes: question.attributes | addSpellcheck,
       hint: {
         text: question.helpText
       },
