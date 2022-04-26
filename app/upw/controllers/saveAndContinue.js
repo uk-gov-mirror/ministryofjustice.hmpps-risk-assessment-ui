@@ -31,7 +31,7 @@ class SaveAndContinue extends BaseSaveAndContinue {
     const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
     const roshRiskSummary = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
 
-    if (roshRiskSummary.roshRiskSummary?.overallRisk === null) {
+    if (roshRiskSummary.roshRiskSummary === null || roshRiskSummary.roshRiskSummary?.overallRisk === null) {
       trackEvent(EVENTS.ARN_NO_ROSH_DATA_AVAILABLE, req)
     }
 

@@ -213,7 +213,7 @@ const action = async (agent, authorisationToken, userId) => {
   } catch (error) {
     logError(error)
     const { status, response } = error
-    if (status === 400 || status === 403 || status === 422) {
+    if (status === 400 || status === 403 || status === 422 || (agent.method !== 'POST' && status === 404)) {
       return [false, response.body]
     }
 
