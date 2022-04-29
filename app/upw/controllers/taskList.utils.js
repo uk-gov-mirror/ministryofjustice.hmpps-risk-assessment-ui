@@ -105,7 +105,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
     },
   ]
 
-  if (answers.gender_identity === 'MALE') {
+  if (answers.gender_identity && answers.gender_identity[0] === 'MALE') {
     // find section with an item with text: placement preferences, and remove from task list
     let taskIndex
     let itemIndex

@@ -87,7 +87,7 @@ describe('TaskListController', () => {
 
   it('it creates a task list and stores in locals', async () => {
     const answers = {
-      foo: 'bar',
+      foo: ['bar'],
     }
 
     getAnswers.mockReturnValueOnce({

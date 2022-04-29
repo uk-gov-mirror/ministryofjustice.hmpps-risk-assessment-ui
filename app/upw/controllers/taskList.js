@@ -3,6 +3,7 @@ const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
 const { getTaskList } = require('./taskList.utils')
 const { getAnswers } = require('../../../common/data/hmppsAssessmentApi')
 const { logger } = require('../../../common/logging/logger')
+const { answerDtoFrom } = require('../../common/controllers/saveAndContinue.utils')
 
 class TaskList extends BaseController {
   async locals(req, res, next) {
@@ -22,7 +23,7 @@ class TaskList extends BaseController {
 
       const consolidatedAnswers = { ...previousAnswers, ...answers }
 
-      res.locals.taskList = getTaskList(`/${journeyName}`, steps, consolidatedAnswers)
+      res.locals.taskList = getTaskList(`/${journeyName}`, steps, answerDtoFrom(consolidatedAnswers))
       res.locals.saveAssessmentUrl = `/${journeyName}/assessment-saved`
 
       const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
