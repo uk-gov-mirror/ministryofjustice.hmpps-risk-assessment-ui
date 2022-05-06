@@ -12,14 +12,13 @@ const checkDeclarationIsSigned = (answers, fieldName, valueWhenSigned) => {
     return false
   }
 
-  return answers[fieldName] === valueWhenSigned
+  return answers[fieldName][0] === valueWhenSigned
 }
 
 const getDeclarationStatus = (answers, tasks, fieldName) => {
   if (!checkAllTasksAreComplete(tasks)) {
     return 'CANNOT_START'
   }
-
   return checkDeclarationIsSigned(answers, fieldName, 'SIGNED') ? 'COMPLETE' : 'INCOMPLETE'
 }
 
