@@ -61,8 +61,8 @@ class StartUnpaidWork extends BaseController {
     )
 
     // update subject details in session
-    req.session.assessment.subject = {
-      ...req.session.assessment.subject,
+    assessment.subject = {
+      ...assessment.subject,
       ...getSubjectDetailsFor(createAssessmentResponse),
     }
 
