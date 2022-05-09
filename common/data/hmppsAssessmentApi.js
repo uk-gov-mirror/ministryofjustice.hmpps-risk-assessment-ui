@@ -29,7 +29,7 @@ const getOffenderData = (uuid, authorisationToken, userId) => {
 }
 
 const getAssessmentQuestions = (assessmentSchemaCode, authorisationToken, userId) => {
-  const path = `${url}/assessments/schema/${assessmentSchemaCode}`
+  const path = `${url}/assessments/${assessmentSchemaCode}`
   return getData(path, authorisationToken, userId)
 }
 
@@ -39,12 +39,12 @@ const getQuestionGroupSummary = (groupId, authorisationToken, userId) => {
 }
 
 const getFlatAssessmentQuestions = (assessmentCode, authorisationToken, userId) => {
-  const path = `${url}/assessments/schema/${assessmentCode}/questions`
+  const path = `${url}/assessments/${assessmentCode}/questions`
   return getData(path, authorisationToken, userId)
 }
 
 const getAssessmentSummary = (assessmentSchemaCode, authorisationToken, userId) => {
-  const path = `${url}/assessments/schema/${assessmentSchemaCode}/summary`
+  const path = `${url}/assessments/${assessmentSchemaCode}/summary`
   return getData(path, authorisationToken, userId)
 }
 

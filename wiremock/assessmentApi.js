@@ -142,7 +142,7 @@ const stubQuestionGroup = groupId => {
   stubFor({
     request: {
       method: 'GET',
-      urlPattern: `/assessments/schema/${groupId}`,
+      urlPattern: `/assessments/${groupId}`,
     },
     response: {
       headers: {
@@ -158,7 +158,7 @@ const stubAssessmentQuestions = assessmentCode => {
   stubFor({
     request: {
       method: 'GET',
-      urlPattern: `/assessments/schema/${assessmentCode}/questions`,
+      urlPattern: `/assessments/${assessmentCode}/questions`,
     },
     response: {
       headers: {
@@ -222,7 +222,7 @@ const stubAssessmentTypeSummary = assessmentType => {
   stubFor({
     request: {
       method: 'GET',
-      urlPattern: `/assessments/schema/${assessmentType}/summary`,
+      urlPattern: `/assessments/${assessmentType}/summary`,
     },
     response: {
       headers: {
