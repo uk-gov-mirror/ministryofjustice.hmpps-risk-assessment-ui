@@ -12,7 +12,7 @@ const checkDeclarationIsSigned = (answers, fieldName, valueWhenSigned) => {
     return false
   }
 
-  return answers[fieldName][0] === valueWhenSigned
+  return answers[fieldName] && answers[fieldName][0] === valueWhenSigned
 }
 
 const getDeclarationStatus = (answers, tasks, fieldName) => {
