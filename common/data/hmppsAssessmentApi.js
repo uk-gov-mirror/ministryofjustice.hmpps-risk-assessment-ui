@@ -118,18 +118,52 @@ const getDraftPredictorScore = (episodeUuid, authorisationToken, userId) => {
   return action(superagent.get(path), authorisationToken, userId)
 }
 
-const getRegistrationsForCrn = (crn, authorisationToken, userId) => {
-  const path = `${url}/assessments/${crn}/registrations`
-  logger.info(`Calling hmppsAssessments API with GET: ${path}`)
+const getRegistrationsForCrn = async (crn, user) => {
+  const endpoint = `${url}/assessments/${crn}/registrations`
 
-  return action(superagent.get(path), authorisationToken, userId)
+  logger.info(`Calling hmppsAssessments API with GET: ${endpoint}`)
+
+  const userDetails = await getCachedUserDetails(user.id)
+
+  try {
+    return await superagent
+      .get(endpoint)
+      .auth(user.token, { type: 'bearer' })
+      .set('x-correlation-id', getCorrelationId())
+      .set('x-user-area', userDetails?.areaCode || '')
+      .accept('application/json')
+      .then(({ ok, body, status }) => ({ ok, response: body, status }))
+  } catch (e) {
+    logError(e)
+    const { response, status } = e
+    return { ok: false, response, status }
+  }
 }
 
-const getRoshRiskSummaryForCrn = (crn, authorisationToken, userId) => {
-  const path = `${url}/assessments/${crn}/ROSH/summary`
-  logger.info(`Calling hmppsAssessments API with GET: ${path}`)
+const getRoshRiskSummaryForCrn = async (crn, user) => {
+  const endpoint = `${url}/assessments/${crn}/ROSH/summary`
 
-  return action(superagent.get(path), authorisationToken, userId)
+  if (user.token === undefined) {
+    throw new Error('No authorisation token found when calling hmppsAssessments API')
+  }
+
+  logger.info(`Calling hmppsAssessments API with GET: ${endpoint}`)
+
+  const userDetails = await getCachedUserDetails(user.id)
+
+  try {
+    return await superagent
+      .get(endpoint)
+      .auth(user.token, { type: 'bearer' })
+      .set('x-correlation-id', getCorrelationId())
+      .set('x-user-area', userDetails?.areaCode || '')
+      .accept('application/json')
+      .then(({ ok, body, status }) => ({ ok, response: body, status }))
+  } catch (e) {
+    logError(e)
+    const { response, status } = e
+    return { ok: false, response, status }
+  }
 }
 
 const getFilteredReferenceData = (assessmentId, episodeId, questionCode, parentList, authorisationToken, userId) => {

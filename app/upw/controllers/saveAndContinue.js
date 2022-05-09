@@ -29,15 +29,15 @@ const invalidateDeclarations = removeAnswers(['declaration'])
 class SaveAndContinue extends BaseSaveAndContinue {
   async locals(req, res, next) {
     const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
-    const roshRiskSummary = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
+    const { roshRiskSummary } = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
 
-    if (roshRiskSummary.roshRiskSummary === null || roshRiskSummary.roshRiskSummary?.overallRisk === null) {
+    if (roshRiskSummary?.hasBeenCompleted === false) {
       trackEvent(EVENTS.ARN_NO_ROSH_DATA_AVAILABLE, req)
     }
 
     res.locals.widgetData = {
       ...deliusRegistrations,
-      ...roshRiskSummary,
+      roshRiskSummary,
     }
 
     await super.locals(req, res, next)

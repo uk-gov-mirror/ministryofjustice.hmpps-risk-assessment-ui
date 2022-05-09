@@ -38,7 +38,21 @@ const formatFlag = flag => flag.description || null
 
 const getRegistrations = async (crn, user) => {
   try {
-    const [, response] = await getRegistrationsForCrn(crn, user?.token, user?.id)
+    const { response, status } = await getRegistrationsForCrn(crn, user)
+
+    if (status === 404) {
+      return {
+        flags: [],
+        mappa: {},
+      }
+    }
+
+    if (status >= 400) {
+      return {
+        mappa: null,
+        flags: null,
+      }
+    }
 
     return {
       mappa: formatMappaResponse(response.mappa),
@@ -46,18 +60,31 @@ const getRegistrations = async (crn, user) => {
     }
   } catch (error) {
     logger.info(`Failed to fetch registrations for CRN ${crn}`)
-    return { flags: [] }
+    return { mappa: null, flags: null }
   }
 }
 
 const getRoshRiskSummary = async (crn, user) => {
   try {
-    const [, response] = await getRoshRiskSummaryForCrn(crn, user?.token, user?.id)
+    const { response, status } = await getRoshRiskSummaryForCrn(crn, user)
 
     const nullIfNotKnown = s => (s === 'NOT_KNOWN' ? null : s)
 
+    if (status === 404) {
+      return {
+        roshRiskSummary: { hasBeenCompleted: false },
+      }
+    }
+
+    if (status >= 400) {
+      return {
+        roshRiskSummary: null,
+      }
+    }
+
     return {
       roshRiskSummary: {
+        hasBeenCompleted: true,
         overallRisk: nullIfNotKnown(response.overallRisk),
         riskToChildren: nullIfNotKnown(response.riskToChildrenInCommunity),
         riskToPublic: nullIfNotKnown(response.riskToPublicInCommunity),
