@@ -99,7 +99,7 @@ const fields = {
     questionText: '[PLACEHOLDER]',
     questionCode: 'declaration',
     answerType: 'checkbox',
-    answerSchemas: [{ text: 'Complete', value: 'COMPLETE' }],
+    answerDtos: [{ text: 'Complete', value: 'COMPLETE' }],
   },
   first_name_aliases: {
     answerType: 'textarea',

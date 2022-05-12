@@ -56,7 +56,7 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
 
   if (fieldProperties.answerType === 'radio') {
     let checkedAnswer = answerFor(fieldName)
-    const [selectedAnswer] = fieldProperties.answerSchemas.filter(answerSchema => answerSchema.value === checkedAnswer)
+    const [selectedAnswer] = fieldProperties.answerDtos.filter(answer => answer.value === checkedAnswer)
     const displayAnswer = selectedAnswer?.text || ''
 
     if (fieldProperties.questionCode.match(/^\w+_complete$/)) {
@@ -67,46 +67,46 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     return {
       ...fieldProperties,
       answer: displayAnswer,
-      answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
-        ...answerSchema,
-        checked: checkedAnswer === answerSchema.value,
+      answerDtos: fieldProperties.answerDtos.map(answer => ({
+        ...answer,
+        checked: checkedAnswer === answer.value,
       })),
     }
   }
 
   if (fieldProperties.answerType === 'checkbox') {
     const selected = submittedAnswers[fieldName] || previousAnswers[fieldName] || []
-    const displayAnswers = fieldProperties.answerSchemas
-      .filter(answerSchema => selected.includes(answerSchema.value))
-      .map(answerSchema => answerSchema.text)
+    const displayAnswers = fieldProperties.answerDtos
+      .filter(answer => selected.includes(answer.value))
+      .map(answer => answer.text)
       .join(', ')
 
     return {
       ...fieldProperties,
       answer: displayAnswers,
-      answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
-        ...answerSchema,
-        checked: selected.includes(answerSchema.value),
+      answerDtos: fieldProperties.answerDtos.map(answer => ({
+        ...answer,
+        checked: selected.includes(answer.value),
       })),
     }
   }
 
   if (fieldProperties.answerType === 'dropdown') {
     const checkedAnswer = answerFor(fieldName)
-    const [selectedAnswer] = fieldProperties.answerSchemas.filter(answerSchema => answerSchema.value === checkedAnswer)
+    const [selectedAnswer] = fieldProperties.answerDtos.filter(answer => answer.value === checkedAnswer)
     const displayAnswer = selectedAnswer?.text || ''
 
     if (!checkedAnswer || checkedAnswer === '') {
       return {
         ...fieldProperties,
         answer: displayAnswer,
-        answerSchemas: [
+        answerDtos: [
           {
             value: '',
             text: 'Select',
             selected: true,
           },
-          ...fieldProperties.answerSchemas,
+          ...fieldProperties.answerDtos,
         ],
       }
     }
@@ -114,9 +114,9 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     return {
       ...fieldProperties,
       answer: displayAnswer,
-      answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
-        ...answerSchema,
-        selected: checkedAnswer === answerSchema.value,
+      answerDtos: fieldProperties.answerDtos.map(answer => ({
+        ...answer,
+        selected: checkedAnswer === answer.value,
       })),
     }
   }
@@ -129,22 +129,22 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
   }
 }
 
-const fieldFrom = (localField, questionSchemaDto = {}) => {
+const fieldFrom = (localField, questionDto = {}) => {
   const validationRules = [...(localField.validate || [])]
   if (
-    questionSchemaDto.mandatory &&
+    questionDto.mandatory &&
     localField.validate?.filter(validationRule => validationRule.type === 'required').length === 0
   ) {
-    const remoteValidationRules = questionSchemaDto.validation ? JSON.parse(questionSchemaDto.validation) : {}
+    const remoteValidationRules = questionDto.validation ? JSON.parse(questionDto.validation) : {}
     const { mandatory = {} } = remoteValidationRules
     validationRules.push({
       type: 'required',
-      message: mandatory.errorMessage || `[PLACEHOLDER] ${questionSchemaDto.questionText} is mandatory`,
+      message: mandatory.errorMessage || `[PLACEHOLDER] ${questionDto.questionText} is mandatory`,
     })
   }
 
   const combinedSchema = {
-    ...questionSchemaDto,
+    ...questionDto,
     ...localField,
     validate: validationRules,
     answer: '',
@@ -209,19 +209,13 @@ const answerDtoFrom = formValues =>
     }
   }, {})
 
-const renderConditionalQuestion = (
-  questions,
-  questionSchema,
-  conditionalQuestionCodes,
-  errors,
-  _nunjucks = nunjucks,
-) => {
+const renderConditionalQuestion = (questions, questionDto, conditionalQuestionCodes, errors, _nunjucks = nunjucks) => {
   const conditionalQuestions = conditionalQuestionCodes.map(({ code, deps }) => {
     const [schema] = questions.filter(question => question.questionCode === code)
     return { schema, deps }
   })
 
-  const answerSchemas = questionSchema.answerSchemas.map(answer => {
+  const answerDtos = questionDto.answerDtos.map(answer => {
     const questionsDependentOnThisAnswer = conditionalQuestions.filter(
       question => question.schema.dependent.value === answer.value,
     )
@@ -260,7 +254,7 @@ const renderConditionalQuestion = (
     return { ...answer, conditional: { html: rendered } }
   })
 
-  return { ...questionSchema, answerSchemas }
+  return { ...questionDto, answerDtos }
 }
 
 const compileConditionalQuestions = (questions, errors) => {

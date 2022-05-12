@@ -12,7 +12,7 @@
       "questionText": "Forename",
       "displayOrder": "1",
       "mandatory": "yes",
-      "answerSchemas": [],
+      "answerDtos": [],
       "answer": "",
       "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the forename\",\"errorSummary\":\"You must enter a forename\"}}"
     },
@@ -24,7 +24,7 @@
       "questionText": "Surname",
       "displayOrder": "2",
       "mandatory": "yes",
-      "answerSchemas": [],
+      "answerDtos": [],
       "answer": "",
       "validation": "{\"mandatory\":{\"errorMessage\":\"Enter the surname\",\"errorSummary\":\"You must enter a surname\"}}"
     },
@@ -39,7 +39,7 @@
       "readOnly": true,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [],
+      "answerDtos": [],
       "answer": ""
     },
     {
@@ -61,7 +61,7 @@
           "readOnly": true,
           "conditional": false,
           "referenceDataTargets": [],
-          "answerSchemas": []
+          "answerDtos": []
         },
         {
           "type": "question",
@@ -74,7 +74,7 @@
           "readOnly": true,
           "conditional": false,
           "referenceDataTargets": [],
-          "answerSchemas": []
+          "answerDtos": []
         },
         {
           "type": "question",
@@ -118,21 +118,21 @@
           "displayOrder": "1",
           "mandatory": "no",
           "helpText": "Select all that apply",
-          "answerSchemas": [
+          "answerDtos": [
             {
-              "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",
+              "answerUuid": "1124444444-4444-4444-4444-444444444444",
               "answerSchemaCode": "SR15.1.2.1",
               "value": "physical",
               "text": "Physical"
             },
             {
-              "answerSchemaUuid": "1234444444-4444-4444-4444-444444444445",
+              "answerUuid": "1234444444-4444-4444-4444-444444444445",
               "answerSchemaCode": "SR15.1.2.2",
               "value": "mental",
               "text": "Mental"
             },
             {
-              "answerSchemaUuid": "1334444444-4444-4444-4444-444444444445",
+              "answerUuid": "1334444444-4444-4444-4444-444444444445",
               "answerSchemaCode": "SR15.1.2.2",
               "value": "emotional",
               "text": "Emotional"
@@ -149,7 +149,7 @@
       "questionText": "Date of Birth",
       "displayOrder": "3",
       "mandatory": "no",
-      "answerSchemas": [],
+      "answerDtos": [],
       "answer": ""
     },
     {
@@ -160,7 +160,7 @@
       "questionText": "Gender",
       "displayOrder": "4",
       "mandatory": "no",
-      "answerSchemas": [],
+      "answerDtos": [],
       "answer": ""
     },
     {
@@ -172,9 +172,9 @@
       "displayOrder": "1",
       "mandatory": "no",
       "validation": "{\"mandatory\":{\"errorMessage\":\"Select an option\",\"errorSummary\":\"Select an accommodation status\"}}",
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "Y",
           "text": "Yes",
@@ -189,7 +189,7 @@
           }
         },
         {
-          "answerSchemaUuid": "44444444-4444-4444-4444-444444444445",
+          "answerUuid": "44444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
           "value": "N",
           "text": "No"
@@ -204,9 +204,9 @@
       "questionText": "Test question for displaying conditional out of line...",
       "displayOrder": "1",
       "mandatory": "no",
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "99444444-4444-4444-4444-444444444444",
+          "answerUuid": "99444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "Y",
           "text": "Yes",
@@ -223,7 +223,7 @@
           ]
         },
         {
-          "answerSchemaUuid": "99444444-4444-4444-4444-444444444445",
+          "answerUuid": "99444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
           "value": "N",
           "text": "No"
@@ -242,21 +242,21 @@
       "mandatory": true,
       "validation": "{\"mandatory\":{\"errorMessage\":\"Select the accommodation type\",\"errorSummary\":\"Select the accommodation type\"}}",
       "conditional": true,
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "a26b1af8-d590-4a87-a347-a78347fa08c9",
+          "answerUuid": "a26b1af8-d590-4a87-a347-a78347fa08c9",
           "answerSchemaCode": "tenant_owner_occupied",
           "value": "tenant owner / occupied",
           "text": "Tenant owner / occupied"
         },
         {
-          "answerSchemaUuid": "34d227ab-437f-40b6-8a66-93a6486e9d6b",
+          "answerUuid": "34d227ab-437f-40b6-8a66-93a6486e9d6b",
           "answerSchemaCode": "living_with_stable_",
           "value": "living with (stable)",
           "text": "Living with (stable)"
         },
         {
-          "answerSchemaUuid": "d976f515-bfbe-4646-9d68-f0575c10ee96",
+          "answerUuid": "d976f515-bfbe-4646-9d68-f0575c10ee96",
           "answerSchemaCode": "living_with_unstable_",
           "value": "living with (unstable)",
           "text": "Living with (unstable)"
@@ -277,33 +277,33 @@
       "questionText": "Sentencing purpose",
       "displayOrder": "1",
       "mandatory": "no",
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "punishment",
           "text": "Punishment"
         },
         {
-          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "public_protection",
           "text": "Public protection"
         },
         {
-          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "crime_reduction",
           "text": "Crime reduction"
         },
         {
-          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "reparation",
           "text": "Reparation"
         },
         {
-          "answerSchemaUuid": "44444444-4444-4444-4444-444444444444",
+          "answerUuid": "44444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "reform_or_rehabilitation",
           "text": "Reform or rehabilitation"
@@ -320,7 +320,7 @@
       "displayOrder": "1",
       "mandatory": "no",
       "helpText": "Enter any other relevant information",
-      "answerSchemas": [],
+      "answerDtos": [],
       "answer": ""
     },
     {
@@ -332,9 +332,9 @@
       "displayOrder": 23,
       "mandatory": true,
       "conditional": false,
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "answerUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
           "answerSchemaCode": "yes",
           "value": "y",
           "text": "Yes",
@@ -365,7 +365,7 @@
           ]
         },
         {
-          "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "answerUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
           "answerSchemaCode": "no",
           "value": "n",
           "text": "No"
@@ -383,9 +383,9 @@
       "displayOrder": 25,
       "mandatory": true,
       "conditional": true,
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
+          "answerUuid": "98dcf9ac-4112-4d05-8159-409fa3545139",
           "answerSchemaCode": "yes",
           "value": "y",
           "text": "Yes",
@@ -400,7 +400,7 @@
           }
         },
         {
-          "answerSchemaUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
+          "answerUuid": "80d453da-1755-4740-9c72-dee00a3b5abc",
           "answerSchemaCode": "no",
           "value": "n",
           "text": "No"
@@ -422,7 +422,7 @@
       "displayOrder": 27,
       "mandatory": true,
       "conditional": true,
-      "answerSchemas": [],
+      "answerDtos": [],
       "answer": "",
       "formClasses": "govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden",
       "isConditional": true,
@@ -440,27 +440,27 @@
       "displayOrder": "1",
       "mandatory": "no",
       "helpText": "Select all that apply",
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "1124444444-4444-4444-4444-444444444444",
+          "answerUuid": "1124444444-4444-4444-4444-444444444444",
           "answerSchemaCode": "SR15.1.2.1",
           "value": "bail_information_record",
           "text": "Bail information record"
         },
         {
-          "answerSchemaUuid": "1234444444-4444-4444-4444-444444444445",
+          "answerUuid": "1234444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
           "value": "basic_custody_screening",
           "text": "Basic custody screening"
         },
         {
-          "answerSchemaUuid": "1334444444-4444-4444-4444-444444444445",
+          "answerUuid": "1334444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
           "value": "community_payback",
           "text": "Community payback"
         },
         {
-          "answerSchemaUuid": "1434444444-4444-4444-4444-444444444445",
+          "answerUuid": "1434444444-4444-4444-4444-444444444445",
           "answerSchemaCode": "SR15.1.2.2",
           "value": "hostel",
           "text": "Hostel"
@@ -476,19 +476,19 @@
       "displayOrder": "1",
       "mandatory": "no",
       "readOnly": true,
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2222",
+          "answerUuid": "2222",
           "value": "Y",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "3333",
+          "answerUuid": "3333",
           "value": "N",
           "text": "No"
         },
         {
-          "answerSchemaUuid": "4444",
+          "answerUuid": "4444",
           "value": "U",
           "text": "Don't know"
         }
@@ -503,29 +503,29 @@
       "displayOrder": "1",
       "mandatory": "no",
       "readOnly": true,
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "6666",
+          "answerUuid": "6666",
           "value": "OPT1",
           "text": "Option 1"
         },
         {
-          "answerSchemaUuid": "7777",
+          "answerUuid": "7777",
           "value": "OPT2",
           "text": "Option 2"
         },
         {
-          "answerSchemaUuid": "8888",
+          "answerUuid": "8888",
           "value": "OPT3",
           "text": "Option 3"
         },
         {
-          "answerSchemaUuid": "9999",
+          "answerUuid": "9999",
           "value": "OPT4",
           "text": "Option 4"
         },
         {
-          "answerSchemaUuid": "AAAA",
+          "answerUuid": "AAAA",
           "value": "OPT5",
           "text": "Option 5"
         }

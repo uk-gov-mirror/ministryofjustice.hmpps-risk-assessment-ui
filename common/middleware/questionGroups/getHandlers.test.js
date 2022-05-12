@@ -23,9 +23,9 @@ const questions = [
     displayOrder: '1',
     mandatory: 'no',
     validation: '{"mandatory":{"errorMessage":"Select an option","errorSummary":"Select an accommodation status"}}',
-    answerSchemas: [
+    answerDtos: [
       {
-        answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+        answerUuid: '44444444-4444-4444-4444-444444444444',
         answerSchemaCode: 'SR15.1.2.1',
         value: 'Y',
         text: 'Yes',
@@ -37,7 +37,7 @@ const questions = [
         ],
       },
       {
-        answerSchemaUuid: '44444444-4444-4444-4444-444444444445',
+        answerUuid: '44444444-4444-4444-4444-444444444445',
         answerSchemaCode: 'SR15.1.2.2',
         value: 'N',
         text: 'No',
@@ -57,7 +57,7 @@ const questions = [
     displayOrder: '1',
     mandatory: 'no',
     conditional: 'yes',
-    answerSchemas: [],
+    answerDtos: [],
     answer: null,
     validation:
       '{"mandatory":{"errorMessage":"Enter some details","errorSummary":"Enter more detail about the accommodation"}}',
@@ -72,14 +72,14 @@ describe('getQuestionGroups', () => {
   describe('process conditional questions', () => {
     it('compiles out-of-line conditional questions', () => {
       const thisTestQuestionGroup = JSON.parse(JSON.stringify(questions))
-      thisTestQuestionGroup[0].answerSchemas[0].conditionals[0].displayInline = false
+      thisTestQuestionGroup[0].answerDtos[0].conditionals[0].displayInline = false
 
       const expected = [
         {
-          answerSchemas: [
+          answerDtos: [
             {
               answerSchemaCode: 'SR15.1.2.1',
-              answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+              answerUuid: '44444444-4444-4444-4444-444444444444',
               attributes: [
                 ['data-conditional', 'further_information'],
                 ['data-aria-controls', 'conditional-id-form-further_information'],
@@ -96,7 +96,7 @@ describe('getQuestionGroups', () => {
             },
             {
               answerSchemaCode: 'SR15.1.2.2',
-              answerSchemaUuid: '44444444-4444-4444-4444-444444444445',
+              answerUuid: '44444444-4444-4444-4444-444444444445',
               text: 'No',
               value: 'N',
             },
@@ -115,7 +115,7 @@ describe('getQuestionGroups', () => {
         },
         {
           answer: null,
-          answerSchemas: [],
+          answerDtos: [],
           answerType: 'textarea',
           attributes: [
             ['data-outofline', 'true'],
@@ -143,10 +143,10 @@ describe('getQuestionGroups', () => {
       const thisQuestionGroup = JSON.parse(JSON.stringify(questions))
       const expected = [
         {
-          answerSchemas: [
+          answerDtos: [
             {
               answerSchemaCode: 'SR15.1.2.1',
-              answerSchemaUuid: '44444444-4444-4444-4444-444444444444',
+              answerUuid: '44444444-4444-4444-4444-444444444444',
               conditional: {
                 html:
                   ' <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="4000"><div class="govuk-form-group"><label class="govuk-label further_information govuk-label--m" for="further_information">Further information</label><div id="further_information-hint" class="govuk-hint"></div><textarea class="govuk-textarea govuk-js-character-count" id="further_information" name="further_information" rows="5" aria-describedby="further_information-info further_information-hint" spellcheck="true"></textarea>\n</div><div id="further_information-info" class="govuk-hint govuk-character-count__message" aria-live="polite">You can enter up to 4000 characters\n</div></div>',
@@ -162,7 +162,7 @@ describe('getQuestionGroups', () => {
             },
             {
               answerSchemaCode: 'SR15.1.2.2',
-              answerSchemaUuid: '44444444-4444-4444-4444-444444444445',
+              answerUuid: '44444444-4444-4444-4444-444444444445',
               text: 'No',
               value: 'N',
             },
@@ -199,15 +199,15 @@ describe('getQuestionGroups', () => {
       readOnly: false,
       conditional: false,
       referenceDataTargets: [],
-      answerSchemas: [
+      answerDtos: [
         {
-          answerSchemaUuid: '59a0f4fe-4cca-426b-9402-0236dae24902',
+          answerUuid: '59a0f4fe-4cca-426b-9402-0236dae24902',
           answerSchemaCode: 'first_option',
           value: '0941c5b2-f42d-4120-ad79-44954674fe00',
           text: 'First Option',
         },
         {
-          answerSchemaUuid: 'c36d2ccd-c049-4640-806e-34b012f682d8',
+          answerUuid: 'c36d2ccd-c049-4640-806e-34b012f682d8',
           answerSchemaCode: 'second_option',
           value: 'f988f76c-3d6c-4f45-aa29-7dc8d11198d7',
           text: 'Second Option',
@@ -221,14 +221,14 @@ describe('getQuestionGroups', () => {
 
     it('annotates the answer schemas for checkbox Groups when the answer is in the body', () => {
       const [theQuestion] = annotateWithAnswers([checkboxGroup], {}, answers)
-      const [firstAnswer, secondAnswer] = theQuestion.answerSchemas
+      const [firstAnswer, secondAnswer] = theQuestion.answerDtos
       expect(firstAnswer.checked).toBe(true)
       expect(secondAnswer.checked).toBe(false)
     })
 
     it('annotates the answer schemas for checkbox Groups when the answer exists in the backend', () => {
       const [theQuestion] = annotateWithAnswers([checkboxGroup], answers, {})
-      const [firstAnswer, secondAnswer] = theQuestion.answerSchemas
+      const [firstAnswer, secondAnswer] = theQuestion.answerDtos
       expect(firstAnswer.checked).toBe(true)
       expect(secondAnswer.checked).toBe(false)
     })
@@ -240,7 +240,7 @@ describe('getQuestionGroups', () => {
       }
 
       const [theQuestion] = annotateWithAnswers([checkboxGroup], singleSelected, {})
-      const [firstAnswer, secondAnswer] = theQuestion.answerSchemas
+      const [firstAnswer, secondAnswer] = theQuestion.answerDtos
       expect(firstAnswer.checked).toBe(true)
       expect(secondAnswer.checked).toBe(false)
     })

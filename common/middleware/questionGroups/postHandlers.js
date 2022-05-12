@@ -74,7 +74,7 @@ const questionGroupValidationRules = async (req, res, next) => {
         const conditionalQuestionToFind = question.questionCode
         const parentQuestion = currentQuestions.filter(thisQuestion => {
           let foundParent = false
-          thisQuestion.answerSchemas?.forEach(schema => {
+          thisQuestion.answerDtos?.forEach(schema => {
             schema.conditionals?.forEach(childQuestion => {
               if (childQuestion.conditional === conditionalQuestionToFind) {
                 foundParent = true

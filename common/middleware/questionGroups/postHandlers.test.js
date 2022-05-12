@@ -36,9 +36,9 @@ const questionGroupWithConditional = {
       readOnly: false,
       conditional: false,
       referenceDataTargets: [],
-      answerSchemas: [
+      answerDtos: [
         {
-          answerSchemaUuid: '0a4dacc1-e37e-4256-9e48-34a601467a0c',
+          answerUuid: '0a4dacc1-e37e-4256-9e48-34a601467a0c',
           answerSchemaCode: 'yes',
           value: 'YES',
           text: 'Yes',
@@ -50,13 +50,13 @@ const questionGroupWithConditional = {
           ],
         },
         {
-          answerSchemaUuid: 'fe00388b-003c-4110-a03e-ad9c1d2d11b9',
+          answerUuid: 'fe00388b-003c-4110-a03e-ad9c1d2d11b9',
           answerSchemaCode: 'no',
           value: 'NO',
           text: 'No',
         },
         {
-          answerSchemaUuid: '665ec981-36ea-4911-989d-06bfc0fd7f96',
+          answerUuid: '665ec981-36ea-4911-989d-06bfc0fd7f96',
           answerSchemaCode: 'don_t_know',
           value: 'DK',
           text: "Don't Know",
@@ -75,7 +75,7 @@ const questionGroupWithConditional = {
       readOnly: false,
       conditional: true,
       referenceDataTargets: [],
-      answerSchemas: [],
+      answerDtos: [],
     },
   ],
 }
@@ -98,7 +98,7 @@ const questionGroupWithOrphanConditional = {
       readOnly: false,
       conditional: true,
       referenceDataTargets: [],
-      answerSchemas: [],
+      answerDtos: [],
     },
   ],
 }
@@ -121,7 +121,7 @@ const questionGroupWithNoConditional = {
       readOnly: false,
       conditional: false,
       referenceDataTargets: [],
-      answerSchemas: [],
+      answerDtos: [],
     },
   ],
 }

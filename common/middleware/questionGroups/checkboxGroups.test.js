@@ -19,15 +19,15 @@ describe('checkboxGroups', () => {
         readOnly: false,
         conditional: false,
         referenceDataTargets: [],
-        answerSchemas: [
+        answerDtos: [
           {
-            answerSchemaUuid: '59a0f4fe-4cca-426b-9402-0236dae24902',
+            answerUuid: '59a0f4fe-4cca-426b-9402-0236dae24902',
             answerSchemaCode: 'yes',
             value: 'YES',
             text: 'Yes',
           },
           {
-            answerSchemaUuid: 'c36d2ccd-c049-4640-806e-34b012f682d8',
+            answerUuid: 'c36d2ccd-c049-4640-806e-34b012f682d8',
             answerSchemaCode: 'no',
             value: 'NO',
             text: 'No',
@@ -45,15 +45,15 @@ describe('checkboxGroups', () => {
         readOnly: false,
         conditional: false,
         referenceDataTargets: [],
-        answerSchemas: [
+        answerDtos: [
           {
-            answerSchemaUuid: '59a0f4fe-4cca-426b-9402-0236dae24902',
+            answerUuid: '59a0f4fe-4cca-426b-9402-0236dae24902',
             answerSchemaCode: 'yes',
             value: 'YES',
             text: 'Yes',
           },
           {
-            answerSchemaUuid: 'c36d2ccd-c049-4640-806e-34b012f682d8',
+            answerUuid: 'c36d2ccd-c049-4640-806e-34b012f682d8',
             answerSchemaCode: 'no',
             value: 'NO',
             text: 'No',
@@ -77,7 +77,7 @@ describe('checkboxGroups', () => {
           mandatory: true,
           readOnly: false,
           conditional: false,
-          answerSchemas: [
+          answerDtos: [
             { text: 'First option', value: '0941c5b2-f42d-4120-ad79-44954674fe00' },
             { text: 'Second option', value: 'f988f76c-3d6c-4f45-aa29-7dc8d11198d7' },
           ],

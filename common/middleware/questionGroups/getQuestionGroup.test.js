@@ -256,7 +256,7 @@ describe('getQuestionGroup middleware', () => {
         type: 'question',
         questionText: 'Test Question',
         referenceDataCategory: 'REFERENCE_DATA_CATEGORY_1',
-        answerSchemas: [{ text: 'foo', value: 'bar' }],
+        answerDtos: [{ text: 'foo', value: 'bar' }],
       })
     })
 
@@ -279,7 +279,7 @@ describe('getQuestionGroup middleware', () => {
                   {
                     type: 'question',
                     questionText: 'Test Question',
-                    answerSchemas: [{ text: 'Should not have altered...', value: '...hopefully' }],
+                    answerDtos: [{ text: 'Should not have altered...', value: '...hopefully' }],
                   },
                 ],
               },
@@ -296,7 +296,7 @@ describe('getQuestionGroup middleware', () => {
       expect(res.locals.questionGroup.contents[0]).toMatchObject({
         type: 'question',
         questionText: 'Test Question',
-        answerSchemas: [{ text: 'Should not have altered...', value: '...hopefully' }],
+        answerDtos: [{ text: 'Should not have altered...', value: '...hopefully' }],
       })
     })
 

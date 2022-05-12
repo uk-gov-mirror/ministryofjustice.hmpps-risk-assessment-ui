@@ -11,7 +11,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -24,7 +24,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -37,33 +37,33 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "b6d5e728-7e5b-4382-972f-31c3c66337cf",
+          "answerUuid": "b6d5e728-7e5b-4382-972f-31c3c66337cf",
           "answerSchemaCode": "male",
           "value": "MALE",
           "text": "Male"
         },
         {
-          "answerSchemaUuid": "07a9ca67-1296-45fb-8fb1-79139198f3e9",
+          "answerUuid": "07a9ca67-1296-45fb-8fb1-79139198f3e9",
           "answerSchemaCode": "female",
           "value": "FEMALE",
           "text": "Female"
         },
         {
-          "answerSchemaUuid": "3619f489-0e17-4702-a05c-a356836aeb79",
+          "answerUuid": "3619f489-0e17-4702-a05c-a356836aeb79",
           "answerSchemaCode": "non_binary",
           "value": "NONE_BINARY",
           "text": "Non-binary"
         },
         {
-          "answerSchemaUuid": "f0e680b7-9bea-45aa-ab44-a8c6371dab66",
+          "answerUuid": "f0e680b7-9bea-45aa-ab44-a8c6371dab66",
           "answerSchemaCode": "prefer_to_self_describe",
           "value": "PREFER_TO_SELF_DESCRIBE",
           "text": "Prefer to self-describe"
         },
         {
-          "answerSchemaUuid": "aa69c244-5c48-47cd-9fb3-c41ca027909c",
+          "answerUuid": "aa69c244-5c48-47cd-9fb3-c41ca027909c",
           "answerSchemaCode": "prefer_no_to_say",
           "value": "PREFER_NOT_TO_SAY",
           "text": "Prefer not to say"
@@ -81,15 +81,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -107,7 +107,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -120,15 +120,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -147,15 +147,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -173,7 +173,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -186,7 +186,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -199,7 +199,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -212,7 +212,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -225,7 +225,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -238,7 +238,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -251,7 +251,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -264,7 +264,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -277,7 +277,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -290,7 +290,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -303,7 +303,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -316,7 +316,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -329,7 +329,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -342,7 +342,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -355,7 +355,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -368,7 +368,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -381,7 +381,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -394,7 +394,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -407,7 +407,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -420,7 +420,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -433,7 +433,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -446,7 +446,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -460,15 +460,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -486,9 +486,9 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes",
@@ -500,7 +500,7 @@
           ]
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -518,7 +518,7 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -532,15 +532,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -558,9 +558,9 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes",
@@ -572,7 +572,7 @@
           ]
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -590,21 +590,21 @@
       "conditional": true,
       "referenceDataCategory": "PLACEMENT_PREFERENCES",
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "e8689a6c-2b53-4d6c-b9bf-3bbb0b4a6f85",
+          "answerUuid": "e8689a6c-2b53-4d6c-b9bf-3bbb0b4a6f85",
           "answerSchemaCode": "individual",
           "value": "INDIVIDUAL",
           "text": "Individual"
         },
         {
-          "answerSchemaUuid": "dfaaa874-928b-4bd8-987a-5cdac16e8dba",
+          "answerUuid": "dfaaa874-928b-4bd8-987a-5cdac16e8dba",
           "answerSchemaCode": "mixed_group",
           "value": "MIXED_GROUP",
           "text": "Mixed group"
         },
         {
-          "answerSchemaUuid": "66646d01-19a5-4b9f-bfaf-a2f162897336",
+          "answerUuid": "66646d01-19a5-4b9f-bfaf-a2f162897336",
           "answerSchemaCode": "female_only_group",
           "value": "FEMALE_ONLY_GROUP",
           "text": "Female only group"
@@ -623,15 +623,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -650,7 +650,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -664,15 +664,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -690,15 +690,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -716,7 +716,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -729,15 +729,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -755,7 +755,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -768,15 +768,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -794,7 +794,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -807,15 +807,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -833,7 +833,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -846,15 +846,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -872,7 +872,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -885,15 +885,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -911,7 +911,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -925,15 +925,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -951,7 +951,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -965,15 +965,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -991,7 +991,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1005,15 +1005,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1031,7 +1031,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1045,15 +1045,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -1072,15 +1072,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1098,7 +1098,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1112,15 +1112,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1138,7 +1138,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1152,15 +1152,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1178,7 +1178,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1192,15 +1192,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1218,7 +1218,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1232,15 +1232,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1258,7 +1258,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1272,15 +1272,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1298,7 +1298,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1312,15 +1312,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1338,7 +1338,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1352,15 +1352,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1378,7 +1378,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1392,15 +1392,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -1418,7 +1418,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1431,7 +1431,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1444,7 +1444,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1457,7 +1457,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1470,7 +1470,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1483,7 +1483,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1496,7 +1496,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1509,7 +1509,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1523,15 +1523,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1549,7 +1549,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1563,15 +1563,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -1590,15 +1590,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1616,7 +1616,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1630,15 +1630,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1656,7 +1656,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1670,15 +1670,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1696,7 +1696,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1710,15 +1710,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1736,7 +1736,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1750,21 +1750,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "c7629b3e-30c0-405a-9d7c-65888c9aca7a",
+          "answerUuid": "c7629b3e-30c0-405a-9d7c-65888c9aca7a",
           "answerSchemaCode": "pregnant",
           "value": "PREGNANT",
           "text": "Pregnant"
         },
         {
-          "answerSchemaUuid": "1fe45bcc-a7f2-4d7a-8d42-3ac5e995f527",
+          "answerUuid": "1fe45bcc-a7f2-4d7a-8d42-3ac5e995f527",
           "answerSchemaCode": "recently_given_birth",
           "value": "RECENTLY_GIVEN_BIRTH",
           "text": "Recently given birth"
         },
         {
-          "answerSchemaUuid": "2bf5141a-9747-479e-8df1-167b2bedc0d1",
+          "answerUuid": "2bf5141a-9747-479e-8df1-167b2bedc0d1",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -1782,7 +1782,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1795,7 +1795,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1809,15 +1809,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -1836,15 +1836,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -1862,7 +1862,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1875,7 +1875,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1888,7 +1888,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1901,7 +1901,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1914,7 +1914,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1927,7 +1927,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1940,7 +1940,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1953,7 +1953,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1966,7 +1966,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1979,7 +1979,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -1993,15 +1993,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2019,7 +2019,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2033,15 +2033,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2060,15 +2060,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2087,15 +2087,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2114,15 +2114,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -2141,15 +2141,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2167,7 +2167,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2181,15 +2181,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -2208,21 +2208,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "f606340b-8413-4012-b11d-ba3c26d02f0d",
+          "answerUuid": "f606340b-8413-4012-b11d-ba3c26d02f0d",
           "answerSchemaCode": "fulltime_education_employment",
           "value": "FULLTIME_EDUCATION_EMPLOYMENT",
           "text": "Full-time education or employment"
         },
         {
-          "answerSchemaUuid": "a8a1df6a-a48b-4904-a11b-a5e179205b30",
+          "answerUuid": "a8a1df6a-a48b-4904-a11b-a5e179205b30",
           "answerSchemaCode": "parttime_education_employment",
           "value": "PARTTIME_EDUCATION_EMPLOYMENT",
           "text": "Part-time education or employment"
         },
         {
-          "answerSchemaUuid": "e57e81aa-f5b1-4bde-9c16-410ccc5d9391",
+          "answerUuid": "e57e81aa-f5b1-4bde-9c16-410ccc5d9391",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2240,7 +2240,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2253,7 +2253,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2267,15 +2267,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2293,7 +2293,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2307,15 +2307,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2333,7 +2333,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2347,15 +2347,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2373,7 +2373,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2387,15 +2387,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -2414,15 +2414,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2440,7 +2440,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2454,15 +2454,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2480,7 +2480,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2494,15 +2494,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -2521,15 +2521,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -2547,7 +2547,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2561,7 +2561,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2575,7 +2575,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2589,7 +2589,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2603,15 +2603,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -2630,129 +2630,129 @@
       "conditional": false,
       "referenceDataCategory": "INDIVIDUAL_AVAILABILITY",
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "034a8964-7a54-4773-8224-87bb6c6a5ed8",
+          "answerUuid": "034a8964-7a54-4773-8224-87bb6c6a5ed8",
           "answerSchemaCode": "monday_morning",
           "value": "MONDAY_MORNING",
           "text": "Monday morning"
         },
         {
-          "answerSchemaUuid": "78384548-62df-403f-99bb-4dd267ee0cc2",
+          "answerUuid": "78384548-62df-403f-99bb-4dd267ee0cc2",
           "answerSchemaCode": "monday_afternoon",
           "value": "MONDAY_AFTERNOON",
           "text": "Monday afternoon"
         },
         {
-          "answerSchemaUuid": "74103423-a881-4572-810b-6993d58ff443",
+          "answerUuid": "74103423-a881-4572-810b-6993d58ff443",
           "answerSchemaCode": "monday_evening",
           "value": "MONDAY_EVENING",
           "text": "Monday evening"
         },
         {
-          "answerSchemaUuid": "53acdc58-94ab-4049-8ebf-c4b2ba08f4f5",
+          "answerUuid": "53acdc58-94ab-4049-8ebf-c4b2ba08f4f5",
           "answerSchemaCode": "tuesday_morning",
           "value": "TUESDAY_MORNING",
           "text": "Tuesday morning"
         },
         {
-          "answerSchemaUuid": "bb7226bc-a231-43a7-a272-2d4d9a9d3d0b",
+          "answerUuid": "bb7226bc-a231-43a7-a272-2d4d9a9d3d0b",
           "answerSchemaCode": "tuesday_afternoon",
           "value": "TUESDAY_AFTERNOON",
           "text": "Tuesday afternoon"
         },
         {
-          "answerSchemaUuid": "5ed93e3e-67d6-402f-8de9-3b86d94d4f24",
+          "answerUuid": "5ed93e3e-67d6-402f-8de9-3b86d94d4f24",
           "answerSchemaCode": "tuesday_evening",
           "value": "TUESDAY_EVENING",
           "text": "Tuesday evening"
         },
         {
-          "answerSchemaUuid": "4ab83101-e739-4618-b010-6983652585ae",
+          "answerUuid": "4ab83101-e739-4618-b010-6983652585ae",
           "answerSchemaCode": "wednesday_morning",
           "value": "WEDNESDAY_MORNING",
           "text": "Wednesday morning"
         },
         {
-          "answerSchemaUuid": "2d2fd1e4-2998-45ad-a7cf-e88f8570b4c2",
+          "answerUuid": "2d2fd1e4-2998-45ad-a7cf-e88f8570b4c2",
           "answerSchemaCode": "wednesday_afternoon",
           "value": "WEDNESDAY_AFTERNOON",
           "text": "Wednesday afternoon"
         },
         {
-          "answerSchemaUuid": "f2147823-0211-4f05-bff7-84b445145d51",
+          "answerUuid": "f2147823-0211-4f05-bff7-84b445145d51",
           "answerSchemaCode": "wednesday_evening",
           "value": "WEDNESDAY_EVENING",
           "text": "Wednesday evening"
         },
         {
-          "answerSchemaUuid": "4479a057-3159-49c5-9599-180f36428a78",
+          "answerUuid": "4479a057-3159-49c5-9599-180f36428a78",
           "answerSchemaCode": "thursday_morning",
           "value": "THURSDAY_MORNING",
           "text": "Thursday morning"
         },
         {
-          "answerSchemaUuid": "1893becf-bf31-4697-b15e-d992dbf1812a",
+          "answerUuid": "1893becf-bf31-4697-b15e-d992dbf1812a",
           "answerSchemaCode": "thursday_afternoon",
           "value": "THURSDAY_AFTERNOON",
           "text": "Thursday afternoon"
         },
         {
-          "answerSchemaUuid": "a87c0229-1a9e-48a1-a319-d7a5101b0f43",
+          "answerUuid": "a87c0229-1a9e-48a1-a319-d7a5101b0f43",
           "answerSchemaCode": "thursday_evening",
           "value": "THURSDAY_EVENING",
           "text": "Thursdy evening"
         },
         {
-          "answerSchemaUuid": "29fdfd16-700c-4196-9c6e-58bf695e55f0",
+          "answerUuid": "29fdfd16-700c-4196-9c6e-58bf695e55f0",
           "answerSchemaCode": "friday_morning",
           "value": "FRIDAY_MORNING",
           "text": "Friday morning"
         },
         {
-          "answerSchemaUuid": "d7ac7df6-d922-41a5-8b5d-379dca5250c7",
+          "answerUuid": "d7ac7df6-d922-41a5-8b5d-379dca5250c7",
           "answerSchemaCode": "friday_afternoon",
           "value": "FRIDAY_AFTERNOON",
           "text": "Friday afternoon"
         },
         {
-          "answerSchemaUuid": "d202e29b-ec9e-4192-98a4-345b07c653f1",
+          "answerUuid": "d202e29b-ec9e-4192-98a4-345b07c653f1",
           "answerSchemaCode": "friday_evening",
           "value": "FRIDAY_EVENING",
           "text": "Friday evening"
         },
         {
-          "answerSchemaUuid": "c3b508b5-0241-4c67-8d87-9fe364290c2d",
+          "answerUuid": "c3b508b5-0241-4c67-8d87-9fe364290c2d",
           "answerSchemaCode": "saturday_morning",
           "value": "SATURDAY_MORNING",
           "text": "Saturday morning"
         },
         {
-          "answerSchemaUuid": "59bb90b0-6216-4920-bc3b-b47a62bda837",
+          "answerUuid": "59bb90b0-6216-4920-bc3b-b47a62bda837",
           "answerSchemaCode": "saturday_afternoon",
           "value": "SATURDAY_AFTERNOON",
           "text": "Saturday afternoon"
         },
         {
-          "answerSchemaUuid": "c072a9ff-fbda-42ae-a5e6-b79616b3bc55",
+          "answerUuid": "c072a9ff-fbda-42ae-a5e6-b79616b3bc55",
           "answerSchemaCode": "saturday_evening",
           "value": "SATURDAY_EVENING",
           "text": "Saturday evening"
         },
         {
-          "answerSchemaUuid": "6398406e-f323-474a-a5aa-cb65a1da75c7",
+          "answerUuid": "6398406e-f323-474a-a5aa-cb65a1da75c7",
           "answerSchemaCode": "sunday_morning",
           "value": "SUNDAY_MORNING",
           "text": "Sunday morning"
         },
         {
-          "answerSchemaUuid": "0acb7955-6e01-4bd6-b47f-438b87db4cc0",
+          "answerUuid": "0acb7955-6e01-4bd6-b47f-438b87db4cc0",
           "answerSchemaCode": "sunday_afternoon",
           "value": "SUNDAY_AFTERNOON",
           "text": "Sunday afternoon"
         },
         {
-          "answerSchemaUuid": "976e41ce-ef5b-431f-8cc7-cd5ea2d8c619",
+          "answerUuid": "976e41ce-ef5b-431f-8cc7-cd5ea2d8c619",
           "answerSchemaCode": "sunday_evening",
           "value": "SUNDAY_EVENING",
           "text": "Sunday evening"
@@ -2770,7 +2770,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -2784,15 +2784,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -2811,15 +2811,15 @@
       "conditional": false,
       "referenceDataCategory": "CLOTHING",
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "b34622fb-6c97-488e-8e13-96f2f43bbecf",
+          "answerUuid": "b34622fb-6c97-488e-8e13-96f2f43bbecf",
           "answerSchemaCode": "male",
           "value": "MALE",
           "text": "Male"
         },
         {
-          "answerSchemaUuid": "623581c2-9b99-4421-8a96-df51f0136e06",
+          "answerUuid": "623581c2-9b99-4421-8a96-df51f0136e06",
           "answerSchemaCode": "female",
           "value": "FEMALE",
           "text": "Female"
@@ -2838,45 +2838,45 @@
       "conditional": false,
       "referenceDataCategory": "WATERPROOF_CLOTHING",
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "bb427a45-d7d4-44a3-8b68-de2428fd92ea",
+          "answerUuid": "bb427a45-d7d4-44a3-8b68-de2428fd92ea",
           "answerSchemaCode": "xs",
           "value": "XS",
           "text": "X-Small"
         },
         {
-          "answerSchemaUuid": "afe91b9f-0d1d-43ab-9dbe-7b81a73d67fa",
+          "answerUuid": "afe91b9f-0d1d-43ab-9dbe-7b81a73d67fa",
           "answerSchemaCode": "s",
           "value": "S",
           "text": "Small"
         },
         {
-          "answerSchemaUuid": "d0d33422-17fd-4c9c-a90b-df4bab850363",
+          "answerUuid": "d0d33422-17fd-4c9c-a90b-df4bab850363",
           "answerSchemaCode": "m",
           "value": "M",
           "text": "Medium"
         },
         {
-          "answerSchemaUuid": "121bd2a4-b57a-4ac5-b2bf-a676767dc264",
+          "answerUuid": "121bd2a4-b57a-4ac5-b2bf-a676767dc264",
           "answerSchemaCode": "l",
           "value": "L",
           "text": "Large"
         },
         {
-          "answerSchemaUuid": "c51f6a7f-e8be-4147-a479-24f9019d30c2",
+          "answerUuid": "c51f6a7f-e8be-4147-a479-24f9019d30c2",
           "answerSchemaCode": "xl",
           "value": "XL",
           "text": "X-Large"
         },
         {
-          "answerSchemaUuid": "b1942513-23fa-4800-96bf-4933edef3cfa",
+          "answerUuid": "b1942513-23fa-4800-96bf-4933edef3cfa",
           "answerSchemaCode": "xxl",
           "value": "XXL",
           "text": "XX-Large"
         },
         {
-          "answerSchemaUuid": "924c187c-5904-436a-9670-205d0b7dc646",
+          "answerUuid": "924c187c-5904-436a-9670-205d0b7dc646",
           "answerSchemaCode": "xxxl",
           "value": "XXXL",
           "text": "XXX-Large"
@@ -2896,75 +2896,75 @@
       "conditional": false,
       "referenceDataCategory": "FOOTWEAR_SIZE",
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "aead43e0-ee10-4271-ba01-83a35428e996",
+          "answerUuid": "aead43e0-ee10-4271-ba01-83a35428e996",
           "answerSchemaCode": "3",
           "value": "3",
           "text": "Size 3"
         },
         {
-          "answerSchemaUuid": "442d529a-750e-46e1-a7ec-869645c147c8",
+          "answerUuid": "442d529a-750e-46e1-a7ec-869645c147c8",
           "answerSchemaCode": "4",
           "value": "4",
           "text": "Size 4"
         },
         {
-          "answerSchemaUuid": "794f872a-5348-450f-a84c-b5a3d9ecdd9f",
+          "answerUuid": "794f872a-5348-450f-a84c-b5a3d9ecdd9f",
           "answerSchemaCode": "5",
           "value": "5",
           "text": "Size 5"
         },
         {
-          "answerSchemaUuid": "5e715a2e-b394-46b6-9cd1-bcf8009e66a4",
+          "answerUuid": "5e715a2e-b394-46b6-9cd1-bcf8009e66a4",
           "answerSchemaCode": "6",
           "value": "6",
           "text": "Size 6"
         },
         {
-          "answerSchemaUuid": "fbf22a78-bb07-44ca-813c-78ff4f09cdd3",
+          "answerUuid": "fbf22a78-bb07-44ca-813c-78ff4f09cdd3",
           "answerSchemaCode": "7",
           "value": "7",
           "text": "Size 7"
         },
         {
-          "answerSchemaUuid": "1e1c93be-d8a9-4257-8f9c-096af3ea7887",
+          "answerUuid": "1e1c93be-d8a9-4257-8f9c-096af3ea7887",
           "answerSchemaCode": "8",
           "value": "8",
           "text": "Size 8"
         },
         {
-          "answerSchemaUuid": "5f6c70df-8f7e-4f69-813a-3b197a5366f4",
+          "answerUuid": "5f6c70df-8f7e-4f69-813a-3b197a5366f4",
           "answerSchemaCode": "9",
           "value": "9",
           "text": "Size 9"
         },
         {
-          "answerSchemaUuid": "e97658a5-5526-4d54-84ad-d4f562076cb7",
+          "answerUuid": "e97658a5-5526-4d54-84ad-d4f562076cb7",
           "answerSchemaCode": "10",
           "value": "10",
           "text": "Size 10"
         },
         {
-          "answerSchemaUuid": "caec7137-e7a7-4e48-aa42-fc2ec84df89d",
+          "answerUuid": "caec7137-e7a7-4e48-aa42-fc2ec84df89d",
           "answerSchemaCode": "11",
           "value": "11",
           "text": "Size 11"
         },
         {
-          "answerSchemaUuid": "8ee47349-1a3d-4b03-a802-87f43765a6af",
+          "answerUuid": "8ee47349-1a3d-4b03-a802-87f43765a6af",
           "answerSchemaCode": "12",
           "value": "12",
           "text": "Size 12"
         },
         {
-          "answerSchemaUuid": "caf6773d-50b2-4fa5-a802-333b37298b95",
+          "answerUuid": "caf6773d-50b2-4fa5-a802-333b37298b95",
           "answerSchemaCode": "13",
           "value": "13",
           "text": "Size 13"
         },
         {
-          "answerSchemaUuid": "90e91ab7-9919-409b-81a9-21ef4c62e2d1",
+          "answerUuid": "90e91ab7-9919-409b-81a9-21ef4c62e2d1",
           "answerSchemaCode": "14",
           "value": "14",
           "text": "Size 14"
@@ -2983,15 +2983,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
           "answerSchemaCode": "no_ill_come_back_later",
           "value": "NO_ILL_COME_BACK_LATER",
           "text": "No, I’ll come back later"
@@ -3010,9 +3010,9 @@
       "conditional": false,
       "referenceDataCategory": "",
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "4f121212-5a7f-4ddf-9286-0843b9cdd913",
+          "answerUuid": "4f121212-5a7f-4ddf-9286-0843b9cdd913",
           "answerSchemaCode": "signed",
           "value": "SIGNED",
           "text": "Sign declaration"
@@ -3032,7 +3032,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3046,7 +3046,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3060,7 +3060,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3074,7 +3074,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3088,7 +3088,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3102,9 +3102,9 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes",
@@ -3136,7 +3136,7 @@
           ]
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3155,9 +3155,9 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes",
@@ -3169,7 +3169,7 @@
           ]
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3188,15 +3188,15 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3216,7 +3216,7 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3230,7 +3230,7 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3244,7 +3244,7 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3258,7 +3258,7 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3272,7 +3272,7 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3287,7 +3287,7 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": []
+      "answerDtos": []
     },
     {
       "type": "question",
@@ -3301,15 +3301,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3328,15 +3328,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3355,21 +3355,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+          "answerUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
           "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
-          "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+          "answerUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
           "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
-          "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+          "answerUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
           "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
@@ -3387,21 +3387,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "d4c6ed05-73b4-4064-8255-7ccb96038988",
+          "answerUuid": "d4c6ed05-73b4-4064-8255-7ccb96038988",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
         },
         {
-          "answerSchemaUuid": "02c77c0c-f9fa-4c4c-a5dc-169aa33f5c86",
+          "answerUuid": "02c77c0c-f9fa-4c4c-a5dc-169aa33f5c86",
           "answerSchemaCode": "not_available_for_work",
           "value": "NOT_AVAILABLE_FOR_WORK",
           "text": "Not available for work"
         },
         {
-          "answerSchemaUuid": "f2619d17-2bda-40ce-9658-f6a7a371b3f2",
+          "answerUuid": "f2619d17-2bda-40ce-9658-f6a7a371b3f2",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
@@ -3420,21 +3420,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+          "answerUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
           "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
-          "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+          "answerUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
           "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
-          "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+          "answerUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
           "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
@@ -3453,9 +3453,9 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes",
@@ -3471,7 +3471,7 @@
           ]
         },
         {
-          "answerSchemaUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3489,9 +3489,9 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "4b6d2415-b152-4ba0-b030-1d203b5b31dc",
+          "answerUuid": "4b6d2415-b152-4ba0-b030-1d203b5b31dc",
           "answerSchemaCode": "victim",
           "value": "victim",
           "text": "Victim"
@@ -3509,9 +3509,9 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "9a52b4dd-5648-41d3-8d0d-171228d98474",
+          "answerUuid": "9a52b4dd-5648-41d3-8d0d-171228d98474",
           "answerSchemaCode": "perpetrator",
           "value": "perpetrator",
           "text": "Perpetrator"
@@ -3530,21 +3530,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+          "answerUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
           "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
-          "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+          "answerUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
           "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
-          "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+          "answerUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
           "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
@@ -3563,21 +3563,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+          "answerUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
           "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
-          "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+          "answerUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
           "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
-          "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+          "answerUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
           "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
@@ -3596,21 +3596,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+          "answerUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
           "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
-          "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+          "answerUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
           "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
-          "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+          "answerUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
           "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
@@ -3629,21 +3629,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+          "answerUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
           "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
-          "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+          "answerUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
           "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
-          "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+          "answerUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
           "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
@@ -3662,21 +3662,21 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
+          "answerUuid": "2dbde741-36ef-44b7-af79-fabdbf3e62c3",
           "answerSchemaCode": "no_problems",
           "value": "NO_PROBLEMS",
           "text": "No problems"
         },
         {
-          "answerSchemaUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
+          "answerUuid": "80cbb013-5633-44ca-b407-87fdde95652d",
           "answerSchemaCode": "some_problems",
           "value": "SOME_PROBLEMS",
           "text": "Some problems"
         },
         {
-          "answerSchemaUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
+          "answerUuid": "2df8f5e2-7d04-41a4-a13f-f9df7479c775",
           "answerSchemaCode": "significant_problems",
           "value": "SIGNIFICANT_PROBLEMS",
           "text": "Significant problems"
@@ -3695,15 +3695,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3722,15 +3722,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3749,15 +3749,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3776,15 +3776,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3803,15 +3803,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3830,15 +3830,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3857,15 +3857,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3884,15 +3884,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3911,15 +3911,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
@@ -3938,15 +3938,15 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
-      "answerSchemas": [
+      "answerDtos": [
         {
-          "answerSchemaUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
+          "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
           "answerSchemaCode": "yes",
           "value": "YES",
           "text": "Yes"
         },
         {
-          "answerSchemaUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
+          "answerUuid": "c36d2ccd-c049-4640-806e-34b012f682d8",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"

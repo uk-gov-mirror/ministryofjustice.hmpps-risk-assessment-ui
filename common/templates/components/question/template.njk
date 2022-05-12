@@ -52,8 +52,8 @@
   {% endif %}
   {% switch question.answerType %}
     {% case 'date' %}{{ value | date("DD MMMM YYYY") }}
-    {% case 'radio' %}{{ compileMultiValueAnswer(question.answerSchemas, value) }}
-    {% case 'checkbox' %}{{ compileMultiValueAnswer(question.answerSchemas, value) }}
+    {% case 'radio' %}{{ compileMultiValueAnswer(question.answerDtos, value) }}
+    {% case 'checkbox' %}{{ compileMultiValueAnswer(question.answerDtos, value) }}
     {% default %}{{ value }}
   {% endswitch %}
 {%- endmacro -%}
@@ -268,7 +268,7 @@
             classes: question.questionCode + labelClasses
           }
         },
-        items: question.answerSchemas,
+        items: question.answerDtos,
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
@@ -289,7 +289,7 @@
             classes: question.questionCode + labelClasses
           }
         },
-        items: question.answerSchemas,
+        items: question.answerDtos,
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
@@ -311,7 +311,7 @@
             classes: question.questionCode + labelClasses
           }
         },
-        items: question.answerSchemas,
+        items: question.answerDtos,
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
@@ -331,7 +331,7 @@
           classes: question.questionCode + labelClasses
         },
         attributes: question.attributes,
-        items: question.answerSchemas,
+        items: question.answerDtos,
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {

@@ -121,7 +121,7 @@ describe('SaveAndContinueController', () => {
           questionCode: 'first_question',
           questionText: 'First Question',
           answerType: 'radio',
-          answerSchemas: [
+          answerDtos: [
             { value: 'YES', text: 'Yes' },
             { value: 'NO', text: 'No' },
           ],
@@ -145,7 +145,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.locals(req, res, () => {})
 
-      const [yesAnswer] = res.locals.questions.first_question.answerSchemas
+      const [yesAnswer] = res.locals.questions.first_question.answerDtos
       expect(yesAnswer.conditional?.html).toMatch(inputWithName('second_question'))
     })
 
@@ -155,7 +155,7 @@ describe('SaveAndContinueController', () => {
           questionCode: 'first_question',
           questionText: 'First Question',
           answerType: 'radio',
-          answerSchemas: [
+          answerDtos: [
             { value: 'YES', text: 'Yes' },
             { value: 'NO', text: 'No' },
           ],
@@ -165,7 +165,7 @@ describe('SaveAndContinueController', () => {
           questionCode: 'second_question',
           questionText: 'Second Question',
           answerType: 'radio',
-          answerSchemas: [
+          answerDtos: [
             { value: 'YES', text: 'Yes' },
             { value: 'NO', text: 'No' },
           ],
@@ -191,7 +191,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.locals(req, res, () => {})
 
-      const [yesAnswer] = res.locals.questions.first_question.answerSchemas
+      const [yesAnswer] = res.locals.questions.first_question.answerDtos
       expect(yesAnswer.conditional?.html).toMatch(inputWithName('second_question'))
       expect(yesAnswer.conditional?.html).toMatch(inputWithName('third_question'))
     })

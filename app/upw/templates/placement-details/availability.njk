@@ -19,15 +19,15 @@
 {{ super() }}
 
 {%- macro getAvailabilityValue(index) -%}
-    {{ questions['individual_availability'].answerSchemas[index].value }}
+    {{ questions['individual_availability'].answerDtos[index].value }}
 {%- endmacro -%}
 
 {%- macro getAvailabilityText(index) -%}
-    {{ questions['individual_availability'].answerSchemas[index].text }}
+    {{ questions['individual_availability'].answerDtos[index].text }}
 {%- endmacro -%}
 
 {%- macro getAvailabilityChecked(index) -%}
-    {%- if questions['individual_availability'].answer == "" -%}checked{%- elseif questions['individual_availability'].answerSchemas[index].checked == true -%}
+    {%- if questions['individual_availability'].answer == "" -%}checked{%- elseif questions['individual_availability'].answerDtos[index].checked == true -%}
         checked
     {%- endif -%}
 {%- endmacro -%}

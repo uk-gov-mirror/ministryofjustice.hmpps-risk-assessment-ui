@@ -63,7 +63,7 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     const checkedAnswer = answerFor(fieldName)
     return {
       ...fieldProperties,
-      answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
+      answerDtos: fieldProperties.answerDtos.map(answerSchema => ({
         ...answerSchema,
         checked: checkedAnswer === answerSchema.value,
       })),
@@ -74,7 +74,7 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     const selected = submittedAnswers[fieldName] || previousAnswers[fieldName] || []
     return {
       ...fieldProperties,
-      answerSchemas: fieldProperties.answerSchemas.map(answerSchema => ({
+      answerDtos: fieldProperties.answerDtos.map(answerSchema => ({
         ...answerSchema,
         selected: selected.includes(answerSchema.value),
       })),
@@ -111,7 +111,7 @@ const fieldFrom = (localField, questionSchemaDto = {}) => {
     helpText: questionSchemaDto.helpText,
     referenceDataTargets: questionSchemaDto.referenceDataTargets,
     answerType: questionSchemaDto.answerType,
-    answerSchemas: questionSchemaDto.answerSchemas,
+    answerDtos: questionSchemaDto.answerDtos,
     validate: validationRules,
     dependent: localField.dependent,
     answer: '',
@@ -181,7 +181,7 @@ const renderConditionalQuestion = (
     return { schema, deps }
   })
 
-  const answerSchemas = questionSchema.answerSchemas.map(answer => {
+  const answerDtos = questionSchema.answerDtos.map(answer => {
     const questionsDependentOnThisAnswer = conditionalQuestions.filter(
       question => question.schema.dependent.value === answer.value,
     )
@@ -220,7 +220,7 @@ const renderConditionalQuestion = (
     return { ...answer, conditional: { html: rendered } }
   })
 
-  return { ...questionSchema, answerSchemas }
+  return { ...questionSchema, answerDtos }
 }
 
 const compileConditionalQuestions = (questions, errors) => {

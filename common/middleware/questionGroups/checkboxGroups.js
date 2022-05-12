@@ -11,7 +11,7 @@ const flattenCheckboxGroups = questions => {
         mandatory: question.mandatory || true,
         readOnly: question.readOnly || false,
         conditional: question.conditional || false,
-        answerSchemas: question.contents.map(({ questionId, questionText }) => ({
+        answerDtos: question.contents.map(({ questionId, questionText }) => ({
           value: questionId,
           text: questionText,
         })),
@@ -29,9 +29,9 @@ const extractCheckboxGroupAnswers = (questions = [], answers = {}) => {
     (previousAnswers, checkboxGroup) => {
       const updatedAnswers = { ...previousAnswers }
       const checkboxGroupQuestions = checkboxGroup.contents
-      checkboxGroupQuestions.forEach(({ questionId, answerSchemas = [] }) => {
+      checkboxGroupQuestions.forEach(({ questionId, answerDtos = [] }) => {
         const answersForThisGroup = updatedAnswers[checkboxGroup.checkboxGroupId] || []
-        const [firstAnswer, secondAnswer] = answerSchemas
+        const [firstAnswer, secondAnswer] = answerDtos
         if (answersForThisGroup.includes(questionId) && firstAnswer) {
           updatedAnswers[questionId] = [firstAnswer.value]
         } else if (secondAnswer) {

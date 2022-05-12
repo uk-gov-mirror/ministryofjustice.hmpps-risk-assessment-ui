@@ -35,15 +35,15 @@
                 href: "/UPW/pdf-preview"
             }) }}
 
-            {%- set declarationSigned = rawAnswers["declaration_confirmation"] == questions["declaration_confirmation"].answerSchemas[0].value -%}
+            {%- set declarationSigned = rawAnswers["declaration_confirmation"] == questions["declaration_confirmation"].answerDtos[0].value -%}
 
             {{ renderQuestion({
                 questionCode: questions["declaration_confirmation"].questionCode,
                 answerType: questions["declaration_confirmation"].answerType,
-                answerSchemas: [
+                answerDtos: [
                     {
-                        answerSchemaCode: questions["declaration_confirmation"].answerSchemas[0].answerSchemaCode,
-                        value: questions["declaration_confirmation"].answerSchemas[0].value,
+                        answerSchemaCode: questions["declaration_confirmation"].answerDtos[0].answerSchemaCode,
+                        value: questions["declaration_confirmation"].answerDtos[0].value,
                         text: "I confirm the individual has received details of their Community Payback Induction Session",
                         checked: declarationSigned
                     }

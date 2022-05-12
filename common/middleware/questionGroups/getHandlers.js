@@ -3,7 +3,7 @@ const nunjucks = require('nunjucks')
 const { getAnswers } = require('../../data/hmppsAssessmentApi')
 const { logger } = require('../../logging/logger')
 
-const whereAnswerSchemaValueIs = value => answerSchema => answerSchema.value === value
+const whereAnswerValueIs = value => answerDto => answerDto.value === value
 const isMultipleChoiceAnswerFor = answerType => answerType === 'radio' || answerType === 'checkbox'
 const isPresentationOnlyFor = answerType => typeof answerType === 'string' && answerType.match(/presentation:/gi)
 let conditionalQuestionsToRemove = []
@@ -54,10 +54,7 @@ const annotateWithAnswers = (questions, answers, body = {}, tables = {}) => {
           if (isMultipleChoiceAnswerFor(tableQuestion.answerType)) {
             return {
               ...tableQuestion,
-              answerSchemas: annotateAnswerSchemas(
-                tableQuestion.answerSchemas,
-                tableAnswers[tableQuestion.questionCode] || [],
-              ),
+              answerDtos: annotateAnswers(tableQuestion.answerDtos, tableAnswers[tableQuestion.questionCode] || []),
             }
           }
           return {
@@ -69,21 +66,21 @@ const annotateWithAnswers = (questions, answers, body = {}, tables = {}) => {
     }
 
     if (questionSchema.answerType === 'checkboxGroup') {
-      const extractedAnswers = questionSchema.answerSchemas.reduce((acc, answerSchema) => {
-        const answerInBody = body[`${answerSchema.value}`]
-        const storedAnswer = answers[`${answerSchema.value}`]
+      const extractedAnswers = questionSchema.answerDtos.reduce((acc, answerDto) => {
+        const answerInBody = body[`${answerDto.value}`]
+        const storedAnswer = answers[`${answerDto.value}`]
         const answer = answerInBody || storedAnswer
 
         if (!answer || !answer.includes('YES')) {
           return acc
         }
 
-        return [...acc, answerSchema.value]
+        return [...acc, answerDto.value]
       }, [])
 
       return {
         ...questionSchema,
-        answerSchemas: annotateAnswerSchemas(questionSchema.answerSchemas, extractedAnswers),
+        answerDtos: annotateAnswers(questionSchema.answerDtos, extractedAnswers),
       }
     }
 
@@ -108,13 +105,13 @@ const annotateWithAnswers = (questions, answers, body = {}, tables = {}) => {
         if (Array.isArray(ans)) {
           const thisElementAnswer = []
           ans.forEach(arrayAns => {
-            const thisAnswer = questionSchema.answerSchemas.find(whereAnswerSchemaValueIs(arrayAns))
+            const thisAnswer = questionSchema.answerDtos.find(whereAnswerValueIs(arrayAns))
             thisElementAnswer.push(thisAnswer.text)
           })
           answerValues.push(thisElementAnswer)
           answerText.push(thisElementAnswer)
         } else {
-          const thisAnswer = questionSchema.answerSchemas.find(whereAnswerSchemaValueIs(ans))
+          const thisAnswer = questionSchema.answerDtos.find(whereAnswerValueIs(ans))
           answerValues.push(thisAnswer?.value)
           answerText.push(thisAnswer?.text)
         }
@@ -122,7 +119,7 @@ const annotateWithAnswers = (questions, answers, body = {}, tables = {}) => {
 
       return {
         ...questionSchema,
-        answerSchemas: annotateAnswerSchemas(questionSchema.answerSchemas, answerInBody || answerValues),
+        answerDtos: annotateAnswers(questionSchema.answerDtos, answerInBody || answerValues),
       }
     }
 
@@ -158,15 +155,15 @@ const compileInlineConditionalQuestions = (questions, errors) => {
     }
     let currentQuestion = question
 
-    const { updatedSchemas, removeQuestions } = updateAnswerSchemasWithInlineConditionals({
-      answerSchemas: question.answerSchemas,
+    const { updatedSchemas, removeQuestions } = updateAnswersWithInlineConditionals({
+      answerDtos: question.answerDtos,
       conditionalQuestionsToRemove,
       questions,
       errors,
       conditionalQuestions,
     })
 
-    currentQuestion.answerSchemas = updatedSchemas
+    currentQuestion.answerDtos = updatedSchemas
 
     if (removeQuestions.length) {
       // @ts-ignore
@@ -207,15 +204,15 @@ const compileInlineConditionalQuestions = (questions, errors) => {
 
 // for inline conditional questions, compile their HTML and add to parent question answer schema,
 // then mark the original question for deletion
-const updateAnswerSchemasWithInlineConditionals = ({
-  answerSchemas,
+const updateAnswersWithInlineConditionals = ({
+  answerDtos,
   conditionalQuestionsToRemove: questionsToRemove = [],
   questions,
   errors,
   conditionalQuestions,
 }) => {
   let removeQuestions = questionsToRemove
-  const updatedSchemas = answerSchemas?.map(schemaLine => {
+  const updatedSchemas = answerDtos?.map(schemaLine => {
     const updatedSchemaLine = schemaLine
 
     schemaLine.conditionals?.forEach(conditionalDisplay => {
@@ -236,14 +233,14 @@ const updateAnswerSchemasWithInlineConditionals = ({
         const conditionalQuestion = conditionalQuestions[subjectCode]
 
         // do a recursive call to compile inline conditionals for this target question if needed
-        const { updatedSchemas: newSchemas, removeQuestions: newRemove } = updateAnswerSchemasWithInlineConditionals({
-          answerSchemas: conditionalQuestion.answerSchemas,
+        const { updatedSchemas: newSchemas, removeQuestions: newRemove } = updateAnswersWithInlineConditionals({
+          answerDtos: conditionalQuestion.answerDtos,
           conditionalQuestionsToRemove: removeQuestions,
           questions,
           errors,
           conditionalQuestions,
         })
-        conditionalQuestion.answerSchemas = newSchemas
+        conditionalQuestion.answerDtos = newSchemas
         if (newRemove.length) {
           // @ts-ignore
           removeQuestions = [...new Set(removeQuestions.concat(removeQuestions))]
@@ -284,7 +281,7 @@ const updateAnswerSchemasWithInlineConditionals = ({
 const updateOutOfLineConditionals = (question = []) => {
   const currentQuestion = question
   // @ts-ignore
-  currentQuestion.answerSchemas = currentQuestion.answerSchemas?.map(schemaLine => {
+  currentQuestion.answerDtos = currentQuestion.answerDtos?.map(schemaLine => {
     const updatedSchemaLine = schemaLine
     const outOfLineConditionalsForThisAnswer = []
 
@@ -314,11 +311,11 @@ const updateOutOfLineConditionals = (question = []) => {
   return currentQuestion
 }
 
-const annotateAnswerSchemas = (answerSchemas, answerValue) => {
+const annotateAnswers = (answerDtos, answerValue) => {
   if (!answerValue || answerValue?.length === 0) {
-    return answerSchemas
+    return answerDtos
   }
-  return answerSchemas.map(as => {
+  return answerDtos.map(as => {
     return Object.assign(as, {
       checked: as.value === answerValue || answerValue.includes(as.value),
       selected: as.value === answerValue || answerValue.includes(as.value),

@@ -104,7 +104,7 @@ const applyStaticReferenceData = async questionResponse => {
       return { ...questionSchema, contents: questionSchema.contents.map(applyReferenceData) }
     }
     if (usesStaticReferenceData(questionSchema)) {
-      return { ...questionSchema, answerSchemas: referenceData[questionSchema.referenceDataCategory] }
+      return { ...questionSchema, answerDtos: referenceData[questionSchema.referenceDataCategory] }
     }
     return questionSchema
   }
