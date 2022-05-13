@@ -107,14 +107,44 @@ const fields = {
   family_name_aliases: {
     answerType: 'textarea',
   },
-  gender_identity: requireSelectOption,
-  sex_change: requireYesOrNo,
+  gender_identity: {
+    validate: [{ type: 'required', message: 'Select a Gender Identity option' }],
+  },
+  sex_change: {
+    validate: [
+      {
+        type: 'required',
+        message:
+          'Has the individual gone through any part of a process to change the sex they were assigned at birth to the gender they now identify with, or do they intend to? Select yes or no',
+      },
+    ],
+  },
   sex_change_details: {
     dependent: { field: 'sex_change', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of gender identity and relevant placement options discussed with the individual.',
+      },
+    ],
   },
-  intersex_or_dsd: requireYesOrNo,
-  transgender: requireYesOrNo,
+  intersex_or_dsd: {
+    validate: [
+      {
+        type: 'required',
+        message:
+          'Is the individual intersex or do they have a Difference in Sexual Development (DSD)? Select Yes or No',
+      },
+    ],
+  },
+  transgender: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Do they consider themselves to be transgender or have a transgender history? Select Yes or No',
+      },
+    ],
+  },
   contact_address_building_name: {},
   contact_address_house_number: {},
   contact_address_street_name: {
@@ -148,10 +178,19 @@ const fields = {
   emergency_contact_mobile_phone_number: {
     validate: [{ type: 'required', message: 'Mobile phone number is required' }],
   },
-  cultural_religious_adjustment: requireYesOrNo,
+  cultural_religious_adjustment: {
+    validate: [
+      { type: 'required', message: 'Are adjustments required for cultural or religious reasons? Select Yes or No' },
+    ],
+  },
   cultural_religious_adjustment_details: {
     dependent: { field: 'cultural_religious_adjustment', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the adjustments required for cultural or religious reasons',
+      },
+    ],
   },
   placement_preference: requireYesOrNo,
   placement_preferences: {
@@ -161,90 +200,294 @@ const fields = {
   placement_preference_by_gender_details: {
     ...requireEnterDetails,
   },
-  history_sexual_offending: requireYesOrNo,
+  history_sexual_offending: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Is there a history of sexual offending? Select Yes or No',
+      },
+    ],
+  },
   history_sexual_offending_details: {
     dependent: { field: 'history_sexual_offending', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the sexual offending',
+      },
+    ],
   },
-  poses_risk_to_children: requireYesOrNo,
+  poses_risk_to_children: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Does the individual pose a risk to children? Select Yes or No',
+      },
+    ],
+  },
   poses_risk_to_children_details: {
     dependent: { field: 'poses_risk_to_children', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the risk posed to children',
+      },
+    ],
   },
-  violent_offences: requireYesOrNo,
+  violent_offences: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Is there a history of violent offences? Select Yes or No',
+      },
+    ],
+  },
   violent_offences_details: {
     dependent: { field: 'violent_offences', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the violent offences',
+      },
+    ],
   },
-  acquisitive_offending: requireYesOrNo,
+  acquisitive_offending: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Is there a history of acquisitive offending? Select Yes or No',
+      },
+    ],
+  },
   acquisitive_offending_details: {
     dependent: { field: 'acquisitive_offending', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the acquisitive offending',
+      },
+    ],
   },
-  sgo_identifier: requireYesOrNo,
+  sgo_identifier: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Has the individual been involved in serious group offending? Select Yes or No',
+      },
+    ],
+  },
   sgo_identifier_details: {
     dependent: { field: 'sgo_identifier', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the serious group offending (SGO)',
+      },
+    ],
   },
-  control_issues: requireYesOrNo,
+  control_issues: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Has the individual had control issues or disruptive behaviour? Select Yes or No',
+      },
+    ],
+  },
   control_issues_details: {
     dependent: { field: 'control_issues', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the control issues or disruptive behaviour',
+      },
+    ],
   },
-  history_of_hate_based_behaviour: requireYesOrNo,
+  history_of_hate_based_behaviour: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Does the individual have a history of hate-based attitudes or behaviours? Select Yes or No',
+      },
+    ],
+  },
   history_of_hate_based_behaviour_details: {
     dependent: { field: 'history_of_hate_based_behaviour', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the hate-based attitudes or behaviours',
+      },
+    ],
   },
-  high_profile_person: requireYesOrNo,
+  high_profile_person: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Is the individual vulnerable because they are a high-profile person? Select Yes or No',
+      },
+    ],
+  },
   high_profile_person_details: {
     dependent: { field: 'high_profile_person', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: "Enter details of the individual's vulnerabilities",
+      },
+    ],
   },
-  additional_rosh_info: requireYesOrNo,
+  additional_rosh_info: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Is there additional risk assessment information relevant to Community Payback? Select Yes or No',
+      },
+    ],
+  },
   additional_rosh_info_details: {
     dependent: { field: 'additional_rosh_info', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter additional risk assessment information',
+      },
+    ],
   },
-  location_exclusion_criteria: requireYesOrNo,
+  location_exclusion_criteria: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Is the individual’s location restricted by victim exclusion criteria? Select Yes or No',
+      },
+    ],
+  },
   location_exclusion_criteria_details: {
     dependent: { field: 'location_exclusion_criteria', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the location restrictions due to victim exclusion criteria',
+      },
+    ],
   },
-  restricted_placement: requireYesOrNo,
+  restricted_placement: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Is close supervision or restricted placement recommended? Select Yes or No',
+      },
+    ],
+  },
   restricted_placement_details: {
     dependent: { field: 'restricted_placement', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of the close supervision or restricted placement recommended',
+      },
+    ],
   },
-  no_female_supervisor: requireYesOrNo,
+  no_female_supervisor: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Do you recommend not to place with a female supervisor? Select Yes or No',
+      },
+    ],
+  },
   no_female_supervisor_details: {
     dependent: { field: 'no_female_supervisor', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of why not to place individual with female supervisor',
+      },
+    ],
   },
-  no_male_supervisor: requireYesOrNo,
+  no_male_supervisor: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Do you recommend not to place with a male supervisor? Select yes or no',
+      },
+    ],
+  },
   no_male_supervisor_details: {
     dependent: { field: 'no_male_supervisor', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of why not to place individual with male supervisor',
+      },
+    ],
   },
-  restrictive_orders: requireYesOrNo,
+  restrictive_orders: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Are there restrictive orders? Select Yes or No',
+      },
+    ],
+  },
   restrictive_orders_details: {
     dependent: { field: 'restrictive_orders', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of restrictive orders',
+      },
+    ],
   },
-  risk_management_issues_individual: requireYesOrNo,
+  risk_management_issues_individual: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Are there any risk management issues for an individual placement? Select Yes or No',
+      },
+    ],
+  },
   risk_management_issues_individual_details: {
     dependent: { field: 'risk_management_issues_individual', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of risk management issues for an individual placement',
+      },
+    ],
   },
-  risk_management_issues_supervised_group: requireYesOrNo,
+  risk_management_issues_supervised_group: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Are there any risk management issues if working in a supervised group? Select Yes or No',
+      },
+    ],
+  },
   risk_management_issues_supervised_group_details: {
     dependent: { field: 'risk_management_issues_supervised_group', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of risk management issues if working in a supervised group',
+      },
+    ],
   },
-  alcohol_drug_issues: requireYesOrNo,
+  alcohol_drug_issues: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Are there any alcohol or drug issues with health and safety impact? Select Yes or No',
+      },
+    ],
+  },
   alcohol_drug_issues_details: {
     dependent: { field: 'alcohol_drug_issues', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of alcohol or drug issues with health and safety impact',
+      },
+    ],
   },
   physical_disability: readOnly,
   physical_disability_details: readOnly,
@@ -379,17 +622,25 @@ const fields = {
     dependent: { field: 'individual_commitment', value: 'YES' },
     ...requireEnterDetails,
   },
-  eligibility_intensive_working: requireYesOrNo,
+  eligibility_intensive_working: {
+    validate: [{ type: 'required', message: 'Is the individual eligible for intensive working? Select yes or no' }],
+  },
   eligibility_intensive_working_details: {
     dependent: { field: 'eligibility_intensive_working', value: 'NO' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details about why the individual is not eligible for intensive working',
+      },
+    ],
   },
   recommended_hours_start_order: {
     dependent: { field: 'eligibility_intensive_working', value: 'YES' },
     validate: [
       {
         type: 'required',
-        message: 'Enter a number between 0 and 21',
+        message:
+          'Enter recommended hours per week in addition to the statutory minimum at the start of the order between 0 and 21',
       },
       {
         fn: noSpace,
@@ -407,7 +658,8 @@ const fields = {
     validate: [
       {
         type: 'required',
-        message: 'Enter a number between 0 and 21',
+        message:
+          'Enter recommended hours per week in addition to the statutory minimum at the midpoint of the order between 0 and 21',
       },
       {
         fn: noSpace,
@@ -422,7 +674,12 @@ const fields = {
   },
   twenty_eight_hours_working_week_details: {
     dependent: { field: 'eligibility_intensive_working', value: 'YES' },
-    ...requireEnterDetails,
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of when the individual should be expected to reach a 28 hour working week',
+      },
+    ],
   },
   individual_availability: requireSelectOption,
   individual_availability_details: {},
@@ -430,11 +687,39 @@ const fields = {
   waterproof_clothing: requireSelectOption,
   footwear_size: requireSelectOption,
   individual_details_complete: requireSelectOption,
-  cultural_religious_adjustment_complete: requireSelectOption,
+  cultural_religious_adjustment_complete: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select Yes I have completed this section or No I have not completed and will come back later',
+      },
+    ],
+  },
   placement_preference_complete: requireSelectOption,
-  placement_preference_by_gender_complete: requireSelectOption,
-  rosh_community_complete: requireSelectOption,
-  managing_risk_complete: requireSelectOption,
+  placement_preference_by_gender_complete: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select Yes I have completed this section or No I have not completed and will come back later',
+      },
+    ],
+  },
+  rosh_community_complete: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select Yes I have completed this section or No I have not completed and will come back later',
+      },
+    ],
+  },
+  managing_risk_complete: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select Yes I have completed this section or No I have not completed and will come back later',
+      },
+    ],
+  },
   disabilities_complete: requireSelectOption,
   health_issues_complete: requireSelectOption,
   gp_details_complete: requireSelectOption,
