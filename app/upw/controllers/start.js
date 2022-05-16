@@ -42,7 +42,7 @@ class StartUnpaidWork extends BaseController {
     const { eventId, assessmentCode, deliusEventType } = assessment
     const { crn } = assessment.subject
 
-    logger.info(`req.session.assessment: ${JSON.stringify(assessment)}`)
+    logger.debug(`req.session.assessment: ${JSON.stringify(assessment)}`)
 
     const [assessmentCreated, createAssessmentResponse] = await createAssessment(
       req.user,
@@ -52,7 +52,7 @@ class StartUnpaidWork extends BaseController {
       deliusEventType,
     )
 
-    logger.info(`createAssessment response: ${JSON.stringify(createAssessmentResponse)}`)
+    logger.debug(`createAssessment response: ${JSON.stringify(createAssessmentResponse)}`)
 
     if (!assessmentCreated) {
       return res.render('app/error', { subHeading: getErrorMessageFor(req.user, createAssessmentResponse.reason) })
@@ -64,7 +64,7 @@ class StartUnpaidWork extends BaseController {
       req.user?.id,
     )
 
-    logger.info(`getCurrentEpisode response: ${JSON.stringify(currentEpisode)}`)
+    logger.debug(`getCurrentEpisode response: ${JSON.stringify(currentEpisode)}`)
 
     // update subject details in session
     assessment.subject = {
@@ -79,7 +79,7 @@ class StartUnpaidWork extends BaseController {
 
     req.session.assessment = assessment
 
-    logger.info(`saving assessment to session: ${JSON.stringify(assessment)}`)
+    logger.debug(`saving assessment to session: ${JSON.stringify(assessment)}`)
 
     req.session.save()
 

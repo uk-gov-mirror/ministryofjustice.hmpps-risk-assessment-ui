@@ -35,6 +35,7 @@ env:
   PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-dev.svc.cluster.local/forms/chromium/convert/html
   SHOW_DETAILED_ERRORS: true
   DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
+  LOGGING_LEVEL: 'DEBUG'
 
 allow_list:
   office: "217.33.148.210/32"

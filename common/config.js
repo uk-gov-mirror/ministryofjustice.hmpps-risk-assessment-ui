@@ -63,7 +63,7 @@ module.exports = {
   },
   domain: `${get('INGRESS_URL', 'http://localhost:3000', true)}`,
   https: production,
-  loggingLevel: get('LOGGING_LEVEL', 'info'),
+  loggingLevel: get('LOGGING_LEVEL', 'INFO'),
   correlationHeader: get('CORRELATION_HEADER_NAME', 'x-request-id'),
   clsNamespace: get('CLS_NAMESPACE', 'uk.gov.digital.hmpps.service-name'),
   applicationInsights: {
