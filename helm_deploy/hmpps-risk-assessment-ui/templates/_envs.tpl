@@ -67,6 +67,9 @@ env:
   - name: SHOW_DETAILED_ERRORS
     value: {{ .Values.env.SHOW_DETAILED_ERRORS | quote }}
 
+  - name: SHOW_REQUEST_ID_ON_ERROR_PAGE
+    value: {{ .Values.env.SHOW_REQUEST_ID_ON_ERROR_PAGE | quote }}
+
   - name: PDF_CONVERTER_ENDPOINT
     value: {{ .Values.env.PDF_CONVERTER_ENDPOINT | quote }}
 

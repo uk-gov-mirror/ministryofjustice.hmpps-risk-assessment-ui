@@ -17,9 +17,15 @@
         {{ heading | default("There is a problem with the service") }}
       </h1>
       {% if subHeading %}
-      <h2 class="govuk-heading-m">
-        {{ subHeading }}
-      </h2>
+        <h2 class="govuk-heading-m">
+          {{ subHeading }}
+        </h2>
+        {% if showRequestIdOnErrorPage and correlationId %}
+          <div class="govuk-inset-text">
+            <span><p class="govuk-body"><strong>Request ID:</strong> {{ correlationId }}</p></span>
+            <p class="govuk-body">Please supply this ID when reporting the issue above.</p>
+          </div>
+        {%endif%}
       {% endif %}
       {% if showDetailedErrors %}
         {% if error %}

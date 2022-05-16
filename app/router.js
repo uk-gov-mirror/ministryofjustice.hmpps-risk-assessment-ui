@@ -61,6 +61,7 @@ const upwWorkflow = require('./upw')
 
 const logger = require('../common/logging/logger')
 const { verifyAssessment } = require('./startAssessment/get.controller')
+const { getCorrelationId } = require('../common/utils/util')
 
 const assessmentUrl = `/${devAssessmentId}/questiongroup/ROSH/summary`
 
@@ -205,6 +206,7 @@ module.exports = app => {
 
   app.use((error, req, res, next) => {
     logger.info(`Unhandled exception received - ${error.message} ${error.stack}`)
+    res.locals.correlationId = getCorrelationId()
     res.render('app/error', {
       subHeading: 'Something unexpected happened',
       error,
