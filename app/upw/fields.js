@@ -408,7 +408,7 @@ const fields = {
     validate: [
       {
         type: 'required',
-        message: 'Do you recommend not to place with a male supervisor? Select yes or no',
+        message: 'Do you recommend not to place with a male supervisor? Select Yes or No',
       },
     ],
   },
@@ -623,7 +623,7 @@ const fields = {
     ...requireEnterDetails,
   },
   eligibility_intensive_working: {
-    validate: [{ type: 'required', message: 'Is the individual eligible for intensive working? Select yes or no' }],
+    validate: [{ type: 'required', message: 'Is the individual eligible for intensive working? Select Yes or No' }],
   },
   eligibility_intensive_working_details: {
     dependent: { field: 'eligibility_intensive_working', value: 'NO' },
