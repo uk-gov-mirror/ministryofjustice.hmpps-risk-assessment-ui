@@ -3,11 +3,10 @@ LABEL maintainer="HMPPS Digital Studio <info@digital.justice.gov.uk>"
 ARG BUILD_NUMBER
 ARG GIT_REF
 
-RUN apt-get update && apt-get install -y make python3
-RUN apt-get install -y curl
-# temporary fix for avd.aquasec.com/nvd/cve-2022-1271
-RUN apt-get upgrade -y gzip=1.10-4+deb11u1 liblzma5=5.2.5-2.1~deb11u1
-RUN apt-get install build-essential -y
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y make python3 curl build-essential && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV TZ=Europe/London
 RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
