@@ -296,7 +296,7 @@
       "questionId": "5cefd241-cc51-4128-a343-cb7c438a9048",
       "questionCode": "cultural_religious_adjustment",
       "answerType": "radio",
-      "questionText": "Cultural or religious adjustments?",
+      "questionText": "Are adjustments required for cultural or religious reasons?",
       "readOnly": false,
       "conditional": false,
       "referenceDataTargets": [],
