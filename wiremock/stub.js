@@ -14,7 +14,6 @@ const {
   stubAssessmentTypeSummaries,
   stubAssessmentQuestions,
   stubPredictors,
-  stubTableActions,
   stubRegistrations,
   stubRoshRiskSummary,
   stubDocumentUpload,
@@ -58,7 +57,6 @@ async function stub() {
   await stubGetQuestionGroup()
   await stubReferenceData()
   await stubOasysUser()
-  await stubTableActions()
   await stubOffenderDetails()
   await stubOffenderAndOffenceDetails()
   await stubGetUserProfile()

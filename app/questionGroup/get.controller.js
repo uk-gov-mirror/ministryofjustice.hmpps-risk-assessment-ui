@@ -14,13 +14,13 @@ const displayQuestionGroup = async (
     const { questionGroup } = res.locals
     const subIndex = Number.parseInt(subgroup, 10)
 
-    const { answers = {}, tables = {}, episodeUuid } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
+    const { answers = {}, episodeUuid } = await grabAnswers(assessmentId, 'current', user?.token, user?.id)
 
     res.locals.assessmentUuid = assessmentId
     res.locals.episodeUuid = episodeUuid
 
     let questions = flattenCheckboxGroups(questionGroup.contents)
-    questions = annotateWithAnswers(questions, answers, body, tables)
+    questions = annotateWithAnswers(questions, answers, body)
     questions = compileInlineConditionalQuestions(questions, errors)
 
     return res.render(`${__dirname}/index`, {

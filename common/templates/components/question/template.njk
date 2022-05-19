@@ -68,73 +68,9 @@
     {{ question.title }}
   </h2>
 
-
   {% for question in question.contents %}
       {{ renderQuestion(question, errors, bodyAnswers[question.questionCode]) }}
   {% endfor %}
-{% endif %}
-
-
-{% if question.type == 'table' or question.type == 'tableGroup'%}
-  {#  find first question that is not presentational #}
-  {% set firstDataColumn = null %}
-  {% for questions in question.contents %}
-    {% if 'presentation:' not in questions.answerType %}
-      {% if firstDataColumn == null %}
-        {% set firstDataColumn = loop.index0 %}
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-
-  {% set numColumns = question.contents.length %}
-
-  {% if (question.contents[firstDataColumn].answer | isArr) and question.contents[firstDataColumn].answer.length > 0 %}
-    {% set numRows = question.contents[firstDataColumn].answer.length %}
-  {% else %}
-    {% set numRows = 1 %}
-  {% endif %}
-  
-  {% if (question.contents[firstDataColumn].answer.length) == 0 %}
-    {% set defaultAnswer = 'n/a' %}
-  {% endif %}
-
-  <table class="govuk-table govuk-table-xl">
-    <caption class="govuk-table__caption govuk-table__caption--l">{{ question.title }}</caption>
-    <thead class="govuk-table__head">
-    <tr class="govuk-table__row">
-    {% set firstDataColumn = null %}
-    {% for tableItems in question.contents %}
-      {% if 'presentation:' not in tableItems.answerType %}
-        {% if firstDataColumn == null %}
-          {% set firstDataColumn = loop.index0 %}
-        {% endif %}
-        <th scope="col" class="govuk-table__header" aria-sort="none">{{ tableItems.questionText }}</th>
-      {% endif %}
-    {%  endfor %}
-      <th scope="col" class="govuk-table__header" aria-sort="none">Action</th>
-    </thead>
-
-    <tbody class="govuk-table__body">
-    {% for row in range(0, numRows) %}
-    <tr class="govuk-table__row">
-      {% for column in range(0, numColumns) %}
-        {% if 'presentation:' not in  question.contents[column].answerType %}
-          <td class="govuk-table__cell govuk-table__cell-wrap">{% if defaultAnswer %}{{ defaultAnswer }}{% else %}{{ getQuestionAnswer(question.contents[column], row) }}</td>
-        {% endif %}{% endif %}
-      {% endfor %}
-      <td class="govuk-table__cell">
-        <ul class="govuk-list">
-          {% if not defaultAnswer %}
-            <li><a class="govuk-link--no-visited-state" aria-label="Edit {{ getQuestionAnswer(question.contents[firstDataColumn], row) }}" href="{{ requested_url }}/edit/{{ question.tableCode }}/{{ loop.index0 }}">Edit</a></li>
-            <li><a class="govuk-link--no-visited-state" aria-label="Delete {{ getQuestionAnswer(question.contents[firstDataColumn], row) }}"href="{{ requested_url }}/delete/{{ question.tableCode }}/{{ loop.index0 }}">Remove</a></li>
-          {% endif %}
-        </ul>
-      </td>
-    </tr>
-    {%  endfor %}
-      </tbody>
-      </table>
-
 {% endif %}
 
 {% if question.attributes.readonly == true and (question.questionCode).slice(0, 2) != 'ui'%}
@@ -158,17 +94,6 @@
 
 {% else %}
   {% set qType = question.answerType %}
-  {% set regExp1 = r/^presentation: link.*/gi %}
-  {% if regExp1.test(qType) %}
-    {% set linkTarget = question.answerType | extractLink | doReplace('<base>', requested_url) %}
-    {% set qType = 'presentation: link' %}
-  {% endif %}
-
-  {% set regExp2 = r/^presentation: buttonlink.*/gi %}
-  {% if regExp2.test(qType) %}
-    {% set linkTarget = question.answerType | extractLink | doReplace('<base>', requested_url) %}
-    {% set qType = 'presentation: buttonlink' %}
-  {% endif %}
 
   {% if qType == 'numeric' %}
     {% set formClass = question.formClasses + ' numeric' %}
@@ -176,24 +101,6 @@
   {% endif %}
 
   {% switch qType %}
-    {% case 'presentation: heading' %}
-      <h2 id="conditional-id-form-{{ question.questionCode }}" class="govuk-heading-m">{{ question.questionText }}</h2>
-    {% case 'presentation: heading_large' %}
-      <h2 id="conditional-id-form-{{ question.questionCode }}" class="govuk-heading-l">{{ question.questionText }}</h2>
-    {% case 'presentation: divider' %}
-      <hr id="conditional-id-form-{{ question.questionCode }}" class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-    {% case 'presentation: body' %}
-      <p id="conditional-id-form-{{ question.questionCode }}" class="govuk-text ">{{ question.questionText }}</p>
-    {% case 'presentation: link' %}
-      <div id="conditional-id-form-{{ question.questionCode }}" class="body-link__container"><a href="{{ linkTarget }}" class="govuk-link body-link">{{ question.questionText }}</a></div>
-    {% case 'presentation: buttonlink' %}
-      {{ govukButton({
-        text: question.questionText,
-        classes: 'govuk-button--secondary',
-        href: linkTarget
-      }) }}
-    {% case 'presentation: inset' %}
-      <div id="conditional-id-form-{{ question.questionCode }}" class="govuk-inset-text">{{ question.questionText }}</div>
     {% case 'noinput' %}
       {{ govukInput({
         id: question.questionCode,

@@ -7,8 +7,6 @@ const flattenCheckboxGroups = questions => {
         questionCode: question.checkboxGroupCode,
         answerType: 'checkboxGroup',
         questionText: question.title,
-        displayOrder: question.displayOrder,
-        mandatory: question.mandatory || true,
         readOnly: question.readOnly || false,
         conditional: question.conditional || false,
         answerDtos: question.contents.map(({ questionId, questionText }) => ({

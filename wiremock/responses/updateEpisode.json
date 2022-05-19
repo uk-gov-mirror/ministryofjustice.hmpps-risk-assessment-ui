@@ -5,43 +5,6 @@
   "reasonForChange": "new episode",
   "created": "2019-11-14T08:11:53.177108",
   "answers": {},
-  "tables": {
-    "children_at_risk_of_serious_harm": [
-      {
-        "pre_sentence_age": ["5"],
-        "pre_sentence_dob": ["2016-01-01"],
-        "pre_sentence_name": ["child1"],
-        "pre_sentence_gender": ["female"],
-        "pre_sentence_address": ["askjhsaj"],
-        "pre_sentence_currently_registered_social_services": ["YES"],
-        "pre_sentence_current_child_protection_registration": ["neglect"],
-        "pre_sentence_previously_registered_social_services": ["YES"],
-        "pre_sentence_previous_child_protection_registration": ["emotional"]
-      },
-      {
-        "pre_sentence_age": ["6"],
-        "pre_sentence_dob": ["2015-01-01"],
-        "pre_sentence_name": ["child2"],
-        "pre_sentence_gender": ["female"],
-        "pre_sentence_address": ["assadsfd"],
-        "pre_sentence_currently_registered_social_services": ["YES"],
-        "pre_sentence_current_child_protection_registration": ["neglect", "physical", "sexual", "emotional"],
-        "pre_sentence_previously_registered_social_services": ["YES"],
-        "pre_sentence_previous_child_protection_registration": ["neglect", "physical", "sexual", "emotional"]
-      },
-      {
-        "pre_sentence_age": ["5"],
-        "pre_sentence_dob": ["2015-01-01"],
-        "pre_sentence_name": ["child2"],
-        "pre_sentence_gender": ["male"],
-        "pre_sentence_address": ["sddsdds"],
-        "pre_sentence_currently_registered_social_services": ["YES"],
-        "pre_sentence_current_child_protection_registration": ["neglect", "physical", "sexual", "emotional"],
-        "pre_sentence_previously_registered_social_services": ["YES"],
-        "pre_sentence_previous_child_protection_registration": ["neglect", "physical", "sexual", "emotional"]
-      }
-    ]
-  },
   "offence": {
     "offenceCode": "00",
     "codeDescription": "Offence",

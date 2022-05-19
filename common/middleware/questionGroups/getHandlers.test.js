@@ -11,7 +11,7 @@ nunjucksEnvironment.addFilter('mojDate', mojDate)
 nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
 nunjucksEnvironment.addFilter('addSpellcheck', jsonObj => updateJsonValue(jsonObj, 'spellcheck', true, true))
 
-const { compileInlineConditionalQuestions, annotateWithAnswers, transformTableEntries } = require('./getHandlers')
+const { compileInlineConditionalQuestions, annotateWithAnswers } = require('./getHandlers')
 
 const questions = [
   {
@@ -20,9 +20,6 @@ const questions = [
     questionCode: 'no_fixed_abode',
     answerType: 'radio',
     questionText: 'Currently of no fixed abode or in transient accommodation',
-    displayOrder: '1',
-    mandatory: 'no',
-    validation: '{"mandatory":{"errorMessage":"Select an option","errorSummary":"Select an accommodation status"}}',
     answerDtos: [
       {
         answerUuid: '44444444-4444-4444-4444-444444444444',
@@ -54,13 +51,9 @@ const questions = [
     questionCode: 'further_information',
     answerType: 'textarea',
     questionText: 'Further information',
-    displayOrder: '1',
-    mandatory: 'no',
     conditional: 'yes',
     answerDtos: [],
     answer: null,
-    validation:
-      '{"mandatory":{"errorMessage":"Enter some details","errorSummary":"Enter more detail about the accommodation"}}',
     attributes: {
       'data-question-code': 'further_information',
       'data-question-type': 'textarea',
@@ -103,15 +96,11 @@ describe('getQuestionGroups', () => {
           ],
           answerType: 'radio',
           attributes: [['data-contains-conditional', 'true']],
-          displayOrder: '1',
           isConditional: true,
-          mandatory: 'no',
           questionCode: 'no_fixed_abode',
           questionId: '11111111-1111-1111-1111-111111111231',
           questionText: 'Currently of no fixed abode or in transient accommodation',
           type: 'question',
-          validation:
-            '{"mandatory":{"errorMessage":"Select an option","errorSummary":"Select an accommodation status"}}',
         },
         {
           answer: null,
@@ -122,17 +111,13 @@ describe('getQuestionGroups', () => {
             ['data-base-question-code', 'further_information'],
           ],
           conditional: 'yes',
-          displayOrder: '1',
           formClasses:
             'govuk-radios__conditional govuk-radios__conditional--no-indent govuk-radios__conditional--hidden',
           isConditional: true,
-          mandatory: 'no',
           questionCode: 'further_information',
           questionId: '12345678-1234-1234-1234-1234-123456789012',
           questionText: 'Further information',
           type: 'question',
-          validation:
-            '{"mandatory":{"errorMessage":"Enter some details","errorSummary":"Enter more detail about the accommodation"}}',
         },
       ]
       const result = compileInlineConditionalQuestions(thisTestQuestionGroup, {})
@@ -172,14 +157,10 @@ describe('getQuestionGroups', () => {
             'data-question-type': 'radio',
             'data-question-code': 'no_fixed_abode',
           },
-          displayOrder: '1',
-          mandatory: 'no',
           questionCode: 'no_fixed_abode',
           questionId: '11111111-1111-1111-1111-111111111231',
           questionText: 'Currently of no fixed abode or in transient accommodation',
           type: 'question',
-          validation:
-            '{"mandatory":{"errorMessage":"Select an option","errorSummary":"Select an accommodation status"}}',
         },
       ]
       const result = compileInlineConditionalQuestions(thisQuestionGroup, {})
@@ -194,8 +175,6 @@ describe('getQuestionGroups', () => {
       questionCode: '1.1',
       answerType: 'checkboxGroup',
       questionText: 'Checkbox Group',
-      displayOrder: 1,
-      mandatory: false,
       readOnly: false,
       conditional: false,
       referenceDataTargets: [],
@@ -243,41 +222,6 @@ describe('getQuestionGroups', () => {
       const [firstAnswer, secondAnswer] = theQuestion.answerDtos
       expect(firstAnswer.checked).toBe(true)
       expect(secondAnswer.checked).toBe(false)
-    })
-  })
-
-  describe('transformTableEntries', () => {
-    it('converts entries to question answers', () => {
-      const tableEntries = [
-        { first: 'foo', second: 'baz' },
-        { first: 'bar', second: 'bar' },
-        { first: 'baz', second: 'foo' },
-      ]
-
-      const expected = {
-        first: ['foo', 'bar', 'baz'],
-        second: ['baz', 'bar', 'foo'],
-      }
-
-      expect(transformTableEntries(tableEntries)).toStrictEqual(expected)
-    })
-
-    it('converts handles missing answers', () => {
-      const tableEntries = [{ first: 'foo', second: 'baz' }, { first: 'bar' }, { second: 'foo' }]
-
-      const expected = {
-        first: ['foo', 'bar', ''],
-        second: ['baz', '', 'foo'],
-      }
-
-      expect(transformTableEntries(tableEntries)).toStrictEqual(expected)
-    })
-
-    it('handles no entries', () => {
-      const tableEntries = []
-      const expected = {}
-
-      expect(transformTableEntries(tableEntries)).toStrictEqual(expected)
     })
   })
 })

@@ -121,18 +121,6 @@ const updateJsonValue = (jsonObj, key, value, createNewObject = false) => {
   return jsonObj
 }
 
-// extract link target from question type formatted as:
-// presentation: link("/update-assessment")
-const extractLink = questionType => {
-  const regex = /^(?:presentation: link|^presentation: buttonlink)\("(?<link>.*)"\)/gm
-  const re = regex.exec(questionType)
-  if (!re) return null
-  const {
-    groups: { link },
-  } = re
-  return link
-}
-
 const doReplace = (input, target, replacement) => {
   return input.split(target).join(replacement)
 }
@@ -207,7 +195,6 @@ module.exports = {
   encodeHTML,
   dynamicMiddleware,
   processReplacements,
-  extractLink,
   doReplace,
   updateJsonValue,
   prettyDate,

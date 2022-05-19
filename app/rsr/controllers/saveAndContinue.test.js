@@ -338,16 +338,6 @@ describe('SaveAndContinueController', () => {
 
       expect(getFlatAssessmentQuestions).toHaveBeenCalledWith('RSR', user.token, user.id)
     })
-
-    it('adds validation for mandatory questions if missing', async () => {
-      getFlatAssessmentQuestions.mockResolvedValue([
-        { questionCode: 'age_first_conviction', questionText: 'Age at first sanction' },
-      ])
-
-      await controller.configure(req, res, () => {})
-
-      expect(getFlatAssessmentQuestions).toHaveBeenCalledWith('RSR', user.token, user.id)
-    })
   })
 
   describe('process', () => {

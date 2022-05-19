@@ -6,7 +6,6 @@ describe('checkboxGroups', () => {
     checkboxGroupId: '91a60f48-89d4-4106-8f8a-fe797edca111',
     checkboxGroupCode: 'checkbox_group',
     title: 'Checkbox group',
-    displayOrder: 1,
     contents: [
       {
         type: 'question',
@@ -14,8 +13,6 @@ describe('checkboxGroups', () => {
         questionCode: '1.1',
         answerType: 'checkbox',
         questionText: 'First option',
-        displayOrder: 1,
-        mandatory: true,
         readOnly: false,
         conditional: false,
         referenceDataTargets: [],
@@ -40,8 +37,6 @@ describe('checkboxGroups', () => {
         questionCode: '1.2',
         answerType: 'checkbox',
         questionText: 'Second option',
-        displayOrder: 2,
-        mandatory: true,
         readOnly: false,
         conditional: false,
         referenceDataTargets: [],
@@ -71,10 +66,8 @@ describe('checkboxGroups', () => {
           type: 'question',
           questionId: '91a60f48-89d4-4106-8f8a-fe797edca111',
           questionCode: 'checkbox_group',
-          displayOrder: 1,
           answerType: 'checkboxGroup',
           questionText: 'Checkbox group',
-          mandatory: true,
           readOnly: false,
           conditional: false,
           answerDtos: [

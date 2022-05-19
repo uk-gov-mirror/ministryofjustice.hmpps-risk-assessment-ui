@@ -5,63 +5,15 @@ const { logger } = require('../../logging/logger')
 
 const whereAnswerValueIs = value => answerDto => answerDto.value === value
 const isMultipleChoiceAnswerFor = answerType => answerType === 'radio' || answerType === 'checkbox'
-const isPresentationOnlyFor = answerType => typeof answerType === 'string' && answerType.match(/presentation:/gi)
 let conditionalQuestionsToRemove = []
 const outOfLineConditionalQuestions = []
 
-const transformTableEntries = tableEntries => {
-  const numberOfEntries = tableEntries.length
-  const initialiseColumnAnswers = n => Array(n).fill('')
-
-  return tableEntries.reduce((previousAnswers, tableEntry, tableEntryPosition) => {
-    const currentAnswers = { ...previousAnswers }
-    Object.entries(tableEntry).forEach(([name, value]) => {
-      if (!Array.isArray(currentAnswers[name])) {
-        currentAnswers[name] = initialiseColumnAnswers(numberOfEntries)
-      }
-      currentAnswers[name][tableEntryPosition] = value
-    })
-    return currentAnswers
-  }, {})
-}
-
-const annotateWithAnswers = (questions, answers, body = {}, tables = {}) => {
+const annotateWithAnswers = (questions, answers, body = {}) => {
   return questions.map(questionSchema => {
     if (questionSchema.type === 'group') {
       return {
         ...questionSchema,
         contents: annotateWithAnswers(questionSchema.contents, answers, body),
-      }
-    }
-
-    if (isPresentationOnlyFor(questionSchema.answerType)) {
-      return {
-        ...questionSchema,
-        answer: '',
-      }
-    }
-
-    if (questionSchema.type === 'table' || questionSchema.type === 'tableGroup') {
-      const tableEntries = tables[questionSchema.tableCode] || []
-      const tableAnswers = transformTableEntries(tableEntries)
-
-      return {
-        ...questionSchema,
-        contents: questionSchema.contents.map(tableQuestion => {
-          if (isPresentationOnlyFor(tableQuestion.answerType)) {
-            return tableQuestion
-          }
-          if (isMultipleChoiceAnswerFor(tableQuestion.answerType)) {
-            return {
-              ...tableQuestion,
-              answerDtos: annotateAnswers(tableQuestion.answerDtos, tableAnswers[tableQuestion.questionCode] || []),
-            }
-          }
-          return {
-            ...tableQuestion,
-            answer: tableAnswers[tableQuestion.questionCode] || '',
-          }
-        }),
       }
     }
 
@@ -332,4 +284,4 @@ const grabAnswers = (assessmentId, episodeId, token, userId) => {
   }
 }
 
-module.exports = { compileInlineConditionalQuestions, annotateWithAnswers, grabAnswers, transformTableEntries }
+module.exports = { compileInlineConditionalQuestions, annotateWithAnswers, grabAnswers }

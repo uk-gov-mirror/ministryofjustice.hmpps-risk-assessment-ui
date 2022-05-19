@@ -131,17 +131,6 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
 
 const fieldFrom = (localField, questionDto = {}) => {
   const validationRules = [...(localField.validate || [])]
-  if (
-    questionDto.mandatory &&
-    localField.validate?.filter(validationRule => validationRule.type === 'required').length === 0
-  ) {
-    const remoteValidationRules = questionDto.validation ? JSON.parse(questionDto.validation) : {}
-    const { mandatory = {} } = remoteValidationRules
-    validationRules.push({
-      type: 'required',
-      message: mandatory.errorMessage || `[PLACEHOLDER] ${questionDto.questionText} is mandatory`,
-    })
-  }
 
   const combinedSchema = {
     ...questionDto,

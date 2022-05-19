@@ -92,7 +92,6 @@ describe('TaskListController', () => {
 
     getAnswers.mockReturnValueOnce({
       answers: {},
-      tables: {},
     })
 
     getTaskList.mockReturnValue('FOO TASK LIST')
