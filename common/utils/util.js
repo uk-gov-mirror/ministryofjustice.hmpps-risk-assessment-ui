@@ -166,6 +166,15 @@ const ageFrom = (dateOfBirth, today = new Date()) => {
   return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
 }
 
+const clearAnswers = questions => {
+  const pageQuestions = Object.keys(questions)
+  pageQuestions.forEach(question => {
+    // eslint-disable-next-line no-param-reassign
+    questions[question].answer = ''
+  })
+  return questions
+}
+
 const getErrorMessageFor = (user, reason) => {
   if (reason === 'OASYS_PERMISSION') {
     return 'You do not have permission to create this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
@@ -200,5 +209,6 @@ module.exports = {
   prettyDate,
   prettyDateAndTime,
   ageFrom,
+  clearAnswers,
   getErrorMessageFor,
 }

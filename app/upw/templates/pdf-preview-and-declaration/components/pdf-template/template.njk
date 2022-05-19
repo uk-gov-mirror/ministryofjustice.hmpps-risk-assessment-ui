@@ -46,14 +46,54 @@
     {% endif %}
 {%- endmacro -%}
 
+{%- macro renderMultiple(values, key) -%}    
+    {% if key === "gp_details" %}
+        {% for gp in values["gp_details"] %}
+            {{renderGpDetails(
+                gp["gp_name"],
+                gp["gp_practice_name"],
+                gp["gp_phone_number"],
+                readOnlyAddress({ 
+                    buildingName: gp["gp_address_building_name"],
+                    houseNumber: gp["gp_address_house_number"],
+                    streetName: gp["gp_address_street_name"],
+                    district: gp["gp_address_district"],
+                    townOrCity: gp["gp_address_town_or_city"],
+                    county: gp["gp_address_county"],
+                    postcode: gp["gp_address_postcode"]
+                })
+            )}}
+            {% if not loop.last %}<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">{% endif %}
+        {% endfor %}
+    {% elif key ===  "emergency_contacts" %}
+        {% for contact in values["emergency_contacts"] %}
+            {{renderEmergencyContact(
+                renderName(contact['emergency_contact_first_name'], contact['emergency_contact_family_name']),
+                contact["emergency_contact_relationship"],
+                contact["emergency_contact_phone_number"],
+                contact["emergency_contact_mobile_phone_number"]
+            )}}
+            {% if not loop.last %}<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">{% endif %}
+        {% endfor %}
+    {% endif %}
+{%- endmacro -%}
+
 {%- macro renderOffence(code, description) -%}
     <p>{% if code %}{{ code }} - {% endif %}{{ description }}</p>
 {%- endmacro -%}
 
-{%- macro renderGpDetails(name, phoneNumber, address) -%}
-    {% if name %}<p>{{ name }}</p>{% endif %}
-    {% if address %}<p>{{ address }}</p>{% endif %}
-    {% if phoneNumber %}<p>{{ phoneNumber }}</p>{% endif %}
+{%- macro renderGpDetails(name, practice, phoneNumber, address) -%}
+    {% if name %}<p><strong>Name: </strong>{{ name }}</p>{% endif %}
+    {% if practice %}<p><strong>Practice: </strong>{{ practice }}</p>{% endif %}
+    {% if address %}<p><strong>Address: </strong><br/>{{ address }}</p>{% endif %}
+    {% if phoneNumber %}<p><strong>Phone number: </strong>{{ phoneNumber }}</p>{% endif %}
+{%- endmacro -%}
+
+{%- macro renderEmergencyContact(name, relationship, phoneNumber, mobileNumber) -%}
+    {% if name %}<p><strong>Name: </strong>{{ name }}</p>{% endif %}
+    {% if relationship %}<p><strong>Relationshop: </strong>{{ relationship }}</p>{% endif %}
+    {% if phoneNumber %}<p><strong>Phone number: </strong>{{ phoneNumber }}</p>{% endif %}
+    {% if mobileNumber %}<p><strong>Mobile number: </strong>{{ mobileNumber }}</p>{% endif %}
 {%- endmacro -%}
 
 {%- macro renderName(firstName, familyName) -%}
@@ -196,12 +236,14 @@
     {{ renderTable({
         caption: "Emergency contact details",
         rows: [
-            { heading: "Name", data: renderName(answers['emergency_contact_first_name'], answers['emergency_contact_family_name']) },
-            { heading: "Relationship to individual", data: renderValue(answers["emergency_contact_relationship"]) },
-            { heading: "Mobile", data: renderValue(answers["emergency_contact_phone_number"]) },
-            { heading: "Phone number", data: renderValue(answers["emergency_contact_mobile_phone_number"]) }
+            {
+                heading: "Emergency contacts", 
+                data: renderMultiple(rawAnswers, 'emergency_contacts')
+            }
         ]
     }) }}
+
+    
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of harm in the community</h1>
 
@@ -414,8 +456,7 @@
         <p>{{ recentlyGivenBirthDescription }}</p>
         {% endif %}
     {%- endmacro -%}
-
-    {% set gpName = answers['gp_first_name'] + ' ' + answers['gp_family_name'] %}
+    
     {{ renderTable({
         caption: "Are there any other health issues that may affect ability to work?",
         rows: [
@@ -461,19 +502,7 @@
             },
             {
                 heading: "Details of GP (if needed to verify information)", 
-                data: renderGpDetails(
-                    gpName,
-                    answers["gp_phone_number"],
-                    readOnlyAddress({ 
-                        buildingName: answers["gp_address_building_name"],
-                        houseNumber: answers["gp_address_house_number"],
-                        streetName: answers["gp_address_street_name"],
-                        district: answers["gp_address_district"],
-                        townOrCity: answers["gp_address_town_or_city"],
-                        county: answers["gp_address_county"],
-                        postcode: answers["gp_address_postcode"]
-                    })
-                )
+                data: renderMultiple(rawAnswers, 'gp_details')
             }
         ]
     }) }}

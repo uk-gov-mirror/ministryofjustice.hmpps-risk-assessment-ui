@@ -9,31 +9,31 @@
 %}
     No data
 {% else %}
-    {% if params.buildingName %}
-        {{ params.buildingName }},<br/>
+    {% if params.buildingName and params.buildingName != "" %}
+        {{ params.buildingName }}<br/>
     {% endif %}
 
-    {% if params.houseNumber and params.streetName %}
-        {{ params.houseNumber }} {{ params.streetName }},</br>
-    {% elif params.houseNumber %}
-        {{ params.houseNumber }},<br/>
-    {% elif params.streetName %}
-        {{ params.streetName }},<br/>
+    {% if (params.houseNumber and params.houseNumber != "") and (params.streetName and params.streetName != "") %}
+        {{ params.houseNumber }} {{ params.streetName }}</br>
+    {% elif params.houseNumber and params.houseNumber != "" %}
+        {{ params.houseNumber }}<br/>
+    {% elif params.streetName and params.streetName != "" %}
+        {{ params.streetName }}<br/>
     {% endif %}
 
-    {% if params.district %}
-        {{ params.district }},<br/>
+    {% if params.district and params.district != "" %}
+        {{ params.district }}<br/>
     {% endif %}
 
-    {% if params.townOrCity %}
-        {{ params.townOrCity }},<br/>
+    {% if params.townOrCity and params.townOrCity != "" %}
+        {{ params.townOrCity }}<br/>
     {% endif %}
 
-    {% if params.county %}
-        {{ params.county }},<br/>
+    {% if params.county and params.county != "" %}
+        {{ params.county }}<br/>
     {% endif %}
     
-    {% if params.postcode %}
+    {% if params.postcode and params.postcode != "" %}
         {{ params.postcode }}
     {% endif %}
 {% endif %}

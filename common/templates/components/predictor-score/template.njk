@@ -1,3 +1,5 @@
+{# Please ensure that any changes made here are also reflected in https://github.com/ministryofjustice/hmpps-risk-ui-elements #}
+
 {% from "common/templates/components/predictor-indicator/macro.njk" import predictorIndicator %}
 
 {% set scoreLabelClass = '' %}
@@ -34,7 +36,7 @@
 
 {% if predictorScore.level === 'NOT APPLICABLE' %}
 <div class="predictor-score govuk-body">
-    <p class="govuk-body">No relevent sexual offences</p>
+    <p class="govuk-body">No relevant sexual offences</p>
 </div>
 {% else %}
 <div class="predictor-score govuk-body">

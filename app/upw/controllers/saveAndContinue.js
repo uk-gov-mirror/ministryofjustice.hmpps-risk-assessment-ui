@@ -67,7 +67,7 @@ class SaveAndContinue extends BaseSaveAndContinue {
 
   successHandler(req, res, next) {
     const sectionCompleteFields = Object.keys(req.form?.options?.fields).filter(key => key.match(/^\w+_complete$/))
-    const answers = req.sessionModel.get('answers')
+    const answers = req.sessionModel.get('answers') || {}
     const sectionComplete = answers[sectionCompleteFields[0]] === SECTION_COMPLETE
 
     trackEvent(EVENTS.ARN_SECTION_COMPLETED, req, {

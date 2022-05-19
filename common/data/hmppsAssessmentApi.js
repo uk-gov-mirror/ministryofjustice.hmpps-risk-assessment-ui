@@ -2,6 +2,7 @@ const superagent = require('superagent')
 const logger = require('../logging/logger')
 const { getCorrelationId } = require('../utils/util')
 const { getCachedUserDetails } = require('./userDetailsCache')
+const { convertAnswersStructure } = require('../utils/convertAnswersStructure')
 const { ServerError } = require('../utils/errors')
 const {
   apis: {
@@ -48,9 +49,18 @@ const getAssessmentSummary = (assessmentSchemaCode, authorisationToken, userId) 
   return getData(path, authorisationToken, userId)
 }
 
-const getAnswers = (assessmentId, episodeId, authorisationToken, userId) => {
+const getAnswers = async (assessmentId, episodeId, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
-  return getData(path, authorisationToken, userId)
+  const answerData = await getData(path, authorisationToken, userId)
+
+  answerData.answers = await convertAnswersStructure(
+    answerData.answers,
+    assessmentId,
+    episodeId,
+    authorisationToken,
+    userId,
+  )
+  return answerData
 }
 
 const getEpisode = (assessmentId, episodeId, authorisationToken, userId) => {

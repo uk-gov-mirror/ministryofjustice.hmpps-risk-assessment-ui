@@ -1602,6 +1602,28 @@
     },
     {
       "type": "question",
+      "questionId": "3878b84a-ce60-491d-a566-8b637c106bec",
+      "questionCode": "gp_name",
+      "answerType": "freetext",
+      "questionText": "Name (Optional)",
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "e8ceda00-f8d2-444b-9d8c-e890343d196b",
+      "questionCode": "gp_practice_name",
+      "answerType": "freetext",
+      "questionText": "GP practice name",
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerDtos": []
+    },
+    {
+      "type": "question",
       "questionId": "9b7a4455-5bdf-4e28-af57-f2fdbfb54805",
       "questionCode": "gp_address_building_name",
       "answerType": "freetext",
