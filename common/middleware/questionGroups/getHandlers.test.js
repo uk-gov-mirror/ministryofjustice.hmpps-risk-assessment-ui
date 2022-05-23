@@ -134,7 +134,7 @@ describe('getQuestionGroups', () => {
               answerUuid: '44444444-4444-4444-4444-444444444444',
               conditional: {
                 html:
-                  ' <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="4000"><div class="govuk-form-group"><label class="govuk-label further_information govuk-label--m" for="further_information">Further information</label><div id="further_information-hint" class="govuk-hint"></div><textarea class="govuk-textarea govuk-js-character-count" id="further_information" name="further_information" rows="5" aria-describedby="further_information-info further_information-hint" spellcheck="true"></textarea>\n</div><div id="further_information-info" class="govuk-hint govuk-character-count__message" aria-live="polite">You can enter up to 4000 characters\n</div></div>',
+                  ' <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="4000"><div class="govuk-form-group"><label class="govuk-label further_information govuk-label--m" for="further_information">Further information</label><div id="further_information-hint" class="govuk-hint"></div><textarea class="govuk-textarea govuk-js-character-count" id="further_information" name="further_information" rows="5" aria-describedby="further_information-info further_information-hint" spellcheck="true"></textarea>\n</div><div id="further_information-info" class="govuk-hint govuk-character-count__message">You can enter up to 4000 characters\n</div></div>',
               },
               conditionals: [
                 {
