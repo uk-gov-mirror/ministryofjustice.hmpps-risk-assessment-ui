@@ -24,7 +24,7 @@ const predictorScores = [
 ]
 
 const formattedCurrentPredictorScore = {
-  date: '13 Aug 2021 at 08:26:21',
+  date: '13 Aug 2021 at 09:26:21',
   scores: {
     RSR: { type: 'RSR', level: 'HIGH', score: 11.34 },
     OSPC: { type: 'OSP/C', level: 'MEDIUM', score: 8.76 },
