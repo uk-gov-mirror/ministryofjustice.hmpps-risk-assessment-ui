@@ -1,5 +1,5 @@
-const { differenceInYears, format } = require('date-fns')
-const { utcToZonedTime, formatInTimeZone } = require('date-fns-tz')
+const { formatInTimeZone } = require('date-fns-tz')
+const { ageFrom } = require('../../common/utils/util')
 const { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } = require('../../common/data/hmppsAssessmentApi')
 const logger = require('../../common/logging/logger')
 const getErrorMessageFor = require('../../common/utils/util')
@@ -24,20 +24,17 @@ const getOffenceDetailsFor = episode => {
     offenceDescription: episode?.offence?.codeDescription,
     subCode: episode?.offence?.offenceSubCode,
     subCodeDescription: episode?.offence?.subCodeDescription,
-    sentenceDate: sentenceDate && formatInTimeZone(new Date(sentenceDate), 'Europe/London', 'do MMMM y'),
+    sentenceDate: sentenceDate && formatInTimeZone(sentenceDate, 'Europe/London', 'do MMMM y'),
   }
 }
 
-const getSubjectDetailsFor = (
-  offender,
-  today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' })),
-) => ({
+const getSubjectDetailsFor = offender => ({
   name: `${offender?.firstName} ${offender?.surname}`,
   dob: offender?.dateOfBirth,
   pnc: offender?.pncNumber,
   crn: offender?.crn,
   subjectUuid: offender?.offenderId,
-  age: differenceInYears(today, utcToZonedTime(offender?.dateOfBirth, 'Europe/London')),
+  age: ageFrom(offender?.dateOfBirth),
 })
 
 const verifyAssessment = async (req, res, next) => {

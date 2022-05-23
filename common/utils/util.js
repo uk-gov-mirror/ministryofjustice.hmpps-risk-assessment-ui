@@ -147,10 +147,8 @@ const processReplacements = (input, replacementDetails) => {
   return JSON.parse(newInput)
 }
 
-const formatDateWith = pattern => isoString => {
-  const parsedDate = parseISO(isoString)
-  return isValid(parsedDate) ? formatInTimeZone(parsedDate, 'Europe/London', pattern) : null
-}
+const formatDateWith = pattern => date =>
+  isValid(parseISO(date)) ? formatInTimeZone(date, 'Europe/London', pattern) : null
 
 const prettyDate = formatDateWith('do MMMM y')
 const prettyDateAndTime = formatDateWith('eeee do MMMM y H:mm')
