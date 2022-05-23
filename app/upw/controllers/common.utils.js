@@ -1,6 +1,6 @@
-const { formatInTimeZone } = require('date-fns-tz')
 const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
 const logger = require('../../../common/logging/logger')
+const { prettyDate } = require('../../../common/utils/util')
 
 const whereStringNotNull = s => s !== null
 
@@ -16,7 +16,7 @@ const formatMappaCode = (code, prefix) => {
   return suffix ? `${prefix} ${suffix}` : null
 }
 
-const formatDate = date => (date ? formatInTimeZone(date, 'Europe/London', 'do MMMM y') : null)
+const formatDate = date => (date ? prettyDate(date) : null)
 
 const formatMappaCodes = ({ category, level } = {}) => {
   if (!category && !level) {

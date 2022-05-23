@@ -1,5 +1,3 @@
-const { differenceInYears } = require('date-fns')
-const { utcToZonedTime } = require('date-fns-tz')
 const BaseController = require('../../common/controllers/baseController')
 const { trackEvent } = require('../../../common/logging/app-insights')
 const { EVENTS } = require('../../../common/utils/constants')
@@ -19,7 +17,7 @@ const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode =
   return assessmentSupervision(assessmentParams, user?.token, user?.id)
 }
 
-const getSubjectDetailsFor = (assessment) => ({
+const getSubjectDetailsFor = assessment => ({
   name: assessment?.subject?.name,
   dob: assessment?.subject?.dateOfBirth,
   pnc: assessment?.subject?.pnc,
