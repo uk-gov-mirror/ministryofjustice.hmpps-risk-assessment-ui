@@ -87,7 +87,10 @@ class SaveAndContinue extends BaseController {
         .filter(([_, editMultiple]) => editMultiple === res.locals.editMultiple)
         .forEach(([questionCode]) => {
           const thisAnswer = previousAnswers[res.locals.editMultiple]?.[res.locals.multipleToEdit]?.[questionCode] || ''
-          res.locals.questions[questionCode].answer = thisAnswer[0] || ''
+          res.locals.questions[questionCode] = {
+            ...res.locals.questions[questionCode],
+            answer: thisAnswer[0] || '',
+          }
         })
     }
 
@@ -193,7 +196,7 @@ class SaveAndContinue extends BaseController {
 
       const multipleKey = res.locals.addNewMultiple
       const rawAnswers = req.sessionModel.get('rawAnswers')
-      const existingMultiple = rawAnswers[multipleKey]
+      const existingMultiple = rawAnswers[multipleKey] || []
       existingMultiple.push(newMultipleAnswer)
       answers[multipleKey] = existingMultiple
 
