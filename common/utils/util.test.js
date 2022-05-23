@@ -165,6 +165,12 @@ describe('prettyDate', () => {
   it('handles empty input', () => {
     expect(prettyDate()).toBeNull()
   })
+
+  it('adjusts for DST', () => {
+    expect(prettyDateAndTime('2022-03-25T07:00:00+0000')).toEqual('Friday 25th March 2022 7:00')
+    expect(prettyDateAndTime('2022-03-27T23:30:00+0000')).toEqual('Monday 28th March 2022 0:30')
+    expect(prettyDateAndTime('2022-03-28T07:00:00+0000')).toEqual('Monday 28th March 2022 8:00')
+  })
 })
 
 describe('prettyDateAndTime', () => {
@@ -181,6 +187,11 @@ describe('prettyDateAndTime', () => {
 
   it('handles empty input', () => {
     expect(prettyDateAndTime()).toBeNull()
+  })
+
+  it('adjusts for DST', () => {
+    expect(prettyDateAndTime('2022-03-26T07:00:00+0000')).toEqual('Saturday 26th March 2022 7:00')
+    expect(prettyDateAndTime('2022-03-28T07:00:00+0000')).toEqual('Monday 28th March 2022 8:00')
   })
 })
 
