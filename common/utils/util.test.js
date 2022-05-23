@@ -212,6 +212,11 @@ describe('ageFrom', () => {
   it('handles empty input', () => {
     expect(ageFrom()).toBeNull()
   })
+
+  it('adjusts for DST', () => {
+    expect(ageFrom('1989-03-28T00:00:00+0000', new Date('2022-03-27T22:30:00+0000'))).toEqual(32)
+    expect(ageFrom('1989-03-28T00:00:00+0000', new Date('2022-03-27T23:30:00+0000'))).toEqual(33)
+  })
 })
 
 // unit tests for updateJsonValue object

@@ -1,6 +1,6 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
-const { format, differenceInYears, isValid, parseISO } = require('date-fns')
+const { startOfDay, differenceInYears, isValid, parseISO } = require('date-fns')
 const { formatInTimeZone, utcToZonedTime } = require('date-fns-tz')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
@@ -155,8 +155,9 @@ const formatDateWith = pattern => isoString => {
 const prettyDate = formatDateWith('do MMMM y')
 const prettyDateAndTime = formatDateWith('eeee do MMMM y H:mm')
 
-const ageFrom = (dateOfBirth, today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }))) => {
-  const parsedDate = utcToZonedTime(dateOfBirth, 'Europe/London')
+const ageFrom = (dateOfBirth, now = new Date()) => {
+  const today = startOfDay(utcToZonedTime(now, 'Europe/London'))
+  const parsedDate = startOfDay(utcToZonedTime(dateOfBirth, 'Europe/London'))
   return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
 }
 
