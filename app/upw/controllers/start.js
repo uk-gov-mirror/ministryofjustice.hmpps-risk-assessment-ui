@@ -6,6 +6,7 @@ const { EVENTS } = require('../../../common/utils/constants')
 const { assessmentSupervision, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi')
 const logger = require('../../../common/logging/logger')
 const { getErrorMessageFor } = require('../../../common/utils/util')
+const { ageFrom } = require('../../../common/utils/util')
 
 const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode = 'UPW', deliusEventType = null) => {
   logger.info(`Creating ${assessmentSchemaCode} assessment for CRN: ${crn}`)
@@ -18,16 +19,13 @@ const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode =
   return assessmentSupervision(assessmentParams, user?.token, user?.id)
 }
 
-const getSubjectDetailsFor = (
-  assessment,
-  today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' })),
-) => ({
+const getSubjectDetailsFor = (assessment) => ({
   name: assessment?.subject?.name,
   dob: assessment?.subject?.dateOfBirth,
   pnc: assessment?.subject?.pnc,
   crn: assessment?.subject?.crn,
   subjectUuid: assessment?.subject?.subjectUuid,
-  age: differenceInYears(today, utcToZonedTime(assessment?.subject?.dateOfBirth, 'Europe/London')),
+  age: ageFrom(assessment?.subject?.dateOfBirth),
 })
 
 class StartUnpaidWork extends BaseController {
