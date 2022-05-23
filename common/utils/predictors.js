@@ -1,7 +1,8 @@
-const { parseISO, format } = require('date-fns')
+const { format } = require('date-fns')
+const { utcToZonedTime } = require('date-fns-tz')
 
 const formatDate = dateString => {
-  const date = parseISO(dateString)
+  const date = utcToZonedTime(dateString, 'Europe/London')
   const datePart = format(date, 'd MMM y')
   const timePart = format(date, 'HH:mm:ss')
   return `${datePart} at ${timePart}`

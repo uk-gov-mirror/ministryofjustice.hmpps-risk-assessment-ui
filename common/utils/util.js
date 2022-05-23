@@ -1,15 +1,9 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
 const { format, differenceInYears, isValid, parseISO } = require('date-fns')
+const { formatInTimeZone, utcToZonedTime } = require('date-fns-tz')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
-
-const getYearMonthFromDate = dateString => {
-  const date = new Date(dateString)
-  const month = date.getMonth() + 1
-  const monthName = date.toLocaleString('default', { month: 'long' })
-  return { month, monthName, year: date.getFullYear().toString() }
-}
 
 const isEmptyObject = obj => {
   if (obj === undefined || obj === null) return true
@@ -155,14 +149,14 @@ const processReplacements = (input, replacementDetails) => {
 
 const formatDateWith = pattern => isoString => {
   const parsedDate = parseISO(isoString)
-  return isValid(parsedDate) ? format(parsedDate, pattern) : null
+  return isValid(parsedDate) ? formatInTimeZone(parsedDate, 'Europe/London', pattern) : null
 }
 
 const prettyDate = formatDateWith('do MMMM y')
 const prettyDateAndTime = formatDateWith('eeee do MMMM y H:mm')
 
-const ageFrom = (dateOfBirth, today = new Date()) => {
-  const parsedDate = parseISO(dateOfBirth)
+const ageFrom = (dateOfBirth, today = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }))) => {
+  const parsedDate = utcToZonedTime(dateOfBirth, 'Europe/London')
   return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
 }
 
@@ -191,7 +185,6 @@ const getErrorMessageFor = (user, reason) => {
 }
 
 module.exports = {
-  getYearMonthFromDate,
   isEmptyObject,
   countWords,
   removeUrlLevels,
