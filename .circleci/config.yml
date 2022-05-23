@@ -44,7 +44,6 @@ jobs:
           paths:
             - node_modules
             - assets/stylesheets
-            - .cache/Cypress
 
   check_outdated:
     executor:
@@ -85,44 +84,6 @@ jobs:
       - store_artifacts:
           path: test-results/unit-test-reports.html
 
-  cypress_integration_tests:
-    working_directory: ~/app
-    executor:
-      name: hmpps/node_redis
-      node_tag: << pipeline.parameters.node-version >>
-      redis_tag: buster
-    resource_class: xlarge
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/app
-      - run:
-          name: Install missing OS dependency
-          command: sudo apt-get install libxss1
-      - run:
-          name: Get wiremock
-          command: curl -o wiremock.jar https://repo1.maven.org/maven2/com/github/tomakehurst/wiremock-standalone/2.27.1/wiremock-standalone-2.27.1.jar
-      - run:
-          name: Run auth wiremock
-          command: java -jar wiremock.jar --port 9191
-          background: true
-      - restore_cache:
-          keys:
-            - dependency-cache-${CACHE_VERSION}-{{ checksum "package.json" }}
-      - run:
-          name: Run the node app
-          command: npm run start:cypress
-          background: true
-      - run:
-          name: Run Cypress Integration tests
-          command: npm run int-test-ci
-      - store_test_results:
-          path: integration-tests/reports
-      - store_artifacts:
-          path: integration-tests/videos
-      - store_artifacts:
-          path: integration-tests/screenshots
-
 workflows:
   version: 2
   build-test-and-deploy:
@@ -132,9 +93,6 @@ workflows:
             tags:
               ignore: /.*/
       - test:
-          requires:
-            - build
-      - cypress_integration_tests:
           requires:
             - build
       - hmpps/helm_lint:
@@ -161,7 +119,6 @@ workflows:
           requires:
             - helm_lint
             - test
-            - cypress_integration_tests
             - build_docker
       - request-preprod-approval:
           type: approval
