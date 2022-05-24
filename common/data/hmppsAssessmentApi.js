@@ -1,4 +1,5 @@
 const superagent = require('superagent')
+const lodash = require('lodash')
 const logger = require('../logging/logger')
 const { getCorrelationId } = require('../utils/util')
 const { getCachedUserDetails } = require('./userDetailsCache')
@@ -53,13 +54,24 @@ const getAnswers = async (assessmentId, episodeId, authorisationToken, userId) =
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
   const answerData = await getData(path, authorisationToken, userId)
 
-  answerData.answers = await convertAnswersStructure(
+  const convertedAnswers = convertAnswersStructure(
     answerData.answers,
     assessmentId,
     episodeId,
     authorisationToken,
     userId,
   )
+
+  if (!lodash.isEqual(answerData.answers, convertedAnswers)) {
+    logger.info(`Saving updated answer structure for assessment ${assessmentId}, episode ${episodeId}`)
+    try {
+      answerData.answers = convertedAnswers
+      await postAnswers(assessmentId, episodeId, { answers: answerData.answers }, authorisationToken, userId)
+    } catch (error) {
+      logger.error(`Could not save converted answers for assessment ${assessmentId}, current episode, error: ${error}`)
+    }
+  }
+
   return answerData
 }
 

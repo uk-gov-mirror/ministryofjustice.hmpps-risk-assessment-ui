@@ -9,9 +9,9 @@ const userDetails = {
   areaName: 'Hertfordshire',
 }
 
-jest.mock('../utils/util', () => ({
-  getCorrelationId: jest.fn(() => 'mocked-correlation-id'),
-}))
+const { getCorrelationId } = require('../utils/util')
+
+jest.mock('../utils/util')
 jest.mock('./userDetailsCache', () => ({
   getCachedUserDetails: jest.fn(() => userDetails),
 }))
@@ -21,14 +21,23 @@ const {
     hmppsAssessments: { url },
   },
 } = require('../config')
-const { getOffenderData } = require('./hmppsAssessmentApi')
+const { getOffenderData, postAnswers, getAnswers } = require('./hmppsAssessmentApi')
+const { convertAnswersStructure } = require('../utils/convertAnswersStructure')
+
+jest.mock('../utils/convertAnswersStructure')
+jest.mock('./hmppsAssessmentApi', () => ({
+  ...jest.requireActual('./hmppsAssessmentApi'),
+  postAnswers: jest.fn(),
+}))
 
 describe('hmppsAssessmentApi', () => {
   beforeEach(() => {
     mockedEndpoint = nock(url)
+    getCorrelationId.mockReturnValue('mocked-correlation-id')
   })
   afterEach(() => {
     nock.cleanAll()
+    jest.resetAllMocks()
   })
   let mockedEndpoint
   const authorisationToken = 'mytoken'
@@ -52,6 +61,44 @@ describe('hmppsAssessmentApi', () => {
     it('should throw an error if it does not receive a valid response', async () => {
       mockedEndpoint.get(offenderDataUrl).reply(503)
       await expect(getOffenderData(uuid, authorisationToken, userId)).rejects.toThrowError()
+    })
+  })
+
+  describe('getAnswers', () => {
+    const answersUrl = `/assessments/${uuid}/episodes/${uuid}`
+    const answersData = {
+      otherfield: 'otherfield',
+      answers: {
+        question_1: ['answer_1'],
+        emergency_contact_phone_number: ['987654321'],
+        question_2: ['answer_2'],
+        gp_family_name: ['Smith'],
+        gp_phone_number: ['0123456789'],
+        emergency_contact_family_name: ['West'],
+      },
+    }
+    it('should return answer details from api', async () => {
+      convertAnswersStructure.mockReturnValue(answersData.answers)
+      mockedEndpoint.get(answersUrl).reply(200, answersData)
+      const output = await getAnswers(uuid, uuid, authorisationToken, userId)
+      expect(output).toEqual(answersData)
+      expect(postAnswers).not.toHaveBeenCalled()
+    })
+    it('should save answers when structure is updated', async () => {
+      const newAnswersData = JSON.parse(JSON.stringify(answersData))
+      const updatedData = { newfield: 'newfield' }
+      newAnswersData.answers = updatedData
+      convertAnswersStructure.mockReturnValue(updatedData)
+      mockedEndpoint.get(answersUrl).reply(200, answersData)
+      const output = await getAnswers(uuid, uuid, authorisationToken, userId)
+
+      const expected = {
+        ...answersData,
+        answers: updatedData,
+      }
+
+      expect(output).toEqual(expected)
+      expect(postAnswers).not.toHaveBeenCalledWith(uuid, uuid, updatedData, authorisationToken, userId)
     })
   })
 })
