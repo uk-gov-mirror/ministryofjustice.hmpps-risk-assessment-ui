@@ -151,7 +151,7 @@ describe('encodeHTML', () => {
 
 describe('prettyDate', () => {
   it('formats date', () => {
-    expect(prettyDate('2021-11-30T07:05:20+0000')).toEqual('30th November 2021')
+    expect(prettyDate('2021-11-30T07:05:20.000000')).toEqual('30th November 2021')
     expect(prettyDate('2021-11-30')).toEqual('30th November 2021')
   })
 
@@ -167,15 +167,15 @@ describe('prettyDate', () => {
   })
 
   it('adjusts for DST', () => {
-    expect(prettyDateAndTime('2022-03-25T07:00:00+0000')).toEqual('Friday 25th March 2022 7:00')
-    expect(prettyDateAndTime('2022-03-27T23:30:00+0000')).toEqual('Monday 28th March 2022 0:30')
-    expect(prettyDateAndTime('2022-03-28T07:00:00+0000')).toEqual('Monday 28th March 2022 8:00')
+    expect(prettyDateAndTime('2022-03-25T07:00:00.000000')).toEqual('Friday 25th March 2022 7:00')
+    expect(prettyDateAndTime('2022-03-27T23:30:00.000000')).toEqual('Monday 28th March 2022 0:30')
+    expect(prettyDateAndTime('2022-03-28T07:00:00.000000')).toEqual('Monday 28th March 2022 8:00')
   })
 })
 
 describe('prettyDateAndTime', () => {
   it('formats date and time', () => {
-    expect(prettyDateAndTime('2021-11-30T07:05:20+0000')).toEqual('Tuesday 30th November 2021 7:05')
+    expect(prettyDateAndTime('2021-11-30T07:05:20.000000')).toEqual('Tuesday 30th November 2021 7:05')
   })
 
   it('handles invalid dates', () => {
@@ -190,16 +190,16 @@ describe('prettyDateAndTime', () => {
   })
 
   it('adjusts for DST', () => {
-    expect(prettyDateAndTime('2022-03-26T07:00:00+0000')).toEqual('Saturday 26th March 2022 7:00')
-    expect(prettyDateAndTime('2022-03-28T07:00:00+0000')).toEqual('Monday 28th March 2022 8:00')
+    expect(prettyDateAndTime('2022-03-26T07:00:00.000000')).toEqual('Saturday 26th March 2022 7:00')
+    expect(prettyDateAndTime('2022-03-28T07:00:00.000000')).toEqual('Monday 28th March 2022 8:00')
   })
 })
 
 describe('ageFrom', () => {
-  const mockNow = new Date('2021-11-30T00:00:00+0000')
+  const mockNow = new Date('2021-11-30T00:00:00.000000')
 
   it('returns the difference in years between the provided date and now', () => {
-    expect(ageFrom('1989-01-19T00:00:00+0000', mockNow)).toEqual(32)
+    expect(ageFrom('1989-01-19T00:00:00.000000', mockNow)).toEqual(32)
   })
 
   it('handles invalid dates', () => {
@@ -214,8 +214,8 @@ describe('ageFrom', () => {
   })
 
   it('adjusts for DST', () => {
-    expect(ageFrom('1989-03-28T00:00:00+0000', new Date('2022-03-27T22:30:00+0000'))).toEqual(32)
-    expect(ageFrom('1989-03-28T00:00:00+0000', new Date('2022-03-27T23:30:00+0000'))).toEqual(33)
+    expect(ageFrom('1989-03-28T00:00:00.000000', new Date('2022-03-27T22:30:00.000000Z'))).toEqual(32)
+    expect(ageFrom('1989-03-28T00:00:00.000000', new Date('2022-03-27T23:30:00.000000Z'))).toEqual(33)
   })
 })
 

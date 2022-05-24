@@ -1,8 +1,8 @@
 const { format } = require('date-fns')
-const { utcToZonedTime } = require('date-fns-tz')
+const { londonDateTimeFrom } = require('./util')
 
 const formatDate = dateString => {
-  const date = utcToZonedTime(dateString, 'Europe/London')
+  const date = londonDateTimeFrom(dateString)
   const datePart = format(date, 'd MMM y')
   const timePart = format(date, 'HH:mm:ss')
   return `${datePart} at ${timePart}`

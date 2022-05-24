@@ -81,7 +81,7 @@ describe('verifyAssessment', () => {
         deliusEventType: null,
         eventId: 1,
         lastEditedBy: 'A Alonso',
-        lastEditedDate: '2022-04-01T09:00',
+        lastEditedDate: '2022-04-01T09:00:00.000000',
         offence: {
           offence: '046',
           offenceDescription: 'Stealing from shops and stalls (shoplifting)',

@@ -1,7 +1,7 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
 const { startOfDay, differenceInYears, isValid, parseISO } = require('date-fns')
-const { formatInTimeZone, utcToZonedTime } = require('date-fns-tz')
+const { formatInTimeZone, utcToZonedTime, zonedTimeToUtc } = require('date-fns-tz')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
 
@@ -147,15 +147,19 @@ const processReplacements = (input, replacementDetails) => {
   return JSON.parse(newInput)
 }
 
-const formatDateWith = pattern => date =>
-  isValid(parseISO(date)) ? formatInTimeZone(date, 'Europe/London', pattern) : null
+const asUTC = s => `${s} UTC`
+const londonDateTimeFrom = s => utcToZonedTime(asUTC(s), 'Europe/London')
+
+const formatDateWith = pattern => date => {
+  return isValid(parseISO(date)) ? formatInTimeZone(londonDateTimeFrom(date), 'Europe/London', pattern) : null
+}
 
 const prettyDate = formatDateWith('do MMMM y')
 const prettyDateAndTime = formatDateWith('eeee do MMMM y H:mm')
 
 const ageFrom = (dateOfBirth, now = new Date()) => {
-  const today = startOfDay(utcToZonedTime(now, 'Europe/London'))
-  const parsedDate = startOfDay(utcToZonedTime(dateOfBirth, 'Europe/London'))
+  const today = startOfDay(zonedTimeToUtc(now, 'Europe/London'))
+  const parsedDate = startOfDay(londonDateTimeFrom(dateOfBirth))
   return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
 }
 
@@ -203,4 +207,5 @@ module.exports = {
   ageFrom,
   clearAnswers,
   getErrorMessageFor,
+  londonDateTimeFrom,
 }

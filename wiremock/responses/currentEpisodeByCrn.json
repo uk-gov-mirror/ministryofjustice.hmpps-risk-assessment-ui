@@ -3,7 +3,7 @@
   "assessmentUuid": "19c8d211-68dc-4692-a6e2-d58468127056",
   "oasysAssessmentId": null,
   "reasonForChange": "Change",
-  "created": "2019-11-14T09:00",
+  "created": "2019-11-14T09:00:00.000000",
   "ended": null,
   "userFullName": "A Alonso",
   "answers": {},
@@ -20,6 +20,6 @@
     "subCodeDescription": "Stealing from shops and stalls (shoplifting)",
     "sentenceDate": "2020-08-25"
   },
-  "lastEditedDate": "2022-04-01T09:00",
+  "lastEditedDate": "2022-04-01T09:00:00.000000",
   "closedDate": null
 }
