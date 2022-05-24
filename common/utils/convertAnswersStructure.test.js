@@ -1,7 +1,5 @@
 const { convertAnswersStructure } = require('./convertAnswersStructure')
-const { postAnswers } = require('../data/hmppsAssessmentApi')
 
-jest.mock('../data/hmppsAssessmentApi')
 jest.mock('../logging/logger', () => ({
   logger: {
     info: jest.fn(),
@@ -15,9 +13,6 @@ const authorisationToken = 'authorisation-token'
 const userId = 'user-uuid'
 
 describe('converts answer structure', () => {
-  beforeEach(() => {
-    postAnswers.mockResolvedValue([true])
-  })
   afterEach(() => {
     jest.resetAllMocks()
   })
@@ -30,7 +25,6 @@ describe('converts answer structure', () => {
 
     const result = await convertAnswersStructure(answers, assessmentUuid, episodeId, authorisationToken, userId)
     expect(result).toEqual(answers)
-    expect(postAnswers).not.toHaveBeenCalled()
   })
 
   it('converts structure when it finds a target field', async () => {
@@ -52,7 +46,6 @@ describe('converts answer structure', () => {
     }
     const result = await convertAnswersStructure(answers, assessmentUuid, episodeId, authorisationToken, userId)
     expect(result).toEqual(expected)
-    expect(postAnswers).toHaveBeenCalledWith(assessmentUuid, episodeId, { answers: result }, authorisationToken, userId)
   })
   it('converts multiple structures when it finds target fields', async () => {
     const answers = {
@@ -81,6 +74,5 @@ describe('converts answer structure', () => {
     }
     const result = await convertAnswersStructure(answers, assessmentUuid, episodeId, authorisationToken, userId)
     expect(result).toEqual(expected)
-    expect(postAnswers).toHaveBeenCalledWith(assessmentUuid, episodeId, { answers: result }, authorisationToken, userId)
   })
 })

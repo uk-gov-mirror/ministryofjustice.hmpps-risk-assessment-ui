@@ -1,7 +1,4 @@
 // used to convert the structure of answers from the old format to the new one for assessments in progress
-const _ = require('lodash')
-const { postAnswers } = require('../data/hmppsAssessmentApi')
-const { logger } = require('../logging/logger')
 
 const gpDetailsFields = [
   'gp_first_name',
@@ -77,7 +74,7 @@ const checkAndConvert = (answers, oldStructure, newStructure, itemGrouping) => {
   return transformedAnswers
 }
 
-const convertAnswersStructure = async (answers, assessmentId, episodeId, authorisationToken, userId) => {
+const convertAnswersStructure = answers => {
   let newAnswers = { ...answers }
 
   // check and convert gp details
@@ -90,16 +87,6 @@ const convertAnswersStructure = async (answers, assessmentId, episodeId, authori
     emergencyContactsFields,
     'emergency_contacts',
   )
-
-  // save if necessary
-  if (!_.isEqual(newAnswers, answers)) {
-    logger.info(`convertAnswersStructure: saving new answers for assessment ${assessmentId}, episode ${episodeId}`)
-    try {
-      await postAnswers(assessmentId, episodeId, { answers: newAnswers }, authorisationToken, userId)
-    } catch (error) {
-      logger.error(`Could not save converted answers for assessment ${assessmentId}, current episode, error: ${error}`)
-    }
-  }
   return newAnswers
 }
 
