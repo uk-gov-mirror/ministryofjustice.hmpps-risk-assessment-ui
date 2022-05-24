@@ -88,7 +88,7 @@ class SaveAndContinue extends BaseController {
         .forEach(([questionCode]) => {
           const thisAnswer = previousAnswers[res.locals.editMultiple]?.[res.locals.multipleToEdit]?.[questionCode] || ''
           res.locals.questions[questionCode] = {
-            ...res.locals.questions[questionCode],
+            ...(res.locals.questions[questionCode] || {}),
             answer: thisAnswer[0] || '',
           }
         })
