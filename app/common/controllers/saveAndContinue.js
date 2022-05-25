@@ -1,7 +1,7 @@
 const BaseController = require('./baseController')
 const { SECTION_INCOMPLETE } = require('../../../common/utils/constants')
 const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
-const { logger } = require('../../../common/logging/logger')
+const logger = require('../../../common/logging/logger')
 const { processReplacements } = require('../../../common/utils/util')
 const {
   compileConditionalQuestions,
@@ -180,6 +180,7 @@ class SaveAndContinue extends BaseController {
     // if is a new multiple then get previous answers for this multiple
     // and add new answers to it to send to API
     if (res.locals.addNewMultiple) {
+      logger.debug(`Adding new multiple to existing answers: ${res.locals.addNewMultiple}`)
       const questions = Object.entries(req.form.options.allFields)
       const multipleFields = questions
         .filter(value => {
@@ -205,6 +206,7 @@ class SaveAndContinue extends BaseController {
       req.sessionModel.set('answers', answers)
 
       logger.info(`Added new record to ${multipleKey} in assessment ${req.session?.assessment?.uuid}, current episode`)
+      logger.debug(`New multiples record: ${JSON.stringify(existingMultiple)}`)
     }
 
     // if editing a multiple record
@@ -234,6 +236,11 @@ class SaveAndContinue extends BaseController {
       rawAnswers[multipleKey] = existingMultiple
       req.sessionModel.set('rawAnswers', rawAnswers)
       req.sessionModel.set('answers', answers)
+
+      logger.info(
+        `Edited record ${res.locals.multipleUpdated} of ${res.locals.editMultiple} in assessment ${req.session?.assessment?.uuid}, current episode`,
+      )
+      logger.debug(`New multiples record: ${JSON.stringify(existingMultiple)}`)
     }
 
     const answersToPost = this.postAnswerModifiers.reduce((a, fn) => fn(a), answers)

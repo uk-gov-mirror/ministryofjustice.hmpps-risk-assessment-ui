@@ -108,6 +108,7 @@ const postCompleteAssessmentEpisode = (assessmentId, episodeId, authorisationTok
 
 const postAnswers = (assessmentId, episodeId, answers, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
+  logger.debug(`posting answers: ${JSON.stringify(answers)}`)
   return postData(path, authorisationToken, userId, answers)
 }
 
