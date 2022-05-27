@@ -151,7 +151,7 @@ describe('encodeHTML', () => {
 
 describe('prettyDate', () => {
   it('formats date', () => {
-    expect(prettyDate('2021-11-30T07:05:20+0000')).toEqual('30th November 2021')
+    expect(prettyDate('2021-11-30T07:05:20.000000')).toEqual('30th November 2021')
     expect(prettyDate('2021-11-30')).toEqual('30th November 2021')
   })
 
@@ -165,11 +165,16 @@ describe('prettyDate', () => {
   it('handles empty input', () => {
     expect(prettyDate()).toBeNull()
   })
+
+  it('assumes dates are already adjusted for "Europe/London"', () => {
+    expect(prettyDate('2022-03-26T23:30:00.000000')).toEqual('26th March 2022') // Clocks forward boundary
+    expect(prettyDate('2022-10-30T00:30:00.000000')).toEqual('30th October 2022') // Clocks back boundary
+  })
 })
 
 describe('prettyDateAndTime', () => {
   it('formats date and time', () => {
-    expect(prettyDateAndTime('2021-11-30T07:05:20+0000')).toEqual('Tuesday 30th November 2021 7:05')
+    expect(prettyDateAndTime('2021-11-30T07:05:20.000000')).toEqual('Tuesday 30th November 2021 7:05')
   })
 
   it('handles invalid dates', () => {
@@ -182,13 +187,18 @@ describe('prettyDateAndTime', () => {
   it('handles empty input', () => {
     expect(prettyDateAndTime()).toBeNull()
   })
+
+  it('assumes dates are already adjusted for "Europe/London"', () => {
+    expect(prettyDateAndTime('2022-04-28T07:05:20.000000')).toEqual('Thursday 28th April 2022 7:05') // Clocks forward
+    expect(prettyDateAndTime('2022-01-01T07:05:20.000000')).toEqual('Saturday 1st January 2022 7:05') // Clocks back
+  })
 })
 
 describe('ageFrom', () => {
-  const mockNow = new Date('2021-11-30T00:00:00+0000')
+  const mockNow = new Date('2021-11-30T00:00:00.000000')
 
   it('returns the difference in years between the provided date and now', () => {
-    expect(ageFrom('1989-01-19T00:00:00+0000', mockNow)).toEqual(32)
+    expect(ageFrom('1989-01-19T00:00:00.000000', mockNow)).toEqual(32)
   })
 
   it('handles invalid dates', () => {

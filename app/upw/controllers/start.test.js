@@ -112,7 +112,7 @@ describe('startController', () => {
       getCurrentEpisode.mockResolvedValue({
         episodeUuid,
         userFullName: 'Test User',
-        lastEditedDate: '2020-01-01',
+        lastEditedDate: '2020-01-01T07:30:00.000000',
         offence: {
           offenceCode,
           codeDescription,
@@ -130,7 +130,7 @@ describe('startController', () => {
         episodeUuid,
         eventId: '12345',
         lastEditedBy: 'Test User',
-        lastEditedDate: '2020-01-01',
+        lastEditedDate: '2020-01-01T07:30:00.000000',
         subject: {
           age: 42,
           dob: '1980-04-01',

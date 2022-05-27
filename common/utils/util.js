@@ -1,6 +1,6 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
-const { format, differenceInYears, isValid, parseISO } = require('date-fns')
+const { format, differenceInYears, isValid, parseISO, startOfDay } = require('date-fns')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
 
@@ -161,9 +161,10 @@ const formatDateWith = pattern => isoString => {
 const prettyDate = formatDateWith('do MMMM y')
 const prettyDateAndTime = formatDateWith('eeee do MMMM y H:mm')
 
-const ageFrom = (dateOfBirth, today = new Date()) => {
-  const parsedDate = parseISO(dateOfBirth)
-  return isValid(parsedDate) ? Math.abs(differenceInYears(today, parsedDate)) : null
+const ageFrom = (dateOfBirth, now = new Date()) => {
+  const todaysDate = startOfDay(now)
+  const birthDate = startOfDay(parseISO(dateOfBirth))
+  return isValid(birthDate) ? Math.abs(differenceInYears(birthDate, todaysDate)) : null
 }
 
 const clearAnswers = questions => {
