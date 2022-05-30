@@ -39,29 +39,29 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {% if rawAnswers['gp_phone_number'].length != 0 %}
-                {% for item in rawAnswers['gp_phone_number'] %}
+            {% if rawAnswers['gp_details'].length != 0 %}
+                {% for gp in rawAnswers['gp_details'] %}
 
-                    {% if rawAnswers['gp_phone_number'][loop.index0] %}{% set gpPhoneNumber = rawAnswers['gp_phone_number'][loop.index0] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
+                    {% if gp['gp_phone_number'][0] %}{% set gpPhoneNumber = gp['gp_phone_number'][0] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
 
                     {{ readOnly({
                         title: 'GP details',
-                        editUrl: 'edit-gp-details/' + [loop.index0],
-                        removeUrl: 'remove-gp-details/' + [loop.index0],
+                        editUrl: 'edit-gp-details/' + [0],
+                        removeUrl: 'remove-gp-details/' + [0],
                         rows: [
                             {
                                 key: {
                                 text: 'Name'
                             },
                                 value: {
-                                html: rawAnswers['gp_name'][loop.index0]
+                                html: gp['gp_name'][0]
                             }
                             },{
                                 key: {
                                 text: 'Practice name'
                             },
                                 value: {
-                                html: rawAnswers['gp_practice_name'][loop.index0]
+                                html: gp['gp_practice_name'][0]
                             }
                             },{
                                 key: {
@@ -69,13 +69,13 @@
                                 },
                                 value: {
                                     html: readOnlyAddress({
-                                        buildingName: rawAnswers['gp_address_building_name'][loop.index0],
-                                        houseNumber: rawAnswers['gp_address_house_number'][loop.index0],
-                                        streetName: rawAnswers['gp_address_street_name'][loop.index0],
-                                        district: rawAnswers['gp_address_district'][loop.index0],
-                                        townOrCity: rawAnswers['gp_address_town_or_city'][loop.index0],
-                                        county: rawAnswers['gp_address_county'][loop.index0],
-                                        postcode: rawAnswers['gp_address_postcode'][loop.index0]
+                                        buildingName: gp['gp_address_building_name'][0],
+                                        houseNumber: gp['gp_address_house_number'][0],
+                                        streetName: gp['gp_address_street_name'][0],
+                                        district: gp['gp_address_district'][0],
+                                        townOrCity: gp['gp_address_town_or_city'][0],
+                                        county: gp['gp_address_county'][0],
+                                        postcode: gp['gp_address_postcode'][0]
                                     })
                                 }
                             },{

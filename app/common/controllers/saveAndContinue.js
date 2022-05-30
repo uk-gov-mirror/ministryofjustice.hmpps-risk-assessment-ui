@@ -63,25 +63,25 @@ class SaveAndContinue extends BaseController {
     // 'answerGroup' is the top level key that the API will use to send repeating groups of answers
     const questions = Object.entries(req.form.options.allFields)
     const multipleFields = questions
-      .filter(value => {
-        return value[1].type === 'multiple'
+      .filter(([_, question]) => {
+        return question.type === 'multiple'
       })
-      .map(field => {
-        return [field[0], field[1].answerGroup]
+      .map(([questionCode, question]) => {
+        return [questionCode, question.answerGroup]
       })
 
     // now for each field construct an array containing all the collected answers for this field,
-    multipleFields.forEach(field => {
+    multipleFields.forEach(([questionCode, groupQuestionCode]) => {
       const answers = []
 
-      const receivedAnswersForThisGroup = previousAnswers[field[1]]
+      const receivedAnswersForThisGroup = previousAnswers[groupQuestionCode]
 
       receivedAnswersForThisGroup?.forEach((answerSet, index) => {
-        const tempAnswer = answerSet[field[0]]
+        const tempAnswer = answerSet[questionCode]
         answers[index] = tempAnswer ? tempAnswer[0] : ''
       })
 
-      previousAnswers[field[0]] = answers
+      previousAnswers[questionCode] = answers
     })
 
     const submittedAnswers =
@@ -205,16 +205,16 @@ class SaveAndContinue extends BaseController {
       logger.debug(`Adding new multiple to existing answers: ${res.locals.addNewMultiple}`)
       const questions = Object.entries(req.form.options.allFields)
       const multipleFields = questions
-        .filter(value => {
-          return value[1].type === 'multiple' && value[1].answerGroup === res.locals.addNewMultiple
+        .filter(([_, question]) => {
+          return question.type === 'multiple' && question.answerGroup === res.locals.addNewMultiple
         })
-        .map(field => {
-          return field[0]
+        .map(([questionCode]) => {
+          return questionCode
         })
       const newMultipleAnswer = {}
-      multipleFields.forEach(field => {
-        newMultipleAnswer[field] = answers[field] || ''
-        delete answers[field]
+      multipleFields.forEach(questionCode => {
+        newMultipleAnswer[questionCode] = answers[questionCode] || ''
+        delete answers[questionCode]
       })
 
       const multipleKey = res.locals.addNewMultiple
@@ -235,17 +235,17 @@ class SaveAndContinue extends BaseController {
     if (res.locals.editMultiple) {
       const questions = Object.entries(req.form.options.allFields)
       const multipleFields = questions
-        .filter(value => {
-          return value[1].type === 'multiple' && value[1].answerGroup === res.locals.editMultiple
+        .filter(([_, question]) => {
+          return question.type === 'multiple' && question.answerGroup === res.locals.editMultiple
         })
-        .map(field => {
-          return field[0]
+        .map(([questionCode]) => {
+          return questionCode
         })
 
       const newMultipleAnswer = {}
-      multipleFields.forEach(field => {
-        newMultipleAnswer[field] = answers[field] || ''
-        delete answers[field]
+      multipleFields.forEach(questionCode => {
+        newMultipleAnswer[questionCode] = answers[questionCode] || ''
+        delete answers[questionCode]
       })
 
       const multipleKey = res.locals.editMultiple

@@ -113,8 +113,8 @@
 
             <h2 class="govuk-heading-l">Emergency contacts</h2>
 
-            {% if rawAnswers['emergency_contact_first_name'].length != 0 %}
-                {% for item in rawAnswers['emergency_contact_first_name'] %}
+            {% if rawAnswers['emergency_contact_details'].length != 0 %}
+                {% for emergencyContact in rawAnswers['emergency_contact_details'] %}
                     {{ readOnly({
                         title: 'Emergency contact ' + [loop.index],
                         editUrl: 'edit-emergency-contact/' + [loop.index0],
@@ -125,28 +125,28 @@
                                 text: 'Name'
                             },
                                 value: {
-                                html: renderName(rawAnswers['emergency_contact_first_name'][loop.index0], rawAnswers['emergency_contact_family_name'][loop.index0])
+                                html: renderName(emergencyContact['emergency_contact_first_name'][0], emergencyContact['emergency_contact_family_name'][0])
                             }
                             }, {
                                 key: {
                                     text: 'Relationship to the individual'
                                 },
                                 value: {
-                                    html: rawAnswers['emergency_contact_relationship'][loop.index0]
+                                    html: emergencyContact['emergency_contact_relationship'][0]
                                 }
                             }, {
                                 key: {
                                     text: 'Mobile number'
                                 },
                                 value: {
-                                    html: rawAnswers['emergency_contact_mobile_phone_number'][loop.index0]
+                                    html: emergencyContact['emergency_contact_mobile_phone_number'][0]
                                 }
                             }, {
                                 key: {
                                     text: 'Phone number'
                                 },
                                 value: {
-                                    html: rawAnswers['emergency_contact_phone_number'][loop.index0]
+                                    html: emergencyContact['emergency_contact_phone_number'][0]
                                 }
                             }
                         ]
