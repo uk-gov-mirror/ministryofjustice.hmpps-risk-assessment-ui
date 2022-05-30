@@ -77,13 +77,13 @@
                         },
                         value: {
                             html: readOnlyAddress({ 
-                                buildingName: answers['contact_address_building_name'],
-                                houseNumber: answers['contact_address_house_number'],
-                                streetName: answers['contact_address_street_name'],
-                                district: answers['contact_address_district'],
-                                townOrCity: answers['contact_address_town_or_city'],
-                                county: answers['contact_address_county'],
-                                postcode: answers['contact_address_postcode']
+                                buildingName: rawAnswers['contact_address_building_name'][0],
+                                houseNumber: rawAnswers['contact_address_house_number'][0],
+                                streetName: rawAnswers['contact_address_street_name'][0],
+                                district: rawAnswers['contact_address_district'][0],
+                                townOrCity: rawAnswers['contact_address_town_or_city'][0],
+                                county: rawAnswers['contact_address_county'][0],
+                                postcode: rawAnswers['contact_address_postcode'][0]
                             })
                         }
                     }, {
@@ -91,21 +91,21 @@
                             text: 'Mobile number'
                         },
                         value: {
-                            html: answers['contact_mobile_phone_number']
+                            html: rawAnswers['contact_mobile_phone_number'][0]
                         }
                     }, {
                         key: {
                             text: 'Phone number'
                         },
                         value: {
-                            html: answers['contact_phone_number']
+                            html: rawAnswers['contact_phone_number'][0]
                         }
                     }, {
                         key: {
                             text: 'Email'
                         },
                         value: {
-                            html: answers['contact_email_addresses']
+                            html: rawAnswers['contact_email_addresses'][0]
                         }
                     }
                 ]
