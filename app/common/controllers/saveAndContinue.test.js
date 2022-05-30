@@ -357,18 +357,18 @@ describe('SaveAndContinueController', () => {
         contact_address_house_number: {},
         emergency_contact_first_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
         },
         emergency_contact_family_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
         },
       }
 
       getAnswers.mockResolvedValue({
         answers: {
           contact_address_house_number: '23',
-          emergency_contacts: [
+          emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
               emergency_contact_family_name: ['Costanza'],
@@ -383,7 +383,7 @@ describe('SaveAndContinueController', () => {
 
       getFlatAssessmentQuestions.mockResolvedValue([
         { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
-        { questionCode: 'emergency_contacts', questionText: 'Age at first sanction' },
+        { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
       ])
 
       req.form.options.fields = fields
@@ -393,7 +393,7 @@ describe('SaveAndContinueController', () => {
 
       expect(res.locals.rawAnswers).toEqual({
         contact_address_house_number: '23',
-        emergency_contacts: [
+        emergency_contact_details: [
           {
             emergency_contact_first_name: ['George'],
             emergency_contact_family_name: ['Costanza'],
@@ -409,19 +409,19 @@ describe('SaveAndContinueController', () => {
     })
 
     it('presents the correct multiple for editing', async () => {
-      res.locals.editMultiple = 'emergency_contacts'
+      res.locals.editMultiple = 'emergency_contact_details'
       res.locals.multipleToEdit = '1'
       const fields = {
         contact_address_house_number: { answer: '', questionCode: '1' },
         emergency_contact_first_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
           answer: '',
           questionCode: 'emergency_contact_first_name',
         },
         emergency_contact_family_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
           answer: '',
           questionCode: 'emergency_contact_family_name',
         },
@@ -430,7 +430,7 @@ describe('SaveAndContinueController', () => {
       getAnswers.mockResolvedValue({
         answers: {
           contact_address_house_number: '23',
-          emergency_contacts: [
+          emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
               emergency_contact_family_name: ['Costanza'],
@@ -445,7 +445,7 @@ describe('SaveAndContinueController', () => {
 
       getFlatAssessmentQuestions.mockResolvedValue([
         { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
-        { questionCode: 'emergency_contacts', questionText: 'Age at first sanction' },
+        { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
       ])
 
       req.form.options.fields = fields
@@ -458,19 +458,19 @@ describe('SaveAndContinueController', () => {
     })
 
     it('presents a blank multiple when adding a new multiple', async () => {
-      res.locals.editMultiple = 'emergency_contacts'
+      res.locals.editMultiple = 'emergency_contact_details'
       res.locals.addingNewMultiple = true
       const fields = {
         contact_address_house_number: { answer: '', questionCode: '1' },
         emergency_contact_first_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
           answer: '',
           questionCode: 'emergency_contact_first_name',
         },
         emergency_contact_family_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
           answer: '',
           questionCode: 'emergency_contact_family_name',
         },
@@ -479,7 +479,7 @@ describe('SaveAndContinueController', () => {
       getAnswers.mockResolvedValue({
         answers: {
           contact_address_house_number: '23',
-          emergency_contacts: [
+          emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
               emergency_contact_family_name: ['Costanza'],
@@ -494,7 +494,7 @@ describe('SaveAndContinueController', () => {
 
       getFlatAssessmentQuestions.mockResolvedValue([
         { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
-        { questionCode: 'emergency_contacts', questionText: 'Age at first sanction' },
+        { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
       ])
 
       req.form.options.fields = fields
@@ -506,7 +506,7 @@ describe('SaveAndContinueController', () => {
     })
 
     it('presents answer just submitted when there is a form error', async () => {
-      res.locals.editMultiple = 'emergency_contacts'
+      res.locals.editMultiple = 'emergency_contact_details'
       res.locals.addingNewMultiple = true
       mockSessionModel({ errors: [{ message: 'field error', key: 'emergency_contact_first_name' }] })
 
@@ -517,13 +517,13 @@ describe('SaveAndContinueController', () => {
         contact_address_house_number: { answer: '', questionCode: '1' },
         emergency_contact_first_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
           answer: '',
           questionCode: 'emergency_contact_first_name',
         },
         emergency_contact_family_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
           answer: '',
           questionCode: 'emergency_contact_family_name',
         },
@@ -532,7 +532,7 @@ describe('SaveAndContinueController', () => {
       getAnswers.mockResolvedValue({
         answers: {
           contact_address_house_number: '23',
-          emergency_contacts: [
+          emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
               emergency_contact_family_name: ['Costanza'],
@@ -547,7 +547,7 @@ describe('SaveAndContinueController', () => {
 
       getFlatAssessmentQuestions.mockResolvedValue([
         { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
-        { questionCode: 'emergency_contacts', questionText: 'Age at first sanction' },
+        { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
       ])
 
       req.form.options.fields = fields
@@ -705,17 +705,17 @@ describe('SaveAndContinueController', () => {
 
     it('adds a new item to a multiples group', async () => {
       postAnswers.mockResolvedValue([true, { episodeUuid }])
-      res.locals.addNewMultiple = 'emergency_contacts'
+      res.locals.addNewMultiple = 'emergency_contact_details'
 
       const fields = {
         contact_address_house_number: {},
         emergency_contact_first_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
         },
         emergency_contact_family_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
         },
       }
 
@@ -730,7 +730,7 @@ describe('SaveAndContinueController', () => {
         },
         rawAnswers: {
           contact_address_house_number: '23',
-          emergency_contacts: [
+          emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
               emergency_contact_family_name: ['Costanza'],
@@ -754,7 +754,7 @@ describe('SaveAndContinueController', () => {
         {
           answers: {
             contact_address_house_number: ['23'],
-            emergency_contacts: [
+            emergency_contact_details: [
               {
                 emergency_contact_first_name: ['George'],
                 emergency_contact_family_name: ['Costanza'],
@@ -777,18 +777,18 @@ describe('SaveAndContinueController', () => {
 
     it('updates an existing multiples group', async () => {
       postAnswers.mockResolvedValue([true, { episodeUuid }])
-      res.locals.editMultiple = 'emergency_contacts'
+      res.locals.editMultiple = 'emergency_contact_details'
       res.locals.multipleUpdated = '1'
 
       const fields = {
         contact_address_house_number: {},
         emergency_contact_first_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
         },
         emergency_contact_family_name: {
           type: 'multiple',
-          answerGroup: 'emergency_contacts',
+          answerGroup: 'emergency_contact_details',
         },
       }
 
@@ -803,7 +803,7 @@ describe('SaveAndContinueController', () => {
         },
         rawAnswers: {
           contact_address_house_number: '23',
-          emergency_contacts: [
+          emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
               emergency_contact_family_name: ['Costanza'],
@@ -827,7 +827,7 @@ describe('SaveAndContinueController', () => {
         {
           answers: {
             contact_address_house_number: ['23'],
-            emergency_contacts: [
+            emergency_contact_details: [
               {
                 emergency_contact_first_name: ['George'],
                 emergency_contact_family_name: ['Costanza'],

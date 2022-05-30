@@ -22,9 +22,7 @@ const {
   },
 } = require('../config')
 const { getOffenderData, postAnswers, getAnswers } = require('./hmppsAssessmentApi')
-const { convertAnswersStructure } = require('../utils/convertAnswersStructure')
 
-jest.mock('../utils/convertAnswersStructure')
 jest.mock('./hmppsAssessmentApi', () => ({
   ...jest.requireActual('./hmppsAssessmentApi'),
   postAnswers: jest.fn(),
@@ -78,27 +76,10 @@ describe('hmppsAssessmentApi', () => {
       },
     }
     it('should return answer details from api', async () => {
-      convertAnswersStructure.mockReturnValue(answersData.answers)
       mockedEndpoint.get(answersUrl).reply(200, answersData)
       const output = await getAnswers(uuid, uuid, authorisationToken, userId)
       expect(output).toEqual(answersData)
       expect(postAnswers).not.toHaveBeenCalled()
-    })
-    it('should save answers when structure is updated', async () => {
-      const newAnswersData = JSON.parse(JSON.stringify(answersData))
-      const updatedData = { newfield: 'newfield' }
-      newAnswersData.answers = updatedData
-      convertAnswersStructure.mockReturnValue(updatedData)
-      mockedEndpoint.get(answersUrl).reply(200, answersData)
-      const output = await getAnswers(uuid, uuid, authorisationToken, userId)
-
-      const expected = {
-        ...answersData,
-        answers: updatedData,
-      }
-
-      expect(output).toEqual(expected)
-      expect(postAnswers).not.toHaveBeenCalledWith(uuid, uuid, updatedData, authorisationToken, userId)
     })
   })
 })

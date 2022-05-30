@@ -1,7 +1,8 @@
+const lodash = require('lodash')
 const BaseController = require('./baseController')
 const { SECTION_INCOMPLETE } = require('../../../common/utils/constants')
 const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
-const { logger } = require('../../../common/logging/logger')
+const logger = require('../../../common/logging/logger')
 const { processReplacements } = require('../../../common/utils/util')
 const {
   compileConditionalQuestions,
@@ -14,6 +15,19 @@ const {
   answerDtoFrom,
   answersByQuestionCode,
 } = require('./saveAndContinue.utils')
+
+const postUpdateIfMigrated = async (originalAnswers, migratedAnswers, assessmentUuid, episodeUuid, user) => {
+  if (!lodash.isEqual(originalAnswers, migratedAnswers)) {
+    logger.info(`Saving updated answer structure for assessment ${assessmentUuid}, episode ${episodeUuid}`)
+    try {
+      await postAnswers(assessmentUuid, episodeUuid, { answers: migratedAnswers }, user?.token, user?.id)
+    } catch (error) {
+      logger.error(
+        `Could not save converted answers for assessment ${assessmentUuid}, episode ${episodeUuid}, error: ${error}`,
+      )
+    }
+  }
+}
 
 class SaveAndContinue extends BaseController {
   constructor(...args) {
@@ -36,6 +50,14 @@ class SaveAndContinue extends BaseController {
     )
 
     const previousAnswers = this.getAnswerModifiers.reduce((a, fn) => fn(a), getAnswersResponse.answers)
+
+    await postUpdateIfMigrated(
+      getAnswersResponse.answers,
+      previousAnswers,
+      req.session.assessment?.uuid,
+      req.session.assessment?.episodeUuid,
+      req.user,
+    )
 
     // get a list of fields with multiple answers in the form [fieldName, answerGroup]
     // 'answerGroup' is the top level key that the API will use to send repeating groups of answers
@@ -180,6 +202,7 @@ class SaveAndContinue extends BaseController {
     // if is a new multiple then get previous answers for this multiple
     // and add new answers to it to send to API
     if (res.locals.addNewMultiple) {
+      logger.debug(`Adding new multiple to existing answers: ${res.locals.addNewMultiple}`)
       const questions = Object.entries(req.form.options.allFields)
       const multipleFields = questions
         .filter(value => {
@@ -205,6 +228,7 @@ class SaveAndContinue extends BaseController {
       req.sessionModel.set('answers', answers)
 
       logger.info(`Added new record to ${multipleKey} in assessment ${req.session?.assessment?.uuid}, current episode`)
+      logger.debug(`New multiples record: ${JSON.stringify(existingMultiple)}`)
     }
 
     // if editing a multiple record
@@ -234,6 +258,11 @@ class SaveAndContinue extends BaseController {
       rawAnswers[multipleKey] = existingMultiple
       req.sessionModel.set('rawAnswers', rawAnswers)
       req.sessionModel.set('answers', answers)
+
+      logger.info(
+        `Edited record ${res.locals.multipleUpdated} of ${res.locals.editMultiple} in assessment ${req.session?.assessment?.uuid}, current episode`,
+      )
+      logger.debug(`New multiples record: ${JSON.stringify(existingMultiple)}`)
     }
 
     const answersToPost = this.postAnswerModifiers.reduce((a, fn) => fn(a), answers)

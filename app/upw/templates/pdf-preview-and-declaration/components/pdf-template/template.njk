@@ -65,8 +65,8 @@
             )}}
             {% if not loop.last %}<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">{% endif %}
         {% endfor %}
-    {% elif key ===  "emergency_contacts" %}
-        {% for contact in values["emergency_contacts"] %}
+    {% elif key ===  "emergency_contact_details" %}
+        {% for contact in values["emergency_contact_details"] %}
             {{renderEmergencyContact(
                 renderName(contact['emergency_contact_first_name'], contact['emergency_contact_family_name']),
                 contact["emergency_contact_relationship"],
@@ -238,7 +238,7 @@
         rows: [
             {
                 heading: "Emergency contacts", 
-                data: renderMultiple(rawAnswers, 'emergency_contacts')
+                data: renderMultiple(rawAnswers, 'emergency_contact_details')
             }
         ]
     }) }}

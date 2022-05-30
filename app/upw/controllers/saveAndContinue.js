@@ -2,6 +2,12 @@ const { trackEvent } = require('../../../common/logging/app-insights')
 const BaseSaveAndContinue = require('../../common/controllers/saveAndContinue')
 const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
 const { EVENTS, SECTION_COMPLETE } = require('../../../common/utils/constants')
+const {
+  createMultiplesFields,
+  migrateGpDetails,
+  migrateEmergencyContacts,
+  removeOldFields,
+} = require('./saveAndContinue.utils')
 
 const removeAnswers = fieldsToRemove => answers =>
   Object.entries(answers).reduce((modifiedAnswers, [fieldName, answer]) => {
@@ -27,6 +33,13 @@ const invalidateSectionCompleteAnswers = (answers, fields) => {
 const invalidateDeclarations = removeAnswers(['declaration'])
 
 class SaveAndContinue extends BaseSaveAndContinue {
+  constructor(...args) {
+    super(...args)
+
+    // Apply migrations where fields have changed and cleanup unused ones
+    this.getAnswerModifiers = [createMultiplesFields, migrateGpDetails, migrateEmergencyContacts, removeOldFields]
+  }
+
   async locals(req, res, next) {
     const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
     const { roshRiskSummary } = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)

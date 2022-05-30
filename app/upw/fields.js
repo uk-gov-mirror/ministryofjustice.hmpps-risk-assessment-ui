@@ -165,26 +165,26 @@ const fields = {
   },
   emergency_contact_first_name: {
     type: 'multiple',
-    answerGroup: 'emergency_contacts',
+    answerGroup: 'emergency_contact_details',
     validate: [{ type: 'required', message: 'First name is required' }],
   },
   emergency_contact_family_name: {
     type: 'multiple',
-    answerGroup: 'emergency_contacts',
+    answerGroup: 'emergency_contact_details',
     validate: [{ type: 'required', message: 'Family name is required' }],
   },
   emergency_contact_relationship: {
     type: 'multiple',
-    answerGroup: 'emergency_contacts',
+    answerGroup: 'emergency_contact_details',
     validate: [{ type: 'required', message: 'Emergency contact relationship is required' }],
   },
   emergency_contact_phone_number: {
     type: 'multiple',
-    answerGroup: 'emergency_contacts',
+    answerGroup: 'emergency_contact_details',
   },
   emergency_contact_mobile_phone_number: {
     type: 'multiple',
-    answerGroup: 'emergency_contacts',
+    answerGroup: 'emergency_contact_details',
   },
   cultural_religious_adjustment: {
     validate: [

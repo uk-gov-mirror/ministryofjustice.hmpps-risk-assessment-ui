@@ -12,15 +12,8 @@ const {
   footerHtml,
   pdfOptions: { marginTop, marginRight, marginBottom, marginLeft },
 } = require('../templates/pdf-preview-and-declaration/components/print-pdf-header-footer')
-const { convertGpDetailsEntries } = require('./gpDetails.utils')
 
 class ConvertPdf extends SaveAndContinue {
-  constructor(...args) {
-    super(...args)
-    // Migrate existing answers for "gp_first_name" and "gp_family_name" to the single "gp_name" field for display
-    this.getAnswerModifiers = [convertGpDetailsEntries]
-  }
-
   async render(req, res, next) {
     try {
       trackEvent(EVENTS.ARN_PDF_DOWNLOAD, req)

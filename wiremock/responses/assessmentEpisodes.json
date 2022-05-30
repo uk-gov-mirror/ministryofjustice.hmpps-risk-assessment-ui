@@ -84,7 +84,7 @@
     "mental_health_condition_details": ["Mental Illness"],
     "placement_preference": ["NO"],
     "placement_preference_complete": ["YES"],
-    "emergency_contacts": [
+    "emergency_contact_details": [
       {
         "emergency_contact_first_name": ["George"],
         "emergency_contact_family_name": ["Costanza"],

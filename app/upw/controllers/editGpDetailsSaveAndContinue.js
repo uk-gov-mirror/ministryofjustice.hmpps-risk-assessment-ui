@@ -1,14 +1,6 @@
-const { unsetOldGPDetailsFields, convertGpDetailsEntries } = require('./gpDetails.utils')
 const upwSaveAndContinue = require('./saveAndContinue')
 
 class SaveAndContinue extends upwSaveAndContinue {
-  constructor(...args) {
-    super(...args)
-    // Migrate existing answers for "gp_first_name" and "gp_family_name" to the single "gp_name" field for display
-    this.getAnswerModifiers = [convertGpDetailsEntries]
-    this.postAnswerModifiers = [unsetOldGPDetailsFields]
-  }
-
   async locals(req, res, next) {
     const contactToEdit = req.params[0]
     res.locals.editMultiple = 'gp_details'
