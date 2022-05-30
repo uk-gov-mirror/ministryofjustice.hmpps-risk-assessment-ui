@@ -101,7 +101,7 @@ class SaveAndContinue extends BaseController {
 
     res.locals.questions = questionsWithReplacements.reduce(keysByQuestionCode, {})
     res.locals.answers = questionsWithMappedAnswers.reduce(answersByQuestionCode, {})
-    res.locals.rawAnswers = { ...previousAnswers, ...submittedAnswers }
+    res.locals.rawAnswers = { ...previousAnswers, ...answerDtoFrom(submittedAnswers) }
 
     // if editing a single 'record' from a multiples collection, add just that one to locals
     if (res.locals.editMultiple && res.locals.multipleToEdit) {
@@ -120,7 +120,9 @@ class SaveAndContinue extends BaseController {
     if (res.locals.editMultiple && res.locals.addingNewMultiple && errorSummary.length === 0) {
       res.locals.clearQuestionAnswers = true
     }
-    if (res.locals.editMultiple) req.sessionModel.set('rawAnswers', { ...previousAnswers, ...submittedAnswers })
+    if (res.locals.editMultiple) {
+      req.sessionModel.set('rawAnswers', { ...previousAnswers, ...answerDtoFrom(submittedAnswers) })
+    }
     req.sessionModel.set('errors', {})
 
     const submittedErrors = res.locals.errors || {}
