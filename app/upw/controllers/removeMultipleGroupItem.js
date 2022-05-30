@@ -30,12 +30,10 @@ class removeItemSaveAndContinue extends saveAndContinue {
     const rawAnswers = answers
 
     // delete the appropriate entry
-    const existingMultiple = answers[multipleGroupName] || {}
+    const existingMultiple = answers[multipleGroupName] || []
     existingMultiple.splice(itemToDelete, 1)
-    answers[multipleGroupName] = existingMultiple
     rawAnswers[multipleGroupName] = existingMultiple
     req.sessionModel.set('rawAnswers', rawAnswers)
-    req.sessionModel.set('answers', answers)
 
     try {
       const [ok, response] = await postAnswers(

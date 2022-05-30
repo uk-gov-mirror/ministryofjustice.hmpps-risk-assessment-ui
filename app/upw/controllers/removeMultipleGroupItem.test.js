@@ -114,7 +114,6 @@ describe('removeMultipleGroupItem (UPW)', () => {
       req.user.id,
     )
 
-    expect(req.sessionModel.set).toHaveBeenCalledWith('answers', expectedAnswer.answers)
     expect(req.sessionModel.set).toHaveBeenCalledWith('rawAnswers', expectedAnswer.answers)
   })
 })
