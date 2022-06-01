@@ -104,11 +104,12 @@ class SaveAndContinue extends BaseController {
     res.locals.rawAnswers = { ...previousAnswers, ...answerDtoFrom(submittedAnswers) }
 
     // if editing a single 'record' from a multiples collection, add just that one to locals
-    if (res.locals.editMultiple && res.locals.multipleToEdit) {
+    if (res.locals.questionGroupCode && res.locals.questionGroupIndex) {
       multipleFields
-        .filter(([_, editMultiple]) => editMultiple === res.locals.editMultiple)
+        .filter(([_, questionGroupCode]) => questionGroupCode === res.locals.questionGroupCode)
         .forEach(([questionCode]) => {
-          const thisAnswer = previousAnswers[res.locals.editMultiple]?.[res.locals.multipleToEdit]?.[questionCode] || ''
+          const thisAnswer =
+            res.locals.rawAnswers[res.locals.questionGroupCode]?.[res.locals.questionGroupIndex]?.[questionCode] || ''
           res.locals.questions[questionCode] = {
             ...(res.locals.questions[questionCode] || {}),
             answer: thisAnswer[0] || '',
@@ -117,10 +118,10 @@ class SaveAndContinue extends BaseController {
     }
 
     // if editing a 'new' record from a multiples collection and nothing is yet submitted, clear the answers
-    if (res.locals.editMultiple && res.locals.addingNewMultiple && errorSummary.length === 0) {
+    if (res.locals.questionGroupCode && res.locals.addingNewMultiple && errorSummary.length === 0) {
       res.locals.clearQuestionAnswers = true
     }
-    if (res.locals.editMultiple) {
+    if (res.locals.questionGroupCode) {
       req.sessionModel.set('rawAnswers', { ...previousAnswers, ...answerDtoFrom(submittedAnswers) })
     }
     req.sessionModel.set('errors', {})
@@ -234,11 +235,11 @@ class SaveAndContinue extends BaseController {
     }
 
     // if editing a multiple record
-    if (res.locals.editMultiple) {
+    if (res.locals.questionGroupCode) {
       const questions = Object.entries(req.form.options.allFields)
       const multipleFields = questions
         .filter(([_, question]) => {
-          return question.type === 'multiple' && question.answerGroup === res.locals.editMultiple
+          return question.type === 'multiple' && question.answerGroup === res.locals.questionGroupCode
         })
         .map(([questionCode]) => {
           return questionCode
@@ -250,7 +251,7 @@ class SaveAndContinue extends BaseController {
         delete answers[questionCode]
       })
 
-      const multipleKey = res.locals.editMultiple
+      const multipleKey = res.locals.questionGroupCode
       const rawAnswers = req.sessionModel.get('rawAnswers')
       const existingMultiple = rawAnswers[multipleKey]
 
@@ -262,7 +263,7 @@ class SaveAndContinue extends BaseController {
       req.sessionModel.set('answers', answers)
 
       logger.info(
-        `Edited record ${res.locals.multipleUpdated} of ${res.locals.editMultiple} in assessment ${req.session?.assessment?.uuid}, current episode`,
+        `Edited record ${res.locals.multipleUpdated} of ${res.locals.questionGroupCode} in assessment ${req.session?.assessment?.uuid}, current episode`,
       )
       logger.debug(`New multiples record: ${JSON.stringify(existingMultiple)}`)
     }

@@ -4,10 +4,10 @@ const { customValidationsEditEmergencyContact } = require('../fields')
 class SaveAndContinue extends upwSaveAndContinue {
   async locals(req, res, next) {
     const contactToEdit = req.params[0]
-    res.locals.editMultiple = 'emergency_contact_details'
+    res.locals.questionGroupCode = 'emergency_contact_details'
     if (contactToEdit !== 'new') {
       res.locals.pageTitle = `Emergency contact ${contactToEdit + 1}`
-      res.locals.multipleToEdit = contactToEdit
+      res.locals.questionGroupIndex = contactToEdit
     } else {
       res.locals.addingNewMultiple = true
       res.locals.pageTitle = 'Emergency contact'
@@ -31,7 +31,7 @@ class SaveAndContinue extends upwSaveAndContinue {
   async saveValues(req, res, next) {
     const contactToEdit = req.params[0]
     if (contactToEdit !== 'new') {
-      res.locals.editMultiple = 'emergency_contact_details'
+      res.locals.questionGroupCode = 'emergency_contact_details'
       res.locals.multipleUpdated = contactToEdit
     } else {
       res.locals.addNewMultiple = 'emergency_contact_details'

@@ -20,7 +20,7 @@
 {{ super() }}
 
 {% if errorSummary and errorSummary.length == 0 %}
-    {% if not editMultiple %}
+    {% if not questionGroupCode %}
         {% set questions = questions | clearAnswers %}
     {% endif %}
 {% endif %}

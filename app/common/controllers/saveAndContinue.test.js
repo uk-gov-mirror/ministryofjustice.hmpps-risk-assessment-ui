@@ -78,7 +78,7 @@ describe('SaveAndContinueController', () => {
     req.form.options.fields = {}
     req.form.options.allFields = {}
 
-    delete res.locals.editMultiple
+    delete res.locals.questionGroupCode
     delete res.locals.multipleToEdit
     delete res.locals.addingNewMultiple
     delete res.locals.addNewMultiple
@@ -409,8 +409,8 @@ describe('SaveAndContinueController', () => {
     })
 
     it('presents the correct multiple for editing', async () => {
-      res.locals.editMultiple = 'emergency_contact_details'
-      res.locals.multipleToEdit = '1'
+      res.locals.questionGroupCode = 'emergency_contact_details'
+      res.locals.questionGroupIndex = '1'
       const fields = {
         contact_address_house_number: { answer: '', questionCode: '1' },
         emergency_contact_first_name: {
@@ -458,7 +458,7 @@ describe('SaveAndContinueController', () => {
     })
 
     it('presents a blank multiple when adding a new multiple', async () => {
-      res.locals.editMultiple = 'emergency_contact_details'
+      res.locals.questionGroupCode = 'emergency_contact_details'
       res.locals.addingNewMultiple = true
       const fields = {
         contact_address_house_number: { answer: '', questionCode: '1' },
@@ -506,7 +506,7 @@ describe('SaveAndContinueController', () => {
     })
 
     it('presents answer just submitted when there is a form error', async () => {
-      res.locals.editMultiple = 'emergency_contact_details'
+      res.locals.questionGroupCode = 'emergency_contact_details'
       res.locals.addingNewMultiple = true
       mockSessionModel({ errors: [{ message: 'field error', key: 'emergency_contact_first_name' }] })
 
@@ -777,7 +777,7 @@ describe('SaveAndContinueController', () => {
 
     it('updates an existing multiples group', async () => {
       postAnswers.mockResolvedValue([true, { episodeUuid }])
-      res.locals.editMultiple = 'emergency_contact_details'
+      res.locals.questionGroupCode = 'emergency_contact_details'
       res.locals.multipleUpdated = '1'
 
       const fields = {
