@@ -6,11 +6,11 @@ class SaveAndContinue extends upwSaveAndContinue {
     const contactToEdit = req.params[0]
     res.locals.editMultiple = 'emergency_contact_details'
     if (contactToEdit !== 'new') {
-      res.locals.pageTitle = 'Edit emergency contact'
+      res.locals.pageTitle = `Emergency contact ${contactToEdit + 1}`
       res.locals.multipleToEdit = contactToEdit
     } else {
       res.locals.addingNewMultiple = true
-      res.locals.pageTitle = 'Add emergency contact'
+      res.locals.pageTitle = 'Emergency contact'
     }
     await super.locals(req, res, next)
   }
