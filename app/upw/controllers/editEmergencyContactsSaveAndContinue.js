@@ -6,7 +6,7 @@ class SaveAndContinue extends upwSaveAndContinue {
     const contactToEdit = req.params[0]
     res.locals.questionGroupCode = 'emergency_contact_details'
     if (contactToEdit !== 'new') {
-      res.locals.pageTitle = `Emergency contact ${contactToEdit + 1}`
+      res.locals.pageTitle = `Emergency contact ${parseInt(contactToEdit, 10) + 1}`
       res.locals.questionGroupIndex = contactToEdit
     } else {
       res.locals.addingNewMultiple = true

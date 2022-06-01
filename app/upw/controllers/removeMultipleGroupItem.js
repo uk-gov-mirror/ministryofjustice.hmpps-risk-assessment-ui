@@ -20,25 +20,36 @@ class removeItemSaveAndContinue extends saveAndContinue {
     }
 
     const { user } = req
-    const { answers: previousAnswers } = await getAnswers(
+    const response = await getAnswers(
       req.session.assessment?.uuid,
       req.session.assessment?.episodeUuid,
       req.user?.token,
       req.user?.id,
     )
-    const answers = answerDtoFrom(previousAnswers)
+    const rawAnswers = answerDtoFrom(response.answers)
+
+    const groupAnswers = rawAnswers[multipleGroupName] || []
+    groupAnswers.splice(parseInt(itemToDelete, 10), 1)
 
     // delete the appropriate entry
-    const existingMultiple = answers[multipleGroupName] || []
-    existingMultiple.splice(itemToDelete, 1)
-    answers[multipleGroupName] = existingMultiple
-    req.sessionModel.set('rawAnswers', answers)
+    const updatedRawAnswers = {
+      ...rawAnswers,
+      [multipleGroupName]: groupAnswers,
+    }
+    req.sessionModel.set('rawAnswers', rawAnswers)
+
+    const answers = req.sessionModel.get('answers')
+    const updatedAnswers = {
+      ...answers,
+      [multipleGroupName]: groupAnswers,
+    }
+    req.sessionModel.set('answers', updatedAnswers)
 
     try {
-      const [ok, response] = await postAnswers(
+      const [ok, postAnswersResponse] = await postAnswers(
         req.session?.assessment?.uuid,
         req.session?.assessment?.episodeUuid,
-        { answers },
+        { answers: updatedRawAnswers },
         user?.token,
         user?.id,
       )
@@ -47,13 +58,16 @@ class removeItemSaveAndContinue extends saveAndContinue {
         return super.successHandler(req, res, next)
       }
       // Errors returned from OASys
-      if (response.status === 422) {
-        const { validationErrors, errorSummary } = pageValidationErrorsFrom(response.errors, response.pageErrors)
+      if (postAnswersResponse.status === 422) {
+        const { validationErrors, errorSummary } = pageValidationErrorsFrom(
+          postAnswersResponse.errors,
+          postAnswersResponse.pageErrors,
+        )
         req.errors = validationErrors
         req.errorSummary = errorSummary
         // TODO: add OASys errors to page and redisplay
       }
-      return res.render('app/error', { subHeading: getErrorMessage(response.reason) })
+      return res.render('app/error', { subHeading: getErrorMessage(postAnswersResponse.reason) })
     } catch (error) {
       logger.error(
         `Could not delete item ${itemToDelete} from ${multipleGroupName} ${req.session?.assessment?.uuid}, current episode, error: ${error}`,
