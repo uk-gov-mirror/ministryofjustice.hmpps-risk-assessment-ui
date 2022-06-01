@@ -117,7 +117,7 @@ const safeDelete = fields => answers => {
   const updatedAnswers = { ...answers }
   fields.forEach(id => {
     if (updatedAnswers[id]) {
-      delete updatedAnswers[id]
+      updatedAnswers[id] = ['']
     }
   })
   return updatedAnswers
