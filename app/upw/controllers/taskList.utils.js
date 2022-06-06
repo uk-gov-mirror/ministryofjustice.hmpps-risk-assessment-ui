@@ -27,6 +27,7 @@ const getDeclarationTask = (answers, baseUrl, steps, taskName, otherSections, de
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}`,
     status: getDeclarationStatus(answers, otherSections, declarationFieldName),
+    id: steps[`/${taskName}`]?.id,
   }
 }
 

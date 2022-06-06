@@ -319,10 +319,11 @@ module.exports = {
   },
   '/pdf-preview-and-declaration': {
     pageTitle: 'PDF preview and declaration',
+    id: 'pdf-preview-declaration',
     controller: Declaration,
     template: `${__dirname}/templates/declaration`,
     fields: ['declaration_confirmation'],
-    next: 'task-list',
+    next: 'task-list#pdf-preview-declaration',
   },
   '/pdf-preview': {
     pageTitle: 'PDF preview',
