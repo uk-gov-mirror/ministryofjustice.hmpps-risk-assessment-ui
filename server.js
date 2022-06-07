@@ -167,7 +167,7 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('prettyDateAndTime', prettyDateAndTime)
   nunjucksEnvironment.addFilter('ageFrom', ageFrom)
   nunjucksEnvironment.addFilter('clearAnswers', clearAnswers)
-  nunjucksEnvironment.addFilter('hasAnswer', (a, v) => a.includes(v))
+  nunjucksEnvironment.addFilter('hasAnswer', (a, v) => Array.isArray(a) && a.includes(v))
 
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise
