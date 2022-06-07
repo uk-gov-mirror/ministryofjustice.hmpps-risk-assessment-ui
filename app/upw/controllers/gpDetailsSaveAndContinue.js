@@ -20,7 +20,7 @@ const customValidationsGpDetails = (fields, gpDetails, gpDetailsComplete) => {
 class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // make changes to sessionModel fields to add in context specific validations
-    const { gp_details = [] } = req.sessionModel.get('rawAnswers') || []
+    const { gp_details = [] } = req.sessionModel.get('rawAnswers') || {}
 
     const { gp_details_complete = '' } = req.form.values
 

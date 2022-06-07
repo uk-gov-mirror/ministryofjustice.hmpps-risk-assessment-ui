@@ -20,7 +20,7 @@ const customValidationsIndividualsDetails = (fields, emergencyContacts, individu
 class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // make changes to sessionModel fields to add in context specific validations
-    const { emergency_contact_details = [] } = req.sessionModel.get('rawAnswers') || []
+    const { emergency_contact_details = [] } = req.sessionModel.get('rawAnswers') || {}
 
     const { individual_details_complete = '' } = req.form.values
 

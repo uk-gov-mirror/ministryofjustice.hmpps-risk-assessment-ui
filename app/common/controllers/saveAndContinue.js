@@ -107,9 +107,8 @@ class SaveAndContinue extends BaseController {
     if (res.locals.questionGroupCode && res.locals.addingNewMultiple && errorSummary.length === 0) {
       res.locals.clearQuestionAnswers = true
     }
-    if (res.locals.questionGroupCode) {
-      req.sessionModel.set('rawAnswers', { ...previousAnswers, ...answerDtoFrom(submittedAnswers) })
-    }
+
+    req.sessionModel.set('rawAnswers', { ...previousAnswers, ...answerDtoFrom(submittedAnswers) })
     req.sessionModel.set('errors', {})
 
     const submittedErrors = res.locals.errors || {}
