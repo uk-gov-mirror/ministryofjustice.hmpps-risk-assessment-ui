@@ -352,62 +352,6 @@ describe('SaveAndContinueController', () => {
       })
     })
 
-    it('translates answers for multiple groups into consolidated arrays of answers for individual questions', async () => {
-      const fields = {
-        contact_address_house_number: {},
-        emergency_contact_first_name: {
-          type: 'multiple',
-          answerGroup: 'emergency_contact_details',
-        },
-        emergency_contact_family_name: {
-          type: 'multiple',
-          answerGroup: 'emergency_contact_details',
-        },
-      }
-
-      getAnswers.mockResolvedValue({
-        answers: {
-          contact_address_house_number: '23',
-          emergency_contact_details: [
-            {
-              emergency_contact_first_name: ['George'],
-              emergency_contact_family_name: ['Costanza'],
-            },
-            {
-              emergency_contact_first_name: ['Alan'],
-              emergency_contact_family_name: ['Moore'],
-            },
-          ],
-        },
-      })
-
-      getFlatAssessmentQuestions.mockResolvedValue([
-        { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
-        { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
-      ])
-
-      req.form.options.fields = fields
-      req.form.options.allFields = fields
-
-      await controller.locals(req, res, () => {})
-
-      expect(res.locals.rawAnswers).toEqual({
-        contact_address_house_number: '23',
-        emergency_contact_details: [
-          {
-            emergency_contact_first_name: ['George'],
-            emergency_contact_family_name: ['Costanza'],
-          },
-          {
-            emergency_contact_first_name: ['Alan'],
-            emergency_contact_family_name: ['Moore'],
-          },
-        ],
-        emergency_contact_first_name: ['George', 'Alan'],
-        emergency_contact_family_name: ['Costanza', 'Moore'],
-      })
-    })
-
     it('presents the correct multiple for editing', async () => {
       res.locals.questionGroupCode = 'emergency_contact_details'
       res.locals.questionGroupIndex = '1'

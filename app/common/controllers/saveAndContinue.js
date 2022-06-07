@@ -70,20 +70,6 @@ class SaveAndContinue extends BaseController {
         return [questionCode, question.answerGroup]
       })
 
-    // now for each field construct an array containing all the collected answers for this field,
-    multipleFields.forEach(([questionCode, groupQuestionCode]) => {
-      const answers = []
-
-      const receivedAnswersForThisGroup = previousAnswers[groupQuestionCode]
-
-      receivedAnswersForThisGroup?.forEach((answerSet, index) => {
-        const tempAnswer = answerSet[questionCode]
-        answers[index] = tempAnswer ? tempAnswer[0] : ''
-      })
-
-      previousAnswers[questionCode] = answers
-    })
-
     const submittedAnswers =
       errorSummary.length === 0 ? req.sessionModel.get('answers') || {} : req.sessionModel.get('formAnswers') || {}
 
