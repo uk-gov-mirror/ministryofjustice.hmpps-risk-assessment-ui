@@ -1,4 +1,4 @@
-const { isDate, isFuture, parseISO, isAfter, isEqual, intervalToDuration } = require('date-fns')
+const { DateTime, Interval } = require('luxon')
 
 const onePresent = function range(value, otherValue) {
   const valueCheck = value != null && value.trim().length !== 0
@@ -11,36 +11,40 @@ const range = function range(value, lowerBound, higherBound) {
   return Number(value) >= Number(lowerBound) && Number(value) <= Number(higherBound)
 }
 
-const notInFuture = function inFuture(value) {
-  return !isFuture(parseISO(value))
+const notInFuture = function inFuture(isoString) {
+  return DateTime.fromISO(isoString) < DateTime.now()
 }
 
-const validDate = function validDate(date) {
-  return date && parseISO(date).toString() !== 'Invalid Date' && isDate(parseISO(date))
+const validDate = function validDate(isoString) {
+  return isoString && DateTime.fromISO(isoString).isValid
 }
 
-const dateIsAfter = function dateIsAfter(date1, date2) {
-  return isAfter(parseISO(date1), parseISO(date2))
+const dateIsAfter = function dateIsAfter(isoString1, isoString2) {
+  const date1 = DateTime.fromISO(isoString1).startOf('day')
+  const date2 = DateTime.fromISO(isoString2).startOf('day')
+  return date1 > date2
 }
 
-const dateIsAfterOrEqual = function dateIsAfterOrEqual(date1, date2) {
-  return isAfter(parseISO(date1), parseISO(date2)) || isEqual(parseISO(date1), parseISO(date2))
+const dateIsAfterOrEqual = function dateIsAfterOrEqual(isoString1, isoString2) {
+  const date1 = DateTime.fromISO(isoString1).startOf('day')
+  const date2 = DateTime.fromISO(isoString2).startOf('day')
+  return date1 >= date2
 }
 
-const yearsBetweenGreaterThan = function yearsBetween(date1, date2, years) {
-  const duration = intervalToDuration({
-    start: parseISO(date2),
-    end: parseISO(date1),
-  })
-  return Math.abs(duration.years) >= years
+const intervalFrom = (isoString1, isoString2) => {
+  const date1 = DateTime.fromISO(isoString1).startOf('day')
+  const date2 = DateTime.fromISO(isoString2).startOf('day')
+  return date1 < date2 ? Interval.fromDateTimes(date1, date2) : Interval.fromDateTimes(date2, date1)
 }
 
-const yearsBetweenLessThan = function yearsBetween(date1, date2, years) {
-  const duration = intervalToDuration({
-    start: parseISO(date2),
-    end: parseISO(date1),
-  })
-  return Math.abs(duration.years) <= years
+const yearsBetweenGreaterThan = function yearsBetween(isoString1, isoString2, years) {
+  const diff = intervalFrom(isoString1, isoString2)
+  return diff.length('years') > years
+}
+
+const yearsBetweenLessThan = function yearsBetween(isoString1, isoString2, years) {
+  const diff = intervalFrom(isoString1, isoString2)
+  return diff.length('years') < years
 }
 
 const noSpace = function noSpace(value) {

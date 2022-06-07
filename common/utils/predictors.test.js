@@ -30,7 +30,7 @@ describe('should format the predictors ready to be displayed', () => {
   it('formats the predictors', () => {
     const expected = {
       current: {
-        date: '23 Jul 2021 at 12:00:00',
+        date: '23 Jul 2021 at 13:00:00',
         scores: {
           OSPC: {
             level: 'MEDIUM',

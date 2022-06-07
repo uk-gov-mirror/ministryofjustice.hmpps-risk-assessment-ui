@@ -1,14 +1,16 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
-const { format, differenceInYears, isValid, parseISO, startOfDay } = require('date-fns')
+const { DateTime } = require('luxon')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
 
-const getYearMonthFromDate = dateString => {
-  const date = new Date(dateString)
-  const month = date.getMonth() + 1
-  const monthName = date.toLocaleString('default', { month: 'long' })
-  return { month, monthName, year: date.getFullYear().toString() }
+const getYearMonthFromDate = isoString => {
+  const date = DateTime.fromISO(isoString, { zone: 'utc' })
+    .setLocale('en-GB')
+    .setZone('Europe/London')
+  const { month } = date
+  const monthName = date.monthLong
+  return { month, monthName, year: date.year }
 }
 
 const isEmptyObject = obj => {
@@ -75,14 +77,9 @@ const catchAndReThrowError = (msg, error) => {
 
 const isValidDate = (day, month, year) => {
   try {
-    const date = new Date()
-    date.setFullYear(year, month - 1, day)
+    const date = DateTime.local(year, month, day, { locale: 'en-GB' })
 
-    return (
-      date.getFullYear() === parseInt(year, 10) &&
-      date.getMonth() === parseInt(month, 10) - 1 &&
-      date.getDate() === parseInt(day, 10)
-    )
+    return date.year === parseInt(year, 10) && date.month === parseInt(month, 10) && date.day === parseInt(day, 10)
   } catch (error) {
     logger.error(`Valid date check error for day:${day}, month:${month}, year:${year}, error: ${error}`)
     return false
@@ -153,18 +150,35 @@ const processReplacements = (input, replacementDetails) => {
   return JSON.parse(newInput)
 }
 
-const formatDateWith = pattern => isoString => {
-  const parsedDate = parseISO(isoString)
-  return isValid(parsedDate) ? format(parsedDate, pattern) : null
+const getOrdinalIndicator = number => {
+  const englishOrdinalRules = new Intl.PluralRules('en', { type: 'ordinal' })
+  const suffixes = {
+    one: 'st',
+    two: 'nd',
+    few: 'rd',
+    other: 'th',
+  }
+  const ordinalCategory = englishOrdinalRules.select(number)
+  return suffixes[ordinalCategory]
 }
 
-const prettyDate = formatDateWith('do MMMM y')
-const prettyDateAndTime = formatDateWith('eeee do MMMM y H:mm')
+const formatDateWith = pattern => isoString => {
+  const parsedDate = DateTime.fromISO(isoString, { zone: 'utc' })
+    .setLocale('en-GB')
+    .setZone('Europe/London')
+  // This is a current workaround due to Luxon not supporting ordinal indicators
+  const updatedPattern = pattern.replace('d ', `d'${getOrdinalIndicator(parsedDate.day)}' `)
+  return parsedDate.isValid ? parsedDate.toFormat(updatedPattern) : null
+}
 
-const ageFrom = (dateOfBirth, now = new Date()) => {
-  const todaysDate = startOfDay(now)
-  const birthDate = startOfDay(parseISO(dateOfBirth))
-  return isValid(birthDate) ? Math.abs(differenceInYears(birthDate, todaysDate)) : null
+const prettyDate = formatDateWith('d MMMM y')
+const prettyDateAndTime = formatDateWith('cccc d MMMM y H:mm')
+
+const ageFrom = (dateOfBirth, today = DateTime.local().startOf('day')) => {
+  const parsedDate = DateTime.fromISO(dateOfBirth, { zone: 'utc' })
+    .setLocale('en-GB')
+    .startOf('day')
+  return parsedDate.isValid ? Math.floor(Math.abs(parsedDate.diff(today).as('years'))) : null
 }
 
 const clearAnswers = questions => {
@@ -212,4 +226,5 @@ module.exports = {
   ageFrom,
   clearAnswers,
   getErrorMessageFor,
+  formatDateWith,
 }

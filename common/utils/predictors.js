@@ -1,10 +1,13 @@
-const { parseISO, format } = require('date-fns')
+const { DateTime } = require('luxon')
 
-const formatDate = dateString => {
-  const date = parseISO(dateString)
-  const datePart = format(date, 'd MMM y')
-  const timePart = format(date, 'HH:mm:ss')
-  return `${datePart} at ${timePart}`
+const formatDate = isoString => {
+  const datePart = 'd MMM y'
+  const timePart = 'HH:mm:ss'
+  const pattern = `${datePart} 'at' ${timePart}`
+  return DateTime.fromISO(isoString, { zone: 'utc' })
+    .setLocale('en-GB')
+    .setZone('Europe/London')
+    .toFormat(pattern)
 }
 
 const displayPredictorLevels = {

@@ -91,7 +91,7 @@ describe('calculates years between dates greater than', () => {
 describe('calculates years between dates less than', () => {
   it('checks duration', () => {
     expect(yearsBetweenLessThan('2020-03-26', '2030-03-27', 100)).toEqual(true)
-    expect(yearsBetweenLessThan('2020-03-28', '2015-03-27', 5)).toEqual(true)
+    expect(yearsBetweenLessThan('2020-03-28', '2015-03-27', 5)).toEqual(false)
   })
 })
 

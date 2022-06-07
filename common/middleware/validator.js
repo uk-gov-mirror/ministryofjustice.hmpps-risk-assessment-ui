@@ -1,6 +1,6 @@
 const { body } = require('express-validator')
-const { isDate, isFuture, isEqual, parseISO, isAfter, intervalToDuration } = require('date-fns')
 const { validationResult } = require('express-validator')
+const { DateTime, Interval } = require('luxon')
 const { removeBlankErrors, formatErrors, formatErrorSummary } = require('../utils/formatErrors')
 const { isEmptyObject, dynamicMiddleware } = require('../utils/util')
 
@@ -25,6 +25,15 @@ const getFieldFor = code => {
   return false
 }
 
+const intervalFrom = (isoString1, isoString2) => {
+  const date1 = DateTime.fromISO(isoString1).startOf('day')
+  const date2 = DateTime.fromISO(isoString2).startOf('day')
+  return date1 < date2 ? Interval.fromDateTimes(date1, date2) : Interval.fromDateTimes(date2, date1)
+}
+
+const isValidDate = isoString => DateTime.fromISO(isoString).isValid
+const isPastDate = isoString => DateTime.fromISO(isoString) < DateTime.now()
+
 // question validation rules hardcoded in the UI, not driven by the Assessments API responses.
 // eslint-disable-next-line consistent-return
 const localValidationRules = async (req, res, next) => {
@@ -45,27 +54,18 @@ const localValidationRules = async (req, res, next) => {
     // Date of first sanction:
     validations.push(
       body(getFieldFor('dateFirstSanction'))
-        .custom(value => {
-          return value && isDate(parseISO(value))
-        })
+        .custom(isValidDate)
         .withMessage({ error: 'Enter a valid date' })
         .bail()
-        .custom(value => {
-          return !isFuture(parseISO(value))
-        })
+        .custom(isPastDate)
         .withMessage({ error: 'Date cannot be in the future' })
         .bail()
-        .custom(value => {
-          return isAfter(parseISO(value), parseISO(offenderDateOfBirth))
-        })
+        .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
         .withMessage({ error: 'Date must be later than the individual’s date of birth' })
         .bail()
         .custom(value => {
-          const duration = intervalToDuration({
-            start: parseISO(offenderDateOfBirth),
-            end: parseISO(value),
-          })
-          return duration.years >= 8
+          const diff = intervalFrom(offenderDateOfBirth, value)
+          return diff.length('years') >= 8
         })
         .withMessage({ error: 'The individual must be aged 8 or older on the date of first sanction' }),
     )
@@ -91,33 +91,25 @@ const localValidationRules = async (req, res, next) => {
     // date of current conviction:
     validations.push(
       body(getFieldFor('currentConvictionDate'))
-        .custom(value => {
-          return value && isDate(parseISO(value))
-        })
+        .custom(isValidDate)
         .withMessage({ error: 'Enter a valid date' })
         .bail()
-        .custom(value => {
-          return !isFuture(parseISO(value))
-        })
+        .custom(isPastDate)
         .withMessage({ error: 'Date cannot be in the future' })
         .bail()
-        .custom(value => {
-          return isAfter(parseISO(value), parseISO(offenderDateOfBirth))
-        })
+        .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
         .withMessage({ error: 'Date must be later than the individual’s date of birth' }),
     )
 
     // offender’s age at Date of Current Conviction CANNOT BE LESS than the offender’s age at first conviction
     // i.e. current conviction date cannot be less than first conviction date
-    if (reqBody[getFieldFor('dateFirstSanction')] && isDate(parseISO(reqBody[getFieldFor('dateFirstSanction')]))) {
+    if (
+      reqBody[getFieldFor('dateFirstSanction')] &&
+      DateTime.fromISO(reqBody[getFieldFor('dateFirstSanction')]).isValid
+    ) {
       validations.push(
         body(getFieldFor('currentConvictionDate'))
-          .custom(value => {
-            return (
-              isEqual(parseISO(value), parseISO(reqBody[getFieldFor('dateFirstSanction')])) ||
-              isAfter(parseISO(value), parseISO(reqBody[getFieldFor('dateFirstSanction')]))
-            )
-          })
+          .custom(value => DateTime.fromISO(value) >= DateTime.fromISO(reqBody[getFieldFor('dateFirstSanction')]))
           .withMessage({ error: 'Current conviction cannot be before the date of first conviction' }),
       )
     }
@@ -127,19 +119,13 @@ const localValidationRules = async (req, res, next) => {
     if (reqBody[getFieldFor('haveTheyCommittedASexualOffence')] === 'YES') {
       validations.push(
         body(getFieldFor('dateOfMostRecentSexualOffence'))
-          .custom(value => {
-            return value && isDate(parseISO(value))
-          })
+          .custom(isValidDate)
           .withMessage({ error: 'Enter a valid date' })
           .bail()
-          .custom(value => {
-            return !isFuture(parseISO(value))
-          })
+          .custom(isPastDate)
           .withMessage({ error: 'Date cannot be in the future' })
           .bail()
-          .custom(value => {
-            return isAfter(parseISO(value), parseISO(offenderDateOfBirth))
-          })
+          .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
           .withMessage({ error: 'Date must be later than the individual’s date of birth' }),
       )
 
@@ -167,22 +153,15 @@ const localValidationRules = async (req, res, next) => {
 
     validations.push(
       body(getFieldFor('dateOfCommencement'))
-        .custom(value => {
-          return value && isDate(parseISO(value))
-        })
+        .custom(isValidDate)
         .withMessage({ error: 'Enter a valid date' })
         .bail()
-        .custom(value => {
-          return isAfter(parseISO(value), parseISO(offenderDateOfBirth))
-        })
+        .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
         .withMessage({ error: 'Date must be later than the individual’s date of birth' })
         .bail()
         .custom(value => {
-          const duration = intervalToDuration({
-            start: parseISO(offenderDateOfBirth),
-            end: parseISO(value),
-          })
-          return duration.years <= 110
+          const diff = intervalFrom(offenderDateOfBirth, value)
+          return diff.length('years') <= 110
         })
         .withMessage({ error: 'PLACEHOLDER: The individual must be aged 110 or younger on commencement' }),
     )

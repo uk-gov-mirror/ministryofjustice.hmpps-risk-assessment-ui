@@ -176,6 +176,7 @@ describe('Auth', () => {
           username: 'Test User',
           refreshToken: 'REFRESH_TOKEN',
           tokenExpiryTime: expiry,
+          tokenLifetime: 60 * 60 * 12,
         }),
         session: {
           passport: { user: {} },

@@ -2,7 +2,7 @@ const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
 const jwtDecode = require('jwt-decode')
-const { addSeconds } = require('date-fns')
+const { DateTime } = require('luxon')
 const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
 const { getUserByEmail } = require('../data/offenderAssessmentApi')
 const { cacheUserDetails, getCachedUserDetails, cacheOasysUserDetails } = require('../data/userDetailsCache')
@@ -102,12 +102,12 @@ const checkForTokenRefresh = (req, res, next) => {
         return next(err)
       }
 
-      const now = new Date()
-
       req.user = user.updateToken({
         token,
         refreshToken,
-        tokenExpiryTime: addSeconds(now, user.tokenLifetime - SIXTY_SECONDS).valueOf(),
+        tokenExpiryTime: DateTime.now()
+          .plus({ seconds: user.tokenLifetime - SIXTY_SECONDS })
+          .valueOf(),
       })
 
       req.session.passport.user = req.user.getSession()
@@ -169,7 +169,6 @@ const initializeAuth = () => {
     (token, refreshToken, params, profile, done) => {
       logger.info(`User logged in: ${params.user_name}}`)
       // Token expiry = 1hr, Refresh token = 12hr
-      const now = new Date()
       done(
         null,
         User.from({
@@ -177,7 +176,9 @@ const initializeAuth = () => {
           token,
           refreshToken,
           tokenLifetime: params.expires_in,
-          tokenExpiryTime: addSeconds(now, params.expires_in - SIXTY_SECONDS).valueOf(),
+          tokenExpiryTime: DateTime.now()
+            .plus({ seconds: params.expires_in - SIXTY_SECONDS })
+            .valueOf(),
         }),
       )
     },

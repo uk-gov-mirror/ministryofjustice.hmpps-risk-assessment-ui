@@ -1,3 +1,4 @@
+const { DateTime } = require('luxon')
 const {
   countWords,
   isEmptyObject,
@@ -167,7 +168,7 @@ describe('prettyDate', () => {
   })
 
   it('assumes dates are already adjusted for "Europe/London"', () => {
-    expect(prettyDate('2022-03-26T23:30:00.000000')).toEqual('26th March 2022') // Clocks forward boundary
+    expect(prettyDate('2022-03-27T23:30:00.000000')).toEqual('28th March 2022') // Clocks forward boundary
     expect(prettyDate('2022-10-30T00:30:00.000000')).toEqual('30th October 2022') // Clocks back boundary
   })
 })
@@ -189,13 +190,15 @@ describe('prettyDateAndTime', () => {
   })
 
   it('assumes dates are already adjusted for "Europe/London"', () => {
-    expect(prettyDateAndTime('2022-04-28T07:05:20.000000')).toEqual('Thursday 28th April 2022 7:05') // Clocks forward
+    expect(prettyDateAndTime('2022-04-28T06:05:20.000000')).toEqual('Thursday 28th April 2022 7:05') // Clocks forward
     expect(prettyDateAndTime('2022-01-01T07:05:20.000000')).toEqual('Saturday 1st January 2022 7:05') // Clocks back
   })
 })
 
 describe('ageFrom', () => {
-  const mockNow = new Date('2021-11-30T00:00:00.000000')
+  const mockNow = DateTime.fromISO('2021-11-30T00:00:00.000000', { zone: 'utc' })
+    .setLocale('en-GB')
+    .startOf('day')
 
   it('returns the difference in years between the provided date and now', () => {
     expect(ageFrom('1989-01-19T00:00:00.000000', mockNow)).toEqual(32)
