@@ -46,8 +46,8 @@
 
                     {{ readOnly({
                         title: 'GP details',
-                        editUrl: 'edit-gp-details/' + [0],
-                        removeUrl: 'remove-gp-details/' + [0],
+                        editUrl: 'edit-gp-details/' + [loop.index0],
+                        removeUrl: 'remove-gp-details/' + [loop.index0],
                         rows: [
                             {
                                 key: {
