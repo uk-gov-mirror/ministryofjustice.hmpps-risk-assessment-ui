@@ -6,7 +6,7 @@ class SaveAndContinue extends upwSaveAndContinue {
     res.locals.questionGroupCode = 'gp_details'
     if (contactToEdit !== 'new') {
       res.locals.pageTitle = 'Edit GP details'
-      res.locals.multipleToEdit = contactToEdit
+      res.locals.questionGroupIndex = contactToEdit
     } else {
       res.locals.addingNewMultiple = true
       res.locals.pageTitle = 'Add GP details'
