@@ -203,7 +203,7 @@ module.exports = {
     controller: gpDetailsSaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/gp-details.njk`,
     next: 'task-list#gp-details',
-    fields: ['gp_details_complete'],
+    fields: ['gp_details_complete', 'gp_details_declined'],
   },
   '/edit-gp-details/*': {
     pageTitle: 'Details of GP',
