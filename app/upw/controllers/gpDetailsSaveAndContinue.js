@@ -3,8 +3,8 @@ const upwSaveAndContinue = require('./saveAndContinue')
 const checkGpDetails = function range(gpDetailsDeclined, gpDetails, gpDetailsComplete) {
   if (gpDetailsComplete !== 'YES') return true
 
-  // validation fails if there are no GP details and gp_details_declined field has not been selected
-  return !((!gpDetails || !gpDetails.length) && gpDetailsDeclined === '')
+  // User has either declined or there are GP details provided
+  return gpDetailsDeclined === 'declined' || (Array.isArray(gpDetails) && gpDetails.length > 0)
 }
 
 const customValidationsGpDetails = (fields, gpDetails, gpDetailsComplete) => {

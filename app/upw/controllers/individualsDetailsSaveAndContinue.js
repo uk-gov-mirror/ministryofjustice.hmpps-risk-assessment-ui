@@ -3,8 +3,8 @@ const upwSaveAndContinue = require('./saveAndContinue')
 const checkContacts = function range(emergencyContactDeclined, emergencyContacts, individualDetailsComplete) {
   if (individualDetailsComplete !== 'YES') return true
 
-  // validation fails if there are no emergency contacts and emergency_contact_declined field has not been selected
-  return !((!emergencyContacts || !emergencyContacts.length) && emergencyContactDeclined === '')
+  // User has either declined or there are Emergency Contacts details provided
+  return emergencyContactDeclined === 'declined' || (Array.isArray(emergencyContacts) && emergencyContacts.length > 0)
 }
 
 const customValidationsIndividualsDetails = (fields, emergencyContacts, individualDetailsComplete) => {
