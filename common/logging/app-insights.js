@@ -7,8 +7,8 @@ const trackEvent = (eventName, req = {}, customProperties = {}) => {
   if (client && eventName) {
     const eventProperties = {
       ...customProperties,
-      assessmentUuid: assessmentInfo?.uuid,
-      episodeUuid: assessmentInfo?.episodeUuid,
+      assessmentUUID: assessmentInfo?.uuid,
+      episodeUUID: assessmentInfo?.episodeUuid,
       crn: assessmentInfo?.subject?.crn,
       author: req.user?.username,
     }
