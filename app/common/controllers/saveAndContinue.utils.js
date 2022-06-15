@@ -1,7 +1,8 @@
 const nunjucks = require('nunjucks')
 const { SECTION_INCOMPLETE, SECTION_COMPLETE } = require('../../../common/utils/constants')
 
-const nullOrEmpty = s => !s || s === ''
+const hasAnswerIn = v => Array.isArray(v) && v.length > 0
+const hasAnswer = v => v && v.length > 0
 
 const getErrorMessage = reason => {
   if (reason === 'OASYS_PERMISSION') {
@@ -38,17 +39,17 @@ const pageValidationErrorsFrom = (validationErrors, serverErrors = []) => {
 }
 
 const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fieldProperties]) => {
-  const someValueFrom = x => (!nullOrEmpty(x) ? x : undefined)
-  const answerFor = f => {
+  const someValueFrom = answer => (hasAnswerIn(answer) ? answer : [])
+  const answerFor = questionCode => {
     let answer = ''
 
-    const submittedAnswer = someValueFrom(submittedAnswers[f])
-    const previousAnswer = someValueFrom(previousAnswers[f])
+    const [submittedAnswer] = someValueFrom(submittedAnswers[questionCode])
+    const [previousAnswer = ''] = someValueFrom(previousAnswers[questionCode])
 
     if (submittedAnswer || submittedAnswer === '') {
       answer = submittedAnswer
-    } else if (Array.isArray(previousAnswer) && previousAnswer.length > 0) {
-      answer = previousAnswer.join('\n')
+    } else {
+      answer = previousAnswer
     }
 
     return answer
@@ -168,9 +169,9 @@ const combineDateFields = (formValues = {}) => {
     const dateKey = fieldName.replace(dateFieldPattern, '')
 
     if (
-      nullOrEmpty(answers[`${dateKey}-year`]) ||
-      nullOrEmpty(answers[`${dateKey}-month`]) ||
-      nullOrEmpty(answers[`${dateKey}-day`])
+      !hasAnswer(answers[`${dateKey}-year`]) ||
+      !hasAnswer(answers[`${dateKey}-month`]) ||
+      !hasAnswer(answers[`${dateKey}-day`])
     ) {
       return { ...otherFields, [dateKey]: '' }
     }

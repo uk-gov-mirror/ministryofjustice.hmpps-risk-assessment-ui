@@ -152,7 +152,7 @@ describe('SaveAndContinueController', () => {
 
       mockSessionModel({
         answers: {
-          first_question: 'YES',
+          first_question: ['YES'],
         },
       })
 

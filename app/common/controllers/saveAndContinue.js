@@ -73,7 +73,7 @@ class SaveAndContinue extends BaseController {
     const submittedAnswers =
       errorSummary.length === 0 ? req.sessionModel.get('answers') || {} : req.sessionModel.get('formAnswers') || {}
 
-    const questionsWithMappedAnswers = questions.map(withAnswersFrom(previousAnswers, submittedAnswers))
+    const questionsWithMappedAnswers = questions.map(withAnswersFrom(previousAnswers, answerDtoFrom(submittedAnswers)))
 
     const questionWithPreCompiledConditionals = compileConditionalQuestions(
       questionsWithMappedAnswers.filter(questionSchema => req.form.options.fields[questionSchema.questionCode]),
@@ -207,16 +207,14 @@ class SaveAndContinue extends BaseController {
 
       const multipleKey = res.locals.addNewMultiple
       const rawAnswers = req.sessionModel.get('rawAnswers')
-      const existingMultiple = rawAnswers[multipleKey] || []
-      existingMultiple.push(newMultipleAnswer)
-      answers[multipleKey] = existingMultiple
-
-      rawAnswers[multipleKey] = existingMultiple
+      const existingMultiples = rawAnswers[multipleKey] || []
+      existingMultiples.push(newMultipleAnswer)
+      answers[multipleKey] = existingMultiples
+      rawAnswers[multipleKey] = existingMultiples
       req.sessionModel.set('rawAnswers', rawAnswers)
-      req.sessionModel.set('answers', answers)
 
       logger.info(`Added new record to ${multipleKey} in assessment ${req.session?.assessment?.uuid}, current episode`)
-      logger.debug(`New multiples record: ${JSON.stringify(existingMultiple)}`)
+      logger.debug(`New multiples record: ${JSON.stringify(existingMultiples)}`)
     }
 
     // if editing a multiple record
@@ -230,27 +228,26 @@ class SaveAndContinue extends BaseController {
           return questionCode
         })
 
-      const newMultipleAnswer = {}
+      const updatedMultiple = {}
       multipleFields.forEach(questionCode => {
-        newMultipleAnswer[questionCode] = answers[questionCode] || ''
+        updatedMultiple[questionCode] = answers[questionCode] || ''
         delete answers[questionCode]
       })
 
       const multipleKey = res.locals.questionGroupCode
       const rawAnswers = req.sessionModel.get('rawAnswers')
-      const existingMultiple = rawAnswers[multipleKey]
+      const existingMultiples = rawAnswers[multipleKey]
 
-      existingMultiple[res.locals.multipleUpdated] = newMultipleAnswer
+      existingMultiples[res.locals.multipleUpdated] = updatedMultiple
 
-      answers[multipleKey] = existingMultiple
-      rawAnswers[multipleKey] = existingMultiple
+      answers[multipleKey] = existingMultiples
+      rawAnswers[multipleKey] = existingMultiples
       req.sessionModel.set('rawAnswers', rawAnswers)
-      req.sessionModel.set('answers', answers)
 
       logger.info(
         `Edited record ${res.locals.multipleUpdated} of ${res.locals.questionGroupCode} in assessment ${req.session?.assessment?.uuid}, current episode`,
       )
-      logger.debug(`New multiples record: ${JSON.stringify(existingMultiple)}`)
+      logger.debug(`New multiples record: ${JSON.stringify(existingMultiples)}`)
     }
 
     const answersToPost = this.postAnswerModifiers.reduce((a, fn) => fn(a), answers)
