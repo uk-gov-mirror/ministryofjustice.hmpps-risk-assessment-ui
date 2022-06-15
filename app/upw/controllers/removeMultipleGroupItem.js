@@ -36,20 +36,13 @@ class removeItemSaveAndContinue extends saveAndContinue {
       ...rawAnswers,
       [multipleGroupName]: groupAnswers,
     }
-    req.sessionModel.set('rawAnswers', rawAnswers)
-
-    const answers = req.sessionModel.get('answers')
-    const updatedAnswers = {
-      ...answers,
-      [multipleGroupName]: groupAnswers,
-    }
-    req.sessionModel.set('answers', updatedAnswers)
+    req.sessionModel.set('rawAnswers', updatedRawAnswers)
 
     try {
       const [ok, postAnswersResponse] = await postAnswers(
         req.session?.assessment?.uuid,
         req.session?.assessment?.episodeUuid,
-        { answers: updatedRawAnswers },
+        { answers: { [multipleGroupName]: groupAnswers } },
         user?.token,
         user?.id,
       )

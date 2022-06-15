@@ -94,26 +94,28 @@ describe('removeMultipleGroupItem (UPW)', () => {
       },
     })
 
-    const expectedAnswer = {
+    const expectedPayload = {
       answers: {
-        first_question: ['PREVIOUS_FOO'],
         my_multiple_group: [{ myFirstItem: 'first ' }, { myThirdItem: 'third' }],
-        third_question: ['PREVIOUS_BAR'],
       },
     }
 
-    postAnswers.mockResolvedValue([true, { expectedAnswer }])
+    postAnswers.mockResolvedValue([true, {}])
 
     await controller.locals(req, res, next)
 
     expect(postAnswers).toHaveBeenCalledWith(
       req.session.assessment.uuid,
       req.session.assessment.episodeUuid,
-      expectedAnswer,
+      expectedPayload,
       req.user.token,
       req.user.id,
     )
 
-    expect(req.sessionModel.set).toHaveBeenCalledWith('rawAnswers', expectedAnswer.answers)
+    expect(req.sessionModel.set).toHaveBeenCalledWith('rawAnswers', {
+      first_question: ['PREVIOUS_FOO'],
+      my_multiple_group: [{ myFirstItem: 'first ' }, { myThirdItem: 'third' }],
+      third_question: ['PREVIOUS_BAR'],
+    })
   })
 })
