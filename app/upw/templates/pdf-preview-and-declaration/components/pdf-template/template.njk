@@ -46,54 +46,8 @@
     {% endif %}
 {%- endmacro -%}
 
-{%- macro renderMultiple(values, key) -%}    
-    {% if key === "gp_details" %}
-        {% for gp in values["gp_details"] %}
-            {{renderGpDetails(
-                gp["gp_name"],
-                gp["gp_practice_name"],
-                gp["gp_phone_number"],
-                readOnlyAddress({ 
-                    buildingName: gp["gp_address_building_name"],
-                    houseNumber: gp["gp_address_house_number"],
-                    streetName: gp["gp_address_street_name"],
-                    district: gp["gp_address_district"],
-                    townOrCity: gp["gp_address_town_or_city"],
-                    county: gp["gp_address_county"],
-                    postcode: gp["gp_address_postcode"]
-                })
-            )}}
-            {% if not loop.last %}<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">{% endif %}
-        {% endfor %}
-    {% elif key ===  "emergency_contact_details" %}
-        {% for contact in values["emergency_contact_details"] %}
-            {{renderEmergencyContact(
-                renderName(contact['emergency_contact_first_name'], contact['emergency_contact_family_name']),
-                contact["emergency_contact_relationship"],
-                contact["emergency_contact_phone_number"],
-                contact["emergency_contact_mobile_phone_number"]
-            )}}
-            {% if not loop.last %}<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">{% endif %}
-        {% endfor %}
-    {% endif %}
-{%- endmacro -%}
-
 {%- macro renderOffence(code, description) -%}
     <p>{% if code %}{{ code }} - {% endif %}{{ description }}</p>
-{%- endmacro -%}
-
-{%- macro renderGpDetails(name, practice, phoneNumber, address) -%}
-    {% if name %}<p><strong>Name: </strong>{{ name }}</p>{% endif %}
-    {% if practice %}<p><strong>Practice: </strong>{{ practice }}</p>{% endif %}
-    {% if address %}<p><strong>Address: </strong><br/>{{ address }}</p>{% endif %}
-    {% if phoneNumber %}<p><strong>Phone number: </strong>{{ phoneNumber }}</p>{% endif %}
-{%- endmacro -%}
-
-{%- macro renderEmergencyContact(name, relationship, phoneNumber, mobileNumber) -%}
-    {% if name %}<p><strong>Name: </strong>{{ name }}</p>{% endif %}
-    {% if relationship %}<p><strong>Relationshop: </strong>{{ relationship }}</p>{% endif %}
-    {% if phoneNumber %}<p><strong>Phone number: </strong>{{ phoneNumber }}</p>{% endif %}
-    {% if mobileNumber %}<p><strong>Mobile number: </strong>{{ mobileNumber }}</p>{% endif %}
 {%- endmacro -%}
 
 {%- macro renderName(firstName, familyName) -%}
@@ -161,7 +115,6 @@
 
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Supervised individual</h1>
-
         {{ renderTable({
             caption: "Offence details",
             rows: [
@@ -171,164 +124,191 @@
             ]
         }) }}
     </div>
-    {{ renderTable({
-        caption: "Personal details",
-        rows: [
-            { heading: "Family name", data: renderValue(rawAnswers["family_name"][0]) },
-            { heading: "First name", data: renderValue(rawAnswers["first_name"][0]) },
-            { heading: "Date of birth", data: renderDate(rawAnswers["dob"][0]) },
-            { heading: "CRN", data: renderValue(rawAnswers["crn"][0]) },
-            { heading: "PNC", data: renderValue(rawAnswers["pnc"][0]) },
-            { heading: "Alias", data: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases']) },
-            { heading: "Ethnicity", data: renderValue(rawAnswers["ethnicity"][0]) }
-        ]
-    }) }}
+    <div class='upw-avoid-break'>
+        {{ renderTable({
+            caption: "Personal details",
+            rows: [
+                { heading: "Family name", data: renderValue(rawAnswers["family_name"][0]) },
+                { heading: "First name", data: renderValue(rawAnswers["first_name"][0]) },
+                { heading: "Date of birth", data: renderDate(rawAnswers["dob"][0]) },
+                { heading: "CRN", data: renderValue(rawAnswers["crn"][0]) },
+                { heading: "PNC", data: renderValue(rawAnswers["pnc"][0]) },
+                { heading: "Alias", data: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases']) },
+                { heading: "Ethnicity", data: renderValue(rawAnswers["ethnicity"][0]) }
+            ]
+        }) }}
+    </div>
+    <div class='upw-avoid-break'>
+        {% set showSexChangeDetails = rawAnswers["sex_change"] == "YES" %}
+        {{ renderTable({
+            caption: "Gender information",
+            rows: [
+                { heading: "Gender identity", data: renderValue(answers["gender_identity"]) },
+                {
+                    heading: "Has the individual gone through any part of a process to change the sex they were assigned at birth to the gender they now identify with, or do they intend to?",
+                    data: renderValue(answers["sex_change"])
+                },
+                { 
+                    heading: "Give details and discuss placement options with the individual, based on their gender identity.",
+                    description: "Record their preference and the details of the conversation.",
+                    condition: showSexChangeDetails,
+                    data: renderValue(answers["sex_change_details"])
+                },
+                {
+                    heading: "Is the individual intersex or do they have a Difference in Sexual Development (DSD)?",
+                    data: renderValue(answers["intersex_or_dsd"])
+                },
+                {
+                    heading: "Do they consider themselves to be transgender or have a transgender history?",
+                    description: "This could include their name, appearance, the way they dress, taking hormones, or having gender-confrming surgery.",
+                    data: renderValue(answers["transgender"])
+                }
+            ]
+        }) }}
+    </div>
+    <div class='upw-avoid-break'>
+        {{ renderTable({
+            caption: "Contact details",
+            rows: [
+                {
+                    heading: "Address",
+                    data: readOnlyAddress({
+                        buildingName: answers["contact_address_building_name"],
+                        houseNumber: answers["contact_address_house_number"],
+                        streetName: answers["contact_address_street_name"],
+                        district: answers["contact_address_district"],
+                        townOrCity: answers["contact_address_town_or_city"],
+                        county: answers["contact_address_county"],
+                        postcode: answers["contact_address_postcode"]
+                    })
+                },
+                { heading: "Mobile", data: renderValue(answers["contact_mobile_phone_number"]) },
+                { heading: "Phone number", data: renderValue(answers["contact_phone_number"]) },
+                { heading: "Email", data: renderValue(answers["contact_email_addresses"]) }
+            ]
+        }) }}
+    </div>
+    <div class='upw-avoid-break'>
+        <h2 class="govuk-heading-m">Emergency contact details</h2>
 
-    {% set showSexChangeDetails = rawAnswers["sex_change"] == "YES" %}
-
-    {{ renderTable({
-        caption: "Gender information",
-        rows: [
-            { heading: "Gender identity", data: renderValue(answers["gender_identity"]) },
-            {
-                heading: "Has the individual gone through any part of a process to change the sex they were assigned at birth to the gender they now identify with, or do they intend to?",
-                data: renderValue(answers["sex_change"])
-            },
-            { 
-                heading: "Give details and discuss placement options with the individual, based on their gender identity.",
-                description: "Record their preference and the details of the conversation.",
-                condition: showSexChangeDetails,
-                data: renderValue(answers["sex_change_details"])
-            },
-            {
-                heading: "Is the individual intersex or do they have a Difference in Sexual Development (DSD)?",
-                data: renderValue(answers["intersex_or_dsd"])
-            },
-            {
-                heading: "Do they consider themselves to be transgender or have a transgender history?",
-                description: "This could include their name, appearance, the way they dress, taking hormones, or having gender-confrming surgery.",
-                data: renderValue(answers["transgender"])
-            }
-        ]
-    }) }}
-
-    {{ renderTable({
-        caption: "Contact details",
-        rows: [
-            {
-                heading: "Address",
-                data: readOnlyAddress({
-                    buildingName: answers["contact_address_building_name"],
-                    houseNumber: answers["contact_address_house_number"],
-                    streetName: answers["contact_address_street_name"],
-                    district: answers["contact_address_district"],
-                    townOrCity: answers["contact_address_town_or_city"],
-                    county: answers["contact_address_county"],
-                    postcode: answers["contact_address_postcode"]
-                })
-            },
-            { heading: "Mobile", data: renderValue(answers["contact_mobile_phone_number"]) },
-            { heading: "Phone number", data: renderValue(answers["contact_phone_number"]) },
-            { heading: "Email", data: renderValue(answers["contact_email_addresses"]) }
-        ]
-    }) }}
-
-    {{ renderTable({
-        caption: "Emergency contact details",
-        rows: [
-            {
-                heading: "Emergency contacts", 
-                data: renderMultiple(rawAnswers, 'emergency_contact_details')
-            }
-        ]
-    }) }}
-
-    
+        {% if rawAnswers['emergency_contact_declined'] | hasAnswer("declined") %}
+            <span class="upw-declined-details">Individual declined to give an emergency contact</span>
+        {% elif rawAnswers['emergency_contact_details'] and rawAnswers['emergency_contact_details'].length > 0 %}
+            {% for contact in rawAnswers['emergency_contact_details'] %}
+            <h3 class="govuk-heading-s">Emergency contact {{ loop.index }}</h3>
+            {{ renderTable({
+                rows: [
+                    {
+                        heading: "Name", 
+                        data: renderValue(contact["emergency_contact_first_name"])
+                    },
+                    {
+                        heading: "Surname", 
+                        data: renderValue(contact["emergency_contact_family_name"])
+                    },
+                    {
+                        heading: "Relationship to individual", 
+                        data: renderValue(contact["emergency_contact_relationship"])
+                    },
+                    {
+                        heading: "Mobile", 
+                        data: renderValue(contact["emergency_contact_mobile_phone_number"])
+                    },
+                    {
+                        heading: "Phone number", 
+                        data: renderValue(contact["emergency_contact_phone_number"])
+                    }
+                ]
+            }) }}
+            {% endfor %}
+        {% endif %}
+    </div>
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of harm in the community</h1>
 
         {{ roshWidget(widgets.roshRiskSummary) }}
     </div>
-
-    {{ renderTable({
-        rows: [
-            { heading: "Delius risk flags (registers)", data: renderRiskFlags(widgets.flags) },
-            {
-                heading: "History of sexual offending?", 
-                data: renderValue(
-                    answers["history_sexual_offending"],
-                    answers["history_sexual_offending_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Individual poses a risk to children?", 
-                data: renderValue(
-                    answers["poses_risk_to_children"],
-                    answers["poses_risk_to_children_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Violent offences?", 
-                data: renderValue(
-                    answers["violent_offences"],
-                    answers["violent_offences_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "History of acquisitive offending?", 
-                data: renderValue(
-                    answers["acquisitive_offending"],
-                    answers["acquisitive_offending_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Has the individual been involved in serious group offending (SGO)?", 
-                data: renderValue(
-                    answers["sgo_identifier"],
-                    answers["sgo_identifier_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Control issues or disruptive behaviour?", 
-                data: renderValue(
-                    answers["control_issues"],
-                    answers["control_issues_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "History of hate-based attitudes or behaviours?",
-                description: "For example, homophobic or racially motivated",
-                data: renderValue(
-                    answers["history_of_hate_based_behaviour"],
-                    answers["history_of_hate_based_behaviour_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Is the individual vulnerable because they are a high-profile person?",
-                description: "For example, they are prominent on social media or are well-known in a particular area.",
-                data: renderValue(
-                    answers["high_profile_person"],
-                    answers["high_profile_person_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Additional risk assessment information?",
-                data: renderValue(
-                    answers["additional_rosh_info"],
-                    answers["additional_rosh_info_details"],
-                    "Yes"
-                ) 
-            }
-        ]
-    }) }}
+    <div class='upw-avoid-break'>
+        {{ renderTable({
+            rows: [
+                { heading: "Delius risk flags (registers)", data: renderRiskFlags(widgets.flags) },
+                {
+                    heading: "History of sexual offending?", 
+                    data: renderValue(
+                        answers["history_sexual_offending"],
+                        answers["history_sexual_offending_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Individual poses a risk to children?", 
+                    data: renderValue(
+                        answers["poses_risk_to_children"],
+                        answers["poses_risk_to_children_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Violent offences?", 
+                    data: renderValue(
+                        answers["violent_offences"],
+                        answers["violent_offences_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "History of acquisitive offending?", 
+                    data: renderValue(
+                        answers["acquisitive_offending"],
+                        answers["acquisitive_offending_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Has the individual been involved in serious group offending (SGO)?", 
+                    data: renderValue(
+                        answers["sgo_identifier"],
+                        answers["sgo_identifier_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Control issues or disruptive behaviour?", 
+                    data: renderValue(
+                        answers["control_issues"],
+                        answers["control_issues_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "History of hate-based attitudes or behaviours?",
+                    description: "For example, homophobic or racially motivated",
+                    data: renderValue(
+                        answers["history_of_hate_based_behaviour"],
+                        answers["history_of_hate_based_behaviour_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Is the individual vulnerable because they are a high-profile person?",
+                    description: "For example, they are prominent on social media or are well-known in a particular area.",
+                    data: renderValue(
+                        answers["high_profile_person"],
+                        answers["high_profile_person_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Additional risk assessment information?",
+                    data: renderValue(
+                        answers["additional_rosh_info"],
+                        answers["additional_rosh_info_details"],
+                        "Yes"
+                    ) 
+                }
+            ]
+        }) }}
+    </div>
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h1>
 
@@ -347,8 +327,9 @@
             {% set mappaDataRows = mappaDataRows | shiftArray %}
         {% endif %}
     </div>
-
-    {{ renderTable({ rows: mappaDataRows }) }}
+    <div class='upw-avoid-break'>
+        {{ renderTable({ rows: mappaDataRows }) }}
+    </div>
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h1>
 
@@ -381,7 +362,6 @@
             ]
         }) }}
     </div>
-
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h1>
 
@@ -441,111 +421,148 @@
             ]
         }) }}
     </div>
+    <div class='upw-avoid-break'>
+        {%- macro renderPregnancyQuestion(value, pregnantDescription, recentlyGivenBirthDescription) -%}
+            <p>{{ value | default("No data", true) }}</p>
+            {% if pregnantDescription and value == "Pregnant" %}
+            <p>{{ pregnantDescription }}</p>
+            {% elif recentlyGivenBirthDescription and value == "Recently given birth" %}
+            <p>{{ recentlyGivenBirthDescription }}</p>
+            {% endif %}
+        {%- endmacro -%}
+        
+        {{ renderTable({
+            caption: "Are there any other health issues that may affect ability to work?",
+            rows: [
+                {
+                    heading: "Allergies?", 
+                    data: renderValue(
+                        answers["allergies"],
+                        answers["allergies_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Sudden loss of consciousness?", 
+                    data: renderValue(
+                        answers["loss_consciousness"],
+                        answers["loss_consciousness_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Epilepsy?", 
+                    data: renderValue(
+                        answers["epilepsy"],
+                        answers["epilepsy_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Any other health issues?", 
+                    data: renderValue(
+                        answers["other_health_issues"],
+                        answers["other_health_issues_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Pregnant or recently given birth?", 
+                    data: renderPregnancyQuestion(
+                        answers["pregnancy"],
+                        answers["pregnancy_pregnant_details"],
+                        answers["pregnancy_recently_given_birth_details"]
+                    ) 
+                }
+            ]
+        }) }}
+    </div>
+    <div class='upw-avoid-break'>
+        <h2 class="govuk-heading-m">GP Details</h2>
 
-    {%- macro renderPregnancyQuestion(value, pregnantDescription, recentlyGivenBirthDescription) -%}
-        <p>{{ value | default("No data", true) }}</p>
-        {% if pregnantDescription and value == "Pregnant" %}
-        <p>{{ pregnantDescription }}</p>
-        {% elif recentlyGivenBirthDescription and value == "Recently given birth" %}
-        <p>{{ recentlyGivenBirthDescription }}</p>
+        {% if rawAnswers['gp_details_declined'] | hasAnswer("declined") %}
+            <span class="upw-declined-details">Individual declined to give GP details</span>
+        {% elif rawAnswers['gp_details'] and rawAnswers['gp_details'].length > 0 %}
+            {% for gp in rawAnswers['gp_details'] %}
+            <h3 class="govuk-heading-s">GP details</h3>
+            {{ renderTable({
+                rows: [
+                    {
+                        heading: "Name", 
+                        data: renderValue(gp["gp_name"])
+                    },
+                    {
+                        heading: "GP practice name", 
+                        data: renderValue(gp["gp_practice_name"])
+                    },
+                    {
+                        heading: "Address", 
+                        data: readOnlyAddress({ 
+                            buildingName: gp["gp_address_building_name"],
+                            houseNumber: gp["gp_address_house_number"],
+                            streetName: gp["gp_address_street_name"],
+                            district: gp["gp_address_district"],
+                            townOrCity: gp["gp_address_town_or_city"],
+                            county: gp["gp_address_county"],
+                            postcode: gp["gp_address_postcode"]
+                        })
+                    },
+                    {
+                        heading: "Phone number", 
+                        data: renderValue(gp["gp_phone_number"])
+                    }
+                ]
+            }) }}
+            {% endfor %}
         {% endif %}
-    {%- endmacro -%}
-    
-    {{ renderTable({
-        caption: "Are there any other health issues that may affect ability to work?",
-        rows: [
-            {
-                heading: "Allergies?", 
-                data: renderValue(
-                    answers["allergies"],
-                    answers["allergies_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Sudden loss of consciousness?", 
-                data: renderValue(
-                    answers["loss_consciousness"],
-                    answers["loss_consciousness_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Epilepsy?", 
-                data: renderValue(
-                    answers["epilepsy"],
-                    answers["epilepsy_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Any other health issues?", 
-                data: renderValue(
-                    answers["other_health_issues"],
-                    answers["other_health_issues_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Pregnant or recently given birth?", 
-                data: renderPregnancyQuestion(
-                    answers["pregnancy"],
-                    answers["pregnancy_pregnant_details"],
-                    answers["pregnancy_recently_given_birth_details"]
-                ) 
-            },
-            {
-                heading: "Details of GP (if needed to verify information)", 
-                data: renderMultiple(rawAnswers, 'gp_details')
-            }
-        ]
-    }) }}
+    </div>
+    <div class='upw-avoid-break'>
+        {%- set hasTravelIssues = answers["travel_information"] == "Yes" -%}
 
-    {%- set hasTravelIssues = answers["travel_information"] == "Yes" -%}
-
-    {{ renderTable({
-        caption: "Travel information",
-        rows: [
-            {
-                heading: "Does the individual have any travel issues that will affect their placement?", 
-                data: renderValue(
-                    answers["travel_information"],
-                    answers["travel_information_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Does the individual have a valid driving licence?", 
-                condition: hasTravelIssues,
-                data: renderValue(answers["driving_licence"])
-            },
-            {
-                heading: "Do they have access to a vehicle?", 
-                condition: hasTravelIssues,
-                data: renderValue(answers["vehicle"])
-            },
-            {
-                heading: "Is public transport available and accessible to the individual?", 
-                condition: hasTravelIssues,
-                data: renderValue(answers["public_transport"])
-            }
-        ]
-    }) }}
-
-    {{ renderTable({
-        caption: "Carer commitments",
-        rows: [
-            {
-                heading: "Are there carer commitments?",
-                data: renderValue(
-                    answers["caring_commitments"],
-                    answers["caring_commitments_details"],
-                    "Yes"
-                )
-            }
-        ]
-    }) }}
-
+        {{ renderTable({
+            caption: "Travel information",
+            rows: [
+                {
+                    heading: "Does the individual have any travel issues that will affect their placement?", 
+                    data: renderValue(
+                        answers["travel_information"],
+                        answers["travel_information_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Does the individual have a valid driving licence?", 
+                    condition: hasTravelIssues,
+                    data: renderValue(answers["driving_licence"])
+                },
+                {
+                    heading: "Do they have access to a vehicle?", 
+                    condition: hasTravelIssues,
+                    data: renderValue(answers["vehicle"])
+                },
+                {
+                    heading: "Is public transport available and accessible to the individual?", 
+                    condition: hasTravelIssues,
+                    data: renderValue(answers["public_transport"])
+                }
+            ]
+        }) }}
+    </div>
+    <div class='upw-avoid-break'>
+        {{ renderTable({
+            caption: "Carer commitments",
+            rows: [
+                {
+                    heading: "Are there carer commitments?",
+                    data: renderValue(
+                        answers["caring_commitments"],
+                        answers["caring_commitments_details"],
+                        "Yes"
+                    )
+                }
+            ]
+        }) }}
+    </div>
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h1>
 
@@ -600,33 +617,33 @@
             ]
         }) }}
     </div>
+    <div class='upw-avoid-break'>
+        {%- set showIndividualCommitment = answers["education_training_need"] == "Yes" -%}
 
-    {%- set showIndividualCommitment = answers["education_training_need"] == "Yes" -%}
-
-    {{ renderTable ({
-        caption: "Training & Employment Opportunities",
-        captionDescription: "Supervised individuals who are unemployed, at risk of unemployment or whose offending reflects employment related needs are eligible to use up to 30% of their Community Payback hours on education, training and pre-employment activity.",
-        rows: [
-            {
-                heading: "Does the individual have an education, training or employment-related need?",
-                data: renderValue(
-                    answers["education_training_need"],
-                    answers["education_training_need_details"],
-                    "Yes"
-                ) 
-            },
-            {
-                heading: "Does the individual agree to use the maximum entitlement of their hours on this activity?",
-                condition: showIndividualCommitment,
-                data: renderValue(
-                    answers["individual_commitment"],
-                    answers["individual_commitment_details"],
-                    "Yes"
-                ) 
-            }
-        ] 
-    }) }}
-
+        {{ renderTable ({
+            caption: "Training & Employment Opportunities",
+            captionDescription: "Supervised individuals who are unemployed, at risk of unemployment or whose offending reflects employment related needs are eligible to use up to 30% of their Community Payback hours on education, training and pre-employment activity.",
+            rows: [
+                {
+                    heading: "Does the individual have an education, training or employment-related need?",
+                    data: renderValue(
+                        answers["education_training_need"],
+                        answers["education_training_need_details"],
+                        "Yes"
+                    ) 
+                },
+                {
+                    heading: "Does the individual agree to use the maximum entitlement of their hours on this activity?",
+                    condition: showIndividualCommitment,
+                    data: renderValue(
+                        answers["individual_commitment"],
+                        answers["individual_commitment_details"],
+                        "Yes"
+                    ) 
+                }
+            ] 
+        }) }}
+    </div>
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement details</h1>
 
@@ -648,7 +665,7 @@
                         data: renderValue(
                             answers["eligibility_intensive_working"],
                             answers["eligibility_intensive_working_details"],
-                            "Yes"
+                            "No"
                         )
                     },
                     {
@@ -670,7 +687,6 @@
             }) }}
         {%- endif -%}
     </div>
-
     <div class='upw-avoid-break'>
         <h2 class="govuk-heading-m">Availability for Community Payback</h2>
 
@@ -726,33 +742,35 @@
             </tbody>
         </table>
     </div>
-    {{ renderTable({
-        rows: [
-            {
-                heading: "Additional availability information",
-                data: renderValue(answers["individual_availability_details"])
-            }
-        ]
-    }) }}
-
-    {{ renderTable({
-        caption: "Equipment",
-        rows: [
-            {
-                heading: "Male or female clothing required?",
-                data: renderValue(answers["male_female_clothing"])
-            },
-            {
-                heading: "Waterproof clothing size",
-                data: renderValue(answers["waterproof_clothing"])
-            },
-            {
-                heading: "Footwear size (UK)",
-                data: renderValue(answers["footwear_size"])
-            }
-        ]
-    }) }}
-
+    <div class='upw-avoid-break'>
+        {{ renderTable({
+            rows: [
+                {
+                    heading: "Additional availability information",
+                    data: renderValue(answers["individual_availability_details"])
+                }
+            ]
+        }) }}
+    </div>
+    <div class='upw-avoid-break'>
+        {{ renderTable({
+            caption: "Equipment",
+            rows: [
+                {
+                    heading: "Male or female clothing required?",
+                    data: renderValue(answers["male_female_clothing"])
+                },
+                {
+                    heading: "Waterproof clothing size",
+                    data: renderValue(answers["waterproof_clothing"])
+                },
+                {
+                    heading: "Footwear size (UK)",
+                    data: renderValue(answers["footwear_size"])
+                }
+            ]
+        }) }}
+    </div>
     <div class='upw-avoid-break'>
         <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Declaration</h1>
         {% if answers["declaration_confirmation"] === 'Sign declaration' %}
@@ -773,7 +791,6 @@
          <hr class="upw-section-break--bold">
          <br>
     </div>
-
     <div class='upw-avoid-break'>
         <h2 class="govuk-heading-m">How long will it take for the individual to complete their hours?</h2>
         <p>Figures are approximate and based on the individual completing 7 hours of work each day.</p>
@@ -831,7 +848,6 @@
                 </tr>
             </tbody>
         </table>
-
 
         <hr class="upw-section-break--bold">
     </div>
