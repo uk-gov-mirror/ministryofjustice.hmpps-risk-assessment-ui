@@ -205,9 +205,6 @@ const fields = {
     dependent: { field: 'placement_preference', value: 'YES' },
     ...requireSelectOption,
   },
-  placement_preference_by_gender_details: {
-    ...requireEnterDetails,
-  },
   history_sexual_offending: {
     validate: [
       {
