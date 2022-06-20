@@ -122,11 +122,18 @@
                         rows: [
                             {
                                 key: {
-                                text: 'Name'
-                            },
+                                    text: 'Name'
+                                },
                                 value: {
-                                html: renderName(emergencyContact['emergency_contact_first_name'][0], emergencyContact['emergency_contact_family_name'][0])
-                            }
+                                    html: emergencyContact['emergency_contact_first_name'][0]
+                                },
+                            }, {
+                                key: {
+                                    text: 'Surname'
+                                },
+                                value: {
+                                    html: emergencyContact['emergency_contact_family_name'][0]
+                                }
                             }, {
                                 key: {
                                     text: 'Relationship to the individual'

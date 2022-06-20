@@ -4,12 +4,11 @@ class SaveAndContinue extends upwSaveAndContinue {
   async locals(req, res, next) {
     const contactToEdit = req.params[0]
     res.locals.questionGroupCode = 'gp_details'
+    res.locals.pageTitle = 'Details of GP'
     if (contactToEdit !== 'new') {
-      res.locals.pageTitle = 'Edit GP details'
       res.locals.questionGroupIndex = contactToEdit
     } else {
       res.locals.addingNewMultiple = true
-      res.locals.pageTitle = 'Add GP details'
     }
 
     await super.locals(req, res, next)

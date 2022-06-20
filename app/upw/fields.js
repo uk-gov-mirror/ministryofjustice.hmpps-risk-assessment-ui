@@ -9,22 +9,7 @@ const customValidationsEditEmergencyContact = (fields, emergencyContactPhoneNumb
   fields.emergency_contact_mobile_phone_number?.validate.push({
     fn: onePresent,
     arguments: [emergencyContactPhoneNumber],
-    message: 'A phone number is required',
-  })
-
-  return fields
-}
-
-const customValidationsEditGpDetails = (fields, emergencyContactPhoneNumber, emergencyContactMobileNumber) => {
-  fields.emergency_contact_phone_number?.validate.push({
-    fn: onePresent,
-    arguments: [emergencyContactMobileNumber],
-    message: 'A phone number is required',
-  })
-  fields.emergency_contact_mobile_phone_number?.validate.push({
-    fn: onePresent,
-    arguments: [emergencyContactPhoneNumber],
-    message: 'A phone number is required',
+    message: 'A mobile is required',
   })
 
   return fields
@@ -550,7 +535,7 @@ const fields = {
     answerGroup: 'gp_details',
   },
   gp_practice_name: {
-    validate: [{ type: 'required', message: 'GP Practice Name is required' }],
+    validate: [{ type: 'required', message: 'GP practice name is required' }],
     type: 'multiple',
     answerGroup: 'gp_details',
   },
@@ -766,6 +751,5 @@ const fields = {
 module.exports = {
   fields,
   customValidationsEditEmergencyContact,
-  customValidationsEditGpDetails,
   customValidationsEditContactDetails,
 }
