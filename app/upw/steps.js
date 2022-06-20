@@ -8,7 +8,6 @@ const gpDetailsSaveAndContinue = require('./controllers/gpDetailsSaveAndContinue
 const editGpDetailsSaveAndContinue = require('./controllers/editGpDetailsSaveAndContinue')
 const removeGpDetailsSaveAndContinue = require('./controllers/removeGpDetailsSaveAndContinue')
 const ConvertPdf = require('./controllers/convertPdf')
-const Declaration = require('./controllers/declaration')
 const Confirmation = require('./controllers/confirmation')
 const CloseAssessment = require('./controllers/closeAssessment')
 const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
@@ -317,27 +316,20 @@ module.exports = {
     next: 'task-list#equipment',
     fields: ['male_female_clothing', 'waterproof_clothing', 'footwear_size', 'equipment_complete'],
   },
-  '/pdf-preview-and-declaration': {
-    pageTitle: 'PDF preview and declaration',
-    id: 'pdf-preview-declaration',
-    controller: Declaration,
-    template: `${__dirname}/templates/declaration`,
-    fields: ['declaration_confirmation'],
-    next: 'task-list#pdf-preview-declaration',
-  },
   '/pdf-preview': {
-    pageTitle: 'PDF preview',
+    pageTitle: 'Completed assessment',
+    id: 'pdf-preview',
     controller: PreviewPdf,
     template: `${__dirname}/templates/pdf-preview-and-declaration/pdf-preview.njk`,
     fields: [],
-    next: 'pdf-preview-and-declaration',
+    next: 'task-list#pdf-preview',
   },
   '/pdf-download': {
     pageTitle: 'PDF preview',
     controller: ConvertPdf,
     noPost: true,
     template: `${__dirname}/templates/default.njk`,
-    next: 'pdf-preview-and-declaration',
+    next: 'confirmation',
   },
   '/confirmation': {
     pageTitle: 'Confirmation',

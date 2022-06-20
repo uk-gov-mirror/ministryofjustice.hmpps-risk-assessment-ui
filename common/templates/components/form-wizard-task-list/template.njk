@@ -9,7 +9,7 @@
       {%- for item in section.items %}
       <li class="task-list__item">
         <span class="task-list__task-name">
-          {% if item.status != 'CANNOT_START' %}
+          {% if item.status != 'CANNOT_START' and item.status != 'CANNOT_VIEW_PDF' %}
           <a id="{{ item.id }}" class="govuk-link" href="{{ item.href }}">
             {{- item.html | safe if item.html else item.text -}}
           </a>
@@ -44,6 +44,18 @@
         {%- if item.status == 'CANNOT_START' %}
           {{ govukTag({
             text: "cannot start yet",
+            classes: 'govuk-tag govuk-tag--red task-list__tag'
+          }) }}
+        {% endif -%}
+        {%- if item.status == 'VIEW_PDF' %}
+          {{ govukTag({
+            text: "View PDF",
+            classes: 'govuk-tag govuk-tag--grey task-list__tag'
+          }) }}
+        {% endif -%}
+        {%- if item.status == 'CANNOT_VIEW_PDF' %}
+          {{ govukTag({
+            text: "Cannot view PDF yet",
             classes: 'govuk-tag govuk-tag--red task-list__tag'
           }) }}
         {% endif -%}

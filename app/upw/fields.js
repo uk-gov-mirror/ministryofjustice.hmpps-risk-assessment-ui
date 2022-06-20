@@ -80,12 +80,6 @@ const requireEnterDetails = {
 const readOnly = { readOnly: true }
 
 const fields = {
-  declaration: {
-    questionText: '[PLACEHOLDER]',
-    questionCode: 'declaration',
-    answerType: 'checkbox',
-    answerDtos: [{ text: 'Complete', value: 'COMPLETE' }],
-  },
   first_name_aliases: {
     answerType: 'textarea',
   },
@@ -741,7 +735,6 @@ const fields = {
   eligibility_intensive_working_complete: requireSelectOption,
   individual_availability_complete: requireSelectOption,
   equipment_complete: requireSelectOption,
-  declaration_confirmation: {},
 }
 
 // const customValidations = (fields, answers) => {

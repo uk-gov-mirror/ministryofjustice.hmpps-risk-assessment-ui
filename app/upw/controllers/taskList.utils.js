@@ -7,26 +7,15 @@ const checkAllTasksAreComplete = sections => {
   })
 }
 
-const checkDeclarationIsSigned = (answers, fieldName, valueWhenSigned) => {
-  if (!answers || !fieldName || !valueWhenSigned) {
-    return false
-  }
-
-  return answers[fieldName] && answers[fieldName][0] === valueWhenSigned
+const getPdfPreviewStatus = tasks => {
+  return checkAllTasksAreComplete(tasks) ? 'VIEW_PDF' : 'CANNOT_VIEW_PDF'
 }
 
-const getDeclarationStatus = (answers, tasks, fieldName) => {
-  if (!checkAllTasksAreComplete(tasks)) {
-    return 'CANNOT_START'
-  }
-  return checkDeclarationIsSigned(answers, fieldName, 'SIGNED') ? 'COMPLETE' : 'INCOMPLETE'
-}
-
-const getDeclarationTask = (answers, baseUrl, steps, taskName, otherSections, declarationFieldName) => {
+const getPdfPreviewTask = (baseUrl, steps, taskName, otherSections) => {
   return {
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}`,
-    status: getDeclarationStatus(answers, otherSections, declarationFieldName),
+    status: getPdfPreviewStatus(otherSections),
     id: steps[`/${taskName}`]?.id,
   }
 }
@@ -122,22 +111,20 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
     if (taskIndex && itemIndex) delete tasks[taskIndex].items[itemIndex]
   }
 
-  const declaration = {
+  const pdfPreview = {
     heading: {
-      text: 'Declaration',
+      text: 'Preview',
     },
-    items: [
-      getDeclarationTask(answers, baseUrl, steps, 'pdf-preview-and-declaration', tasks, 'declaration_confirmation'),
-    ],
+    items: [getPdfPreviewTask(baseUrl, steps, 'pdf-preview', tasks)],
   }
 
-  const allSections = [...tasks, declaration]
+  const allSections = [...tasks, pdfPreview]
 
-  return { sections: allSections, allowedToSubmit: checkAllTasksAreComplete(allSections) }
+  return { sections: allSections, allowedToSubmit: checkAllTasksAreComplete(tasks) }
 }
 
 module.exports = {
-  getDeclarationTask,
+  getPdfPreviewTask,
   getTask,
   getTaskList,
 }

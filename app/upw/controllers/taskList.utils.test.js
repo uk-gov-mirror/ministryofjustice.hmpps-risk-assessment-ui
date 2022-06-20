@@ -1,12 +1,80 @@
-const { getDeclarationTask, getTask, getTaskList } = require('./taskList.utils')
+const { getPdfPreviewTask, getTask, getTaskList } = require('./taskList.utils')
 
 describe('taskList.util', () => {
-  describe('getDeclarationTask', () => {
-    it('returns a declaration task with the name from the step definition', () => {
-      const answers = {
-        declaration: '',
+  describe('getPdfPreviewTask', () => {
+    it('returns a pdf-preview task with the name from the step definition', () => {
+      const sections = [
+        {
+          items: [{ status: 'COMPLETE' }, { status: 'COMPLETE' }],
+        },
+      ]
+
+      const steps = {
+        '/first-task': {
+          pageTitle: 'First task',
+        },
+        '/second-task': {
+          pageTitle: 'Second task',
+        },
+        '/pdf-preview': {
+          pageTitle: 'Preview PDF',
+        },
       }
 
+      const task = getPdfPreviewTask('/UPW', steps, 'pdf-preview', sections)
+
+      expect(task.text).toStrictEqual('Preview PDF')
+    })
+
+    it('returns a pdf-preview task with the URL to the step', () => {
+      const sections = [
+        {
+          items: [{ status: 'COMPLETE' }, { status: 'COMPLETE' }],
+        },
+      ]
+
+      const steps = {
+        '/first-task': {
+          pageTitle: 'First task',
+        },
+        '/second-task': {
+          pageTitle: 'Second task',
+        },
+        '/pdf-preview': {
+          pageTitle: 'Preview PDF',
+        },
+      }
+
+      const task = getPdfPreviewTask('/UPW', steps, 'pdf-preview', sections)
+
+      expect(task.href).toStrictEqual('/UPW/pdf-preview')
+    })
+
+    it('returns "VIEW_PDF" when all sections are complete', () => {
+      const sections = [
+        {
+          items: [{ status: 'COMPLETE' }, { status: 'COMPLETE' }],
+        },
+      ]
+
+      const steps = {
+        '/first-task': {
+          pageTitle: 'First task',
+        },
+        '/second-task': {
+          pageTitle: 'Second task',
+        },
+        '/pdf-preview': {
+          pageTitle: 'Preview PDF',
+        },
+      }
+
+      const task = getPdfPreviewTask('/UPW', steps, 'pdf-preview', sections)
+
+      expect(task.status).toStrictEqual('VIEW_PDF')
+    })
+
+    it('returns "CANNOT_VIEW_PDF" when there is an incomplete section', () => {
       const sections = [
         {
           items: [{ status: 'INCOMPLETE' }, { status: 'COMPLETE' }],
@@ -17,99 +85,17 @@ describe('taskList.util', () => {
         '/first-task': {
           pageTitle: 'First task',
         },
-      }
-
-      const task = getDeclarationTask(answers, '/UPW', steps, 'first-task', sections, 'declaration')
-
-      expect(task.text).toStrictEqual('First task')
-    })
-
-    it('returns a declaration task with the URL to the step', () => {
-      const answers = {
-        declaration: '',
-      }
-
-      const sections = [
-        {
-          items: [{ status: 'INCOMPLETE' }, { status: 'COMPLETE' }],
+        '/second-task': {
+          pageTitle: 'Second task',
         },
-      ]
-
-      const steps = {
-        '/first-task': {
-          pageTitle: 'First task',
+        '/pdf-preview': {
+          pageTitle: 'Preview PDF',
         },
       }
 
-      const task = getDeclarationTask(answers, '/UPW', steps, 'first-task', sections, 'declaration')
+      const task = getPdfPreviewTask('/UPW', steps, 'pdf-preview', sections)
 
-      expect(task.href).toStrictEqual('/UPW/first-task')
-    })
-
-    it('returns "CANNOT_START" when there is an incomplete section', () => {
-      const answers = {
-        declaration: '',
-      }
-
-      const sections = [
-        {
-          items: [{ status: 'INCOMPLETE' }, { status: 'COMPLETE' }],
-        },
-      ]
-
-      const steps = {
-        '/first-task': {
-          pageTitle: 'First task',
-        },
-      }
-
-      const task = getDeclarationTask(answers, '/UPW', steps, 'first-task', sections, 'declaration')
-
-      expect(task.status).toStrictEqual('CANNOT_START')
-    })
-
-    it('returns "INCOMPLETE" when the declaration is not signed', () => {
-      const answers = {
-        declaration: '',
-      }
-
-      const sections = [
-        {
-          items: [{ status: 'COMPLETE' }],
-        },
-      ]
-
-      const steps = {
-        '/first-task': {
-          pageTitle: 'First task',
-        },
-      }
-
-      const task = getDeclarationTask(answers, '/UPW', steps, 'first-task', sections, 'declaration')
-
-      expect(task.status).toStrictEqual('INCOMPLETE')
-    })
-
-    it('returns "COMPLETE" when the declaration is signed', () => {
-      const answers = {
-        declaration: ['SIGNED'],
-      }
-
-      const sections = [
-        {
-          items: [{ status: 'COMPLETE' }],
-        },
-      ]
-
-      const steps = {
-        '/first-task': {
-          pageTitle: 'First task',
-        },
-      }
-
-      const task = getDeclarationTask(answers, '/UPW', steps, 'first-task', sections, 'declaration')
-
-      expect(task.status).toStrictEqual('COMPLETE')
+      expect(task.status).toStrictEqual('CANNOT_VIEW_PDF')
     })
   })
 

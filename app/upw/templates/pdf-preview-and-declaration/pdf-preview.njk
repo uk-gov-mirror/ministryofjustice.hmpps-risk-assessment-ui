@@ -1,7 +1,7 @@
 {% extends "common/templates/layout.njk" %}
 {% from "app/upw/templates/pdf-preview-and-declaration/components/pdf-template/macro.njk" import renderPdfTemplate %}
 
-{% set backLink = 'pdf-preview-and-declaration' %}
+{% set backLink = 'task-list#pdf-preview' %}
 
 {% block pageTitle %}
 {{ pageTitle }}
@@ -12,7 +12,6 @@
 {% endblock %}
 
 {% block content %}
-{# include errorSummary partial #}
 {{ super() }}
 
 {{ renderPdfTemplate(assessment, answers, rawAnswers, widgetData, userFullName, {

@@ -9,28 +9,11 @@ const {
   removeOldFields,
 } = require('./saveAndContinue.utils')
 
-const removeAnswers = fieldsToRemove => answers =>
-  Object.entries(answers).reduce((modifiedAnswers, [fieldName, answer]) => {
-    if (fieldsToRemove.includes(fieldName)) {
-      return {
-        ...modifiedAnswers,
-        [fieldName]: '',
-      }
-    }
-
-    return {
-      ...modifiedAnswers,
-      [fieldName]: answer,
-    }
-  }, {})
-
 const invalidateSectionCompleteAnswers = (answers, fields) => {
   return Object.entries(answers)
     .map(([key, value]) => (fields.includes(key) ? [key, ''] : [key, value]))
     .reduce((a, [key, value]) => ({ ...a, [key]: value }), {})
 }
-
-const invalidateDeclarations = removeAnswers(['declaration'])
 
 class SaveAndContinue extends BaseSaveAndContinue {
   constructor(...args) {
@@ -72,8 +55,7 @@ class SaveAndContinue extends BaseSaveAndContinue {
 
   saveValues(req, res, next) {
     const answers = req.sessionModel.get('formAnswers') || {}
-    const answersWithInvalidatedDeclarations = invalidateDeclarations(answers)
-    req.sessionModel.set('answers', answersWithInvalidatedDeclarations)
+    req.sessionModel.set('answers', answers)
 
     super.saveValues(req, res, next)
   }

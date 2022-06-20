@@ -2652,25 +2652,6 @@
           "text": "No, I’ll come back later"
         }
       ]
-    },
-    {
-      "type": "question",
-      "questionId": "7beed4f4-0f3b-4b16-85f0-90377a350f1e",
-      "questionCode": "declaration_confirmation",
-      "answerType": "checkbox",
-      "questionText": "I confirm the individual has received details of their Community Payback Induction Session",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataCategory": "",
-      "referenceDataTargets": [],
-      "answerDtos": [
-        {
-          "answerUuid": "4f121212-5a7f-4ddf-9286-0843b9cdd913",
-          "answerSchemaCode": "signed",
-          "value": "SIGNED",
-          "text": "Sign declaration"
-        }
-      ]
     }
   ],
   "RSR": [

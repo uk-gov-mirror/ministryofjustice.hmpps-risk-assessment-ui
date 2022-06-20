@@ -34,11 +34,10 @@
         <div class="govuk-button-group">
             <form method="post" action="{{ action }}">
                 <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
-                {% if taskList.allowedToSubmit %}
                 {{ govukButton({
-                    text: "Submit"
+                    text: "Submit",
+                    disabled: not taskList.allowedToSubmit
                 }) }}
-                {% endif %}
                 <a class="govuk-button govuk-button--secondary" href="{{ saveAssessmentUrl }}">Save and close</a>
             </form>
         </div>

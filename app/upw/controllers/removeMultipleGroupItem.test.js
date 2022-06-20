@@ -78,7 +78,6 @@ describe('removeMultipleGroupItem (UPW)', () => {
   it('it saves the updated multiple group', async () => {
     mockSessionModel({
       formAnswers: {
-        declaration: 'COMPLETED',
         foo: 'bar',
       },
     })
