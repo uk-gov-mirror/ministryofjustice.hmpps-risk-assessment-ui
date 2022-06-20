@@ -145,12 +145,12 @@ const fields = {
   emergency_contact_first_name: {
     type: 'multiple',
     answerGroup: 'emergency_contact_details',
-    validate: [{ type: 'required', message: 'First name is required' }],
+    validate: [{ type: 'required', message: 'Name is required' }],
   },
   emergency_contact_family_name: {
     type: 'multiple',
     answerGroup: 'emergency_contact_details',
-    validate: [{ type: 'required', message: 'Family name is required' }],
+    validate: [{ type: 'required', message: 'Surname is required' }],
   },
   emergency_contact_relationship: {
     type: 'multiple',
