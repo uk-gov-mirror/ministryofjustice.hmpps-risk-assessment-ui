@@ -11,7 +11,7 @@
 {%- endmacro -%}
 
 {%- macro renderTable(table) -%}
-        <table class="upw-pdf-table">
+    <table class="upw-pdf-table">
         {%- if table.caption -%}
         <caption>
             <h2 class="govuk-heading-m">{{ table.caption }}</h2>
@@ -373,53 +373,101 @@
             {%- endif -%}
         {%- endmacro -%}
 
-        {{ renderTable({
-            caption: "Disabilities and mental health",
-            captionDescription: "Does the individual have any of the following?",
-            rows: [
-                {
-                    heading: "Physical disability",
-                    data: renderValue(
-                        ifAnswerIsPresent(answers["physical_disability"], "Yes", "No"),
-                        answers["physical_disability_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Learning disability",
-                    data: renderValue(
-                        ifAnswerIsPresent(answers["learning_disability"], "Yes", "No"),
-                        answers["learning_disability_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Learning difficulty",
-                    data: renderValue(
-                        ifAnswerIsPresent(answers["learning_difficulty"], "Yes", "No"),
-                        answers["learning_difficulty_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Mental health condition",
-                    data: renderValue(
-                        ifAnswerIsPresent(answers["mental_health_condition"], "Yes", "No"),
-                        answers["mental_health_condition_details"],
-                        "Yes"
-                    )
-                },
-                {
-                    heading: "Do any of the above affect the individual’s ability to engage with Community Payback?",
-                    description: "Suggest adjustments, if known",
-                    data: renderValue(
-                        answers["disabilities"],
-                        answers["disabilities_details"],
-                        "Yes"
-                    )
-                }
-            ]
-        }) }}
+        {%- set disabilitiesCaptionHeading = "Disabilities and mental health" -%}
+        {% if rawAnswers["active_disabilities"] %}
+            {%- set disabilitiesCaptionSubheading = "Disabilities, conditions and adjustments" -%}
+            {% if rawAnswers["active_disabilities"].length %}
+
+            <table class="upw-pdf-table">
+                <caption>
+                    <h2 class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h2>
+                    <p>{{ disabilitiesCaptionSubheading }}</p>
+                </caption>
+                <tbody>
+                    {% for disability in rawAnswers["active_disabilities"] %}
+                    <tr>
+                        <th>{{ disability["code"] | toDisabilityDescription | default(disability["description"]) }}</th>
+                        <td>
+                            <p class="govuk-body">{{ disability["disability_notes"] | default("No further details.") }}</p>
+                            <p class="govuk-body">
+                                <strong>Adjustments</strong><br>
+                                {% if disability["disability_adjustments"] %}
+                                    {% for adjustment in disability["disability_adjustments"] %}
+                                    {{ adjustment }}<br>
+                                    {% endfor %}
+                                {% else %}
+                                None
+                                {% endif %}
+                            </p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% else %}
+
+            <h2 class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h2>
+            <p>{{ disabilitiesCaptionSubheading }}</p>
+
+            <hr class="govuk-section-break govuk-section-break--visible">
+            <p class="govuk-body-l govuk-!-margin-bottom-5 govuk-!-margin-top-5">No details recorded in Delius</p>
+            <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
+
+            {% endif %}
+
+        {# Otherwise display the old format #}
+        {% else %}
+
+            {{ renderTable({
+                caption: disabilitiesCaptionHeading,
+                captionDescription: "Does the individual have any of the following?",
+                rows: [
+                    {
+                        heading: "Physical disability",
+                        data: renderValue(
+                            ifAnswerIsPresent(answers["physical_disability"], "Yes", "No"),
+                            answers["physical_disability_details"],
+                            "Yes"
+                        )
+                    },
+                    {
+                        heading: "Learning disability",
+                        data: renderValue(
+                            ifAnswerIsPresent(answers["learning_disability"], "Yes", "No"),
+                            answers["learning_disability_details"],
+                            "Yes"
+                        )
+                    },
+                    {
+                        heading: "Learning difficulty",
+                        data: renderValue(
+                            ifAnswerIsPresent(answers["learning_difficulty"], "Yes", "No"),
+                            answers["learning_difficulty_details"],
+                            "Yes"
+                        )
+                    },
+                    {
+                        heading: "Mental health condition",
+                        data: renderValue(
+                            ifAnswerIsPresent(answers["mental_health_condition"], "Yes", "No"),
+                            answers["mental_health_condition_details"],
+                            "Yes"
+                        )
+                    },
+                    {
+                        heading: "Do any of the above affect the individual’s ability to engage with Community Payback?",
+                        description: "Suggest adjustments, if known",
+                        data: renderValue(
+                            answers["disabilities"],
+                            answers["disabilities_details"],
+                            "Yes"
+                        )
+                    }
+                ]
+            }) }}
+            
+        {% endif %}
     </div>
     <div class='upw-avoid-break'>
         {%- macro renderPregnancyQuestion(value, pregnantDescription, recentlyGivenBirthDescription) -%}

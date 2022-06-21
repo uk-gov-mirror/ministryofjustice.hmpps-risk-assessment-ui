@@ -36,6 +36,7 @@ const {
   ageFrom,
   prettyDateAndTime,
   clearAnswers,
+  disabilityCodeToDescription,
 } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
@@ -168,6 +169,7 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('ageFrom', ageFrom)
   nunjucksEnvironment.addFilter('clearAnswers', clearAnswers)
   nunjucksEnvironment.addFilter('hasAnswer', (a, v) => Array.isArray(a) && a.includes(v))
+  nunjucksEnvironment.addFilter('toDisabilityDescription', disabilityCodeToDescription)
 
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise

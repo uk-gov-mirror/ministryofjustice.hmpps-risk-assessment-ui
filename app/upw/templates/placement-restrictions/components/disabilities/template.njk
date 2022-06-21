@@ -1,0 +1,107 @@
+{% from "common/templates/components/read-only/macro.njk" import readOnly %}
+
+{# Display the new structured disabilities data if we have it #}
+{% if rawAnswers["active_disabilities"] %}
+    {% if rawAnswers["active_disabilities"].length %}
+
+    <table class="govuk-table">
+    <caption class="govuk-table__caption govuk-table__caption--l">Disabilities, conditions and adjustments</caption>
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Description</th>
+            <th scope="col" class="govuk-table__header">Notes</th>
+            <th scope="col" class="govuk-table__header">Adjustment</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        {% for disability in rawAnswers["active_disabilities"] %}
+        <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">{{ disability["description"] | default(disability["description"]) }}</th>
+        <td class="govuk-table__cell">{{ disability["disability_notes"] }}</td>
+        <td class="govuk-table__cell">
+            {% if disability["disability_adjustments"] %}
+            {% for adjustment in disability["disability_adjustments"] %}
+            {{ adjustment }}<br>
+            {% endfor %}
+            {% endif %}
+        </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+    {% else %}
+
+    <h2 class="govuk-heading-l">Disabilities, conditions and adjustments</h2>
+
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <p class="govuk-body-l govuk-!-margin-bottom-5 govuk-!-margin-top-5">No details recorded in Delius</p>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
+
+    {% endif %}
+
+{# Otherwise display the old format #}
+{% else %}
+
+{%- macro renderValue(value, description, condition) -%}
+    <p>{{ value | default("No data", true) }}</p>
+    {% if description and (not condition or condition and value == condition) %}
+    <p>{{ description }}</p>
+    {% endif %}
+{%- endmacro -%}
+
+{%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
+    {%- if answer -%}
+        {{ textIfPresent }}
+    {%- else -%}
+        {{ textIfNotPresent }}
+    {%- endif -%}
+{%- endmacro -%}
+
+<table class="govuk-table">
+<caption class="govuk-table__caption govuk-table__caption--l">Disabilities and mental health</caption>
+<tbody class="govuk-table__body">
+    <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">Physical disability</th>
+        <td class="govuk-table__cell">
+            {{ renderValue(
+                ifAnswerIsPresent(answers["physical_disability"], "Yes", "No"),
+                answers["physical_disability_details"],
+                "Yes"
+            ) }}
+        </td>
+    </tr>
+    <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">Learning disability</th>
+        <td class="govuk-table__cell">
+            {{ renderValue(
+                ifAnswerIsPresent(answers["learning_disability"], "Yes", "No"),
+                answers["learning_disability_details"],
+                "Yes"
+            ) }}
+        </td>
+    </tr>
+    <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">Learning difficulty</th>
+        <td class="govuk-table__cell">
+            {{ renderValue(
+                ifAnswerIsPresent(answers["learning_difficulty"], "Yes", "No"),
+                answers["learning_difficulty_details"],
+                "Yes"
+            ) }}
+        </td>
+    </tr>
+    <tr class="govuk-table__row">
+        <th scope="row" class="govuk-table__header">Mental health condition</th>
+        <td class="govuk-table__cell">
+            {{ renderValue(
+                ifAnswerIsPresent(answers["mental_health_condition"], "Yes", "No"),
+                answers["mental_health_condition_details"],
+                "Yes"
+            ) }}
+        </td>
+    </tr>
+</tbody>
+</table>
+
+{% endif %}

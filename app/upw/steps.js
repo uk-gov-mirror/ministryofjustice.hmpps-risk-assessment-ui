@@ -173,7 +173,13 @@ module.exports = {
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/disabilities-and-mental-health.njk`,
     next: 'task-list#disabilities-mental-health',
-    fields: ['disabilities', 'disabilities_details', 'disabilities_complete'],
+    fields: [
+      'additional_disabilities',
+      'additional_disabilities_details',
+      'disabilities',
+      'disabilities_details',
+      'disabilities_complete',
+    ],
   },
   '/health-issues': {
     pageTitle: 'Health issues',

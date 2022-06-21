@@ -1272,6 +1272,42 @@
     },
     {
       "type": "question",
+      "questionId": "22aa55c0-8cd3-4106-a4cf-a64c05ed72c7",
+      "questionCode": "additional_disabilities",
+      "answerType": "radio",
+      "questionText": "Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?",
+      "helpText": "",
+      "readOnly": true,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerDtos": [
+        {
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7ce51aeb-c2fa-4b95-9c0d-8e353b5de869",
+      "questionCode": "additional_disabilities_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerDtos": []
+    },
+    {
+      "type": "question",
       "questionId": "d35335af-4747-4842-8fbc-42ddca5bc78c",
       "questionCode": "disabilities",
       "answerType": "radio",

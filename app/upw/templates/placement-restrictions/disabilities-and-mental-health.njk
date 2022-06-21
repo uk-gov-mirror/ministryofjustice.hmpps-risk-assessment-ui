@@ -4,6 +4,7 @@
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
 {% from "common/templates/components/read-only/macro.njk" import readOnly %}
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
+{% from "app/upw/templates/placement-restrictions/components/disabilities/macro.njk" import renderDisabilities %}
 
 {% set backLink = 'task-list' %}
 
@@ -27,64 +28,9 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            <h2 class="govuk-heading-m">Does the individual have any of the following?</h2>
+            {{ renderDisabilities(answers, rawAnswers) }}
 
-            {{ readOnly({
-                field: {
-                    key: 'physical_disability',
-                    text: 'Physical disability'
-                },
-                conditional: {
-                    key: 'physical_disability_details',
-                    value: 'Yes'
-                },
-                answers: answers,
-                ifValuePresent: true,
-                ifNotPresent: "No"
-            }) }}
-
-            {{ readOnly({
-                field: {
-                    key: 'learning_disability',
-                    text: 'Learning disability'
-                },
-                conditional: {
-                    key: 'learning_disability_details',
-                    value: 'Yes'
-                },
-                answers: answers,
-                ifValuePresent: true,
-                ifNotPresent: "No"
-            }) }}
-
-            {{ readOnly({
-                field: {
-                    key: 'learning_difficulty',
-                    text: 'Learning difficulty'
-                },
-                conditional: {
-                    key: 'learning_difficulty_details',
-                    value: 'Yes'
-                },
-                answers: answers,
-                ifValuePresent: true,
-                ifNotPresent: "No"
-            }) }}
-
-            {{ readOnly({
-                field: {
-                    key: 'mental_health_condition',
-                    text: 'Mental health condition'
-                },
-                conditional: {
-                    key: 'mental_health_condition_details',
-                    value: 'Yes'
-                },
-                answers: answers,
-                ifValuePresent: true,
-                ifNotPresent: "No"
-            }) }}
-
+            {{ renderQuestion(questions['additional_disabilities'], errors) }}
             {{ renderQuestion(questions['disabilities'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">

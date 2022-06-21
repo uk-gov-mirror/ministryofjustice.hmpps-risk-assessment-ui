@@ -205,6 +205,25 @@ const getErrorMessageFor = (user, reason) => {
   return 'Something went wrong' // Unhandled exception
 }
 
+const disabilityCodeToDescription = code => {
+  const lookup = {
+    DY: 'Dyslexia',
+    VI: 'Visual condition',
+    SI: 'Speech condition',
+    HD: 'Hearing condition',
+    LD: 'Learning disability or challenges',
+    MI: 'Mental health condition',
+    PC: 'Progressive condition',
+    RM: 'Reduced mobility',
+    RC: 'Reduced physical ability',
+    SD: 'Disfigurement',
+    RD: 'Refusal to disclose',
+    AP: 'Apathy',
+  }
+
+  return lookup[code]
+}
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -227,4 +246,5 @@ module.exports = {
   clearAnswers,
   getErrorMessageFor,
   formatDateWith,
+  disabilityCodeToDescription,
 }
