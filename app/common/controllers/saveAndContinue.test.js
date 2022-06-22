@@ -226,6 +226,11 @@ describe('SaveAndContinueController', () => {
           questionCode: 'third_question',
           answerType: 'numeric',
         },
+        fourth_question: {
+          questionCode: 'fourth_question',
+          answerType: 'numeric',
+          default: 'TEST',
+        },
       }
 
       mockSessionModel({
@@ -255,6 +260,12 @@ describe('SaveAndContinueController', () => {
           questionCode: 'third_question',
           answerType: 'numeric',
           answer: '',
+        },
+        fourth_question: {
+          questionCode: 'fourth_question',
+          answerType: 'numeric',
+          default: 'TEST',
+          answer: 'TEST',
         },
       })
     })

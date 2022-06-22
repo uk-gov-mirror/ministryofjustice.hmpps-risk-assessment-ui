@@ -481,12 +481,18 @@ const fields = {
   learning_difficulty_details: readOnly,
   mental_health_condition: readOnly,
   mental_health_condition_details: readOnly,
-  additional_disabilities: requireYesOrNo,
+  additional_disabilities: {
+    ...requireYesOrNo,
+    default: 'NO',
+  },
   additional_disabilities_details: {
     dependent: { field: 'additional_disabilities', value: 'YES' },
     ...requireEnterDetails,
   },
-  disabilities: requireYesOrNo,
+  disabilities: {
+    ...requireYesOrNo,
+    default: 'NO',
+  },
   disabilities_details: {
     dependent: { field: 'disabilities', value: 'YES' },
   },

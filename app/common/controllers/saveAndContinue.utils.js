@@ -44,12 +44,14 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
     let answer = ''
 
     const [submittedAnswer] = someValueFrom(submittedAnswers[questionCode])
-    const [previousAnswer = ''] = someValueFrom(previousAnswers[questionCode])
+    const [previousAnswer] = someValueFrom(previousAnswers[questionCode])
 
     if (submittedAnswer || submittedAnswer === '') {
       answer = submittedAnswer
-    } else {
+    } else if (previousAnswer) {
       answer = previousAnswer
+    } else {
+      answer = fieldProperties.default || ''
     }
 
     return answer
@@ -76,7 +78,7 @@ const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fiel
   }
 
   if (fieldProperties.answerType === 'checkbox') {
-    const selected = submittedAnswers[fieldName] || previousAnswers[fieldName] || []
+    const selected = submittedAnswers[fieldName] || previousAnswers[fieldName] || fieldProperties.default || []
     const displayAnswers = fieldProperties.answerDtos
       .filter(answer => selected.includes(answer.value))
       .map(answer => answer.text)
