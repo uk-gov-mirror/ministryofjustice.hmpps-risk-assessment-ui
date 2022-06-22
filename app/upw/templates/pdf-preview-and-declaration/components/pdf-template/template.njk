@@ -392,9 +392,11 @@
                             <p class="govuk-body">
                                 <strong>Adjustments</strong><br>
                                 {% if disability["disability_adjustments"] %}
+                                <ul class="govuk-list">
                                     {% for adjustment in disability["disability_adjustments"] %}
-                                    {{ adjustment }}<br>
+                                    <li>{{ adjustment }}</li>
                                     {% endfor %}
+                                </ul>
                                 {% else %}
                                 None
                                 {% endif %}

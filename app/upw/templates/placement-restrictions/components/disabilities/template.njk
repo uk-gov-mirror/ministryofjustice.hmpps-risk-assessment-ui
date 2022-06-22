@@ -20,9 +20,11 @@
         <td class="govuk-table__cell">{{ disability["disability_notes"] }}</td>
         <td class="govuk-table__cell">
             {% if disability["disability_adjustments"] %}
+            <ul class="govuk-list">
             {% for adjustment in disability["disability_adjustments"] %}
-            {{ adjustment }}<br>
+                <li>{{ adjustment }}</li>
             {% endfor %}
+            </ul>
             {% endif %}
         </td>
         </tr>
