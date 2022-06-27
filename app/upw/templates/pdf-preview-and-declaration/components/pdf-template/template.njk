@@ -404,6 +404,28 @@
                         </td>
                     </tr>
                     {% endfor %}
+                    <tr>
+                        <th>
+                            <p><strong>Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?</strong></p>
+                        </th>
+                        <td>
+                            <p>{{ answers["additional_disabilities"] }}</p>
+                            {% if answers["additional_disabilities_details"] and answers["additional_disabilities"] == "Yes" %}
+                            <p>{{ answers["additional_disabilities_details"] }}</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <p><strong>Do any of the above affect the individual’s ability to engage with Community Payback?</strong></p>
+                            <p>Suggest adjustments, if known</p>
+                        <td>
+                            <p>{{ answers["disabilities"] }}</p>
+                            {% if answers["disabilities_details"] and answers["disabilities"] == "Yes" %}
+                            <p>{{ answers["disabilities_details"] }}</p>
+                            {% endif %}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -454,6 +476,14 @@
                         data: renderValue(
                             ifAnswerIsPresent(answers["mental_health_condition"], "Yes", "No"),
                             answers["mental_health_condition_details"],
+                            "Yes"
+                        )
+                    },
+                    {
+                        heading: "Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?",                        
+                        data: renderValue(
+                            answers["additional_disabilities"],
+                            answers["additional_disabilities_details"],
                             "Yes"
                         )
                     },
