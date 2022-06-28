@@ -16,7 +16,7 @@
     <tbody class="govuk-table__body">
         {% for disability in rawAnswers["active_disabilities"] %}
         <tr class="govuk-table__row">
-        <th scope="row" class="govuk-table__header">{{ disability["description"] | default(disability["description"]) }}</th>
+        <th scope="row" class="govuk-table__header">{{ disability["code"] | toDisabilityDescription | default(disability["description"]) }}</th>
         <td class="govuk-table__cell">{{ disability["disability_notes"] }}</td>
         <td class="govuk-table__cell">
             {% if disability["disability_adjustments"] %}
