@@ -186,7 +186,7 @@ describe('GetRegistrations', () => {
 
   it('returns null when there is a failed request', async () => {
     await Promise.all(
-      [400, 401, 403, 500, 501, 502, 503, 504].map(async statusCode => {
+      [400, 401, 403, 500, 501, 502, 503, 504].map(async (statusCode) => {
         getRegistrationsForCrn.mockResolvedValue({
           status: statusCode,
           ok: false,
@@ -281,7 +281,7 @@ describe('GetRegistrations', () => {
 
   it('returns null when the response is 400', async () => {
     await Promise.all(
-      [400, 401, 403, 500, 501, 502, 503, 504].map(async statusCode => {
+      [400, 401, 403, 500, 501, 502, 503, 504].map(async (statusCode) => {
         getRoshRiskSummaryForCrn.mockResolvedValue({
           status: statusCode,
           ok: false,

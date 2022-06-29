@@ -2,7 +2,7 @@ const { getDraftPredictorScore } = require('../../common/data/hmppsAssessmentApi
 const { splitPredictorScores } = require('../../common/utils/predictors')
 const logger = require('../../common/logging/logger')
 
-const getSubheadingFor = assessmentType => {
+const getSubheadingFor = (assessmentType) => {
   const subheadings = { RSR: 'Risk of Serious Recidivism (RSR) assessment' }
   return subheadings[assessmentType]
 }

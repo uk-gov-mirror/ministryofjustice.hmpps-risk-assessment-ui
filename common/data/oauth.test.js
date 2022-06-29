@@ -31,10 +31,7 @@ describe('Oauth', () => {
 
   describe('checkTokenIsActive', () => {
     it('returns the token status', async () => {
-      authService
-        .post('/token/verify')
-        .matchHeader('authorization', 'Bearer FOO_TOKEN')
-        .reply(200, { active: true })
+      authService.post('/token/verify').matchHeader('authorization', 'Bearer FOO_TOKEN').reply(200, { active: true })
 
       const isActive = await checkTokenIsActive('FOO_TOKEN')
 
@@ -42,10 +39,7 @@ describe('Oauth', () => {
     })
 
     it('swallows exceptions', async () => {
-      authService
-        .get('/token/verify')
-        .matchHeader('authorization', 'Bearer FOO_TOKEN')
-        .reply(500)
+      authService.get('/token/verify').matchHeader('authorization', 'Bearer FOO_TOKEN').reply(500)
 
       const isActive = await checkTokenIsActive('FOO_TOKEN')
 
@@ -66,10 +60,7 @@ describe('Oauth', () => {
     })
 
     it('Throws AuthenticationError when unable to find user', async () => {
-      authService
-        .get('/api/me/email')
-        .matchHeader('authorization', 'Bearer FOO_TOKEN')
-        .reply(404)
+      authService.get('/api/me/email').matchHeader('authorization', 'Bearer FOO_TOKEN').reply(404)
 
       await expect(getUserEmail('FOO_TOKEN')).rejects.toThrow(new AuthenticationError('Unable to fetch user details'))
     })

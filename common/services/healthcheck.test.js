@@ -19,10 +19,11 @@ describe.only('service healthcheck', () => {
   })
 
   describe('with healthy dependencies', () => {
-    beforeEach(done => {
+    beforeEach((done) => {
       serviceCheckFactory.mockReset()
       serviceCheckFactory.mockImplementation((_name, { url }) => {
         return () => {
+          // eslint-disable-next-line no-promise-executor-return
           return new Promise((resolve, reject) => (url === 'unhealthy' ? reject(new Error(404)) : resolve('OK')))
         }
       })
@@ -67,10 +68,11 @@ describe.only('service healthcheck', () => {
     })
   })
   describe('with unhealthy dependencies', () => {
-    beforeEach(done => {
+    beforeEach((done) => {
       serviceCheckFactory.mockReset()
       serviceCheckFactory.mockImplementation((_name, { url }) => {
         return () => {
+          // eslint-disable-next-line no-promise-executor-return
           return new Promise((resolve, reject) => (url === 'unhealthy' ? reject(new Error(404)) : resolve('OK')))
         }
       })

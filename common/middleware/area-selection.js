@@ -21,7 +21,7 @@ const checkAssessmentType = () => async (req, res, next) => {
   return next()
 }
 
-const checkUserHasAreaSelected = overrideUrl => async (req, res, next) => {
+const checkUserHasAreaSelected = (overrideUrl) => async (req, res, next) => {
   try {
     const { user } = req
     if (!req.session.standaloneAssessment) {

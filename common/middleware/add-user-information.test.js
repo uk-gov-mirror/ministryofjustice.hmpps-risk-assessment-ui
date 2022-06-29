@@ -13,7 +13,7 @@ describe('Put keycloak header information into session', () => {
     }
   })
 
-  test('should add user name to locals', done => {
+  test('should add user name to locals', (done) => {
     addUserInformation(req, res, done)
     expect(res.locals.username).toEqual('JBOND')
     expect(res.locals.userFullName).toEqual('James Bond')

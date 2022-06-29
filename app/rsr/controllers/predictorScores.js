@@ -3,7 +3,7 @@ const { getDraftPredictorScore, postCompleteAssessment } = require('../../../com
 const logger = require('../../../common/logging/logger')
 const { splitPredictorScores } = require('../../../common/utils/predictors')
 
-const getErrorMessage = reason => {
+const getErrorMessage = (reason) => {
   if (reason === 'OASYS_PERMISSION') {
     return 'You do not have permission to complete this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
   }

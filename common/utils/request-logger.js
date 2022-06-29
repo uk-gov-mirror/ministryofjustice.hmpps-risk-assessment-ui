@@ -1,13 +1,13 @@
 const logger = require('../logging/logger')
 
-const logRequestStart = context => {
+const logRequestStart = (context) => {
   logger.debug(`Calling ${context.service}  ${context.description}-`, {
     service: context.service,
     method: context.method,
     url: context.url,
   })
 }
-const logRequestEnd = context => {
+const logRequestEnd = (context) => {
   const duration = new Date() - context.startTime
   logger.info(`[${context.correlationId}] - ${context.method} to ${context.url} ended - elapsed time: ${duration} ms`)
 }

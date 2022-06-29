@@ -17,11 +17,16 @@
 {% endblock %}
 
 {% block headIcons %}
-  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ assetPath | default('') }}/images/favicon.ico" type="image/x-icon" />
-  <link rel="mask-icon" href="{{ assetPath | default('/assets') }}/images/govuk-mask-icon.svg" color="{{ themeColor | default('#0b0c0c') }}"> {# Hardcoded value of $govuk-black #}
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-180x180.png">
-  <link rel="apple-touch-icon" sizes="167x167" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-167x167.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-152x152.png">
+  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ assetPath | default('') }}/images/favicon.ico"
+        type="image/x-icon" />
+  <link rel="mask-icon" href="{{ assetPath | default('/assets') }}/images/govuk-mask-icon.svg"
+        color="{{ themeColor | default('#0b0c0c') }}"> {# Hardcoded value of $govuk-black #}
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-180x180.png">
+  <link rel="apple-touch-icon" sizes="167x167"
+        href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-167x167.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-152x152.png">
   <link rel="apple-touch-icon" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon.png">
 {% endblock %}
 
@@ -30,7 +35,7 @@
 
 {% endblock %}
 
-{%  block content %}
+{% block content %}
   {% if errorSummary and errorSummary.length > 0 %}
     {% include "./partials/errorSummary.njk" %}
   {% endif %}
@@ -38,29 +43,27 @@
 
 {% block footer %}
 
-  <div style="background: {{ feedbackBannerBackground or '#fff' }}" class="govuk-!-display-none-print">
+  <div class="govuk-!-display-none-print arn-white-background">
     <div class="govuk-width-container {{ containerClasses }}">
       {% include "../templates/components/feedbackBanner/feedbackBanner.njk" %}
     </div>
   </div>
 
-  {{
-    govukFooter({
-      containerClasses: containerClasses,
-      meta: {
-        items: [
-          {
-            href: "privacy",
-            text: "Privacy"
-          },
-          {
-            href: "cookies",
-            text: "Cookies"
-          } 
-        ]  
-      }
-    })
-  }}
+  {{ govukFooter({
+    containerClasses: containerClasses,
+    meta: {
+      items: [
+        {
+          href: "privacy",
+          text: "Privacy"
+        },
+        {
+          href: "cookies",
+          text: "Cookies"
+        }
+      ]
+    }
+  }) }}
 {% endblock %}
 
 {% block bodyEnd %}

@@ -196,9 +196,7 @@ describe('prettyDateAndTime', () => {
 })
 
 describe('ageFrom', () => {
-  const mockNow = DateTime.fromISO('2021-11-30T00:00:00.000000', { zone: 'utc' })
-    .setLocale('en-GB')
-    .startOf('day')
+  const mockNow = DateTime.fromISO('2021-11-30T00:00:00.000000', { zone: 'utc' }).setLocale('en-GB').startOf('day')
 
   it('returns the difference in years between the provided date and now', () => {
     expect(ageFrom('1989-01-19T00:00:00.000000', mockNow)).toEqual(32)

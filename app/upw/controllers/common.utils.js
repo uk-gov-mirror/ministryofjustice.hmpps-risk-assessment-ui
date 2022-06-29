@@ -2,7 +2,7 @@ const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../c
 const logger = require('../../../common/logging/logger')
 const { prettyDate } = require('../../../common/utils/util')
 
-const whereStringNotNull = s => s !== null
+const whereStringNotNull = (s) => s !== null
 
 const formatMappaCode = (code, prefix) => {
   const suffixes = {
@@ -30,7 +30,7 @@ const formatMappaResponse = (mappaResponse = {}) => ({
   lastUpdated: prettyDate(mappaResponse?.startDate),
 })
 
-const formatFlag = flag => flag.description || null
+const formatFlag = (flag) => flag.description || null
 
 const getRegistrations = async (crn, user) => {
   try {
@@ -64,7 +64,7 @@ const getRoshRiskSummary = async (crn, user) => {
   try {
     const { response, status } = await getRoshRiskSummaryForCrn(crn, user)
 
-    const nullIfNotKnown = s => (s === 'NOT_KNOWN' ? null : s)
+    const nullIfNotKnown = (s) => (s === 'NOT_KNOWN' ? null : s)
 
     if (status === 404) {
       return {

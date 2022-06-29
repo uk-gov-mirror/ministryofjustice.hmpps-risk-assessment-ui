@@ -54,7 +54,7 @@ function startWorker(workerId) {
  */
 function onInterrupt() {
   pid = readFileSync(pidFile, fileOptions)
-  unlink(pidFile, err => {
+  unlink(pidFile, (err) => {
     if (err) throw err
     logger.info('File successfully deleted')
   })

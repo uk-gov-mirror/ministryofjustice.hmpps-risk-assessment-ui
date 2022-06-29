@@ -242,7 +242,7 @@ const action = async (agent, authorisationToken, userId) => {
       .set('x-correlation-id', getCorrelationId())
       .set('x-user-area', cachedDetails?.areaCode || '')
       .timeout(timeout)
-      .then(response => {
+      .then((response) => {
         return [true, response.body]
       })
   } catch (error) {
@@ -260,7 +260,7 @@ const action = async (agent, authorisationToken, userId) => {
   }
 }
 
-const logError = error => {
+const logError = (error) => {
   logger.warn('Error calling hmppsAssessments API')
   logger.warn({
     status: error.status,

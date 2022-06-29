@@ -167,7 +167,7 @@ describe('Auth', () => {
       jest.useRealTimers()
     })
 
-    it('refreshes the token when expired', done => {
+    it('refreshes the token when expired', (done) => {
       const now = Date.now()
       const expiry = now - 60
 
@@ -262,7 +262,7 @@ describe('Auth', () => {
       baseRequest.logout.mockReset()
       res.redirect.mockReset()
       baseRequest.session.destroy.mockReset()
-      baseRequest.session.destroy.mockImplementation(fn => fn())
+      baseRequest.session.destroy.mockImplementation((fn) => fn())
     })
 
     it('logs the user out and redirects if signed in', () => {

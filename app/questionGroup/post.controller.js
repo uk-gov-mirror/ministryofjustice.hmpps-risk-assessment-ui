@@ -4,7 +4,7 @@ const { displayQuestionGroup } = require('./get.controller')
 const { postAnswers } = require('../../common/data/hmppsAssessmentApi')
 const { formatValidationErrors } = require('../../common/middleware/questionGroups/postHandlers')
 
-const getErrorMessage = reason => {
+const getErrorMessage = (reason) => {
   if (reason === 'OASYS_PERMISSION') {
     return 'You do not have permission to update this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
   }
@@ -14,7 +14,7 @@ const getErrorMessage = reason => {
 const groupsThatRedirectToScores = [
   '6d3a4377-2177-429e-a7fa-6aa2444d14dd', // RSR Needs
 ]
-const redirectsToScores = groupUuid => groupsThatRedirectToScores.includes(groupUuid)
+const redirectsToScores = (groupUuid) => groupsThatRedirectToScores.includes(groupUuid)
 
 const saveQuestionGroup = async (req, res) => {
   const {

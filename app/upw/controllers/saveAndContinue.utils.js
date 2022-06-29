@@ -1,7 +1,10 @@
 const createFullNameFrom = (firstName = '', familyName = '') => `${firstName} ${familyName}`.trim()
-const orEmptyWith = (answers, defaultValue = []) => questionCode => answers[questionCode] || defaultValue
-const answersExistIn = answers => questionCode =>
-  Array.isArray(answers[questionCode]) && answers[questionCode].some(value => value !== '')
+const orEmptyWith =
+  (answers, defaultValue = []) =>
+  (questionCode) =>
+    answers[questionCode] || defaultValue
+const answersExistIn = (answers) => (questionCode) =>
+  Array.isArray(answers[questionCode]) && answers[questionCode].some((value) => value !== '')
 
 const gpDetailsMigration = {
   collectionKey: 'gp_details',
@@ -84,7 +87,7 @@ const fieldsToRemove = [
   'emergency_contact_mobile_phone_number',
 ]
 
-const createMultiplesFields = answers => {
+const createMultiplesFields = (answers) => {
   const getExistingEntriesFor = orEmptyWith(answers)
   return {
     ...answers,
@@ -93,29 +96,33 @@ const createMultiplesFields = answers => {
   }
 }
 
-const migrateFieldsUsing = (migration = {}) => originalAnswers => {
-  const { collectionKey, recordFrom, hasFieldsToBeConverted } = migration
+const migrateFieldsUsing =
+  (migration = {}) =>
+  (originalAnswers) => {
+    const { collectionKey, recordFrom, hasFieldsToBeConverted } = migration
 
-  if (!collectionKey || !recordFrom || !hasFieldsToBeConverted) {
-    throw new Error('Misconfigured migration')
-  }
-
-  const answers = { ...originalAnswers, [collectionKey]: originalAnswers[collectionKey].map(recordFrom) }
-  if (hasFieldsToBeConverted(answers)) {
-    const recordToBeAdded = recordFrom(answers)
-    if (
-      !answers[collectionKey].some(existingRecord => JSON.stringify(recordToBeAdded) === JSON.stringify(existingRecord))
-    ) {
-      answers[collectionKey].push(recordToBeAdded)
+    if (!collectionKey || !recordFrom || !hasFieldsToBeConverted) {
+      throw new Error('Misconfigured migration')
     }
+
+    const answers = { ...originalAnswers, [collectionKey]: originalAnswers[collectionKey].map(recordFrom) }
+    if (hasFieldsToBeConverted(answers)) {
+      const recordToBeAdded = recordFrom(answers)
+      if (
+        !answers[collectionKey].some(
+          (existingRecord) => JSON.stringify(recordToBeAdded) === JSON.stringify(existingRecord),
+        )
+      ) {
+        answers[collectionKey].push(recordToBeAdded)
+      }
+    }
+
+    return answers
   }
 
-  return answers
-}
-
-const safeDelete = fields => answers => {
+const safeDelete = (fields) => (answers) => {
   const updatedAnswers = { ...answers }
-  fields.forEach(id => {
+  fields.forEach((id) => {
     if (updatedAnswers[id]) {
       updatedAnswers[id] = ['']
     }

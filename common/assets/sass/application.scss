@@ -1,17 +1,19 @@
+$govuk-global-styles: true;
+
 @import "govuk-frontend/govuk/all";
 @import "@ministryofjustice/frontend/moj/all";
 /* stylelint-disable scss/at-import-partial-extension */
 @import "accessible-autocomplete/dist/accessible-autocomplete.min";
 /* stylelint-enable scss/at-import-partial-extension */
-@import "components/accessible-autocomplete";
-@import "components/cookie-message";
-@import "components/task-list";
-@import "components/form-wizard-task-list";
-@import "components/predictor-scores";
-@import "pages";
-@import "upw-pages";
-@import "upw-pdf-template";
-@import "widgets";
+@import "common/assets/sass/components/accessible-autocomplete";
+@import "common/assets/sass/components/cookie-message";
+@import "common/assets/sass/components/task-list";
+@import "common/assets/sass/components/form-wizard-task-list";
+@import "common/assets/sass/components/predictor-scores";
+@import "common/assets/sass/pages";
+@import "common/assets/sass/upw-pages";
+@import "common/assets/sass/upw-pdf-template";
+@import "common/assets/sass/widgets";
 
 $white-transparent: rgb(255 255 255 / 25%);
 

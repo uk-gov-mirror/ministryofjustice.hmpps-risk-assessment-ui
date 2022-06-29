@@ -2,19 +2,19 @@ const { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } = require('../..
 const logger = require('../../common/logging/logger')
 const { getErrorMessageFor, prettyDate, ageFrom } = require('../../common/utils/util')
 
-const validateAssessmentType = assessmentType => {
+const validateAssessmentType = (assessmentType) => {
   if (!assessmentType) {
     throw new Error('Assessment type is mandatory')
   }
 }
 
-const validateCRN = crn => {
+const validateCRN = (crn) => {
   if (!crn) {
     throw new Error('CRN is mandatory')
   }
 }
 
-const getOffenceDetailsFor = episode => {
+const getOffenceDetailsFor = (episode) => {
   const sentenceDate = episode?.offence?.sentenceDate
 
   return {
@@ -26,7 +26,7 @@ const getOffenceDetailsFor = episode => {
   }
 }
 
-const getSubjectDetailsFor = offender => ({
+const getSubjectDetailsFor = (offender) => ({
   name: `${offender?.firstName} ${offender?.surname}`,
   dob: offender?.dateOfBirth,
   pnc: offender?.pncNumber,

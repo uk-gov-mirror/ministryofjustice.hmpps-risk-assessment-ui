@@ -3,7 +3,7 @@ const { processReplacements } = require('../utils/util')
 const logger = require('../logging/logger')
 const { compileInlineConditionalQuestions, annotateWithAnswers } = require('./questionGroups/getHandlers')
 
-const formatWizardValidationErrors = validationErrors => {
+const formatWizardValidationErrors = (validationErrors) => {
   const errors = {}
   const errorSummary = []
   if (validationErrors) {

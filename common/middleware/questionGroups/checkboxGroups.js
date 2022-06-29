@@ -1,5 +1,5 @@
-const flattenCheckboxGroups = questions => {
-  return questions.map(question => {
+const flattenCheckboxGroups = (questions) => {
+  return questions.map((question) => {
     if (question.type === 'checkboxGroup') {
       return {
         type: 'question',
@@ -21,7 +21,7 @@ const flattenCheckboxGroups = questions => {
 }
 
 const extractCheckboxGroupAnswers = (questions = [], answers = {}) => {
-  const checkboxGroups = questions.filter(question => question.type === 'checkboxGroup')
+  const checkboxGroups = questions.filter((question) => question.type === 'checkboxGroup')
 
   const extractedAnswers = checkboxGroups.reduce(
     (previousAnswers, checkboxGroup) => {

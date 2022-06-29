@@ -7,7 +7,7 @@ const { convertHtmlToPdf } = require('../../../common/data/pdf')
 
 const createFileNameFrom = (type, ...parts) => {
   const fileName = parts
-    .filter(s => s !== '')
+    .filter((s) => s !== '')
     .join('-')
     .toLowerCase()
   return `${fileName}.${type}`

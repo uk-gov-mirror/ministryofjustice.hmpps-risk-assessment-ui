@@ -1,13 +1,13 @@
 const { SECTION_COMPLETE } = require('../../../common/utils/constants')
 
-const checkAllTasksAreComplete = sections => {
-  return sections.every(section => {
+const checkAllTasksAreComplete = (sections) => {
+  return sections.every((section) => {
     const tasks = section.items || []
-    return tasks.every(task => task.status === 'COMPLETE')
+    return tasks.every((task) => task.status === 'COMPLETE')
   })
 }
 
-const getPdfPreviewStatus = tasks => {
+const getPdfPreviewStatus = (tasks) => {
   return checkAllTasksAreComplete(tasks) ? 'VIEW_PDF' : 'CANNOT_VIEW_PDF'
 }
 

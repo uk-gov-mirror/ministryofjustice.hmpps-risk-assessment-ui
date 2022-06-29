@@ -4,16 +4,16 @@ const service = (name, config) => {
   const check = serviceCheckFactory(name, config)
   return () =>
     check()
-      .then(result => ({ name, status: 'ok', message: result }))
-      .catch(err => ({ name, status: 'ERROR', message: err }))
+      .then((result) => ({ name, status: 'ok', message: result }))
+      .catch((err) => ({ name, status: 'ERROR', message: err }))
 }
 
 module.exports = (...services) => {
   const checks = services.map(({ name, config }) => service(name, config))
 
-  return callback =>
-    Promise.all(checks.map(fn => fn())).then(checkResults => {
-      const allOk = checkResults.every(item => item.status === 'ok')
+  return (callback) =>
+    Promise.all(checks.map((fn) => fn())).then((checkResults) => {
+      const allOk = checkResults.every((item) => item.status === 'ok')
       const result = {
         healthy: allOk,
         checks: checkResults.reduce(gatherCheckInfo, {}),

@@ -7,8 +7,8 @@ const displayAssessmentsList = async ({ params: { assessmentId }, user }, res) =
     const questionsList = await getAssessmentsList(user?.token, user?.id)
 
     const topLevelForms = questionsList
-      .filter(form => form.questionCount === 0)
-      .map(form => {
+      .filter((form) => form.questionCount === 0)
+      .map((form) => {
         return {
           ...form,
           path: `/${assessmentId}/questionGroup/${form.groupId}/summary`,

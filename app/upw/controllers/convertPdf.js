@@ -28,7 +28,7 @@ class ConvertPdf extends SaveAndContinue {
       const crn = res.locals.rawAnswers.crn || ''
 
       const fileName = [firstName, familyName, crn]
-        .filter(s => s !== '')
+        .filter((s) => s !== '')
         .join('-')
         .toLowerCase()
 

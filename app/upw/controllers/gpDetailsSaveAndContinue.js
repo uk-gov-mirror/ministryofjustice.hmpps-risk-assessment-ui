@@ -20,8 +20,10 @@ const customValidationsGpDetails = (fields, gpDetails, gpDetailsComplete) => {
 class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // make changes to sessionModel fields to add in context specific validations
+    // eslint-disable-next-line camelcase
     const { gp_details = [] } = req.sessionModel.get('rawAnswers') || {}
 
+    // eslint-disable-next-line camelcase
     const { gp_details_complete = '' } = req.form.values
 
     req.form.options.fields = customValidationsGpDetails(req.form.options.fields, gp_details, gp_details_complete)

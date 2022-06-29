@@ -3,7 +3,7 @@ const { extractCheckboxGroupAnswers } = require('./checkboxGroups')
 function findDateAnswerKeys(postBody) {
   // find keys of all the dates in the body
   const pattern = /-day$/
-  return Object.keys(postBody).filter(key => {
+  return Object.keys(postBody).filter((key) => {
     return pattern.test(key)
   })
 }
@@ -13,7 +13,7 @@ const assembleDates = async (req, res, next) => {
 
   const dateKeys = findDateAnswerKeys(reqBody)
 
-  dateKeys.forEach(key => {
+  dateKeys.forEach((key) => {
     const dateKey = key.replace(/-day$/, '')
     let constructedDate = ''
     try {

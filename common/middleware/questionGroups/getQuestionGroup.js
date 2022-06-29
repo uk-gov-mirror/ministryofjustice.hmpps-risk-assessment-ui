@@ -56,13 +56,13 @@ const findParent = (questionGroups, section) => {
   return questionGroups.contents[section].title
 }
 
-const usesStaticReferenceData = questionSchema =>
+const usesStaticReferenceData = (questionSchema) =>
   questionSchema.referenceDataCategory && questionSchema.referenceDataCategory !== 'FILTERED_REFERENCE_DATA'
-const usesDynamicReferenceData = questionSchema =>
+const usesDynamicReferenceData = (questionSchema) =>
   questionSchema.referenceDataCategory && questionSchema.referenceDataCategory === 'FILTERED_REFERENCE_DATA'
 
-const applyStaticReferenceData = async questionResponse => {
-  const extractReferenceDataCategories = questionSchema => {
+const applyStaticReferenceData = async (questionResponse) => {
+  const extractReferenceDataCategories = (questionSchema) => {
     if (questionSchema.type === 'group') {
       return questionSchema.contents.flatMap(extractReferenceDataCategories)
     }
@@ -82,7 +82,7 @@ const applyStaticReferenceData = async questionResponse => {
 
   const apiToken = await getApiToken()
 
-  const referenceDataRequests = Array.from(referenceDataCategories).map(async category => ({
+  const referenceDataRequests = Array.from(referenceDataCategories).map(async (category) => ({
     category,
     data: await getReferenceDataListByCategory(category, apiToken),
   }))
@@ -91,7 +91,7 @@ const applyStaticReferenceData = async questionResponse => {
   const referenceData = referenceDataResponses.reduce(
     (resultObject, referenceDataResponse) => ({
       ...resultObject,
-      [referenceDataResponse.category]: referenceDataResponse.data.map(r => ({
+      [referenceDataResponse.category]: referenceDataResponse.data.map((r) => ({
         text: r.description,
         value: r.code,
       })),
@@ -99,7 +99,7 @@ const applyStaticReferenceData = async questionResponse => {
     {},
   )
 
-  const applyReferenceData = questionSchema => {
+  const applyReferenceData = (questionSchema) => {
     if (questionSchema.type === 'group') {
       return { ...questionSchema, contents: questionSchema.contents.map(applyReferenceData) }
     }
@@ -121,15 +121,15 @@ module.exports = async ({ params: { groupId, subgroup = 0, page = 0 }, user }, r
     const hydratedQuestions = await applyStaticReferenceData(questions)
 
     const thisQuestionGroup = hydratedQuestions.contents[subgroup].contents[page]
-    const readOnlyToAttribute = q => {
+    const readOnlyToAttribute = (q) => {
       if (q.readOnly) {
         // eslint-disable-next-line no-param-reassign
         q.attributes = { readonly: true, disabled: true, ...q.attributes }
       }
-      q.contents?.forEach(c => readOnlyToAttribute(c))
+      q.contents?.forEach((c) => readOnlyToAttribute(c))
     }
-    thisQuestionGroup.contents?.forEach(q => readOnlyToAttribute(q))
-    thisQuestionGroup.contents = thisQuestionGroup.contents?.map(questionSchema => {
+    thisQuestionGroup.contents?.forEach((q) => readOnlyToAttribute(q))
+    thisQuestionGroup.contents = thisQuestionGroup.contents?.map((questionSchema) => {
       const attributes = {
         ...questionSchema.attributes,
         'data-question-code': questionSchema.questionCode,

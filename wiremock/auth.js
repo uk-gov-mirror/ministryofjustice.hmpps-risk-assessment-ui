@@ -19,7 +19,7 @@ const getLoginUrl = () =>
   getMatchingRequests({
     method: 'GET',
     urlPath: '/auth/oauth/authorize',
-  }).then(data => {
+  }).then((data) => {
     const { requests } = data.body
     const stateValue = requests[requests.length - 1].queryParams.state.values[0]
     return `/login/callback?code=codexxxx&state=${stateValue}`
@@ -80,7 +80,7 @@ const token = () =>
     },
   })
 
-const stubUser = username => {
+const stubUser = (username) => {
   const user = username || 'TEST_USER'
   return stubFor({
     request: {
@@ -131,7 +131,7 @@ const stubUserMeRoles = (roles = ['ROLE']) =>
     },
   })
 
-const stubEmail = username =>
+const stubEmail = (username) =>
   stubFor({
     request: {
       method: 'GET',

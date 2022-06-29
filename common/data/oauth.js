@@ -11,26 +11,26 @@ const redis = require('./redis')
 const { SIXTY_SECONDS } = require('../utils/constants')
 const { AuthenticationError } = require('../utils/errors')
 
-const checkTokenIsActive = async token => {
+const checkTokenIsActive = async (token) => {
   return superagent
     .post(`${url}/token/verify`)
     .auth(token, { type: 'bearer' })
     .timeout(timeout)
-    .then(response => response.body && response.body.active)
-    .catch(error => {
+    .then((response) => response.body && response.body.active)
+    .catch((error) => {
       logger.error(`Unable to verify token: ${error.message}`)
     })
 }
 
-const getUserEmail = async token => {
+const getUserEmail = async (token) => {
   return superagent
     .get(`${url}/api/me/email`)
     .auth(token, { type: 'bearer' })
     .timeout(timeout)
-    .then(response => {
+    .then((response) => {
       return response.body?.email
     })
-    .catch(error => {
+    .catch((error) => {
       logger.error(`Unable to get user email: ${error.message}`)
       throw new AuthenticationError('Unable to fetch user details')
     })
@@ -52,7 +52,7 @@ const getApiToken = async () => {
       .send()
       .auth(apiClientId, apiClientSecret)
       .timeout(timeout)
-      .then(response => {
+      .then((response) => {
         const { access_token: token, expires_in: expiresIn } = response.body
         redis.set('ui:apiToken', token, 'EX', expiresIn - SIXTY_SECONDS)
         return token
@@ -62,7 +62,7 @@ const getApiToken = async () => {
   }
 }
 
-const logError = error => {
+const logError = (error) => {
   logger.warn('Error calling authentication API')
   logger.warn({
     status: error.status,

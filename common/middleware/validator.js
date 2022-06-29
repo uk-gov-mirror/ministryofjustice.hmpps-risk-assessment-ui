@@ -4,7 +4,7 @@ const { DateTime, Interval } = require('luxon')
 const { removeBlankErrors, formatErrors, formatErrorSummary } = require('../utils/formatErrors')
 const { isEmptyObject, dynamicMiddleware } = require('../utils/util')
 
-const getFieldFor = code => {
+const getFieldFor = (code) => {
   const fields = {
     dateFirstSanction: 'date_first_sanction',
     totalSanctions: 'total_sanctions',
@@ -31,8 +31,8 @@ const intervalFrom = (isoString1, isoString2) => {
   return date1 < date2 ? Interval.fromDateTimes(date1, date2) : Interval.fromDateTimes(date2, date1)
 }
 
-const isValidDate = isoString => DateTime.fromISO(isoString).isValid
-const isPastDate = isoString => DateTime.fromISO(isoString) < DateTime.now()
+const isValidDate = (isoString) => DateTime.fromISO(isoString).isValid
+const isPastDate = (isoString) => DateTime.fromISO(isoString) < DateTime.now()
 
 // question validation rules hardcoded in the UI, not driven by the Assessments API responses.
 // eslint-disable-next-line consistent-return
@@ -60,10 +60,10 @@ const localValidationRules = async (req, res, next) => {
         .custom(isPastDate)
         .withMessage({ error: 'Date cannot be in the future' })
         .bail()
-        .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
+        .custom((value) => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
         .withMessage({ error: 'Date must be later than the individual’s date of birth' })
         .bail()
-        .custom(value => {
+        .custom((value) => {
           const diff = intervalFrom(offenderDateOfBirth, value)
           return diff.length('years') >= 8
         })
@@ -97,7 +97,7 @@ const localValidationRules = async (req, res, next) => {
         .custom(isPastDate)
         .withMessage({ error: 'Date cannot be in the future' })
         .bail()
-        .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
+        .custom((value) => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
         .withMessage({ error: 'Date must be later than the individual’s date of birth' }),
     )
 
@@ -109,7 +109,7 @@ const localValidationRules = async (req, res, next) => {
     ) {
       validations.push(
         body(getFieldFor('currentConvictionDate'))
-          .custom(value => DateTime.fromISO(value) >= DateTime.fromISO(reqBody[getFieldFor('dateFirstSanction')]))
+          .custom((value) => DateTime.fromISO(value) >= DateTime.fromISO(reqBody[getFieldFor('dateFirstSanction')]))
           .withMessage({ error: 'Current conviction cannot be before the date of first conviction' }),
       )
     }
@@ -125,29 +125,21 @@ const localValidationRules = async (req, res, next) => {
           .custom(isPastDate)
           .withMessage({ error: 'Date cannot be in the future' })
           .bail()
-          .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
+          .custom((value) => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
           .withMessage({ error: 'Date must be later than the individual’s date of birth' }),
       )
 
       validations.push(
-        body(getFieldFor('numAdultSexual'))
-          .isInt({ min: 0, max: 99 })
-          .withMessage({ error: 'Enter a number' }),
+        body(getFieldFor('numAdultSexual')).isInt({ min: 0, max: 99 }).withMessage({ error: 'Enter a number' }),
       )
       validations.push(
-        body(getFieldFor('numChildSexual'))
-          .isInt({ min: 0, max: 99 })
-          .withMessage({ error: 'Enter a number' }),
+        body(getFieldFor('numChildSexual')).isInt({ min: 0, max: 99 }).withMessage({ error: 'Enter a number' }),
       )
       validations.push(
-        body(getFieldFor('numIndecentImage'))
-          .isInt({ min: 0, max: 99 })
-          .withMessage({ error: 'Enter a number' }),
+        body(getFieldFor('numIndecentImage')).isInt({ min: 0, max: 99 }).withMessage({ error: 'Enter a number' }),
       )
       validations.push(
-        body(getFieldFor('numNonContactSexual'))
-          .isInt({ min: 0, max: 99 })
-          .withMessage({ error: 'Enter a number' }),
+        body(getFieldFor('numNonContactSexual')).isInt({ min: 0, max: 99 }).withMessage({ error: 'Enter a number' }),
       )
     }
 
@@ -156,10 +148,10 @@ const localValidationRules = async (req, res, next) => {
         .custom(isValidDate)
         .withMessage({ error: 'Enter a valid date' })
         .bail()
-        .custom(value => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
+        .custom((value) => DateTime.fromISO(value) > DateTime.fromISO(offenderDateOfBirth))
         .withMessage({ error: 'Date must be later than the individual’s date of birth' })
         .bail()
-        .custom(value => {
+        .custom((value) => {
           const diff = intervalFrom(offenderDateOfBirth, value)
           return diff.length('years') <= 110
         })

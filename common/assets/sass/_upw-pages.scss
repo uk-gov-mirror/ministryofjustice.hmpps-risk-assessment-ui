@@ -7,6 +7,7 @@
 .caring_commitments {
   font-size: 48px;
 }
+
 /* stylelint-enable selector-class-pattern */
 
 .upw-complete-break {
@@ -104,4 +105,8 @@
 
 .upw-confirmation-panel {
   margin-bottom: govuk-spacing(5);
+}
+
+.upw-white-background {
+  background: #fff;
 }

@@ -89,6 +89,13 @@ function initialiseApplicationInsights() {
 function initialiseGlobalMiddleware(app) {
   app.set('settings', { getVersionedPath: staticify.getVersionedPath })
   app.use(helmet())
+  app.use((req, res, next) => {
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'sha256-m5Sbrhw+r00tt+60yyAghRM3ydJ7im+KM/aKiPEK/HQ='; style-src 'self'; frame-src 'self'",
+    )
+    next()
+  })
   app.use(favicon(join(__dirname, 'public/images/', 'favicon.ico')))
   app.use(compression())
   app.use(staticify.middleware)
@@ -173,20 +180,20 @@ function initialiseTemplateEngine(app) {
 
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise
-  nunjucksEnvironment.addFilter('encodeHtml', str => encodeHTML(str))
-  nunjucksEnvironment.addFilter('extractLink', str => extractLink(str))
+  nunjucksEnvironment.addFilter('encodeHtml', (str) => encodeHTML(str))
+  nunjucksEnvironment.addFilter('extractLink', (str) => extractLink(str))
   nunjucksEnvironment.addFilter('doReplace', (str, target, replacement) => doReplace(str, target, replacement))
   // typeof for array, using native JS Array.isArray()
-  nunjucksEnvironment.addFilter('isArr', str => Array.isArray(str))
-  nunjucksEnvironment.addFilter('addSpellcheck', jsonObj => updateJsonValue(jsonObj, 'spellcheck', true, true))
+  nunjucksEnvironment.addFilter('isArr', (str) => Array.isArray(str))
+  nunjucksEnvironment.addFilter('addSpellcheck', (jsonObj) => updateJsonValue(jsonObj, 'spellcheck', true, true))
   nunjucksEnvironment.addFilter('updateJsonValue', (jsonObj, keyToChange, newValue) =>
     updateJsonValue(jsonObj, keyToChange, newValue),
   )
-  nunjucksEnvironment.addFilter('shiftArray', arr => {
+  nunjucksEnvironment.addFilter('shiftArray', (arr) => {
     return arr.slice(1)
   })
   nunjucksEnvironment.addFilter('todayPretty', () => {
-    const nth = dateDay => {
+    const nth = (dateDay) => {
       if (dateDay > 3 && dateDay < 21) return 'th'
       switch (dateDay % 10) {
         case 1:

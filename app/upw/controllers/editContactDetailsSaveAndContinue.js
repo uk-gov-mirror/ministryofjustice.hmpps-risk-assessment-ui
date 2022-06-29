@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const upwSaveAndContinue = require('./saveAndContinue')
 const { customValidationsEditContactDetails } = require('../fields')
 

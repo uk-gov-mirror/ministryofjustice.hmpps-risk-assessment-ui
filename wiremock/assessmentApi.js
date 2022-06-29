@@ -138,7 +138,7 @@ const stubAssessmentComplete = () => {
   })
 }
 
-const stubQuestionGroup = groupId => {
+const stubQuestionGroup = (groupId) => {
   stubFor({
     request: {
       method: 'GET',
@@ -154,7 +154,7 @@ const stubQuestionGroup = groupId => {
   })
 }
 
-const stubAssessmentQuestions = assessmentCode => {
+const stubAssessmentQuestions = (assessmentCode) => {
   stubFor({
     request: {
       method: 'GET',
@@ -202,7 +202,7 @@ const stubAssessmentQuestions = assessmentCode => {
 //   }
 // }
 
-const stubQuestionGroupSummary = groupId => {
+const stubQuestionGroupSummary = (groupId) => {
   stubFor({
     request: {
       method: 'GET',
@@ -218,7 +218,7 @@ const stubQuestionGroupSummary = groupId => {
   })
 }
 
-const stubAssessmentTypeSummary = assessmentType => {
+const stubAssessmentTypeSummary = (assessmentType) => {
   stubFor({
     request: {
       method: 'GET',
@@ -249,7 +249,7 @@ const stubQuestionGroupCodeSummary = (assessmentSchemaCode, groupId) => {
     },
   })
 }
-const stubAnswersGroup = groupId => {
+const stubAnswersGroup = (groupId) => {
   stubFor({
     request: {
       method: 'GET',

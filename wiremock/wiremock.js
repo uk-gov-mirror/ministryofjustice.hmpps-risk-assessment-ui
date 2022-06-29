@@ -2,21 +2,21 @@ const superagent = require('superagent')
 
 const url = 'http://localhost:9191/__admin'
 
-const stubFor = mapping => Promise.all([superagent.post(`${url}/mappings`).send(mapping)])
+const stubFor = (mapping) => Promise.all([superagent.post(`${url}/mappings`).send(mapping)])
 
 const getRequests = () => superagent.get(`${url}/requests`)
 
-const getMatchingRequests = body => superagent.post(`${url}/requests/find`).send(body)
+const getMatchingRequests = (body) => superagent.post(`${url}/requests/find`).send(body)
 
 const resetStubs = () => Promise.all([superagent.delete(`${url}/mappings`), superagent.delete(`${url}/requests`)])
 
-const verifyPosts = requestUrl =>
+const verifyPosts = (requestUrl) =>
   superagent.post(`${url}/requests/count`).send({
     method: 'POST',
     url: requestUrl,
   })
 
-const verifyPut = requestUrl =>
+const verifyPut = (requestUrl) =>
   superagent.post(`${url}/requests/count`).send({
     method: 'PUT',
     url: requestUrl,

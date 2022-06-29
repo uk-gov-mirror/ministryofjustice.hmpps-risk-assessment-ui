@@ -2,7 +2,7 @@ const { stubFor } = require('./wiremock')
 const referenceData = require('./responses/referenceData.json')
 const filteredReferenceData = require('./responses/filteredReferenceData.json')
 
-const stubStaticReferenceData = category => {
+const stubStaticReferenceData = (category) => {
   stubFor({
     request: {
       method: 'GET',
@@ -18,7 +18,7 @@ const stubStaticReferenceData = category => {
   })
 }
 
-const stubDynamicReferenceData = field => {
+const stubDynamicReferenceData = (field) => {
   stubFor({
     request: {
       method: 'POST',

@@ -3,13 +3,13 @@ const nunjucks = require('nunjucks')
 const { getAnswers } = require('../../data/hmppsAssessmentApi')
 const { logger } = require('../../logging/logger')
 
-const whereAnswerValueIs = value => answerDto => answerDto.value === value
-const isMultipleChoiceAnswerFor = answerType => answerType === 'radio' || answerType === 'checkbox'
+const whereAnswerValueIs = (value) => (answerDto) => answerDto.value === value
+const isMultipleChoiceAnswerFor = (answerType) => answerType === 'radio' || answerType === 'checkbox'
 let conditionalQuestionsToRemove = []
 const outOfLineConditionalQuestions = []
 
 const annotateWithAnswers = (questions, answers, body = {}) => {
-  return questions.map(questionSchema => {
+  return questions.map((questionSchema) => {
     if (questionSchema.type === 'group') {
       return {
         ...questionSchema,
@@ -36,7 +36,7 @@ const annotateWithAnswers = (questions, answers, body = {}) => {
       }
     }
 
-    const asArray = v => {
+    const asArray = (v) => {
       if (!v) {
         return []
       }
@@ -53,10 +53,10 @@ const annotateWithAnswers = (questions, answers, body = {}) => {
     if (isMultipleChoiceAnswerFor(questionSchema.answerType)) {
       const answerText = []
       answerValues = []
-      answer?.forEach(ans => {
+      answer?.forEach((ans) => {
         if (Array.isArray(ans)) {
           const thisElementAnswer = []
-          ans.forEach(arrayAns => {
+          ans.forEach((arrayAns) => {
             const thisAnswer = questionSchema.answerDtos.find(whereAnswerValueIs(arrayAns))
             thisElementAnswer.push(thisAnswer.text)
           })
@@ -87,7 +87,7 @@ const annotateWithAnswers = (questions, answers, body = {}) => {
 const compileInlineConditionalQuestions = (questions, errors) => {
   // construct an object with all conditional questions, keyed on id
   const conditionalQuestions = {}
-  questions.forEach(question => {
+  questions.forEach((question) => {
     if (question.conditional) {
       const key = question.questionCode
       conditionalQuestions[key] = question
@@ -95,7 +95,7 @@ const compileInlineConditionalQuestions = (questions, errors) => {
   })
 
   // add in rendered conditional question strings to each answer when displayed inline
-  const compiledQuestions = questions.map(question => {
+  const compiledQuestions = questions.map((question) => {
     if (!isMultipleChoiceAnswerFor(question.answerType)) {
       return question
     }
@@ -128,14 +128,14 @@ const compileInlineConditionalQuestions = (questions, errors) => {
   })
 
   return compiledQuestions
-    .filter(question => {
+    .filter((question) => {
       // remove questions that have been rendered inline
       return (
         !conditionalQuestionsToRemove.includes(question.questionCode) ||
         outOfLineConditionalQuestions.includes(question.questionCode)
       )
     })
-    .map(question => {
+    .map((question) => {
       // add css to hide questions to be displayed out of line
       const questionObject = question
       if (!questionObject.questionText) {
@@ -164,10 +164,10 @@ const updateAnswersWithInlineConditionals = ({
   conditionalQuestions,
 }) => {
   let removeQuestions = questionsToRemove
-  const updatedSchemas = answerDtos?.map(schemaLine => {
+  const updatedSchemas = answerDtos?.map((schemaLine) => {
     const updatedSchemaLine = schemaLine
 
-    schemaLine.conditionals?.forEach(conditionalDisplay => {
+    schemaLine.conditionals?.forEach((conditionalDisplay) => {
       const subjectCode = conditionalDisplay.conditional
       if (conditionalDisplay.displayInline) {
         let thisError
@@ -233,11 +233,11 @@ const updateAnswersWithInlineConditionals = ({
 const updateOutOfLineConditionals = (question = []) => {
   const currentQuestion = question
   // @ts-ignore
-  currentQuestion.answerDtos = currentQuestion.answerDtos?.map(schemaLine => {
+  currentQuestion.answerDtos = currentQuestion.answerDtos?.map((schemaLine) => {
     const updatedSchemaLine = schemaLine
     const outOfLineConditionalsForThisAnswer = []
 
-    schemaLine.conditionals?.forEach(conditionalDisplay => {
+    schemaLine.conditionals?.forEach((conditionalDisplay) => {
       const subjectCode = conditionalDisplay.conditional
       if (!conditionalDisplay.displayInline) {
         outOfLineConditionalsForThisAnswer.push(subjectCode)
@@ -245,7 +245,7 @@ const updateOutOfLineConditionals = (question = []) => {
 
       if (outOfLineConditionalsForThisAnswer?.length) {
         const pre = 'conditional-id-form-'
-        const ariaControls = outOfLineConditionalsForThisAnswer.map(i => pre + i).join(' ')
+        const ariaControls = outOfLineConditionalsForThisAnswer.map((i) => pre + i).join(' ')
         updatedSchemaLine.attributes = [
           ['data-conditional', outOfLineConditionalsForThisAnswer.join(' ')],
           ['data-aria-controls', ariaControls],
@@ -267,7 +267,7 @@ const annotateAnswers = (answerDtos, answerValue) => {
   if (!answerValue || answerValue?.length === 0) {
     return answerDtos
   }
-  return answerDtos.map(as => {
+  return answerDtos.map((as) => {
     return Object.assign(as, {
       checked: as.value === answerValue || answerValue.includes(as.value),
       selected: as.value === answerValue || answerValue.includes(as.value),

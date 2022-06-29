@@ -15,7 +15,7 @@ const cacheOasysUserDetails = async (userId, oasysUser) => {
   return userDetails
 }
 
-const cacheUserDetails = async user => {
+const cacheUserDetails = async (user) => {
   const userDetails = {
     username: user?.user_name,
     name: user?.name,
@@ -32,7 +32,7 @@ const cacheUserDetailsWithRegion = async (userId, areaCode, areaName) => {
   await redis.set(`user:${userId}`, JSON.stringify(userDetails))
 }
 
-const getCachedUserDetails = async userId => {
+const getCachedUserDetails = async (userId) => {
   const serializedDetails = await redis.get(`user:${userId}`)
   return serializedDetails !== null ? JSON.parse(serializedDetails) : null
 }

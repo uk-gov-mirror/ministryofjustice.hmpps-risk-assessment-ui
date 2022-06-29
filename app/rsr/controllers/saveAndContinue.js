@@ -5,9 +5,9 @@ const { logger } = require('../../../common/logging/logger')
 const { customValidations } = require('../fields')
 const { processReplacements } = require('../../../common/utils/util')
 
-const nullOrEmpty = s => !s || s === ''
+const nullOrEmpty = (s) => !s || s === ''
 
-const getErrorMessage = reason => {
+const getErrorMessage = (reason) => {
   if (reason === 'OASYS_PERMISSION') {
     return 'You do not have permission to update this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
   }
@@ -30,7 +30,7 @@ const pageValidationErrorsFrom = (validationErrors, serverErrors = []) => {
     { validationErrors: {}, errorSummary: [] },
   )
 
-  const processedServerErrors = serverErrors.map(errorMessage => ({
+  const processedServerErrors = serverErrors.map((errorMessage) => ({
     text: errorMessage,
     href: `#`,
   }))
@@ -41,53 +41,55 @@ const pageValidationErrorsFrom = (validationErrors, serverErrors = []) => {
   }
 }
 
-const withAnswersFrom = (previousAnswers, submittedAnswers) => ([fieldName, fieldProperties]) => {
-  const someValueFrom = x => (!nullOrEmpty(x) ? x : undefined)
-  const answerFor = f => {
-    let answer = ''
+const withAnswersFrom =
+  (previousAnswers, submittedAnswers) =>
+  ([fieldName, fieldProperties]) => {
+    const someValueFrom = (x) => (!nullOrEmpty(x) ? x : undefined)
+    const answerFor = (f) => {
+      let answer = ''
 
-    const submittedAnswer = someValueFrom(submittedAnswers[f])
-    const previousAnswer = someValueFrom(previousAnswers[f])
+      const submittedAnswer = someValueFrom(submittedAnswers[f])
+      const previousAnswer = someValueFrom(previousAnswers[f])
 
-    if (submittedAnswer) {
-      answer = submittedAnswer
-    } else if (Array.isArray(previousAnswer) && previousAnswer.length > 0) {
-      const [firstAnswer] = previousAnswer
-      answer = firstAnswer
+      if (submittedAnswer) {
+        answer = submittedAnswer
+      } else if (Array.isArray(previousAnswer) && previousAnswer.length > 0) {
+        const [firstAnswer] = previousAnswer
+        answer = firstAnswer
+      }
+
+      return answer
     }
 
-    return answer
-  }
+    if (fieldProperties.answerType === 'radio') {
+      const checkedAnswer = answerFor(fieldName)
+      return {
+        ...fieldProperties,
+        answerDtos: fieldProperties.answerDtos.map((answerSchema) => ({
+          ...answerSchema,
+          checked: checkedAnswer === answerSchema.value,
+        })),
+      }
+    }
 
-  if (fieldProperties.answerType === 'radio') {
-    const checkedAnswer = answerFor(fieldName)
+    if (fieldProperties.answerType === 'checkbox') {
+      const selected = submittedAnswers[fieldName] || previousAnswers[fieldName] || []
+      return {
+        ...fieldProperties,
+        answerDtos: fieldProperties.answerDtos.map((answerSchema) => ({
+          ...answerSchema,
+          selected: selected.includes(answerSchema.value),
+        })),
+      }
+    }
+
+    const answer = answerFor(fieldName)
+
     return {
       ...fieldProperties,
-      answerDtos: fieldProperties.answerDtos.map(answerSchema => ({
-        ...answerSchema,
-        checked: checkedAnswer === answerSchema.value,
-      })),
+      answer,
     }
   }
-
-  if (fieldProperties.answerType === 'checkbox') {
-    const selected = submittedAnswers[fieldName] || previousAnswers[fieldName] || []
-    return {
-      ...fieldProperties,
-      answerDtos: fieldProperties.answerDtos.map(answerSchema => ({
-        ...answerSchema,
-        selected: selected.includes(answerSchema.value),
-      })),
-    }
-  }
-
-  const answer = answerFor(fieldName)
-
-  return {
-    ...fieldProperties,
-    answer,
-  }
-}
 
 const fieldFrom = (localField, questionSchemaDto = {}) => {
   const validationRules = [...localField.validate]
@@ -112,19 +114,21 @@ const keysByQuestionCode = (otherQuestions, currentQuestion) => ({
   [currentQuestion.questionCode]: currentQuestion,
 })
 
-const combinedLocalFieldsWith = remoteQuestions => (otherFields, [questionCode, localQuestion]) => ({
-  ...otherFields,
-  [questionCode]: fieldFrom(localQuestion, remoteQuestions[questionCode]),
-})
+const combinedLocalFieldsWith =
+  (remoteQuestions) =>
+  (otherFields, [questionCode, localQuestion]) => ({
+    ...otherFields,
+    [questionCode]: fieldFrom(localQuestion, remoteQuestions[questionCode]),
+  })
 
 const combineDateFields = (formValues = {}) => {
   const dateFieldPattern = /-(day|month|year)$/
-  const whereDateField = key => dateFieldPattern.test(key)
+  const whereDateField = (key) => dateFieldPattern.test(key)
 
   const dateFieldNames = Object.keys(formValues).filter(whereDateField)
-  const nonDateFieldNames = Object.keys(formValues).filter(fieldName => !whereDateField(fieldName))
+  const nonDateFieldNames = Object.keys(formValues).filter((fieldName) => !whereDateField(fieldName))
 
-  const combinedDateFieldsFor = answers => (otherFields, fieldName) => {
+  const combinedDateFieldsFor = (answers) => (otherFields, fieldName) => {
     const dateKey = fieldName.replace(dateFieldPattern, '')
 
     if (
@@ -142,13 +146,13 @@ const combineDateFields = (formValues = {}) => {
     return { ...otherFields, [dateKey]: `${year}-${month}-${day}` }
   }
 
-  const answersFrom = answers => (otherFields, fieldName) => ({ ...otherFields, [fieldName]: answers[fieldName] })
+  const answersFrom = (answers) => (otherFields, fieldName) => ({ ...otherFields, [fieldName]: answers[fieldName] })
 
   const combinedDateFields = dateFieldNames.reduce(combinedDateFieldsFor(formValues), {})
   return nonDateFieldNames.reduce(answersFrom(formValues), combinedDateFields)
 }
 
-const answerDtoFrom = formValues =>
+const answerDtoFrom = (formValues) =>
   Object.keys(formValues).reduce((otherFields, fieldName) => {
     const answer = formValues[fieldName] !== '' ? formValues[fieldName] : []
     const answerAsArray = Array.isArray(answer) ? answer : [answer]
@@ -166,13 +170,13 @@ const renderConditionalQuestion = (
   _nunjucks = nunjucks,
 ) => {
   const conditionalQuestions = conditionalQuestionCodes.map(({ code, deps }) => {
-    const [schema] = questions.filter(question => question.questionCode === code)
+    const [schema] = questions.filter((question) => question.questionCode === code)
     return { schema, deps }
   })
 
-  const answerDtos = questionSchema.answerDtos.map(answer => {
+  const answerDtos = questionSchema.answerDtos.map((answer) => {
     const questionsDependentOnThisAnswer = conditionalQuestions.filter(
-      question => question.schema.dependent.value === answer.value,
+      (question) => question.schema.dependent.value === answer.value,
     )
 
     if (questionsDependentOnThisAnswer.length === 0) {
@@ -214,13 +218,13 @@ const renderConditionalQuestion = (
 
 const compileConditionalQuestions = (questions, errors) => {
   const inlineConditionalQuestions = questions.filter(
-    question => question.dependent && !question.dependent.displayOutOfLine,
+    (question) => question.dependent && !question.dependent.displayOutOfLine,
   )
 
-  const questionCodes = inlineConditionalQuestions.map(question => question.questionCode)
+  const questionCodes = inlineConditionalQuestions.map((question) => question.questionCode)
 
   const rootConditionalQuestions = inlineConditionalQuestions
-    .filter(question => !questionCodes.includes(question.dependent.field))
+    .filter((question) => !questionCodes.includes(question.dependent.field))
     .reduce(
       (otherQuestions, currentQuestion) => [
         ...otherQuestions,
@@ -229,12 +233,12 @@ const compileConditionalQuestions = (questions, errors) => {
       [],
     )
 
-  const buildNode = parentQuestionCode =>
+  const buildNode = (parentQuestionCode) =>
     inlineConditionalQuestions
-      .filter(question => question.dependent.field === parentQuestionCode)
-      .map(question => {
+      .filter((question) => question.dependent.field === parentQuestionCode)
+      .map((question) => {
         const dependents = inlineConditionalQuestions.filter(
-          otherQuestion => question.questionCode === otherQuestion.dependent.field,
+          (otherQuestion) => question.questionCode === otherQuestion.dependent.field,
         )
         if (dependents.length > 0) {
           return { code: question.questionCode, deps: buildNode(question.questionCode) }
@@ -242,13 +246,13 @@ const compileConditionalQuestions = (questions, errors) => {
         return { code: question.questionCode }
       })
 
-  const dependencyTree = rootConditionalQuestions.map(questionCode => {
+  const dependencyTree = rootConditionalQuestions.map((questionCode) => {
     return { code: questionCode, deps: buildNode(questionCode) }
   })
 
   return dependencyTree.reduce(
     (otherQuestions, { code: questionCode, deps: conditionalQuestionCodes }) => {
-      const [questionSchema] = otherQuestions.filter(question => question.questionCode === questionCode)
+      const [questionSchema] = otherQuestions.filter((question) => question.questionCode === questionCode)
 
       const updatedQuestion = renderConditionalQuestion(
         otherQuestions,
@@ -256,7 +260,7 @@ const compileConditionalQuestions = (questions, errors) => {
         conditionalQuestionCodes,
         errors,
       )
-      return otherQuestions.map(question =>
+      return otherQuestions.map((question) =>
         question.questionCode === updatedQuestion.questionCode ? updatedQuestion : question,
       )
     },
@@ -340,6 +344,7 @@ class SaveAndContinue extends Controller {
   async validateFields(req, res, next) {
     // at this point makes changes to sessionModel fields to add in context specific validations
     const answers = req.sessionModel.get('answers') || {}
+    // eslint-disable-next-line camelcase
     const { date_first_sanction = '', total_sanctions = '' } = answers
     const offenderDob = req.session?.assessment?.subject?.dob
 

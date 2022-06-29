@@ -67,7 +67,7 @@ jest.mock('../../data/hmppsAssessmentApi')
 jest.mock('../../data/offenderAssessmentApi')
 jest.mock('../../utils/util')
 
-processReplacements.mockImplementation(input => input)
+processReplacements.mockImplementation((input) => input)
 
 describe('getQuestionGroup middleware', () => {
   let req

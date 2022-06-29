@@ -13,7 +13,7 @@ const {
   },
 } = require('../config')
 
-const convertHtmlToPdf = async renderedHtml => {
+const convertHtmlToPdf = async (renderedHtml) => {
   try {
     const request = superagent
       .post(url)

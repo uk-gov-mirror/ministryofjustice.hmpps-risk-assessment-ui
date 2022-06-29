@@ -76,7 +76,7 @@ class SaveAndContinue extends BaseController {
     const questionsWithMappedAnswers = questions.map(withAnswersFrom(previousAnswers, answerDtoFrom(submittedAnswers)))
 
     const questionWithPreCompiledConditionals = compileConditionalQuestions(
-      questionsWithMappedAnswers.filter(questionSchema => req.form.options.fields[questionSchema.questionCode]),
+      questionsWithMappedAnswers.filter((questionSchema) => req.form.options.fields[questionSchema.questionCode]),
       validationErrors,
     )
 
@@ -130,7 +130,7 @@ class SaveAndContinue extends BaseController {
 
     const combineLocalAndRemoteFields = (fields, remoteFields) =>
       Object.entries(fields).reduce(combinedLocalFieldsWith(remoteFields), {})
-    const grabQuestions = async request => {
+    const grabQuestions = async (request) => {
       try {
         const journeyName = request.form?.options?.journeyName || ''
         return await getFlatAssessmentQuestions(journeyName, request.user?.token, request.user?.id)
@@ -168,9 +168,9 @@ class SaveAndContinue extends BaseController {
     const filteredAnswers = filterAnswersByFields(req.form?.options?.fields, answersWithFormattedDates)
 
     // if user has selected 'I'll come back later' for this page, remove field validations for unanswered fields
-    const sectionCompleteField = Object.keys(req.form?.options?.fields).find(key => key.match(/^\w+_complete$/))
+    const sectionCompleteField = Object.keys(req.form?.options?.fields).find((key) => key.match(/^\w+_complete$/))
     if (filteredAnswers[sectionCompleteField] === SECTION_INCOMPLETE) {
-      Object.keys(filteredAnswers).forEach(key => {
+      Object.keys(filteredAnswers).forEach((key) => {
         if (filteredAnswers[key] === '') {
           req.form.options.fields[key].validate = []
         }
@@ -200,7 +200,7 @@ class SaveAndContinue extends BaseController {
           return questionCode
         })
       const newMultipleAnswer = {}
-      multipleFields.forEach(questionCode => {
+      multipleFields.forEach((questionCode) => {
         newMultipleAnswer[questionCode] = answers[questionCode] || ''
         delete answers[questionCode]
       })
@@ -229,7 +229,7 @@ class SaveAndContinue extends BaseController {
         })
 
       const updatedMultiple = {}
-      multipleFields.forEach(questionCode => {
+      multipleFields.forEach((questionCode) => {
         updatedMultiple[questionCode] = answers[questionCode] || ''
         delete answers[questionCode]
       })

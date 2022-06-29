@@ -52,7 +52,7 @@ const action = async (agent, authorisationToken) => {
       .auth(authorisationToken, { type: 'bearer' })
       .set('x-correlation-id', getCorrelationId())
       .timeout(timeout)
-      .then(response => {
+      .then((response) => {
         return [true, response.body]
       })
   } catch (error) {
@@ -71,7 +71,7 @@ const action = async (agent, authorisationToken) => {
   }
 }
 
-const logError = error => {
+const logError = (error) => {
   logger.warn('Error calling offenderAssessments API')
   logger.warn({
     status: error.status,

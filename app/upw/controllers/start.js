@@ -16,7 +16,7 @@ const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode =
   return assessmentSupervision(assessmentParams, user?.token, user?.id)
 }
 
-const getSubjectDetailsFor = assessment => ({
+const getSubjectDetailsFor = (assessment) => ({
   name: assessment?.subject?.name,
   dob: assessment?.subject?.dateOfBirth,
   pnc: assessment?.subject?.pnc,

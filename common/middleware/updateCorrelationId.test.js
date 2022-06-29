@@ -30,12 +30,12 @@ describe('Set correlation ID to value of x-request-id if it is present', () => {
     jest.resetAllMocks()
   })
 
-  test('should not change correlation ID', done => {
+  test('should not change correlation ID', (done) => {
     updateCorrelationId(req, res, done)
     expect(cls.getNamespace).not.toHaveBeenCalled()
   })
 
-  test('should update correlation ID', done => {
+  test('should update correlation ID', (done) => {
     req.headers['x-request-id'] = 'NCC-1701'
     updateCorrelationId(req, res, done)
     expect(cls.getNamespace).toHaveBeenCalled()
