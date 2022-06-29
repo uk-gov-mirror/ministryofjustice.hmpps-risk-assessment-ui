@@ -45,7 +45,7 @@
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
     "build": "npm run build:copy & npm run build:css & npm run build:js",
-    "clean": "rimraf public && mkdir public && mkdir public/assets",
+    "clean": "rimraf public && mkdir public && mkdir public/assets && mkdir public/assets/fonts",
     "build:copy": "npm run copy-govuk-assets && npm run copy-assets",
     "build:css": "npm run compile-sass && npm run cssmin",
     "build:js": "npm run browserify && npm run babel && npm run concat",
