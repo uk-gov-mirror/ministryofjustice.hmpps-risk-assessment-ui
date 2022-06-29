@@ -2688,6 +2688,30 @@
           "text": "No, I’ll come back later"
         }
       ]
+    },
+    {
+      "type": "question",
+      "questionId": "8f721d80-2b61-4b3d-8f72-7d20a72d2ed0",
+      "questionCode": "active_carer_commitments",
+      "answerType": "freetext",
+      "questionText": "Are there carer commitments?",
+      "helpText": "",
+      "readOnly": true,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "d1d6d2be-bbec-4cd0-bced-927bf24fa614",
+      "questionCode": "active_carer_commitments_details",
+      "answerType": "textarea",
+      "questionText": "Additional information (Optional)",
+      "helpText": "",
+      "readOnly": true,
+      "conditional": false,
+      "referenceDataTargets": [],
+      "answerDtos": []
     }
   ],
   "RSR": [

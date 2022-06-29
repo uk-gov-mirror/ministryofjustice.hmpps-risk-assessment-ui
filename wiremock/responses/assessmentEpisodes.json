@@ -79,7 +79,17 @@
         "disability_notes": "Some comments",
         "disability_adjustments": ["Colour/visibility marking"]
       }
-    ]
+    ],
+    "active_carer_commitments": [
+      {
+        "description": "Dependents",
+        "code": "I",
+        "subType": "Is a Primary Carer",
+        "subTypeCode": "I02",
+        "isEvidenced": false
+      }
+    ],
+    "active_carer_commitments_details": []
   },
   "predictors": [
     {

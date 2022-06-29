@@ -46,6 +46,15 @@ const customValidationsEditContactDetails = (
   return fields
 }
 
+const customValidationsCaringCommitments = (fields, newCaringCommitmentsData) => {
+  if (!newCaringCommitmentsData) {
+    fields.caring_commitments?.validate.push(...requireYesOrNo.validate)
+    fields.caring_commitments_details?.validate.push(...requireEnterDetails.validate)
+  }
+
+  return fields
+}
+
 const requireSelectOption = {
   validate: [
     {
@@ -589,11 +598,11 @@ const fields = {
     dependent: { field: 'travel_information', value: 'YES' },
     ...requireYesOrNo,
   },
-  caring_commitments: requireYesOrNo,
+  caring_commitments: {},
   caring_commitments_details: {
     dependent: { field: 'caring_commitments', value: 'YES' },
-    ...requireEnterDetails,
   },
+  active_carer_commitments_details: {},
   employment_education: {
     validate: [
       {
@@ -756,4 +765,5 @@ module.exports = {
   fields,
   customValidationsEditEmergencyContact,
   customValidationsEditContactDetails,
+  customValidationsCaringCommitments,
 }
