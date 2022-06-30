@@ -29,12 +29,12 @@
                 <caption class="govuk-table__caption govuk-table__caption--xl">Are there carer commitments?</caption>
                 <tbody class="govuk-table__body">
                     <tr class="govuk-table__row">
-                    <th scope="row" class="govuk-table__header"> Carer commitments</th>
+                    <th scope="row" class="govuk-table__header">Carer commitments</th>
                     <td class="govuk-table__cell">
                     <ul class="govuk-list">
                     {% for commitment in rawAnswers["active_carer_commitments"] %}
                         <li>
-                            {{ commitment["description"] }} - {{ commitment["subType"] }}
+                            {{ commitment["subType"] }}
                         </li>
                     {% endfor %}
                     </ul>

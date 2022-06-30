@@ -84,8 +84,22 @@
       {
         "description": "Dependents",
         "code": "I",
+        "subType": "Has Dependents",
+        "subTypeCode": "I01",
+        "isEvidenced": false
+      },
+      {
+        "description": "Dependents",
+        "code": "I",
         "subType": "Is a Primary Carer",
         "subTypeCode": "I02",
+        "isEvidenced": false
+      },
+      {
+        "description": "Dependents",
+        "code": "I",
+        "subType": "Is a Lone Parent",
+        "subTypeCode": "I03",
         "isEvidenced": false
       }
     ],
