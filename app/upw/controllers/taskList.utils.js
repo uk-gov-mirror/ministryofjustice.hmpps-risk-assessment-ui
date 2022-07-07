@@ -108,7 +108,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
       })
     }, tasks)
 
-    if (taskIndex && itemIndex) delete tasks[taskIndex].items[itemIndex]
+    if (taskIndex && itemIndex) delete tasks[taskIndex].items.splice(itemIndex, 1)
   }
 
   const pdfPreview = {

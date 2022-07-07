@@ -2,22 +2,17 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
 <header class="moj-header" role="banner">
-
   <div class="moj-header__container govuk-width-container--app-extra-wide">
-
     <div class="moj-header__logo">
-
       {{ renderMojCrest('#FFFFFF', 40) }}
-
       <a class="moj-header__link moj-header__link--organisation-name" href="/">HMPPS</a>
       <a class="moj-header__link moj-header__link--service-name" href="/">Assess risks and needs</a>
-      <div class="pac-phase-tag"><strong class="govuk-tag pac-header-tag">Beta</strong></div>
-
+      <div class="pac-phase-tag">
+        <strong class="govuk-tag pac-header-tag">Beta</strong>
+      </div>
     </div>
     <div class="moj-header__content">
-
       <nav class="moj-header__navigation" aria-label="Account navigation">
-
         <ul class="moj-header__navigation-list">
           {% if username %}
             <li class="moj-header__navigation-item">
@@ -28,14 +23,10 @@
             </li>
           {% endif %}
         </ul>
-
       </nav>
-
     </div>
   </div>
-
 </header>
-
 
 {% if not hideBackLink %}
   <div class="moj-primary-navigation__container govuk-width-container--app-extra-wide">
@@ -46,7 +37,4 @@
       }) }}
     </div>
   </div>
-
 {% endif %}
-
-{% include "./offenderDetails.njk" %}

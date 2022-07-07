@@ -36,6 +36,7 @@
 {% endblock %}
 
 {% block content %}
+  {% include "./partials/offenderDetails.njk" %}
   {% if errorSummary and errorSummary.length > 0 %}
     {% include "./partials/errorSummary.njk" %}
   {% endif %}
