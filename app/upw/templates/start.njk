@@ -6,7 +6,7 @@
 {% set hideBackLink = true %}
 
 {% block pageTitle %}
-{{ pageTitle }}
+    {{ pageTitle }}
 {% endblock %}
 
 {% block header %}
@@ -20,44 +20,51 @@
 {%- endmacro -%}
 
 {% block content %}
-<div class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
-        {{ renderLastEdited(assessment.lastEditedBy, assessment.lastEditedDate) }}
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-three-quarters">
+            {{ renderLastEdited(assessment.lastEditedBy, assessment.lastEditedDate) }}
 
-        <h1 class="govuk-heading-xl landing-page__heading">{{ options.journeyPageTitle }}</h1>
+            <h1 class="govuk-heading-xl landing-page__heading">{{ options.journeyPageTitle }}</h1>
 
-        <p class="govuk-hint hint__large">{{ pageDescription | safe }}</p>
+            <p class="govuk-body govuk-!-font-size-19">Your answers will be combined with OASys and nDelius information to create a PDF.</p>
+            <p class="govuk-body govuk-!-font-size-19 govuk-!-font-weight-bold">Some information held in nDelius cannot be changed in this assessment, including details about an individual’s:</p>
+            <ul class="govuk-list govuk-list--bullet govuk-!-font-size-19">
+                <li>Aliases</li>
+                <li>Disabilities and adjustments</li>
+                <li>Personal circumstances (including carer and dependants information)</li>
+            </ul>
+            <p class="govuk-body govuk-!-font-size-19">It is advised to check that these details are up to date in nDelius before starting this assessment.</p>
 
-        <div class="landing-page__offence-details">
-            <table class="govuk-table no-bottom-margin">
-                <tbody class="govuk-table__body">
-                <tr class="govuk-table__row">
-                    <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Offence</th>
-                    <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.offence }} - {{ assessment.offence.offenceDescription }}</td>
-                </tr>
-                <tr class="govuk-table__row">
-                    <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Subcode</th>
-                    <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.subCode }} - {{ assessment.offence.subCodeDescription }}</td>
-                </tr>
-                <tr class="govuk-table__row">
-                    <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Sentence date</th>
-                    <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.sentenceDate }}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="landing-page__offence-details">
+                <table class="govuk-table no-bottom-margin">
+                    <tbody class="govuk-table__body">
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Offence</th>
+                            <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.offence }} - {{ assessment.offence.offenceDescription }}</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Subcode</th>
+                            <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.subCode }} - {{ assessment.offence.subCodeDescription }}</td>
+                        </tr>
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header no-bottom-border table-cell__narrow">Sentence date</th>
+                            <td class="govuk-table__cell no-bottom-border">{{ assessment.offence.sentenceDate }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="questiongroup-action-buttons__start">
-            <form method="post" action="{{ action }}">
-                <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+            <div class="questiongroup-action-buttons__start">
+                <form method="post" action="{{ action }}">
+                    <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-                {{ govukButton({
-                    text: 'Start now',
-                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1',
-                    isStartButton: true
-                }) }}
-            </form>
+                    {{ govukButton({
+                        text: 'Start now',
+                        classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1',
+                        isStartButton: true
+                    }) }}
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
