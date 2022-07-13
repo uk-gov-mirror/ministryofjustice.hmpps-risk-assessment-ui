@@ -1,6 +1,7 @@
 node_modules
 public
 common/assets/javascripts/*.min.js
+common/assets/javascripts/app-insights.js
 common/browsered/*.js
 package.json
 package-lock.json

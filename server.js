@@ -92,7 +92,7 @@ function initialiseGlobalMiddleware(app) {
   app.use((req, res, next) => {
     res.setHeader(
       'Content-Security-Policy',
-      "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'sha256-m5Sbrhw+r00tt+60yyAghRM3ydJ7im+KM/aKiPEK/HQ='; style-src 'self'; frame-src 'self'",
+      "default-src 'self'; connect-src 'self' dc.services.visualstudio.com/v2/track; font-src 'self'; img-src 'self'; script-src 'self' js.monitor.azure.com 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'sha256-m5Sbrhw+r00tt+60yyAghRM3ydJ7im+KM/aKiPEK/HQ=' 'sha256-KRSTS/E0qGKsfXMQ4E12L0K3g+FJNXiXgJSYfVQV91M=' 'sha256-TKr7E5adYQIZfInlwPaDsfURYufKvKlSM0oNSK0yZwI=' 'sha256-aC+Kg9O1M7kgGrqr2caWuEs3eY9R8msK8cFrLtguFY4=' 'sha256-9YsoG/P7wvqSx6FVKCl5C73RpWzbIaMsbYfxLUQeDto=' 'sha256-OMPCbW+0lYfE0SfAtKG15jIcU3/75d0fjIKf/f59gE4='; style-src 'self'; frame-src 'self'",
     )
     next()
   })
@@ -142,6 +142,14 @@ function initialiseGlobalMiddleware(app) {
   auth.init()
   app.use(passport.initialize())
   app.use(passport.session())
+
+  // add instrumentation key to app so it can be picked up in front end templates
+  // eslint-disable-next-line no-param-reassign
+  app.locals.applicationInsightsInstrumentationKey = applicationInsights.instrumentationKey
+
+  // add role name to app so it can be picked up in front end templates
+  // eslint-disable-next-line no-param-reassign
+  app.locals.applicationInsightsRoleName = process.env.npm_package_name
 
   // must be after session since we need session
   app.use(mdcSetup)

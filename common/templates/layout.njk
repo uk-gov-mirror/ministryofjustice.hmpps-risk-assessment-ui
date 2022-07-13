@@ -33,6 +33,13 @@
 {% block head %}
   {% include "common/templates/includes/head.njk" %}
 
+  <script>
+    var applicationInsightsInstrumentationKey = '{{ applicationInsightsInstrumentationKey }}';
+  </script>
+  <script>
+    var applicationInsightsRoleName = '{{ applicationInsightsRoleName }}';
+  </script>
+  <script src='/javascripts/app-insights.js' type='text/javascript'></script>
 {% endblock %}
 
 {% block content %}

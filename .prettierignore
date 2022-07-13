@@ -1,0 +1,3 @@
+common/assets/javascripts/*.min.js
+common/assets/javascripts/app-insights.js
+public/*
