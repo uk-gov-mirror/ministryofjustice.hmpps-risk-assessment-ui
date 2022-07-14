@@ -16,7 +16,7 @@ const CaringCommitmentsController = require('./controllers/carerCommitment')
 
 module.exports = {
   '/start': {
-    pageTitle: 'Community payback assessment start',
+    pageTitle: 'Complete and download the Community payback assessment',
     controller: StartUpwAssessment,
     reset: true,
     entryPoint: true,
@@ -321,7 +321,7 @@ module.exports = {
     fields: ['individual_availability', 'individual_availability_details', 'individual_availability_complete'],
   },
   '/equipment': {
-    pageTitle: 'Equipment',
+    pageTitle: 'Choose equipment sizes',
     id: 'equipment',
     controller: SaveAndContinue,
     template: `${__dirname}/templates/placement-details/equipment`,
