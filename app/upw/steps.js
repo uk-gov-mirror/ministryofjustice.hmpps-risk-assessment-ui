@@ -375,4 +375,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/cookies.njk`,
   },
+  '/accessibility-statement': {
+    pageTitle: 'Accessibility statement for the Community Payback Assessment',
+    noPost: true,
+    template: `${__dirname}/templates/accessibility-statement.njk`,
+  },
 }
