@@ -1,55 +1,25 @@
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+---
+# Per environment values which override defaults in hmpps-risk-assessments-ui/values.yaml
 
-replicaCount: 2
-minReadySeconds: 10
-maxSurge: 100%
-maxUnavailable: 50%
-
-image:
-  repository: quay.io/hmpps/hmpps-risk-assessment-ui
-  tag: latest
-  pullPolicy: Always
-  port: 3000
-
-ingress:
-  enabled: true
-  enable_allow_list: true
-  host: preprod.hmpps-assessments.service.justice.gov.uk
-  cert_secret: hmpps-assessments-cert
-  path: /
-  identifier: green
-  weighting: 0
-
-redis:
-  secret: hmpps-assessments-elasticache-redis
-  tlsEnabled: true
-
-apiClientSecretName: hmpps-assessments-api
-authClientSecretName: hmpps-risk-assessment-ui
-
-env:
-  HMPPS_ASSESSMENT_API_URL: http://hmpps-assessments-api.hmpps-assessments-preprod.svc.cluster.local
-  OFFENDER_ASSESSMENT_API_URL: https://offender-prprod.aks-live-1.studio-hosting.service.justice.gov.uk
-  OAUTH_ENDPOINT_URL: https://sign-in-preprod.hmpps.service.justice.gov.uk/auth
-  PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-preprod.svc.cluster.local/forms/chromium/convert/html
-  SHOW_DETAILED_ERRORS: false
-  SHOW_REQUEST_ID_ON_ERROR_PAGE: false
-  DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
-
-allow_list:
-  office: "217.33.148.210/32"
-  health-kick: "35.177.252.195/32"
-  mojvpn: "81.134.202.29/32"
-  ark-internet-1: "194.33.192.0/25"
-  ark-internet-2: "194.33.196.0/25"
-  cloudplatform-live1-1: "35.178.209.113/32"
-  cloudplatform-live1-2: "3.8.51.207/32"
-  cloudplatform-live1-3: "35.177.252.54/32"
-  global-protect: "35.176.93.186/32"
-
-gotenberg:
+generic-service:
   replicaCount: 2
+
+  ingress:
+    host: preprod.hmpps-assessments.service.justice.gov.uk
+    contextColour: green
+
+  env:
+    HMPPS_ASSESSMENT_API_URL: http://hmpps-assessments-api.hmpps-assessments-preprod.svc.cluster.local
+    OFFENDER_ASSESSMENT_API_URL: https://offender-prprod.aks-live-1.studio-hosting.service.justice.gov.uk
+    OAUTH_ENDPOINT_URL: https://sign-in-preprod.hmpps.service.justice.gov.uk/auth
+    PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-preprod.svc.cluster.local/forms/chromium/convert/html
+    SHOW_DETAILED_ERRORS: false
+    SHOW_REQUEST_ID_ON_ERROR_PAGE: false
+    DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"    
+    INGRESS_HOST: https://preprod.hmpps-assessments.service.justice.gov.uk
 
 generic-prometheus-alerts:
   enabled: false
+  targetApplication: hmpps-risk-assessment-ui
+  alertSeverity: hmpps-assess-risks-and-needs
+
