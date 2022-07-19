@@ -17,7 +17,7 @@ generic-service:
     SHOW_REQUEST_ID_ON_ERROR_PAGE: true
     DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
     LOGGING_LEVEL: 'DEBUG'
-    INGRESS_HOST: https://dev.hmpps-assessments.service.justice.gov.uk
+    INGRESS_URL: https://dev.hmpps-assessments.service.justice.gov.uk
 
 generic-prometheus-alerts:
   enabled: false

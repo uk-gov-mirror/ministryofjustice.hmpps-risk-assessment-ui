@@ -15,8 +15,8 @@ generic-service:
     PDF_CONVERTER_ENDPOINT: http://hmpps-risk-assessment-ui-gotenberg.hmpps-assessments-prod.svc.cluster.local/forms/chromium/convert/html
     SHOW_DETAILED_ERRORS: false
     SHOW_REQUEST_ID_ON_ERROR_PAGE: false
-    DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"    
-    INGRESS_HOST: https://hmpps-assessments.service.justice.gov.uk
+    DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
+    INGRESS_URL: https://hmpps-assessments.service.justice.gov.uk
 
 generic-prometheus-alerts:
   enabled: true
