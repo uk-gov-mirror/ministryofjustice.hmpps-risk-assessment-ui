@@ -49,7 +49,7 @@ generic-service:
       APPINSIGHTS_INSTRUMENTATIONKEY: "APPINSIGHTS_INSTRUMENTATIONKEY"
     hmpps-assessments-elasticache-redis:
       REDIS_HOST: "primary_endpoint_address"
-      REDIS_AUTH_TOKEN: "auth_token"
+      REDIS_PASSWORD: "auth_token"
 
   allowlist:
     office: "217.33.148.210/32"
