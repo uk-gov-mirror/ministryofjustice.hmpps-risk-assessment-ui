@@ -2338,127 +2338,127 @@
           "answerUuid": "034a8964-7a54-4773-8224-87bb6c6a5ed8",
           "answerSchemaCode": "monday_morning",
           "value": "MONDAY_MORNING",
-          "text": "Monday morning"
+          "text": "Available for work Monday morning"
         },
         {
           "answerUuid": "78384548-62df-403f-99bb-4dd267ee0cc2",
           "answerSchemaCode": "monday_afternoon",
           "value": "MONDAY_AFTERNOON",
-          "text": "Monday afternoon"
+          "text": "Available for work Monday afternoon"
         },
         {
           "answerUuid": "74103423-a881-4572-810b-6993d58ff443",
           "answerSchemaCode": "monday_evening",
           "value": "MONDAY_EVENING",
-          "text": "Monday evening"
+          "text": "Available for work Monday evening"
         },
         {
           "answerUuid": "53acdc58-94ab-4049-8ebf-c4b2ba08f4f5",
           "answerSchemaCode": "tuesday_morning",
           "value": "TUESDAY_MORNING",
-          "text": "Tuesday morning"
+          "text": "Available for work Tuesday morning"
         },
         {
           "answerUuid": "bb7226bc-a231-43a7-a272-2d4d9a9d3d0b",
           "answerSchemaCode": "tuesday_afternoon",
           "value": "TUESDAY_AFTERNOON",
-          "text": "Tuesday afternoon"
+          "text": "Available for work Tuesday afternoon"
         },
         {
           "answerUuid": "5ed93e3e-67d6-402f-8de9-3b86d94d4f24",
           "answerSchemaCode": "tuesday_evening",
           "value": "TUESDAY_EVENING",
-          "text": "Tuesday evening"
+          "text": "Available for work Tuesday evening"
         },
         {
           "answerUuid": "4ab83101-e739-4618-b010-6983652585ae",
           "answerSchemaCode": "wednesday_morning",
           "value": "WEDNESDAY_MORNING",
-          "text": "Wednesday morning"
+          "text": "Available for work Wednesday morning"
         },
         {
           "answerUuid": "2d2fd1e4-2998-45ad-a7cf-e88f8570b4c2",
           "answerSchemaCode": "wednesday_afternoon",
           "value": "WEDNESDAY_AFTERNOON",
-          "text": "Wednesday afternoon"
+          "text": "Available for work Wednesday afternoon"
         },
         {
           "answerUuid": "f2147823-0211-4f05-bff7-84b445145d51",
           "answerSchemaCode": "wednesday_evening",
           "value": "WEDNESDAY_EVENING",
-          "text": "Wednesday evening"
+          "text": "Available for work Wednesday evening"
         },
         {
           "answerUuid": "4479a057-3159-49c5-9599-180f36428a78",
           "answerSchemaCode": "thursday_morning",
           "value": "THURSDAY_MORNING",
-          "text": "Thursday morning"
+          "text": "Available for work Thursday morning"
         },
         {
           "answerUuid": "1893becf-bf31-4697-b15e-d992dbf1812a",
           "answerSchemaCode": "thursday_afternoon",
           "value": "THURSDAY_AFTERNOON",
-          "text": "Thursday afternoon"
+          "text": "Available for work Thursday afternoon"
         },
         {
           "answerUuid": "a87c0229-1a9e-48a1-a319-d7a5101b0f43",
           "answerSchemaCode": "thursday_evening",
           "value": "THURSDAY_EVENING",
-          "text": "Thursdy evening"
+          "text": "Available for work Thursday evening"
         },
         {
           "answerUuid": "29fdfd16-700c-4196-9c6e-58bf695e55f0",
           "answerSchemaCode": "friday_morning",
           "value": "FRIDAY_MORNING",
-          "text": "Friday morning"
+          "text": "Available for work Friday morning"
         },
         {
           "answerUuid": "d7ac7df6-d922-41a5-8b5d-379dca5250c7",
           "answerSchemaCode": "friday_afternoon",
           "value": "FRIDAY_AFTERNOON",
-          "text": "Friday afternoon"
+          "text": "Available for work Friday afternoon"
         },
         {
           "answerUuid": "d202e29b-ec9e-4192-98a4-345b07c653f1",
           "answerSchemaCode": "friday_evening",
           "value": "FRIDAY_EVENING",
-          "text": "Friday evening"
+          "text": "Available for work Friday evening"
         },
         {
           "answerUuid": "c3b508b5-0241-4c67-8d87-9fe364290c2d",
           "answerSchemaCode": "saturday_morning",
           "value": "SATURDAY_MORNING",
-          "text": "Saturday morning"
+          "text": "Available for work Saturday morning"
         },
         {
           "answerUuid": "59bb90b0-6216-4920-bc3b-b47a62bda837",
           "answerSchemaCode": "saturday_afternoon",
           "value": "SATURDAY_AFTERNOON",
-          "text": "Saturday afternoon"
+          "text": "Available for work Saturday afternoon"
         },
         {
           "answerUuid": "c072a9ff-fbda-42ae-a5e6-b79616b3bc55",
           "answerSchemaCode": "saturday_evening",
           "value": "SATURDAY_EVENING",
-          "text": "Saturday evening"
+          "text": "Available for work Saturday evening"
         },
         {
           "answerUuid": "6398406e-f323-474a-a5aa-cb65a1da75c7",
           "answerSchemaCode": "sunday_morning",
           "value": "SUNDAY_MORNING",
-          "text": "Sunday morning"
+          "text": "Available for work Sunday morning"
         },
         {
           "answerUuid": "0acb7955-6e01-4bd6-b47f-438b87db4cc0",
           "answerSchemaCode": "sunday_afternoon",
           "value": "SUNDAY_AFTERNOON",
-          "text": "Sunday afternoon"
+          "text": "Available for work Sunday afternoon"
         },
         {
           "answerUuid": "976e41ce-ef5b-431f-8cc7-cd5ea2d8c619",
           "answerSchemaCode": "sunday_evening",
           "value": "SUNDAY_EVENING",
-          "text": "Sunday evening"
+          "text": "Available for work Sunday evening"
         }
       ]
     },

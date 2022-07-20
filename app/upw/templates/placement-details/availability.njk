@@ -14,8 +14,7 @@
   {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
-{% block content %}
-  {# include errorSummary partial #}
+{% block content %}  
   {{ super() }}
 
   {%- macro getAvailabilityValue(index) -%}
@@ -40,7 +39,8 @@
                type="checkbox"
                value="{{ getAvailabilityValue(optionNumber) }}" {{ getAvailabilityChecked(optionNumber) }}>
         <label class="govuk-label govuk-checkboxes__label"
-               for="{{ questions['individual_availability'].questionCode }}-{{ optionNumber }}"><span
+               for="{{ questions['individual_availability'].questionCode }}-{{ optionNumber }}">
+          <span
               class='govuk-visually-hidden'>{{ getAvailabilityText(optionNumber) }}</span></label>
       </div>
     </td>
@@ -56,71 +56,72 @@
       <form method="post" action="{{ action }}">
         <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-        <fieldset class="govuk-fieldset" aria-describedby="individual_availability-hint">
-          <legend class="govuk-fieldset__legend individual_availability govuk-label--m">
-            {{ questions['individual_availability'].questionText }}
-          </legend>
-
+        <fieldset class="govuk-fieldset" aria-describedby="individual_availability-legend">
           <table class="govuk-table upw-availability-table">
+            <caption class="govuk-visually-hidden">
+              <legend id="individual_availability-legend" class="govuk-fieldset__legend individual_availability govuk-label--m">
+                {{ questions['individual_availability'].questionText }}
+              </legend>
+            </caption>
             <thead class="govuk-table__head">
-            <tr>
-              <th scope="row" class="govuk-table__header"></th>
-              <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+              <tr>
+                <td scope="row" class="govuk-table__header"></td>
+                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
                 Monday
               </th>
-              <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
                 Tuesday
               </th>
-              <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
                 Wednesday
               </th>
-              <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
                 Thursday
               </th>
-              <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
                 Friday
               </th>
-              <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
                 Saturday
               </th>
-              <th scope="col"
+                <th scope="col"
                   class="govuk-table__header upw-availability-table__column upw-availability-table__header no-right-border">
                 Sunday
               </th>
-            </tr>
+              </tr>
             </thead>
             <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Morning</th>
-              {{ availabilityOption(0) }}
-              {{ availabilityOption(3) }}
-              {{ availabilityOption(6) }}
-              {{ availabilityOption(9) }}
-              {{ availabilityOption(12) }}
-              {{ availabilityOption(15) }}
-              {{ availabilityOption(18) }}
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Morning</th>
+                {{ availabilityOption(0) }}
+                {{ availabilityOption(3) }}
+                {{ availabilityOption(6) }}
+                {{ availabilityOption(9) }}
+                {{ availabilityOption(12) }}
+                {{ availabilityOption(15) }}
+                {{ availabilityOption(18) }}
 
-            </tr>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Afternoon</th>
-              {{ availabilityOption(1) }}
-              {{ availabilityOption(4) }}
-              {{ availabilityOption(7) }}
-              {{ availabilityOption(10) }}
-              {{ availabilityOption(13) }}
-              {{ availabilityOption(16) }}
-              {{ availabilityOption(19) }}
-            </tr>
-            <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Evening</th>
-              {{ availabilityOption(2) }}
-              {{ availabilityOption(5) }}
-              {{ availabilityOption(8) }}
-              {{ availabilityOption(11) }}
-              {{ availabilityOption(14) }}
-              {{ availabilityOption(17) }}
-              {{ availabilityOption(20) }}
-            </tr>
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Afternoon</th>
+                {{ availabilityOption(1) }}
+                {{ availabilityOption(4) }}
+                {{ availabilityOption(7) }}
+                {{ availabilityOption(10) }}
+                {{ availabilityOption(13) }}
+                {{ availabilityOption(16) }}
+                {{ availabilityOption(19) }}
+              </tr>
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Evening</th>
+                {{ availabilityOption(2) }}
+                {{ availabilityOption(5) }}
+                {{ availabilityOption(8) }}
+                {{ availabilityOption(11) }}
+                {{ availabilityOption(14) }}
+                {{ availabilityOption(17) }}
+                {{ availabilityOption(20) }}
+              </tr>
             </tbody>
           </table>
         </fieldset>
