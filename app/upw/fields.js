@@ -644,7 +644,7 @@ const fields = {
     ...requireYesOrNo,
   },
   individual_commitment_details: {
-    dependent: { field: 'individual_commitment', value: 'YES' },
+    dependent: { field: 'individual_commitment', value: 'NO' },
     ...requireEnterDetails,
   },
   eligibility_intensive_working: {
