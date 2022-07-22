@@ -1,6 +1,6 @@
 {# Please ensure that any changes made here are also reflected in https://github.com/ministryofjustice/hmpps-risk-ui-elements #}
 
-<div class="mappa-widget">
+<aside class="mappa-widget" aria-label="MAPPA level">
 {% if mappa != null %}
     <h3 class="govuk-heading-m"><strong>{{ mappa.level | default("NO", true) }}</strong> MAPPA</h3>
     <p class="govuk-body-m">Multi-agency public protection arrangements</p>
@@ -14,4 +14,4 @@
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
     <p class="govuk-body-m">Something went wrong. We are unable to show MAPPA information at this time. Try again later.</p>
 {% endif %}
-</div>
+</aside>

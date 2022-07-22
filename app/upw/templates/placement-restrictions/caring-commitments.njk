@@ -19,7 +19,7 @@
 {{ super() }}
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-three-quarters">
+    <section class="govuk-grid-column-three-quarters" aria-label="Form content">
         <span class="govuk-caption-xl">Placement restrictions due to health and other needs</span>
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
@@ -62,9 +62,9 @@
                 }) }}
             </div>
         </form>
-    </div>
-    <div class="govuk-grid-column-one-quarter">
-        {{ widgets(widgetData) }}
-    </div>
+    </section>
+
+    {{ widgets(widgetData) }}
+    
 </div>
 {% endblock %}

@@ -4,7 +4,9 @@
 {% from "common/templates/components/mappa-widget/macro.njk" import mappaWidget %}
 {% from "common/templates/components/risk-flag-widget/macro.njk" import riskFlagWidget %}
 
-<h3 class="govuk-heading-m">Risk information</h3>
-{{ roshWidget(params.roshRiskSummary) }}
-{{ mappaWidget(params.mappa) }}
-{{ riskFlagWidget(params.flags) }}
+<div class="govuk-grid-column-one-quarter">
+    <h2 class="govuk-heading-m">Risk information</h2>
+    {{ roshWidget(params.roshRiskSummary) }}
+    {{ mappaWidget(params.mappa) }}
+    {{ riskFlagWidget(params.flags) }}
+</div>

@@ -15,7 +15,7 @@
     {% set offenderDetailsExists = true %}
   {% endif %}
   {% if offenderDetailsExists %}
-    <section class="key-details-bar" aria-label="Key details">
+    <aside class="key-details-bar" aria-label="Individuals key details">
       <div class="key-details-bar__top-block moj-context-header">
         <div class="column-reversed">
           <h2 class="key-details-bar__name"><span class="govuk-visually-hidden">Key details for </span>{{ subjectName }}</h2>
@@ -39,6 +39,6 @@
         </div>
         <hr class="key-details-bar__section-break govuk-section-break govuk-section-break--m govuk-section-break--visible">
       </div>
-    </section>
+    </aside>
   {% endif %}
 {% endif %}

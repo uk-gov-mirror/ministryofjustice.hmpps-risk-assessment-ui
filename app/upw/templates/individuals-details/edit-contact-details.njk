@@ -20,7 +20,7 @@
 {{ super() }}
 
 <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <section class="govuk-grid-column-two-thirds" aria-label="Form content">
         <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
         
         <form method="post" action="{{ action }}">
@@ -78,7 +78,6 @@
                 }) }}
             </div>
         </form>
-
-    </div>
+    </section>
 </div>
 {% endblock %}
