@@ -15,8 +15,8 @@
 {%- macro renderTable(table) -%}
   <table class="upw-pdf-table">
     {%- if table.caption -%}
-      <caption>
-        <h2 class="govuk-heading-m">{{ table.caption }}</h2>
+      <caption {% if table.captionId  %}id="caption_{{ table.captionId }}"{% endif %}>
+        <h3 class="govuk-heading-m">{{ table.caption }}</h3>
         <p>{{ table.captionDescription }}</p>
       </caption>
     {%- endif -%}
@@ -120,8 +120,9 @@
   </div>
 
   <div class='upw-avoid-break'>
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Supervised individual</h1>
+    <h2 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Supervised individual</h2>
     {{ renderTable({
+      captionId: "offence_details",
       caption: "Offence details",
       rows: [
         { id: "offence", heading: "Offence", data: renderOffence(assessment.offence.offence, assessment.offence.offenceDescription) },
@@ -132,6 +133,7 @@
   </div>
   <div class='upw-avoid-break'>
     {{ renderTable({
+      captionId: "personal_details",
       caption: "Personal details",
       rows: [
         { id: "family_name", heading: "Family name", data: renderValue(rawAnswers["family_name"][0]) },
@@ -147,6 +149,7 @@
   <div class='upw-avoid-break'>
     {% set showSexChangeDetails = rawAnswers["sex_change"] == "YES" %}
     {{ renderTable({
+      captionId: "gender_identity",
       caption: "Gender information",
       rows: [
         { id: "gender_identity", heading: "Gender identity", data: renderValue(answers["gender_identity"]) },
@@ -156,7 +159,7 @@
           data: renderValue(answers["sex_change"])
         },
         {
-          id: "sex_change",
+          id: "sex_change_details",
           heading: "Give details and discuss placement options with the individual, based on their gender identity.",
           description: "Record their preference and the details of the conversation.",
           condition: showSexChangeDetails,
@@ -178,6 +181,7 @@
   </div>
   <div class='upw-avoid-break'>
     {{ renderTable({
+      captionId: "contact_details",
       caption: "Contact details",
       rows: [
         {
@@ -200,14 +204,14 @@
     }) }}
   </div>
   <div class='upw-avoid-break'>
-    <h2 class="govuk-heading-m">Emergency contact details</h2>
+    <h3 id="heading_emergency_contacts" class="govuk-heading-m">Emergency contact details</h3>
 
     {% if rawAnswers['emergency_contact_declined'] | hasAnswer("declined") %}
       <span class="upw-declined-details">Individual declined to give an emergency contact</span>
     {% elif rawAnswers['emergency_contact_details'] and rawAnswers['emergency_contact_details'].length > 0 %}
       <div id="emergency_contact_details">
         {% for contact in rawAnswers['emergency_contact_details'] %}
-          <h3 class="govuk-heading-s">Emergency contact {{ loop.index }}</h3>
+          <h4 class="govuk-heading-s">Emergency contact {{ loop.index }}</h4>
           <div id="emergency_contact_details_{{ loop.index }}">
             {{ renderTable({
               rows: [
@@ -244,7 +248,7 @@
     {% endif %}
   </div>
   <div class='upw-avoid-break'>
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of harm in the community</h1>
+    <h2 id="heading_risk_of_harm" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of harm in the community</h2>
     <div id="rosh-widget">
       {{ roshWidget(widgets.roshRiskSummary) }}
     </div>
@@ -340,7 +344,7 @@
     }) }}
   </div>
   <div class='upw-avoid-break'>
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h1>
+    <h2 id="heading_management_of_risk" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h2>
 
     {%- set mappaDataRows = [ 
       { id: "mappa_nominal", heading: "MAPPA nominal?", data: renderValue("No") },
@@ -364,7 +368,7 @@
     {{ renderTable({ rows: mappaDataRows }) }}
   </div>
   <div class='upw-avoid-break'>
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h1>
+    <h2 id="heading_diversity_information" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h2>
 
     {%- set showPlacementPreferences = rawAnswers["gender_identity"] != "MALE" and rawAnswers["placement_preference"] == "YES" -%}
     {%- set showPlacementPreferencesByGender = rawAnswers["sex_change"] == "YES" -%}
@@ -398,7 +402,7 @@
     }) }}
   </div>
   <div class='upw-avoid-break'>
-    <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h1>
+    <h2 id="heading_placement_restrictions" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h2>
 
     {%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
       {%- if answer -%}
@@ -414,8 +418,8 @@
       {% if rawAnswers["active_disabilities"].length %}
 
         <table id="active_disabilities" class="upw-pdf-table">
-          <caption>
-            <h2 class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h2>
+          <caption id="caption_active_disabilities">
+            <h3 class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h3>
             <p>{{ disabilitiesCaptionSubheading }}</p>
           </caption>
           <tbody>
@@ -470,7 +474,7 @@
 
         {% else %}
 
-          <h2 class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h2>
+          <h3 id="heading_no_active_disabilities" class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h3>
           <p>{{ disabilitiesCaptionSubheading }}</p>
 
           <hr class="govuk-section-break govuk-section-break--visible">
@@ -483,6 +487,7 @@
       {% else %}
 
         {{ renderTable({
+          captionId: "disabilities_and_mental_health",
           caption: disabilitiesCaptionHeading,
           captionDescription: "Does the individual have any of the following?",
           rows: [
@@ -557,6 +562,7 @@
       {%- endmacro -%}
 
       {{ renderTable({
+        captionId: "health_issues",
         caption: "Are there any other health issues that may affect ability to work?",
         rows: [
           {
@@ -608,7 +614,7 @@
       }) }}
     </div>
     <div class='upw-avoid-break'>
-      <h2 class="govuk-heading-m">GP Details</h2>
+      <h3 id="heading_gp_details" class="govuk-heading-m">GP Details</h3>
 
       {% if rawAnswers['gp_details_declined'] | hasAnswer("declined") %}
         <span class="upw-declined-details">Individual declined to give GP details</span>
@@ -616,7 +622,7 @@
         <div id="gp_details">
           {% for gp in rawAnswers['gp_details'] %}
             <div id="gp_details_{{ loop.index }}">
-              <h3 class="govuk-heading-s">GP details</h3>
+              <h4 class="govuk-heading-s">GP details</h4>
               {{ renderTable({
               rows: [
                 {
@@ -658,6 +664,7 @@
       {%- set hasTravelIssues = answers["travel_information"] == "Yes" -%}
 
       {{ renderTable({
+        captionId: "travel_information",
         caption: "Travel information",
         rows: [
           {
@@ -693,8 +700,8 @@
     <div class='upw-avoid-break'>
       {% if rawAnswers["active_carer_commitments"] %}
         <table class="upw-pdf-table">
-          <caption>
-            <h2>Are there carer commitments?</h2>
+          <caption id="caption_carer_commitments">
+            <h3 class="govuk-heading-m">Are there carer commitments?</h3>
           </caption>
           <tbody>
             <tr id="active_carer_commitments">
@@ -725,6 +732,7 @@
         </table>
       {% else %}
         {{ renderTable({
+          captionId: "carer_commitments",
           caption: "Carer commitments",
           rows: [
             {
@@ -741,7 +749,7 @@
       {% endif %}
     </div>
     <div class='upw-avoid-break'>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h1>
+      <h2 id="heading_employment_education_skills" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h2>
 
       {%- if rawAnswers["employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
         {%- set employmentDetails = answers["employment_education_details_fulltime"] -%}
@@ -763,7 +771,7 @@
             data: renderValue(answers["employment_education"])
           },
           {
-            id: "employment_education",
+            id: "employment_education_details",
             heading: "Employment or education details (working days, hours etc)",
             data: renderValue(employmentDetails),
             condition: showEmploymentDetails
@@ -803,6 +811,7 @@
       {%- set showIndividualCommitment = answers["education_training_need"] == "Yes" -%}
 
       {{ renderTable ({
+        captionId: "training_employment",
         caption: "Training & Employment Opportunities",
         captionDescription: "Supervised individuals who are unemployed, at risk of unemployment or whose offending reflects employment related needs are eligible to use up to 30% of their Community Payback hours on education, training and pre-employment activity.",
         rows: [
@@ -829,7 +838,7 @@
       }) }}
     </div>
     <div class='upw-avoid-break'>
-      <h1 class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement details</h1>
+      <h2 id="heading_placement_details" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement details</h2>
 
       {%- set showIntensiveWorkingSection = rawAnswers["employment_education"] == "NO" -%}
       {%- if showIntensiveWorkingSection -%}
@@ -842,6 +851,7 @@
         {%- endif -%}
 
         {{ renderTable({
+          captionId: "intensive_working",
           caption: "Intensive working",
           rows: [
             {
@@ -876,7 +886,7 @@
       {%- endif -%}
     </div>
     <div class='upw-avoid-break'>
-      <h2 class="govuk-heading-m">Availability for Community Payback</h2>
+      <h3 id="heading_availability" class="govuk-heading-m">Availability for Community Payback</h3>
 
       {% macro ifAnswerHasValue(answer, value, text) %}
         {% if answer and value in answer %}
@@ -885,7 +895,7 @@
       {% endmacro %}
 
       <table class="upw-pdf-chart">
-        <caption class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom" colspan="8">When is the individual available for community payback work?</caption>
+        <caption id="caption_availability" class="upw-pdf-chart__cell--light-grey upw-pdf-chart__cell--border-top upw-pdf-chart__cell--border-bottom" colspan="8">When is the individual available for community payback work?</caption>
         <tbody>
           <tr>
             <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right  upw-pdf-chart__cell--border-left"></th>
@@ -943,6 +953,7 @@
     </div>
     <div class='upw-avoid-break'>
       {{ renderTable({
+        captionId: "equipment",
         caption: "Equipment",
         rows: [
           {
@@ -964,7 +975,7 @@
       }) }}
     </div>
     <div class='upw-avoid-break'>
-      <h2 class="govuk-heading-m">How long will it take for the individual to complete their hours?</h2>
+      <h3 id="heading_time_to_complete" class="govuk-heading-m">How long will it take for the individual to complete their hours?</h3>
       <p>Figures are approximate and based on the individual completing 7 hours of work each day.</p>
       <br>
       <table class="upw-pdf-chart">
