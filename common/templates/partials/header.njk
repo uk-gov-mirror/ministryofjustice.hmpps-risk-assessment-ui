@@ -29,12 +29,15 @@
 </header>
 
 {% if not hideBackLink %}
+  {% if usingBrowserBack %}
+    {% set backLink = previousUrl %}
+  {% endif %}
   <div class="moj-primary-navigation__container govuk-width-container--app-extra-wide">
-    <div role="navigation" aria-label="back">
-      {{ govukBackLink({
-        href: backLink,
-        text: backText or "Back"
-      }) }}
+    <div role="navigation" aria-label="back">      
+      <a id="back-link" href="{{ backLink }}" class="govuk-back-link">{{ backText | default("Back") }}</a>
     </div>
   </div>
+  {% if usingBrowserBack %}
+    <script src='/javascripts/back-link.js' type='text/javascript'></script>
+  {% endif %}
 {% endif %}

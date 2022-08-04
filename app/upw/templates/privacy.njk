@@ -4,18 +4,16 @@
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
 
-{% set backLink = 'task-list' %}
-
 {% block pageTitle %}
 {{ pageTitle }}
 {% endblock %}
 
 {% block header %}
+{%- set usingBrowserBack = true -%}
 {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
 {% block content %}
-{# include errorSummary partial #}
 {{ super() }}
 
 <div class="govuk-grid-row">

@@ -5,18 +5,16 @@
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
 {% from "govuk/components/table/macro.njk" import govukTable %}
 
-{% set backLink = 'task-list' %}
-
 {% block pageTitle %}
 {{ pageTitle }}
 {% endblock %}
 
 {% block header %}
+{%- set usingBrowserBack = true -%}
 {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
 {% block content %}
-{# include errorSummary partial #}
 {{ super() }}
 
 <div class="govuk-grid-row">

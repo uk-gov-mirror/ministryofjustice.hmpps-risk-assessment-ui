@@ -12,6 +12,14 @@ router.get('*', (req, res, next) => {
   next()
 })
 
+router.get('*', (req, res, next) => {
+  res.locals.previousUrl = req.session.previousUrl
+  if (req.session.previousUrl !== req.originalUrl) {
+    req.session.previousUrl = req.originalUrl
+  }
+  next()
+})
+
 router.use(
   wizard(steps, fields, {
     journeyName: 'UPW',
