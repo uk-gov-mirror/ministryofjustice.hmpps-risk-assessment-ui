@@ -567,7 +567,7 @@
         rows: [
           {
             id: "allergies",
-            heading: "Allergies?", 
+            heading: "Does the individual have any known allergies?", 
             data: renderValue(
               answers["allergies"],
               answers["allergies_details"],
@@ -576,7 +576,7 @@
           },
           {
             id: "loss_consciousness",
-            heading: "Sudden loss of consciousness?", 
+            heading: "Has the individual experienced sudden loss of consciousness?", 
             data: renderValue(
               answers["loss_consciousness"],
               answers["loss_consciousness_details"],
@@ -585,11 +585,20 @@
           },
           {
             id: "epilepsy",
-            heading: "Epilepsy?", 
+            heading: "Does the individual have epilepsy?", 
             data: renderValue(
               answers["epilepsy"],
               answers["epilepsy_details"],
               "Yes"
+            )
+          },
+          {
+            id: "pregnancy",
+            heading: "Is the individual pregnant or recently given birth?", 
+            data: renderPregnancyQuestion(
+              answers["pregnancy"],
+              answers["pregnancy_pregnant_details"],
+              answers["pregnancy_recently_given_birth_details"]
             )
           },
           {
@@ -599,15 +608,6 @@
               answers["other_health_issues"],
               answers["other_health_issues_details"],
               "Yes"
-            )
-          },
-          {
-            id: "pregnancy",
-            heading: "Pregnant or recently given birth?", 
-            data: renderPregnancyQuestion(
-              answers["pregnancy"],
-              answers["pregnancy_pregnant_details"],
-              answers["pregnancy_recently_given_birth_details"]
             )
           }
         ]
