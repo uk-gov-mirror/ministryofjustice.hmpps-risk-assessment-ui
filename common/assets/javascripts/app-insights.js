@@ -13,7 +13,7 @@
 window.appInsights = appInsights;
 
 appInsights.queue.push(function () {
-  appInsights.context.addTelemetryInitializer(function (envelope) {
+  appInsights.addTelemetryInitializer(function (envelope) {
     envelope.tags["ai.cloud.role"] = applicationInsightsRoleName;
   });
 });
