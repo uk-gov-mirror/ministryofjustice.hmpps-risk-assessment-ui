@@ -32,7 +32,7 @@
   {%- endmacro -%}
 
   {%- macro availabilityOption(optionNumber) -%}
-    <td class="govuk-table__cell upw-availability-table__column upw-availability-table__item-{{ optionNumber }}">
+    <td class="govuk-table__cell upw-availability-table__cell upw-availability-table__item-{{ optionNumber }}">
       <div class="govuk-checkboxes__item govuk-checkboxes govuk-checkboxes--small upw-checkbox-item__availability">
         <input class="govuk-checkboxes__input" name="{{ questions['individual_availability'].questionCode }}"
                id="{{ questions['individual_availability'].questionCode }}-{{ optionNumber }}" name="organisation"

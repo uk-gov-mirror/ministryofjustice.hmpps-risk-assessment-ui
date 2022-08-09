@@ -1,6 +1,8 @@
 /*  styles related to specific questions and elements in the unpaid work assessment */
 @use "sass:math";
 
+$compact-table-breakpoint: 650px;
+
 /* stylelint-disable selector-class-pattern */
 .cultural_religious_adjustment,
 .placement_preference,
@@ -22,13 +24,21 @@
   float: left;
 }
 
-.upw-read-only__link {
-  font-size: 1.25rem;
+.upw-summary__links {
   float: right;
   margin-bottom: govuk-spacing(4);
+
+  & a {
+    font-size: 1.25rem;
+    margin-left: 10px;
+  }
+
+  & a:first-of-type {
+    margin-left: 0;
+  }
 }
 
-.upw-remove__link {
+.upw-summary__link--remove {
   color: #d4351c !important;
   margin-left: 10px;
 }
@@ -58,6 +68,13 @@
   line-height: 16px;
   text-align: center;
   width: 90px;
+
+  @media (max-width: $compact-table-breakpoint) {
+    padding: 2px;
+    writing-mode: vertical-rl;
+    vertical-align: middle;
+    text-orientation: sideways;
+  }
 }
 
 .upw-availability-table__rowheader {
@@ -72,13 +89,20 @@
   width: 90px !important;
 }
 
-.upw-checkbox-item__availability {
-  .govuk-checkboxes__label::before {
-    left: 38px;
+.upw-availability-table__cell {
+  padding: 10px 24px 10px 0;
+  border-left: 1px solid #b1b4b6;
+  border-right: 1px solid #b1b4b6;
+
+  &:last-child {
+    padding: 10px 24px 10px 0;
   }
 
-  .govuk-checkboxes__label::after {
-    left: 43px !important;
+  .govuk-checkboxes__item {
+    padding: 0;
+    width: 0;
+    height: 0;
+    margin: 0 auto;
   }
 }
 

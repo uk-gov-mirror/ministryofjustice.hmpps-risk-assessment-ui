@@ -5,8 +5,6 @@
 
 {% extends "govuk/template.njk" %}
 
-{% set containerClasses = "govuk-width-container--app-extra-wide" %}
-
 {% block bodyStart %}
   {% include "common/templates/includes/scripts.njk" %}
 {% endblock %}
@@ -52,13 +50,12 @@
 {% block footer %}
 
   <div class="govuk-!-display-none-print arn-white-background">
-    <div class="govuk-width-container {{ containerClasses }}">
+    <div class="govuk-width-container">
       {% include "../templates/components/feedbackBanner/feedbackBanner.njk" %}
     </div>
   </div>
 
-  {{ govukFooter({
-    containerClasses: containerClasses,
+  {{ govukFooter({    
     meta: {
       items: [
         {

@@ -1,4 +1,10 @@
 $govuk-global-styles: true;
+$govuk-page-width: 1220px;
+$govuk-breakpoints: (
+  mobile:  390px,
+  tablet:  1024px,
+  desktop: 1024px
+);
 
 @import "govuk-frontend/govuk/all";
 @import "@ministryofjustice/frontend/moj/all";
@@ -21,8 +27,8 @@ $white-transparent: rgb(255 255 255 / 25%);
   padding-top: 30px;
 }
 
-.govuk-width-container--app-extra-wide {
-  max-width: 1220px;
+.use-govuk-page-width {
+  max-width: $govuk-page-width;
 }
 
 .key-details-bar {
