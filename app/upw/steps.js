@@ -380,4 +380,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/accessibility-statement.njk`,
   },
+  '/assessment-help': {
+    pageTitle: 'Community Payback assessment help',
+    noPost: true,
+    template: `${__dirname}/templates/assessment-help.njk`,
+  },
 }
