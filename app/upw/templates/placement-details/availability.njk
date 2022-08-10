@@ -14,7 +14,7 @@
   {% include "common/templates/partials/header.njk" %}
 {% endblock %}
 
-{% block content %}  
+{% block content %}
   {{ super() }}
 
   {%- macro getAvailabilityValue(index) -%}
@@ -55,76 +55,81 @@
 
       <form method="post" action="{{ action }}">
         <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+        <div class="govuk-form-group {% if errors['individual_availability'] %}govuk-form-group--error{% endif %}">
+          <fieldset class="govuk-fieldset" aria-describedby="individual_availability-legend {% if errors['individual_availability'] %} individual_availability{% endif %}">
+            <legend id="individual_availability-legend" class="govuk-fieldset__legend individual_availability govuk-label--m">
+              {{ questions['individual_availability'].questionText }}
+            </legend>
+            <table class="govuk-table upw-availability-table">
+              <caption class="upw-availability-table__caption">Dates available for Community Payback work</caption>
+              {% if errors['individual_availability'] %}
+              <p id="individual_availability-error" class="govuk-error-message">
+                <span class="govuk-visually-hidden">Error:</span> {{ errors['individual_availability'].text }}
+              </p>
+              {% endif %}
+              <thead class="govuk-table__head">
+                <tr>
+                  <td scope="row" class="govuk-table__header"></td>
+                  <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                  Monday
+                </th>
+                  <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                  Tuesday
+                </th>
+                  <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                  Wednesday
+                </th>
+                  <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                  Thursday
+                </th>
+                  <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                  Friday
+                </th>
+                  <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
+                  Saturday
+                </th>
+                  <th scope="col"
+                    class="govuk-table__header upw-availability-table__column upw-availability-table__header no-right-border">
+                  Sunday
+                </th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Morning</th>
+                  {{ availabilityOption(0) }}
+                  {{ availabilityOption(3) }}
+                  {{ availabilityOption(6) }}
+                  {{ availabilityOption(9) }}
+                  {{ availabilityOption(12) }}
+                  {{ availabilityOption(15) }}
+                  {{ availabilityOption(18) }}
 
-        <fieldset class="govuk-fieldset" aria-describedby="individual_availability-legend">
-          <table class="govuk-table upw-availability-table">
-            <caption class="upw-availability-table__caption">
-              <legend id="individual_availability-legend" class="govuk-fieldset__legend individual_availability govuk-label--m">
-                {{ questions['individual_availability'].questionText }}
-              </legend>
-            </caption>
-            <thead class="govuk-table__head">
-              <tr>
-                <td scope="row" class="govuk-table__header"></td>
-                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
-                Monday
-              </th>
-                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
-                Tuesday
-              </th>
-                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
-                Wednesday
-              </th>
-                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
-                Thursday
-              </th>
-                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
-                Friday
-              </th>
-                <th scope="col" class="govuk-table__header upw-availability-table__column upw-availability-table__header">
-                Saturday
-              </th>
-                <th scope="col"
-                  class="govuk-table__header upw-availability-table__column upw-availability-table__header no-right-border">
-                Sunday
-              </th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Morning</th>
-                {{ availabilityOption(0) }}
-                {{ availabilityOption(3) }}
-                {{ availabilityOption(6) }}
-                {{ availabilityOption(9) }}
-                {{ availabilityOption(12) }}
-                {{ availabilityOption(15) }}
-                {{ availabilityOption(18) }}
-
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Afternoon</th>
-                {{ availabilityOption(1) }}
-                {{ availabilityOption(4) }}
-                {{ availabilityOption(7) }}
-                {{ availabilityOption(10) }}
-                {{ availabilityOption(13) }}
-                {{ availabilityOption(16) }}
-                {{ availabilityOption(19) }}
-              </tr>
-              <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Evening</th>
-                {{ availabilityOption(2) }}
-                {{ availabilityOption(5) }}
-                {{ availabilityOption(8) }}
-                {{ availabilityOption(11) }}
-                {{ availabilityOption(14) }}
-                {{ availabilityOption(17) }}
-                {{ availabilityOption(20) }}
-              </tr>
-            </tbody>
-          </table>
-        </fieldset>
+                </tr>
+                <tr class="govuk-table__row">
+                  <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Afternoon</th>
+                  {{ availabilityOption(1) }}
+                  {{ availabilityOption(4) }}
+                  {{ availabilityOption(7) }}
+                  {{ availabilityOption(10) }}
+                  {{ availabilityOption(13) }}
+                  {{ availabilityOption(16) }}
+                  {{ availabilityOption(19) }}
+                </tr>
+                <tr class="govuk-table__row">
+                  <th scope="row" class="govuk-table__header upw-availability-table__rowheader">Evening</th>
+                  {{ availabilityOption(2) }}
+                  {{ availabilityOption(5) }}
+                  {{ availabilityOption(8) }}
+                  {{ availabilityOption(11) }}
+                  {{ availabilityOption(14) }}
+                  {{ availabilityOption(17) }}
+                  {{ availabilityOption(20) }}
+                </tr>
+              </tbody>
+            </table>
+          </fieldset>
+        </div>
 
         {#            {{ renderQuestion(questions['individual_availability'], errors) }} #}
         {{ renderQuestion(questions['individual_availability_details'], errors) }}
@@ -142,6 +147,6 @@
     </section>
 
     {{ widgets(widgetData) }}
-    
+
   </div>
 {% endblock %}

@@ -706,7 +706,14 @@ const fields = {
       },
     ],
   },
-  individual_availability: requireSelectOption,
+  individual_availability: {
+    validate: [
+      {
+        type: 'required',
+        message: 'When is the individual available for work? Select an option',
+      },
+    ],
+  },
   individual_availability_details: {},
   male_female_clothing: requireSelectOption,
   waterproof_clothing: requireSelectOption,
