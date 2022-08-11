@@ -710,7 +710,7 @@ const fields = {
     validate: [
       {
         type: 'required',
-        message: 'When is the individual available for work? Select an option',
+        message: 'Select when the individual is available for work',
       },
     ],
   },
