@@ -32,10 +32,8 @@
   {% if usingBrowserBack %}
     {% set backLink = previousUrl %}
   {% endif %}
-  <div class="moj-primary-navigation__container use-govuk-page-width">
-    <div role="navigation" aria-label="back">      
-      <a id="back-link" href="{{ backLink }}" class="govuk-back-link">{{ backText | default("Back") }}</a>
-    </div>
+  <div class="primary-navigation__container">
+    <a id="back-link" href="{{ backLink }}" class="govuk-back-link">{{ backText | default("Back") }}</a>
   </div>
   {% if usingBrowserBack %}
     <script src='/javascripts/back-link.js' type='text/javascript'></script>

@@ -1,9 +1,9 @@
 $govuk-global-styles: true;
 $govuk-page-width: 1220px;
 $govuk-breakpoints: (
-  mobile:  390px,
-  tablet:  1024px,
-  desktop: 1024px
+  mobile: 390px,
+  tablet: 1024px,
+  desktop: 1024px,
 );
 
 @import "govuk-frontend/govuk/all";
@@ -25,6 +25,15 @@ $white-transparent: rgb(255 255 255 / 25%);
 
 #main-content {
   padding-top: 30px;
+}
+
+.primary-navigation__container {
+  @include govuk-width-container($govuk-page-width);
+  @include govuk-clearfix;
+
+  & a {
+    float: left;
+  }
 }
 
 .use-govuk-page-width {
