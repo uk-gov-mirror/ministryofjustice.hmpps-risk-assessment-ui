@@ -2,7 +2,7 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
-{% from "govuk/components/table/macro.njk" import govukTable %} 
+{% from "govuk/components/table/macro.njk" import govukTable %}
 
 {% block pageTitle %}
 {{ pageTitle }}
@@ -21,5 +21,30 @@
         <h1 class="govuk-heading-l">
             {{ pageTitle }}
         </h1>
+      
+        <h2 class="govuk-heading-m">
+            Task list
+        </h2>
+        <p>
+            The task list will update automatically as you
+            work through the assessment. <br>
+            <br>
+            You can answer the questions in any order.
+            When you finish a section, mark it as complete
+            and it will be saved. <br>
+            <br>
+            When all the sections are done, you can make a
+            declaration and automatically submit the
+            assessment to Delius in the form of a PDF.
+            
+        </p>
+    </div>
 
+     <div class="govuk-grid-column-one-third">
+         <br>
+         <br>
+         <br>
+            <img class="upw-accessibility-statement-img" src="/images/task_list.jpg" alt="Task list page">
+    </div>
+</div>
 {% endblock %}
