@@ -28,6 +28,8 @@
     "mental_health_condition_details": ["Mental Illness"],
     "placement_preference": ["NO"],
     "placement_preference_complete": ["YES"],
+    "reading_writing_difficulties": ["YES"],
+    "reading_writing_difficulties_details": ["Cannot read\nNumeracy difficulties\nCommunication difficulties"],
     "emergency_contact_details": [
       {
         "emergency_contact_first_name": ["George"],
