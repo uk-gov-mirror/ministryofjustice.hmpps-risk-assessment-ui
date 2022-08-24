@@ -259,10 +259,11 @@ describe('Auth', () => {
     }
 
     beforeEach(() => {
-      baseRequest.logout.mockReset()
       res.redirect.mockReset()
       baseRequest.session.destroy.mockReset()
       baseRequest.session.destroy.mockImplementation((fn) => fn())
+      baseRequest.logout.mockReset()
+      baseRequest.logout.mockImplementation((fn) => fn())
     })
 
     it('logs the user out and redirects if signed in', () => {

@@ -132,14 +132,21 @@ const handleLoginCallback = () => {
 const handleLogout = () => {
   const logoutUrl = `${config.apis.oauth.url}/logout?client_id=${config.authClientId}&redirect_uri=${config.domain}`
 
-  return (req, res) => {
+  return (req, res, next) => {
     if (req.user) {
       const { username } = req.user
-      req.logout()
-      req.session.destroy(() => res.redirect(logoutUrl))
-      logger.info(`User logged out: ${username}}`)
+      req.logout((err) => {
+        if (err) {
+          next(err)
+          return
+        }
+
+        req.session.destroy(() => res.redirect(logoutUrl))
+        logger.info(`User logged out: ${username}}`)
+      })
       return
     }
+
     res.redirect(logoutUrl)
   }
 }

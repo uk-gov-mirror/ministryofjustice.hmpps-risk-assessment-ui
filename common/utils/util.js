@@ -1,6 +1,7 @@
 const async = require('async')
 const { getNamespace } = require('cls-hooked')
 const { DateTime } = require('luxon')
+const { v4: uuid } = require('uuid')
 const { logger } = require('../logging/logger')
 const { clsNamespace } = require('../config')
 
@@ -76,7 +77,7 @@ const isValidDate = (day, month, year) => {
   }
 }
 
-const getCorrelationId = () => getNamespace(clsNamespace).get('MDC').correlationId || ''
+const getCorrelationId = () => getNamespace(clsNamespace).get('MDC')?.correlationId || uuid()
 
 const updateMDC = (mdcDataKey, mdc) => getNamespace(clsNamespace).set(mdcDataKey, mdc)
 
