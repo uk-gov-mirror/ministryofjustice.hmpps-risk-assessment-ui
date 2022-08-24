@@ -75,7 +75,7 @@ function initialiseApplicationInsights() {
   }
 
   appInsights
-    .setup(applicationInsights.instrumentationKey)
+    .setup()
     .setDistributedTracingMode(appInsights.DistributedTracingModes.AI_AND_W3C)
     .setInternalLogging(applicationInsights.internalLogging, true)
     .start()

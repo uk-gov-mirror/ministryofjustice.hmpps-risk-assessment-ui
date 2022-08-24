@@ -6,8 +6,10 @@
   crossOrigin: "anonymous", // When supplied this will add the provided value as the cross origin attribute on the script tag
 // onInit: null, // Once the application insights instance has loaded and initialized this callback function will be called with 1 argument -- the sdk instance (DO NOT ADD anything to the sdk.queue -- As they won't get called)
   cfg: { // Application Insights Configuration
-  instrumentationKey: applicationInsightsInstrumentationKey,
-  autoTrackPageVisitTime: true,
+    instrumentationKey: applicationInsightsInstrumentationKey,
+    ingestionendpoint: 'https://northeurope-0.in.applicationinsights.azure.com/',
+    liveendpoint: 'https://northeurope.livediagnostics.monitor.azure.com/',
+    autoTrackPageVisitTime: true,
 }});
 
 window.appInsights = appInsights;
