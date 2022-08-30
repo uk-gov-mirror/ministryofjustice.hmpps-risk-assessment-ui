@@ -164,6 +164,22 @@ p {
   }
 }
 
+@media print {
+  .moj-header,
+  #non-printable {
+    display: none !important;
+  }
+
+  .govuk-back-link,
+  #non-printable {
+    display: none !important;
+  }
+
+  #printable {
+    display: block;
+  }
+}
+
 .sp-print-button {
   float: right;
   margin-top: govuk-spacing(2);
