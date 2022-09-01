@@ -141,27 +141,30 @@
         classes: options.classes
       }) }}
     {% case 'textarea' %}
-    {{ govukCharacterCount({
-      name:question.questionCode,
-      id: question.questionCode,
-      maxlength: 4000,
-      value: questionAnswer | encodeHtml | safe,
-      label: {
-        text: question.questionText,
-        isPageHeading: false,
-        classes: question.questionCode + labelClasses
-      },
-      formGroup : {
-        classes: question.formClasses
-      },
-      attributes: question.attributes | addSpellcheck,
-      hint: {
-        text: question.helpText
-      },
-      errorMessage: errorMessage
-    }) }}
-
-  {% case 'radio' %}
+    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="4000">
+      <div class="govuk-form-group{% if errorMessage %} govuk-form-group--error{% endif %}">
+        <label class="govuk-label {{question.questionCode}}{% if labelClasses %}{{labelClasses}}{% else %} govuk-label--l{% endif %}" for="{{ question.questionCode }}">
+            {{ question.questionText }}
+        </label>
+        {% if errorMessage %}
+        <p id="{{question.questionCode}}-error" class="govuk-error-message">
+          <span class="govuk-visually-hidden">Error:</span> {{ errorMessage.text }}
+        </p>
+        {% endif %}
+        <div id="{{question.questionCode}}-hint" class="govuk-hint">
+          {{ question.helpText }}
+        </div>
+        <textarea class="govuk-textarea govuk-js-character-count" id="{{ question.questionCode }}" name="{{ question.questionCode }}" rows="5" aria-describedby="{{ question.questionCode }}-info {{ question.questionCode }}-hint{% if errorMessage %} {{ question.questionCode }}-error{% endif %}" spellcheck="true">
+        {%- for line in question.answer | splitLines -%}
+        {{- line | encodeHtml | safe -}}{% if not loop.last %}&#10;{% endif %}
+        {%- endfor -%}
+        </textarea>
+      </div>
+      <div id="{{ question.questionCode }}-info" class="govuk-hint govuk-character-count__message">
+        You can enter up to 4000 characters
+      </div>
+    </div>
+    {% case 'radio' %}
       {{ govukRadios({
         idPrefix: question.questionCode,
         name: question.questionCode,

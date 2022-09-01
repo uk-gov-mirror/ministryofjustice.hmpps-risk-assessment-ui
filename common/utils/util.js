@@ -207,6 +207,8 @@ const disabilityCodeToDescription = (code) => {
   return lookup[code]
 }
 
+const splitLines = (str) => (str ? str.split('\r\n') : [])
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -230,4 +232,5 @@ module.exports = {
   getErrorMessageFor,
   formatDateWith,
   disabilityCodeToDescription,
+  splitLines,
 }

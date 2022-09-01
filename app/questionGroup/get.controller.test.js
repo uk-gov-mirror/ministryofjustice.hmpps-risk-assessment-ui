@@ -3,11 +3,12 @@ const { configure } = require('nunjucks')
 
 const nunjucksEnvironment = configure({}, {})
 const dateFilter = require('nunjucks-date-filter')
-const { encodeHTML, updateJsonValue } = require('../../common/utils/util')
+const { encodeHTML, updateJsonValue, splitLines } = require('../../common/utils/util')
 const { mojDate } = require('../../node_modules/@ministryofjustice/frontend/moj/filters/all')()
 // add custom nunjucks filters
 nunjucksEnvironment.addFilter('date', dateFilter)
 nunjucksEnvironment.addFilter('mojDate', mojDate)
+nunjucksEnvironment.addFilter('splitLines', splitLines)
 nunjucksEnvironment.addFilter('encodeHtml', (str) => encodeHTML(str))
 nunjucksEnvironment.addFilter('addSpellcheck', (jsonObj) => updateJsonValue(jsonObj, 'spellcheck', true, true))
 

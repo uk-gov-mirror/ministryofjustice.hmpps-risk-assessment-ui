@@ -37,6 +37,7 @@ const {
   prettyDateAndTime,
   clearAnswers,
   disabilityCodeToDescription,
+  splitLines,
 } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
@@ -189,6 +190,7 @@ function initialiseTemplateEngine(app) {
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise
   nunjucksEnvironment.addFilter('encodeHtml', (str) => encodeHTML(str))
+  nunjucksEnvironment.addFilter('splitLines', splitLines)
   nunjucksEnvironment.addFilter('extractLink', (str) => extractLink(str))
   nunjucksEnvironment.addFilter('doReplace', (str, target, replacement) => doReplace(str, target, replacement))
   // typeof for array, using native JS Array.isArray()

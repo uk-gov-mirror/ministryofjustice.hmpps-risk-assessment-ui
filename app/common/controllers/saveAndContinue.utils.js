@@ -45,13 +45,13 @@ const withAnswersFrom =
     const answerFor = (questionCode) => {
       let answer = ''
 
-      const [submittedAnswer] = someValueFrom(submittedAnswers[questionCode])
-      const [previousAnswer] = someValueFrom(previousAnswers[questionCode])
+      const submittedAnswer = someValueFrom(submittedAnswers[questionCode])
+      const previousAnswer = someValueFrom(previousAnswers[questionCode])
 
-      if (submittedAnswer || submittedAnswer === '') {
-        answer = submittedAnswer
-      } else if (previousAnswer) {
-        answer = previousAnswer
+      if (submittedAnswer.length > 0) {
+        answer = submittedAnswer.join('\r\n')
+      } else if (previousAnswer.length > 0) {
+        answer = previousAnswer.join('\r\n')
       } else {
         answer = fieldProperties.default || ''
       }
