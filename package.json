@@ -7,7 +7,7 @@
   "license": "MIT",
   "engines": {
     "node": "16.17.0",
-    "npm": "8.18.0"
+    "npm": "8.19.0"
   },
   "jest": {
     "setupFilesAfterEnv": [
