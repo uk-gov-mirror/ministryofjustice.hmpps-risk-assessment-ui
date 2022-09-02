@@ -1,9 +1,7 @@
 const { stubFor, resetStubs } = require('./wiremock')
 const {
-  stubForms,
   stubSupervision,
   stubQuestions,
-  stubQuestionSummaries,
   stubAnswers,
   stubEpisodes,
   stubOffenderDetails,
@@ -11,7 +9,6 @@ const {
   stubAssessmentComplete,
   stubGetAssessments,
   stubGetQuestionGroup,
-  stubAssessmentTypeSummaries,
   stubAssessmentQuestions,
   stubPredictors,
   stubRegistrations,
@@ -21,7 +18,6 @@ const {
 } = require('./assessmentApi')
 const { stubGetAssessmentFromDelius, stubPostAssessmentFromDelius } = require('./assessmentFromDelius')
 const { stubStart } = require('./start')
-const { stubReferenceData } = require('./referenceData')
 const { stubGetToken } = require('./oauth')
 const { stubGetUserProfile, stubOasysUser } = require('./oasysUser')
 
@@ -42,10 +38,7 @@ async function stub() {
     },
   })
   await stubSupervision()
-  await stubForms()
   await stubQuestions()
-  await stubQuestionSummaries()
-  await stubAssessmentTypeSummaries()
   await stubAnswers()
   await stubEpisodes()
   await stubGetToken()
@@ -55,7 +48,6 @@ async function stub() {
   await stubStart()
   await stubGetAssessments()
   await stubGetQuestionGroup()
-  await stubReferenceData()
   await stubOasysUser()
   await stubOffenderDetails()
   await stubOffenderAndOffenceDetails()
