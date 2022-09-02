@@ -38,6 +38,7 @@ const {
   clearAnswers,
   disabilityCodeToDescription,
   splitLines,
+  todayPretty,
 } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
@@ -177,12 +178,15 @@ function initialiseTemplateEngine(app) {
   // Initialise nunjucks environment
   const nunjucksEnvironment = configure(APP_VIEWS, nunjucksConfiguration)
 
-  // add custom nunjucks filters
+  // add custom date formatters
   nunjucksEnvironment.addFilter('date', dateFilter)
   nunjucksEnvironment.addFilter('mojDate', mojDate)
   nunjucksEnvironment.addFilter('prettyDate', prettyDate)
   nunjucksEnvironment.addFilter('prettyDateAndTime', prettyDateAndTime)
   nunjucksEnvironment.addFilter('ageFrom', ageFrom)
+  nunjucksEnvironment.addFilter('todayPretty', todayPretty)
+
+  // add answer formatters
   nunjucksEnvironment.addFilter('clearAnswers', clearAnswers)
   nunjucksEnvironment.addFilter('hasAnswer', (a, v) => Array.isArray(a) && a.includes(v))
   nunjucksEnvironment.addFilter('toDisabilityDescription', disabilityCodeToDescription)
@@ -193,6 +197,7 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('splitLines', splitLines)
   nunjucksEnvironment.addFilter('extractLink', (str) => extractLink(str))
   nunjucksEnvironment.addFilter('doReplace', (str, target, replacement) => doReplace(str, target, replacement))
+
   // typeof for array, using native JS Array.isArray()
   nunjucksEnvironment.addFilter('isArr', (str) => Array.isArray(str))
   nunjucksEnvironment.addFilter('addSpellcheck', (jsonObj) => updateJsonValue(jsonObj, 'spellcheck', true, true))
@@ -201,43 +206,6 @@ function initialiseTemplateEngine(app) {
   )
   nunjucksEnvironment.addFilter('shiftArray', (arr) => {
     return arr.slice(1)
-  })
-  nunjucksEnvironment.addFilter('todayPretty', () => {
-    const nth = (dateDay) => {
-      if (dateDay > 3 && dateDay < 21) return 'th'
-      switch (dateDay % 10) {
-        case 1:
-          return 'st'
-        case 2:
-          return 'nd'
-        case 3:
-          return 'rd'
-        default:
-          return 'th'
-      }
-    }
-
-    const dateObj = new Date()
-    const date = dateObj.getDate()
-    const month = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ][dateObj.getMonth()]
-    const year = dateObj.getFullYear()
-
-    const dateString = `${date + nth(date)} ${month} ${year}`
-
-    return dateString
   })
 
   // Set view engine

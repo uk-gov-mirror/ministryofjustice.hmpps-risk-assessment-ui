@@ -158,6 +158,9 @@ const formatDateWith = (pattern) => (isoString) => {
 
 const prettyDate = formatDateWith('d MMMM y')
 const prettyDateAndTime = formatDateWith('cccc d MMMM y H:mm')
+const todayPretty = (today = new Date()) => {
+  prettyDate(today.toISOString())
+}
 
 const ageFrom = (dateOfBirth, today = DateTime.local().startOf('day')) => {
   const parsedDate = DateTime.fromISO(dateOfBirth, { zone: 'utc' }).setLocale('en-GB').startOf('day')
@@ -233,4 +236,5 @@ module.exports = {
   formatDateWith,
   disabilityCodeToDescription,
   splitLines,
+  todayPretty,
 }
