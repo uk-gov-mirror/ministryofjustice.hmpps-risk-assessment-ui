@@ -28,16 +28,6 @@ const getOffenderData = (uuid, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
-const getAssessmentQuestions = (assessmentSchemaCode, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentSchemaCode}`
-  return getData(path, authorisationToken, userId)
-}
-
-const getQuestionGroupSummary = (groupId, authorisationToken, userId) => {
-  const path = `${url}/questions/${groupId}/summary`
-  return getData(path, authorisationToken, userId)
-}
-
 const getFlatAssessmentQuestions = (assessmentCode, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentCode}/questions`
   return getData(path, authorisationToken, userId)
@@ -97,21 +87,6 @@ const closeAssessment = (assessmentId, episodeId, user) => {
   return action(superagent.get(path), user?.token, user?.id)
 }
 
-const postTableRow = (assessmentId, episodeId, tableName, answers, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/table/${tableName}`
-  return postData(path, authorisationToken, userId, answers)
-}
-
-const deleteTableRow = (assessmentId, episodeId, tableName, tableRow, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/table/${tableName}/${tableRow}`
-  return deleteData(path, authorisationToken, userId)
-}
-
-const updateTableRow = (assessmentId, episodeId, tableName, tableRow, answers, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/table/${tableName}/${tableRow}`
-  return putData(path, authorisationToken, userId, answers)
-}
-
 const getDraftPredictorScore = (episodeUuid, authorisationToken, userId) => {
   const path = `${url}/risks/predictors/episodes/${episodeUuid}?final=false`
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
@@ -167,17 +142,6 @@ const getRoshRiskSummaryForCrn = async (crn, user) => {
   }
 }
 
-const getFilteredReferenceData = (assessmentId, episodeId, questionCode, parentList, authorisationToken, userId) => {
-  const path = `${url}/referencedata/filtered`
-  const requestBody = {
-    assessmentUuid: assessmentId,
-    episodeUuid: episodeId,
-    fieldName: questionCode,
-    parentList,
-  }
-  return postData(path, authorisationToken, userId, requestBody)
-}
-
 const uploadPdfDocumentToDelius = async (assessmentUuid, episodeUuid, pdf, user) => {
   if (user.token === undefined) {
     throw new Error('No authorisation token found when calling hmppsAssessments API')
@@ -216,18 +180,6 @@ const postData = (path, authorisationToken, userId, data) => {
   logger.info(`Calling hmppsAssessments API with POST: ${path}`)
 
   return action(superagent.post(path).send(data), authorisationToken, userId)
-}
-
-const putData = (path, authorisationToken, userId, data) => {
-  logger.info(`Calling hmppsAssessments API with PUT: ${path}`)
-
-  return action(superagent.put(path).send(data), authorisationToken, userId)
-}
-
-const deleteData = (path, authorisationToken, userId) => {
-  logger.info(`Calling hmppsAssessments API with DELETE: ${path}`)
-
-  return action(superagent.delete(path), authorisationToken, userId)
 }
 
 const action = async (agent, authorisationToken, userId) => {
@@ -273,17 +225,11 @@ const logError = (error) => {
 module.exports = {
   assessmentSupervision,
   getOffenderData,
-  getAssessmentQuestions,
   getAnswers,
   getAssessmentsList,
   postAnswers,
-  getQuestionGroupSummary,
   getAssessmentSummary,
   postCompleteAssessment,
-  getFilteredReferenceData,
-  postTableRow,
-  deleteTableRow,
-  updateEditedTableRow: updateTableRow,
   getFlatAssessmentQuestions,
   getDraftPredictorScore,
   getEpisode,

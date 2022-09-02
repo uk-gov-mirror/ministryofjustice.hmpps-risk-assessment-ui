@@ -13,11 +13,6 @@ const getUserProfile = (userCode, authorisationToken) => {
   return getData(path, authorisationToken)
 }
 
-const getReferenceDataListByCategory = (category, authorisationToken) => {
-  const path = `${url}/referencedata/${category}`
-  return getData(path, authorisationToken)
-}
-
 const getUserByEmail = async (email, authorisationToken) => {
   try {
     const path = `${url}/authentication/user/email`
@@ -82,7 +77,6 @@ const logError = (error) => {
 }
 
 module.exports = {
-  getReferenceDataListByCategory,
   getUserByEmail,
   getUserProfile,
 }

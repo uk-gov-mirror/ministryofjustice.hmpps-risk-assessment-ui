@@ -1,33 +1,7 @@
-// Local dependencies
-// const healthCheckFactory = require('../common/services/healthcheck')
-//
-// const {
-//   apis: { offenderAssessments },
-// } = require('../common/config')
-
 const passport = require('passport')
 const xss = require('xss-clean')
 
-const getOffenderDetails = require('../common/middleware/getOffenderDetails')
-const getQuestionGroup = require('../common/middleware/questionGroups/getQuestionGroup')
 const addUserToLocals = require('../common/middleware/add-user-information')
-
-// pages
-const { startController } = require('./start/get.controller')
-const { areaSelectionController } = require('./areaSelectionPage/get.controller')
-const { redirectToAssessmentList } = require('./areaSelectionPage/post.controller')
-const { displayAssessmentsList } = require('./assessmentsList/get.controller')
-const { displayQuestionGroup } = require('./questionGroup/get.controller')
-
-const { displayOverview } = require('./summary/get.controller')
-const { completeAssessment } = require('./summary/post.controller')
-const { saveQuestionGroup } = require('./questionGroup/post.controller')
-const { assembleDates, extractAnswers } = require('../common/middleware/questionGroups/postHandlers')
-const { fetchFilteredReferenceData } = require('./referenceData/post.controller')
-const { psrFromCourt } = require('./psrFromCourt/get.controller')
-const { startPsrFromCourt, startPsrFromForm } = require('./psrFromCourt/post.controller')
-
-const { validate, localValidationRules } = require('../common/middleware/validator')
 
 const {
   checkUserIsAuthenticated,
@@ -36,13 +10,7 @@ const {
   checkForTokenRefresh,
 } = require('../common/middleware/auth')
 
-const { checkUserHasAreaSelected, checkAssessmentType } = require('../common/middleware/area-selection')
-
-const {
-  dev: { devAssessmentId },
-} = require('../common/config')
-const { displayPredictorScores } = require('./predictorScores/get.controller')
-const { submitPredictorScores } = require('./submitPredictorScores/get.controller')
+const { checkAssessmentType } = require('../common/middleware/area-selection')
 
 const rsrWorkflow = require('./rsr')
 const upwWorkflow = require('./upw')
@@ -50,8 +18,6 @@ const upwWorkflow = require('./upw')
 const logger = require('../common/logging/logger')
 const { verifyAssessment } = require('./startAssessment/get.controller')
 const { getCorrelationId } = require('../common/utils/util')
-
-const assessmentUrl = `/${devAssessmentId}/questiongroup/ROSH/summary`
 
 // Export
 module.exports = (app) => {
@@ -84,51 +50,8 @@ module.exports = (app) => {
 
   app.use(checkAssessmentType(), checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
 
-  app.get(`/`, (req, res) => {
-    res.redirect('/start')
-  })
-  app.get(`/start`, checkAssessmentType(), checkUserHasAreaSelected(assessmentUrl), startController)
-
-  app.get(`/area-selection`, areaSelectionController)
-  app.post('/area-selection', redirectToAssessmentList)
-
-  app.get('*', checkAssessmentType(), checkUserHasAreaSelected())
+  app.get('*', checkAssessmentType())
   app.post('*', xss())
-  app.get(`/:assessmentId/assessments`, getOffenderDetails, displayAssessmentsList)
-
-  app.get(`/:assessmentId/questiongroup/:assessmentSchemaCode/summary`, getOffenderDetails, displayOverview)
-
-  app.get(
-    `/:assessmentId/questiongroup/:groupId/:subgroup/:page`,
-    getOffenderDetails,
-    getQuestionGroup,
-    displayQuestionGroup,
-  )
-  app.post(
-    `/:assessmentId/questiongroup/:groupId/:subgroup/:page`,
-    getOffenderDetails,
-    getQuestionGroup,
-    assembleDates,
-    localValidationRules,
-    validate,
-    extractAnswers,
-    saveQuestionGroup,
-  )
-
-  app.post(`/:assessmentId/episode/:episodeId/referencedata/filtered`, fetchFilteredReferenceData)
-
-  app.post('/:assessmentId/questiongroup/:groupId/summary', getOffenderDetails, completeAssessment)
-
-  app.get('/psr-from-court', psrFromCourt)
-  app.post('/psr-from-court', startPsrFromForm)
-  app.post('/psr-from-court/:courtCode/case/:caseNumber', startPsrFromCourt)
-
-  app.get('/:assessmentId/episode/:episodeId/:assessmentType/scores', getOffenderDetails, displayPredictorScores)
-  app.get(
-    '/:assessmentId/episode/:episodeId/:assessmentType/scores/complete',
-    getOffenderDetails,
-    submitPredictorScores,
-  )
 
   app.get(['/start-assessment', '/assessment-from-delius'], verifyAssessment)
   app.use('/rsr', rsrWorkflow)
