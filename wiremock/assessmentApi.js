@@ -294,7 +294,6 @@ const stubCloseAssessment = () => {
 }
 
 const stubQuestions = async () => {
-  await stubAssessmentQuestions('RSR', 1)
   await stubAssessmentQuestions('UPW', 1)
 }
 

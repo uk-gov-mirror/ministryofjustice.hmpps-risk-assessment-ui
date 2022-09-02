@@ -12,7 +12,6 @@ const {
 
 const { checkAssessmentType } = require('../common/middleware/area-selection')
 
-const rsrWorkflow = require('./rsr')
 const upwWorkflow = require('./upw')
 
 const logger = require('../common/logging/logger')
@@ -54,7 +53,6 @@ module.exports = (app) => {
   app.post('*', xss())
 
   app.get(['/start-assessment', '/assessment-from-delius'], verifyAssessment)
-  app.use('/rsr', rsrWorkflow)
   app.use('/upw', upwWorkflow)
 
   app.use((error, req, res, next) => {
