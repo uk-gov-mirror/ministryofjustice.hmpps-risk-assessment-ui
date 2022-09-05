@@ -87,13 +87,6 @@ const closeAssessment = (assessmentId, episodeId, user) => {
   return action(superagent.get(path), user?.token, user?.id)
 }
 
-const getDraftPredictorScore = (episodeUuid, authorisationToken, userId) => {
-  const path = `${url}/risks/predictors/episodes/${episodeUuid}?final=false`
-  logger.info(`Calling hmppsAssessments API with GET: ${path}`)
-
-  return action(superagent.get(path), authorisationToken, userId)
-}
-
 const getRegistrationsForCrn = async (crn, user) => {
   const endpoint = `${url}/assessments/${crn}/registrations`
 
@@ -231,7 +224,6 @@ module.exports = {
   getAssessmentSummary,
   postCompleteAssessment,
   getFlatAssessmentQuestions,
-  getDraftPredictorScore,
   getEpisode,
   getCurrentEpisode,
   getCurrentEpisodeForCrn,
