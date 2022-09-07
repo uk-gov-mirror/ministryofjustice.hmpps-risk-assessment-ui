@@ -3,8 +3,7 @@ const passport = require('passport')
 const jwtDecode = require('jwt-decode')
 const auth = require('./auth')
 const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
-const { getUserByEmail } = require('../data/offenderAssessmentApi')
-const { cacheOasysUserDetails, cacheUserDetails, getCachedUserDetails } = require('../data/userDetailsCache')
+const { cacheUserDetails, getCachedUserDetails, getAndCacheUserDetails } = require('../data/userDetailsCache')
 const User = require('../models/user')
 const authUser = require('./testSupportFiles/user_token.json')
 
@@ -16,23 +15,19 @@ jest.mock('../data/oauth', () => ({
   getUserEmail: jest.fn(),
   getApiToken: jest.fn(),
 }))
-jest.mock('../data/offenderAssessmentApi', () => ({
-  getUserByEmail: jest.fn(),
-}))
 jest.mock('../data/userDetailsCache', () => ({
-  cacheOasysUserDetails: jest.fn(),
   cacheUserDetails: jest.fn(),
   getCachedUserDetails: jest.fn(),
+  getAndCacheUserDetails: jest.fn(),
 }))
 
 describe('Auth', () => {
   beforeEach(() => {
     getUserEmail.mockReset()
     getApiToken.mockReset()
-    getUserByEmail.mockReset()
-    cacheOasysUserDetails.mockReset()
     cacheUserDetails.mockReset()
     getCachedUserDetails.mockReset()
+    getAndCacheUserDetails.mockReset()
   })
 
   describe('tokenVerifier', () => {
@@ -303,36 +298,16 @@ describe('Auth', () => {
 
       getUserEmail.mockResolvedValue('foo@bar.baz')
       getApiToken.mockResolvedValue('BAR_TOKEN')
-      cacheOasysUserDetails.mockResolvedValue({
-        isActive: true,
-        oasysUserCode: 'SUPPORT1',
-        username: 'Ray Arnold',
-        email: 'foo@bar.baz',
-        areaCode: 'HFS',
-        areaName: 'Hertfordshire',
-      })
-      const oasysUser = {
-        oasysUserCode: 'USER_CODE',
-        userForename1: 'Test',
-        userFamilyName: 'User',
-        email: 'foo@bar.baz',
-        accountStatus: 'ACTIVE',
-      }
-      getUserByEmail.mockResolvedValue(oasysUser)
       const callback = jest.fn()
 
       await serializer(req, User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
-      // We grab the user email
-      expect(getUserEmail).toHaveBeenCalledWith('FOO_TOKEN')
-      expect(getUserByEmail).toHaveBeenCalledWith('foo@bar.baz', 'BAR_TOKEN')
-      // Persist user details to Cache and key by the user's ID
-      expect(cacheOasysUserDetails).toHaveBeenCalledWith(1, oasysUser)
+
       // Persist the user token to the session
       expect(callback).toHaveBeenCalledWith(null, { id: 1, token: 'FOO_TOKEN' })
     })
 
     it('does not get OASys details for standalone assessments', async () => {
-      const req = { session: { standaloneAssessment: true } }
+      const req = {}
 
       expect(passport.serializeUser).toHaveBeenCalledTimes(1)
       const [serializer] = passport.serializeUser.mock.calls[0]
@@ -341,10 +316,7 @@ describe('Auth', () => {
       const callback = jest.fn()
 
       await serializer(req, User.from(authUser), callback)
-      // We grab the user email
-      expect(getUserEmail).toHaveBeenCalledWith(authUser.token)
-      expect(getUserByEmail).not.toHaveBeenCalled()
-      expect(cacheOasysUserDetails).not.toHaveBeenCalled()
+
       const userDetails = jwtDecode(authUser)
       expect(cacheUserDetails).toHaveBeenCalledWith(userDetails)
 
@@ -366,9 +338,7 @@ describe('Auth', () => {
         User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }).withDetails({ email: 'foo@bar.baz' }),
         callback,
       )
-      // We grab the user email
-      expect(getUserEmail).not.toHaveBeenCalled()
-      expect(cacheOasysUserDetails).not.toHaveBeenCalled()
+
       expect(callback).toHaveBeenCalled()
     })
 
@@ -378,7 +348,7 @@ describe('Auth', () => {
       const [serializer] = passport.serializeUser.mock.calls[0]
       expect(typeof serializer).toBe('function')
 
-      getUserEmail.mockRejectedValue('💥')
+      cacheUserDetails.mockRejectedValue('💥')
       const callback = jest.fn()
 
       await serializer(req, User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
@@ -397,13 +367,8 @@ describe('Auth', () => {
       getCachedUserDetails.mockResolvedValue(
         JSON.parse(
           JSON.stringify({
-            isActive: true,
-            oasysUserCode: 'SUPPORT1',
             username: 'FBAR',
             name: 'Foo Bar',
-            email: 'foo@bar.baz',
-            areaCode: 'HFS',
-            areaName: 'Hertfordshire',
           }),
         ),
       )
@@ -416,9 +381,6 @@ describe('Auth', () => {
           token: 'FOO_TOKEN',
           username: 'FBAR',
           name: 'Foo Bar',
-          email: 'foo@bar.baz',
-          isActive: true,
-          oasysUserCode: 'SUPPORT1',
         }),
         callback,
       )
@@ -432,59 +394,6 @@ describe('Auth', () => {
       expect(user.getDetails()).toEqual({
         username: 'FBAR',
         name: 'Foo Bar',
-        email: 'foo@bar.baz',
-        isActive: true,
-        oasysUserCode: 'SUPPORT1',
-        areaCode: 'HFS',
-        areaName: 'Hertfordshire',
-      })
-      expect(user.getSession()).toEqual({
-        id: 1,
-        token: 'FOO_TOKEN',
-      })
-    })
-
-    it('handles a cache miss by fetching user details', async () => {
-      const req = {}
-      expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
-      const [deserializer] = passport.deserializeUser.mock.calls[0]
-      expect(typeof deserializer).toBe('function')
-
-      getCachedUserDetails.mockResolvedValue(null)
-      cacheOasysUserDetails.mockResolvedValue({
-        oasysUserCode: 'USER_CODE',
-        username: 'FBAR',
-        name: 'Foo Bar',
-        email: 'foo@bar.baz',
-        isActive: true,
-      })
-      getUserEmail.mockResolvedValue('foo@bar.baz')
-      getApiToken.mockResolvedValue('BAR_TOKEN')
-      const oasysUser = {
-        oasysUserCode: 'USER_CODE',
-        userForename1: 'Test',
-        userFamilyName: 'User',
-        email: 'foo@bar.baz',
-        accountStatus: 'ACTIVE',
-      }
-      getUserByEmail.mockResolvedValue(oasysUser)
-      const callback = jest.fn()
-
-      await deserializer(req, User.from({ id: 1, token: 'FOO_TOKEN' }), callback)
-
-      expect(getCachedUserDetails).toHaveBeenCalledWith(1)
-      expect(cacheOasysUserDetails).toHaveBeenCalledWith(1, oasysUser)
-      expect(callback).toHaveBeenCalled()
-
-      const [error, user] = callback.mock.calls[0]
-
-      expect(error).toBeNull()
-      expect(user.getDetails()).toEqual({
-        username: 'FBAR',
-        name: 'Foo Bar',
-        email: 'foo@bar.baz',
-        isActive: true,
-        oasysUserCode: 'USER_CODE',
       })
       expect(user.getSession()).toEqual({
         id: 1,

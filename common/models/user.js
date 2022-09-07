@@ -16,26 +16,16 @@ class User {
     return this
   }
 
-  withDetails({ isActive, email, oasysUserCode, username, name, areaCode, areaName } = {}) {
-    this.isActive = isActive
-    this.email = email
-    this.oasysUserCode = oasysUserCode
+  withDetails({ username, name } = {}) {
     this.username = username
     this.name = name || username
-    this.areaCode = areaCode
-    this.areaName = areaName
     return this
   }
 
   getDetails() {
     return {
-      isActive: this.isActive,
-      email: this.email,
-      oasysUserCode: this.oasysUserCode,
       username: this.username,
       name: this.name,
-      areaCode: this.areaCode,
-      areaName: this.areaName,
     }
   }
 

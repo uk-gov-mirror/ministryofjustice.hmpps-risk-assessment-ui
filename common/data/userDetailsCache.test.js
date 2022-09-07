@@ -1,5 +1,5 @@
 const jwtDecode = require('jwt-decode')
-const { cacheOasysUserDetails, getCachedUserDetails, cacheUserDetails } = require('./userDetailsCache')
+const { getCachedUserDetails, cacheUserDetails } = require('./userDetailsCache')
 const redis = require('./redis')
 const authUser = require('../middleware/testSupportFiles/user_token.json')
 
@@ -14,25 +14,6 @@ describe('Auth', () => {
     redis.set.mockReset()
   })
   describe('cache user details', () => {
-    it('adds the OASys user details to redis cache', async () => {
-      const oasysUser = {
-        oasysUserCode: 'USER_CODE',
-        userForename1: 'Test',
-        userFamilyName: 'User',
-        email: 'foo@bar.baz',
-        accountStatus: 'ACTIVE',
-      }
-
-      await cacheOasysUserDetails(1, oasysUser)
-      // Persist user details to Redis and key by the user's ID
-      expect(redis.set).toHaveBeenCalledWith(
-        'user:1',
-        '{"isActive":true,"email":"foo@bar.baz","oasysUserCode":"USER_CODE","username":"Test User"}',
-        'EX',
-        43200,
-      )
-    })
-
     it('adds the standalone user details to redis cache', async () => {
       const user = jwtDecode(authUser.token)
 
@@ -42,20 +23,14 @@ describe('Auth', () => {
     })
 
     it('get the user details from redis cache', async () => {
-      redis.get.mockResolvedValue(
-        '{"isActive":true,"email":"foo@bar.baz","oasysUserCode":"SUPPORT1","username":"Ray Arnold","areaCode":"HFS","areaName":"Hertfordshire"}',
-      )
+      redis.get.mockResolvedValue('{"username":"RAY_ARNOLD", "name":"Ray Arnold"}')
 
       const cachedDetails = await getCachedUserDetails(1)
 
       expect(redis.get).toHaveBeenCalledWith('user:1')
       const userDetails = {
-        isActive: true,
-        oasysUserCode: 'SUPPORT1',
-        username: 'Ray Arnold',
-        email: 'foo@bar.baz',
-        areaCode: 'HFS',
-        areaName: 'Hertfordshire',
+        name: 'Ray Arnold',
+        username: 'RAY_ARNOLD',
       }
       expect(cachedDetails).toStrictEqual(userDetails)
     })

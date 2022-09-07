@@ -10,8 +10,6 @@ const {
   checkForTokenRefresh,
 } = require('../common/middleware/auth')
 
-const { checkAssessmentType } = require('../common/middleware/area-selection')
-
 const upwWorkflow = require('./upw')
 
 const logger = require('../common/logging/logger')
@@ -47,9 +45,8 @@ module.exports = (app) => {
     })
   })
 
-  app.use(checkAssessmentType(), checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
+  app.use(checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
 
-  app.get('*', checkAssessmentType())
   app.post('*', xss())
 
   app.get(['/start-assessment', '/assessment-from-delius'], verifyAssessment)
