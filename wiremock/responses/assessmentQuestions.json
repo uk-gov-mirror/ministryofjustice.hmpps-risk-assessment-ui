@@ -1119,59 +1119,61 @@
       "type": "question",
       "questionId": "86b3e0c5-2731-49c0-a76a-9baaef7941c9",
       "questionCode": "modern_day_slavery_risks",
-      "answerType": "freetext",
+      "answerType": "radio",
       "questionText": "Are there specific risks  that need to be taken into account?",
       "readOnly": false,
       "conditional": false,
-      "answerDtos": []
+      "answerDtos": [
+        {
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes",
+          "conditionals": [
+            {
+              "conditional": "modern_day_slavery_risks_details",
+              "displayInline": true
+            }
+          ]
+        },
+        {
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
     },
     {
       "type": "question",
       "questionId": "e84ee6f1-231c-4d65-a02c-00e3a2eb29e9",
       "questionCode": "modern_day_slavery_risks_details",
-      "answerType": "radio",
+      "answerType": "textarea",
       "questionText": "Give details",
       "readOnly": false,
       "conditional": true,
-      "answerDtos": [
-        {
-          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
-          "answerSchemaCode": "yes",
-          "value": "YES",
-          "text": "Yes"
-        },
-        {
-          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
-          "answerSchemaCode": "no",
-          "value": "NO",
-          "text": "No"
-        }
-      ]
+      "answerDtos": []
     },
     {
       "type": "question",
       "questionId": "36c51db6-1f9c-4257-9372-7c48cbaa4cef",
       "questionCode": "modern_day_slavery_orders",
-      "answerType": "freetext",
+      "answerType": "radio",
       "questionText": "Are there any slavery and trafficking prevention orders or slavery and trafficking risk orders in place?",
       "readOnly": false,
       "conditional": false,
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "0b5a97bd-9f60-4a78-9f43-ccc68cc1a6ec",
-      "questionCode": "modern_day_slavery_orders_details",
-      "answerType": "radio",
-      "questionText": "What restrictions do they specify?",
-      "readOnly": false,
-      "conditional": true,
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
-          "text": "Yes"
+          "text": "Yes",
+          "conditionals": [
+            {
+              "conditional": "modern_day_slavery_orders_details",
+              "displayInline": true
+            }
+          ]
         },
         {
           "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
@@ -1183,34 +1185,74 @@
     },
     {
       "type": "question",
-      "questionId": "2223afec-9239-406b-93a3-52186af94f0a",
-      "questionCode": "modern_day_slavery_safeguarding",
-      "answerType": "freetext",
-      "questionText": "Are there any safeguarding measures that need to be put into place?",
+      "questionId": "0b5a97bd-9f60-4a78-9f43-ccc68cc1a6ec",
+      "questionCode": "modern_day_slavery_orders_details",
+      "answerType": "textarea",
+      "questionText": "What restrictions do they specify?",
       "readOnly": false,
-      "conditional": false,
+      "conditional": true,
       "answerDtos": []
     },
     {
       "type": "question",
-      "questionId": "935df25c-ac07-4260-a298-57ea1631dac7",
-      "questionCode": "modern_day_slavery_safeguarding_details",
+      "questionId": "2223afec-9239-406b-93a3-52186af94f0a",
+      "questionCode": "modern_day_slavery_safeguarding",
       "answerType": "radio",
-      "questionText": "Give details",
+      "questionText": "Are there any safeguarding measures that need to be put into place?",
       "readOnly": false,
-      "conditional": true,
+      "conditional": false,
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
           "answerSchemaCode": "yes",
           "value": "YES",
-          "text": "Yes"
+          "text": "Yes",
+          "conditionals": [
+            {
+              "conditional": "modern_day_slavery_safeguarding_details",
+              "displayInline": true
+            }
+          ]
         },
         {
           "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
           "answerSchemaCode": "no",
           "value": "NO",
           "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "935df25c-ac07-4260-a298-57ea1631dac7",
+      "questionCode": "modern_day_slavery_safeguarding_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": true,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "efd7bc3f-b9f4-46c6-a06f-f29f911c0138",
+      "questionCode": "modern_day_slavery_complete",
+      "answerType": "radio",
+      "questionText": "Mark modern day slavery section as complete?",
+      "helpText": "",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": [
+        {
+          "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerUuid": "70ca6d84-730d-45b2-b531-1d8d13fefadc",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
         }
       ]
     },

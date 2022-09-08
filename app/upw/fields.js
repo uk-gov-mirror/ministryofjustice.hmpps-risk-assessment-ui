@@ -482,6 +482,54 @@ const fields = {
       },
     ],
   },
+  modern_day_slavery_risks: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select if there are specific risks that need to be taken into account',
+      },
+    ],
+    ...requireYesOrNo,
+  },
+  modern_day_slavery_risks_details: {
+    dependent: { field: 'modern_day_slavery_risks', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  modern_day_slavery_orders: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select if there any slavery and trafficking prevention orders or slavery and trafficking risk',
+      },
+    ],
+    ...requireYesOrNo,
+  },
+  modern_day_slavery_orders_details: {
+    dependent: { field: 'modern_day_slavery_orders', value: 'YES' },
+    validate: [
+      {
+        fn: noSpace,
+        message: 'Enter what restrictions they specify',
+      },
+      {
+        type: 'required',
+        message: 'Enter what restrictions they specify',
+      },
+    ],
+  },
+  modern_day_slavery_safeguarding: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select if there are any safeguarding measures that need to be put into place',
+      },
+    ],
+    ...requireYesOrNo,
+  },
+  modern_day_slavery_safeguarding_details: {
+    dependent: { field: 'modern_day_slavery_safeguarding', value: 'YES' },
+    ...requireEnterDetails,
+  },
   physical_disability: readOnly,
   physical_disability_details: readOnly,
   learning_disability: readOnly,
@@ -745,6 +793,14 @@ const fields = {
     ],
   },
   managing_risk_complete: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select Yes I have completed this section or No I have not completed and will come back later',
+      },
+    ],
+  },
+  modern_day_slavery_complete: {
     validate: [
       {
         type: 'required',

@@ -1,0 +1,50 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "common/templates/components/widgets/macro.njk" import widgets %}
+
+{% set backLink = 'task-list' %}
+
+{% block pageTitle %}
+{{ pageTitle }}
+{% endblock %}
+
+{% block header %}
+{% include "common/templates/partials/header.njk" %}
+{% endblock %}
+
+{% block content %}
+{# include errorSummary partial #}
+{{ super() }}
+
+<div class="govuk-grid-row">
+    <section class="govuk-grid-column-three-quarters" aria-label="Form content">
+        <span class="govuk-caption-xl">Risk information</span>
+        <h1 class="govuk-heading-xl">
+            {{ pageTitle }}
+        </h1>
+        
+        <form method="post" action="{{ action }}">
+            <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+            {{ renderQuestion(questions['modern_day_slavery_risks'], errors) }}
+            {{ renderQuestion(questions['modern_day_slavery_orders'], errors) }}
+            {{ renderQuestion(questions['modern_day_slavery_safeguarding'], errors) }}
+
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
+
+            {{ renderQuestion(questions['modern_day_slavery_complete'], errors) }}
+
+            <div class="questiongroup-action-buttons">
+                {{ govukButton({
+                    text: buttonText | default('Save'),
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                }) }}
+            </div>
+        </form>
+    </section>
+
+    {{ widgets(widgetData) }}
+    
+</div>
+{% endblock %}

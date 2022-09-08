@@ -168,6 +168,22 @@ module.exports = {
       'managing_risk_complete',
     ],
   },
+  '/modern-day-slavery': {
+    pageTitle: 'Modern day slavery',
+    id: 'modern-day-slavery',
+    controller: SaveAndContinue,
+    template: `${__dirname}/templates/risk-information/modern-day-slavery.njk`,
+    next: 'task-list#modern-day-slavery',
+    fields: [
+      'modern_day_slavery_risks',
+      'modern_day_slavery_risks_details',
+      'modern_day_slavery_orders',
+      'modern_day_slavery_orders_details',
+      'modern_day_slavery_safeguarding',
+      'modern_day_slavery_safeguarding_details',
+      'modern_day_slavery_complete',
+    ],
+  },
   '/disabilities-and-mental-health': {
     pageTitle: 'Disabilities and mental health',
     id: 'disabilities-mental-health',

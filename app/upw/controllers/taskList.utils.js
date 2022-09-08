@@ -60,6 +60,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
       items: [
         getTask(answers, baseUrl, steps, 'risk-of-harm-in-the-community', 'rosh_community_complete'),
         getTask(answers, baseUrl, steps, 'managing-risk', 'managing_risk_complete'),
+        getTask(answers, baseUrl, steps, 'modern-day-slavery', 'modern_day_slavery_complete'),
       ],
     },
     {
