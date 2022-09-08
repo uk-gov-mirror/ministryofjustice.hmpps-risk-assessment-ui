@@ -30,8 +30,6 @@ const formatMappaResponse = (mappaResponse = {}) => ({
   lastUpdated: prettyDate(mappaResponse?.startDate),
 })
 
-const formatFlag = (flag) => flag.description || null
-
 const getRegistrations = async (crn, user) => {
   try {
     const { response, status } = await getRegistrationsForCrn(crn, user)
@@ -52,7 +50,7 @@ const getRegistrations = async (crn, user) => {
 
     return {
       mappa: formatMappaResponse(response.mappa),
-      flags: response.flags.map(formatFlag).filter(whereStringNotNull),
+      flags: response.flags.filter(({ description }) => whereStringNotNull(description)),
     }
   } catch (error) {
     logger.info(`Failed to fetch registrations for CRN ${crn}`)

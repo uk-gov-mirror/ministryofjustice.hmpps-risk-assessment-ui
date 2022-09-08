@@ -3,7 +3,7 @@ const { SECTION_COMPLETE } = require('../../../common/utils/constants')
 const checkAllTasksAreComplete = (sections) => {
   return sections.every((section) => {
     const tasks = section.items || []
-    return tasks.every((task) => task.status === 'COMPLETE')
+    return tasks.every((task) => !task.active || task.status === 'COMPLETE')
   })
 }
 
@@ -17,19 +17,24 @@ const getPdfPreviewTask = (baseUrl, steps, taskName, otherSections) => {
     href: `${baseUrl}/${taskName}`,
     status: getPdfPreviewStatus(otherSections),
     id: steps[`/${taskName}`]?.id,
+    active: true,
   }
 }
 
-const getTask = (answers, baseUrl, steps, taskName, completionField) => {
+const getTask = (answers, baseUrl, steps, taskName, completionField, active = true) => {
   return {
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}` || '#',
     status: answers[completionField]?.toString().toUpperCase() === SECTION_COMPLETE ? 'COMPLETE' : 'INCOMPLETE',
     id: steps[`/${taskName}`]?.id,
+    active,
   }
 }
 
-const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
+const hasRiskFlags = (flags = [], requiredCodes = []) =>
+  flags.filter(({ code }) => requiredCodes.includes(code)).length > 0
+
+const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => {
   const tasks = [
     {
       heading: {
@@ -60,7 +65,14 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}) => {
       items: [
         getTask(answers, baseUrl, steps, 'risk-of-harm-in-the-community', 'rosh_community_complete'),
         getTask(answers, baseUrl, steps, 'managing-risk', 'managing_risk_complete'),
-        getTask(answers, baseUrl, steps, 'modern-day-slavery', 'modern_day_slavery_complete'),
+        getTask(
+          answers,
+          baseUrl,
+          steps,
+          'modern-day-slavery',
+          'modern_day_slavery_complete',
+          hasRiskFlags(riskFlags, ['MSV', 'MSP']),
+        ),
       ],
     },
     {
@@ -128,4 +140,5 @@ module.exports = {
   getPdfPreviewTask,
   getTask,
   getTaskList,
+  hasRiskFlags,
 }

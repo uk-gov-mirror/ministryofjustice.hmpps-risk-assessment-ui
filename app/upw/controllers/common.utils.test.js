@@ -140,7 +140,7 @@ describe('GetRegistrations', () => {
     const registrations = await getRegistrations('A123456', user)
 
     expect(registrations).toEqual({
-      flags: ['Hate Crime'],
+      flags: [{ code: 'IRMO', description: 'Hate Crime', colour: 'Red' }],
       mappa: {
         level: null,
         isNominal: null,

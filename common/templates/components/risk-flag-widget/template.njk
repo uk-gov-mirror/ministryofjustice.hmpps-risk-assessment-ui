@@ -5,7 +5,7 @@
         {% if flags.length %}
             <ul class="govuk-list" aria-label="Risk flags">
             {% for risk in flags %}
-                <li>{{ risk }}</li>
+                <li>{{ risk.description }}</li>
             {% endfor %}
             </ul>
         {% else %}

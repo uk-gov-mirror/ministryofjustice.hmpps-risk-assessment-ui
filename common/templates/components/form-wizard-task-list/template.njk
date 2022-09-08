@@ -7,6 +7,7 @@
     </h{{ section.heading.headingLevel | default(2) }}>
     <ul class="task-list__items">
       {%- for item in section.items %}
+      {% if item.active %}
       <li class="task-list__item">
         <span class="task-list__task-name">
           {% if item.status != 'CANNOT_START' and item.status != 'CANNOT_VIEW_PDF' %}
@@ -60,6 +61,7 @@
           }) }}
         {% endif -%}
       </li>
+      {% endif %}
       {% endfor -%}
     </ul>
   </li>

@@ -23,11 +23,16 @@ class TaskList extends BaseController {
 
       const consolidatedAnswers = { ...previousAnswers, ...answers }
 
-      res.locals.taskList = getTaskList(`/${journeyName}`, steps, answerDtoFrom(consolidatedAnswers))
-      res.locals.saveAssessmentUrl = `/${journeyName}/assessment-saved`
-
       const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
       const roshRiskSummary = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
+
+      res.locals.taskList = getTaskList(
+        `/${journeyName}`,
+        steps,
+        answerDtoFrom(consolidatedAnswers),
+        deliusRegistrations.flags || [],
+      )
+      res.locals.saveAssessmentUrl = `/${journeyName}/assessment-saved`
 
       res.locals.widgetData = {
         ...deliusRegistrations,

@@ -6,5 +6,8 @@
     "categoryDescription": "MAPPA Cat 2",
     "startDate": "2021-10-10"
   },
-  "flags": [{ "code": "IRMO", "description": "Hate Crime", "colour": "Red" }]
+  "flags": [
+    { "code": "IRMO", "description": "Hate Crime", "colour": "Red" },
+    { "code": "MSP", "description": "Modern Day Slavery - Perpetrator", "colour": "Amber" }
+  ]
 }
