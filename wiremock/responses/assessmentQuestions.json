@@ -8,7 +8,6 @@
       "questionText": "First name (aliases)",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -19,7 +18,6 @@
       "questionText": "Family name (aliases)",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -30,7 +28,6 @@
       "questionText": "Gender identity",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "b6d5e728-7e5b-4382-972f-31c3c66337cf",
@@ -72,7 +69,6 @@
       "questionText": "Has the individual gone through any part of a process to change the sex they were assigned at birth to the gender they now identify with, or do they intend to?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
@@ -96,7 +92,6 @@
       "questionText": "Give details and discuss placement options with the individual, based on their gender identity. Record their preference and the details of the conversation.",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -107,7 +102,6 @@
       "questionText": "Is the individual intersex or do they have a Difference in Sexual Development (DSD)?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
@@ -132,7 +126,6 @@
       "helpText": "This could include their name, appearance, the way they dress, taking hormones, or having gender-confirming surgery.",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "59a0f4fe-4cca-426b-9402-0236dae24902",
@@ -156,7 +149,6 @@
       "questionText": "Building name",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -167,7 +159,6 @@
       "questionText": "House number",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -178,7 +169,6 @@
       "questionText": "Street name",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -189,7 +179,6 @@
       "questionText": "District",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -200,7 +189,6 @@
       "questionText": "Town or city",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -211,7 +199,6 @@
       "questionText": "County",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -222,7 +209,6 @@
       "questionText": "Postcode",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -233,7 +219,6 @@
       "questionText": "Phone number",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -244,7 +229,6 @@
       "questionText": "Mobile number",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -255,7 +239,6 @@
       "questionText": "Email",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -263,10 +246,9 @@
       "questionId": "70eb1db7-4e68-4a59-b40c-7ce00f9c0aec",
       "questionCode": "emergency_contact_first_name",
       "answerType": "freetext",
-      "questionText": "First name",
+      "questionText": "Name",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -274,10 +256,9 @@
       "questionId": "c5645fe0-8e9b-4402-8392-629d1b7bfba8",
       "questionCode": "emergency_contact_family_name",
       "answerType": "freetext",
-      "questionText": "Family name",
+      "questionText": "Surname",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -288,7 +269,6 @@
       "questionText": "Relationship to the individual",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -299,7 +279,6 @@
       "questionText": "Are adjustments required for cultural or religious reasons?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -329,7 +308,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": true,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -337,11 +315,10 @@
       "questionId": "0238fbc4-e488-4e1e-858d-856532d1cf56",
       "questionCode": "cultural_religious_adjustment_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark cultural or religious adjustments section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -365,7 +342,6 @@
       "questionText": "Phone number",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -373,10 +349,9 @@
       "questionId": "07334e88-94ab-4121-ad51-1b9ae050a3cd",
       "questionCode": "emergency_contact_mobile_phone_number",
       "answerType": "freetext",
-      "questionText": "Mobile number",
+      "questionText": "Mobile",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -384,11 +359,10 @@
       "questionId": "c8a72834-64e9-41dd-a23d-52ea0f60ed64",
       "questionCode": "individual_details_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark individual’s details section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -412,7 +386,6 @@
       "questionText": "Does the individual have any placement preferences?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -442,7 +415,6 @@
       "readOnly": false,
       "conditional": true,
       "referenceDataCategory": "PLACEMENT_PREFERENCES",
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "e8689a6c-2b53-4d6c-b9bf-3bbb0b4a6f85",
@@ -469,11 +441,10 @@
       "questionId": "d1d849fe-1240-49db-bf60-692967a9e55e",
       "questionCode": "placement_preference_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark placement preferences as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -498,7 +469,6 @@
       "helpText": "Record their preference and the details of the conversation.",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -506,11 +476,10 @@
       "questionId": "980f7936-682c-4174-91b6-3dcfc684c494",
       "questionCode": "placement_preference_by_gender_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark gender information section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -534,7 +503,6 @@
       "questionText": "History of acquisitive offending?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -558,7 +526,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -569,7 +536,6 @@
       "questionText": "History of sexual offending?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -593,7 +559,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -604,7 +569,6 @@
       "questionText": "Individual poses a risk to children?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -628,7 +592,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -639,7 +602,6 @@
       "questionText": "Violent offences?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -663,7 +625,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -674,7 +635,6 @@
       "questionText": "Has the individual been involved in serious group offending (SGO)?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -698,7 +658,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -709,7 +668,6 @@
       "questionText": "Control issues or disruptive behaviour?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -733,7 +691,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -745,7 +702,6 @@
       "helpText": "For example, homophobic or racially motivated",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -769,7 +725,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -781,7 +736,6 @@
       "helpText": "For example, they are prominent on social media or are well-known in a particular area.",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -805,7 +759,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -817,7 +770,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -841,7 +793,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -849,11 +800,10 @@
       "questionId": "e457d288-aa0e-4000-8906-140bbd9d5b17",
       "questionCode": "rosh_community_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark risk of harm in the community section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -878,7 +828,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -902,7 +851,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -914,7 +862,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -938,7 +885,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -950,7 +896,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -974,7 +919,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -986,7 +930,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1010,7 +953,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1022,7 +964,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1046,7 +987,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1058,7 +998,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1082,7 +1021,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1094,7 +1032,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1118,7 +1055,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1130,7 +1066,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1154,7 +1089,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1162,11 +1096,10 @@
       "questionId": "e8cc7779-498e-494b-8280-8cb088b3c6e9",
       "questionCode": "managing_risk_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark managing risk section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -1184,102 +1117,22 @@
     },
     {
       "type": "question",
-      "questionId": "7503ab1a-ea03-41f3-8d0a-b75da9830909",
-      "questionCode": "physical_disability",
-      "answerType": "textarea",
-      "questionText": "Physical disability",
+      "questionId": "86b3e0c5-2731-49c0-a76a-9baaef7941c9",
+      "questionCode": "modern_day_slavery_risks",
+      "answerType": "freetext",
+      "questionText": "Are there specific risks  that need to be taken into account?",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
       "type": "question",
-      "questionId": "4a97f15f-1a1e-44d5-83f7-ef5b2ad67246",
-      "questionCode": "physical_disability_details",
-      "answerType": "textarea",
-      "questionText": "Give details",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "ce7451a2-5f75-42a8-95ad-377dee4d99bf",
-      "questionCode": "learning_disability",
-      "answerType": "textarea",
-      "questionText": "Learning disability",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "637efa3b-264b-42f5-91d3-2985576e9614",
-      "questionCode": "learning_disability_details",
-      "answerType": "textarea",
-      "questionText": "Give details",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "5c70e49d-92e1-4ee3-b934-380dca6e326a",
-      "questionCode": "learning_difficulty",
-      "answerType": "textarea",
-      "questionText": "Learning difficulty",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "3c73385e-fafb-4df8-a668-8a8ab2e90625",
-      "questionCode": "learning_difficulty_details",
-      "answerType": "textarea",
-      "questionText": "Give details",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "a349c303-b5e3-4c72-9540-fb17c1b6753a",
-      "questionCode": "mental_health_condition",
-      "answerType": "textarea",
-      "questionText": "Mental health condition",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "c97bb3af-993d-45f3-a349-27ba547310c6",
-      "questionCode": "mental_health_condition_details",
-      "answerType": "textarea",
-      "questionText": "Give details",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "22aa55c0-8cd3-4106-a4cf-a64c05ed72c7",
-      "questionCode": "additional_disabilities",
+      "questionId": "e84ee6f1-231c-4d65-a02c-00e3a2eb29e9",
+      "questionCode": "modern_day_slavery_risks_details",
       "answerType": "radio",
-      "questionText": "Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?",
-      "helpText": "",
-      "readOnly": true,
-      "conditional": false,
-      "referenceDataTargets": [],
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": true,
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1297,13 +1150,148 @@
     },
     {
       "type": "question",
-      "questionId": "7ce51aeb-c2fa-4b95-9c0d-8e353b5de869",
-      "questionCode": "additional_disabilities_details",
+      "questionId": "36c51db6-1f9c-4257-9372-7c48cbaa4cef",
+      "questionCode": "modern_day_slavery_orders",
+      "answerType": "freetext",
+      "questionText": "Are there any slavery and trafficking prevention orders or slavery and trafficking risk orders in place?",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "0b5a97bd-9f60-4a78-9f43-ccc68cc1a6ec",
+      "questionCode": "modern_day_slavery_orders_details",
+      "answerType": "radio",
+      "questionText": "What restrictions do they specify?",
+      "readOnly": false,
+      "conditional": true,
+      "answerDtos": [
+        {
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "2223afec-9239-406b-93a3-52186af94f0a",
+      "questionCode": "modern_day_slavery_safeguarding",
+      "answerType": "freetext",
+      "questionText": "Are there any safeguarding measures that need to be put into place?",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "935df25c-ac07-4260-a298-57ea1631dac7",
+      "questionCode": "modern_day_slavery_safeguarding_details",
+      "answerType": "radio",
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": true,
+      "answerDtos": [
+        {
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7503ab1a-ea03-41f3-8d0a-b75da9830909",
+      "questionCode": "physical_disability",
+      "answerType": "textarea",
+      "questionText": "Physical disability",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "4a97f15f-1a1e-44d5-83f7-ef5b2ad67246",
+      "questionCode": "physical_disability_details",
       "answerType": "textarea",
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "ce7451a2-5f75-42a8-95ad-377dee4d99bf",
+      "questionCode": "learning_disability",
+      "answerType": "textarea",
+      "questionText": "Learning disability",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "637efa3b-264b-42f5-91d3-2985576e9614",
+      "questionCode": "learning_disability_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "5c70e49d-92e1-4ee3-b934-380dca6e326a",
+      "questionCode": "learning_difficulty",
+      "answerType": "textarea",
+      "questionText": "Learning difficulty",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "3c73385e-fafb-4df8-a668-8a8ab2e90625",
+      "questionCode": "learning_difficulty_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "a349c303-b5e3-4c72-9540-fb17c1b6753a",
+      "questionCode": "mental_health_condition",
+      "answerType": "textarea",
+      "questionText": "Mental health condition",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "c97bb3af-993d-45f3-a349-27ba547310c6",
+      "questionCode": "mental_health_condition_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": false,
       "answerDtos": []
     },
     {
@@ -1315,7 +1303,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1339,7 +1326,6 @@
       "questionText": "Suggest  adjustments, if known [optional]",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1347,11 +1333,10 @@
       "questionId": "69e64e83-ce81-4796-8907-84b5dfac59f3",
       "questionCode": "disabilities_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark disabilities and mental health section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -1369,14 +1354,64 @@
     },
     {
       "type": "question",
-      "questionId": "c11154bb-5675-4822-91ce-d870cdbcd46c",
-      "questionCode": "allergies",
+      "questionId": "7268c822-637c-45ad-b23a-6ee211e4c206",
+      "questionCode": "active_disabilities",
+      "answerType": "freetext",
+      "questionText": "Disabilities",
+      "helpText": "",
+      "readOnly": true,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "22aa55c0-8cd3-4106-a4cf-a64c05ed72c7",
+      "questionCode": "additional_disabilities",
       "answerType": "radio",
-      "questionText": "Allergies?",
+      "questionText": "Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
+      "answerDtos": [
+        {
+          "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes",
+          "conditionals": [
+            {
+              "conditional": "additional_disabilities_details",
+              "displayInline": true
+            }
+          ]
+        },
+        {
+          "answerUuid": "2a6011b2-4973-4249-99fd-9f84dbb2c88e",
+          "answerSchemaCode": "no",
+          "value": "NO",
+          "text": "No"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "questionId": "7ce51aeb-c2fa-4b95-9c0d-8e353b5de869",
+      "questionCode": "additional_disabilities_details",
+      "answerType": "textarea",
+      "questionText": "Give details",
+      "readOnly": false,
+      "conditional": true,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "c11154bb-5675-4822-91ce-d870cdbcd46c",
+      "questionCode": "allergies",
+      "answerType": "radio",
+      "questionText": "Does the individual have any known allergies?",
+      "helpText": "",
+      "readOnly": false,
+      "conditional": false,
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1400,7 +1435,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1408,11 +1442,10 @@
       "questionId": "1c34a46a-a094-4903-8c93-362b1dcb5718",
       "questionCode": "loss_consciousness",
       "answerType": "radio",
-      "questionText": "Sudden loss of consciousness?",
+      "questionText": "Has the individual experienced sudden loss of consciousness?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1436,7 +1469,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1444,11 +1476,10 @@
       "questionId": "988aabc4-5a74-489c-be96-349197cada51",
       "questionCode": "epilepsy",
       "answerType": "radio",
-      "questionText": "Epilepsy?",
+      "questionText": "Does the individual have epilepsy?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1472,7 +1503,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1484,7 +1514,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1508,7 +1537,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1516,11 +1544,10 @@
       "questionId": "fb0d6e10-9a10-40e4-8ebc-ffcb2c46ffbb",
       "questionCode": "pregnancy",
       "answerType": "radio",
-      "questionText": "Pregnant or recently given birth?",
+      "questionText": "Is the individual pregnant or recently given birth?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "c7629b3e-30c0-405a-9d7c-65888c9aca7a",
@@ -1550,7 +1577,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1561,7 +1587,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1569,11 +1594,10 @@
       "questionId": "155e1596-9f83-4e0a-8fa7-e36f9ed2b2e5",
       "questionCode": "health_issues_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark health issues section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -1594,11 +1618,10 @@
       "questionId": "0ba4ef3e-8c40-4c1e-b267-a42afd07ee4e",
       "questionCode": "gp_details_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark GP details section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -1622,7 +1645,6 @@
       "questionText": "First name",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1633,29 +1655,6 @@
       "questionText": "Family name",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "3878b84a-ce60-491d-a566-8b637c106bec",
-      "questionCode": "gp_name",
-      "answerType": "freetext",
-      "questionText": "Name (Optional)",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "e8ceda00-f8d2-444b-9d8c-e890343d196b",
-      "questionCode": "gp_practice_name",
-      "answerType": "freetext",
-      "questionText": "GP practice name",
-      "readOnly": false,
-      "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1666,7 +1665,6 @@
       "questionText": "Building name",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1677,7 +1675,6 @@
       "questionText": "House number",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1688,7 +1685,6 @@
       "questionText": "Street name",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1699,7 +1695,6 @@
       "questionText": "District",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1710,7 +1705,6 @@
       "questionText": "Town or city",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1721,7 +1715,6 @@
       "questionText": "County",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1732,7 +1725,6 @@
       "questionText": "Postcode",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1743,7 +1735,26 @@
       "questionText": "Phone number",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "6001121c-5b82-467f-bcfe-597f5e91e2f0",
+      "questionCode": "gp_practice_name",
+      "answerType": "freetext",
+      "questionText": "GP practice name",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "4b1e24af-6eb0-4d3c-add2-c6716878d480",
+      "questionCode": "gp_name",
+      "answerType": "freetext",
+      "questionText": "Name (Optional)",
+      "readOnly": false,
+      "conditional": false,
       "answerDtos": []
     },
     {
@@ -1755,7 +1766,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1779,7 +1789,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1791,7 +1800,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1816,7 +1824,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1841,7 +1848,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1862,11 +1868,10 @@
       "questionId": "1dabae67-1b71-4190-ba31-aae51d575f31",
       "questionCode": "travel_information_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark travel information section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -1891,7 +1896,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -1915,7 +1919,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1923,11 +1926,10 @@
       "questionId": "7f7896f3-62b2-455a-9565-08538085ced5",
       "questionCode": "caring_commitments_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark caring commitments section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -1945,6 +1947,28 @@
     },
     {
       "type": "question",
+      "questionId": "8f721d80-2b61-4b3d-8f72-7d20a72d2ed0",
+      "questionCode": "active_carer_commitments",
+      "answerType": "freetext",
+      "questionText": "Are there carer commitments?",
+      "helpText": "",
+      "readOnly": true,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "d1d6d2be-bbec-4cd0-bced-927bf24fa614",
+      "questionCode": "active_carer_commitments_details",
+      "answerType": "textarea",
+      "questionText": "Additional information (Optional)",
+      "helpText": "",
+      "readOnly": true,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
       "questionId": "01704ebe-886e-4d66-805d-9b84e529783c",
       "questionCode": "employment_education",
       "answerType": "radio",
@@ -1952,7 +1976,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "f606340b-8413-4012-b11d-ba3c26d02f0d",
@@ -1982,7 +2005,6 @@
       "questionText": "Employment or education details (working days, hours etc)",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -1993,7 +2015,6 @@
       "questionText": "Employment or education details (working days, hours etc)",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2005,7 +2026,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2029,7 +2049,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2041,7 +2060,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2065,7 +2083,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2077,7 +2094,6 @@
       "helpText": "For example: retail, gardening etc",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2101,7 +2117,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2109,11 +2124,10 @@
       "questionId": "e2529cda-e57b-44c6-bf08-466caf8be43d",
       "questionCode": "employment_education_skills_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark employment, education and skills section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -2138,7 +2152,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2162,7 +2175,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2174,7 +2186,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2198,7 +2209,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2206,11 +2216,10 @@
       "questionId": "315db0b1-66ac-4a3e-93bb-f9b7545fddb4",
       "questionCode": "employment_training_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark training and employment section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -2235,7 +2244,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "0d4682ab-7b24-4527-b0b3-b4d520e7c2d8",
@@ -2259,7 +2267,6 @@
       "questionText": "Give details",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2271,7 +2278,6 @@
       "helpText": "7 hours is the standard working day. Maximum of 21 additional hours per week.",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2283,7 +2289,6 @@
       "helpText": "7 hours is the standard working day. Maximum of 21 additional hours per week.",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2295,7 +2300,6 @@
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2303,11 +2307,10 @@
       "questionId": "fbee7d2a-3c6a-4aa7-bf7f-067674f07a8e",
       "questionCode": "eligibility_intensive_working_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark intensive working section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -2332,7 +2335,6 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataCategory": "INDIVIDUAL_AVAILABILITY",
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "034a8964-7a54-4773-8224-87bb6c6a5ed8",
@@ -2470,7 +2472,6 @@
       "questionText": "Additional availability information [Optional]",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": []
     },
     {
@@ -2478,11 +2479,10 @@
       "questionId": "b75f9b88-6e52-4543-a280-18866938d1bc",
       "questionCode": "individual_availability_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark availability for community payback work section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -2507,7 +2507,6 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataCategory": "CLOTHING",
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "b34622fb-6c97-488e-8e13-96f2f43bbecf",
@@ -2532,7 +2531,6 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataCategory": "WATERPROOF_CLOTHING",
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "bb427a45-d7d4-44a3-8b68-de2428fd92ea",
@@ -2588,7 +2586,6 @@
       "readOnly": false,
       "conditional": false,
       "referenceDataCategory": "FOOTWEAR_SIZE",
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "aead43e0-ee10-4271-ba01-83a35428e996",
@@ -2669,11 +2666,10 @@
       "questionId": "5b1046e3-53f1-44d8-97db-5fd543f4382c",
       "questionCode": "equipment_complete",
       "answerType": "radio",
-      "questionText": "Mark this section as complete?",
+      "questionText": "Mark equipment sizes section as complete?",
       "helpText": "",
       "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
       "answerDtos": [
         {
           "answerUuid": "51c9db72-9c69-4377-818c-b107572eab33",
@@ -2691,27 +2687,21 @@
     },
     {
       "type": "question",
-      "questionId": "8f721d80-2b61-4b3d-8f72-7d20a72d2ed0",
-      "questionCode": "active_carer_commitments",
-      "answerType": "freetext",
-      "questionText": "Are there carer commitments?",
-      "helpText": "",
-      "readOnly": true,
+      "questionId": "7beed4f4-0f3b-4b16-85f0-90377a350f1e",
+      "questionCode": "declaration_confirmation",
+      "answerType": "checkbox",
+      "questionText": "I confirm the individual has received details of their Community Payback Induction Session",
+      "readOnly": false,
       "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
-    },
-    {
-      "type": "question",
-      "questionId": "d1d6d2be-bbec-4cd0-bced-927bf24fa614",
-      "questionCode": "active_carer_commitments_details",
-      "answerType": "textarea",
-      "questionText": "Additional information (Optional)",
-      "helpText": "",
-      "readOnly": true,
-      "conditional": false,
-      "referenceDataTargets": [],
-      "answerDtos": []
+      "referenceDataCategory": "",
+      "answerDtos": [
+        {
+          "answerUuid": "4f121212-5a7f-4ddf-9286-0843b9cdd913",
+          "answerSchemaCode": "signed",
+          "value": "SIGNED",
+          "text": "Sign declaration"
+        }
+      ]
     }
   ]
 }
