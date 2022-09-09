@@ -1,5 +1,5 @@
 const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
-const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
+const { getRegistrations, getRoshRiskSummary, hasModernSlaveryFlags } = require('./common.utils')
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 
@@ -295,5 +295,28 @@ describe('GetRegistrations', () => {
         })
       }),
     )
+  })
+})
+
+describe('hasModernSlaveryFlags', () => {
+  it('returns true when present', () => {
+    const modernSlaveryPerpetrator = [{ code: 'MSP' }]
+    const modernSlaveryVictim = [{ code: 'MSV' }]
+
+    expect(hasModernSlaveryFlags(modernSlaveryPerpetrator)).toBe(true)
+    expect(hasModernSlaveryFlags(modernSlaveryVictim)).toBe(true)
+    expect(hasModernSlaveryFlags([...modernSlaveryPerpetrator, ...modernSlaveryVictim])).toBe(true)
+  })
+
+  it('returns false when not present', () => {
+    const flags = []
+
+    expect(hasModernSlaveryFlags(flags)).toBe(false)
+  })
+
+  it('handles when flags are undefined', () => {
+    const flags = undefined
+
+    expect(hasModernSlaveryFlags(flags)).toBe(false)
   })
 })

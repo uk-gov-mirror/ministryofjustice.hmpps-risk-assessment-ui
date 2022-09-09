@@ -93,7 +93,13 @@ const getRoshRiskSummary = async (crn, user) => {
   }
 }
 
+const hasRiskFlags = (flags = [], requiredCodes = []) =>
+  flags.filter(({ code }) => requiredCodes.includes(code)).length > 0
+
+const hasModernSlaveryFlags = (riskFlags) => hasRiskFlags(riskFlags, ['MSV', 'MSP'])
+
 module.exports = {
   getRegistrations,
   getRoshRiskSummary,
+  hasModernSlaveryFlags,
 }

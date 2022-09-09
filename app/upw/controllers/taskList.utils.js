@@ -1,4 +1,5 @@
 const { SECTION_COMPLETE } = require('../../../common/utils/constants')
+const { hasModernSlaveryFlags } = require('./common.utils')
 
 const checkAllTasksAreComplete = (sections) => {
   return sections.every((section) => {
@@ -71,7 +72,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
           steps,
           'modern-day-slavery',
           'modern_day_slavery_complete',
-          hasRiskFlags(riskFlags, ['MSV', 'MSP']),
+          hasModernSlaveryFlags(riskFlags),
         ),
       ],
     },

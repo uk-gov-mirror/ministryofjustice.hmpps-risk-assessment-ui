@@ -1,4 +1,4 @@
-const { getPdfPreviewTask, getTask, getTaskList, hasRiskFlags } = require('./taskList.utils')
+const { getPdfPreviewTask, getTask, getTaskList } = require('./taskList.utils')
 
 describe('taskList.util', () => {
   describe('getPdfPreviewTask', () => {
@@ -192,29 +192,6 @@ describe('taskList.util', () => {
       const taskList = getTaskList('/UPW', steps, answers)
 
       expect(taskList.sections.length).toBe(7)
-    })
-  })
-
-  describe('hasRiskFlags', () => {
-    it('returns true when present', () => {
-      const flags = [{ code: 'MSP' }]
-      const requiredCodes = ['MSP']
-
-      expect(hasRiskFlags(flags, requiredCodes)).toBe(true)
-    })
-
-    it('returns false when not present', () => {
-      const flags = []
-      const requiredCodes = ['MSP']
-
-      expect(hasRiskFlags(flags, requiredCodes)).toBe(false)
-    })
-
-    it('handles when flags are undefined', () => {
-      const flags = undefined
-      const requiredCodes = ['MSP']
-
-      expect(hasRiskFlags(flags, requiredCodes)).toBe(false)
     })
   })
 })

@@ -80,6 +80,14 @@
   {% endif %}
 {%- endmacro -%}
 
+{%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
+  {%- if answer -%}
+    {{ textIfPresent }}
+  {%- else -%}
+    {{ textIfNotPresent }}
+  {%- endif -%}
+{%- endmacro -%}
+
 <div class="govuk-body upw-pdf">
   <div class="upw-pdf-header">
     <div class="upw-pdf-header__left">
@@ -367,6 +375,46 @@
   <div class='upw-avoid-break'>
     {{ renderTable({ rows: mappaDataRows }) }}
   </div>
+  
+  {% if widgets.flags | shouldDisplayModernSlaverySection %}
+  <div class='upw-avoid-break'>
+    <h2 id="heading_management_of_risk" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Modern day slavery</h2>
+
+    {{ renderTable({
+      captionId: "modern_day_slavery",      
+      rows: [
+        {
+          id: "modern_day_slavery_risks",
+          heading: "Are there specific risks  that need to be taken into account?",
+          data: renderValue(
+              answers["modern_day_slavery_risks"],
+              answers["modern_day_slavery_risks_details"],
+              "Yes"
+          )
+        },
+        {
+          id: "modern_day_slavery_orders",
+          heading: "Are there any slavery and trafficking prevention orders or slavery and trafficking risk orders in place?",
+          data: renderValue(
+              answers["modern_day_slavery_orders"],
+              answers["modern_day_slavery_orders_details"],
+              "Yes"
+          )
+        },
+        {
+          id: "modern_day_slavery_safeguarding",
+          heading: "Are there any safeguarding measures that need to be put into place?",
+          data: renderValue(
+              answers["modern_day_slavery_safeguarding"],
+              answers["modern_day_slavery_safeguarding_details"],
+              "Yes"
+          )
+        }
+      ]
+    }) }}
+  </div>
+  {% endif %}
+
   <div class='upw-avoid-break'>
     <h2 id="heading_diversity_information" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h2>
 
@@ -403,14 +451,6 @@
   </div>
   <div class='upw-avoid-break'>
     <h2 id="heading_placement_restrictions" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h2>
-
-    {%- macro ifAnswerIsPresent(answer, textIfPresent, textIfNotPresent) -%}
-      {%- if answer -%}
-        {{ textIfPresent }}
-      {%- else -%}
-        {{ textIfNotPresent }}
-      {%- endif -%}
-    {%- endmacro -%}
 
     {%- set disabilitiesCaptionHeading = "Disabilities and mental health" -%}
     {% if rawAnswers["active_disabilities"] %}
