@@ -483,26 +483,26 @@ const fields = {
     ],
   },
   modern_day_slavery_risks: {
+    ...requireYesOrNo,
     validate: [
       {
         type: 'required',
         message: 'Select if there are specific risks that need to be taken into account',
       },
     ],
-    ...requireYesOrNo,
   },
   modern_day_slavery_risks_details: {
     dependent: { field: 'modern_day_slavery_risks', value: 'YES' },
     ...requireEnterDetails,
   },
   modern_day_slavery_orders: {
+    ...requireYesOrNo,
     validate: [
       {
         type: 'required',
-        message: 'Select if there any slavery and trafficking prevention orders or slavery and trafficking risk',
+        message: 'Select if there any slavery and trafficking prevention orders or slavery and trafficking risk orders',
       },
     ],
-    ...requireYesOrNo,
   },
   modern_day_slavery_orders_details: {
     dependent: { field: 'modern_day_slavery_orders', value: 'YES' },
@@ -518,13 +518,13 @@ const fields = {
     ],
   },
   modern_day_slavery_safeguarding: {
+    ...requireYesOrNo,
     validate: [
       {
         type: 'required',
         message: 'Select if there are any safeguarding measures that need to be put into place',
       },
     ],
-    ...requireYesOrNo,
   },
   modern_day_slavery_safeguarding_details: {
     dependent: { field: 'modern_day_slavery_safeguarding', value: 'YES' },
