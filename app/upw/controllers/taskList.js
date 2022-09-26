@@ -3,7 +3,6 @@ const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
 const { getTaskList } = require('./taskList.utils')
 const { getAnswers } = require('../../../common/data/hmppsAssessmentApi')
 const { logger } = require('../../../common/logging/logger')
-const { answerDtoFrom } = require('../../common/controllers/saveAndContinue.utils')
 
 class TaskList extends BaseController {
   async locals(req, res, next) {
@@ -12,26 +11,24 @@ class TaskList extends BaseController {
     try {
       const journeyName = req.form?.options?.journeyName || ''
       const steps = req.form?.options?.steps || {}
-      const answers = req.sessionModel.get('answers') || {}
 
-      const { answers: previousAnswers } = await getAnswers(
-        req.session.assessment?.uuid,
-        req.session.assessment?.episodeUuid,
-        req.user?.token,
-        req.user?.id,
-      )
+      let persistedAnswers = req.sessionModel.get('rawAnswers')
 
-      const consolidatedAnswers = { ...previousAnswers, ...answers }
+      if (!persistedAnswers) {
+        const { answers } = await getAnswers(
+          req.session.assessment?.uuid,
+          req.session.assessment?.episodeUuid,
+          req.user?.token,
+          req.user?.id,
+        )
+
+        persistedAnswers = answers
+      }
 
       const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
       const roshRiskSummary = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
 
-      res.locals.taskList = getTaskList(
-        `/${journeyName}`,
-        steps,
-        answerDtoFrom(consolidatedAnswers),
-        deliusRegistrations.flags || [],
-      )
+      res.locals.taskList = getTaskList(`/${journeyName}`, steps, persistedAnswers, deliusRegistrations.flags || [])
       res.locals.saveAssessmentUrl = `/${journeyName}/assessment-saved`
 
       res.locals.widgetData = {

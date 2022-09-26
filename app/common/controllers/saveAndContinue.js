@@ -21,12 +21,32 @@ const postUpdateIfMigrated = async (originalAnswers, migratedAnswers, assessment
     logger.info(`Saving updated answer structure for assessment ${assessmentUuid}, episode ${episodeUuid}`)
     try {
       await postAnswers(assessmentUuid, episodeUuid, { answers: migratedAnswers }, user?.token, user?.id)
+      return migratedAnswers
     } catch (error) {
       logger.error(
         `Could not save converted answers for assessment ${assessmentUuid}, episode ${episodeUuid}, error: ${error}`,
       )
     }
   }
+
+  return originalAnswers
+}
+
+const filterAnswers = (answers, questionCodes) => {
+  return Object.entries(answers).reduce((acc, [answerCode, value]) => {
+    if (questionCodes.filter((questionCode) => questionCode === answerCode).length > 0) {
+      return { ...acc, [answerCode]: value }
+    }
+
+    return acc
+  }, {})
+}
+
+const filterSubmittedAnswers = (req) => {
+  const submittedAnswers = req.sessionModel.get('formAnswers') || {}
+  const questionCodes = Object.keys(req.form.options.fields)
+
+  return filterAnswers(submittedAnswers, questionCodes)
 }
 
 class SaveAndContinue extends BaseController {
@@ -42,18 +62,24 @@ class SaveAndContinue extends BaseController {
     res.locals.errors = validationErrors
     res.locals.errorSummary = errorSummary
 
-    const getAnswersResponse = await getAnswers(
-      req.session.assessment?.uuid,
-      req.session.assessment?.episodeUuid,
-      req.user?.token,
-      req.user?.id,
-    )
+    let persistedAnswers = req.sessionModel.get('rawAnswers')
 
-    const previousAnswers = this.getAnswerModifiers.reduce((a, fn) => fn(a), getAnswersResponse.answers)
+    if (!persistedAnswers) {
+      const apiResponse = await getAnswers(
+        req.session.assessment?.uuid,
+        req.session.assessment?.episodeUuid,
+        req.user?.token,
+        req.user?.id,
+      )
 
-    await postUpdateIfMigrated(
-      getAnswersResponse.answers,
-      previousAnswers,
+      persistedAnswers = apiResponse.answers
+    }
+
+    const modifiedAnswers = this.getAnswerModifiers.reduce((a, fn) => fn(a), persistedAnswers)
+
+    const answers = await postUpdateIfMigrated(
+      persistedAnswers,
+      modifiedAnswers,
       req.session.assessment?.uuid,
       req.session.assessment?.episodeUuid,
       req.user,
@@ -70,25 +96,9 @@ class SaveAndContinue extends BaseController {
         return [questionCode, question.answerGroup]
       })
 
-    const submittedAnswers =
-      // errorSummary.length === 0 ? req.sessionModel.get('answers') || {} : req.sessionModel.get('formAnswers') || {}
-      req.sessionModel.get('formAnswers') || {}
+    const submittedAnswers = filterSubmittedAnswers(req)
 
-    const filterAnswers = (answers, fields) => {
-      return Object.entries(answers).reduce((acc, [answerCode, value]) => {
-        if (fields.filter((questionCode) => questionCode === answerCode).length > 0) {
-          return { ...acc, [answerCode]: value }
-        }
-
-        return acc
-      }, {})
-    }
-
-    const filteredSubmittedAnswers = filterAnswers(submittedAnswers, Object.keys(req.form.options.fields))
-
-    const questionsWithMappedAnswers = questions.map(
-      withAnswersFrom(previousAnswers, answerDtoFrom(filteredSubmittedAnswers)),
-    )
+    const questionsWithMappedAnswers = questions.map(withAnswersFrom(answers, answerDtoFrom(submittedAnswers)))
 
     const questionWithPreCompiledConditionals = compileConditionalQuestions(
       questionsWithMappedAnswers.filter((questionSchema) => req.form.options.fields[questionSchema.questionCode]),
@@ -102,7 +112,7 @@ class SaveAndContinue extends BaseController {
 
     res.locals.questions = questionsWithReplacements.reduce(keysByQuestionCode, {})
     res.locals.answers = questionsWithMappedAnswers.reduce(answersByQuestionCode, {})
-    res.locals.rawAnswers = { ...previousAnswers, ...answerDtoFrom(submittedAnswers) }
+    res.locals.rawAnswers = { ...answers, ...answerDtoFrom(submittedAnswers) }
 
     // if editing a single 'record' from a multiples collection, add just that one to locals
     if (res.locals.questionGroupCode && res.locals.questionGroupIndex) {
@@ -123,7 +133,6 @@ class SaveAndContinue extends BaseController {
       res.locals.clearQuestionAnswers = true
     }
 
-    req.sessionModel.set('rawAnswers', { ...previousAnswers, ...answerDtoFrom(submittedAnswers) })
     req.sessionModel.set('errors', {})
 
     const submittedErrors = res.locals.errors || {}
@@ -179,7 +188,6 @@ class SaveAndContinue extends BaseController {
 
     const requestBody = req.body || {}
     const answersWithFormattedDates = combineDateFields(requestBody)
-    const answersInSession = req.sessionModel.get('answers')
     const filteredAnswers = filterAnswersByFields(req.form?.options?.fields, answersWithFormattedDates)
 
     // if user has selected 'I'll come back later' for this page, remove field validations for unanswered fields
@@ -192,7 +200,7 @@ class SaveAndContinue extends BaseController {
       })
     }
 
-    req.form.values = { ...answersInSession, ...filteredAnswers }
+    req.form.values = filteredAnswers
 
     req.sessionModel.set('formAnswers', req.form?.values || {})
     super.process(req, res, next)
@@ -200,7 +208,8 @@ class SaveAndContinue extends BaseController {
 
   async saveValues(req, res, next) {
     const { user } = req
-    const answers = answerDtoFrom(req.sessionModel.get('answers'))
+    const submittedAnswers = req.sessionModel.get('formAnswers') || {}
+    const answers = answerDtoFrom(submittedAnswers)
 
     // if is a new multiple then get previous answers for this multiple
     // and add new answers to it to send to API
@@ -221,12 +230,12 @@ class SaveAndContinue extends BaseController {
       })
 
       const multipleKey = res.locals.addNewMultiple
-      const rawAnswers = req.sessionModel.get('rawAnswers')
-      const existingMultiples = rawAnswers[multipleKey] || []
+      const persistedAnswers = req.sessionModel.get('rawAnswers')
+      const existingMultiples = persistedAnswers[multipleKey] || []
       existingMultiples.push(newMultipleAnswer)
       answers[multipleKey] = existingMultiples
-      rawAnswers[multipleKey] = existingMultiples
-      req.sessionModel.set('rawAnswers', rawAnswers)
+      persistedAnswers[multipleKey] = existingMultiples
+      req.sessionModel.set('rawAnswers', persistedAnswers)
 
       logger.info(`Added new record to ${multipleKey} in assessment ${req.session?.assessment?.uuid}, current episode`)
       logger.debug(`New multiples record: ${JSON.stringify(existingMultiples)}`)
@@ -250,14 +259,14 @@ class SaveAndContinue extends BaseController {
       })
 
       const multipleKey = res.locals.questionGroupCode
-      const rawAnswers = req.sessionModel.get('rawAnswers')
-      const existingMultiples = rawAnswers[multipleKey]
+      const persistedAnswers = req.sessionModel.get('rawAnswers')
+      const existingMultiples = persistedAnswers[multipleKey]
 
       existingMultiples[res.locals.multipleUpdated] = updatedMultiple
 
       answers[multipleKey] = existingMultiples
-      rawAnswers[multipleKey] = existingMultiples
-      req.sessionModel.set('rawAnswers', rawAnswers)
+      persistedAnswers[multipleKey] = existingMultiples
+      req.sessionModel.set('rawAnswers', persistedAnswers)
 
       logger.info(
         `Edited record ${res.locals.multipleUpdated} of ${res.locals.questionGroupCode} in assessment ${req.session?.assessment?.uuid}, current episode`,
@@ -277,15 +286,12 @@ class SaveAndContinue extends BaseController {
       )
 
       if (ok) {
+        // Update the local cache of answers to reflect what is persisted and clear the cache of previously submitted answers
+        req.sessionModel.set('rawAnswers', response.answers)
+        req.sessionModel.set('formAnswers', {})
         return super.saveValues(req, res, next)
       }
-      // Errors returned from OASys
-      if (response.status === 422) {
-        const { validationErrors, errorSummary } = pageValidationErrorsFrom(response.errors, response.pageErrors)
-        req.errors = validationErrors
-        req.errorSummary = errorSummary
-        // TODO: add OASys errors to page and redisplay
-      }
+
       return res.render('app/error', { subHeading: getErrorMessage(response.reason) })
     } catch (error) {
       logger.error(`Could not save to assessment ${req.session?.assessment?.uuid}, current episode, error: ${error}`)

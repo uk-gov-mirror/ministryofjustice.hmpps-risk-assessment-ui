@@ -24,13 +24,13 @@ describe('SaveAndContinueController', () => {
     req.sessionModel.get.mockImplementation((key) => {
       switch (key) {
         case 'errors':
-          return values.errors || []
+          return values.errors
         case 'answers':
-          return values.answers || {}
+          return values.answers
         case 'formAnswers':
-          return values.formAnswers || {}
+          return values.formAnswers
         case 'rawAnswers':
-          return values.rawAnswers || {}
+          return values.rawAnswers
         default:
           return undefined
       }
@@ -643,8 +643,8 @@ describe('SaveAndContinueController', () => {
     it('saves the answers', async () => {
       postAnswers.mockResolvedValue([true, { episodeUuid }])
       mockSessionModel({
-        answers: {
-          some_field: 'foo',
+        formAnswers: {
+          some_field: ['foo'],
           some_selection_field: ['bar'],
           some_empty_selection_field: [],
           some_empty_field: '',
@@ -653,7 +653,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith('formAnswers')
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,
@@ -690,13 +690,13 @@ describe('SaveAndContinueController', () => {
       req.form.options.allFields = fields
 
       mockSessionModel({
-        answers: {
+        formAnswers: {
           contact_address_house_number: '23',
           emergency_contact_first_name: 'New',
           emergency_contact_family_name: 'Name',
         },
         rawAnswers: {
-          contact_address_house_number: '23',
+          contact_address_house_number: ['23'],
           emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
@@ -714,7 +714,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith('rawAnswers')
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,
@@ -763,13 +763,13 @@ describe('SaveAndContinueController', () => {
       req.form.options.allFields = fields
 
       mockSessionModel({
-        answers: {
+        formAnswers: {
           contact_address_house_number: '23',
           emergency_contact_first_name: 'New',
           emergency_contact_family_name: 'Name',
         },
         rawAnswers: {
-          contact_address_house_number: '23',
+          contact_address_house_number: ['23'],
           emergency_contact_details: [
             {
               emergency_contact_first_name: ['George'],
@@ -787,7 +787,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith('rawAnswers')
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,
@@ -809,40 +809,6 @@ describe('SaveAndContinueController', () => {
         user.token,
         user.id,
       )
-    })
-
-    it('renders an error when there are OASys validation errors', async () => {
-      postAnswers.mockResolvedValue([
-        false,
-        {
-          status: 422,
-          reason: 'OASYS_VALIDATION',
-          errors: [{ message: 'field error', key: 'some_field' }],
-          pageErrors: ['server error'],
-        },
-      ])
-      mockSessionModel()
-
-      await controller.saveValues(req, res, next)
-
-      const theError = 'Something went wrong'
-
-      expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
-      expect(postAnswers).toHaveBeenCalledWith(assessmentUuid, episodeUuid, { answers: {} }, user.token, user.id)
-      expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
-    })
-
-    it('renders an error when the user does not have permission to update the assessment', async () => {
-      postAnswers.mockResolvedValue([false, { status: 403, reason: 'OASYS_PERMISSION' }])
-      mockSessionModel()
-
-      await controller.saveValues(req, res, next)
-
-      const theError =
-        'You do not have permission to update this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
-
-      expect(req.sessionModel.get).toHaveBeenCalledWith('answers')
-      expect(res.render).toHaveBeenCalledWith('app/error', { subHeading: theError })
     })
 
     it('displays an error if answer saving fails', async () => {

@@ -7,7 +7,9 @@ const {
   apis: {
     hmppsAssessments: { timeout, url },
   },
+  dev: { useLocalCache },
 } = require('../config')
+const { mockPostAnswers } = require('./localCache')
 
 const getOffenderAndOffenceDetails = (crn, eventId, assessmentCode, eventType, authorisationToken, userId) => {
   const path =
@@ -75,6 +77,10 @@ const postCompleteAssessmentEpisode = (assessmentId, episodeId, authorisationTok
 }
 
 const postAnswers = (assessmentId, episodeId, answers, authorisationToken, userId) => {
+  if (useLocalCache) {
+    return mockPostAnswers(answers)
+  }
+
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
   logger.debug(`posting answers: ${JSON.stringify(answers)}`)
   return postData(path, authorisationToken, userId, answers)

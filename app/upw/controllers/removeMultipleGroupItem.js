@@ -1,9 +1,5 @@
 const saveAndContinue = require('../../common/controllers/saveAndContinue')
-const {
-  answerDtoFrom,
-  pageValidationErrorsFrom,
-  getErrorMessage,
-} = require('../../common/controllers/saveAndContinue.utils')
+const { getErrorMessage } = require('../../common/controllers/saveAndContinue.utils')
 const { postAnswers, getAnswers } = require('../../../common/data/hmppsAssessmentApi')
 const { logger } = require('../../../common/logging/mdc-aware-logger')
 
@@ -26,20 +22,19 @@ class removeItemSaveAndContinue extends saveAndContinue {
       req.user?.token,
       req.user?.id,
     )
-    const rawAnswers = answerDtoFrom(response.answers)
+    const persistedAnswers = response.answers || {}
 
-    const groupAnswers = rawAnswers[multipleGroupName] || []
+    const groupAnswers = persistedAnswers[multipleGroupName] || []
     groupAnswers.splice(parseInt(itemToDelete, 10), 1)
 
     // delete the appropriate entry
-    const updatedRawAnswers = {
-      ...rawAnswers,
+    const updatedAnswers = {
+      ...persistedAnswers,
       [multipleGroupName]: groupAnswers,
     }
-    req.sessionModel.set('rawAnswers', updatedRawAnswers)
 
     try {
-      const [ok, postAnswersResponse] = await postAnswers(
+      const [ok, apiResponse] = await postAnswers(
         req.session?.assessment?.uuid,
         req.session?.assessment?.episodeUuid,
         { answers: { [multipleGroupName]: groupAnswers } },
@@ -48,19 +43,11 @@ class removeItemSaveAndContinue extends saveAndContinue {
       )
 
       if (ok) {
+        req.sessionModel.set('rawAnswers', updatedAnswers)
         return super.successHandler(req, res, next)
       }
-      // Errors returned from OASys
-      if (postAnswersResponse.status === 422) {
-        const { validationErrors, errorSummary } = pageValidationErrorsFrom(
-          postAnswersResponse.errors,
-          postAnswersResponse.pageErrors,
-        )
-        req.errors = validationErrors
-        req.errorSummary = errorSummary
-        // TODO: add OASys errors to page and redisplay
-      }
-      return res.render('app/error', { subHeading: getErrorMessage(postAnswersResponse.reason) })
+
+      return res.render('app/error', { subHeading: getErrorMessage(apiResponse.reason) })
     } catch (error) {
       logger.error(
         `Could not delete item ${itemToDelete} from ${multipleGroupName} ${req.session?.assessment?.uuid}, current episode, error: ${error}`,

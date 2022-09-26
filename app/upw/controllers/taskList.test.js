@@ -22,6 +22,8 @@ describe('TaskListController', () => {
           return values.errors || []
         case 'answers':
           return values.answers || {}
+        case 'rawAnswers':
+          return values.rawAnswers || {}
         default:
           return undefined
       }
@@ -95,7 +97,7 @@ describe('TaskListController', () => {
     })
 
     getTaskList.mockReturnValue('FOO TASK LIST')
-    mockSessionModel({ answers })
+    mockSessionModel({ rawAnswers: answers })
 
     await controller.locals(req, res, next)
 
