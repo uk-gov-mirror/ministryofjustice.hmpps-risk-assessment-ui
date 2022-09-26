@@ -72,7 +72,7 @@
   {% if flags %}
     <ul class="govuk-list">
       {% for risk in flags %}
-        <li>{{ risk }}</li>
+        <li>{{ risk.description }}</li>
       {% endfor %}
     </ul>
   {% else %}
@@ -381,7 +381,7 @@
     <h2 id="heading_management_of_risk" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Modern day slavery</h2>
 
     {{ renderTable({
-      captionId: "modern_day_slavery",      
+      captionId: "modern_day_slavery",
       rows: [
         {
           id: "modern_day_slavery_risks",
