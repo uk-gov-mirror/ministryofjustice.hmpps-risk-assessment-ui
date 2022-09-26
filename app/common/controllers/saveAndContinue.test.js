@@ -27,6 +27,8 @@ describe('SaveAndContinueController', () => {
           return values.errors || []
         case 'answers':
           return values.answers || {}
+        case 'formAnswers':
+          return values.formAnswers || {}
         case 'rawAnswers':
           return values.rawAnswers || {}
         default:
@@ -233,15 +235,25 @@ describe('SaveAndContinueController', () => {
         },
       }
 
-      mockSessionModel({
+      const allFields = {
+        ...fields,
+        fifth_question: {
+          questionCode: 'fifth_question',
+          answerType: 'numeric',
+          default: 'TEST',
+        },
+      }
+
+      getAnswers.mockResolvedValue({
         answers: {
-          first_question: 'FOO',
-          second_question: 'BAR',
+          first_question: ['FOO'],
+          second_question: ['BAR'],
+          fifth_question: ['BAZ'],
         },
       })
 
       req.form.options.fields = fields
-      req.form.options.allFields = fields
+      req.form.options.allFields = allFields
 
       await controller.locals(req, res, () => {})
 
@@ -287,7 +299,7 @@ describe('SaveAndContinueController', () => {
       }
 
       mockSessionModel({
-        answers: {
+        formAnswers: {
           first_question: 'SUBMITTED_FOO',
           second_question: '',
           third_question: '',

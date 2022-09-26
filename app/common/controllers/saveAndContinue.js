@@ -71,9 +71,24 @@ class SaveAndContinue extends BaseController {
       })
 
     const submittedAnswers =
-      errorSummary.length === 0 ? req.sessionModel.get('answers') || {} : req.sessionModel.get('formAnswers') || {}
+      // errorSummary.length === 0 ? req.sessionModel.get('answers') || {} : req.sessionModel.get('formAnswers') || {}
+      req.sessionModel.get('formAnswers') || {}
 
-    const questionsWithMappedAnswers = questions.map(withAnswersFrom(previousAnswers, answerDtoFrom(submittedAnswers)))
+    const filterAnswers = (answers, fields) => {
+      return Object.entries(answers).reduce((acc, [answerCode, value]) => {
+        if (fields.filter((questionCode) => questionCode === answerCode).length > 0) {
+          return { ...acc, [answerCode]: value }
+        }
+
+        return acc
+      }, {})
+    }
+
+    const filteredSubmittedAnswers = filterAnswers(submittedAnswers, Object.keys(req.form.options.fields))
+
+    const questionsWithMappedAnswers = questions.map(
+      withAnswersFrom(previousAnswers, answerDtoFrom(filteredSubmittedAnswers)),
+    )
 
     const questionWithPreCompiledConditionals = compileConditionalQuestions(
       questionsWithMappedAnswers.filter((questionSchema) => req.form.options.fields[questionSchema.questionCode]),

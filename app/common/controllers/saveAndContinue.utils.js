@@ -64,7 +64,7 @@ const withAnswersFrom =
       const [selectedAnswer] = fieldProperties.answerDtos.filter((answer) => answer.value === checkedAnswer)
       const displayAnswer = selectedAnswer?.text || ''
 
-      if (fieldProperties.questionCode.match(/^\w+_complete$/)) {
+      if (fieldName.match(/^\w+_complete$/)) {
         if (checkedAnswer !== SECTION_COMPLETE) {
           checkedAnswer = SECTION_INCOMPLETE
         }

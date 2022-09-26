@@ -54,8 +54,8 @@ class SaveAndContinue extends BaseSaveAndContinue {
   }
 
   saveValues(req, res, next) {
-    const answers = req.sessionModel.get('formAnswers') || {}
-    req.sessionModel.set('answers', answers)
+    // const answers = req.sessionModel.get('formAnswers') || {}
+    // req.sessionModel.set('answers', answers)
 
     super.saveValues(req, res, next)
   }
