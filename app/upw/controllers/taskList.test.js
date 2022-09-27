@@ -1,6 +1,7 @@
 const TaskList = require('./taskList')
 const { getTaskList } = require('./taskList.utils')
 const { getAnswers } = require('../../../common/data/hmppsAssessmentApi')
+const { CACHE } = require('../../../common/utils/constants')
 
 jest.mock('./taskList.utils')
 jest.mock('../../../common/data/hmppsAssessmentApi')
@@ -18,11 +19,9 @@ describe('TaskListController', () => {
   const mockSessionModel = (values = {}) => {
     req.sessionModel.get.mockImplementation((key) => {
       switch (key) {
-        case 'errors':
+        case CACHE.ERRORS:
           return values.errors || []
-        case 'answers':
-          return values.answers || {}
-        case 'persistedAnswers':
+        case CACHE.PERSISTED_ANSWERS:
           return values.persistedAnswers || {}
         default:
           return undefined

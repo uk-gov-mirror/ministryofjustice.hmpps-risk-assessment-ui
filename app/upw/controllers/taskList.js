@@ -3,6 +3,7 @@ const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
 const { getTaskList } = require('./taskList.utils')
 const { getAnswers } = require('../../../common/data/hmppsAssessmentApi')
 const { logger } = require('../../../common/logging/logger')
+const { CACHE } = require('../../../common/utils/constants')
 
 class TaskList extends BaseController {
   async locals(req, res, next) {
@@ -12,7 +13,7 @@ class TaskList extends BaseController {
       const journeyName = req.form?.options?.journeyName || ''
       const steps = req.form?.options?.steps || {}
 
-      let persistedAnswers = req.sessionModel.get('persistedAnswers')
+      let persistedAnswers = req.sessionModel.get(CACHE.PERSISTED_ANSWERS)
 
       if (!persistedAnswers) {
         const { answers } = await getAnswers(

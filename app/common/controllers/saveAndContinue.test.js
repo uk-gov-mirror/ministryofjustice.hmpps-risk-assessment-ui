@@ -2,6 +2,7 @@ const { configure } = require('nunjucks')
 const SaveAndContinueController = require('./saveAndContinue')
 const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
 const { processReplacements, encodeHTML, updateJsonValue } = require('../../../common/utils/util')
+const { CACHE } = require('../../../common/utils/constants')
 
 const nunjucksEnvironment = configure({}, {})
 nunjucksEnvironment.addFilter('encodeHtml', (str) => encodeHTML(str))
@@ -23,13 +24,11 @@ describe('SaveAndContinueController', () => {
   const mockSessionModel = (values = {}) => {
     req.sessionModel.get.mockImplementation((key) => {
       switch (key) {
-        case 'errors':
+        case CACHE.ERRORS:
           return values.errors
-        case 'answers':
-          return values.answers
-        case 'formAnswers':
-          return values.formAnswers
-        case 'persistedAnswers':
+        case CACHE.SUBMITTED_ANSWERS:
+          return values.submittedAnswers
+        case CACHE.PERSISTED_ANSWERS:
           return values.persistedAnswers
         default:
           return undefined
@@ -118,7 +117,7 @@ describe('SaveAndContinueController', () => {
       mockSessionModel({ errors: [{ message: 'field error', key: 'some_field' }] })
       await controller.locals(req, res, () => {})
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('errors')
+      expect(req.sessionModel.get).toHaveBeenCalledWith(CACHE.ERRORS)
       expect(res.locals.errors).toEqual({
         some_field: {
           text: 'field error',
@@ -299,7 +298,7 @@ describe('SaveAndContinueController', () => {
       }
 
       mockSessionModel({
-        formAnswers: {
+        submittedAnswers: {
           first_question: 'SUBMITTED_FOO',
           second_question: '',
           third_question: '',
@@ -589,7 +588,7 @@ describe('SaveAndContinueController', () => {
         date_field: '',
       })
 
-      expect(req.sessionModel.set).toHaveBeenCalledWith('formAnswers', req.form.values)
+      expect(req.sessionModel.set).toHaveBeenCalledWith(CACHE.SUBMITTED_ANSWERS, req.form.values)
     })
 
     it('returns empty when the date has no month component', async () => {
@@ -612,7 +611,7 @@ describe('SaveAndContinueController', () => {
         date_field: '',
       })
 
-      expect(req.sessionModel.set).toHaveBeenCalledWith('formAnswers', req.form.values)
+      expect(req.sessionModel.set).toHaveBeenCalledWith(CACHE.SUBMITTED_ANSWERS, req.form.values)
     })
 
     it('returns empty when the date has no year component', async () => {
@@ -635,7 +634,7 @@ describe('SaveAndContinueController', () => {
         date_field: '',
       })
 
-      expect(req.sessionModel.set).toHaveBeenCalledWith('formAnswers', req.form.values)
+      expect(req.sessionModel.set).toHaveBeenCalledWith(CACHE.SUBMITTED_ANSWERS, req.form.values)
     })
   })
 
@@ -643,7 +642,7 @@ describe('SaveAndContinueController', () => {
     it('saves the answers', async () => {
       postAnswers.mockResolvedValue([true, { episodeUuid }])
       mockSessionModel({
-        formAnswers: {
+        submittedAnswers: {
           some_field: ['foo'],
           some_selection_field: ['bar'],
           some_empty_selection_field: [],
@@ -653,7 +652,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('formAnswers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith(CACHE.SUBMITTED_ANSWERS)
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,
@@ -690,7 +689,7 @@ describe('SaveAndContinueController', () => {
       req.form.options.allFields = fields
 
       mockSessionModel({
-        formAnswers: {
+        submittedAnswers: {
           contact_address_house_number: '23',
           emergency_contact_first_name: 'New',
           emergency_contact_family_name: 'Name',
@@ -714,7 +713,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('persistedAnswers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith(CACHE.PERSISTED_ANSWERS)
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,
@@ -763,7 +762,7 @@ describe('SaveAndContinueController', () => {
       req.form.options.allFields = fields
 
       mockSessionModel({
-        formAnswers: {
+        submittedAnswers: {
           contact_address_house_number: '23',
           emergency_contact_first_name: 'New',
           emergency_contact_family_name: 'Name',
@@ -787,7 +786,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('persistedAnswers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith(CACHE.PERSISTED_ANSWERS)
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,

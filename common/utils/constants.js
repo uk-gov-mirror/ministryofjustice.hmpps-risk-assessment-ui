@@ -14,6 +14,13 @@ const EVENTS = {
   ARN_SECTION_COMPLETED: 'arnSectionCompleted',
 }
 
+const CACHE = {
+  PERSISTED_ANSWERS: 'persistedAnswers',
+  SUBMITTED_ANSWERS: 'submittedAnswers',
+  ERRORS: 'errors',
+  API_TOKEN: 'ui:apiToken',
+}
+
 module.exports = Object.freeze({
   UUID_REGEX,
   REFRESH_TOKEN_LIFETIME_SECONDS,
@@ -23,4 +30,5 @@ module.exports = Object.freeze({
   SECTION_INCOMPLETE,
   SECTION_COMPLETE,
   EVENTS,
+  CACHE,
 })

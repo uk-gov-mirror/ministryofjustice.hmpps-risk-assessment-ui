@@ -1,5 +1,6 @@
 const DeleteItemController = require('./removeMultipleGroupItem')
 const { getAnswers, postAnswers } = require('../../../common/data/hmppsAssessmentApi')
+const { CACHE } = require('../../../common/utils/constants')
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 
@@ -17,12 +18,10 @@ describe('removeMultipleGroupItem (UPW)', () => {
   const mockSessionModel = (values = {}) => {
     req.sessionModel.get.mockImplementation((key) => {
       switch (key) {
-        case 'errors':
+        case CACHE.ERRORS:
           return values.errors || []
-        case 'formAnswers':
-          return values.formAnswers || {}
-        case 'answers':
-          return values.formAnswers || {}
+        case CACHE.SUBMITTED_ANSWERS:
+          return values.submittedAnswers || {}
         default:
           return undefined
       }
@@ -77,7 +76,7 @@ describe('removeMultipleGroupItem (UPW)', () => {
 
   it('it saves the updated multiple group', async () => {
     mockSessionModel({
-      formAnswers: {
+      submittedAnswers: {
         foo: 'bar',
       },
     })
@@ -111,7 +110,7 @@ describe('removeMultipleGroupItem (UPW)', () => {
       req.user.id,
     )
 
-    expect(req.sessionModel.set).toHaveBeenCalledWith('persistedAnswers', {
+    expect(req.sessionModel.set).toHaveBeenCalledWith(CACHE.PERSISTED_ANSWERS, {
       first_question: ['PREVIOUS_FOO'],
       my_multiple_group: [{ myFirstItem: 'first ' }, { myThirdItem: 'third' }],
       third_question: ['PREVIOUS_BAR'],

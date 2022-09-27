@@ -8,7 +8,7 @@ const {
   },
 } = require('../config')
 const redis = require('./redis')
-const { SIXTY_SECONDS } = require('../utils/constants')
+const { SIXTY_SECONDS, CACHE } = require('../utils/constants')
 const { AuthenticationError } = require('../utils/errors')
 
 const checkTokenIsActive = async (token) => {
@@ -39,7 +39,7 @@ const getUserEmail = async (token) => {
 const getApiToken = async () => {
   logger.info('Getting API bearer token')
   try {
-    const cachedToken = await redis.get('ui:apiToken')
+    const cachedToken = await redis.get(CACHE.API_TOKEN)
 
     if (cachedToken) {
       return cachedToken
@@ -54,7 +54,7 @@ const getApiToken = async () => {
       .timeout(timeout)
       .then((response) => {
         const { access_token: token, expires_in: expiresIn } = response.body
-        redis.set('ui:apiToken', token, 'EX', expiresIn - SIXTY_SECONDS)
+        redis.set(CACHE.API_TOKEN, token, 'EX', expiresIn - SIXTY_SECONDS)
         return token
       })
   } catch (error) {

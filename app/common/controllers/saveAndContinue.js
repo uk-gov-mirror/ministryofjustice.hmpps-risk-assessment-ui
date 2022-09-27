@@ -1,6 +1,6 @@
 const lodash = require('lodash')
 const BaseController = require('./baseController')
-const { SECTION_INCOMPLETE } = require('../../../common/utils/constants')
+const { SECTION_INCOMPLETE, CACHE } = require('../../../common/utils/constants')
 const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
 const logger = require('../../../common/logging/logger')
 const { processReplacements } = require('../../../common/utils/util')
@@ -43,7 +43,7 @@ const filterAnswers = (answers, questionCodes) => {
 }
 
 const filterSubmittedAnswers = (req) => {
-  const submittedAnswers = req.sessionModel.get('formAnswers') || {}
+  const submittedAnswers = req.sessionModel.get(CACHE.SUBMITTED_ANSWERS) || {}
   const questionCodes = Object.keys(req.form.options.fields)
 
   return filterAnswers(submittedAnswers, questionCodes)
@@ -57,12 +57,12 @@ class SaveAndContinue extends BaseController {
   }
 
   async locals(req, res, next) {
-    const errors = req.sessionModel.get('errors') || {}
+    const errors = req.sessionModel.get(CACHE.ERRORS) || {}
     const { validationErrors, errorSummary } = pageValidationErrorsFrom(errors)
     res.locals.errors = validationErrors
     res.locals.errorSummary = errorSummary
 
-    let persistedAnswers = req.sessionModel.get('persistedAnswers')
+    let persistedAnswers = req.sessionModel.get(CACHE.PERSISTED_ANSWERS)
 
     if (!persistedAnswers) {
       const apiResponse = await getAnswers(
@@ -136,7 +136,7 @@ class SaveAndContinue extends BaseController {
       res.locals.clearQuestionAnswers = true
     }
 
-    req.sessionModel.set('errors', {})
+    req.sessionModel.set(CACHE.ERRORS, {})
 
     const submittedErrors = res.locals.errors || {}
     if (Object.keys(submittedErrors).length > 0) {
@@ -205,13 +205,13 @@ class SaveAndContinue extends BaseController {
 
     req.form.values = filteredAnswers
 
-    req.sessionModel.set('formAnswers', req.form?.values || {})
+    req.sessionModel.set(CACHE.SUBMITTED_ANSWERS, req.form?.values || {})
     super.process(req, res, next)
   }
 
   async saveValues(req, res, next) {
     const { user } = req
-    const submittedAnswers = req.sessionModel.get('formAnswers') || {}
+    const submittedAnswers = req.sessionModel.get(CACHE.SUBMITTED_ANSWERS) || {}
     const answers = answerDtoFrom(submittedAnswers)
 
     // if is a new multiple then get previous answers for this multiple
@@ -233,12 +233,12 @@ class SaveAndContinue extends BaseController {
       })
 
       const multipleKey = res.locals.addNewMultiple
-      const persistedAnswers = req.sessionModel.get('persistedAnswers')
+      const persistedAnswers = req.sessionModel.get(CACHE.PERSISTED_ANSWERS)
       const existingMultiples = persistedAnswers[multipleKey] || []
       existingMultiples.push(newMultipleAnswer)
       answers[multipleKey] = existingMultiples
       persistedAnswers[multipleKey] = existingMultiples
-      req.sessionModel.set('persistedAnswers', persistedAnswers)
+      req.sessionModel.set(CACHE.PERSISTED_ANSWERS, persistedAnswers)
 
       logger.info(`Added new record to ${multipleKey} in assessment ${req.session?.assessment?.uuid}, current episode`)
       logger.debug(`New multiples record: ${JSON.stringify(existingMultiples)}`)
@@ -262,14 +262,14 @@ class SaveAndContinue extends BaseController {
       })
 
       const multipleKey = res.locals.questionGroupCode
-      const persistedAnswers = req.sessionModel.get('persistedAnswers')
+      const persistedAnswers = req.sessionModel.get(CACHE.PERSISTED_ANSWERS)
       const existingMultiples = persistedAnswers[multipleKey]
 
       existingMultiples[res.locals.multipleUpdated] = updatedMultiple
 
       answers[multipleKey] = existingMultiples
       persistedAnswers[multipleKey] = existingMultiples
-      req.sessionModel.set('persistedAnswers', persistedAnswers)
+      req.sessionModel.set(CACHE.PERSISTED_ANSWERS, persistedAnswers)
 
       logger.info(
         `Edited record ${res.locals.multipleUpdated} of ${res.locals.questionGroupCode} in assessment ${req.session?.assessment?.uuid}, current episode`,
@@ -290,8 +290,8 @@ class SaveAndContinue extends BaseController {
 
       if (ok) {
         // Update the local cache of answers to reflect what is persisted and clear the cache of previously submitted answers
-        req.sessionModel.set('persistedAnswers', response.answers)
-        req.sessionModel.set('formAnswers', {})
+        req.sessionModel.set(CACHE.PERSISTED_ANSWERS, response.answers)
+        req.sessionModel.set(CACHE.SUBMITTED_ANSWERS, {})
         return super.saveValues(req, res, next)
       }
 

@@ -1,3 +1,4 @@
+const { CACHE } = require('../../../common/utils/constants')
 const upwSaveAndContinue = require('./saveAndContinue')
 
 const checkGpDetails = function range(gpDetailsDeclined, gpDetails, gpDetailsComplete) {
@@ -21,7 +22,7 @@ class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // make changes to sessionModel fields to add in context specific validations
     // eslint-disable-next-line camelcase
-    const { gp_details = [] } = req.sessionModel.get('persistedAnswers') || {}
+    const { gp_details = [] } = req.sessionModel.get(CACHE.PERSISTED_ANSWERS) || {}
 
     // eslint-disable-next-line camelcase
     const { gp_details_complete = '' } = req.form.values

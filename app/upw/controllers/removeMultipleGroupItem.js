@@ -2,6 +2,7 @@ const saveAndContinue = require('../../common/controllers/saveAndContinue')
 const { getErrorMessage } = require('../../common/controllers/saveAndContinue.utils')
 const { postAnswers, getAnswers } = require('../../../common/data/hmppsAssessmentApi')
 const { logger } = require('../../../common/logging/mdc-aware-logger')
+const { CACHE } = require('../../../common/utils/constants')
 
 class removeItemSaveAndContinue extends saveAndContinue {
   async locals(req, res, next) {
@@ -43,7 +44,7 @@ class removeItemSaveAndContinue extends saveAndContinue {
       )
 
       if (ok) {
-        req.sessionModel.set('persistedAnswers', updatedAnswers)
+        req.sessionModel.set(CACHE.PERSISTED_ANSWERS, updatedAnswers)
         return super.successHandler(req, res, next)
       }
 

@@ -2,6 +2,8 @@ const { logger } = require('../logging/logger')
 const { REFRESH_TOKEN_LIFETIME_SECONDS } = require('../utils/constants')
 const redis = require('./redis')
 
+const LOCAL_CACHE = 'localCache'
+
 const applyBackendBusinessRules = (answers) => {
   const updatedAnswers = JSON.parse(JSON.stringify(answers)) // deep clone
 
@@ -17,10 +19,10 @@ const applyBackendBusinessRules = (answers) => {
 // Simple mock for how the backend API handles answer updates
 const mockPostAnswers = async (updatedAnswers) => {
   try {
-    const previousAnswers = (await redis.get('localCache')) || '{}'
+    const previousAnswers = (await redis.get(LOCAL_CACHE)) || '{}'
     const answers = { ...JSON.parse(previousAnswers), ...updatedAnswers.answers }
     await redis.set(
-      'localCache',
+      LOCAL_CACHE,
       JSON.stringify(applyBackendBusinessRules(answers)),
       'EX',
       REFRESH_TOKEN_LIFETIME_SECONDS,
