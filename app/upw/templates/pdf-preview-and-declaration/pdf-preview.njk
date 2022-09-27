@@ -14,7 +14,7 @@
 {% block content %}
 {{ super() }}
 
-{{ renderPdfTemplate(assessment, answers, rawAnswers, widgetData, userFullName, {
+{{ renderPdfTemplate(assessment, answers, persistedAnswers, widgetData, userFullName, {
     imageAssetPath: "/assets/images/"
 }) }}
 

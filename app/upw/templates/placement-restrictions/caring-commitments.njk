@@ -24,7 +24,7 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {% if rawAnswers["active_carer_commitments"] %}
+            {% if persistedAnswers["active_carer_commitments"] %}
             <table class="govuk-table">
                 <caption class="govuk-table__caption govuk-table__caption--xl">Are there carer commitments?</caption>
                 <tbody class="govuk-table__body">
@@ -32,7 +32,7 @@
                     <th scope="row" class="govuk-table__header">Carer commitments</th>
                     <td class="govuk-table__cell">
                     <ul class="govuk-list">
-                    {% for commitment in rawAnswers["active_carer_commitments"] %}
+                    {% for commitment in persistedAnswers["active_carer_commitments"] %}
                         <li>
                             {{ commitment["subType"] }}
                         </li>

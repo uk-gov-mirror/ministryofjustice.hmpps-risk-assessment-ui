@@ -21,7 +21,7 @@ class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // make changes to sessionModel fields to add in context specific validations
     // eslint-disable-next-line camelcase
-    const { emergency_contact_details = [] } = req.sessionModel.get('rawAnswers') || {}
+    const { emergency_contact_details = [] } = req.sessionModel.get('persistedAnswers') || {}
 
     // eslint-disable-next-line camelcase
     const { individual_details_complete = '' } = req.form.values

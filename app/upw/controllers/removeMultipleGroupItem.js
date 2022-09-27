@@ -43,7 +43,7 @@ class removeItemSaveAndContinue extends saveAndContinue {
       )
 
       if (ok) {
-        req.sessionModel.set('rawAnswers', updatedAnswers)
+        req.sessionModel.set('persistedAnswers', updatedAnswers)
         return super.successHandler(req, res, next)
       }
 

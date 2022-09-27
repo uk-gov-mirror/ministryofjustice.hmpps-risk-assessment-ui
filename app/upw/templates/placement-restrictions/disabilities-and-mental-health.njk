@@ -28,7 +28,7 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderDisabilities(answers, rawAnswers) }}
+            {{ renderDisabilities(answers, persistedAnswers) }}
 
             {{ renderQuestion(questions['additional_disabilities'], errors) }}
             {{ renderQuestion(questions['disabilities'], errors) }}

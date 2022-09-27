@@ -23,9 +23,9 @@ class ConvertPdf extends SaveAndContinue {
         css_path: 'application.min.css',
       })
 
-      const firstName = res.locals.rawAnswers.first_name || ''
-      const familyName = res.locals.rawAnswers.family_name || ''
-      const crn = res.locals.rawAnswers.crn || ''
+      const firstName = res.locals.persistedAnswers.first_name || ''
+      const familyName = res.locals.persistedAnswers.family_name || ''
+      const crn = res.locals.persistedAnswers.crn || ''
 
       const fileName = [firstName, familyName, crn]
         .filter((s) => s !== '')

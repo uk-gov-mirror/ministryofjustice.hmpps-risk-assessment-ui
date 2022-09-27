@@ -39,8 +39,8 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {% if rawAnswers['gp_details'].length != 0 %}
-                {% for gp in rawAnswers['gp_details'] %}
+            {% if persistedAnswers['gp_details'].length != 0 %}
+                {% for gp in persistedAnswers['gp_details'] %}
 
                     {% if gp['gp_phone_number'][0] %}{% set gpPhoneNumber = gp['gp_phone_number'][0] %}{% else %}{% set gpPhoneNumber = 'No data' %}{%endif%}
 
@@ -103,7 +103,7 @@
                         {
                             value: "declined",
                             text: "Individual declined to give GP details",
-                            checked: rawAnswers['gp_details_declined'] | hasAnswer("declined")
+                            checked: persistedAnswers['gp_details_declined'] | hasAnswer("declined")
                         }
                     ]
                 }) }}

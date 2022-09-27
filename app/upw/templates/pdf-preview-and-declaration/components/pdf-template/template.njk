@@ -144,18 +144,18 @@
       captionId: "personal_details",
       caption: "Personal details",
       rows: [
-        { id: "family_name", heading: "Family name", data: renderValue(rawAnswers["family_name"][0]) },
-        { id: "first_name", heading: "First name", data: renderValue(rawAnswers["first_name"][0]) },
-        { id: "dob", heading: "Date of birth", data: renderDate(rawAnswers["dob"][0]) },
-        { id: "crn", heading: "CRN", data: renderValue(rawAnswers["crn"][0]) },
-        { id: "pnc", heading: "PNC", data: renderValue(rawAnswers["pnc"][0]) },
-        { id: "first_name_aliases", heading: "Alias", data: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases']) },
-        { id: "ethnicity", heading: "Ethnicity", data: renderValue(rawAnswers["ethnicity"][0]) }
+        { id: "family_name", heading: "Family name", data: renderValue(persistedAnswers["family_name"][0]) },
+        { id: "first_name", heading: "First name", data: renderValue(persistedAnswers["first_name"][0]) },
+        { id: "dob", heading: "Date of birth", data: renderDate(persistedAnswers["dob"][0]) },
+        { id: "crn", heading: "CRN", data: renderValue(persistedAnswers["crn"][0]) },
+        { id: "pnc", heading: "PNC", data: renderValue(persistedAnswers["pnc"][0]) },
+        { id: "first_name_aliases", heading: "Alias", data: renderAliases(persistedAnswers['first_name_aliases'], persistedAnswers['family_name_aliases']) },
+        { id: "ethnicity", heading: "Ethnicity", data: renderValue(persistedAnswers["ethnicity"][0]) }
       ]
     }) }}
   </div>
   <div class='upw-avoid-break'>
-    {% set showSexChangeDetails = rawAnswers["sex_change"] == "YES" %}
+    {% set showSexChangeDetails = persistedAnswers["sex_change"] == "YES" %}
     {{ renderTable({
       captionId: "gender_identity",
       caption: "Gender information",
@@ -214,11 +214,11 @@
   <div class='upw-avoid-break'>
     <h3 id="heading_emergency_contacts" class="govuk-heading-m">Emergency contact details</h3>
 
-    {% if rawAnswers['emergency_contact_declined'] | hasAnswer("declined") %}
+    {% if persistedAnswers['emergency_contact_declined'] | hasAnswer("declined") %}
       <span class="upw-declined-details">Individual declined to give an emergency contact</span>
-    {% elif rawAnswers['emergency_contact_details'] and rawAnswers['emergency_contact_details'].length > 0 %}
+    {% elif persistedAnswers['emergency_contact_details'] and persistedAnswers['emergency_contact_details'].length > 0 %}
       <div id="emergency_contact_details">
-        {% for contact in rawAnswers['emergency_contact_details'] %}
+        {% for contact in persistedAnswers['emergency_contact_details'] %}
           <h4 class="govuk-heading-s">Emergency contact {{ loop.index }}</h4>
           <div id="emergency_contact_details_{{ loop.index }}">
             {{ renderTable({
@@ -418,18 +418,18 @@
   <div class='upw-avoid-break'>
     <h2 id="heading_diversity_information" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Diversity information</h2>
 
-    {%- set showPlacementPreferences = rawAnswers["gender_identity"] != "MALE" and rawAnswers["placement_preference"] == "YES" -%}
-    {%- set showPlacementPreferencesByGender = rawAnswers["sex_change"] == "YES" -%}
+    {%- set showPlacementPreferences = persistedAnswers["gender_identity"] != "MALE" and persistedAnswers["placement_preference"] == "YES" -%}
+    {%- set showPlacementPreferencesByGender = persistedAnswers["sex_change"] == "YES" -%}
 
-    {%- if rawAnswers["requires_interpreter"] == "true" -%}
+    {%- if persistedAnswers["requires_interpreter"] == "true" -%}
       {%- set requiresInterpreter = "Yes" -%}
-    {%- elif rawAnswers["requires_interpreter"] == "false" -%}
+    {%- elif persistedAnswers["requires_interpreter"] == "false" -%}
       {%- set requiresInterpreter = "No" -%}
     {%- endif -%}
 
     {{ renderTable({
       rows: [
-        { id: "language", heading: "Preferred language", data: renderValue(rawAnswers["language"]) },
+        { id: "language", heading: "Preferred language", data: renderValue(persistedAnswers["language"]) },
         { id: "requires_interpreter", heading: "Interpreter required?", data: renderValue(requiresInterpreter) },
         {
           id: "cultural_religious_adjustment",
@@ -453,9 +453,9 @@
     <h2 id="heading_placement_restrictions" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h2>
 
     {%- set disabilitiesCaptionHeading = "Disabilities and mental health" -%}
-    {% if rawAnswers["active_disabilities"] %}
+    {% if persistedAnswers["active_disabilities"] %}
       {%- set disabilitiesCaptionSubheading = "Disabilities, conditions and adjustments" -%}
-      {% if rawAnswers["active_disabilities"].length %}
+      {% if persistedAnswers["active_disabilities"].length %}
 
         <table id="active_disabilities" class="upw-pdf-table">
           <caption id="caption_active_disabilities">
@@ -463,7 +463,7 @@
             <p>{{ disabilitiesCaptionSubheading }}</p>
           </caption>
           <tbody>
-            {% for disability in rawAnswers["active_disabilities"] %}
+            {% for disability in persistedAnswers["active_disabilities"] %}
               <tr id="active_disabilities_{{ loop.index }}">
                 <th>{{ disability["code"] | toDisabilityDescription | default(disability["description"]) }}</th>
                 <td>
@@ -656,11 +656,11 @@
     <div class='upw-avoid-break'>
       <h3 id="heading_gp_details" class="govuk-heading-m">GP Details</h3>
 
-      {% if rawAnswers['gp_details_declined'] | hasAnswer("declined") %}
+      {% if persistedAnswers['gp_details_declined'] | hasAnswer("declined") %}
         <span class="upw-declined-details">Individual declined to give GP details</span>
-      {% elif rawAnswers['gp_details'] and rawAnswers['gp_details'].length > 0 %}
+      {% elif persistedAnswers['gp_details'] and persistedAnswers['gp_details'].length > 0 %}
         <div id="gp_details">
-          {% for gp in rawAnswers['gp_details'] %}
+          {% for gp in persistedAnswers['gp_details'] %}
             <div id="gp_details_{{ loop.index }}">
               <h4 class="govuk-heading-s">GP details</h4>
               {{ renderTable({
@@ -738,7 +738,7 @@
       }) }}
     </div>
     <div class='upw-avoid-break'>
-      {% if rawAnswers["active_carer_commitments"] %}
+      {% if persistedAnswers["active_carer_commitments"] %}
         <table class="upw-pdf-table">
           <caption id="caption_carer_commitments">
             <h3 class="govuk-heading-m">Are there carer commitments?</h3>
@@ -748,8 +748,8 @@
               <th>Carer commitments</th>
               <td>
                 <ul class="govuk-list">
-                  {% if rawAnswers["active_carer_commitments"].length %}
-                    {% for commitment in rawAnswers["active_carer_commitments"] %}
+                  {% if persistedAnswers["active_carer_commitments"].length %}
+                    {% for commitment in persistedAnswers["active_carer_commitments"] %}
                       <li>{{ commitment["subType"] }}</li>
                     {% endfor %}
                   {% else %}
@@ -791,9 +791,9 @@
     <div class='upw-avoid-break'>
       <h2 id="heading_employment_education_skills" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h2>
 
-      {%- if rawAnswers["employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
+      {%- if persistedAnswers["employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
         {%- set employmentDetails = answers["employment_education_details_fulltime"] -%}
-      {%- elif rawAnswers["employment_education"] == "PARTTIME_EDUCATION_EMPLOYMENT" -%}
+      {%- elif persistedAnswers["employment_education"] == "PARTTIME_EDUCATION_EMPLOYMENT" -%}
         {%- set employmentDetails = answers["employment_education_details_parttime"] -%}
       {%- endif -%}
 
@@ -880,10 +880,10 @@
     <div class='upw-avoid-break'>
       <h2 id="heading_placement_details" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement details</h2>
 
-      {%- set showIntensiveWorkingSection = rawAnswers["employment_education"] == "NO" -%}
+      {%- set showIntensiveWorkingSection = persistedAnswers["employment_education"] == "NO" -%}
       {%- if showIntensiveWorkingSection -%}
 
-        {%- set eligibleForIntensiveWorking = rawAnswers["eligibility_intensive_working"] == "YES" -%}
+        {%- set eligibleForIntensiveWorking = persistedAnswers["eligibility_intensive_working"] == "YES" -%}
 
         {%- if eligibleForIntensiveWorking -%}
           {% set recommendedHoursStartOrder = answers["recommended_hours_start_order"] | default("0") %}
@@ -949,33 +949,33 @@
           </tr>
           <tr>
             <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Morning</th>
-            <td id="individual_availability--MONDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_MORNING", "✓") }}</td>
-            <td id="individual_availability--TUESDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_MORNING", "✓") }}</td>
-            <td id="individual_availability--WEDNESDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_MORNING", "✓") }}</td>
-            <td id="individual_availability--THURSDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_MORNING", "✓") }}</td>
-            <td id="individual_availability--FRIDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_MORNING", "✓") }}</td>
-            <td id="individual_availability--SATURDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_MORNING", "✓") }}</td>
-            <td id="individual_availability--SUNDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_MORNING", "✓") }}</td>
+            <td id="individual_availability--MONDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "MONDAY_MORNING", "✓") }}</td>
+            <td id="individual_availability--TUESDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "TUESDAY_MORNING", "✓") }}</td>
+            <td id="individual_availability--WEDNESDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "WEDNESDAY_MORNING", "✓") }}</td>
+            <td id="individual_availability--THURSDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "THURSDAY_MORNING", "✓") }}</td>
+            <td id="individual_availability--FRIDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "FRIDAY_MORNING", "✓") }}</td>
+            <td id="individual_availability--SATURDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "SATURDAY_MORNING", "✓") }}</td>
+            <td id="individual_availability--SUNDAY_MORNING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "SUNDAY_MORNING", "✓") }}</td>
           </tr>
           <tr>
             <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Afternoon</th>
-            <td id="individual_availability--MONDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_AFTERNOON", "✓") }}</td>
-            <td id="individual_availability--TUESDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_AFTERNOON", "✓") }}</td>
-            <td id="individual_availability--WEDNESDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_AFTERNOON", "✓") }}</td>
-            <td id="individual_availability--THURSDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_AFTERNOON", "✓") }}</td>
-            <td id="individual_availability--FRIDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_AFTERNOON", "✓") }}</td>
-            <td id="individual_availability--SATURDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_AFTERNOON", "✓") }}</td>
-            <td id="individual_availability--SUNDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_AFTERNOON", "✓") }}</td>
+            <td id="individual_availability--MONDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "MONDAY_AFTERNOON", "✓") }}</td>
+            <td id="individual_availability--TUESDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "TUESDAY_AFTERNOON", "✓") }}</td>
+            <td id="individual_availability--WEDNESDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "WEDNESDAY_AFTERNOON", "✓") }}</td>
+            <td id="individual_availability--THURSDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "THURSDAY_AFTERNOON", "✓") }}</td>
+            <td id="individual_availability--FRIDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "FRIDAY_AFTERNOON", "✓") }}</td>
+            <td id="individual_availability--SATURDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "SATURDAY_AFTERNOON", "✓") }}</td>
+            <td id="individual_availability--SUNDAY_AFTERNOON" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "SUNDAY_AFTERNOON", "✓") }}</td>
           </tr>
           <tr>
             <th class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--mid-grey upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right upw-pdf-chart__cell--border-left">Evening</th>
-            <td id="individual_availability--MONDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "MONDAY_EVENING", "✓") }}</td>
-            <td id="individual_availability--TUESDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "TUESDAY_EVENING", "✓") }}</td>
-            <td id="individual_availability--WEDNESDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "WEDNESDAY_EVENING", "✓") }}</td>
-            <td id="individual_availability--THURSDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "THURSDAY_EVENING", "✓") }}</td>
-            <td id="individual_availability--FRIDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "FRIDAY_EVENING", "✓") }}</td>
-            <td id="individual_availability--SATURDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SATURDAY_EVENING", "✓") }}</td>
-            <td id="individual_availability--SUNDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(rawAnswers["individual_availability"], "SUNDAY_EVENING", "✓") }}</td>
+            <td id="individual_availability--MONDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "MONDAY_EVENING", "✓") }}</td>
+            <td id="individual_availability--TUESDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "TUESDAY_EVENING", "✓") }}</td>
+            <td id="individual_availability--WEDNESDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "WEDNESDAY_EVENING", "✓") }}</td>
+            <td id="individual_availability--THURSDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "THURSDAY_EVENING", "✓") }}</td>
+            <td id="individual_availability--FRIDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "FRIDAY_EVENING", "✓") }}</td>
+            <td id="individual_availability--SATURDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "SATURDAY_EVENING", "✓") }}</td>
+            <td id="individual_availability--SUNDAY_EVENING" class="upw-pdf-chart__cell--eighth upw-pdf-chart__cell--border-bottom upw-pdf-chart__cell--border-right">{{ ifAnswerHasValue(persistedAnswers["individual_availability"], "SUNDAY_EVENING", "✓") }}</td>
           </tr>
         </tbody>
       </table>

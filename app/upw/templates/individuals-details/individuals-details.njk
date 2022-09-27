@@ -61,7 +61,7 @@
                             text: 'Alias'
                         },
                         value: {
-                            html: renderAliases(rawAnswers['first_name_aliases'], rawAnswers['family_name_aliases'])
+                            html: renderAliases(persistedAnswers['first_name_aliases'], persistedAnswers['family_name_aliases'])
                         }
                     }
                 ]
@@ -77,13 +77,13 @@
                         },
                         value: {
                             html: readOnlyAddress({ 
-                                buildingName: rawAnswers['contact_address_building_name'][0],
-                                houseNumber: rawAnswers['contact_address_house_number'][0],
-                                streetName: rawAnswers['contact_address_street_name'][0],
-                                district: rawAnswers['contact_address_district'][0],
-                                townOrCity: rawAnswers['contact_address_town_or_city'][0],
-                                county: rawAnswers['contact_address_county'][0],
-                                postcode: rawAnswers['contact_address_postcode'][0]
+                                buildingName: persistedAnswers['contact_address_building_name'][0],
+                                houseNumber: persistedAnswers['contact_address_house_number'][0],
+                                streetName: persistedAnswers['contact_address_street_name'][0],
+                                district: persistedAnswers['contact_address_district'][0],
+                                townOrCity: persistedAnswers['contact_address_town_or_city'][0],
+                                county: persistedAnswers['contact_address_county'][0],
+                                postcode: persistedAnswers['contact_address_postcode'][0]
                             })
                         }
                     }, {
@@ -91,21 +91,21 @@
                             text: 'Mobile number'
                         },
                         value: {
-                            html: rawAnswers['contact_mobile_phone_number'][0]
+                            html: persistedAnswers['contact_mobile_phone_number'][0]
                         }
                     }, {
                         key: {
                             text: 'Phone number'
                         },
                         value: {
-                            html: rawAnswers['contact_phone_number'][0]
+                            html: persistedAnswers['contact_phone_number'][0]
                         }
                     }, {
                         key: {
                             text: 'Email'
                         },
                         value: {
-                            html: rawAnswers['contact_email_addresses'][0]
+                            html: persistedAnswers['contact_email_addresses'][0]
                         }
                     }
                 ]
@@ -113,8 +113,8 @@
 
             <h2 class="govuk-heading-l">Emergency contacts</h2>
 
-            {% if rawAnswers['emergency_contact_details'].length != 0 %}
-                {% for emergencyContact in rawAnswers['emergency_contact_details'] %}
+            {% if persistedAnswers['emergency_contact_details'].length != 0 %}
+                {% for emergencyContact in persistedAnswers['emergency_contact_details'] %}
                     {{ readOnly({
                         title: 'Emergency contact ' + [loop.index],
                         editUrl: 'edit-emergency-contact/' + [loop.index0],
@@ -175,7 +175,7 @@
                     {
                         value: "declined",
                         text: "Individual declined to give an emergency contact",
-                        checked: rawAnswers['emergency_contact_declined'] | hasAnswer("declined")
+                        checked: persistedAnswers['emergency_contact_declined'] | hasAnswer("declined")
                     }
                 ]
             }) }}

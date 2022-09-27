@@ -43,7 +43,7 @@ describe('ConfirmationController', () => {
       set: jest.fn(),
       locals: {
         'csrf-token': 'CSRF_TOKEN',
-        rawAnswers: {
+        persistedAnswers: {
           first_name: 'Robert',
           last_name: 'Robertson',
           crn: 'X123456',

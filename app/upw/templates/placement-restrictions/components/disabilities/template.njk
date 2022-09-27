@@ -1,8 +1,8 @@
 {% from "common/templates/components/read-only/macro.njk" import readOnly %}
 
 {# Display the new structured disabilities data if we have it #}
-{% if rawAnswers["active_disabilities"] %}
-    {% if rawAnswers["active_disabilities"].length %}
+{% if persistedAnswers["active_disabilities"] %}
+    {% if persistedAnswers["active_disabilities"].length %}
 
     <table class="govuk-table">
     <caption class="govuk-table__caption govuk-table__caption--l">Disabilities, conditions and adjustments</caption>
@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody class="govuk-table__body">
-        {% for disability in rawAnswers["active_disabilities"] %}
+        {% for disability in persistedAnswers["active_disabilities"] %}
         <tr class="govuk-table__row">
         <th scope="row" class="govuk-table__header">{{ disability["code"] | toDisabilityDescription | default(disability["description"]) }}</th>
         <td class="govuk-table__cell">{{ disability["disability_notes"] }}</td>

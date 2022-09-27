@@ -62,7 +62,7 @@ class SaveAndContinue extends BaseController {
     res.locals.errors = validationErrors
     res.locals.errorSummary = errorSummary
 
-    let persistedAnswers = req.sessionModel.get('rawAnswers')
+    let persistedAnswers = req.sessionModel.get('persistedAnswers')
 
     if (!persistedAnswers) {
       const apiResponse = await getAnswers(
@@ -112,7 +112,7 @@ class SaveAndContinue extends BaseController {
 
     res.locals.questions = questionsWithReplacements.reduce(keysByQuestionCode, {})
     res.locals.answers = questionsWithMappedAnswers.reduce(answersByQuestionCode, {})
-    res.locals.rawAnswers = { ...answers, ...answerDtoFrom(submittedAnswers) }
+    res.locals.persistedAnswers = { ...answers, ...answerDtoFrom(submittedAnswers) }
 
     // if editing a single 'record' from a multiples collection, add just that one to locals
     if (res.locals.questionGroupCode && res.locals.questionGroupIndex) {
@@ -120,7 +120,9 @@ class SaveAndContinue extends BaseController {
         .filter(([_, questionGroupCode]) => questionGroupCode === res.locals.questionGroupCode)
         .forEach(([questionCode]) => {
           const thisAnswer =
-            res.locals.rawAnswers[res.locals.questionGroupCode]?.[res.locals.questionGroupIndex]?.[questionCode] || ''
+            res.locals.persistedAnswers[res.locals.questionGroupCode]?.[res.locals.questionGroupIndex]?.[
+              questionCode
+            ] || ''
           res.locals.questions[questionCode] = {
             ...(res.locals.questions[questionCode] || {}),
             answer: thisAnswer[0] || '',
@@ -230,12 +232,12 @@ class SaveAndContinue extends BaseController {
       })
 
       const multipleKey = res.locals.addNewMultiple
-      const persistedAnswers = req.sessionModel.get('rawAnswers')
+      const persistedAnswers = req.sessionModel.get('persistedAnswers')
       const existingMultiples = persistedAnswers[multipleKey] || []
       existingMultiples.push(newMultipleAnswer)
       answers[multipleKey] = existingMultiples
       persistedAnswers[multipleKey] = existingMultiples
-      req.sessionModel.set('rawAnswers', persistedAnswers)
+      req.sessionModel.set('persistedAnswers', persistedAnswers)
 
       logger.info(`Added new record to ${multipleKey} in assessment ${req.session?.assessment?.uuid}, current episode`)
       logger.debug(`New multiples record: ${JSON.stringify(existingMultiples)}`)
@@ -259,14 +261,14 @@ class SaveAndContinue extends BaseController {
       })
 
       const multipleKey = res.locals.questionGroupCode
-      const persistedAnswers = req.sessionModel.get('rawAnswers')
+      const persistedAnswers = req.sessionModel.get('persistedAnswers')
       const existingMultiples = persistedAnswers[multipleKey]
 
       existingMultiples[res.locals.multipleUpdated] = updatedMultiple
 
       answers[multipleKey] = existingMultiples
       persistedAnswers[multipleKey] = existingMultiples
-      req.sessionModel.set('rawAnswers', persistedAnswers)
+      req.sessionModel.set('persistedAnswers', persistedAnswers)
 
       logger.info(
         `Edited record ${res.locals.multipleUpdated} of ${res.locals.questionGroupCode} in assessment ${req.session?.assessment?.uuid}, current episode`,
@@ -287,7 +289,7 @@ class SaveAndContinue extends BaseController {
 
       if (ok) {
         // Update the local cache of answers to reflect what is persisted and clear the cache of previously submitted answers
-        req.sessionModel.set('rawAnswers', response.answers)
+        req.sessionModel.set('persistedAnswers', response.answers)
         req.sessionModel.set('formAnswers', {})
         return super.saveValues(req, res, next)
       }

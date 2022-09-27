@@ -12,7 +12,7 @@ class TaskList extends BaseController {
       const journeyName = req.form?.options?.journeyName || ''
       const steps = req.form?.options?.steps || {}
 
-      let persistedAnswers = req.sessionModel.get('rawAnswers')
+      let persistedAnswers = req.sessionModel.get('persistedAnswers')
 
       if (!persistedAnswers) {
         const { answers } = await getAnswers(

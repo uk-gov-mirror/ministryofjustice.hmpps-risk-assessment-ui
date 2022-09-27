@@ -111,7 +111,7 @@ describe('removeMultipleGroupItem (UPW)', () => {
       req.user.id,
     )
 
-    expect(req.sessionModel.set).toHaveBeenCalledWith('rawAnswers', {
+    expect(req.sessionModel.set).toHaveBeenCalledWith('persistedAnswers', {
       first_question: ['PREVIOUS_FOO'],
       my_multiple_group: [{ myFirstItem: 'first ' }, { myThirdItem: 'third' }],
       third_question: ['PREVIOUS_BAR'],

@@ -29,8 +29,8 @@ describe('SaveAndContinueController', () => {
           return values.answers
         case 'formAnswers':
           return values.formAnswers
-        case 'rawAnswers':
-          return values.rawAnswers
+        case 'persistedAnswers':
+          return values.persistedAnswers
         default:
           return undefined
       }
@@ -695,7 +695,7 @@ describe('SaveAndContinueController', () => {
           emergency_contact_first_name: 'New',
           emergency_contact_family_name: 'Name',
         },
-        rawAnswers: {
+        persistedAnswers: {
           contact_address_house_number: ['23'],
           emergency_contact_details: [
             {
@@ -714,7 +714,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('rawAnswers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith('persistedAnswers')
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,
@@ -768,7 +768,7 @@ describe('SaveAndContinueController', () => {
           emergency_contact_first_name: 'New',
           emergency_contact_family_name: 'Name',
         },
-        rawAnswers: {
+        persistedAnswers: {
           contact_address_house_number: ['23'],
           emergency_contact_details: [
             {
@@ -787,7 +787,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(req.sessionModel.get).toHaveBeenCalledWith('rawAnswers')
+      expect(req.sessionModel.get).toHaveBeenCalledWith('persistedAnswers')
       expect(postAnswers).toHaveBeenCalledWith(
         assessmentUuid,
         episodeUuid,
