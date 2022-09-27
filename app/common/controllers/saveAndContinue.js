@@ -73,6 +73,7 @@ class SaveAndContinue extends BaseController {
       )
 
       persistedAnswers = apiResponse.answers
+      req.sessionModel.set('persistedAnswers', persistedAnswers)
     }
 
     const modifiedAnswers = this.getAnswerModifiers.reduce((a, fn) => fn(a), persistedAnswers)
