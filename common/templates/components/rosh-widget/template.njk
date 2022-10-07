@@ -36,39 +36,36 @@
   {% endif %}
 {% endmacro %}
 
+{% macro renderRiskTable(label, riskData) %}
+  {% if riskData %}
+    <table class="govuk-table rosh-widget__table">
+      <caption class="govuk-visually-hidden">Risk of serious harm in {{ label }}</caption>
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">Risk to</th>
+        <th class="govuk-table__header">{{ label }}</th>
+      </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+      {% for key, value in riskData %}
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header">{{ key }}</th>
+        <td class="govuk-table__cell {{ getRiskLevelClass(value) }}">{{ getRiskLevelText(value) | default("No data") }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+{% endmacro %}
+
 {% if roshSummary and roshSummary.hasBeenCompleted %}
   <aside class="rosh-widget {{ getOverallRiskLevelClass(roshSummary.overallRisk) }}" aria-label="Risk of serious harm summary">
     <h3 class="govuk-heading-m"><strong>{{ getRiskLevelText(roshSummary.overallRisk) | upper }}</strong> RoSH</h3>
     <p class="govuk-body-m">Risk of serious harm</p>
     <p class="govuk-hint govuk-body-m">Last updated: {{ roshSummary.lastUpdated | default("Not known") }}</p>
 
-    <table class="govuk-table rosh-widget__table">
-      <caption class="govuk-visually-hidden">Risk of serious harm summary</caption>
-      <thead class="govuk-table__head">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header">Risk to</th>
-        <th class="govuk-table__header">Community</th>
-      </tr>
-      </thead>
-      <tbody class="govuk-table__body">
-      <tr class="govuk-table__row">
-        <th class="govuk-table__header">Children</th>
-        <td class="govuk-table__cell {{ getRiskLevelClass(roshSummary.riskToChildren) }}">{{ getRiskLevelText(roshSummary.riskToChildren) | default("No data") }}</td>
-      </tr>
-      <tr>
-        <th class="govuk-table__header">Public</th>
-        <td class="govuk-table__cell {{ getRiskLevelClass(roshSummary.riskToPublic) }}">{{ getRiskLevelText(roshSummary.riskToPublic) | default("No data") }}</td>
-      </tr>
-      <tr>
-        <th class="govuk-table__header">Known adult</th>
-        <td class="govuk-table__cell {{ getRiskLevelClass(roshSummary.riskToKnownAdult) }}">{{ getRiskLevelText(roshSummary.riskToKnownAdult) | default("No data") }}</td>
-      </tr>
-      <tr>
-        <th class="govuk-table__header">Staff</th>
-        <td class="govuk-table__cell {{ getRiskLevelClass(roshSummary.riskToStaff) }}">{{ getRiskLevelText(roshSummary.riskToStaff) | default("No data") }}</td>
-      </tr>
-      </tbody>
-    </table>
+    {{ renderRiskTable("Community", roshSummary.riskInCommunity) }}
+    {{ renderRiskTable("Custody", roshSummary.riskInCustody) }}
   </aside>
   {% elif roshSummary and not roshSummary.hasBeenCompleted %}
   <aside class="rosh-widget rosh-widget--unknown" aria-label="Risk of serious harm summary">

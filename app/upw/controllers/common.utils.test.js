@@ -210,12 +210,15 @@ describe('GetRegistrations', () => {
       status: 200,
       ok: true,
       response: {
+        hasBeenCompleted: true,
         overallRisk: 'HIGH',
-        riskToChildrenInCommunity: 'LOW',
-        riskToPublicInCommunity: 'HIGH',
-        riskToKnownAdultInCommunity: 'MEDIUM',
-        riskToStaffInCommunity: 'HIGH',
-        lastUpdated: '2021-10-10',
+        assessedOn: '2021-10-10',
+        riskInCommunity: {
+          Children: 'LOW',
+          Public: 'HIGH',
+          'Known Adult': 'MEDIUM',
+          Staff: 'HIGH',
+        },
       },
     })
 
@@ -224,27 +227,32 @@ describe('GetRegistrations', () => {
     expect(riskSummary).toEqual({
       roshRiskSummary: {
         hasBeenCompleted: true,
-        lastUpdated: '10th October 2021',
         overallRisk: 'HIGH',
-        riskToChildren: 'LOW',
-        riskToKnownAdult: 'MEDIUM',
-        riskToPublic: 'HIGH',
-        riskToStaff: 'HIGH',
+        lastUpdated: '10th October 2021',
+        riskInCommunity: {
+          Children: 'LOW',
+          Public: 'HIGH',
+          'Known Adult': 'MEDIUM',
+          Staff: 'HIGH',
+        },
       },
     })
   })
 
-  it('returns null when "NOT_KNOWN" risk', async () => {
+  it('returns null when not known risk', async () => {
     getRoshRiskSummaryForCrn.mockResolvedValue({
       status: 200,
       ok: true,
       response: {
-        overallRisk: 'NOT_KNOWN',
-        riskToChildrenInCommunity: 'NOT_KNOWN',
-        riskToPublicInCommunity: 'NOT_KNOWN',
-        riskToKnownAdultInCommunity: 'NOT_KNOWN',
-        riskToStaffInCommunity: 'NOT_KNOWN',
-        lastUpdated: '2021-10-10',
+        hasBeenCompleted: true,
+        overallRisk: null,
+        assessedOn: '2021-10-10',
+        riskInCommunity: {
+          Children: null,
+          Public: null,
+          'Known Adult': null,
+          Staff: null,
+        },
       },
     })
 
@@ -253,14 +261,34 @@ describe('GetRegistrations', () => {
     expect(riskSummary).toEqual({
       roshRiskSummary: {
         hasBeenCompleted: true,
-        lastUpdated: '10th October 2021',
         overallRisk: null,
-        riskToChildren: null,
-        riskToKnownAdult: null,
-        riskToPublic: null,
-        riskToStaff: null,
+        lastUpdated: '10th October 2021',
+        riskInCommunity: {
+          Children: null,
+          Public: null,
+          'Known Adult': null,
+          Staff: null,
+        },
       },
     })
+  })
+
+  it('returns null when the response has a 4XX or 5XX status', async () => {
+    await Promise.all(
+      [400, 401, 403, 500, 501, 502, 503, 504].map(async (statusCode) => {
+        getRoshRiskSummaryForCrn.mockResolvedValue({
+          status: statusCode,
+          ok: false,
+          response: {},
+        })
+
+        const riskSummary = await getRoshRiskSummary('A123456', user)
+
+        expect(riskSummary).toEqual({
+          roshRiskSummary: null,
+        })
+      }),
+    )
   })
 
   it('flags as notBeenCompleted when the response is 404', async () => {
@@ -277,24 +305,6 @@ describe('GetRegistrations', () => {
         hasBeenCompleted: false,
       },
     })
-  })
-
-  it('returns null when the response is 400', async () => {
-    await Promise.all(
-      [400, 401, 403, 500, 501, 502, 503, 504].map(async (statusCode) => {
-        getRoshRiskSummaryForCrn.mockResolvedValue({
-          status: statusCode,
-          ok: false,
-          response: {},
-        })
-
-        const riskSummary = await getRoshRiskSummary('A123456', user)
-
-        expect(riskSummary).toEqual({
-          roshRiskSummary: null,
-        })
-      }),
-    )
   })
 })
 
