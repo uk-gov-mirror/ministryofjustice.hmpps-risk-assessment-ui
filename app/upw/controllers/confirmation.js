@@ -13,58 +13,79 @@ const createFileNameFrom = (type, ...parts) => {
   return `${fileName}.${type}`
 }
 
+const uploadPdf = async (req, res) => {
+  const renderedHtml = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
+    ...res.locals,
+    css_path: 'application.min.css',
+  })
+
+  const firstName = res.locals.persistedAnswers.first_name || ''
+  const familyName = res.locals.persistedAnswers.family_name || ''
+  const crn = res.locals.persistedAnswers.crn || ''
+
+  const assessmentId = req.session?.assessment?.uuid
+  const episodeId = req.session?.assessment?.episodeUuid
+
+  const fileName = createFileNameFrom('pdf', firstName, familyName, crn)
+
+  const pdfConvertResponse = await convertHtmlToPdf(renderedHtml)
+
+  if (!pdfConvertResponse.ok) {
+    logger.error(`Failed to convert template to PDF, status=${pdfConvertResponse.status}`)
+    return [new Error('Failed to convert template to PDF')]
+  }
+
+  const deliusUploadResponse = await uploadPdfDocumentToDelius(
+    assessmentId,
+    episodeId,
+    { document: pdfConvertResponse.response, fileName },
+    req.user,
+  )
+
+  if (!deliusUploadResponse.ok) {
+    logger.error(`Failed to upload the PDF, status=${deliusUploadResponse.status}`)
+    return [null, new Error('Failed to upload the PDF')]
+  }
+
+  logger.info(`PDF uploaded for CRN ${crn}, episode ${episodeId}`)
+
+  return []
+}
+
+const completeAssessment = async (req, res) => {
+  const assessmentId = req.session?.assessment?.uuid
+  const episodeId = req.session?.assessment?.episodeUuid
+  const crn = res.locals.persistedAnswers.crn || ''
+
+  const [assessmentCompleted] = await postCompleteAssessmentEpisode(
+    assessmentId,
+    episodeId,
+    req.user?.token,
+    req.user?.id,
+  )
+
+  if (!assessmentCompleted) {
+    logger.error(`Could not close assessment: ${assessmentId} for CRN: ${crn}`)
+    return new Error('Failed to complete the assessment')
+  }
+
+  return null
+}
+
 class Confirmation extends SaveAndContinue {
   async render(req, res, next) {
     try {
-      const renderedHtml = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
-        ...res.locals,
-        css_path: 'application.min.css',
-      })
+      const [[failedToConvertPdf, failedToUploadPdf] = [], failedToComplete] = await Promise.all([
+        uploadPdf(req, res),
+        completeAssessment(req, res),
+      ])
 
-      const firstName = res.locals.persistedAnswers.first_name || ''
-      const familyName = res.locals.persistedAnswers.family_name || ''
-      const crn = res.locals.persistedAnswers.crn || ''
-
-      const assessmentId = req.session?.assessment?.uuid
-      const episodeId = req.session?.assessment?.episodeUuid
-
-      const fileName = createFileNameFrom('pdf', firstName, familyName, crn)
-
-      const pdfConvertResponse = await convertHtmlToPdf(renderedHtml)
-
-      if (!pdfConvertResponse.ok) {
-        logger.error(`Failed to convert template to PDF, status=${pdfConvertResponse.status}`)
-        throw new Error('Failed to convert template to PDF')
+      if (failedToUploadPdf) {
+        return res.redirect('/UPW/delius-error')
       }
 
-      const deliusUploadResponse = await uploadPdfDocumentToDelius(
-        assessmentId,
-        episodeId,
-        { document: pdfConvertResponse.response, fileName },
-        req.user,
-      )
-
-      if (!deliusUploadResponse.ok) {
-        logger.error(`Failed to upload the PDF, status=${deliusUploadResponse.status}`)
-        if (deliusUploadResponse.status >= 400) {
-          return res.redirect('/UPW/delius-error')
-        }
-
-        throw new Error('Failed to upload the PDF')
-      } else {
-        logger.info(`PDF uploaded for CRN ${crn}, episode ${episodeId}`)
-      }
-
-      const [assessmentCompleted] = await postCompleteAssessmentEpisode(
-        assessmentId,
-        episodeId,
-        req.user?.token,
-        req.user?.id,
-      )
-
-      if (!assessmentCompleted) {
-        logger.error(`Could not close assessment: ${assessmentId} for CRN: ${crn}`)
-        throw new Error('Failed to complete the assessment')
+      if (failedToConvertPdf || failedToComplete) {
+        return next(failedToConvertPdf || failedToComplete)
       }
 
       return super.render(req, res, next)
