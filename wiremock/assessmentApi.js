@@ -5,7 +5,7 @@ const assessmentEpisodes = require('./responses/assessmentEpisodes.json')
 const currentEpisodeByCrn = require('./responses/currentEpisodeByCrn.json')
 const offenderDetails = require('./responses/offenderDetails.json')
 const offenderAndOffenceDetails = require('./responses/offenderAndOffenceDetails.json')
-const assessmentSupervision = require('./responses/assessmentSupervision.json')
+const startAssessment = require('./responses/startAssessment.json')
 const updateEpisode = require('./responses/updateEpisode.json')
 const predictors = require('./responses/predictors.json')
 const registrations = require('./responses/registrations.json')
@@ -100,7 +100,7 @@ const stubAssessmentSupervision = () => {
         'Content-Type': 'application/json;charset=UTF-8',
       },
       status: 200,
-      jsonBody: assessmentSupervision,
+      jsonBody: startAssessment,
     },
   })
 }

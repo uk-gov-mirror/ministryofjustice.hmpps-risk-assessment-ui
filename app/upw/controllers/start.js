@@ -1,7 +1,7 @@
 const BaseController = require('../../common/controllers/baseController')
 const { trackEvent } = require('../../../common/logging/app-insights')
 const { EVENTS } = require('../../../common/utils/constants')
-const { assessmentSupervision, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi')
+const { startAssessment, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi')
 const logger = require('../../../common/logging/logger')
 const { getErrorMessageFor, ageFrom } = require('../../../common/utils/util')
 
@@ -13,7 +13,7 @@ const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode =
     assessmentParams.deliusEventType = deliusEventType
   }
 
-  return assessmentSupervision(assessmentParams, user?.token, user?.id)
+  return startAssessment(assessmentParams, user?.token, user?.id)
 }
 
 const getSubjectDetailsFor = (assessment) => ({

@@ -6,11 +6,11 @@ const controller = new StartUnpaidWork({
   route: 'test-route',
 })
 
-const { assessmentSupervision, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi')
+const { startAssessment, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi')
 
 jest.mock('../../../common/data/hmppsAssessmentApi', () => ({
   getCurrentEpisode: jest.fn(),
-  assessmentSupervision: jest.fn(),
+  startAssessment: jest.fn(),
 }))
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
@@ -70,7 +70,7 @@ describe('startController', () => {
         crn: 'CRN1234567',
         subjectUuid: 'SUBJECT_UUID',
       }
-      assessmentSupervision.mockResolvedValue([true, { assessmentUuid, subject }])
+      startAssessment.mockResolvedValue([true, { assessmentUuid, subject }])
       getCurrentEpisode.mockResolvedValue({
         episodeUuid,
         offence: {
@@ -84,7 +84,7 @@ describe('startController', () => {
 
       await controller.saveValues(req, res, next)
 
-      expect(assessmentSupervision).toHaveBeenCalledWith(
+      expect(startAssessment).toHaveBeenCalledWith(
         {
           assessmentSchemaCode: 'A12345',
           crn: 'CRN1234567',
@@ -108,7 +108,7 @@ describe('startController', () => {
         crn: 'CRN1234567',
         subjectUuid: 'SUBJECT_UUID',
       }
-      assessmentSupervision.mockResolvedValue([true, { assessmentUuid, subject }])
+      startAssessment.mockResolvedValue([true, { assessmentUuid, subject }])
       getCurrentEpisode.mockResolvedValue({
         episodeUuid,
         userFullName: 'Test User',
@@ -145,7 +145,7 @@ describe('startController', () => {
     })
 
     it('returns an error when unable to create an assessment', async () => {
-      assessmentSupervision.mockResolvedValue([false, { reason: 'SOME_ERROR' }])
+      startAssessment.mockResolvedValue([false, { reason: 'SOME_ERROR' }])
 
       await controller.saveValues(req, res, next)
 

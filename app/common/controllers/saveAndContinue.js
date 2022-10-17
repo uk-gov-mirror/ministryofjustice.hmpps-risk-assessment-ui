@@ -1,7 +1,7 @@
 const lodash = require('lodash')
 const BaseController = require('./baseController')
 const { SECTION_INCOMPLETE, CACHE } = require('../../../common/utils/constants')
-const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
+const { getAnswers, postAnswers, getQuestionsForAssessmentType } = require('../../../common/data/hmppsAssessmentApi')
 const logger = require('../../../common/logging/logger')
 const { processReplacements } = require('../../../common/utils/util')
 const {
@@ -160,7 +160,7 @@ class SaveAndContinue extends BaseController {
     const grabQuestions = async (request) => {
       try {
         const journeyName = request.form?.options?.journeyName || ''
-        return await getFlatAssessmentQuestions(journeyName, request.user?.token, request.user?.id)
+        return await getQuestionsForAssessmentType(journeyName, request.user?.token, request.user?.id)
       } catch (e) {
         return []
       }

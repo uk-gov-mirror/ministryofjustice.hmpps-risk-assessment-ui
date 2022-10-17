@@ -19,8 +19,7 @@ const getOffenderAndOffenceDetails = (crn, eventId, assessmentCode, eventType, a
   return getData(path, authorisationToken, userId)
 }
 
-// this endpoint creates the assessment
-const assessmentSupervision = (assessmentDto, authorisationToken, userId) => {
+const startAssessment = (assessmentDto, authorisationToken, userId) => {
   const path = `${url}/assessments`
   return postData(path, authorisationToken, userId, assessmentDto)
 }
@@ -30,22 +29,12 @@ const getOffenderData = (uuid, authorisationToken, userId) => {
   return getData(path, authorisationToken, userId)
 }
 
-const getFlatAssessmentQuestions = (assessmentCode, authorisationToken, userId) => {
+const getQuestionsForAssessmentType = (assessmentCode, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentCode}/questions`
   return getData(path, authorisationToken, userId)
 }
 
-const getAssessmentSummary = (assessmentSchemaCode, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentSchemaCode}/summary`
-  return getData(path, authorisationToken, userId)
-}
-
 const getAnswers = (assessmentId, episodeId, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
-  return getData(path, authorisationToken, userId)
-}
-
-const getEpisode = (assessmentId, episodeId, authorisationToken, userId) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
   return getData(path, authorisationToken, userId)
 }
@@ -58,17 +47,6 @@ const getCurrentEpisode = (assessmentId, authorisationToken, userId) => {
 const getCurrentEpisodeForCrn = (crn, authorisationToken, userId) => {
   const path = `${url}/assessments/subject/${crn}/episodes/current`
   return getData(path, authorisationToken, userId)
-}
-
-const getAssessmentsList = (authorisationToken, userId) => {
-  const path = `${url}/questions/list`
-  return getData(path, authorisationToken, userId)
-}
-
-// this endpoint is now deprecated - use postCompleteAssessmentEpisode below which is idempotent
-const postCompleteAssessment = (assessmentId, authorisationToken, userId) => {
-  const path = `${url}/assessments/${assessmentId}/complete`
-  return postData(path, authorisationToken, userId)
 }
 
 const postCompleteAssessmentEpisode = (assessmentId, episodeId, authorisationToken, userId) => {
@@ -222,15 +200,11 @@ const logError = (error) => {
 }
 
 module.exports = {
-  assessmentSupervision,
+  startAssessment,
   getOffenderData,
   getAnswers,
-  getAssessmentsList,
   postAnswers,
-  getAssessmentSummary,
-  postCompleteAssessment,
-  getFlatAssessmentQuestions,
-  getEpisode,
+  getQuestionsForAssessmentType,
   getCurrentEpisode,
   getCurrentEpisodeForCrn,
   getRegistrationsForCrn,

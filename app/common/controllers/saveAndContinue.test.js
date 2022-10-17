@@ -1,6 +1,6 @@
 const { configure } = require('nunjucks')
 const SaveAndContinueController = require('./saveAndContinue')
-const { getAnswers, postAnswers, getFlatAssessmentQuestions } = require('../../../common/data/hmppsAssessmentApi')
+const { getAnswers, postAnswers, getQuestionsForAssessmentType } = require('../../../common/data/hmppsAssessmentApi')
 const { processReplacements, encodeHTML, updateJsonValue } = require('../../../common/utils/util')
 const { CACHE } = require('../../../common/utils/constants')
 
@@ -89,7 +89,7 @@ describe('SaveAndContinueController', () => {
 
     getAnswers.mockReset()
     postAnswers.mockReset()
-    getFlatAssessmentQuestions.mockReset()
+    getQuestionsForAssessmentType.mockReset()
     processReplacements.mockReset()
 
     processReplacements.mockImplementation((questions) => questions)
@@ -409,7 +409,7 @@ describe('SaveAndContinueController', () => {
         },
       })
 
-      getFlatAssessmentQuestions.mockResolvedValue([
+      getQuestionsForAssessmentType.mockResolvedValue([
         { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
         { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
       ])
@@ -458,7 +458,7 @@ describe('SaveAndContinueController', () => {
         },
       })
 
-      getFlatAssessmentQuestions.mockResolvedValue([
+      getQuestionsForAssessmentType.mockResolvedValue([
         { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
         { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
       ])
@@ -511,7 +511,7 @@ describe('SaveAndContinueController', () => {
         },
       })
 
-      getFlatAssessmentQuestions.mockResolvedValue([
+      getQuestionsForAssessmentType.mockResolvedValue([
         { questionCode: 'contact_address_house_number', questionText: 'contact_address_house_number question text' },
         { questionCode: 'emergency_contact_details', questionText: 'Age at first sanction' },
       ])
@@ -528,13 +528,13 @@ describe('SaveAndContinueController', () => {
 
   describe('configure', () => {
     it('combines remote and local field configurations', async () => {
-      getFlatAssessmentQuestions.mockResolvedValue([
+      getQuestionsForAssessmentType.mockResolvedValue([
         { questionCode: 'age_first_conviction', questionText: 'Age at first sanction' },
       ])
 
       await controller.configure(req, res, next)
 
-      expect(getFlatAssessmentQuestions).toHaveBeenCalledWith('RSR', user.token, user.id)
+      expect(getQuestionsForAssessmentType).toHaveBeenCalledWith('RSR', user.token, user.id)
     })
 
     it('displays an error when no assessment is selected', async () => {
