@@ -417,4 +417,9 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/assessment-help.njk`,
   },
+  '/additional-info': {
+    pageTitle: 'Additional information',
+    noPost: true,
+    template: `${__dirname}/templates/additional-info.njk`,
+  },
 }

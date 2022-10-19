@@ -118,6 +118,8 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
         getTask(answers, baseUrl, steps, 'intensive-working', 'eligibility_intensive_working_complete'),
         getTask(answers, baseUrl, steps, 'availability', 'individual_availability_complete'),
         getTask(answers, baseUrl, steps, 'equipment', 'equipment_complete'),
+        getTask(answers, baseUrl, steps, 'additional-info'),
+
       ],
     },
   ]
