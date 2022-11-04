@@ -6,8 +6,8 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "16.18.0",
-    "npm": "8.19.2"
+    "node": "^18",
+    "npm": "^8"
   },
   "jest": {
     "setupFilesAfterEnv": [
@@ -158,5 +158,8 @@
     "*.scss": [
       "stylelint '**/*.scss' --cache --fix"
     ]
+  },
+  "overrides": {
+    "string-width": "4.2.3"
   }
 }

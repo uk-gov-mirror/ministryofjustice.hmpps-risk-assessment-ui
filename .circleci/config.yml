@@ -7,10 +7,10 @@ orbs:
 parameters:
   alerts-slack-channel:
     type: string
-    default: "hmpps-assessments-dev"
+    default: "hmpps-assessments-notifications"
   node-version:
     type: string
-    default: 16.14-browsers
+    default: 18.11-browsers
 
 jobs:
   build:
