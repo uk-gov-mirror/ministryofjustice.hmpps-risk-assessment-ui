@@ -18,6 +18,69 @@
 {# include errorSummary partial #}
 {{ super() }}
 
+{%- macro modernDaySlaveryRisksHelpText() -%}
+<p class="govuk-body">
+You should ensure that the project does not:
+<ul class="govuk-body">
+   <li>place the perpetrator with vulnerable people</li>
+   <li>place co-defendants or close associates together</li>
+   <li>breach any prohibitions set out in an ancillary order</li>
+</ul> 
+</p>
+<details class="govuk-details" data-module="govuk-details">
+   <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+      What you should include 
+      </span>
+   </summary>
+   <div class="govuk-details__text">
+      <p> You should include: </p>
+      <ul>
+         <li>any vulnerabilities to avoid</li>
+         <li>co-defendant or close associate's details including their Ndelius number and probation practitioner’s name</li>
+         <li>any behaviours or issues community payback staff should know and report on - for example, evidence of coercion, manipulation or exploitation</li>
+      </ul> 
+   </div>
+</details> 
+{%- endmacro -%}
+
+{%- macro modernDaySlaveryOrdersHelpText() -%}
+<details class="govuk-details" data-module="govuk-details">
+   <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+      What you should consider and include
+      </span>
+   </summary>
+   <div class="govuk-details__text">
+   <p> You should consider: </p>
+   <ul>
+      <li>including any prohibitions attached to the Slavery and Trafficking Prevention Orders (STPOs) and Slavery and Trafficking Risk Orders (STROs) - for example, contacting or recruiting specific individuals directly or indirectly</li>
+      <li>who community payback staff should report a potential or actual breach of prohibition to - include who to report this to and how</li>
+      <li>who community payback staff should report a potential or actual breach to outside of standard working hours - include the agencies details</li>
+   </ul> 
+   </div>
+</details>
+{%- endmacro -%}
+
+{%- macro modernDaySlaverySafeguardingHelpText() -%}
+<details class="govuk-details" data-module="govuk-details">
+   <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+          What you should consider and include
+       </span>
+   </summary>
+   <div class="govuk-details__text">
+      <p> You should consider: </p>
+      <ul>
+            <li>removing the preparator or potential victim from a project if there are concerns</li>
+            <li>taking the order back to court if they attempt to exploit others and if it’s a breach of order</li>
+            <li>that the perpetrator could also be a victim - if they are, include safeguarding measures to reduce their vulnerability</li>
+            <li>any adult or child safeguarding concerns during out of hours - include who to contact and their details</li>
+      </ul> 
+   </div>
+</details>
+{%- endmacro -%}
+
 <div class="govuk-grid-row">
     <section class="govuk-grid-column-three-quarters" aria-label="Form content">
         <span class="govuk-caption-xl">Risk information</span>
@@ -27,69 +90,54 @@
         
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
-            <h3 class="govuk-heading-m">Are there specific risks that need to be taken into account?</h3>
-            <p class="govuk-body">
-                You should ensure that the project does not:
-             <ul class="govuk-body">
-                <li>place the perpetrator with vulnerable people</li>
-                <li>place co-defendants or close associates together</li>
-                <li>breach any prohibitions set out in an ancillary order</li>
-             </ul> 
-            </p>
-         <details class="govuk-details" data-module="govuk-details">
-         <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">
-                What you should include 
-            </span>
-            </summary>
-            <div class="govuk-details__text">
-             <p> You should include: </p>
-             <ul>
-                <li>any vulnerabilities to avoid</li>
-                <li>co-defendant or close associate's details including their Ndelius number and probation practitioner’s name</li>
-                <li>any behaviours or issues community payback staff should know and report on - for example, evidence of coercion, manipulation or exploitation</li>
-             </ul> 
-            </div>
-         </details>
-            {{ renderQuestion(questions['modern_day_slavery_risks'], errors) }}
+            {% if questions['modern_day_slavery_risks'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_risks'].answer,
+               answerDtos: questions['modern_day_slavery_risks'].answerDtos,
+               answerType: questions['modern_day_slavery_risks'].answerType,
+               questionText: questions['modern_day_slavery_risks'].questionText,
+               conditional: questions['modern_day_slavery_risks'].conditional,
+               questionCode: questions['modern_day_slavery_risks'].questionCode,
+               questionId: questions['modern_day_slavery_risks'].questionId,
+               readOnly: questions['modern_day_slavery_risks'].readOnly,
+               type: questions['modern_day_slavery_risks'].type,
+               validate: questions['modern_day_slavery_risks'].validate,
+               helpText: modernDaySlaveryRisksHelpText()
+            }, errors) }}
+            {% endif %}
+
+            {% if questions ['modern_day_slavery_orders'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_orders'].answer,
+               answerDtos: questions['modern_day_slavery_orders'].answerDtos,
+               answerType: questions['modern_day_slavery_orders'].answerType,
+               questionText: questions['modern_day_slavery_orders'].questionText,
+               conditional: questions['modern_day_slavery_orders'].conditional,
+               questionCode: questions['modern_day_slavery_orders'].questionCode,
+               questionId: questions['modern_day_slavery_orders'].questionId,
+               readOnly: questions['modern_day_slavery_orders'].readOnly,
+               type: questions['modern_day_slavery_orders'].type,
+               validate: questions['modern_day_slavery_orders'].validate,
+               helpText: modernDaySlaveryOrdersHelpText()
+            }, errors) }}
+            {% endif %}
+
+            {% if questions ['modern_day_slavery_safeguarding'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_safeguarding'].answer,
+               answerDtos: questions['modern_day_slavery_safeguarding'].answerDtos,
+               answerType: questions['modern_day_slavery_safeguarding'].answerType,
+               questionText: questions['modern_day_slavery_safeguarding'].questionText,
+               conditional: questions['modern_day_slavery_safeguarding'].conditional,
+               questionCode: questions['modern_day_slavery_safeguarding'].questionCode,
+               questionId: questions['modern_day_slavery_safeguarding'].questionId,
+               readOnly: questions['modern_day_slavery_safeguarding'].readOnly,
+               type: questions['modern_day_slavery_safeguarding'].type,
+               validate: questions['modern_day_slavery_safeguarding'].validate,
+               helpText: modernDaySlaverySafeguardingHelpText()
+            }, errors) }}
+            {% endif %}
         
-         <h3 class="govuk-heading-m">Are there any slavery and trafficking prevention orders or slavery and trafficking risk orders in place?</h3>
-         <details class="govuk-details" data-module="govuk-details">
-         <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">
-                What you should consider and include
-            </span>
-            </summary>
-            <div class="govuk-details__text">
-             <p> You should consider: </p>
-             <ul>
-                <li>including any prohibitions attached to the Slavery and Trafficking Prevention Orders (STPOs) and Slavery and Trafficking Risk Orders (STROs) - for example, contacting or recruiting specific individuals directly or indirectly</li>
-                <li>who community payback staff should report a potential or actual breach of prohibition to - include who to report this to and how</li>
-                <li>who community payback staff should report a potential or actual breach to outside of standard working hours - include the agencies details</li>
-             </ul> 
-            </div>
-         </details>
-            {{ renderQuestion(questions['modern_day_slavery_orders'], errors) }}
-
-         <h3 class="govuk-heading-m">Are there any safeguarding measures that need to be put into place?</h3>
-         <details class="govuk-details" data-module="govuk-details">
-         <summary class="govuk-details__summary">
-            <span class="govuk-details__summary-text">
-                What you should consider and include
-            </span>
-            </summary>
-            <div class="govuk-details__text">
-             <p> You should consider: </p>
-             <ul>
-                <li>removing the preparator or potential victim from a project if there are concerns</li>
-                <li>taking the order back to court if they attempt to exploit others and if it’s a breach of order</li>
-                <li>that the perpetrator could also be a victim - if they are, include safeguarding measures to reduce their vulnerability</li>
-                <li>any adult or child safeguarding concerns during out of hours - include who to contact and their details</li>
-             </ul> 
-            </div>
-         </details>
-            {{ renderQuestion(questions['modern_day_slavery_safeguarding'], errors) }}
-
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
 
             {{ renderQuestion(questions['modern_day_slavery_complete'], errors) }}

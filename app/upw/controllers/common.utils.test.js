@@ -1,5 +1,11 @@
 const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
-const { getRegistrations, getRoshRiskSummary, hasModernSlaveryFlags } = require('./common.utils')
+const {
+  getRegistrations,
+  getRoshRiskSummary,
+  isModernSlaveryVictim,
+  isModernSlaveryPerpetrator,
+  hasBothModernSlaveryFlags,
+} = require('./common.utils')
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 
@@ -308,25 +314,34 @@ describe('GetRegistrations', () => {
   })
 })
 
-describe('hasModernSlaveryFlags', () => {
+describe('hasModernSlaveryFlags ', () => {
   it('returns true when present', () => {
     const modernSlaveryPerpetrator = [{ code: 'MSP' }]
     const modernSlaveryVictim = [{ code: 'MSV' }]
+    const modernSlaveryPerpetratorAndVictim = [{ code: 'MSV' && 'MSP' }]
+    // modernSlaveryPerpetrator && modernSlaveryVictim
 
-    expect(hasModernSlaveryFlags(modernSlaveryPerpetrator)).toBe(true)
-    expect(hasModernSlaveryFlags(modernSlaveryVictim)).toBe(true)
-    expect(hasModernSlaveryFlags([...modernSlaveryPerpetrator, ...modernSlaveryVictim])).toBe(true)
+    expect(isModernSlaveryVictim(modernSlaveryVictim)).toBe(true)
+    expect(isModernSlaveryPerpetrator(modernSlaveryPerpetrator)).toBe(true)
+    // expect(hasBothModernSlaveryFlags(modernSlaveryPerpetratorAndVictim)).toBe(true)
+
+    // expect(hasModernSlaveryFlags([...modernSlaveryPerpetrator, ...modernSlaveryVictim])).toBe(true)
   })
 
   it('returns false when not present', () => {
     const flags = []
 
-    expect(hasModernSlaveryFlags(flags)).toBe(false)
+    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
+    expect(isModernSlaveryVictim(flags)).toBe(false)
+
+    // expect(modernSlaveryPerpetratorAndVictim(flags)).toBe(false)
+    // expect(modernSlaveryPerpetratorAndVictim(modernSlaveryVictim)).toBe(false)
+    // expect(modernSlaveryPerpetratorAndVictim(modernSlaveryPerpetrator)).toBe(false)
   })
 
   it('handles when flags are undefined', () => {
     const flags = undefined
 
-    expect(hasModernSlaveryFlags(flags)).toBe(false)
+    // expect(hasModernSlaveryFlags(flags)).toBe(false)
   })
 })

@@ -1,5 +1,10 @@
 const { SECTION_COMPLETE } = require('../../../common/utils/constants')
-const { hasModernSlaveryFlags } = require('./common.utils')
+
+// MDS ticket
+// const { hasModernSlaveryFlags } = require('./common.utils')
+const { hasBothModernSlaveryFlags } = require('./common.utils')
+const { isModernSlaveryVictim } = require('./common.utils')
+const { isModernSlaveryPerpetrator } = require('./common.utils')
 
 const checkAllTasksAreComplete = (sections) => {
   return sections.every((section) => {
@@ -72,7 +77,8 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
           steps,
           'modern-day-slavery-perpetrator',
           'modern_day_slavery_complete',
-          hasModernSlaveryFlags(riskFlags),
+          isModernSlaveryPerpetrator(riskFlags),
+          hasBothModernSlaveryFlags(riskFlags),
         ),
         getTask(
           answers,
@@ -80,7 +86,8 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
           steps,
           'modern-day-slavery-victim',
           'modern_day_slavery_complete',
-          hasModernSlaveryFlags(riskFlags),
+          isModernSlaveryVictim(riskFlags),
+          hasBothModernSlaveryFlags(riskFlags),
         ),
       ],
     },

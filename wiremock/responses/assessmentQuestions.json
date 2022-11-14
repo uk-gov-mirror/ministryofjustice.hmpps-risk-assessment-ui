@@ -1120,6 +1120,7 @@
       "questionId": "86b3e0c5-2731-49c0-a76a-9baaef7941c9",
       "questionCode": "modern_day_slavery_risks",
       "answerType": "radio",
+      "questionText": "Are there specific risks that need to be taken into account?",
       "readOnly": false,
       "conditional": false,
       "answerDtos": [
@@ -1158,6 +1159,7 @@
       "questionId": "36c51db6-1f9c-4257-9372-7c48cbaa4cef",
       "questionCode": "modern_day_slavery_orders",
       "answerType": "radio",
+      "questionText": "Are there any slavery and trafficking prevention orders or slavery and trafficking risk orders in place?",
       "readOnly": false,
       "conditional": false,
       "answerDtos": [
@@ -1196,6 +1198,7 @@
       "questionId": "2223afec-9239-406b-93a3-52186af94f0a",
       "questionCode": "modern_day_slavery_safeguarding",
       "answerType": "radio",
+      "questionText": "Are there any safeguarding measures that need to be put into place?",
       "readOnly": false,
       "conditional": false,
       "answerDtos": [
