@@ -314,34 +314,29 @@ describe('GetRegistrations', () => {
   })
 })
 
-describe('hasModernSlaveryFlags ', () => {
-  it('returns true when present', () => {
-    const modernSlaveryPerpetrator = [{ code: 'MSP' }]
-    const modernSlaveryVictim = [{ code: 'MSV' }]
-    const modernSlaveryPerpetratorAndVictim = [{ code: 'MSV' && 'MSP' }]
-    // modernSlaveryPerpetrator && modernSlaveryVictim
-
+describe('modernSlaveryFlags ', () => {
+  const modernSlaveryPerpetrator = [{ code: 'MSP' }]
+  const modernSlaveryVictim = [{ code: 'MSV' }]
+  const modernSlaveryPerpetratorAndVictim = [{ code: 'MSV' }, { code: 'MSP' }]
+  it('returns true when flags are present', () => {
     expect(isModernSlaveryVictim(modernSlaveryVictim)).toBe(true)
     expect(isModernSlaveryPerpetrator(modernSlaveryPerpetrator)).toBe(true)
-    // expect(hasBothModernSlaveryFlags(modernSlaveryPerpetratorAndVictim)).toBe(true)
-
-    // expect(hasModernSlaveryFlags([...modernSlaveryPerpetrator, ...modernSlaveryVictim])).toBe(true)
+    expect(hasBothModernSlaveryFlags(modernSlaveryPerpetratorAndVictim)).toBe(true)
   })
 
-  it('returns false when not present', () => {
+  it('returns false when flags are not present', () => {
     const flags = []
 
     expect(isModernSlaveryPerpetrator(flags)).toBe(false)
     expect(isModernSlaveryVictim(flags)).toBe(false)
-
-    // expect(modernSlaveryPerpetratorAndVictim(flags)).toBe(false)
-    // expect(modernSlaveryPerpetratorAndVictim(modernSlaveryVictim)).toBe(false)
-    // expect(modernSlaveryPerpetratorAndVictim(modernSlaveryPerpetrator)).toBe(false)
+    expect(hasBothModernSlaveryFlags(flags)).toBe(false)
   })
 
   it('handles when flags are undefined', () => {
     const flags = undefined
 
-    // expect(hasModernSlaveryFlags(flags)).toBe(false)
+    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
+    expect(isModernSlaveryVictim(flags)).toBe(false)
+    expect(hasBothModernSlaveryFlags(flags)).toBe(false)
   })
 })

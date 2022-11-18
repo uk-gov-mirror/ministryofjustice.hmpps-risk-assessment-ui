@@ -198,10 +198,14 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('toDisabilityDescription', disabilityCodeToDescription)
 
   // MDS TICKET
-  // nunjucksEnvironment.addFilter('shouldDisplayModernSlaverySection', hasModernSlaveryFlags)
-  nunjucksEnvironment.addFilter('shouldDisplayModernSlaverySection', hasBothModernSlaveryFlags)
-  nunjucksEnvironment.addFilter('shouldDisplayModernSlaverySection', isModernSlaveryVictim)
-  nunjucksEnvironment.addFilter('shouldDisplayModernSlaverySection', isModernSlaveryPerpetrator)
+  nunjucksEnvironment.addFilter(
+    'shouldDisplayModernSlaveryVictimSection',
+    (flags = []) => isModernSlaveryVictim(flags) && !isModernSlaveryPerpetrator(flags),
+  )
+  nunjucksEnvironment.addFilter(
+    'shouldDisplayModernSlaveryPerpetratorSection',
+    (flags = []) => isModernSlaveryPerpetrator(flags) || hasBothModernSlaveryFlags(flags),
+  )
 
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise
