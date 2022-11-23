@@ -314,29 +314,54 @@ describe('GetRegistrations', () => {
   })
 })
 
-describe('modernSlaveryFlags ', () => {
-  const modernSlaveryPerpetrator = [{ code: 'MSP' }]
+describe('isModernSlaveryVictim', () => {
   const modernSlaveryVictim = [{ code: 'MSV' }]
-  const modernSlaveryPerpetratorAndVictim = [{ code: 'MSV' }, { code: 'MSP' }]
+
   it('returns true when flags are present', () => {
     expect(isModernSlaveryVictim(modernSlaveryVictim)).toBe(true)
+  })
+
+  it('returns false when flags are not present', () => {
+    const flags = []
+    expect(isModernSlaveryVictim(flags)).toBe(false)
+  })
+
+  it('handles when flags are undefined', () => {
+    const flags = undefined
+    expect(isModernSlaveryVictim(flags)).toBe(false)
+  })
+})
+
+describe('isModernSlaveryPerpetrator', () => {
+  const modernSlaveryPerpetrator = [{ code: 'MSP' }]
+  it('returns true when flags are present', () => {
     expect(isModernSlaveryPerpetrator(modernSlaveryPerpetrator)).toBe(true)
+  })
+
+  it('returns false when flags are not present', () => {
+    const flags = []
+    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
+  })
+
+  it('handles when flags are undefined', () => {
+    const flags = undefined
+    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
+  })
+})
+
+describe('hasBothModernSlaveryFlags', () => {
+  const modernSlaveryPerpetratorAndVictim = [{ code: 'MSV' }, { code: 'MSP' }]
+  it('returns true when flags are present', () => {
     expect(hasBothModernSlaveryFlags(modernSlaveryPerpetratorAndVictim)).toBe(true)
   })
 
   it('returns false when flags are not present', () => {
     const flags = []
-
-    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
-    expect(isModernSlaveryVictim(flags)).toBe(false)
     expect(hasBothModernSlaveryFlags(flags)).toBe(false)
   })
 
   it('handles when flags are undefined', () => {
     const flags = undefined
-
-    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
-    expect(isModernSlaveryVictim(flags)).toBe(false)
     expect(hasBothModernSlaveryFlags(flags)).toBe(false)
   })
 })

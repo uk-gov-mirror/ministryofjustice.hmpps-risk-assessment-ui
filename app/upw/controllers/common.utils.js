@@ -91,7 +91,6 @@ const getRoshRiskSummary = async (crn, user) => {
 const hasRiskFlags = (flags = [], requiredCodes = []) =>
   flags.filter(({ code }) => requiredCodes.includes(code)).length > 0
 
-// const hasModernSlaveryFlags = (riskFlags) => hasRiskFlags(riskFlags, ['MSV', 'MSP'])
 const hasBothModernSlaveryFlags = (riskFlags) =>
   isModernSlaveryPerpetrator(riskFlags) && isModernSlaveryVictim(riskFlags)
 const isModernSlaveryVictim = (riskFlags) => hasRiskFlags(riskFlags, ['MSV'])
@@ -103,5 +102,4 @@ module.exports = {
   hasBothModernSlaveryFlags,
   isModernSlaveryVictim,
   isModernSlaveryPerpetrator,
-  // hasModernSlaveryFlags,
 }
