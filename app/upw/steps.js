@@ -13,6 +13,8 @@ const CloseAssessment = require('./controllers/closeAssessment')
 const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
 const PreviewPdf = require('./controllers/previewPdf')
 const CaringCommitmentsController = require('./controllers/carerCommitment')
+const ModernDaySlaveryPerpetrator = require('./controllers/modernDaySlaveryPerpetrator')
+const ModernDaySlaveryVictim = require('./controllers/modernDaySlaveryVictim')
 
 module.exports = {
   '/start': {
@@ -171,7 +173,7 @@ module.exports = {
   '/modern-day-slavery-perpetrator': {
     pageTitle: 'Modern day slavery - perpetrator',
     id: 'modern-day-slavery-perpetrator',
-    controller: SaveAndContinue,
+    controller: ModernDaySlaveryPerpetrator,
     template: `${__dirname}/templates/risk-information/modern-day-slavery-perpetrator.njk`,
     next: 'task-list#modern-day-slavery-perpetrator',
     fields: [
@@ -187,7 +189,7 @@ module.exports = {
   '/modern-day-slavery-victim': {
     pageTitle: 'Modern day slavery - victim',
     id: 'modern-day-slavery-victim',
-    controller: SaveAndContinue,
+    controller: ModernDaySlaveryVictim,
     template: `${__dirname}/templates/risk-information/modern-day-slavery-victim.njk`,
     next: 'task-list#modern-day-slavery-victim',
     fields: [

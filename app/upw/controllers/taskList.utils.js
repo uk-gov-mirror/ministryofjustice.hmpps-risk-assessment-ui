@@ -1,7 +1,5 @@
 const { SECTION_COMPLETE } = require('../../../common/utils/constants')
 
-// MDS ticket
-// const { hasModernSlaveryFlags } = require('./common.utils')
 const { hasBothModernSlaveryFlags } = require('./common.utils')
 const { isModernSlaveryVictim } = require('./common.utils')
 const { isModernSlaveryPerpetrator } = require('./common.utils')
