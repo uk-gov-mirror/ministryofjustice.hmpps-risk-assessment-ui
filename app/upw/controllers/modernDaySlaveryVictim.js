@@ -7,7 +7,6 @@ const migrateModernSlaveryAnswers = (answers) => {
     modern_day_slavery_risks_details_victim: answers.modern_day_slavery_risks_details,
     modern_day_slavery_safeguarding_victim: answers.modern_day_slavery_safeguarding,
     modern_day_slavery_safeguarding_details_victim: answers.modern_day_slavery_safeguarding_details,
-    // add mds complete?
   }
 }
 
@@ -20,4 +19,7 @@ class ModernDaySlaveryVictim extends SaveAndContinue {
   }
 }
 
-module.exports = ModernDaySlaveryVictim
+module.exports = {
+  ModernDaySlaveryVictim,
+  migrateModernSlaveryAnswers,
+}
