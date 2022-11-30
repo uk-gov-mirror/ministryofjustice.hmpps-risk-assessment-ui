@@ -44,4 +44,18 @@ describe('it returns previous answers of modern day slavery if present', () => {
       modern_day_slavery_safeguarding_details_perpetrator: [],
     })
   })
+
+  it('does not return previous answers if answers object is empty', () => {
+    const answers = {}
+    const updateAnswers = migrateModernSlaveryAnswers(answers)
+    expect(updateAnswers).toStrictEqual({
+      ...answers,
+      modern_day_slavery_risks_perpetrator: undefined,
+      modern_day_slavery_risks_details_perpetrator: undefined,
+      modern_day_slavery_orders_perpetrator: undefined,
+      modern_day_slavery_orders_details_perpetrator: undefined,
+      modern_day_slavery_safeguarding_perpetrator: undefined,
+      modern_day_slavery_safeguarding_details_perpetrator: undefined,
+    })
+  })
 })

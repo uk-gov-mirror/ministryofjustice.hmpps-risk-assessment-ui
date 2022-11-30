@@ -2,7 +2,7 @@
 const { migrateModernSlaveryAnswers } = require('./modernDaySlaveryVictim.js')
 
 describe('it returns previous answers of modern day slavery if present', () => {
-  it('it returns previous modern day slavery answers when present', () => {
+  it('returns previous modern day slavery answers when present', () => {
     const answers = {
       modern_day_slavery_risks: ['YES'],
       modern_day_slavery_risks_details: ['YES'],
@@ -20,7 +20,7 @@ describe('it returns previous answers of modern day slavery if present', () => {
     })
   })
 
-  it('it does not return previous modern day slavery answers when not present', () => {
+  it('does not return previous modern day slavery answers when not present', () => {
     const answers = {
       modern_day_slavery_risks: [],
       modern_day_slavery_risks_details: [],
@@ -34,6 +34,18 @@ describe('it returns previous answers of modern day slavery if present', () => {
       modern_day_slavery_risks_details_victim: [],
       modern_day_slavery_safeguarding_victim: [],
       modern_day_slavery_safeguarding_details_victim: [],
+    })
+  })
+
+  it('does not return previous answers if answers object is empty', () => {
+    const answers = {}
+    const updateAnswers = migrateModernSlaveryAnswers(answers)
+    expect(updateAnswers).toStrictEqual({
+      ...answers,
+      modern_day_slavery_risks_victim: undefined,
+      modern_day_slavery_risks_details_victim: undefined,
+      modern_day_slavery_safeguarding_victim: undefined,
+      modern_day_slavery_safeguarding_details_victim: undefined,
     })
   })
 })
