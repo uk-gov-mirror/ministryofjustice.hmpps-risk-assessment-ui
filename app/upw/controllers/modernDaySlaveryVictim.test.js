@@ -48,4 +48,11 @@ describe('it returns previous answers of modern day slavery if present', () => {
       modern_day_slavery_safeguarding_details_victim: undefined,
     })
   })
+
+  it('will return a default value of an empty object if previous answers are undefined', () => {
+    const answers = undefined
+    const updateAnswers = migrateModernSlaveryAnswers(answers)
+
+    expect(updateAnswers).toEqual({})
+  })
 })

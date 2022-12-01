@@ -1,6 +1,6 @@
 const SaveAndContinue = require('./saveAndContinue')
 
-const migrateModernSlaveryAnswers = (answers) => {
+const migrateModernSlaveryAnswers = (answers = {}) => {
   return {
     ...answers,
     modern_day_slavery_risks_perpetrator: answers.modern_day_slavery_risks,
