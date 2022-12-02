@@ -13,8 +13,8 @@ const CloseAssessment = require('./controllers/closeAssessment')
 const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
 const PreviewPdf = require('./controllers/previewPdf')
 const CaringCommitmentsController = require('./controllers/carerCommitment')
-const ModernDaySlaveryPerpetrator = require('./controllers/modernDaySlaveryPerpetrator')
-const ModernDaySlaveryVictim = require('./controllers/modernDaySlaveryVictim')
+const { ModernDaySlaveryPerpetrator } = require('./controllers/modernDaySlaveryPerpetrator')
+const { ModernDaySlaveryVictim } = require('./controllers/modernDaySlaveryVictim')
 
 module.exports = {
   '/start': {
