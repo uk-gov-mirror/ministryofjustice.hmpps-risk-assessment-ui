@@ -504,7 +504,7 @@ const fields = {
       },
     ],
   },
-  modern_day_slavery_safeguarding_details: {
+  modern_day_slavery_safeguarding_details_victim: {
     dependent: { field: 'modern_day_slavery_safeguarding_victim', value: 'YES' },
     ...requireEnterDetails,
   },
