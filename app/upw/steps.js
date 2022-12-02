@@ -13,6 +13,8 @@ const CloseAssessment = require('./controllers/closeAssessment')
 const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
 const PreviewPdf = require('./controllers/previewPdf')
 const CaringCommitmentsController = require('./controllers/carerCommitment')
+const ModernDaySlaveryPerpetrator = require('./controllers/modernDaySlaveryPerpetrator')
+const ModernDaySlaveryVictim = require('./controllers/modernDaySlaveryVictim')
 
 module.exports = {
   '/start': {
@@ -168,20 +170,34 @@ module.exports = {
       'managing_risk_complete',
     ],
   },
-  '/modern-day-slavery': {
-    pageTitle: 'Modern day slavery',
-    id: 'modern-day-slavery',
-    controller: SaveAndContinue,
-    template: `${__dirname}/templates/risk-information/modern-day-slavery.njk`,
-    next: 'task-list#modern-day-slavery',
+  '/modern-day-slavery-perpetrator': {
+    pageTitle: 'Modern day slavery - perpetrator',
+    id: 'modern-day-slavery-perpetrator',
+    controller: ModernDaySlaveryPerpetrator,
+    template: `${__dirname}/templates/risk-information/modern-day-slavery-perpetrator.njk`,
+    next: 'task-list#modern-day-slavery-perpetrator',
     fields: [
-      'modern_day_slavery_risks',
-      'modern_day_slavery_risks_details',
-      'modern_day_slavery_orders',
-      'modern_day_slavery_orders_details',
-      'modern_day_slavery_safeguarding',
-      'modern_day_slavery_safeguarding_details',
-      'modern_day_slavery_complete',
+      'modern_day_slavery_risks_perpetrator',
+      'modern_day_slavery_risks_details_perpetrator',
+      'modern_day_slavery_orders_perpetrator',
+      'modern_day_slavery_orders_details_perpetrator',
+      'modern_day_slavery_safeguarding_perpetrator',
+      'modern_day_slavery_safeguarding_details_perpetrator',
+      'modern_day_slavery_complete_perpetrator',
+    ],
+  },
+  '/modern-day-slavery-victim': {
+    pageTitle: 'Modern day slavery - victim',
+    id: 'modern-day-slavery-victim',
+    controller: ModernDaySlaveryVictim,
+    template: `${__dirname}/templates/risk-information/modern-day-slavery-victim.njk`,
+    next: 'task-list#modern-day-slavery-victim',
+    fields: [
+      'modern_day_slavery_risks_victim',
+      'modern_day_slavery_risks_details_victim',
+      'modern_day_slavery_safeguarding_victim',
+      'modern_day_slavery_safeguarding_details_victim',
+      'modern_day_slavery_complete_victim',
     ],
   },
   '/disabilities-and-mental-health': {

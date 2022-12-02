@@ -44,7 +44,10 @@ const config = require('./common/config')
 const auth = require('./common/middleware/auth')
 const redis = require('./common/data/redis')
 const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('./common/utils/constants')
-const { hasModernSlaveryFlags } = require('./app/upw/controllers/common.utils')
+
+const { hasBothModernSlaveryFlags } = require('./app/upw/controllers/common.utils')
+const { isModernSlaveryVictim } = require('./app/upw/controllers/common.utils')
+const { isModernSlaveryPerpetrator } = require('./app/upw/controllers/common.utils')
 
 // Global constants
 const { static: _static } = express
@@ -191,7 +194,15 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('clearAnswers', clearAnswers)
   nunjucksEnvironment.addFilter('hasAnswer', (a, v) => Array.isArray(a) && a.includes(v))
   nunjucksEnvironment.addFilter('toDisabilityDescription', disabilityCodeToDescription)
-  nunjucksEnvironment.addFilter('shouldDisplayModernSlaverySection', hasModernSlaveryFlags)
+
+  nunjucksEnvironment.addFilter(
+    'shouldDisplayModernSlaveryVictimSection',
+    (flags = []) => isModernSlaveryVictim(flags) && !isModernSlaveryPerpetrator(flags),
+  )
+  nunjucksEnvironment.addFilter(
+    'shouldDisplayModernSlaveryPerpetratorSection',
+    (flags = []) => isModernSlaveryPerpetrator(flags) || hasBothModernSlaveryFlags(flags),
+  )
 
   // for textarea or input components we can add an extra filter to encode any raw HTML characters
   // that might cause security issues otherwise

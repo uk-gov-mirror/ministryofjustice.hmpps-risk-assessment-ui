@@ -376,37 +376,67 @@
     {{ renderTable({ rows: mappaDataRows }) }}
   </div>
   
-  {% if widgets.flags | shouldDisplayModernSlaverySection %}
+  {% if widgets.flags | shouldDisplayModernSlaveryPerpetratorSection %}
   <div class='upw-avoid-break'>
-    <h2 id="heading_management_of_risk" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Modern day slavery</h2>
+    <h2 id="heading_management_of_risk" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Modern day slavery - perpetrator</h2>
 
     {{ renderTable({
-      captionId: "modern_day_slavery",
+      captionId: "modern_day_slavery_perpetrator",
       rows: [
         {
-          id: "modern_day_slavery_risks",
+          id: "modern_day_slavery_risks_perpetrator",
           heading: "Are there specific risks  that need to be taken into account?",
           data: renderValue(
-              answers["modern_day_slavery_risks"],
-              answers["modern_day_slavery_risks_details"],
+              answers["modern_day_slavery_risks_perpetrator"],
+              answers["modern_day_slavery_risks_details_perpetrator"],
               "Yes"
           )
         },
         {
-          id: "modern_day_slavery_orders",
+          id: "modern_day_slavery_orders_perpetrator",
           heading: "Are there any slavery and trafficking prevention orders or slavery and trafficking risk orders in place?",
           data: renderValue(
-              answers["modern_day_slavery_orders"],
-              answers["modern_day_slavery_orders_details"],
+              answers["modern_day_slavery_orders_perpetrator"],
+              answers["modern_day_slavery_orders_details_perpetrator"],
               "Yes"
           )
         },
         {
-          id: "modern_day_slavery_safeguarding",
+          id: "modern_day_slavery_safeguarding_perpetrator"",
           heading: "Are there any safeguarding measures that need to be put into place?",
           data: renderValue(
-              answers["modern_day_slavery_safeguarding"],
-              answers["modern_day_slavery_safeguarding_details"],
+              answers["modern_day_slavery_safeguarding_perpetrator"],
+              answers["modern_day_slavery_safeguarding_details_perpetrator"],
+              "Yes"
+          )
+        }
+      ]
+    }) }}
+  </div>
+  {% endif %}
+  
+  {% if widgets.flags | shouldDisplayModernSlaveryVictimSection %}
+  <div class='upw-avoid-break'>
+    <h2 id="heading_management_of_risk" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Modern day slavery - victim</h2>
+
+    {{ renderTable({
+      captionId: "modern_day_slavery_victim",
+      rows: [
+        {
+          id: "modern_day_slavery_risks_victim",
+          heading: "Are there specific risks  that need to be taken into account?",
+          data: renderValue(
+              answers["modern_day_slavery_risks_victim"],
+              answers["modern_day_slavery_risks_details_victim"],
+              "Yes"
+          )
+        },
+        {
+          id: "modern_day_slavery_safeguarding_victim",
+          heading: "Are there any safeguarding measures that need to be put into place?",
+          data: renderValue(
+              answers["modern_day_slavery_safeguarding_victim"],
+              answers["modern_day_slavery_safeguarding_details_victim"],
               "Yes"
           )
         }

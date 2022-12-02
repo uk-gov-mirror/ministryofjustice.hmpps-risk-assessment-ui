@@ -1,0 +1,122 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "common/templates/components/widgets/macro.njk" import widgets %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
+{% set backLink = 'task-list' %}
+
+{% block pageTitle %}
+{{ pageTitle }}
+{% endblock %}
+
+{% block header %}
+{% include "common/templates/partials/header.njk" %}
+{% endblock %}
+
+{% block content %}
+{# include errorSummary partial #}
+{{ super() }}
+
+
+{%- macro modernDaySlaveryRisksHelpText() -%}
+<p class="govuk-body">
+    You should ensure that the victim is not on a project where they are likely to be targeted or exploited and perpetrators or known associates are not on the same project as their victims.
+</p>
+<details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+        What you should consider 
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+    <p> You should consider: </p>
+    <ul>
+        <li>the victim’s vulnerabilities or risk factors and what community payback staff should look for</li>
+        <li>how community payback staff should report on anything unusual. This could be specific evidence of manipulation, if associates are isolating the individual, if they are prevented from talking to staff</li>
+        <li>who takes them to and from projects</li>
+        <li>who could be congregating around placement and if they are being watched</li>
+        <li>conversations overheard that could indicate they are at risk</li>  
+    </ul> 
+    </div>
+</details>
+{%- endmacro -%}
+
+{%- macro modernDaySlaverySafeguardingHelpText() -%}
+<details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+        What you should consider and include
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+    <p> You should consider: </p>
+    <ul>
+        <li>removing the victim and placing them on another project if there are concerns</li>
+        <li>if a National Referral Mechanism (NRM) referral has been made made - include what support community payback staff need to know</li>
+        <li>if the victim’s name is on an ancillary order and if there are prohibitions preventing perpetrators from contacting them - include details so potential breaches can be escalated</li>
+        <li>any adult or child safeguarding concerns during out of hours - include who to contact and their details</li>
+    </ul> 
+    </div>
+</details>
+{%- endmacro -%}
+
+<div class="govuk-grid-row">
+    <section class="govuk-grid-column-three-quarters" aria-label="Form content">
+        <span class="govuk-caption-xl">Risk information</span>
+        <h1 class="govuk-heading-xl">
+            {{ pageTitle }}
+        </h1>
+    
+        <form method="post" action="{{ action }}">
+            <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+           {% if questions['modern_day_slavery_risks_victim'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_risks_victim'].answer,
+               answerDtos: questions['modern_day_slavery_risks_victim'].answerDtos,
+               answerType: questions['modern_day_slavery_risks_victim'].answerType,
+               questionText: questions['modern_day_slavery_risks_victim'].questionText,
+               conditional: questions['modern_day_slavery_risks_victim'].conditional,
+               questionCode: questions['modern_day_slavery_risks_victim'].questionCode,
+               questionId: questions['modern_day_slavery_risks_victim'].questionId,
+               readOnly: questions['modern_day_slavery_risks_victim'].readOnly,
+               type: questions['modern_day_slavery_risks_victim'].type,
+               validate: questions['modern_day_slavery_risks_victim'].validate,
+               helpText: modernDaySlaveryRisksHelpText()
+            }, errors) }}
+            {% endif %}
+
+            {% if questions ['modern_day_slavery_safeguarding_victim'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_safeguarding_victim'].answer,
+               answerDtos: questions['modern_day_slavery_safeguarding_victim'].answerDtos,
+               answerType: questions['modern_day_slavery_safeguarding_victim'].answerType,
+               questionText: questions['modern_day_slavery_safeguarding_victim'].questionText,
+               conditional: questions['modern_day_slavery_safeguarding_victim'].conditional,
+               questionCode: questions['modern_day_slavery_safeguarding_victim'].questionCode,
+               questionId: questions['modern_day_slavery_safeguarding_victim'].questionId,
+               readOnly: questions['modern_day_slavery_safeguarding_victim'].readOnly,
+               type: questions['modern_day_slavery_safeguarding_victim'].type,
+               validate: questions['modern_day_slavery_safeguarding_victim'].validate,
+               helpText: modernDaySlaverySafeguardingHelpText()
+            }, errors) }}
+            {% endif %}
+
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
+
+            {{ renderQuestion(questions['modern_day_slavery_complete_victim'], errors) }}
+
+            <div class="questiongroup-action-buttons">
+                {{ govukButton({
+                    text: buttonText | default('Save'),
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                }) }}
+            </div>
+        </form>
+    </section>
+
+    {{ widgets(widgetData) }}
+    
+</div>
+{% endblock %}

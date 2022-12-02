@@ -8,6 +8,7 @@
   },
   "flags": [
     { "code": "IRMO", "description": "Hate Crime", "colour": "Red" },
-    { "code": "MSP", "description": "Modern Day Slavery - Perpetrator", "colour": "Amber" }
+    { "code": "MSP", "description": "Modern Day Slavery - Perpetrator", "colour": "Amber" },
+    { "code": "MSV", "description": "Modern Day Slavery - Victim", "colour": "Amber" }
   ]
 }

@@ -1,5 +1,11 @@
 const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
-const { getRegistrations, getRoshRiskSummary, hasModernSlaveryFlags } = require('./common.utils')
+const {
+  getRegistrations,
+  getRoshRiskSummary,
+  isModernSlaveryVictim,
+  isModernSlaveryPerpetrator,
+  hasBothModernSlaveryFlags,
+} = require('./common.utils')
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 
@@ -308,25 +314,54 @@ describe('GetRegistrations', () => {
   })
 })
 
-describe('hasModernSlaveryFlags', () => {
-  it('returns true when present', () => {
-    const modernSlaveryPerpetrator = [{ code: 'MSP' }]
-    const modernSlaveryVictim = [{ code: 'MSV' }]
+describe('isModernSlaveryVictim', () => {
+  const modernSlaveryVictim = [{ code: 'MSV' }]
 
-    expect(hasModernSlaveryFlags(modernSlaveryPerpetrator)).toBe(true)
-    expect(hasModernSlaveryFlags(modernSlaveryVictim)).toBe(true)
-    expect(hasModernSlaveryFlags([...modernSlaveryPerpetrator, ...modernSlaveryVictim])).toBe(true)
+  it('returns true when flags are present', () => {
+    expect(isModernSlaveryVictim(modernSlaveryVictim)).toBe(true)
   })
 
-  it('returns false when not present', () => {
+  it('returns false when flags are not present', () => {
     const flags = []
-
-    expect(hasModernSlaveryFlags(flags)).toBe(false)
+    expect(isModernSlaveryVictim(flags)).toBe(false)
   })
 
   it('handles when flags are undefined', () => {
     const flags = undefined
+    expect(isModernSlaveryVictim(flags)).toBe(false)
+  })
+})
 
-    expect(hasModernSlaveryFlags(flags)).toBe(false)
+describe('isModernSlaveryPerpetrator', () => {
+  const modernSlaveryPerpetrator = [{ code: 'MSP' }]
+  it('returns true when flags are present', () => {
+    expect(isModernSlaveryPerpetrator(modernSlaveryPerpetrator)).toBe(true)
+  })
+
+  it('returns false when flags are not present', () => {
+    const flags = []
+    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
+  })
+
+  it('handles when flags are undefined', () => {
+    const flags = undefined
+    expect(isModernSlaveryPerpetrator(flags)).toBe(false)
+  })
+})
+
+describe('hasBothModernSlaveryFlags', () => {
+  const modernSlaveryPerpetratorAndVictim = [{ code: 'MSV' }, { code: 'MSP' }]
+  it('returns true when flags are present', () => {
+    expect(hasBothModernSlaveryFlags(modernSlaveryPerpetratorAndVictim)).toBe(true)
+  })
+
+  it('returns false when flags are not present', () => {
+    const flags = []
+    expect(hasBothModernSlaveryFlags(flags)).toBe(false)
+  })
+
+  it('handles when flags are undefined', () => {
+    const flags = undefined
+    expect(hasBothModernSlaveryFlags(flags)).toBe(false)
   })
 })

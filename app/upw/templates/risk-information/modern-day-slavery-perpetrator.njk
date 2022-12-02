@@ -1,0 +1,157 @@
+{% extends "common/templates/layout.njk" %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "common/templates/components/question/macro.njk" import renderQuestion %}
+{% from "common/templates/components/widgets/macro.njk" import widgets %}
+
+{% set backLink = 'task-list' %}
+
+{% block pageTitle %}
+{{ pageTitle }}
+{% endblock %}
+
+{% block header %}
+{% include "common/templates/partials/header.njk" %}
+{% endblock %}
+
+{% block content %}
+{# include errorSummary partial #}
+{{ super() }}
+
+{%- macro modernDaySlaveryRisksHelpText() -%}
+<p class="govuk-body">
+You should ensure that the project does not:
+<ul class="govuk-body">
+   <li>place the perpetrator with vulnerable people</li>
+   <li>place co-defendants or close associates together</li>
+   <li>breach any prohibitions set out in an ancillary order</li>
+</ul> 
+</p>
+<details class="govuk-details" data-module="govuk-details">
+   <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+      What you should include 
+      </span>
+   </summary>
+   <div class="govuk-details__text">
+      <p> You should include: </p>
+      <ul>
+         <li>any vulnerabilities to avoid</li>
+         <li>co-defendant or close associate's details including their Ndelius number and probation practitioner’s name</li>
+         <li>any behaviours or issues community payback staff should know and report on - for example, evidence of coercion, manipulation or exploitation</li>
+      </ul> 
+   </div>
+</details> 
+{%- endmacro -%}
+
+{%- macro modernDaySlaveryOrdersHelpText() -%}
+<details class="govuk-details" data-module="govuk-details">
+   <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+      What you should consider and include
+      </span>
+   </summary>
+   <div class="govuk-details__text">
+   <p> You should consider: </p>
+   <ul>
+      <li>including any prohibitions attached to the Slavery and Trafficking Prevention Orders (STPOs) and Slavery and Trafficking Risk Orders (STROs) - for example, contacting or recruiting specific individuals directly or indirectly</li>
+      <li>who community payback staff should report a potential or actual breach of prohibition to - include who to report this to and how</li>
+      <li>who community payback staff should report a potential or actual breach to outside of standard working hours - include the agencies details</li>
+   </ul> 
+   </div>
+</details>
+{%- endmacro -%}
+
+{%- macro modernDaySlaverySafeguardingHelpText() -%}
+<details class="govuk-details" data-module="govuk-details">
+   <summary class="govuk-details__summary">
+      <span class="govuk-details__summary-text">
+          What you should consider and include
+       </span>
+   </summary>
+   <div class="govuk-details__text">
+      <p> You should consider: </p>
+      <ul>
+            <li>removing the preparator or potential victim from a project if there are concerns</li>
+            <li>taking the order back to court if they attempt to exploit others and if it’s a breach of order</li>
+            <li>that the perpetrator could also be a victim - if they are, include safeguarding measures to reduce their vulnerability</li>
+            <li>any adult or child safeguarding concerns during out of hours - include who to contact and their details</li>
+      </ul> 
+   </div>
+</details>
+{%- endmacro -%}
+
+<div class="govuk-grid-row">
+    <section class="govuk-grid-column-three-quarters" aria-label="Form content">
+        <span class="govuk-caption-xl">Risk information</span>
+        <h1 class="govuk-heading-xl">
+            {{ pageTitle }}
+        </h1>
+        
+        <form method="post" action="{{ action }}">
+            <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
+            {% if questions ['modern_day_slavery_risks_perpetrator'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_risks_perpetrator'].answer,
+               answerDtos: questions['modern_day_slavery_risks_perpetrator'].answerDtos,
+               answerType: questions['modern_day_slavery_risks_perpetrator'].answerType,
+               questionText: questions['modern_day_slavery_risks_perpetrator'].questionText,
+               conditional: questions['modern_day_slavery_risks_perpetrator'].conditional,
+               questionCode: questions['modern_day_slavery_risks_perpetrator'].questionCode,
+               questionId: questions['modern_day_slavery_risks_perpetrator'].questionId,
+               readOnly: questions['modern_day_slavery_risks_perpetrator'].readOnly,
+               type: questions['modern_day_slavery_risks_perpetrator'].type,
+               validate: questions['modern_day_slavery_risks_perpetrator'].validate,
+               helpText: modernDaySlaveryRisksHelpText()
+            }, errors) }}
+            {% endif %}
+
+            {% if questions ['modern_day_slavery_orders_perpetrator'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_orders_perpetrator'].answer,
+               answerDtos: questions['modern_day_slavery_orders_perpetrator'].answerDtos,
+               answerType: questions['modern_day_slavery_orders_perpetrator'].answerType,
+               questionText: questions['modern_day_slavery_orders_perpetrator'].questionText,
+               conditional: questions['modern_day_slavery_orders_perpetrator'].conditional,
+               questionCode: questions['modern_day_slavery_orders_perpetrator'].questionCode,
+               questionId: questions['modern_day_slavery_orders_perpetrator'].questionId,
+               readOnly: questions['modern_day_slavery_orders_perpetrator'].readOnly,
+               type: questions['modern_day_slavery_orders_perpetrator'].type,
+               validate: questions['modern_day_slavery_orders_perpetrator'].validate,
+               helpText: modernDaySlaveryOrdersHelpText()
+            }, errors) }}
+            {% endif %}
+
+            {% if questions ['modern_day_slavery_safeguarding_perpetrator'] %}
+            {{ renderQuestion({
+               answer: questions['modern_day_slavery_safeguarding_perpetrator'] .answer,
+               answerDtos: questions['modern_day_slavery_safeguarding_perpetrator'] .answerDtos,
+               answerType: questions['modern_day_slavery_safeguarding_perpetrator'] .answerType,
+               questionText: questions['modern_day_slavery_safeguarding_perpetrator'] .questionText,
+               conditional: questions['modern_day_slavery_safeguarding_perpetrator'] .conditional,
+               questionCode: questions['modern_day_slavery_safeguarding_perpetrator'] .questionCode,
+               questionId: questions['modern_day_slavery_safeguarding_perpetrator'] .questionId,
+               readOnly: questions['modern_day_slavery_safeguarding_perpetrator'] .readOnly,
+               type: questions['modern_day_slavery_safeguarding_perpetrator'] .type,
+               validate: questions['modern_day_slavery_safeguarding_perpetrator'] .validate,
+               helpText: modernDaySlaverySafeguardingHelpText()
+            }, errors) }}
+            {% endif %}
+        
+            <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
+
+            {{ renderQuestion(questions['modern_day_slavery_complete_perpetrator'], errors) }}
+
+            <div class="questiongroup-action-buttons">
+                {{ govukButton({
+                    text: buttonText | default('Save'),
+                    classes: 'govuk-!-margin-bottom-3 govuk-!-margin-right-1'
+                }) }}
+            </div>
+        </form>
+    </section>
+
+    {{ widgets(widgetData) }}
+    
+</div>
+{% endblock %}

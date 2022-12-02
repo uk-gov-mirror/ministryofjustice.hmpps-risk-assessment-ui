@@ -482,7 +482,7 @@ const fields = {
       },
     ],
   },
-  modern_day_slavery_risks: {
+  modern_day_slavery_risks_victim: {
     ...requireYesOrNo,
     validate: [
       {
@@ -491,11 +491,37 @@ const fields = {
       },
     ],
   },
-  modern_day_slavery_risks_details: {
-    dependent: { field: 'modern_day_slavery_risks', value: 'YES' },
+  modern_day_slavery_risks_details_victim: {
+    dependent: { field: 'modern_day_slavery_risks_victim', value: 'YES' },
     ...requireEnterDetails,
   },
-  modern_day_slavery_orders: {
+  modern_day_slavery_safeguarding_victim: {
+    ...requireYesOrNo,
+    validate: [
+      {
+        type: 'required',
+        message: 'Select if there are any safeguarding measures that need to be put into place',
+      },
+    ],
+  },
+  modern_day_slavery_safeguarding_details: {
+    dependent: { field: 'modern_day_slavery_safeguarding_victim', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  modern_day_slavery_risks_perpetrator: {
+    ...requireYesOrNo,
+    validate: [
+      {
+        type: 'required',
+        message: 'Select if there are specific risks that need to be taken into account',
+      },
+    ],
+  },
+  modern_day_slavery_risks_details_perpetrator: {
+    dependent: { field: 'modern_day_slavery_risks_perpetrator', value: 'YES' },
+    ...requireEnterDetails,
+  },
+  modern_day_slavery_orders_perpetrator: {
     ...requireYesOrNo,
     validate: [
       {
@@ -504,8 +530,8 @@ const fields = {
       },
     ],
   },
-  modern_day_slavery_orders_details: {
-    dependent: { field: 'modern_day_slavery_orders', value: 'YES' },
+  modern_day_slavery_orders_details_perpetrator: {
+    dependent: { field: 'modern_day_slavery_orders_perpetrator', value: 'YES' },
     validate: [
       {
         fn: noSpace,
@@ -517,7 +543,7 @@ const fields = {
       },
     ],
   },
-  modern_day_slavery_safeguarding: {
+  modern_day_slavery_safeguarding_perpetrator: {
     ...requireYesOrNo,
     validate: [
       {
@@ -526,8 +552,8 @@ const fields = {
       },
     ],
   },
-  modern_day_slavery_safeguarding_details: {
-    dependent: { field: 'modern_day_slavery_safeguarding', value: 'YES' },
+  modern_day_slavery_safeguarding_details_perpetrator: {
+    dependent: { field: 'modern_day_slavery_safeguarding_perpetrator', value: 'YES' },
     ...requireEnterDetails,
   },
   physical_disability: readOnly,
@@ -800,7 +826,15 @@ const fields = {
       },
     ],
   },
-  modern_day_slavery_complete: {
+  modern_day_slavery_complete_perpetrator: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Select Yes I have completed this section or No I have not completed and will come back later',
+      },
+    ],
+  },
+  modern_day_slavery_complete_victim: {
     validate: [
       {
         type: 'required',
