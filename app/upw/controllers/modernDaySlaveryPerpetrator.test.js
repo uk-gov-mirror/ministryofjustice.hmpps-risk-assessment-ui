@@ -65,10 +65,4 @@ describe('it returns previous answers of modern day slavery if present', () => {
 
     expect(updateAnswers).toEqual({})
   })
-
-  // it('will return a default value of an empty object if answers are null', () => {
-  //   // const answers = null;  - // TypeError: Cannot read properties of null
-  //   const updateAnswers = migrateModernSlaveryAnswers(answers)
-  //   expect(updateAnswers).toEqual({})
-  // })
 })
