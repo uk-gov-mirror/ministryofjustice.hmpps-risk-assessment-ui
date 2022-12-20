@@ -16,7 +16,6 @@ const CaringCommitmentsController = require('./controllers/carerCommitment')
 const { ModernDaySlaveryPerpetrator } = require('./controllers/modernDaySlaveryPerpetrator')
 const { ModernDaySlaveryVictim } = require('./controllers/modernDaySlaveryVictim')
 
-
 module.exports = {
   '/start': {
     pageTitle: 'Complete and download the Community payback assessment',
