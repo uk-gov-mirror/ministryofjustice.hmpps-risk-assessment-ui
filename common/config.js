@@ -3,7 +3,7 @@ require('dotenv').config()
 const production = process.env.NODE_ENV === 'production'
 
 function bool(v) {
-  return v in ['true', '1', 'on', 'yes']
+  return ['true', '1', 'on', 'yes'].includes(v)
 }
 
 function get(name, fallback, options = {}) {
@@ -86,5 +86,14 @@ module.exports = {
     devAssessmentId: get('DEV_ASSESSMENT_ID', 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4'),
     devPreSentenceQuestionGroupId: get('DEV_PRE_SENTENCE_QUESTION_GROUP_ID', '65a3924c-4130-4140-b7f4-cc39a52603bb'),
     useLocalCache: get('USE_LOCAL_CACHE', '', false),
+  },
+  aws: {
+    useLocalStack: get('USE_LOCALSTACK', false, { parser: bool }),
+    s3: {
+      region: get('S3_REGION', 'eu-west-2', { requireInProduction: true }),
+      bucketName: get('S3_BUCKET_NAME', 'hmpps-assessments-s3', { requireInProduction: true }),
+      accessKeyId: get('S3_ACCESS_KEY_ID', 'UNSET', { requireInProduction: true }),
+      secretAccessKey: get('S3_SECRET_ACCESS_KEY', 'UNSET', { requireInProduction: true }),
+    },
   },
 }

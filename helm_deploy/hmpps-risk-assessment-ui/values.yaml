@@ -36,6 +36,7 @@ generic-service:
     REDIS_TLS_ENABLED: "true"
     TOKEN_VERIFICATION_ENABLED: "true"
     APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY);IngestionEndpoint=https://northeurope-0.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/"
+    S3_REGION: "eu-west-2"
 
   # Pre-existing kubernetes secrets to load as environment variables in the deployment.
   # namespace_secrets:
@@ -53,6 +54,10 @@ generic-service:
     hmpps-assessments-elasticache-redis:
       REDIS_HOST: "primary_endpoint_address"
       REDIS_PASSWORD: "auth_token"
+    hmpps-assessments-s3:
+      S3_BUCKET_NAME: "bucket_name"
+      S3_ACCESS_KEY_ID: "access_key_id"
+      S3_SECRET_ACCESS_KEY: "secret_access_key"
 
   allowlist:
     office: "217.33.148.210/32"

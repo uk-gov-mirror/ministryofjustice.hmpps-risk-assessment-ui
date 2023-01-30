@@ -4,12 +4,14 @@ const nunjucks = require('nunjucks')
 const ConfirmationController = require('./confirmation')
 const pdfConverterClient = require('../../../common/data/pdf')
 const hmppsAssessmentsApiClient = require('../../../common/data/hmppsAssessmentApi')
+const { S3 } = require('../../../common/data/aws')
 
 jest.mock('nunjucks')
 jest.mock('../../../common/data/pdf')
 jest.mock('../../../common/data/hmppsAssessmentApi')
 jest.mock('../../../common/utils/util', () => ({
   getCorrelationId: jest.fn(() => 'mocked-correlation-id'),
+  createDocumentId: jest.fn(() => 'documents/foo-document.pdf'),
 }))
 jest.mock('../../../common/data/userDetailsCache', () => ({
   getCachedUserDetails: jest.fn(() => ({
@@ -21,6 +23,7 @@ jest.mock('../../../common/data/userDetailsCache', () => ({
     areaName: 'Hertfordshire',
   })),
 }))
+jest.mock('../../../common/data/aws')
 
 const createTestFile = () => Buffer.from('Test Buffer')
 
@@ -89,27 +92,21 @@ describe('ConfirmationController', () => {
       next.mockReset()
       nunjucks.render.mockReturnValue('RENDERED_TEMPLATE')
       pdfConverterClient.convertHtmlToPdf.mockReset()
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockReset()
       superMethod.mockReset()
-      req.session.save.mockReset()
+      S3.prototype.upload.mockReset()
     })
 
-    it('calls the PDF convert and passes the response to the backend API', async () => {
+    it('calls the PDF convert and uploads the document to S3', async () => {
       const file = createTestFile()
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: true })
       hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
+      S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
 
       await controller.render(req, res, next)
 
       expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
-      expect(hmppsAssessmentsApiClient.uploadPdfDocumentToDelius).toHaveBeenCalledWith(
-        assessmentUuid,
-        episodeUuid,
-        { fileName: 'robert-x123456.pdf', document: file },
-        user,
-      )
+      expect(S3.prototype.upload).toHaveBeenCalledWith('documents/foo-document.pdf', file)
       expect(superMethod).toHaveBeenCalled()
     })
 
@@ -119,68 +116,14 @@ describe('ConfirmationController', () => {
       await controller.render(req, res, next)
 
       expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
-      expect(next).toHaveBeenCalledWith(new Error('Failed to convert template to PDF'))
-    })
-
-    it('redirects to the "Delius is down" page when uploading the PDF returns a 400', async () => {
-      const file = createTestFile()
-
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: false, status: 400 })
-
-      await controller.render(req, res, next)
-
-      expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
-      expect(hmppsAssessmentsApiClient.uploadPdfDocumentToDelius).toHaveBeenCalledWith(
-        assessmentUuid,
-        episodeUuid,
-        { fileName: 'robert-x123456.pdf', document: file },
-        user,
-      )
-      expect(res.redirect).toHaveBeenCalledWith('/UPW/delius-error')
-    })
-
-    it('redirects to the "Delius is down" page when uploading the PDF returns a 502', async () => {
-      const file = createTestFile()
-
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: false, status: 502 })
-
-      await controller.render(req, res, next)
-
-      expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
-      expect(hmppsAssessmentsApiClient.uploadPdfDocumentToDelius).toHaveBeenCalledWith(
-        assessmentUuid,
-        episodeUuid,
-        { fileName: 'robert-x123456.pdf', document: file },
-        user,
-      )
-      expect(res.redirect).toHaveBeenCalledWith('/UPW/delius-error')
-    })
-
-    it('redirects to the "Delius is down" page when uploading the PDF returns a 503', async () => {
-      const file = createTestFile()
-
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: false, status: 503 })
-
-      await controller.render(req, res, next)
-
-      expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
-      expect(hmppsAssessmentsApiClient.uploadPdfDocumentToDelius).toHaveBeenCalledWith(
-        assessmentUuid,
-        episodeUuid,
-        { fileName: 'robert-x123456.pdf', document: file },
-        user,
-      )
-      expect(res.redirect).toHaveBeenCalledWith('/UPW/delius-error')
+      expect(next).toHaveBeenCalledWith(new Error('Failed to generate the PDF'))
     })
 
     it('completes the assessment', async () => {
       const file = createTestFile()
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: true })
+      S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
 
       await controller.render(req, res, next)
@@ -198,7 +141,7 @@ describe('ConfirmationController', () => {
       const file = createTestFile()
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
-      hmppsAssessmentsApiClient.uploadPdfDocumentToDelius.mockResolvedValue({ ok: true })
+      S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([false])
 
       await controller.render(req, res, next)
