@@ -1,11 +1,13 @@
 const refresh = require('passport-oauth2-refresh')
 const passport = require('passport')
 const jwtDecode = require('jwt-decode')
+const { UnauthorizedError } = require('express-jwt')
 const auth = require('./auth')
 const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
 const { cacheUserDetails, getCachedUserDetails, getAndCacheUserDetails } = require('../data/userDetailsCache')
 const User = require('../models/user')
 const authUser = require('./testSupportFiles/user_token.json')
+const { clientHasRole, apiErrorHandler } = require('./auth')
 
 jest.mock('passport-oauth2-refresh')
 jest.mock('passport')
@@ -413,6 +415,85 @@ describe('Auth', () => {
       await deserializer(req, User.from({ id: 1, token: 'FOO_TOKEN' }), callback)
 
       expect(callback).toHaveBeenCalledWith('💥')
+    })
+  })
+
+  describe('clientHasRole', () => {
+    let req
+
+    const res = {
+      set: jest.fn(),
+      json: jest.fn(),
+      status: jest.fn(),
+    }
+
+    const next = jest.fn()
+
+    beforeEach(() => {
+      req = {}
+
+      res.json.mockReset()
+      res.set.mockReset()
+      res.status.mockReset()
+      res.set.mockReturnValue(res)
+      res.status.mockReturnValue(res)
+      next.mockReset()
+    })
+
+    it('calls the next middleware when the role is present', () => {
+      req.auth = { authorities: ['ROLE_TEST'] }
+
+      clientHasRole('ROLE_TEST')(req, res, next)
+
+      expect(next).toHaveBeenCalled()
+    })
+
+    it('returns a 403 when the role is not present', () => {
+      req.auth = { authorities: [] }
+
+      clientHasRole('ROLE_TEST')(req, res, next)
+
+      expect(next).not.toHaveBeenCalled()
+      expect(res.status).toHaveBeenCalledWith(403)
+      expect(res.json).toHaveBeenCalled()
+    })
+  })
+
+  describe('apiErrorHandler', () => {
+    let req
+
+    const res = {
+      json: jest.fn(),
+      status: jest.fn(),
+    }
+
+    const next = jest.fn()
+
+    beforeEach(() => {
+      req = {}
+
+      res.json.mockReset()
+      res.status.mockReset()
+      res.status.mockReturnValue(res)
+      next.mockReset()
+    })
+
+    it('returns 401 when there is an authentication error', () => {
+      const authError = new UnauthorizedError('invalid_token', new Error('test'))
+
+      apiErrorHandler(authError, req, res, next)
+
+      expect(res.status).toHaveBeenCalledWith(401)
+      expect(res.json).toHaveBeenCalled()
+    })
+
+    it('returns 500 when not an authentication error', () => {
+      const authError = new Error('some random exception occurred')
+
+      apiErrorHandler(authError, req, res, next)
+
+      expect(res.status).toHaveBeenCalledWith(500)
+      expect(res.json).toHaveBeenCalled()
     })
   })
 })

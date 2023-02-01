@@ -8,6 +8,9 @@ const {
   handleLoginCallback,
   handleLogout,
   checkForTokenRefresh,
+  requestIsAuthenticated,
+  apiErrorHandler,
+  clientHasRole,
 } = require('../common/middleware/auth')
 
 const upwWorkflow = require('./upw')
@@ -15,6 +18,7 @@ const upwWorkflow = require('./upw')
 const logger = require('../common/logging/logger')
 const { verifyAssessment } = require('./startAssessment/get.controller')
 const { getCorrelationId } = require('../common/utils/util')
+const { downloadUpwPdf } = require('./upw/controllers/api')
 
 // Export
 module.exports = (app) => {
@@ -27,6 +31,14 @@ module.exports = (app) => {
   app.get('/ping', (req, res) => {
     res.status(200).send('pong')
   })
+
+  app.use(
+    '/api/upw/download/:episodeId',
+    requestIsAuthenticated(),
+    clientHasRole('ROLE_ARN_READ_ONLY'),
+    downloadUpwPdf,
+    apiErrorHandler,
+  )
 
   app.get('/login', passport.authenticate('oauth2'))
   app.get('/login/callback', handleLoginCallback())
