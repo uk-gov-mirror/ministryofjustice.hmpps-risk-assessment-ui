@@ -1,5 +1,4 @@
 const { S3 } = require('../../../common/data/aws')
-const logger = require('../../../common/logging/logger')
 const { createDocumentId } = require('../../../common/utils/util')
 
 const downloadUpwPdf = async (req, res, next) => {
@@ -21,7 +20,6 @@ const downloadUpwPdf = async (req, res, next) => {
         .send(response.body)
     }
 
-    logger.info(`An error occurred fetching the document from S3: ${response.error?.name}}`)
     return res.status(response.error?.statusCode || 500).send()
   } catch (e) {
     return next(e)

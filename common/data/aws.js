@@ -43,7 +43,8 @@ class S3 {
         Bucket: this.bucketName,
         Key: key,
       })
-      .promise(({ Body: body }) => {
+      .promise()
+      .then(({ Body: body }) => {
         logger.info(`Fetched file from S3: ${key}`)
         return { ok: true, body }
       })
