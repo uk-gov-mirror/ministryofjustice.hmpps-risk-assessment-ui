@@ -49,7 +49,7 @@ class S3 {
       })
       .catch((error) => {
         logger.error(`Failed to fetch file from S3: ${error.message}`)
-        return { ok: false, statusCode: error.statusCode, code: error.code }
+        return { ok: false, error }
       })
   }
 }

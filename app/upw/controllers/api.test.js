@@ -48,7 +48,7 @@ describe('UPW API', () => {
     it('returns a 404 when the key does not exist in S3', async () => {
       req.params.episodeId = 'episodeId'
 
-      S3.prototype.fetch.mockResolvedValue({ ok: false, statusCode: 404 })
+      S3.prototype.fetch.mockResolvedValue({ ok: false, error: { name: 'NotFound', statusCode: 404 } })
 
       await downloadUpwPdf(req, res)
 
