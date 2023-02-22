@@ -854,10 +854,6 @@ const fields = {
   equipment_complete: requireSelectOption,
 }
 
-// const customValidations = (fields, answers) => {
-//   return fields
-// }
-
 module.exports = {
   fields,
   customValidationsEditEmergencyContact,

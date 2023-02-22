@@ -107,7 +107,6 @@ describe('removeMultipleGroupItem (UPW)', () => {
       req.session.assessment.episodeUuid,
       expectedPayload,
       req.user.token,
-      req.user.id,
     )
 
     expect(req.sessionModel.set).toHaveBeenCalledWith(CACHE.PERSISTED_ANSWERS, {

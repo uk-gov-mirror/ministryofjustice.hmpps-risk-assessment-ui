@@ -20,7 +20,6 @@ class TaskList extends BaseController {
           req.session.assessment?.uuid,
           req.session.assessment?.episodeUuid,
           req.user?.token,
-          req.user?.id,
         )
 
         persistedAnswers = answers

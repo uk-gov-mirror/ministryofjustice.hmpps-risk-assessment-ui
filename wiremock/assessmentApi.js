@@ -194,6 +194,21 @@ const stubAssessmentEpisodes = () => {
       jsonBody: assessmentEpisodes,
     },
   })
+
+  stubFor({
+    request: {
+      method: 'GET',
+      urlPattern: `/episode/.+?`,
+    },
+    response: {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      status: 200,
+      jsonBody: assessmentEpisodes,
+    },
+  })
+
   stubFor({
     request: {
       method: 'POST',

@@ -22,7 +22,7 @@ const generatePdf = async (req, res) => {
     throw new Error('Failed to generate the PDF')
   }
 
-  return { key: createDocumentId(episodeId), file: pdfConvertResponse.response }
+  return { key: createDocumentId(episodeId), file: pdfConvertResponse.body }
 }
 
 const uploadToS3 = async ({ key, file }) => {
@@ -39,12 +39,7 @@ const completeAssessment = async (req, res) => {
   const episodeId = req.session?.assessment?.episodeUuid
   const crn = res.locals.persistedAnswers.crn || ''
 
-  const [assessmentCompleted] = await postCompleteAssessmentEpisode(
-    assessmentId,
-    episodeId,
-    req.user?.token,
-    req.user?.id,
-  )
+  const [assessmentCompleted] = await postCompleteAssessmentEpisode(assessmentId, episodeId, req.user?.token)
 
   if (!assessmentCompleted) {
     logger.error(`Could not close assessment: ${assessmentId} for CRN: ${crn}`)

@@ -99,7 +99,7 @@ describe('ConfirmationController', () => {
     it('calls the PDF convert and uploads the document to S3', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
+      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
 
@@ -122,7 +122,7 @@ describe('ConfirmationController', () => {
     it('completes the assessment', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
+      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
 
@@ -132,7 +132,6 @@ describe('ConfirmationController', () => {
         assessmentUuid,
         episodeUuid,
         user.token,
-        user.id,
       )
       expect(superMethod).toHaveBeenCalled()
     })
@@ -140,7 +139,7 @@ describe('ConfirmationController', () => {
     it('displays an error when unable to complete the assessment', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
+      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([false])
 
@@ -150,7 +149,6 @@ describe('ConfirmationController', () => {
         assessmentUuid,
         episodeUuid,
         user.token,
-        user.id,
       )
       expect(next).toHaveBeenCalledWith(new Error('Failed to complete the assessment'))
       expect(superMethod).not.toHaveBeenCalled()

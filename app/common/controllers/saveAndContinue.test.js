@@ -322,7 +322,6 @@ describe('SaveAndContinueController', () => {
         req.session.assessment.uuid,
         req.session.assessment.episodeUuid,
         req.user.token,
-        req.user.id,
       )
 
       expect(res.locals.questions).toEqual({
@@ -534,7 +533,7 @@ describe('SaveAndContinueController', () => {
 
       await controller.configure(req, res, next)
 
-      expect(getQuestionsForAssessmentType).toHaveBeenCalledWith('RSR', user.token, user.id)
+      expect(getQuestionsForAssessmentType).toHaveBeenCalledWith('RSR', user.token)
     })
 
     it('displays an error when no assessment is selected', async () => {
@@ -665,7 +664,6 @@ describe('SaveAndContinueController', () => {
           },
         },
         user.token,
-        user.id,
       )
     })
 
@@ -737,7 +735,6 @@ describe('SaveAndContinueController', () => {
           },
         },
         user.token,
-        user.id,
       )
     })
 
@@ -806,7 +803,6 @@ describe('SaveAndContinueController', () => {
           },
         },
         user.token,
-        user.id,
       )
     })
 

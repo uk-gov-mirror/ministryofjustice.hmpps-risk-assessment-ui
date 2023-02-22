@@ -92,7 +92,6 @@ describe('startController', () => {
           deliusEventType: 'A',
         },
         'USER_TOKEN',
-        '1',
       )
     })
 
