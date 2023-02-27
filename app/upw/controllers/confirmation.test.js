@@ -4,7 +4,8 @@ const nunjucks = require('nunjucks')
 const ConfirmationController = require('./confirmation')
 const pdfConverterClient = require('../../../common/data/pdf')
 const hmppsAssessmentsApiClient = require('../../../common/data/hmppsAssessmentApi')
-const { S3 } = require('../../../common/data/aws')
+const { S3 } = require('../../../common/data/aws/s3')
+const { SNS } = require('../../../common/data/aws/sns')
 
 jest.mock('nunjucks')
 jest.mock('../../../common/data/pdf')
@@ -23,7 +24,8 @@ jest.mock('../../../common/data/userDetailsCache', () => ({
     areaName: 'Hertfordshire',
   })),
 }))
-jest.mock('../../../common/data/aws')
+jest.mock('../../../common/data/aws/s3')
+jest.mock('../../../common/data/aws/sns')
 
 const createTestFile = () => Buffer.from('Test Buffer')
 
@@ -68,7 +70,7 @@ describe('ConfirmationController', () => {
           assessment: {
             uuid: assessmentUuid,
             episodeUuid,
-            subject: { dob: '1980-01-01' },
+            subject: { crn: 'X123456', dob: '1980-01-01' },
           },
           save: jest.fn(),
         },
@@ -94,19 +96,27 @@ describe('ConfirmationController', () => {
       pdfConverterClient.convertHtmlToPdf.mockReset()
       superMethod.mockReset()
       S3.prototype.upload.mockReset()
+      SNS.prototype.publishJson.mockReset()
     })
 
-    it('calls the PDF convert and uploads the document to S3', async () => {
+    it('completes the assessment', async () => {
       const file = createTestFile()
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
-      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
+      SNS.prototype.publishJson.mockResolvedValue({ ok: true })
+      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
 
       await controller.render(req, res, next)
 
       expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
       expect(S3.prototype.upload).toHaveBeenCalledWith('documents/foo-document.pdf', file)
+      expect(SNS.prototype.publishJson).toHaveBeenCalled()
+      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode).toHaveBeenCalledWith(
+        assessmentUuid,
+        episodeUuid,
+        user.token,
+      )
       expect(superMethod).toHaveBeenCalled()
     })
 
@@ -115,25 +125,33 @@ describe('ConfirmationController', () => {
 
       await controller.render(req, res, next)
 
-      expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
       expect(next).toHaveBeenCalledWith(new Error('Failed to generate the PDF'))
+      expect(superMethod).not.toHaveBeenCalled()
     })
 
-    it('completes the assessment', async () => {
+    it('passes an error to the error handler when PDF upload fails', async () => {
+      const file = createTestFile()
+
+      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
+      S3.prototype.upload.mockResolvedValue({ ok: false })
+
+      await controller.render(req, res, next)
+
+      expect(next).toHaveBeenCalledWith(new Error('Failed to upload the PDF'))
+      expect(superMethod).not.toHaveBeenCalled()
+    })
+
+    it('passes an error to the error handler when unable to send the notification', async () => {
       const file = createTestFile()
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
-      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
+      SNS.prototype.publishJson.mockResolvedValue({ ok: false })
 
       await controller.render(req, res, next)
 
-      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode).toHaveBeenCalledWith(
-        assessmentUuid,
-        episodeUuid,
-        user.token,
-      )
-      expect(superMethod).toHaveBeenCalled()
+      expect(next).toHaveBeenCalledWith(new Error('Failed to publish "UPW Complete" event'))
+      expect(superMethod).not.toHaveBeenCalled()
     })
 
     it('displays an error when unable to complete the assessment', async () => {
@@ -141,15 +159,11 @@ describe('ConfirmationController', () => {
 
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
+      SNS.prototype.publishJson.mockResolvedValue({ ok: true })
       hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([false])
 
       await controller.render(req, res, next)
 
-      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode).toHaveBeenCalledWith(
-        assessmentUuid,
-        episodeUuid,
-        user.token,
-      )
       expect(next).toHaveBeenCalledWith(new Error('Failed to complete the assessment'))
       expect(superMethod).not.toHaveBeenCalled()
     })

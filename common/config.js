@@ -95,5 +95,13 @@ module.exports = {
       accessKeyId: get('S3_ACCESS_KEY_ID', 'UNSET', { requireInProduction: true }),
       secretAccessKey: get('S3_SECRET_ACCESS_KEY', 'UNSET', { requireInProduction: true }),
     },
+    sns: {
+      region: get('SNS_REGION', 'eu-west-2', { requireInProduction: true }),
+      topicArn: get('SNS_TOPIC_ARN', 'arn:aws:sns:eu-west-2:000000000000:hmpps-assessments-topic', {
+        requireInProduction: true,
+      }),
+      accessKeyId: get('SNS_ACCESS_KEY_ID', 'UNSET', { requireInProduction: true }),
+      secretAccessKey: get('SNS_SECRET_ACCESS_KEY', 'UNSET', { requireInProduction: true }),
+    },
   },
 }

@@ -4,10 +4,12 @@ const SaveAndContinue = require('./saveAndContinue')
 const logger = require('../../../common/logging/logger')
 const { postCompleteAssessmentEpisode } = require('../../../common/data/hmppsAssessmentApi')
 const { convertHtmlToPdf } = require('../../../common/data/pdf')
-const { S3 } = require('../../../common/data/aws')
+const { S3 } = require('../../../common/data/aws/s3')
+const { SNS } = require('../../../common/data/aws/sns')
 const { createDocumentId } = require('../../../common/utils/util')
+const { upwComplete } = require('../../../common/data/sns-messages')
 
-const generatePdf = async (req, res) => {
+const generateDocument = async (req, res) => {
   const renderedHtml = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
     ...res.locals,
     css_path: 'application.min.css',
@@ -25,7 +27,7 @@ const generatePdf = async (req, res) => {
   return { key: createDocumentId(episodeId), file: pdfConvertResponse.body }
 }
 
-const uploadToS3 = async ({ key, file }) => {
+const uploadDocument = async ({ key, file }) => {
   const s3 = new S3()
   const s3UploadResponse = await s3.upload(key, file)
 
@@ -34,10 +36,28 @@ const uploadToS3 = async ({ key, file }) => {
   }
 }
 
-const completeAssessment = async (req, res) => {
-  const assessmentId = req.session?.assessment?.uuid
-  const episodeId = req.session?.assessment?.episodeUuid
-  const crn = res.locals.persistedAnswers.crn || ''
+const publishEvent = (req) => async () => {
+  const { assessment } = req.session
+
+  if (!assessment?.episodeUuid || !assessment?.subject?.crn) {
+    throw new Error('Failed to get assessment details')
+  }
+
+  const sns = new SNS()
+
+  const snsResponse = await sns.publishJson(upwComplete(assessment.episodeUuid, assessment.subject.crn))
+
+  if (!snsResponse.ok) {
+    throw new Error('Failed to publish "UPW Complete" event')
+  }
+}
+
+const completeAssessment = (req) => async () => {
+  const { assessment } = req.session
+
+  const assessmentId = assessment?.uuid
+  const episodeId = assessment?.episodeUuid
+  const crn = assessment?.subject.crn || ''
 
   const [assessmentCompleted] = await postCompleteAssessmentEpisode(assessmentId, episodeId, req.user?.token)
 
@@ -50,9 +70,13 @@ const completeAssessment = async (req, res) => {
 class Confirmation extends SaveAndContinue {
   async render(req, res, next) {
     try {
-      await generatePdf(req, res)
-        .then(uploadToS3)
-        .then(() => completeAssessment(req, res))
+      const { assessment } = req.session
+
+      if (!assessment?.episodeUuid || !assessment?.subject?.crn) {
+        return next(new Error('Failed to get assessment details'))
+      }
+
+      await generateDocument(req, res).then(uploadDocument).then(publishEvent(req)).then(completeAssessment(req))
 
       return super.render(req, res, next)
     } catch (e) {

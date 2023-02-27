@@ -35,7 +35,7 @@ module.exports = (app) => {
   app.use(
     '/api/upw/download/:episodeId',
     requestIsAuthenticated(),
-    clientHasRole('ROLE_ARN_READ_ONLY'),
+    clientHasRole('ROLE_UPW_READ_ONLY'),
     downloadUpwPdf,
     apiErrorHandler,
   )

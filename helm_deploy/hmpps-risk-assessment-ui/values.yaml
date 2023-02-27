@@ -37,6 +37,7 @@ generic-service:
     TOKEN_VERIFICATION_ENABLED: "true"
     APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY);IngestionEndpoint=https://northeurope-0.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/"
     S3_REGION: "eu-west-2"
+    SNS_REGION: "eu-west-2"
 
   # Pre-existing kubernetes secrets to load as environment variables in the deployment.
   # namespace_secrets:
@@ -58,6 +59,10 @@ generic-service:
       S3_BUCKET_NAME: "bucket_name"
       S3_ACCESS_KEY_ID: "access_key_id"
       S3_SECRET_ACCESS_KEY: "secret_access_key"
+    hmpps-domain-events-topic:
+      SNS_TOPIC_ARN: "topic_arn"
+      SNS_ACCESS_KEY_ID: "access_key_id"
+      SNS_SECRET_ACCESS_KEY: "secret_access_key"
 
   allowlist:
     office: "217.33.148.210/32"

@@ -1,5 +1,5 @@
 const nunjucks = require('nunjucks')
-const { S3 } = require('../../../common/data/aws')
+const { S3 } = require('../../../common/data/aws/s3')
 const { getOffenderData, getEpisode } = require('../../../common/data/hmppsAssessmentApi')
 const { getApiToken } = require('../../../common/data/oauth')
 const { createDocumentId } = require('../../../common/utils/util')

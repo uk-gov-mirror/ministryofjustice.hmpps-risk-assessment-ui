@@ -1,13 +1,15 @@
 const AWS = require('aws-sdk')
-const config = require('../config')
-const logger = require('../logging/logger')
+const config = require('../../config')
+const logger = require('../../logging/logger')
 
 class S3 {
   constructor() {
     const options = {
       region: 'eu-west-2',
-      accessKeyId: config.aws.s3.accessKeyId,
-      secretAccessKey: config.aws.s3.secretAccessKey,
+      credentials: {
+        accessKeyId: config.aws.s3.accessKeyId,
+        secretAccessKey: config.aws.s3.secretAccessKey,
+      },
     }
 
     if (config.aws.useLocalStack) {
