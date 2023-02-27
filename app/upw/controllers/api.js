@@ -42,7 +42,12 @@ const fetchTemplateData = async (episodeId) => {
 }
 
 const sendDocumentResponse = (res, document) =>
-  res.status(200).set('Content-Type', 'application/pdf').set('Content-Length', document.length).send(document)
+  res
+    .status(200)
+    .set('Content-Type', 'application/pdf')
+    .set('Content-Length', document.length)
+    .set('Content-Disposition', 'attachment; filename="upw-assessment.pdf"')
+    .send(document)
 
 const generatePdf = (res) => async (templateData) => {
   const rendered = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
