@@ -277,22 +277,6 @@ const stubRoshRiskSummary = () => {
   })
 }
 
-const stubDocumentUpload = () => {
-  stubFor({
-    request: {
-      method: 'POST',
-      urlPattern: `/assessments/.+?/episode/.+?/document`,
-    },
-    response: {
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-      status: 200,
-      jsonBody: {},
-    },
-  })
-}
-
 const stubCloseAssessment = () => {
   stubFor({
     request: {
@@ -360,6 +344,5 @@ module.exports = {
   stubPredictors,
   stubRegistrations,
   stubRoshRiskSummary,
-  stubDocumentUpload,
   stubCloseAssessment,
 }
