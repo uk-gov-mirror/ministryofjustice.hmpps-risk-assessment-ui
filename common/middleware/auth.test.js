@@ -1,7 +1,6 @@
 const refresh = require('passport-oauth2-refresh')
 const passport = require('passport')
 const jwtDecode = require('jwt-decode')
-// eslint-disable-next-line import/no-unresolved
 const { UnauthorizedError } = require('express-jwt')
 const auth = require('./auth')
 const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
