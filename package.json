@@ -65,6 +65,7 @@
     "test": "jest --forceExit",
     "lint": "eslint . --cache --max-warnings 0 && stylelint '**/*.scss' --cache --max-warnings 0",
     "lint-staged": "lint-staged",
+    "lint:fix": "eslint . --cache --fix && stylelint '**/*.scss' --cache --fix",
     "watch:sass": "nodemon -e scss -x \"npm run build:css\"",
     "watch": "npm run watch:sass",
     "record-build-info": "node ./bin/record-build-info",
