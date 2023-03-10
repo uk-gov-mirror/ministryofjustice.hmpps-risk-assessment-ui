@@ -52,6 +52,12 @@ const noSpace = function noSpace(value) {
   return value.trim().length > 0
 }
 
+const characterCount = function (characterLimit) {
+  return function characterCount(value) {
+    return value.length <= characterLimit
+  }
+}
+
 module.exports = {
   range,
   notInFuture,
@@ -62,4 +68,5 @@ module.exports = {
   yearsBetweenLessThan,
   noSpace,
   onePresent,
+  characterCount,
 }

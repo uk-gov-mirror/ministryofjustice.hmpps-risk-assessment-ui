@@ -417,9 +417,15 @@ module.exports = {
     noPost: true,
     template: `${__dirname}/templates/assessment-help.njk`,
   },
-  '/additional-info': {
+  '/additional-information': {
+    id: 'additional-information',
     pageTitle: 'Additional information',
-    noPost: true,
-    template: `${__dirname}/templates/additional-info.njk`,
+    template: `${__dirname}/templates/additional-information.njk`,
+    fields: [
+      'additional_information',
+      'additional_information_complete',
+    ], 
+    controller: SaveAndContinue,
+    next: 'task-list#additional-information',
   },
 }

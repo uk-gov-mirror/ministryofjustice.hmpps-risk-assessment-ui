@@ -3,7 +3,7 @@ if ("webkitSpeechRecognition" in window) {
     let speechRecognition = new webkitSpeechRecognition();
   
     // String for the Final Transcript
-    let final_transcript = "";
+    let finalTranscript = "";
   
     // Set the properties for the Speech Recognition object
     speechRecognition.continuous = true;
@@ -26,35 +26,36 @@ if ("webkitSpeechRecognition" in window) {
   
     speechRecognition.onresult = (event) => {
       // Create the interim transcript string locally because we don't want it to persist like final transcript
-      let interim_transcript = "";
+      let interimTranscript = "";
   
       // Loop through the results from the speech recognition object.
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         // If the result item is Final, add it to Final Transcript, Else add it to Interim transcript
         if (event.results[i].isFinal) {
-          final_transcript += event.results[i][0].transcript;
+          finalTranscript += event.results[i][0].transcript;
         } else {
-          interim_transcript += event.results[i][0].transcript;
+          interimTranscript += event.results[i][0].transcript;
         }
       }
   
       // Set the Final transcript and Interim transcript.
-      document.querySelector("#final").innerHTML = final_transcript;
-      document.querySelector("#interim").innerHTML = interim_transcript;
+      document.querySelector("#additional_information").innerHTML = finalTranscript;
+      document.querySelector("#interim").innerHTML = interimTranscript;
     };
   
     // Set the onClick property of the start button
-    document.querySelector("#start").onclick = () => {
+    document.querySelector("#start").onclick = (e) => { 
+      e.preventDefault();
       // Start the Speech Recognition
       speechRecognition.start();
     };
     // Set the onClick property of the stop button
-    document.querySelector("#stop").onclick = () => {
+    document.querySelector("#stop").onclick = (e) => {
+      e.preventDefault();
       // Stop the Speech Recognition
       speechRecognition.stop();
     };
   } else {
     console.log("Speech recognition is not available");
 }
-
 

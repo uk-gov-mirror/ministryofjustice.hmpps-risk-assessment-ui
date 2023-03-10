@@ -8,6 +8,7 @@ const {
   yearsBetweenGreaterThan,
   noSpace,
   onePresent,
+  characterCount,
 } = require('./validators')
 
 describe('checks numbers are in range', () => {
@@ -113,5 +114,15 @@ describe('checks if at least one of the values is present', () => {
     expect(onePresent(undefined, undefined)).toEqual(false)
     expect(onePresent(undefined, '  ')).toEqual(false)
     expect(onePresent(null, null)).toEqual(false)
+  })
+})
+
+describe('characterCount', () => {
+  it('validates the character count', () => { const validator = characterCount(5)
+    expect(validator('123456')).toEqual(false)
+    expect(validator('12345')).toEqual(true)
+    expect(validator('1234')).toEqual(true)
+    expect(validator('')).toEqual(true)
+   
   })
 })

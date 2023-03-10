@@ -3,7 +3,7 @@ require('dotenv').config()
 const production = process.env.NODE_ENV === 'production'
 
 function bool(v) {
-  return v in ['true', '1', 'on', 'yes']
+  return ['true', '1', 'on', 'yes'].includes(v)
 }
 
 function get(name, fallback, options = {}) {
@@ -82,6 +82,7 @@ module.exports = {
   apiClientId: get('API_CLIENT_ID', 'clientId'),
   apiClientSecret: get('API_CLIENT_SECRET', 'clientSecret'),
   sessionSecret: get('SESSION_SECRET', 'superSecret'),
+  speechToTextEnabled: get('SPEECH_TO_TEXT_ENABLED', false, { parser: bool }),
   dev: {
     devAssessmentId: get('DEV_ASSESSMENT_ID', 'fb6b7c33-07fc-4c4c-a009-8d60f66952c4'),
     devPreSentenceQuestionGroupId: get('DEV_PRE_SENTENCE_QUESTION_GROUP_ID', '65a3924c-4130-4140-b7f4-cc39a52603bb'),

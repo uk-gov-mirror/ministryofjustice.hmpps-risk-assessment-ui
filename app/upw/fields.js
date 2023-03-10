@@ -1,4 +1,6 @@
-const { range, noSpace, onePresent } = require('../../common/middleware/form-wizard-validators/validators')
+const { range, noSpace, onePresent, characterCount } = require('../../common/middleware/form-wizard-validators/validators')
+
+const characterLimit = 250; 
 
 const customValidationsEditEmergencyContact = (fields, emergencyContactPhoneNumber, emergencyContactMobileNumber) => {
   fields.emergency_contact_phone_number?.validate.push({
@@ -842,6 +844,14 @@ const fields = {
       },
     ],
   },
+  additional_information:{
+    validate: [
+      { 
+        fn: characterCount(characterLimit),
+        message: `[Additional information must be ${characterLimit} characters or less]`,
+      },
+    ]
+  },
   disabilities_complete: requireSelectOption,
   health_issues_complete: requireSelectOption,
   gp_details_complete: requireSelectOption,
@@ -852,7 +862,9 @@ const fields = {
   eligibility_intensive_working_complete: requireSelectOption,
   individual_availability_complete: requireSelectOption,
   equipment_complete: requireSelectOption,
+  additional_information_complete: requireSelectOption,
 }
+
 
 // const customValidations = (fields, answers) => {
 //   return fields
