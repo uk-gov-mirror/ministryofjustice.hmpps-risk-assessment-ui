@@ -141,10 +141,10 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
 
     if (taskIndex && itemIndex) delete tasks[taskIndex].items.splice(itemIndex, 1)
   }
-  
-  if (speechToTextEnabled){
+
+  if (speechToTextEnabled) {
     tasks.forEach((task) => {
-      if(task?.heading?.text === 'Placement details'){
+      if (task?.heading?.text === 'Placement details') {
         logger.info('STT feature enabled')
         task.items.push(getTask(answers, baseUrl, steps, 'additional-information', 'additional_information_complete'))
       }

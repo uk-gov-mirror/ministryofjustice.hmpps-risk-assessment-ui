@@ -2,7 +2,9 @@ const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
 const jwtDecode = require('jwt-decode')
+// eslint-disable-next-line import/no-unresolved
 const jwksRsa = require('jwks-rsa')
+// eslint-disable-next-line import/no-unresolved
 const { expressjwt: jwt } = require('express-jwt')
 const { DateTime } = require('luxon')
 const { checkTokenIsActive } = require('../data/oauth')

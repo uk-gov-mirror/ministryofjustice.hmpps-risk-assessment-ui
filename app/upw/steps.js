@@ -416,10 +416,7 @@ module.exports = {
     id: 'additional-information',
     pageTitle: 'Additional information',
     template: `${__dirname}/templates/additional-information.njk`,
-    fields: [
-      'additional_information',
-      'additional_information_complete',
-    ], 
+    fields: ['additional_information', 'additional_information_complete'],
     controller: SaveAndContinue,
     next: 'task-list#additional-information',
   },

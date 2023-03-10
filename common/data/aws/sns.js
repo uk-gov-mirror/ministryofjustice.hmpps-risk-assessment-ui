@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 const AWS = require('aws-sdk')
 const config = require('../../config')
 const logger = require('../../logging/logger')
