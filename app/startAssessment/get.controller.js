@@ -45,21 +45,14 @@ const verifyAssessment = async (req, res, next) => {
     const assessmentCode = assessmentType === 'UNPAID_WORK' ? 'UPW' : assessmentType
     const deliusEventType = assessmentType === 'UNPAID_WORK' ? 'EVENT_ID' : null
 
-    const offenderDetailsRetrieved = await getOffenderAndOffenceDetails(
-      crn,
-      eventId,
-      assessmentCode,
-      deliusEventType,
-      req.user?.token,
-      req.user?.id,
-    )
+    const offenderDetailsRetrieved = await getOffenderAndOffenceDetails(crn, eventId, deliusEventType, req.user?.token)
 
     if (!offenderDetailsRetrieved) {
       logger.error(`Could not get offender and offence details for CRN ${crn}, assessment type ${assessmentType}`)
       return res.render('app/error', { subHeading: getErrorMessageFor(req.user, offenderDetailsRetrieved.reason) })
     }
 
-    const currentEpisode = await getCurrentEpisodeForCrn(crn, req.user?.token, req.user?.id)
+    const currentEpisode = await getCurrentEpisodeForCrn(crn, req.user?.token)
 
     req.session.assessment = {
       lastEditedBy: currentEpisode?.userFullName,

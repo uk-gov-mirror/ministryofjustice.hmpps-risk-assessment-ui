@@ -212,6 +212,8 @@ const disabilityCodeToDescription = (code) => {
 
 const splitLines = (str) => (str ? str.split('\r\n') : [])
 
+const createDocumentId = (episodeId) => `documents/${episodeId}.pdf`
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -237,4 +239,5 @@ module.exports = {
   disabilityCodeToDescription,
   splitLines,
   todayPretty,
+  createDocumentId,
 }

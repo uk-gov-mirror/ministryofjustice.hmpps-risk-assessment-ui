@@ -51,8 +51,8 @@ describe('verifyAssessment', () => {
 
     await verifyAssessment(req, res, next)
 
-    expect(getCurrentEpisodeForCrn).toHaveBeenCalledWith('123456', 'USER_TOKEN', 1)
-    expect(getOffenderAndOffenceDetails).toHaveBeenCalledWith('123456', 1, 'UPW', null, 'USER_TOKEN', 1)
+    expect(getCurrentEpisodeForCrn).toHaveBeenCalledWith('123456', 'USER_TOKEN')
+    expect(getOffenderAndOffenceDetails).toHaveBeenCalledWith('123456', 1, null, 'USER_TOKEN')
 
     expect(res.redirect).toHaveBeenCalledWith(`/${req.query.assessmentType}/start`)
   })

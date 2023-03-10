@@ -13,7 +13,7 @@ const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode =
     assessmentParams.deliusEventType = deliusEventType
   }
 
-  return startAssessment(assessmentParams, user?.token, user?.id)
+  return startAssessment(assessmentParams, user?.token)
 }
 
 const getSubjectDetailsFor = (assessment) => ({
@@ -55,11 +55,7 @@ class StartUnpaidWork extends BaseController {
         return res.render('app/error', { subHeading: getErrorMessageFor(req.user, createAssessmentResponse.reason) })
       }
 
-      const currentEpisode = await getCurrentEpisode(
-        createAssessmentResponse.assessmentUuid,
-        req.user?.token,
-        req.user?.id,
-      )
+      const currentEpisode = await getCurrentEpisode(createAssessmentResponse.assessmentUuid, req.user?.token)
 
       logger.debug(`getCurrentEpisode response: ${JSON.stringify(currentEpisode)}`)
 

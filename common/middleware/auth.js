@@ -2,6 +2,8 @@ const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
 const jwtDecode = require('jwt-decode')
+const jwksRsa = require('jwks-rsa')
+const { expressjwt: jwt } = require('express-jwt')
 const { DateTime } = require('luxon')
 const { checkTokenIsActive } = require('../data/oauth')
 const { cacheUserDetails, getCachedUserDetails } = require('../data/userDetailsCache')
@@ -171,6 +173,43 @@ const initializeAuth = () => {
   refresh.use(strategy)
 }
 
+const clientIsAuthenticated = () => {
+  return jwt({
+    secret: jwksRsa.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `${config.apis.oauth.url}/.well-known/jwks.json`,
+    }),
+    issuer: `${config.apis.oauth.url}/issuer`,
+    algorithms: ['RS256'],
+  })
+}
+
+const clientHasRole = (role) => (req, res, next) => {
+  const roles = req.auth?.authorities || []
+
+  if (!roles.includes(role)) {
+    logger.info(`Client missing required role: ${role}`)
+    return res.status(403).json({ reason: `Missing required role: ${role}` })
+  }
+
+  return next()
+}
+
+const apiErrorHandler = (err, req, res, next) => {
+  if (err) {
+    if (err.name === 'UnauthorizedError') {
+      logger.info(`Invalid token: ${err.code}`)
+      return res.status(401).json({ reason: 'Token invalid' })
+    }
+
+    return res.status(500).json({ reason: `Server error: ${err.name}` })
+  }
+
+  return next()
+}
+
 module.exports = {
   checkUserIsAuthenticated,
   checkForTokenRefresh,
@@ -180,4 +219,7 @@ module.exports = {
   generateBasicAuthToken,
   userHasExpiredToken,
   tokenVerifier,
+  requestIsAuthenticated: clientIsAuthenticated,
+  clientHasRole,
+  apiErrorHandler,
 }

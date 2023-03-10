@@ -20,7 +20,7 @@ const postUpdateIfMigrated = async (originalAnswers, migratedAnswers, assessment
   if (!lodash.isEqual(originalAnswers, migratedAnswers)) {
     logger.info(`Saving updated answer structure for assessment ${assessmentUuid}, episode ${episodeUuid}`)
     try {
-      await postAnswers(assessmentUuid, episodeUuid, { answers: migratedAnswers }, user?.token, user?.id)
+      await postAnswers(assessmentUuid, episodeUuid, { answers: migratedAnswers }, user?.token)
       return migratedAnswers
     } catch (error) {
       logger.error(
@@ -69,7 +69,6 @@ class SaveAndContinue extends BaseController {
         req.session.assessment?.uuid,
         req.session.assessment?.episodeUuid,
         req.user?.token,
-        req.user?.id,
       )
 
       persistedAnswers = apiResponse.answers
@@ -160,7 +159,7 @@ class SaveAndContinue extends BaseController {
     const grabQuestions = async (request) => {
       try {
         const journeyName = request.form?.options?.journeyName || ''
-        return await getQuestionsForAssessmentType(journeyName, request.user?.token, request.user?.id)
+        return await getQuestionsForAssessmentType(journeyName, request.user?.token)
       } catch (e) {
         return []
       }
@@ -285,7 +284,6 @@ class SaveAndContinue extends BaseController {
         req.session?.assessment?.episodeUuid,
         { answers: answersToPost },
         user?.token,
-        user?.id,
       )
 
       if (ok) {

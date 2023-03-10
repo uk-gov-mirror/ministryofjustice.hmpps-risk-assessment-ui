@@ -88,4 +88,21 @@ module.exports = {
     devPreSentenceQuestionGroupId: get('DEV_PRE_SENTENCE_QUESTION_GROUP_ID', '65a3924c-4130-4140-b7f4-cc39a52603bb'),
     useLocalCache: get('USE_LOCAL_CACHE', '', false),
   },
+  aws: {
+    useLocalStack: get('USE_LOCALSTACK', false, { parser: bool }),
+    s3: {
+      region: get('S3_REGION', 'eu-west-2', { requireInProduction: true }),
+      bucketName: get('S3_BUCKET_NAME', 'hmpps-assessments-s3', { requireInProduction: true }),
+      accessKeyId: get('S3_ACCESS_KEY_ID', 'UNSET', { requireInProduction: true }),
+      secretAccessKey: get('S3_SECRET_ACCESS_KEY', 'UNSET', { requireInProduction: true }),
+    },
+    sns: {
+      region: get('SNS_REGION', 'eu-west-2', { requireInProduction: true }),
+      topicArn: get('SNS_TOPIC_ARN', 'arn:aws:sns:eu-west-2:000000000000:hmpps-assessments-topic', {
+        requireInProduction: true,
+      }),
+      accessKeyId: get('SNS_ACCESS_KEY_ID', 'UNSET', { requireInProduction: true }),
+      secretAccessKey: get('SNS_SECRET_ACCESS_KEY', 'UNSET', { requireInProduction: true }),
+    },
+  },
 }

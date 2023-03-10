@@ -21,7 +21,6 @@ class removeItemSaveAndContinue extends saveAndContinue {
       req.session.assessment?.uuid,
       req.session.assessment?.episodeUuid,
       req.user?.token,
-      req.user?.id,
     )
     const persistedAnswers = response.answers || {}
 
@@ -40,7 +39,6 @@ class removeItemSaveAndContinue extends saveAndContinue {
         req.session?.assessment?.episodeUuid,
         { answers: { [multipleGroupName]: groupAnswers } },
         user?.token,
-        user?.id,
       )
 
       if (ok) {

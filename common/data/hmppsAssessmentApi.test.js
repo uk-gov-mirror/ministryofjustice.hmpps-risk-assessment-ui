@@ -53,7 +53,7 @@ describe('hmppsAssessmentApi', () => {
         dob: '1989-02-02T00:00:00.000Z',
       }
       mockedEndpoint.get(offenderDataUrl).reply(200, offenderData)
-      const output = await getOffenderData(uuid, authorisationToken, userId)
+      const output = await getOffenderData(uuid, authorisationToken)
       expect(output).toEqual(offenderData)
     })
     it('should throw an error if it does not receive a valid response', async () => {
@@ -77,7 +77,7 @@ describe('hmppsAssessmentApi', () => {
     }
     it('should return answer details from api', async () => {
       mockedEndpoint.get(answersUrl).reply(200, answersData)
-      const output = await getAnswers(uuid, uuid, authorisationToken, userId)
+      const output = await getAnswers(uuid, uuid, authorisationToken)
       expect(output).toEqual(answersData)
       expect(postAnswers).not.toHaveBeenCalled()
     })

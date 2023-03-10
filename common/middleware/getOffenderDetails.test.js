@@ -44,7 +44,7 @@ describe('getOffenderDetails middleware', () => {
     })
     it('should call the data service once and pass the id', () => {
       expect(getOffenderData).toHaveBeenCalledTimes(1)
-      expect(getOffenderData).toHaveBeenCalledWith(devAssessmentId, user.token, user.id)
+      expect(getOffenderData).toHaveBeenCalledWith(devAssessmentId, user.token)
     })
     it('should call the next function', () => {
       expect(next).toHaveBeenCalledTimes(1)
