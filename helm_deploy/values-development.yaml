@@ -18,9 +18,9 @@ generic-service:
     DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
     LOGGING_LEVEL: 'DEBUG'
     INGRESS_URL: https://dev.hmpps-assessments.service.justice.gov.uk
+    SPEECH_TO_TEXT_ENABLED: true
 
 generic-prometheus-alerts:
   enabled: false
   targetApplication: hmpps-risk-assessment-ui
   alertSeverity: hmpps-assess-risks-and-needs
-

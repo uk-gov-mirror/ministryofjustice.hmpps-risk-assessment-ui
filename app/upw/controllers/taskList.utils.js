@@ -1,3 +1,5 @@
+const { speechToTextEnabled } = require('../../../common/config')
+const logger = require('../../../common/logging/logger')
 const { SECTION_COMPLETE } = require('../../../common/utils/constants')
 
 const { hasBothModernSlaveryFlags } = require('./common.utils')
@@ -138,6 +140,15 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
     }, tasks)
 
     if (taskIndex && itemIndex) delete tasks[taskIndex].items.splice(itemIndex, 1)
+  }
+
+  if (speechToTextEnabled) {
+    tasks.forEach((task) => {
+      if (task?.heading?.text === 'Placement details') {
+        logger.info('STT feature enabled')
+        task.items.push(getTask(answers, baseUrl, steps, 'additional-information', 'additional_information_complete'))
+      }
+    })
   }
 
   const pdfPreview = {

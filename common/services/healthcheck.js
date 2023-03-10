@@ -39,7 +39,7 @@ function addAppInfo(result) {
 
 function getBuild() {
   try {
-    // eslint-disable-next-line import/no-unresolved,global-require
+    // eslint-disable-next-line global-require
     return require('../../build-info.json')
   } catch (ex) {
     return null

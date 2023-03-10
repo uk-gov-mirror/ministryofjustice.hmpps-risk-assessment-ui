@@ -2987,6 +2987,41 @@
           "text": "Sign declaration"
         }
       ]
+    },
+    {
+      "type": "question",
+      "questionId": "91063b72-486e-4260-9b71-bc6d8ebdab88",
+      "questionCode": "additional_information",
+      "answerType": "textarea",
+      "questionText": "Can you provide any additional information that is relevant for this assessment?",
+      "helpText": "This page uses speech recognition technology.",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": []
+    },
+    {
+      "type": "question",
+      "questionId": "4c7c5b0b-4aff-4e7e-bdc5-d80a863f73a7",
+      "questionCode": "additional_information_complete",
+      "answerType": "radio",
+      "questionText": "Mark additional information section as complete?",
+      "helpText": "",
+      "readOnly": false,
+      "conditional": false,
+      "answerDtos": [
+        {
+          "answerUuid": "19fd1dd3-5323-4158-bc66-45b418976408",
+          "answerSchemaCode": "yes",
+          "value": "YES",
+          "text": "Yes"
+        },
+        {
+          "answerUuid": "60e0ae9c-ff97-4c82-961d-02fd1f56398d",
+          "answerSchemaCode": "no_ill_come_back_later",
+          "value": "NO_ILL_COME_BACK_LATER",
+          "text": "No, I’ll come back later"
+        }
+      ]
     }
   ]
 }

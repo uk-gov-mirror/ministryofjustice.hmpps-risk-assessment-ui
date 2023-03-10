@@ -52,6 +52,14 @@ const noSpace = function noSpace(value) {
   return value.trim().length > 0
 }
 
+// eslint-disable-next-line func-names
+const characterCount = function (characterLimit) {
+  // eslint-disable-next-line no-shadow
+  return function characterCount(value) {
+    return value.length <= characterLimit
+  }
+}
+
 module.exports = {
   range,
   notInFuture,
@@ -62,4 +70,5 @@ module.exports = {
   yearsBetweenLessThan,
   noSpace,
   onePresent,
+  characterCount,
 }

@@ -69,7 +69,7 @@
   </h2>
 
   {% for question in question.contents %}
-      {{ renderQuestion(question, errors, bodyAnswers[question.questionCode]) }}
+      {{ renderQuestion(question, errors, options, bodyAnswers[question.questionCode]) }}
   {% endfor %}
 {% endif %}
 
@@ -141,7 +141,7 @@
         classes: options.classes
       }) }}
     {% case 'textarea' %}
-    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="4000">
+    <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="{{ options.characterCount | default(4000) }}">
       <div class="govuk-form-group{% if errorMessage %} govuk-form-group--error{% endif %}">
         <label class="govuk-label {{question.questionCode}}{% if labelClasses %}{{labelClasses}}{% else %} govuk-label--l{% endif %}" for="{{ question.questionCode }}">
             {{ question.questionText }}
@@ -161,7 +161,7 @@
         </textarea>
       </div>
       <div id="{{ question.questionCode }}-info" class="govuk-hint govuk-character-count__message">
-        You can enter up to 4000 characters
+        You can enter up to {{ options.characterCount | default(4000) }} characters
       </div>
     </div>
     {% case 'radio' %}
