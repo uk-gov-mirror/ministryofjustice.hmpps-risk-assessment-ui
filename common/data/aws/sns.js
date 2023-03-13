@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk')
+const { SNS: SNSClient } = require('@aws-sdk/client-sns')
 const config = require('../../config')
 const logger = require('../../logging/logger')
 
@@ -16,7 +16,7 @@ class SNS {
       options.endpoint = 'http://localhost:4566'
     }
 
-    this.client = new AWS.SNS(options)
+    this.client = new SNSClient(options)
     this.topicArn = config.aws.sns.topicArn
   }
 

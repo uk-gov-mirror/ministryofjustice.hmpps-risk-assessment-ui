@@ -1,4 +1,4 @@
-const AWS = require('aws-sdk')
+const { S3: S3Client } = require('@aws-sdk/client-s3')
 const config = require('../../config')
 const logger = require('../../logging/logger')
 
@@ -17,7 +17,7 @@ class S3 {
       options.s3ForcePathStyle = true
     }
 
-    this.client = new AWS.S3(options)
+    this.client = new S3Client(options)
     this.bucketName = config.aws.s3.bucketName
   }
 
