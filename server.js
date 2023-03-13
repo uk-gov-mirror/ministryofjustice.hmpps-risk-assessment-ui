@@ -14,7 +14,7 @@ const dateFilter = require('nunjucks-date-filter')
 const session = require('express-session')
 const helmet = require('helmet')
 const passport = require('passport')
-const connectRedis = require('connect-redis')
+const RedisStore = require('connect-redis').default
 
 // Local dependencies
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -59,8 +59,6 @@ const { NODE_ENV } = process.env
 const CSS_PATH = staticify.getVersionedPath('/stylesheets/application.min.css')
 const JAVASCRIPT_PATH = staticify.getVersionedPath('/javascripts/application.js')
 const allGateKeeperPages = /^\/(?!health$).*/
-
-const RedisStore = connectRedis(session)
 
 // Define app views
 const APP_VIEWS = [
