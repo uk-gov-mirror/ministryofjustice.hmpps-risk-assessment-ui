@@ -39,9 +39,9 @@ function startMaster() {
  * @param  {Number} workerId
  */
 function startWorker(workerId) {
-  _start()
-
-  logger.info(`Started worker ${workerId}, PID: ${process.pid}`)
+  _start().then(() => {
+    logger.info(`Started worker ${workerId}, PID: ${process.pid}`)
+  })
 
   process.on('SIGINT', () => {
     logger.info(`Worker ${workerId} exiting...`)

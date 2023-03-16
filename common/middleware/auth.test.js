@@ -269,7 +269,6 @@ describe('Auth', () => {
       handleLogout(req, res)
 
       expect(req.logout).toHaveBeenCalled()
-      expect(req.session.destroy).toHaveBeenCalled()
       expect(res.redirect).toHaveBeenCalled()
     })
 

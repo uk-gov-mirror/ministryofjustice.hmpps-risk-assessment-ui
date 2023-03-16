@@ -90,7 +90,7 @@ function initialiseApplicationInsights() {
   logger.info(`Application Insights enabled with role name '${roleName}'`)
 }
 
-function initialiseGlobalMiddleware(app) {
+async function initialiseGlobalMiddleware(app) {
   app.set('settings', { getVersionedPath: staticify.getVersionedPath })
   app.use(helmet())
   app.use((req, res, next) => {
@@ -128,6 +128,9 @@ function initialiseGlobalMiddleware(app) {
   })
 
   app.use(cookieParser())
+
+  await redis.client.connect()
+
   app.use(
     session({
       store: new RedisStore({ client: redis.client }),
@@ -143,7 +146,7 @@ function initialiseGlobalMiddleware(app) {
     }),
   )
 
-  auth.init()
+  auth.init(passport)
   app.use(passport.initialize())
   app.use(passport.session())
 
@@ -246,8 +249,8 @@ function initialiseRoutes(app) {
   router(app)
 }
 
-function listen() {
-  const app = initialise()
+async function listen() {
+  const app = await initialise()
   app.listen(PORT)
   logger.info(`Listening on port ${PORT}`)
 }
@@ -256,12 +259,12 @@ function listen() {
  * Configures app
  * @return app
  */
-function initialise() {
+async function initialise() {
   const app = unconfiguredApp
   app.disable('x-powered-by')
   initialiseApplicationInsights()
   initialiseProxy(app)
-  initialiseGlobalMiddleware(app)
+  await initialiseGlobalMiddleware(app)
   initialiseTemplateEngine(app)
   initialiseRoutes(app)
   initialisePublic(app)
@@ -271,8 +274,8 @@ function initialise() {
 /**
  * Starts app after ensuring DB is up
  */
-function start() {
-  listen()
+async function start() {
+  await listen()
 }
 
 /**

@@ -44,16 +44,11 @@ module.exports = (app) => {
   app.get('/login/callback', handleLoginCallback())
   app.get('/logout', handleLogout())
   app.use(['/login', '/logout'], (error, req, res, next) => {
-    req.logout((_err) => {
-      //  We're  already in the error handler, so we just ignore the error here
-      req.session.destroy(() => {
-        res.status(error.status || 500)
-        res.render('app/error', {
-          heading: 'Something went wrong',
-          subHeading: 'We are unable to sign you in at this time',
-          error,
-        })
-      })
+    res.status(error.status || 500)
+    res.render('app/error', {
+      heading: 'Something went wrong',
+      subHeading: 'We are unable to sign you in at this time',
+      error,
     })
   })
 

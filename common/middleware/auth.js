@@ -119,7 +119,7 @@ const handleLogout = () => {
           return
         }
 
-        req.session.destroy(() => res.redirect(logoutUrl))
+        res.redirect(logoutUrl)
         logger.info(`User logged out: ${username}}`)
       })
       return
