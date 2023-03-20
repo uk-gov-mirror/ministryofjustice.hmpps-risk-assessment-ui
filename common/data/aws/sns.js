@@ -1,4 +1,4 @@
-const { SNS: SNSClient } = require('@aws-sdk/client-sns')
+const { SNS: SNSClient, PublishCommand } = require('@aws-sdk/client-sns')
 const config = require('../../config')
 const logger = require('../../logging/logger')
 
@@ -22,17 +22,18 @@ class SNS {
 
   async publishJson(message) {
     return this.client
-      .publish({
-        Message: JSON.stringify(message),
-        MessageAttributes: {
-          eventType: {
-            DataType: 'String',
-            StringValue: message.eventType,
+      .send(
+        new PublishCommand({
+          Message: JSON.stringify(message),
+          MessageAttributes: {
+            eventType: {
+              DataType: 'String',
+              StringValue: message.eventType,
+            },
           },
-        },
-        TopicArn: this.topicArn,
-      })
-      .promise()
+          TopicArn: this.topicArn,
+        }),
+      )
       .then(() => {
         logger.info(`Publishing message to SNS topic: ${this.topicArn}`)
         return { ok: true }

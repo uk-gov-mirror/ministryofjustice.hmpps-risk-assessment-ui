@@ -1,4 +1,4 @@
-const { S3: S3Client } = require('@aws-sdk/client-s3')
+const { S3: S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3')
 const config = require('../../config')
 const logger = require('../../logging/logger')
 
@@ -23,12 +23,13 @@ class S3 {
 
   async upload(key, file) {
     return this.client
-      .putObject({
-        Bucket: this.bucketName,
-        Key: key,
-        Body: file,
-      })
-      .promise()
+      .send(
+        new PutObjectCommand({
+          Bucket: this.bucketName,
+          Key: key,
+          Body: file,
+        }),
+      )
       .then(() => {
         logger.info(`Uploaded file to S3: ${key}`)
         return { ok: true, key }
@@ -41,11 +42,12 @@ class S3 {
 
   async fetch(key) {
     return this.client
-      .getObject({
-        Bucket: this.bucketName,
-        Key: key,
-      })
-      .promise()
+      .send(
+        new GetObjectCommand({
+          Bucket: this.bucketName,
+          Key: key,
+        }),
+      )
       .then(({ Body: body }) => {
         logger.info(`Fetched file from S3: ${key}`)
         return { ok: true, body }
