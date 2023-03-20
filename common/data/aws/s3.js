@@ -23,7 +23,7 @@ class S3 {
 
   async upload(key, file) {
     return this.client
-      .upload({
+      .putObject({
         Bucket: this.bucketName,
         Key: key,
         Body: file,
