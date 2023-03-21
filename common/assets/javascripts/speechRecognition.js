@@ -1,7 +1,7 @@
 if ('webkitSpeechRecognition' in window) {
   // Initialize webkitSpeechRecognition
-  // eslint-disable-next-line no-undef
-  const speechRecognition = new WebkitSpeechRecognition()
+  // eslint-disable-next-line no-undef, new-cap
+  const speechRecognition = new window.webkitSpeechRecognition()
 
   // String for the Final Transcript
   let finalTranscript = ''
