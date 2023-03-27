@@ -23,6 +23,12 @@ describe('UPW API', () => {
       status: jest.fn(),
     }
 
+    const next = jest.fn()
+
+    const mockS3ResponseBody = {
+      pipe: jest.fn(),
+    }
+
     beforeEach(() => {
       req = {
         params: {},
@@ -41,21 +47,23 @@ describe('UPW API', () => {
       getRoshRiskSummary.mockReset()
       nunjucks.render.mockReset()
       getApiToken.mockReset()
+      next.mockReset()
+      mockS3ResponseBody.pipe.mockReset()
     })
 
     it('returns the document from S3', async () => {
       req.params.episodeId = 'episodeId'
 
-      S3.prototype.fetch.mockResolvedValue({ ok: true, body: 'FOO_FILE_DATA' })
+      S3.prototype.fetch.mockResolvedValue({ ok: true, body: mockS3ResponseBody })
 
-      await downloadUpwPdf(req, res)
+      await downloadUpwPdf(req, res, next)
 
       expect(S3.prototype.fetch).toHaveBeenCalledWith(`documents/${req.params.episodeId}.pdf`)
-      expect(res.send).toHaveBeenCalledWith('FOO_FILE_DATA')
+      expect(mockS3ResponseBody.pipe).toHaveBeenCalledWith(res)
     })
 
     it('returns 400 when not supplied a key', async () => {
-      await downloadUpwPdf(req, res)
+      await downloadUpwPdf(req, res, next)
 
       expect(S3.prototype.fetch).not.toHaveBeenCalled()
       expect(res.status).toHaveBeenCalledWith(400)

@@ -131,7 +131,7 @@ describe('startController', () => {
         lastEditedBy: 'Test User',
         lastEditedDate: '2020-01-01T07:30:00.000000',
         subject: {
-          age: 42,
+          age: 43,
           dob: '1980-04-01',
           crn: 'CRN1234567',
           existingSubjectParam: 'abc',

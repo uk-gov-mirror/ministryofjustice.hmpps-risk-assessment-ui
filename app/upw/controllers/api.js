@@ -41,13 +41,23 @@ const fetchTemplateData = async (episodeId) => {
   }
 }
 
-const sendDocumentResponse = (res, document) =>
+const sendDocumentResponse = (res, document) => {
   res
     .status(200)
     .set('Content-Type', 'application/pdf')
     .set('Content-Length', document.length)
     .set('Content-Disposition', 'attachment; filename="upw-assessment.pdf"')
     .send(document)
+}
+
+const streamDocumentResponse = (res, document) => {
+  res
+    .status(200)
+    .set('Content-Type', 'application/pdf')
+    .set('Content-Disposition', 'attachment; filename="upw-assessment.pdf"')
+
+  document.pipe(res)
+}
 
 const generatePdf = (res) => async (templateData) => {
   const rendered = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
@@ -78,7 +88,7 @@ const downloadUpwPdf = async (req, res, next) => {
 
     if (response.ok) {
       logger.info(`Returning PDF from S3 for episode: ${episodeId}`)
-      return sendDocumentResponse(res, response.body)
+      return streamDocumentResponse(res, response.body)
     }
     if (response.error?.statusCode === 404) {
       logger.info(`Returning generated PDF for episode: ${episodeId}`)

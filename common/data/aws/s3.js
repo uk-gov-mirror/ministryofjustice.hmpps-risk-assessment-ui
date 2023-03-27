@@ -14,7 +14,7 @@ class S3 {
 
     if (config.aws.useLocalStack) {
       options.endpoint = 'http://localhost:4566'
-      options.s3ForcePathStyle = true
+      options.forcePathStyle = true
     }
 
     this.client = new S3Client(options)
