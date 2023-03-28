@@ -205,7 +205,18 @@ const answerDtoFrom = (formValues) =>
     }
   }, {})
 
-const renderConditionalQuestion = (questions, questionDto, conditionalQuestionCodes, errors, _nunjucks = nunjucks) => {
+const formatForNunjucks = (str = '') =>
+  str
+    .replace('{{', '{ {') // Prevent nunjucks mistaking the braces when rendering the template
+    .replace('}}', '} }')
+
+const renderConditionalQuestion = (
+  questions,
+  questionDto,
+  conditionalQuestionCodes,
+  errors = {},
+  _nunjucks = nunjucks,
+) => {
   const conditionalQuestions = conditionalQuestionCodes.map(({ code, deps }) => {
     const [schema] = questions.filter((question) => question.questionCode === code)
     return { schema, deps }
@@ -231,17 +242,12 @@ const renderConditionalQuestion = (questions, questionDto, conditionalQuestionCo
         )
       }
 
-      const validationError = errors[conditionalQuestionSchema.questionCode]
-
-      const questionString = JSON.stringify(conditionalQuestionSchema)
-        .replace('{{', '{ {') // Prevent nunjucks mistaking the braces when rendering the template
-        .replace('}}', '} }')
-
-      const errorString = validationError ? `, ${JSON.stringify(validationError)}` : ''
+      const questionString = formatForNunjucks(JSON.stringify(conditionalQuestionSchema))
+      const errorString = formatForNunjucks(JSON.stringify(errors))
 
       const conditionalQuestionString =
         '{% from "common/templates/components/question/macro.njk" import renderQuestion %} \n' +
-        `{{ renderQuestion(${questionString}${errorString}) }}`
+        `{{ renderQuestion(${questionString}, ${errorString}) }}`
 
       const renderedQuestion = _nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, '')
 

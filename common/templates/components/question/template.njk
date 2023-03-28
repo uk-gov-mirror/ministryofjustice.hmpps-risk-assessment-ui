@@ -61,7 +61,7 @@
 
 {# templates for each question type #}
 {% set questionAnswer = bodyAnswer or question.answer or '' %}
-{% set errorMessage = thisErrorMessage or errors[question.questionCode] %}
+{% set errorMessage = errors[question.questionCode] %}
 
 {% if question.type == 'group' %}
   <h2 class="govuk-heading-m">
