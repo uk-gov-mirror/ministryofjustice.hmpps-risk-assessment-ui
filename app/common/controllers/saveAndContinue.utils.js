@@ -241,7 +241,7 @@ const renderConditionalQuestion = (questions, questionDto, conditionalQuestionCo
 
       const conditionalQuestionString =
         '{% from "common/templates/components/question/macro.njk" import renderQuestion %} \n' +
-        `{{ renderQuestion(${questionString}, "", ""${errorString}) }}`
+        `{{ renderQuestion(${questionString}${errorString}) }}`
 
       const renderedQuestion = _nunjucks.renderString(conditionalQuestionString).replace(/(\r\n|\n|\r)\s+/gm, '')
 
