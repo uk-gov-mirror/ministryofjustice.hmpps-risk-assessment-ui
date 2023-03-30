@@ -43,9 +43,8 @@ const verifyAssessment = async (req, res, next) => {
     validateAssessmentType(assessmentType)
 
     const assessmentCode = assessmentType === 'UNPAID_WORK' ? 'UPW' : assessmentType
-    const deliusEventType = assessmentType === 'UNPAID_WORK' ? 'EVENT_ID' : null
 
-    const offenderDetailsRetrieved = await getOffenderAndOffenceDetails(crn, eventId, deliusEventType, req.user?.token)
+    const offenderDetailsRetrieved = await getOffenderAndOffenceDetails(crn, eventId, req.user?.token)
 
     if (!offenderDetailsRetrieved) {
       logger.error(`Could not get offender and offence details for CRN ${crn}, assessment type ${assessmentType}`)
@@ -60,7 +59,6 @@ const verifyAssessment = async (req, res, next) => {
       offence: getOffenceDetailsFor(offenderDetailsRetrieved),
       subject: getSubjectDetailsFor(offenderDetailsRetrieved),
       eventId,
-      deliusEventType,
       assessmentCode,
     }
 

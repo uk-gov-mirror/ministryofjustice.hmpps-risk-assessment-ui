@@ -42,7 +42,6 @@ describe('startController', () => {
           assessment: {
             eventId: '12345',
             assessmentCode: 'A12345',
-            deliusEventType: 'A',
             uuid: assessmentUuid,
             episodeUuid,
             subject: { dob: '1980-01-01', crn: 'CRN1234567', existingSubjectParam: 'abc' },
@@ -89,7 +88,6 @@ describe('startController', () => {
           assessmentSchemaCode: 'A12345',
           crn: 'CRN1234567',
           deliusEventId: '12345',
-          deliusEventType: 'A',
         },
         'USER_TOKEN',
       )
@@ -125,7 +123,6 @@ describe('startController', () => {
 
       expect(req.session.assessment).toEqual({
         assessmentCode: 'A12345',
-        deliusEventType: 'A',
         episodeUuid,
         eventId: '12345',
         lastEditedBy: 'Test User',

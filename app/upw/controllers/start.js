@@ -5,13 +5,10 @@ const { startAssessment, getCurrentEpisode } = require('../../../common/data/hmp
 const logger = require('../../../common/logging/logger')
 const { getErrorMessageFor, ageFrom } = require('../../../common/utils/util')
 
-const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode = 'UPW', deliusEventType = null) => {
+const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode = 'UPW') => {
   logger.info(`Creating ${assessmentSchemaCode} assessment for CRN: ${crn}`)
 
   const assessmentParams = { crn, deliusEventId, assessmentSchemaCode }
-  if (deliusEventType) {
-    assessmentParams.deliusEventType = deliusEventType
-  }
 
   return startAssessment(assessmentParams, user?.token)
 }
@@ -36,7 +33,7 @@ class StartUnpaidWork extends BaseController {
   async saveValues(req, res, next) {
     try {
       const { assessment } = req.session
-      const { eventId, assessmentCode, deliusEventType } = assessment
+      const { eventId, assessmentCode } = assessment
       const { crn } = assessment.subject
 
       logger.debug(`req.session.assessment: ${JSON.stringify(assessment)}`)
@@ -46,7 +43,6 @@ class StartUnpaidWork extends BaseController {
         crn,
         eventId,
         assessmentCode,
-        deliusEventType,
       )
 
       logger.debug(`createAssessment response: ${JSON.stringify(createAssessmentResponse)}`)

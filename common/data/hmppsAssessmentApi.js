@@ -10,11 +10,9 @@ const {
 } = require('../config')
 const { mockPostAnswers } = require('./localCache')
 
-const getOffenderAndOffenceDetails = (crn, eventId, eventType, authorisationToken) => {
-  const path =
-    eventType === null
-      ? `${url}/offender/crn/${crn}/eventId/${eventId}`
-      : `${url}/offender/crn/${crn}/eventType/${eventType}/eventId/${eventId}`
+const getOffenderAndOffenceDetails = (crn, eventId, authorisationToken) => {
+  const path = `${url}/offender/crn/${crn}/eventId/${eventId}`
+
   return getData(path, authorisationToken)
 }
 

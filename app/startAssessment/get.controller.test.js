@@ -52,7 +52,7 @@ describe('verifyAssessment', () => {
     await verifyAssessment(req, res, next)
 
     expect(getCurrentEpisodeForCrn).toHaveBeenCalledWith('123456', 'USER_TOKEN')
-    expect(getOffenderAndOffenceDetails).toHaveBeenCalledWith('123456', 1, null, 'USER_TOKEN')
+    expect(getOffenderAndOffenceDetails).toHaveBeenCalledWith('123456', 1, 'USER_TOKEN')
 
     expect(res.redirect).toHaveBeenCalledWith(`/${req.query.assessmentType}/start`)
   })
@@ -78,7 +78,6 @@ describe('verifyAssessment', () => {
       ...baseSession,
       assessment: {
         assessmentCode: 'UPW',
-        deliusEventType: null,
         eventId: 1,
         lastEditedBy: 'A Alonso',
         lastEditedDate: '2022-04-01T09:00',

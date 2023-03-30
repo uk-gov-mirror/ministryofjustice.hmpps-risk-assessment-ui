@@ -63,20 +63,6 @@ const stubOffenderAndOffenceDetails = () => {
   stubFor({
     request: {
       method: 'GET',
-      urlPattern: `/offender/crn/.+?/eventType/.+?/eventId/.+?`,
-    },
-    response: {
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-      status: 200,
-      jsonBody: offenderAndOffenceDetails,
-    },
-  })
-
-  stubFor({
-    request: {
-      method: 'GET',
       urlPattern: `/offender/crn/.+?/eventId/.+?`,
     },
     response: {
