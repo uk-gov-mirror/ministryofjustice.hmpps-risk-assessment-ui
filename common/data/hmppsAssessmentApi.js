@@ -74,7 +74,7 @@ const closeAssessment = (assessmentId, episodeId, user) => {
 }
 
 const getRegistrationsForCrn = async (crn, eventId, authorisationToken) => {
-  const endpoint = `${url}/assessments/${crn}/event/${eventId}registrations`
+  const endpoint = `${url}/assessments/${crn}/event/${eventId}/registrations`
 
   logger.info(`Calling hmppsAssessments API with GET: ${endpoint}`)
 
