@@ -30,9 +30,9 @@ const formatMappaResponse = (mappaResponse = {}) => ({
   lastUpdated: prettyDate(mappaResponse?.startDate),
 })
 
-const getRegistrations = async (crn, user) => {
+const getRegistrations = async (crn, eventId, user) => {
   try {
-    const { response, status } = await getRegistrationsForCrn(crn, user)
+    const { response, status } = await getRegistrationsForCrn(crn, eventId, user?.token)
 
     if (status === 404) {
       return {

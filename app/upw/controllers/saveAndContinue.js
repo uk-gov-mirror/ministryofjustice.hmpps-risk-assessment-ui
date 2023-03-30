@@ -24,8 +24,11 @@ class SaveAndContinue extends BaseSaveAndContinue {
   }
 
   async locals(req, res, next) {
-    const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
-    const { roshRiskSummary } = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
+    const crn = req.session.assessment?.subject?.crn
+    const eventId = req.session.assessment?.eventId
+
+    const deliusRegistrations = await getRegistrations(crn, eventId, req.user)
+    const { roshRiskSummary } = await getRoshRiskSummary(crn, req.user)
 
     if (roshRiskSummary?.hasBeenCompleted === false) {
       trackEvent(EVENTS.ARN_NO_ROSH_DATA_AVAILABLE, req)

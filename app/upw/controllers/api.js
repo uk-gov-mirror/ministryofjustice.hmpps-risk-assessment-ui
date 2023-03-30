@@ -10,8 +10,8 @@ const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
 const { convertHtmlToPdf } = require('../../../common/data/pdf')
 const { logger } = require('../../../common/logging/logger')
 
-const fetchWidgetData = async (crn, token) => {
-  const deliusRegistrations = await getRegistrations(crn, { token })
+const fetchWidgetData = async (crn, eventId, token) => {
+  const deliusRegistrations = await getRegistrations(crn, eventId, { token })
   const { roshRiskSummary } = await getRoshRiskSummary(crn, { token })
 
   return {
@@ -26,7 +26,7 @@ const fetchTemplateData = async (episodeId) => {
   const subject = await getOffenderData(episode.assessmentUuid, token)
   const offence = episode.offence || {}
   const persistedAnswers = episode.answers || {}
-  const widgetData = await fetchWidgetData(subject.crn, token)
+  const widgetData = await fetchWidgetData(subject.crn, offence.eventId, token)
   const questions = Object.entries(fields)
 
   const questionsWithMappedAnswers = questions.map(withAnswersFrom({}, persistedAnswers))

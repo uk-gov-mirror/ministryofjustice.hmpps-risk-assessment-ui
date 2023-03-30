@@ -11,7 +11,10 @@ jest.mock('../../../common/data/hmppsAssessmentApi')
 
 const user = { id: 1, token: 'FOO_TOKEN' }
 
-describe('GetRegistrations', () => {
+const crn = 'A123456'
+const eventId = 123456
+
+describe('getRegistrations', () => {
   it('returns MAPPA data', async () => {
     getRegistrationsForCrn.mockResolvedValue({
       status: 200,
@@ -27,7 +30,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [],
@@ -47,7 +50,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [],
@@ -72,7 +75,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [],
@@ -97,7 +100,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [],
@@ -123,7 +126,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [],
@@ -143,7 +146,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [{ code: 'IRMO', description: 'Hate Crime', colour: 'Red' }],
@@ -163,7 +166,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [],
@@ -182,7 +185,7 @@ describe('GetRegistrations', () => {
       response: {},
     })
 
-    const registrations = await getRegistrations('A123456', user)
+    const registrations = await getRegistrations(crn, eventId, user)
 
     expect(registrations).toEqual({
       flags: [],
@@ -199,7 +202,7 @@ describe('GetRegistrations', () => {
           response: {},
         })
 
-        const registrations = await getRegistrations('A123456', user)
+        const registrations = await getRegistrations(crn, eventId, user)
 
         expect(registrations).toEqual({
           flags: null,
@@ -210,7 +213,7 @@ describe('GetRegistrations', () => {
   })
 })
 
-describe('GetRegistrations', () => {
+describe('getRoshRiskSummary', () => {
   it('returns ROSH risk data', async () => {
     getRoshRiskSummaryForCrn.mockResolvedValue({
       status: 200,
@@ -228,7 +231,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const riskSummary = await getRoshRiskSummary('A123456', user)
+    const riskSummary = await getRoshRiskSummary(crn, user)
 
     expect(riskSummary).toEqual({
       roshRiskSummary: {
@@ -262,7 +265,7 @@ describe('GetRegistrations', () => {
       },
     })
 
-    const riskSummary = await getRoshRiskSummary('A123456', user)
+    const riskSummary = await getRoshRiskSummary(crn, user)
 
     expect(riskSummary).toEqual({
       roshRiskSummary: {
@@ -288,7 +291,7 @@ describe('GetRegistrations', () => {
           response: {},
         })
 
-        const riskSummary = await getRoshRiskSummary('A123456', user)
+        const riskSummary = await getRoshRiskSummary(crn, user)
 
         expect(riskSummary).toEqual({
           roshRiskSummary: null,
@@ -304,7 +307,7 @@ describe('GetRegistrations', () => {
       response: {},
     })
 
-    const riskSummary = await getRoshRiskSummary('A123456', user)
+    const riskSummary = await getRoshRiskSummary(crn, user)
 
     expect(riskSummary).toEqual({
       roshRiskSummary: {

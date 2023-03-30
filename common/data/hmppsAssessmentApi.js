@@ -73,15 +73,15 @@ const closeAssessment = (assessmentId, episodeId, user) => {
   return action(superagent.get(path), user?.token)
 }
 
-const getRegistrationsForCrn = async (crn, user) => {
-  const endpoint = `${url}/assessments/${crn}/registrations`
+const getRegistrationsForCrn = async (crn, eventId, authorisationToken) => {
+  const endpoint = `${url}/assessments/${crn}/event/${eventId}registrations`
 
   logger.info(`Calling hmppsAssessments API with GET: ${endpoint}`)
 
   try {
     return await superagent
       .get(endpoint)
-      .auth(user.token, { type: 'bearer' })
+      .auth(authorisationToken, { type: 'bearer' })
       .set('x-correlation-id', getCorrelationId())
       .accept('application/json')
       .then(({ ok, body, status }) => ({ ok, response: body, status }))

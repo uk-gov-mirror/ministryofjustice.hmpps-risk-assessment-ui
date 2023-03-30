@@ -25,8 +25,10 @@ class TaskList extends BaseController {
         persistedAnswers = answers
       }
 
-      const deliusRegistrations = await getRegistrations(req.session.assessment?.subject?.crn, req.user)
-      const roshRiskSummary = await getRoshRiskSummary(req.session.assessment?.subject?.crn, req.user)
+      const crn = req.session.assessment?.subject?.crn
+      const { eventId } = req.session.assessment
+      const deliusRegistrations = await getRegistrations(crn, eventId, req.user)
+      const roshRiskSummary = await getRoshRiskSummary(crn, req.user)
 
       res.locals.taskList = getTaskList(`/${journeyName}`, steps, persistedAnswers, deliusRegistrations.flags || [])
       res.locals.saveAssessmentUrl = `/${journeyName}/assessment-saved`
