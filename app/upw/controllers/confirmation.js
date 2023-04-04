@@ -45,7 +45,9 @@ const publishEvent = (req) => async () => {
 
   const sns = new SNS()
 
-  const snsResponse = await sns.publishJson(upwComplete(assessment.episodeUuid, assessment.subject.crn))
+  const snsResponse = await sns.publishJson(
+    upwComplete(assessment.episodeUuid, assessment.subject.crn, assessment.eventId),
+  )
 
   if (!snsResponse.ok) {
     throw new Error('Failed to publish "UPW Complete" event')

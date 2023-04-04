@@ -1,7 +1,7 @@
 const { DateTime } = require('luxon')
 const config = require('../config')
 
-const upwComplete = (episodeUuid, crn) => ({
+const upwComplete = (episodeUuid, crn, eventId) => ({
   eventType: 'unpaid-work.assessment.completed',
   version: '2',
   description: 'UPW Assessment Completed',
@@ -9,6 +9,7 @@ const upwComplete = (episodeUuid, crn) => ({
   detailUrl: `${config.domain}/api/upw/download/${episodeUuid}`,
   additionalInformation: {
     episodeId: episodeUuid,
+    eventId,
   },
   personReference: {
     identifiers: [
