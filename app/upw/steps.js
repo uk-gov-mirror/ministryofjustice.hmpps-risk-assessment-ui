@@ -7,7 +7,6 @@ const removeEmergencyContactsSaveAndContinue = require('./controllers/removeEmer
 const gpDetailsSaveAndContinue = require('./controllers/gpDetailsSaveAndContinue')
 const editGpDetailsSaveAndContinue = require('./controllers/editGpDetailsSaveAndContinue')
 const removeGpDetailsSaveAndContinue = require('./controllers/removeGpDetailsSaveAndContinue')
-const ConvertPdf = require('./controllers/convertPdf')
 const Confirmation = require('./controllers/confirmation')
 const CloseAssessment = require('./controllers/closeAssessment')
 const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
@@ -367,13 +366,6 @@ module.exports = {
     template: `${__dirname}/templates/pdf-preview-and-declaration/pdf-preview.njk`,
     fields: [],
     next: 'task-list#pdf-preview',
-  },
-  '/pdf-download': {
-    pageTitle: 'PDF preview',
-    controller: ConvertPdf,
-    noPost: true,
-    template: `${__dirname}/templates/default.njk`,
-    next: 'confirmation',
   },
   '/confirmation': {
     pageTitle: 'Confirmation',

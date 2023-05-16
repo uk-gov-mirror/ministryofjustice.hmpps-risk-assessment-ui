@@ -38,10 +38,11 @@ generic-service:
     APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY);IngestionEndpoint=https://northeurope-0.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/"
     S3_REGION: "eu-west-2"
     SNS_REGION: "eu-west-2"
+    SHOW_NOTIFICATION: "false"
+    NOTIFICATION_HEADER: ""
+    NOTIFICATION_BODY: ""
     DISPLAY_MAINTENANCE_PAGE: false
     MAINTENANCE_PAGE_TEXT: ""
-
-
 
   # Pre-existing kubernetes secrets to load as environment variables in the deployment.
   # namespace_secrets:

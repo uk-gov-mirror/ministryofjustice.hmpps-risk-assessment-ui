@@ -108,4 +108,9 @@ module.exports = {
       secretAccessKey: get('SNS_SECRET_ACCESS_KEY', 'UNSET', { requireInProduction: true }),
     },
   },
+  notification: {
+    active: get('SHOW_NOTIFICATION', false, { parser: bool }),
+    header: get('NOTIFICATION_HEADER', null, { requireInProduction: true }),
+    body: get('NOTIFICATION_BODY', null, { requireInProduction: true }),
+  },
 }
