@@ -1,5 +1,6 @@
 // Node.js core dependencies
 const { join } = require('path')
+const crypto = require('crypto')
 
 // Npm dependencies
 const appInsights = require('applicationinsights')
@@ -92,14 +93,36 @@ function initialiseApplicationInsights() {
 
 async function initialiseGlobalMiddleware(app) {
   app.set('settings', { getVersionedPath: staticify.getVersionedPath })
-  app.use(helmet())
-  app.use((req, res, next) => {
-    res.setHeader(
-      'Content-Security-Policy',
-      "default-src 'self'; connect-src 'self' dc.services.visualstudio.com/v2/track; font-src 'self'; img-src 'self'; script-src 'self' js.monitor.azure.com 'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU=' 'sha256-m5Sbrhw+r00tt+60yyAghRM3ydJ7im+KM/aKiPEK/HQ=' 'sha256-KRSTS/E0qGKsfXMQ4E12L0K3g+FJNXiXgJSYfVQV91M=' 'sha256-TKr7E5adYQIZfInlwPaDsfURYufKvKlSM0oNSK0yZwI=' 'sha256-aC+Kg9O1M7kgGrqr2caWuEs3eY9R8msK8cFrLtguFY4=' 'sha256-9YsoG/P7wvqSx6FVKCl5C73RpWzbIaMsbYfxLUQeDto=' 'sha256-OMPCbW+0lYfE0SfAtKG15jIcU3/75d0fjIKf/f59gE4='; style-src 'self'; frame-src 'self'",
-    )
+  app.use((_req, res, next) => {
+    res.locals.cspNonce = crypto.randomBytes(16).toString('hex')
     next()
   })
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          connectSrc: ["'self'", 'dc.services.visualstudio.com/v2/track'],
+          defaultSrc: ["'self'"],
+          scriptSrc: [
+            "'self'",
+            'js.monitor.azure.com',
+            "'sha256-+6WnXIl4mbFTCARd8N3COQmT3bJJmo32N8q8ZSQAIcU='",
+            "'sha256-m5Sbrhw+r00tt+60yyAghRM3ydJ7im+KM/aKiPEK/HQ='",
+            "'sha256-KRSTS/E0qGKsfXMQ4E12L0K3g+FJNXiXgJSYfVQV91M='",
+            "'sha256-TKr7E5adYQIZfInlwPaDsfURYufKvKlSM0oNSK0yZwI='",
+            "'sha256-aC+Kg9O1M7kgGrqr2caWuEs3eY9R8msK8cFrLtguFY4='",
+            "'sha256-9YsoG/P7wvqSx6FVKCl5C73RpWzbIaMsbYfxLUQeDto='",
+            "'sha256-OMPCbW+0lYfE0SfAtKG15jIcU3/75d0fjIKf/f59gE4='",
+            (_req, res) => `'nonce-${res.locals.cspNonce}'`,
+          ],
+          styleSrc: ["'self'", (_req, res) => `'nonce-${res.locals.cspNonce}'`],
+          fontSrc: ["'self'"],
+          formAction: [`'self' ${config.apis.oauth.url}`],
+        },
+      },
+      crossOriginEmbedderPolicy: true,
+    }),
+  )
   app.use(favicon(join(__dirname, 'public/images/', 'favicon.ico')))
   app.use(compression())
   app.use(staticify.middleware)

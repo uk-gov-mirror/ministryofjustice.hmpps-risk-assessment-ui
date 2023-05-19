@@ -32,10 +32,10 @@
 {% block head %}
   {% include "common/templates/includes/head.njk" %}
 
-  <script>
+  <script nonce="{{ cspNonce }}">
     var applicationInsightsInstrumentationKey = '{{ applicationInsightsInstrumentationKey }}';
   </script>
-  <script>
+  <script nonce="{{ cspNonce }}">
     var applicationInsightsRoleName = '{{ applicationInsightsRoleName }}';
   </script>
   <script src='/javascripts/app-insights.js' type='text/javascript'></script>
@@ -92,7 +92,7 @@
 {% endblock %}
 
 {% block bodyEnd %}
-  <script>
+  <script nonce="{{ cspNonce }}">
     window.initAll()
     window.outOflineConditionalRadios()
   </script>

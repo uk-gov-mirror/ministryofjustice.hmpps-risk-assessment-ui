@@ -19,7 +19,7 @@
             {% endfor %}
     </select>
   </div>
-  <script>
+  <script nonce="{{ cspNonce }}">
     window.accessibleAutocomplete.enhanceSelectElement({
       selectElement: document.querySelector('#{{ id }}'),
       showAllValues: false,
