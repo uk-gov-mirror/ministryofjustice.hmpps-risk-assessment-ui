@@ -38,10 +38,10 @@ generic-service:
     APPLICATIONINSIGHTS_CONNECTION_STRING: "InstrumentationKey=$(APPINSIGHTS_INSTRUMENTATIONKEY);IngestionEndpoint=https://northeurope-0.in.applicationinsights.azure.com/;LiveEndpoint=https://northeurope.livediagnostics.monitor.azure.com/"
     S3_REGION: "eu-west-2"
     SNS_REGION: "eu-west-2"
-    SHOW_NOTIFICATION: true
-    NOTIFICATION_HEADER: "Scheduled maintenance on 25 May 2023 between 12:00pm to 12:30pm"
-    NOTIFICATION_BODY: "Make sure you have saved your answers before this"
-    DISPLAY_MAINTENANCE_PAGE: false
+    SHOW_NOTIFICATION: false
+    NOTIFICATION_HEADER: ""
+    NOTIFICATION_BODY: ""
+    DISPLAY_MAINTENANCE_PAGE: true
     MAINTENANCE_PAGE_TEXT: "You will be able to use the service from 12:30pm on Thursday 25 May 2023"
 
   # Pre-existing kubernetes secrets to load as environment variables in the deployment.
