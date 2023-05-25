@@ -41,8 +41,8 @@ generic-service:
     SHOW_NOTIFICATION: false
     NOTIFICATION_HEADER: " "
     NOTIFICATION_BODY: " "
-    DISPLAY_MAINTENANCE_PAGE: true
-    MAINTENANCE_PAGE_TEXT: "You will be able to use the service from 12:30pm on Thursday 25 May 2023"
+    DISPLAY_MAINTENANCE_PAGE: false
+    MAINTENANCE_PAGE_TEXT: " "
 
   # Pre-existing kubernetes secrets to load as environment variables in the deployment.
   # namespace_secrets:
