@@ -5,6 +5,8 @@
 {% from "common/templates/components/read-only/macro.njk" import readOnly %}
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
 {% from "app/upw/templates/placement-restrictions/components/disabilities/macro.njk" import renderDisabilities %}
+{% from "app/upw/templates/placement-restrictions/components/render-disabilities/macro.njk" import renderCurrentDisabilities %}
+{% from "app/upw/templates/placement-restrictions/components/render-provisions/macro.njk" import renderCurrentProvisions %}
 
 {% set backLink = 'task-list' %}
 
@@ -17,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-{# include errorSummary partial #}
+
 {{ super() }}
 
 <div class="govuk-grid-row">
@@ -28,7 +30,21 @@
         <form method="post" action="{{ action }}">
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
-            {{ renderDisabilities(answers, persistedAnswers) }}
+            {% set disabilities = persistedAnswers["current_disabilities"] %}
+            {% set provisions = persistedAnswers["current_provisions"] %}
+
+            {% if disabilities %}
+                {{ renderCurrentDisabilities(disabilities) }}
+            {% endif %}
+
+            {% if provisions %}
+                {{ renderCurrentProvisions(provisions) }}
+            {% endif %}
+
+
+            {% if not disabilities and not provisions %}
+                {{ renderDisabilities(answers, persistedAnswers) }}
+            {% endif %}
 
             {{ renderQuestion(questions['additional_disabilities'], errors) }}
             {{ renderQuestion(questions['disabilities'], errors) }}

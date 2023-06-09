@@ -1,0 +1,34 @@
+{% from "common/templates/components/read-only/macro.njk" import readOnly %}
+
+{% if data and data.length %}
+
+{% set provisions = data | groupProvisions %}
+    <table class="{{ options.tableClass | default("govuk-table") }}">
+    <caption class="govuk-table__caption {{ options.captionClass | default("govuk-table__caption--l") }}">Provisions</caption>
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Type</th>
+            <th scope="col" class="govuk-table__header">Category</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        {% for provision in provisions %}
+            {% for provisionSubType in provision.subTypes %}
+            <tr class="govuk-table__row">
+                {%if loop.first %}
+                    <th scope="row" class="govuk-table__header" rowspan={{ provision.subTypes.length }}>{{ provision.type }}</th>
+                {% endif %}
+                <td class="govuk-table__cell">{{ provisionSubType.description }}</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+    </table>
+
+{% else %}
+
+    <hr class="govuk-section-break govuk-section-break--visible">
+    <p class="govuk-body-l govuk-!-margin-bottom-5 govuk-!-margin-top-5">No details recorded in Delius</p>
+    <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
+
+{% endif %}

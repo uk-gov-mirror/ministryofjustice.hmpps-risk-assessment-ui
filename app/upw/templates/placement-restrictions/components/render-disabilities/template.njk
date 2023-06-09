@@ -1,0 +1,32 @@
+{% from "common/templates/components/read-only/macro.njk" import readOnly %}
+
+<table class="{{ options.tableClass | default("govuk-table") }}">
+    <caption class="govuk-table__caption {{ options.captionClass | default("govuk-table__caption--l") }}">Disabilities</caption>
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Type</th>
+            <th scope="col" class="govuk-table__header">Condition</th>
+            <th scope="col" class="govuk-table__header">Notes</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        {% if data.length %}
+            {% set disabilities = data | groupDisabilities %}
+            {% for disability in disabilities %}
+                {% for condition in disability.subTypes %}
+                    <tr class="govuk-table__row">
+                        {%if loop.first %}
+                            <th scope="row" class="govuk-table__header" rowspan={{ disability.subTypes.length }}>{{ disability.type }}</th>
+                        {% endif %}
+                        <td class="govuk-table__cell">{{ condition.description }}</td>
+                        <td class="govuk-table__cell">{{ condition.notes }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell" colspan=3>No details recorded in Delius</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>

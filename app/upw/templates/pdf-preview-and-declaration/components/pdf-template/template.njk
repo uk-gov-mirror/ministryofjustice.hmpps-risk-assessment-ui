@@ -2,6 +2,8 @@
 {% from "common/templates/components/read-only-address/macro.njk" import readOnlyAddress %}
 {% from "common/templates/components/rosh-widget/macro.njk" import roshWidget %}
 {% from "common/templates/components/mappa-widget/macro.njk" import mappaWidget %}
+{% from "app/upw/templates/placement-restrictions/components/render-disabilities/macro.njk" import renderCurrentDisabilities %}
+{% from "app/upw/templates/placement-restrictions/components/render-provisions/macro.njk" import renderCurrentProvisions %}
 
 {%- macro renderTableHeading(heading, description) -%}
   <p>
@@ -482,80 +484,56 @@
   <div class='upw-avoid-break'>
     <h2 id="heading_placement_restrictions" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Placement restrictions due to health and other needs</h2>
 
-    {%- set disabilitiesCaptionHeading = "Disabilities and mental health" -%}
-    {% if persistedAnswers["active_disabilities"] %}
-      {%- set disabilitiesCaptionSubheading = "Disabilities, conditions and adjustments" -%}
-      {% if persistedAnswers["active_disabilities"].length %}
 
-        <table id="active_disabilities" class="upw-pdf-table">
-          <caption id="caption_active_disabilities">
-            <h3 class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h3>
+    {% set disabilities = persistedAnswers["current_disabilities"] %}
+    {% set provisions = persistedAnswers["current_provisions"] %}
+
+    {% if disabilities and provisions %}
+      {{ renderCurrentDisabilities(disabilities, { tableClass: "upw-pdf-table", captionClass: "govuk-table__caption--m" }) }}
+      {{ renderCurrentProvisions(provisions, { tableClass: "upw-pdf-table", captionClass: "govuk-table__caption--m" }) }}
+    {% else %}
+      {%- set disabilitiesCaptionHeading = "Disabilities and mental health" -%}
+
+      {% if persistedAnswers["active_disabilities"] %}
+        {%- set disabilitiesCaptionSubheading = "Disabilities, conditions and adjustments" -%}
+        {% if persistedAnswers["active_disabilities"].length %}
+          <table id="active_disabilities" class="upw-pdf-table">
+            <caption id="caption_active_disabilities">
+              <h3 class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h3>
+              <p>{{ disabilitiesCaptionSubheading }}</p>
+            </caption>
+            <tbody>
+              {% for disability in persistedAnswers["active_disabilities"] %}
+                <tr id="active_disabilities_{{ loop.index }}">
+                  <th>{{ disability["code"] | toDisabilityDescription | default(disability["description"]) }}</th>
+                  <td>
+                    <p class="govuk-body">{{ disability["disability_notes"] | default("No further details.") }}</p>
+                    <p class="govuk-body">
+                      <strong>Adjustments</strong><br>
+                      <ul class="govuk-list">
+                        {% if disability["disability_adjustments"] %}
+                          {% for adjustment in disability["disability_adjustments"] %}
+                            <li>{{ adjustment }}</li>
+                          {% endfor %}
+                        {% else %}
+                          <li>None</li>
+                        {% endif %}
+                      </ul>
+                    </p>
+                  </td>
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <h3 id="heading_no_active_disabilities" class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h3>
             <p>{{ disabilitiesCaptionSubheading }}</p>
-          </caption>
-          <tbody>
-            {% for disability in persistedAnswers["active_disabilities"] %}
-              <tr id="active_disabilities_{{ loop.index }}">
-                <th>{{ disability["code"] | toDisabilityDescription | default(disability["description"]) }}</th>
-                <td>
-                  <p class="govuk-body">{{ disability["disability_notes"] | default("No further details.") }}</p>
-                  <p class="govuk-body">
-                    <strong>Adjustments</strong><br>
-                    <ul class="govuk-list">
-                      {% if disability["disability_adjustments"] %}
-                        {% for adjustment in disability["disability_adjustments"] %}
-                          <li>{{ adjustment }}</li>
-                        {% endfor %}
-                      {% else %}
-                        <li>None</li>
-                      {% endif %}
-                    </ul>
-                  </p>
-                </td>
-              </tr>
-            {% endfor %}
-            <tr id="additional_disabilities">
-              <th>
-                <p>
-                  <strong>Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?</strong>
-                </p>
-              </th>
-              <td>
-                <p>{{ answers["additional_disabilities"] }}</p>
-                {% if answers["additional_disabilities_details"] and answers["additional_disabilities"] == "Yes" %}
-                  <p>{{ answers["additional_disabilities_details"] }}</p>
-                {% endif %}
-              </td>
-            </tr>
-            <tr id="disabilities">
-              <th>
-                <p>
-                  <strong>Do any of the above affect the individual’s ability to engage with Community Payback?</strong>
-                </p>
-                <p>Suggest adjustments, if known</p>
-                <td>
-                  <p>{{ answers["disabilities"] }}</p>
-                  {% if answers["disabilities_details"] and answers["disabilities"] == "Yes" %}
-                    <p>{{ answers["disabilities_details"] }}</p>
-                  {% endif %}
-                </td>
-              </tr>
-            </tbody>
-          </table>
 
-        {% else %}
-
-          <h3 id="heading_no_active_disabilities" class="govuk-heading-m">{{ disabilitiesCaptionHeading }}</h3>
-          <p>{{ disabilitiesCaptionSubheading }}</p>
-
-          <hr class="govuk-section-break govuk-section-break--visible">
-          <p class="govuk-body-l govuk-!-margin-bottom-5 govuk-!-margin-top-5">No details recorded in Delius</p>
-          <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
-
-        {% endif %}
-
-        {# Otherwise display the old format #}
+            <hr class="govuk-section-break govuk-section-break--visible">
+            <p class="govuk-body-l govuk-!-margin-bottom-5 govuk-!-margin-top-5">No details recorded in Delius</p>
+            <hr class="govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-5">
+          {% endif %}
       {% else %}
-
         {{ renderTable({
           captionId: "disabilities_and_mental_health",
           caption: disabilitiesCaptionHeading,
@@ -596,30 +574,38 @@
                 answers["mental_health_condition_details"],
                 "Yes"
               )
-            },
-            {
-              id: "additional_disabilities",
-              heading: "Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?",                        
-              data: renderValue(
-                answers["additional_disabilities"],
-                answers["additional_disabilities_details"],
-                "Yes"
-              )
-            },
-            {
-              id: "disabilities",
-              heading: "Do any of the above affect the individual’s ability to engage with Community Payback?",
-              description: "Suggest adjustments, if known",
-              data: renderValue(
-                answers["disabilities"],
-                answers["disabilities_details"],
-                "Yes"
-              )
             }
           ]
         }) }}
-
       {% endif %}
+    {% endif %}
+
+    {{ renderTable({
+      captionId: "additional_disabilities_information",
+      caption: "Additional disability information",
+      rows: [
+        {
+          id: "additional_disabilities",
+          heading: "Any additional disabilities or health issues that affect the individual’s ability to engage with Community Payback?",                        
+          data: renderValue(
+            answers["additional_disabilities"],
+            answers["additional_disabilities_details"],
+            "Yes"
+          )
+        },
+        {
+          id: "disabilities",
+          heading: "Do any of the above affect the individual’s ability to engage with Community Payback?",
+          description: "Suggest adjustments, if known",
+          data: renderValue(
+            answers["disabilities"],
+            answers["disabilities_details"],
+            "Yes"
+          )
+        }
+      ]
+    }) }}
+
     </div>
     <div class='upw-avoid-break'>
       {%- macro renderPregnancyQuestion(value, pregnantDescription, recentlyGivenBirthDescription) -%}

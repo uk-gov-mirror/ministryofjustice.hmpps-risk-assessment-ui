@@ -82,6 +82,74 @@
         "disability_adjustments": ["Colour/visibility marking"]
       }
     ],
+    "current_disabilities": [
+      {
+        "type": {
+          "code": "LDI",
+          "description": "Learning Disability"
+        },
+        "condition": {
+          "code": "LDA",
+          "description": "Learning Disability Condition A"
+        },
+        "notes": "Notes about condition A"
+      },
+      {
+        "type": {
+          "code": "LDI",
+          "description": "Learning Disability"
+        },
+        "condition": {
+          "code": "LDB",
+          "description": "Learning Disability Condition B"
+        }
+      },
+      {
+        "type": {
+          "code": "LDI",
+          "description": "Learning Disability"
+        },
+        "condition": {
+          "code": "LDC",
+          "description": "Learning Disability Condition C"
+        },
+        "notes": "Notes about condition C"
+      },
+      {
+        "type": {
+          "code": "MHR",
+          "description": "Mental Health related disabilities"
+        },
+        "condition": {
+          "code": "MHR2",
+          "description": "Mental Health related disabilities condition"
+        },
+        "notes": "Notes about condition"
+      },
+      {
+        "type": {
+          "code": "MRD",
+          "description": "Mobility related Disabilities"
+        },
+        "condition": {
+          "code": "MRD2",
+          "description": "Mobility related Disabilities condition"
+        },
+        "notes": "Notes about condition"
+      }
+    ],
+    "current_provisions": [
+      {
+        "type": {
+          "code": "ACC1",
+          "description": "Accessibility"
+        },
+        "category": {
+          "code": "HAND1",
+          "description": "Handrails"
+        }
+      }
+    ],
     "active_carer_commitments": [
       {
         "description": "Dependents",

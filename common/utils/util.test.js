@@ -12,6 +12,8 @@ const {
   prettyDate,
   ageFrom,
   updateJsonValue,
+  groupDisabilities,
+  groupProvisions,
 } = require('./util')
 
 const inputText = "There is a green hill far away - and I shouldn't tell you that really"
@@ -243,5 +245,115 @@ describe('tests for the updateJsonValue function', () => {
     const myObject = { one: '1', two: '2' }
     const results = updateJsonValue(myObject, null, 'value', false)
     expect(results).toEqual(myObject)
+  })
+})
+
+describe('groupDisabilities', () => {
+  it('groups disabilities by type', () => {
+    const disabilities = [
+      {
+        type: {
+          code: 'FOO',
+          description: 'Foo Disability',
+        },
+        condition: {
+          code: 'FOO1',
+          description: 'Foo Disability Condition 1',
+        },
+        notes: 'Foo Disability Condition 1 notes',
+      },
+      {
+        type: {
+          code: 'FOO',
+          description: 'Foo Disability',
+        },
+        condition: {
+          code: 'FOO2',
+          description: 'Foo Disability Condition 2',
+        },
+        notes: 'Foo Disability Condition 2 notes',
+      },
+    ]
+
+    const result = groupDisabilities(disabilities)
+
+    expect(result).toEqual([
+      {
+        type: 'Foo Disability',
+        subTypes: [
+          { description: 'Foo Disability Condition 1', notes: 'Foo Disability Condition 1 notes' },
+          { description: 'Foo Disability Condition 2', notes: 'Foo Disability Condition 2 notes' },
+        ],
+      },
+    ])
+  })
+
+  it('handles when there are no disabilities', () => {
+    const disabilities = []
+
+    const result = groupDisabilities(disabilities)
+
+    expect(result).toEqual([])
+  })
+
+  it('handles when disabilities is undefined', () => {
+    const result = groupDisabilities()
+
+    expect(result).toEqual([])
+  })
+})
+
+describe('groupProvisions', () => {
+  it('groups provisions by type', () => {
+    const provisions = [
+      {
+        type: {
+          code: 'FOO',
+          description: 'Foo Provision',
+        },
+        category: {
+          code: 'FOO1',
+          description: 'Foo Provision Category 1',
+        },
+        notes: 'Foo Provision Category 1 notes',
+      },
+      {
+        type: {
+          code: 'FOO',
+          description: 'Foo Provision',
+        },
+        category: {
+          code: 'FOO2',
+          description: 'Foo Provision Category 2',
+        },
+        notes: 'Foo Provision Category 2 notes',
+      },
+    ]
+
+    const result = groupProvisions(provisions)
+
+    expect(result).toEqual([
+      {
+        type: 'Foo Provision',
+        subTypes: [
+          { description: 'Foo Provision Category 1', notes: 'Foo Provision Category 1 notes' },
+          { description: 'Foo Provision Category 2', notes: 'Foo Provision Category 2 notes' },
+        ],
+      },
+    ])
+  })
+
+  it('handles when there are no provisions', () => {
+    const provisions = []
+
+    const result = groupProvisions(provisions)
+
+    expect(result).toEqual([])
+  })
+
+  it('handles when provisions is undefined', () => {
+    const result = groupProvisions(undefined)
+
+    expect(result).toEqual([])
   })
 })

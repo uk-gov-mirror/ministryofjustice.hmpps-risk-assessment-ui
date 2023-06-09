@@ -40,6 +40,8 @@ const {
   disabilityCodeToDescription,
   splitLines,
   todayPretty,
+  groupDisabilities,
+  groupProvisions,
 } = require('./common/utils/util')
 const config = require('./common/config')
 const auth = require('./common/middleware/auth')
@@ -253,6 +255,9 @@ function initialiseTemplateEngine(app) {
   nunjucksEnvironment.addFilter('shiftArray', (arr) => {
     return arr.slice(1)
   })
+
+  nunjucksEnvironment.addFilter('groupDisabilities', groupDisabilities)
+  nunjucksEnvironment.addFilter('groupProvisions', groupProvisions)
 
   // Set view engine
   app.set('view engine', 'njk')

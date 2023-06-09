@@ -214,6 +214,30 @@ const splitLines = (str) => (str ? str.split('\r\n') : [])
 
 const createDocumentId = (episodeId) => `documents/${episodeId}.pdf`
 
+const groupTypesSubtypes =
+  (subTypeKey) =>
+  (entries = []) => {
+    const groupedDisabilities = entries.reduce((acc, entry) => {
+      const typeCode = entry.type.code
+      const typeDescription = entry.type.description
+      const subTypeDescription = entry[subTypeKey].description
+      const { notes } = entry
+
+      const existingEntry = acc[typeCode]
+
+      const subType = { description: subTypeDescription, notes }
+
+      if (existingEntry) {
+        return { ...acc, [typeCode]: { ...existingEntry, subTypes: [...existingEntry.subTypes, subType] } }
+      }
+      return { ...acc, [typeCode]: { type: typeDescription, subTypes: [subType] } }
+    }, {})
+    return Object.values(groupedDisabilities)
+  }
+
+const groupDisabilities = groupTypesSubtypes('condition')
+const groupProvisions = groupTypesSubtypes('category')
+
 module.exports = {
   getYearMonthFromDate,
   isEmptyObject,
@@ -240,4 +264,6 @@ module.exports = {
   splitLines,
   todayPretty,
   createDocumentId,
+  groupDisabilities,
+  groupProvisions,
 }
