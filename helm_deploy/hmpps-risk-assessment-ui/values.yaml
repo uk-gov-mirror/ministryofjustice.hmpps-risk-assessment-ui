@@ -4,6 +4,8 @@ generic-service:
 
   replicaCount: 2
 
+  serviceAccountName: hmpps-assessments-service-account
+
   image:
     repository: quay.io/hmpps/hmpps-risk-assessment-ui
     tag: app_version    # override at deployment time
@@ -62,12 +64,8 @@ generic-service:
       REDIS_PASSWORD: "auth_token"
     hmpps-assessments-s3:
       S3_BUCKET_NAME: "bucket_name"
-      S3_ACCESS_KEY_ID: "access_key_id"
-      S3_SECRET_ACCESS_KEY: "secret_access_key"
     hmpps-domain-events-topic:
       SNS_TOPIC_ARN: "topic_arn"
-      SNS_ACCESS_KEY_ID: "access_key_id"
-      SNS_SECRET_ACCESS_KEY: "secret_access_key"
 
   allowlist:
     office: "217.33.148.210/32"

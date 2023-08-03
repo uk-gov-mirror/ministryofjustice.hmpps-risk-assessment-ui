@@ -6,10 +6,6 @@ class SNS {
   constructor() {
     const options = {
       region: 'eu-west-2',
-      credentials: {
-        accessKeyId: config.aws.sns.accessKeyId,
-        secretAccessKey: config.aws.sns.secretAccessKey,
-      },
     }
 
     if (config.aws.useLocalStack) {

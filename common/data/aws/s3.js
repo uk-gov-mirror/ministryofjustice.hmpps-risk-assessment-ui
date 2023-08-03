@@ -6,10 +6,6 @@ class S3 {
   constructor() {
     const options = {
       region: 'eu-west-2',
-      credentials: {
-        accessKeyId: config.aws.s3.accessKeyId,
-        secretAccessKey: config.aws.s3.secretAccessKey,
-      },
     }
 
     if (config.aws.useLocalStack) {
