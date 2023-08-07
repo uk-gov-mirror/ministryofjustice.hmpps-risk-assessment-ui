@@ -131,7 +131,7 @@
     "envfile": "^6.17.0",
     "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^8.0.0",
