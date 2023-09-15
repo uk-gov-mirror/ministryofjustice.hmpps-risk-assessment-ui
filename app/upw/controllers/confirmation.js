@@ -62,7 +62,10 @@ const completeAssessment = (req) => async () => {
   const episodeId = assessment?.episodeUuid
   const crn = assessment?.subject.crn || ''
 
-  const [assessmentCompleted] = await postCompleteAssessmentEpisode(assessmentId, episodeId, req.user?.token)
+  const [assessmentCompleted, episode] = await postCompleteAssessmentEpisode(assessmentId, episodeId, req.user?.token)
+
+  req.session.assessment.isComplete = episode?.ended != null
+  req.session.save()
 
   if (!assessmentCompleted) {
     logger.error(`Could not close assessment: ${assessmentId} for CRN: ${crn}`)
@@ -79,7 +82,9 @@ class Confirmation extends SaveAndContinue {
         return next(new Error('Failed to get assessment details'))
       }
 
-      await generateDocument(req, res).then(uploadDocument).then(publishEvent(req)).then(completeAssessment(req))
+      if (!assessment.isComplete) {
+        await generateDocument(req, res).then(uploadDocument).then(publishEvent(req)).then(completeAssessment(req))
+      }
 
       return super.render(req, res, next)
     } catch (e) {

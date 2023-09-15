@@ -70,6 +70,7 @@ describe('ConfirmationController', () => {
           assessment: {
             uuid: assessmentUuid,
             episodeUuid,
+            isComplete: false,
             subject: { crn: 'X123456', dob: '1980-01-01' },
           },
           save: jest.fn(),
@@ -97,6 +98,7 @@ describe('ConfirmationController', () => {
       superMethod.mockReset()
       S3.prototype.upload.mockReset()
       SNS.prototype.publishJson.mockReset()
+      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockReset()
     })
 
     it('completes the assessment', async () => {
@@ -105,7 +107,10 @@ describe('ConfirmationController', () => {
       pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       SNS.prototype.publishJson.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
+      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([
+        true,
+        { ended: '2023-01-01T00:00:00.000000' },
+      ])
 
       await controller.render(req, res, next)
 
@@ -117,6 +122,26 @@ describe('ConfirmationController', () => {
         episodeUuid,
         user.token,
       )
+      expect(req.session.assessment.isComplete).toBe(true)
+      expect(superMethod).toHaveBeenCalled()
+    })
+
+    it('if already complete it does not re-complete the assessment', async () => {
+      const file = createTestFile()
+
+      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
+      S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
+      SNS.prototype.publishJson.mockResolvedValue({ ok: true })
+      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
+
+      req.session.assessment.isComplete = true
+
+      await controller.render(req, res, next)
+
+      expect(pdfConverterClient.convertHtmlToPdf.mock.calls.length).toBe(0)
+      expect(S3.prototype.upload.mock.calls.length).toBe(0)
+      expect(SNS.prototype.publishJson.mock.calls.length).toBe(0)
+      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mock.calls.length).toBe(0)
       expect(superMethod).toHaveBeenCalled()
     })
 

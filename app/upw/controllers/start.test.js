@@ -110,6 +110,7 @@ describe('startController', () => {
         episodeUuid,
         userFullName: 'Test User',
         lastEditedDate: '2020-01-01T07:30:00.000000',
+        ended: undefined,
         offence: {
           offenceCode,
           codeDescription,
@@ -137,7 +138,40 @@ describe('startController', () => {
           subjectUuid: 'SUBJECT_UUID',
         },
         uuid: '22222222-2222-2222-2222-222222222221',
+        isComplete: false,
       })
+    })
+
+    it('marks as complete when the episode has an end date', async () => {
+      const offenceCode = '00'
+      const codeDescription = 'Offence'
+      const offenceSubCode = '00'
+      const subCodeDescription = 'Sub Offence'
+      const subject = {
+        name: 'Test Offender',
+        dateOfBirth: '1980-04-01',
+        pnc: 'PNC1234567',
+        crn: 'CRN1234567',
+        subjectUuid: 'SUBJECT_UUID',
+      }
+      startAssessment.mockResolvedValue([true, { assessmentUuid, subject }])
+      getCurrentEpisode.mockResolvedValue({
+        episodeUuid,
+        userFullName: 'Test User',
+        lastEditedDate: '2020-01-01T07:30:00.000000',
+        ended: '2023-01-01T00:00:00.000000',
+        offence: {
+          offenceCode,
+          codeDescription,
+          offenceSubCode,
+          subCodeDescription,
+          sentenceDate: '2020-01-01',
+        },
+      })
+
+      await controller.saveValues(req, res, next)
+
+      expect(req.session.assessment?.isComplete).toEqual(true)
     })
 
     it('returns an error when unable to create an assessment', async () => {

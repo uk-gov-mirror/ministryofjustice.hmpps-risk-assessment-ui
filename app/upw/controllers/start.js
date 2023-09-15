@@ -65,6 +65,7 @@ class StartUnpaidWork extends BaseController {
       assessment.episodeUuid = currentEpisode?.episodeUuid
       assessment.lastEditedBy = currentEpisode?.userFullName
       assessment.lastEditedDate = currentEpisode?.lastEditedDate
+      assessment.isComplete = currentEpisode?.ended != null
 
       req.session.assessment = assessment
 

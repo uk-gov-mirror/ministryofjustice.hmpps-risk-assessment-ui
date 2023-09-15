@@ -102,7 +102,7 @@ const stubAssessmentComplete = () => {
         'Content-Type': 'application/json;charset=UTF-8',
       },
       status: 200,
-      jsonBody: assessmentEpisodes,
+      jsonBody: { ...currentEpisodeByCrn, ended: '2023-01-01T00:00:00.000000' },
     },
   })
 
@@ -116,7 +116,7 @@ const stubAssessmentComplete = () => {
         'Content-Type': 'application/json;charset=UTF-8',
       },
       status: 200,
-      jsonBody: assessmentEpisodes,
+      jsonBody: { ...currentEpisodeByCrn, ended: '2023-01-01T00:00:00.000000' },
     },
   })
 }
