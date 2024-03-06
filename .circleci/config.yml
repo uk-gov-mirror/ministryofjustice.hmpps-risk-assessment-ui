@@ -111,7 +111,6 @@ workflows:
           chart_name: hmpps-risk-assessment-ui
           context:
             - hmpps-common-vars
-            - hmpps-assessments-dev-live
           filters:
             branches:
               only:
