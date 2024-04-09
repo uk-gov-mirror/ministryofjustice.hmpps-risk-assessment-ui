@@ -94,13 +94,15 @@ describe('startController', () => {
     })
 
     it('updates assessment with returned supervision information', async () => {
+      const now = new Date()
+      const dob = `1980-${now.toISOString().substring(5, 10)}`
       const offenceCode = '00'
       const codeDescription = 'Offence'
       const offenceSubCode = '00'
       const subCodeDescription = 'Sub Offence'
       const subject = {
         name: 'Test Offender',
-        dateOfBirth: '1980-04-01',
+        dateOfBirth: dob,
         pnc: 'PNC1234567',
         crn: 'CRN1234567',
         subjectUuid: 'SUBJECT_UUID',
@@ -129,8 +131,8 @@ describe('startController', () => {
         lastEditedBy: 'Test User',
         lastEditedDate: '2020-01-01T07:30:00.000000',
         subject: {
-          age: 43,
-          dob: '1980-04-01',
+          age: now.getFullYear() - 1980,
+          dob,
           crn: 'CRN1234567',
           existingSubjectParam: 'abc',
           name: 'Test Offender',
