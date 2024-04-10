@@ -18,6 +18,10 @@ generic-service:
     DEV_ASSESSMENT_ID: "fb6b7c33-07fc-4c4c-a009-8d60f66952c4"
     INGRESS_URL: https://hmpps-assessments.service.justice.gov.uk
 
+  allowlist:
+    groups:
+      - probation
+
 generic-prometheus-alerts:
   enabled: true
   targetApplication: hmpps-risk-assessment-ui
