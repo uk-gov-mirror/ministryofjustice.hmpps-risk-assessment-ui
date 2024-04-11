@@ -20,6 +20,7 @@ generic-service:
 
   allowlist:
     groups:
+      - internal
       - probation
 
 generic-prometheus-alerts:
