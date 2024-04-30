@@ -8,10 +8,6 @@ class SNS {
       region: 'eu-west-2',
     }
 
-    if (config.aws.useLocalStack) {
-      options.endpoint = 'http://localhost:4566'
-    }
-
     this.client = new SNSClient(options)
     this.topicArn = config.aws.sns.topicArn
   }

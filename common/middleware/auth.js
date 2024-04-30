@@ -143,7 +143,7 @@ const initializeAuth = () => {
 
   const strategy = new Strategy(
     {
-      authorizationURL: `${apis.oauth.url}/oauth/authorize`,
+      authorizationURL: `${apis.oauth.externalUrl}/oauth/authorize`,
       tokenURL: `${apis.oauth.url}/oauth/token`,
       clientID: authClientId,
       clientSecret: authClientSecret,
