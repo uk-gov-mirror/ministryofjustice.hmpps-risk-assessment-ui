@@ -10,7 +10,7 @@ parameters:
     default: "hmpps-assessments-notifications"
   node-version:
     type: string
-    default: 18.18-browsers
+    default: 22.13-browsers
 
 jobs:
   build:
