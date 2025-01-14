@@ -19,6 +19,11 @@ $ npm install
 $ npm run start:local
 ```
 
+To update the submodule(s) run
+```bash
+git submodule update --remote
+```
+
 Then go to [http://localhost:3000/](http://localhost:3000/) to see it in action.
 
 Links to assessments types:
