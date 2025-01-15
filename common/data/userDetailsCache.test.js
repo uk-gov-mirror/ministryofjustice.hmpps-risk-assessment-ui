@@ -1,4 +1,4 @@
-const jwtDecode = require('jwt-decode')
+const { jwtDecode } = require('jwt-decode')
 const { getCachedUserDetails, cacheUserDetails } = require('./userDetailsCache')
 const redis = require('./redis')
 const authUser = require('../middleware/testSupportFiles/user_token.json')

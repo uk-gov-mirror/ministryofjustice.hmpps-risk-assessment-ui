@@ -1,7 +1,7 @@
 const passport = require('passport')
 const { Strategy } = require('passport-oauth2')
 const refresh = require('passport-oauth2-refresh')
-const jwtDecode = require('jwt-decode')
+const { jwtDecode } = require('jwt-decode')
 const jwksRsa = require('jwks-rsa')
 const { expressjwt: jwt } = require('express-jwt')
 const { DateTime } = require('luxon')
