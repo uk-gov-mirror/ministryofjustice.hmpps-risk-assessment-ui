@@ -1,6 +1,6 @@
 const getOffenderDetails = require('./getOffenderDetails')
 const { getOffenderData } = require('../data/hmppsAssessmentApi')
-const mockOffenderData = require('../../wiremock/responses/offenderDetails.json')
+
 const {
   dev: { devAssessmentId },
 } = require('../config')
@@ -10,10 +10,20 @@ jest.mock('../data/hmppsAssessmentApi')
 describe('getOffenderDetails middleware', () => {
   let req
   let res
-  const offenderData = mockOffenderData
+
+  const offenderData = {
+    assessmentUuid: '1234',
+    name: 'Garry Hart',
+    pnc: '2012/123450000F',
+    crn: 'J081276',
+    dob: '1987-03-14',
+    age: '34',
+  }
+
   const next = jest.fn()
   const render = jest.fn()
   const user = {}
+
   beforeEach(() => {
     req = {
       params: {

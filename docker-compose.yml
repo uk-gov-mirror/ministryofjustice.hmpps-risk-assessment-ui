@@ -1,10 +1,7 @@
-version: "3.1"
 services:
   postgres:
     image: postgres
     restart: always
-    ports:
-      - "5432:5432"
     networks:
       - hmpps
     environment:
@@ -17,116 +14,179 @@ services:
     image: "redis:6.2.3-alpine"
     networks:
       - hmpps
-    container_name: redis
-    ports:
-      - "6379:6379"
+
+  auth-db:
+    image: postgres:16
+    restart: always
+    networks:
+      - hmpps
+    environment:
+      - POSTGRES_PASSWORD=admin_password
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=auth-db
 
   hmpps-auth:
     image: quay.io/hmpps/hmpps-auth:latest
     networks:
       - hmpps
-    container_name: hmpps-auth
-    depends_on: [nomis-user-roles-api]
-    ports:
-      - "9090:8080"
+    depends_on:
+      - wiremock
+      - auth-db
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth/health" ]
+      test: [ "CMD", "curl", "-f", "http://hmpps-auth:9090/auth/health" ]
+      interval: 5s
+      retries: 60
     environment:
-      - SPRING_PROFILES_ACTIVE=dev,nomis
+      - SERVER_PORT=9090
+      - SPRING_PROFILES_ACTIVE=dev,delius,local-postgres
       - APPLICATION_AUTHENTICATION_UI_ALLOWLIST=0.0.0.0/0
-      - NOMIS_ENDPOINT_URL=http://nomis-user-roles-api:8080
-
-  nomis-user-roles-api:
-    image: quay.io/hmpps/nomis-user-roles-api:latest
-    networks:
-      - hmpps
-    container_name: nomis-user-roles-api
-    ports:
-      - "8102:8080"
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/health/ping" ]
-    environment:
-      - SERVER_PORT=8080
-      - SPRING_PROFILES_ACTIVE=dev
-      - API_BASE_URL_OAUTH=http://hmpps-auth:8080/auth
-
-  offender-assessment-api:
-    image: quay.io/hmpps/offender-assessments-api:latest
-    restart: always
-    networks:
-      - hmpps
-    container_name: offender-assessment-api
-    depends_on: [hmpps-auth]
-    ports:
-      - "8081:8080"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-    environment:
-      - SERVER_PORT=8080
-      - SPRING_PROFILES_ACTIVE=dev
-      - OAUTH_ENDPOINT_URL=http://oauth:9090/auth
-
-  hmpps-assessment-api:
-    image: quay.io/hmpps/hmpps-assessments-api:latest
-    restart: always
-    networks:
-      - hmpps
-    container_name: hmpps-assessment-api
-    depends_on: [hmpps-auth]
-    ports:
-      - "8082:8080"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-    environment:
-      - SERVER_PORT=8080
-      - SPRING_PROFILES_ACTIVE=dev
-      - OAUTH_ENDPOINT_URL=http://oauth:9090/auth
       - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=DEBUG
+      - DELIUS_ENDPOINT_URL=http://wiremock:8080/delius
+      - MANAGE_USERS_API_ENDPOINT_URL=http://hmpps-manage-users-api:8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-db:5432/auth-db
+
+  hmpps-external-users-api:
+    image: quay.io/hmpps/hmpps-external-users-api:latest
+    depends_on:
+      - hmpps-auth
+      - auth-db
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://hmpps-external-users-api:8080/health/ping" ]
+      interval: 5s
+      retries: 60
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev,local-postgres
+      - API_BASE_URL_OAUTH=http://hmpps-auth:9090/auth
+      - SPRING_R2DBC_URL=r2dbc:postgresql://auth-db:5432/auth-db?sslmode=prefer
+      - SPRING_FLYWAY_URL=jdbc:postgresql://auth-db:5432/auth-db?sslmode=prefer
+
+  hmpps-manage-users-api:
+    image: quay.io/hmpps/hmpps-manage-users-api:latest
+    depends_on:
+      - hmpps-auth
+      - hmpps-external-users-api
+      - wiremock
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://hmpps-manage-users-api:8080/health/ping" ]
+      interval: 5s
+      retries: 60
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev,local-docker
 
   gotenberg:
     image: thecodingmachine/gotenberg:7
     restart: always
     networks:
       - hmpps
-    ports:
-      - "9099:3000"
 
   localstack:
-    container_name: localstack
-    image: localstack/localstack
-    ports:
-      - "4566:4566"            # LocalStack Gateway
-      - "4510-4559:4510-4559"  # external services port range
+    image: localstack/localstack:latest
     networks:
       - hmpps
     environment:
-      - LOCALSTACK_SERVICES=${LOCALSTACK_SERVICES-sns,s3}
-      - DEBUG=${DEBUG-}
-      - PERSISTENCE=${PERSISTENCE-}
-      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
-      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=sns,s3
+      - LOCALSTACK_HOST=localstack:4566
+      - DEBUG=1
+      - DEFAULT_REGION=eu-west-2
+      - AWS_DEFAULT_REGION=eu-west-2
+      - USE_SSL=false
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./scripts/localstack/init:/etc/localstack/init/ready.d"
+      - "./scripts/localstack/wait:/scripts/wait"
+    healthcheck:
+      test: [ "CMD", "bash", "/scripts/wait/healthcheck.sh" ]
+      interval: 5s
+      timeout: 10s
+      retries: 50
 
-  localstack-cli:
-    image: xueshanf/awscli
+  wiremock:
+    image: rodolpheche/wiremock
     networks:
       - hmpps
+    volumes:
+      - ./wiremock:/home/wiremock
     command:
-      - /bin/sh
-      - -c
-      - |
-        sleep 30
-        aws --version
-        aws --endpoint-url=http://localstack:4566 s3 mb s3://hmpps-assessments-s3
-        aws --endpoint-url=http://localstack:4566 sns create-topic --name hmpps-assessments-topic
-    environment:
-      AWS_ACCESS_KEY_ID: UNSET
-      AWS_SECRET_ACCESS_KEY: UNSET
-      AWS_DEFAULT_REGION: 'eu-west-2'
+      - -verbose
+      - -global-response-templating
+
+  community-payback-assessment-api:
+    image: quay.io/hmpps/hmpps-assessments-api:${API_IMAGE_TAG:-latest}
+    restart: always
+    networks:
+      - hmpps
     depends_on:
-    - localstack
+      - hmpps-auth
+      - postgres
+      - localstack
+      - redis
+      - wiremock
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://community-payback-assessment-api:8080/health"]
+      interval: 5s
+      retries: 60
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=dev,postgres
+      - OAUTH_ENDPOINT_URL=${OAUTH_ENDPOINT_URL:-http://hmpps-auth:9090/auth}
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=DEBUG
+      - DATABASE_ENDPOINT=postgres:5432
+      - AWS_ENDPOINT_URL=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_SSL_ENABLED=false
+      - HMPPS_SQS_USE_WEB_TOKEN=false
+      - ASSESS_RISKS_AND_NEEDS_API_BASE_URL=http://wiremock:8080/
+      - ASSESS_RISKS_AND_NEEDS_API_ID=${API_CLIENT_CREDENTIALS_ID:-hmpps-community-payback-api-client}
+      - ASSESS_RISKS_AND_NEEDS_API_CLIENT_SECRET=${API_CLIENT_CREDENTIALS_SECRET:-clientsecret}
+      - DELIUS_INTEGRATION_BASE_URL=http://wiremock:8080
+      - DELIUS_INTEGRATION_CLIENT_ID=${API_CLIENT_CREDENTIALS_ID:-hmpps-community-payback-api-client}
+      - DELIUS_INTEGRATION_CLIENT_SECRET=${API_CLIENT_CREDENTIALS_SECRET:-clientsecret}
+
+  community-payback-assessment-ui:
+    image: quay.io/hmpps/hmpps-risk-assessment-ui:${UI_IMAGE_TAG:-latest}
+    networks:
+      - hmpps
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://community-payback-assessment-ui:3000/health"]
+      interval: 5s
+      retries: 60
+    environment:
+      - OAUTH_ENDPOINT_URL=${OAUTH_ENDPOINT_URL:-http://hmpps-auth:9090/auth}
+      - OAUTH_EXTERNAL_URL=${OAUTH_EXTERNAL_URL:-http://hmpps-auth:9090/auth}
+      - HMPPS_ASSESSMENT_API_URL=http://community-payback-assessment-api:8080
+      - PDF_CONVERTER_ENDPOINT=http://gotenberg:3000/forms/chromium/convert/html
+      - API_CLIENT_ID=${UI_CLIENT_CREDENTIALS_ID:-hmpps-community-payback-api-client}
+      - API_CLIENT_SECRET=${UI_CLIENT_CREDENTIALS_SECRET:-clientsecret}
+      - AUTH_CLIENT_ID=${UI_AUTHORIZATION_CODE_ID:-hmpps-community-payback-ui-client}
+      - AUTH_CLIENT_SECRET=${UI_AUTHORIZATION_CODE_SECRET:-clientsecret}
+      - OAUTH_VERIFY_TOKEN=false
+      - SHOW_DETAILED_ERRORS=true
+      - SHOW_REQUEST_ID_ON_ERROR_PAGE=true
+      - USE_LOCALSTACK=true
+      - SHOW_NOTIFICATION=false
+      - NOTIFICATION_HEADER=
+      - NOTIFICATION_BODY=
+      - AWS_ENDPOINT_URL=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
+      - S3_REGION=eu-west-2
+      - S3_BUCKET_NAME=hmpps-assessments-s3
+      - SNS_REGION=eu-west-2
+      - SNS_TOPIC_ARN=arn:aws:sns:eu-west-2:000000000000:hmpps-assessments-topic
+      - REDIS_HOST=redis
+      - REDIS_TLS_ENABLED=false
+      - LOGGING_LEVEL=debug
+      - INGRESS_URL=http://community-payback-assessment-ui:3000
+      - NODE_ENV=development
+    depends_on:
+      - hmpps-auth
+      - localstack
+      - community-payback-assessment-api
+      - gotenberg
 
 networks:
   hmpps:

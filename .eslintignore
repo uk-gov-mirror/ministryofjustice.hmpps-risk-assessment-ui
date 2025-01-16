@@ -5,13 +5,9 @@ common/assets/javascripts/app-insights.js
 common/browsered/*.js
 package.json
 package-lock.json
-cypress.json
-cypress.env.json
-cypress-reporter-config.json
-wiremock/responses/*
-integration-tests/mockApis/responses/*
 app/questionGroup/fixtures/*.json
 app/addRow/fixtures/*.json
 app/editRow/fixtures/*.json
 app/summary/fixtures/*.json
 common/middleware/testSupportFiles
+wiremock

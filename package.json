@@ -43,7 +43,6 @@
     ]
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "build": "npm run build:copy & npm run build:css & npm run build:js",
     "clean": "rimraf public && mkdir public && mkdir public/assets && mkdir public/assets/fonts",
     "build:copy": "npm run copy-govuk-assets && npm run copy-assets",
@@ -59,7 +58,7 @@
     "security_audit": "npm audit",
     "server": "node ./start.js",
     "start": "npm run clean && npm run build && node ./start.js",
-    "start:local": "npm run clean && npm run build && npm run setupStubs && NODE_ENV=local node ./start.js & npm run watch",
+    "start:local": "npm run clean && npm run build && NODE_ENV=local node ./start.js & npm run watch",
     "lint-sass": "stylelint '**/*.scss'",
     "lint-sass:fix": "stylelint '**/*.scss' --fix",
     "test": "jest --forceExit",
@@ -69,7 +68,6 @@
     "watch:sass": "nodemon -e scss -x \"npm run build:css\"",
     "watch": "npm run watch:sass",
     "record-build-info": "node ./bin/record-build-info",
-    "setupStubs": "node ./wiremock/stub.js",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -121,6 +119,8 @@
     "@babel/helper-compilation-targets": "^7.14.5",
     "@babel/plugin-proposal-optional-chaining": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
+    "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
     "@types/luxon": "^3.0.0",
     "audit-ci": "^6.6.1",
     "browserify": "^17.0.0",
@@ -128,11 +128,22 @@
     "chokidar": "^3.5.3",
     "clean-css-cli": "^5.3.0",
     "concat": "^1.0.3",
+    "cypress": "^13.17.0",
+    "cypress-audit": "^1.1.0",
+    "cypress-axe": "^1.5.0",
+    "cypress-circleci-reporter": "^0.3.0",
+    "cypress-multi-reporters": "^1.6.4",
+    "cypress-plugin-tab": "^1.0.5",
+    "cypress-terminal-report": "^5.3.12",
+    "cypress-visual-regression": "^5.2.2",
+    "cypress-wait-until": "^1.7.2",
     "envfile": "^7.0.0",
     "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-cypress": "^3.6.0",
     "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-no-only-tests": "^3.3.0",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^9.0.0",
     "jest": "^29.0.0",
@@ -143,6 +154,7 @@
     "nock": "^13.2.7",
     "nodemon": "^3.0.0",
     "prettier": "^3.0.3",
+    "querystring": "^0.2.1",
     "redis-mock": "^0.56.3",
     "rimraf": "^5.0.1",
     "sass": "^1.53.0",
@@ -163,5 +175,15 @@
     "*.scss": [
       "stylelint '**/*.scss' --cache --fix"
     ]
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "step_definitions": "cypress/support/step_definitions/",
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/reports/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
   }
 }

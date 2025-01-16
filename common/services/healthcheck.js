@@ -26,6 +26,15 @@ function gatherCheckInfo(total, currentValue) {
   return { ...total, [currentValue.name]: currentValue.message }
 }
 
+function getBuild() {
+  try {
+    // eslint-disable-next-line global-require
+    return require('../../build-info.json')
+  } catch (ex) {
+    return null
+  }
+}
+
 function addAppInfo(result) {
   const buildInformation = getBuild()
   const buildInfo = {
@@ -35,13 +44,4 @@ function addAppInfo(result) {
   }
 
   return { ...result, ...buildInfo }
-}
-
-function getBuild() {
-  try {
-    // eslint-disable-next-line global-require
-    return require('../../build-info.json')
-  } catch (ex) {
-    return null
-  }
 }

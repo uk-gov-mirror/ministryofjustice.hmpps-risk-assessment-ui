@@ -1,7 +1,5 @@
 const { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } = require('../../common/data/hmppsAssessmentApi')
 const { verifyAssessment } = require('./get.controller')
-const offenderAndOffenceDetails = require('../../wiremock/responses/offenderAndOffenceDetails.json')
-const currentEpisodeDetails = require('../../wiremock/responses/currentEpisodeByCrn.json')
 
 jest.mock('../../common/data/hmppsAssessmentApi', () => ({
   getCurrentEpisodeForCrn: jest.fn(),
@@ -24,6 +22,55 @@ describe('verifyAssessment', () => {
     render: jest.fn(),
   }
   const next = jest.fn()
+
+  const offenderAndOffenceDetails = {
+    offenderId: 101,
+    firstName: 'John',
+    surname: 'Smith',
+    dateOfBirth: '1979-08-18',
+    gender: 'Male',
+    crn: 'DX5678A',
+    pncNumber: 'A/1234560BA',
+    croNumber: null,
+    offence: {
+      convictionId: 2500000223,
+      convictionIndex: 1,
+      offenceCode: '046',
+      codeDescription: 'Stealing from shops and stalls (shoplifting)',
+      offenceSubCode: '00',
+      subCodeDescription: 'Stealing from shops and stalls (shoplifting)',
+      sentenceDate: '2020-08-25',
+    },
+    address: null,
+    firstNameAliases: ['John', 'Jonny'],
+    surnameAliases: ['Smithy'],
+  }
+
+  const currentEpisodeDetails = {
+    episodeUuid: 'f3569440-efd5-4289-8fdd-4560360e5279',
+    assessmentUuid: '19c8d211-68dc-4692-a6e2-d58468127056',
+    oasysAssessmentId: null,
+    reasonForChange: 'Change',
+    created: '2019-11-14T09:00',
+    ended: null,
+    userFullName: 'A Alonso',
+    answers: {},
+    errors: null,
+    pageErrors: null,
+    assessmentErrors: null,
+    predictors: [],
+    offence: {
+      convictionId: 2500000223,
+      convictionIndex: 1,
+      offenceCode: '046',
+      codeDescription: 'Stealing from shops and stalls (shoplifting)',
+      offenceSubCode: '00',
+      subCodeDescription: 'Stealing from shops and stalls (shoplifting)',
+      sentenceDate: '2020-08-25',
+    },
+    lastEditedDate: '2022-04-01T09:00',
+    closedDate: null,
+  }
 
   beforeEach(() => {
     getCurrentEpisodeForCrn.mockReset()

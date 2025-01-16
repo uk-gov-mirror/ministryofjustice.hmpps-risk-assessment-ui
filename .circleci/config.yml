@@ -13,6 +13,12 @@ parameters:
     type: string
     default: 22.13-browsers
 
+executors:
+  e2e-executor:
+    machine:
+      image: ubuntu-2204:current
+      resource_class: medium
+
 jobs:
   build:
     executor:
@@ -25,12 +31,12 @@ jobs:
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           keys:
-            - dependency-cache-${CACHE_VERSION}-{{ checksum "package.json" }}
+            - dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: Install Dependencies
-          command: npm ci
+          command: npm ci --no-audit
       - save_cache:
-          key: dependency-cache-${CACHE_VERSION}-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
             - ~/.cache
@@ -54,7 +60,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - dependency-cache-${CACHE_VERSION}-{{ checksum "package.json" }}
+            - dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: unit tests
           command: npm run test
@@ -64,14 +70,16 @@ jobs:
           path: test-results/unit-test-reports.html
 
   e2e_test:
-    machine:
-      image: ubuntu-2204:current
-      resource_class: medium
-    parallelism: 3
+    executor: e2e-executor
+    parallelism: 2
     steps:
       - checkout
-      - run: git submodule sync
-      - run: git submodule update --init --recursive --remote
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Move cached node_modules to project directory
+          command: mv ~/app/node_modules ~/project
       - attach_workspace:
           at: ~/app
       - run:
@@ -79,46 +87,32 @@ jobs:
           command: docker load --input ~/app/docker_cache/build_image.tar
       - mem/recall:
           env_var: APP_VERSION
-      - restore_cache:
-          key: dependency-cache-{{ checksum "hmpps-community-payback-assessment-e2e-tests/package-lock.json" }}
       - run:
           name: Stand up a test environment
           command: |
-            cd hmpps-community-payback-assessment-e2e-tests
             export UI_IMAGE_TAG=$APP_VERSION
             make test-up
       - run:
-          name: Install Node and npm for running Cypress
-          command: |
-            sudo apt-get update
-            sudo apt-get install nodejs npm
-      - run:
-          name: Install Dependencies
-          command: |
-            cd hmpps-community-payback-assessment-e2e-tests
-            npm i --no-audit
-      - save_cache:
-          key: dependency-cache-{{ checksum "hmpps-community-payback-assessment-e2e-tests/package-lock.json" }}
-          paths:
-            - hmpps-community-payback-assessment-e2e-tests/node_modules
-            - ~/.cache
+          name: Clear the visual regression diffs directory
+          command: rm -rf cypress/snapshots/diff
       - run:
           name: Run the end-to-end tests
-          command: |
-            cd hmpps-community-payback-assessment-e2e-tests
-            make e2e-ci
+          command: make e2e-ci
+      - run:
+          name: Check for visual regression diffs
+          command: if test -d cypress/snapshots/diff; then exit 1; fi
       - run:
           name: Store container logs
-          command: |
-            cd hmpps-community-payback-assessment-e2e-tests
-            make save-logs OUTPUT_LOGS_DIR=~/docker-logs PROJECT_NAME="hmpps-community-payback-assessment-e2e-tests-test"
+          command: make save-logs OUTPUT_LOGS_DIR=~/docker-logs PROJECT_NAME="hmpps-risk-assessment-ui-test"
           when: on_fail
       - store_test_results:
-          path: hmpps-community-payback-assessment-e2e-tests/test_results
+          path: test_results
       - store_artifacts:
-          path: hmpps-community-payback-assessment-e2e-tests/cypress/videos
+          path: cypress/videos
       - store_artifacts:
-          path: hmpps-community-payback-assessment-e2e-tests/cypress/screenshots
+          path: cypress/screenshots
+      - store_artifacts:
+          path: cypress/snapshots/diff
       - store_artifacts:
           path: ~/docker-logs
 
@@ -153,6 +147,7 @@ workflows:
       - e2e_test:
           context: hmpps-common-vars
           requires:
+            - build
             - build_docker
       - hmpps/publish_docker:
           name: publish_docker

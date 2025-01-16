@@ -65,9 +65,12 @@ govuk_modules/
 public/
 
 # Cypress
-integration-tests/videos
-integration-tests/screenshots
-integration-tests/reports/
+cypress/reports/
+cypress/logs/
+cypress/screenshots/
+cypress/snapshots/diff/
+cypress/videos/
+cypress/downloads/
 
 .DS_Store
 .idea/
@@ -76,4 +79,6 @@ integration-tests/reports/
 
 
 volume/
+
+
 

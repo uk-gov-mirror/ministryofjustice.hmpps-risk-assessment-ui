@@ -8,7 +8,8 @@
     "jest": true,
     "jquery": true
   },
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "plugins": ["import", "no-only-tests"],
+  "extends": ["airbnb-base", "plugin:prettier/recommended", "plugin:cypress/recommended"],
   "rules": {
     "no-unused-vars": [
       1,
@@ -20,6 +21,6 @@
     "no-use-before-define": 0,
     "semi": 0,
     "comma-dangle": ["error", "always-multiline"],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "test/**"]}]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "test/**", "cypress.config.js", "cypress/**/*.js"]}]
   }
 }
