@@ -16,7 +16,7 @@ Feature: Verify the Caring commitments page
     And I select "Yes" for Mark this section as complete? for Caring commitments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Caring commitments" link is marked as "COMPLETED"
+    Then I see the "Caring commitments" link is marked as "Completed"
 
 #   ARN-742 UPW Task list pages - Caring commitments - Clicking on "Back" Link is not clearing the values on the Caring commitments Page
   Scenario: Verify that all the Caring commitments related values are cleared when the user navigates to Task List Page by clicking "Back" link
@@ -24,7 +24,7 @@ Feature: Verify the Caring commitments page
     And I enter Additional information as "Additional caring commitments" for Caring commitments
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Caring commitments" link is marked as "INCOMPLETE"
+    And I see the "Caring commitments" link is marked as "Incomplete"
     And I click on the "Caring commitments" link
     And I see UPW "Are there carer commitments?" page
     Then I verify that the Optional Additional information text box is "Cleared"
@@ -35,7 +35,7 @@ Feature: Verify the Caring commitments page
     And I select "No, I'll come back later" for Mark this section as complete? for Caring commitments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Caring commitments" link is marked as "INCOMPLETE"
+    And I see the "Caring commitments" link is marked as "Incomplete"
     And I click on the "Caring commitments" link
     Then I verify that the Optional Additional information text box is "Not cleared"
 

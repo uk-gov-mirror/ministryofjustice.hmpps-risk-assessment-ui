@@ -90,20 +90,9 @@ $compact-table-breakpoint: 650px;
 }
 
 .upw-availability-table__cell {
-  padding: 10px 24px 10px 0;
+  padding: 10px 0 10px 44px;
   border-left: 1px solid #b1b4b6;
   border-right: 1px solid #b1b4b6;
-
-  &:last-child {
-    padding: 10px 24px 10px 0;
-  }
-
-  .govuk-checkboxes__item {
-    padding: 0;
-    width: 0;
-    height: 0;
-    margin: 0 auto;
-  }
 }
 
 .upw-availability-table__column {

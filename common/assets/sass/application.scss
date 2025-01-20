@@ -6,8 +6,8 @@ $govuk-breakpoints: (
   desktop: 1024px,
 );
 
-@import "govuk-frontend/govuk/all";
-@import "@ministryofjustice/frontend/moj/all";
+@import "govuk/index";
+@import "moj/all";
 /* stylelint-disable scss/at-import-partial-extension */
 @import "accessible-autocomplete/dist/accessible-autocomplete.min";
 /* stylelint-enable scss/at-import-partial-extension */
@@ -16,6 +16,7 @@ $govuk-breakpoints: (
 @import "common/assets/sass/components/task-list";
 @import "common/assets/sass/components/form-wizard-task-list";
 @import "common/assets/sass/components/predictor-scores";
+@import "common/assets/sass/components/header-bar";
 @import "common/assets/sass/pages";
 @import "common/assets/sass/upw-pages";
 @import "common/assets/sass/upw-pdf-template";

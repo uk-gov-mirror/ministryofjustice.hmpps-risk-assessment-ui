@@ -1,16 +1,20 @@
-{%- from "node_modules/govuk-frontend/govuk/components/input/macro.njk" import govukInput -%}
-{%- from "node_modules/govuk-frontend/govuk/components/textarea/macro.njk" import govukTextarea -%}
-{%- from "node_modules/govuk-frontend/govuk/components/radios/macro.njk" import govukRadios -%}
-{%- from "node_modules/govuk-frontend/govuk/components/checkboxes/macro.njk" import govukCheckboxes -%}
-{%- from "node_modules/govuk-frontend/govuk/components/select/macro.njk" import govukSelect -%}
-{%- from "node_modules/govuk-frontend/govuk/components/date-input/macro.njk" import govukDateInput -%}
-{%- from "node_modules/govuk-frontend/govuk/components/summary-list/macro.njk" import govukSummaryList -%}
-{%- from "node_modules/govuk-frontend/govuk/components/button/macro.njk" import govukButton -%}
-{%- from "node_modules/govuk-frontend/govuk/components/character-count/macro.njk" import govukCharacterCount -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/input/macro.njk" import govukInput -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/textarea/macro.njk" import govukTextarea -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/radios/macro.njk" import govukRadios -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/checkboxes/macro.njk" import govukCheckboxes -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/select/macro.njk" import govukSelect -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/date-input/macro.njk" import govukDateInput -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/summary-list/macro.njk" import govukSummaryList -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/button/macro.njk" import govukButton -%}
+{%- from "node_modules/govuk-frontend/dist/govuk/components/character-count/macro.njk" import govukCharacterCount -%}
 
 {% set labelClasses = '' %}
 {% if not options.useSmallLabel %}
-{% set labelClasses = labelClasses + ' govuk-label--m' %}
+  {% if question.answerType === 'radio' or question.answerType === 'checkbox' or question.answerType === 'checkboxGroup' or question.answerType === 'date' %}
+    {% set labelClasses = labelClasses + ' govuk-fieldset__legend--m' %}
+  {% else %}
+    {% set labelClasses = labelClasses + ' govuk-label--m' %}
+  {% endif %}
 {% endif %}
 {% if options.labelClasses %}
 {% set labelClasses = labelClasses + ' ' + options.labelClasses %}

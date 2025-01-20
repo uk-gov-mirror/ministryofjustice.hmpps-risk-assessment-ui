@@ -42,7 +42,7 @@ Feature: Verify the GP details page
     And I select "Yes" for Mark this section as complete? for GP details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "GP Details" link is marked as "COMPLETED"
+    And I see the "GP Details" link is marked as "Completed"
 
   Scenario: Verify that user can complete GP details section by not adding GP details
     When I see UPW "GP Details" page
@@ -51,7 +51,7 @@ Feature: Verify the GP details page
     And I select "Yes" for Mark this section as complete? for GP details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "GP Details" link is marked as "COMPLETED"
+    Then I see the "GP Details" link is marked as "Completed"
 
   Scenario: Verify that it is mandatory to provide a set of GP details or check the "Individual declined to give GP details" CheckBox
     When I see UPW "GP Details" page
@@ -67,7 +67,7 @@ Feature: Verify the GP details page
     And I say Individual declined to give GP details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "GP Details" link is marked as "INCOMPLETE"
+    And I see the "GP Details" link is marked as "Incomplete"
 
   Scenario: Try to continue without entering any text for GP details and verify the error messages
     When I see UPW "GP Details" page

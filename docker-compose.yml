@@ -112,7 +112,7 @@ services:
       - -verbose
       - -global-response-templating
 
-  community-payback-assessment-api:
+  api:
     image: quay.io/hmpps/hmpps-assessments-api:${API_IMAGE_TAG:-latest}
     restart: always
     networks:
@@ -124,7 +124,7 @@ services:
       - redis
       - wiremock
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://community-payback-assessment-api:8080/health"]
+      test: ["CMD", "curl", "-f", "http://api:8080/health"]
       interval: 5s
       retries: 60
     environment:
@@ -146,8 +146,12 @@ services:
       - DELIUS_INTEGRATION_CLIENT_ID=${API_CLIENT_CREDENTIALS_ID:-hmpps-community-payback-api-client}
       - DELIUS_INTEGRATION_CLIENT_SECRET=${API_CLIENT_CREDENTIALS_SECRET:-clientsecret}
 
-  community-payback-assessment-ui:
+  ui:
     image: quay.io/hmpps/hmpps-risk-assessment-ui:${UI_IMAGE_TAG:-latest}
+    hostname: community-payback-assessment-ui
+    build:
+      context: .
+      target: production
     networks:
       - hmpps
     healthcheck:
@@ -157,7 +161,7 @@ services:
     environment:
       - OAUTH_ENDPOINT_URL=${OAUTH_ENDPOINT_URL:-http://hmpps-auth:9090/auth}
       - OAUTH_EXTERNAL_URL=${OAUTH_EXTERNAL_URL:-http://hmpps-auth:9090/auth}
-      - HMPPS_ASSESSMENT_API_URL=http://community-payback-assessment-api:8080
+      - HMPPS_ASSESSMENT_API_URL=http://api:8080
       - PDF_CONVERTER_ENDPOINT=http://gotenberg:3000/forms/chromium/convert/html
       - API_CLIENT_ID=${UI_CLIENT_CREDENTIALS_ID:-hmpps-community-payback-api-client}
       - API_CLIENT_SECRET=${UI_CLIENT_CREDENTIALS_SECRET:-clientsecret}
@@ -185,7 +189,7 @@ services:
     depends_on:
       - hmpps-auth
       - localstack
-      - community-payback-assessment-api
+      - api
       - gotenberg
 
 networks:

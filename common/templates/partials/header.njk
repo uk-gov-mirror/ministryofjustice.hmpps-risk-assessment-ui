@@ -1,30 +1,35 @@
 {% from "common/templates/components/moj-crest/macro.njk" import renderMojCrest %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
-<header class="moj-header" role="banner">
-  <div class="moj-header__container use-govuk-page-width">
-    <div class="moj-header__logo">
-      {{ renderMojCrest('#FFFFFF', 40) }}
-      <a class="moj-header__link moj-header__link--organisation-name" href="/">HMPPS</a>
-      <a class="moj-header__link moj-header__link--service-name" href="/">Assess risks and needs</a>
-      <div class="pac-phase-tag">
-        <strong class="govuk-tag pac-header-tag">Beta</strong>
-      </div>
+{% set applicationName = "Assess risks and needs" %}
+
+<header class="hmpps-header" role="banner">
+  <div class="hmpps-header__container">
+    <div class="hmpps-header__title">
+      <span class="hmpps-header__title__organisation-name">
+        {{ renderMojCrest('#FFFFFF', 40) }}
+        HMPPS
+      </span>
+
+      <span class="hmpps-header__title__service-name">{{ applicationName }}</span>
+
+      <strong class="govuk-tag phase-tag">
+        Beta
+      </strong>
     </div>
-    <div class="moj-header__content">
-      <nav class="moj-header__navigation" aria-label="Account navigation">
-        <ul class="moj-header__navigation-list">
-          {% if username %}
-            <li class="moj-header__navigation-item">
-              {{ username }}
-            </li>
-            <li class="moj-header__navigation-item">
-              <a class="govuk-header__link" href="/logout">Sign out</a>
-            </li>
-          {% endif %}
-        </ul>
-      </nav>
-    </div>
+
+    <nav aria-label="Account navigation">
+      <ul class="hmpps-header__navigation">
+        {% if username %}
+          <li class="hmpps-header__navigation__item">
+            {{ username }}
+          </li>
+          <li class="hmpps-header__navigation__item">
+            <a class="govuk-header__link" href="/logout">Sign out</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
   </div>
 </header>
 

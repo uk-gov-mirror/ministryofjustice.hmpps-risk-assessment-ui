@@ -1,8 +1,8 @@
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
-{% from 'moj/components/header/macro.njk' import mojHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+{% from 'moj/components/header/macro.njk' import mojHeader %}
 
 {% extends "govuk/template.njk" %}
 
@@ -16,17 +16,12 @@
 {% endblock %}
 
 {% block headIcons %}
-  <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="{{ assetPath | default('') }}/images/favicon.ico"
-        type="image/x-icon" />
-  <link rel="mask-icon" href="{{ assetPath | default('/assets') }}/images/govuk-mask-icon.svg"
-        color="{{ themeColor | default('#0b0c0c') }}"> {# Hardcoded value of $govuk-black #}
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-180x180.png">
-  <link rel="apple-touch-icon" sizes="167x167"
-        href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-167x167.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon-152x152.png">
-  <link rel="apple-touch-icon" href="{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="{{ assetPath | default('') }}{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon.png">
+  <link rel="icon" sizes="48x48" href="{{ assetPath | default('') }}/assets/images/favicon.ico">
+  <link rel="icon" sizes="any" href="{{ assetPath | default('') }}/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="mask-icon" href="{{ assetPath | default('') }}/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+  <link rel="apple-touch-icon" href="{{ assetPath | default('') }}/assets/images/govuk-icon-180.png">
+  <link rel="manifest" href="{{ assetPath | default('') }}/assets/manifest.json">
 {% endblock %}
 
 {% block head %}
@@ -94,6 +89,6 @@
 {% block bodyEnd %}
   <script nonce="{{ cspNonce }}">
     window.initAll()
-    window.outOflineConditionalRadios()
+    window.outOfLineConditionalRadios()
   </script>
 {% endblock %}

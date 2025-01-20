@@ -65,7 +65,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Individuals details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Individual's details" link is marked as "COMPLETED"
+    And I see the "Individual's details" link is marked as "Completed"
     #  Action/Enter Offender's "Gender information"
     When I click on the "Gender information" link
     And I see UPW "Gender information" page
@@ -80,7 +80,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Gender information
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Gender information" link is marked as "COMPLETED"
+    Then I see the "Gender information" link is marked as "Completed"
     And I see that "Placement preferences" link is available
     #  Action/Enter Offender's "Cultural and religious adjustments"
     When I click on the "Cultural and religious adjustments" link
@@ -92,7 +92,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Culture And Religious Adjustments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Cultural and religious adjustments" link is marked as "COMPLETED"
+    Then I see the "Cultural and religious adjustments" link is marked as "Completed"
     #  Action/Enter Offender's "Placement preferences"
     When I click on the "Placement preferences" link
     And I see UPW "Does the individual have any placement preferences?" page
@@ -103,7 +103,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete?
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Placement preferences" link is marked as "COMPLETED"
+    Then I see the "Placement preferences" link is marked as "Completed"
     #  Action/Enter Offender's "Risk of harm in the community" information
     When I click on the "Risk of harm in the community" link
     And I see UPW "Risk of harm in the community" page
@@ -124,7 +124,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Risk of Harm Community
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Risk of harm in the community" link is marked as "COMPLETED"
+    Then I see the "Risk of harm in the community" link is marked as "Completed"
     #  Action/Enter Offender's "Managing risk" details
     When I click on the "Managing risk" link
     And I see UPW "Managing risk" page
@@ -143,7 +143,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Managing Risk
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Managing risk" link is marked as "COMPLETED"
+    Then I see the "Managing risk" link is marked as "Completed"
     #  Action/Enter Offender's "Disabilities and mental health" details
     When I click on the "Disabilities and mental health" link
     And I see UPW "Disabilities and mental health" page
@@ -156,7 +156,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Disabilities and mental health
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Disabilities and mental health" link is marked as "COMPLETED"
+    Then I see the "Disabilities and mental health" link is marked as "Completed"
     #  Action/Enter Offender's existing "Health issues"
     When I click on the "Health issues" link
     And I see UPW "Are there any other health issues that may affect ability to work?" page
@@ -172,7 +172,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Health issues
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Health issues" link is marked as "COMPLETED"
+    Then I see the "Health issues" link is marked as "Completed"
     #  Action/Enter Offender's "GP Details"
     And I see the UPW "task-list" page
     And I click on the "GP Details" link
@@ -210,7 +210,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for GP details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "GP Details" link is marked as "COMPLETED"
+    Then I see the "GP Details" link is marked as "Completed"
     #  Action/Enter Offender's "Travel" information
     When I click on the "Travel" link
     And I see UPW "Travel information" page
@@ -225,7 +225,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Travel information
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Travel" link is marked as "COMPLETED"
+    Then I see the "Travel" link is marked as "Completed"
     #  Action/Enter Offender's "Caring commitments" details
     When I click on the "Caring commitments" link
     And I see UPW "Are there carer commitments?" page
@@ -235,7 +235,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Caring commitments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Caring commitments" link is marked as "COMPLETED"
+    Then I see the "Caring commitments" link is marked as "Completed"
     #  Action/Enter Offender's "Employment, education and skills" information
     And I click on the "Employment, education and skills" link
     When I see UPW "Employment, education and skills" page
@@ -251,7 +251,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Employment, education and skills
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Employment, education and skills" link is marked as "COMPLETED"
+    Then I see the "Employment, education and skills" link is marked as "Completed"
     #  Action/Enter Offender's "Training & employment opportunities" information
     And I click on the "Training & employment opportunities" link
     When I see UPW "Training & employment opportunities" page
@@ -264,7 +264,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Training & employment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Training & employment opportunities" link is marked as "COMPLETED"
+    Then I see the "Training & employment opportunities" link is marked as "Completed"
     #  Action/Enter Offender's "Intensive working" details
     When I click on the "Intensive working" link
     And I see UPW "Intensive working" page
@@ -279,7 +279,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Intensive working
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Intensive working" link is marked as "COMPLETED"
+    Then I see the "Intensive working" link is marked as "Completed"
     #  Action/Enter Offender's "Availability" for Community Payback work
     When I click on the "Availability" link
     And I see UPW "Availability for Community Payback work" page
@@ -294,7 +294,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Availability
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Availability" link is marked as "COMPLETED"
+    Then I see the "Availability" link is marked as "Completed"
     #  Action/Enter Offender's "Equipment" requirements
     When I click on the "Choose equipment sizes" link
     And I see UPW "Choose equipment sizes" page
@@ -309,7 +309,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Equipment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Choose equipment sizes" link is marked as "COMPLETED"
+    Then I see the "Choose equipment sizes" link is marked as "Completed"
     #   PDF preview, confirm declaration & generate output pdf
     And I check the visual regression for "task-list-complete"
     And I click on the "Completed assessment" link
@@ -498,7 +498,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Individuals details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Individual's details" link is marked as "COMPLETED"
+    And I see the "Individual's details" link is marked as "Completed"
     When I click on the "Gender information" link
     And I see UPW "Gender information" page
     And I see that "No, I'll come back later" is Default state on Gender information page
@@ -517,7 +517,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Gender information
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Gender information" link is marked as "COMPLETED"
+    Then I see the "Gender information" link is marked as "Completed"
     And I see that "Placement preferences" link is available
     When I click on the "Cultural and religious adjustments" link
     And I see UPW "Are adjustments required for cultural or religious reasons?" page
@@ -529,7 +529,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Culture And Religious Adjustments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Cultural and religious adjustments" link is marked as "COMPLETED"
+    Then I see the "Cultural and religious adjustments" link is marked as "Completed"
     #  Action/Enter Offender's "Placement preferences"
     When I click on the "Placement preferences" link
     And I see UPW "Does the individual have any placement preferences?" page
@@ -542,7 +542,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete?
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Placement preferences" link is marked as "COMPLETED"
+    Then I see the "Placement preferences" link is marked as "Completed"
     #  Action/Enter Offender's "Risk of harm in the community" information
     When I click on the "Risk of harm in the community" link
     And I see UPW "Risk of harm in the community" page
@@ -562,7 +562,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Risk of Harm Community
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Risk of harm in the community" link is marked as "COMPLETED"
+    Then I see the "Risk of harm in the community" link is marked as "Completed"
 #      Action/Enter Offender's "Managing risk" details
     When I click on the "Managing risk" link
     And I see UPW "Managing risk" page
@@ -580,7 +580,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Managing Risk
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Managing risk" link is marked as "COMPLETED"
+    Then I see the "Managing risk" link is marked as "Completed"
     #  Action/Enter Offender's "Disabilities and mental health" details
     When I click on the "Disabilities and mental health" link
     And I see UPW "Disabilities and mental health" page
@@ -592,7 +592,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Disabilities and mental health
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Disabilities and mental health" link is marked as "COMPLETED"
+    Then I see the "Disabilities and mental health" link is marked as "Completed"
     #  Action/Enter Offender's existing "Health issues"
     When I click on the "Health issues" link
     And I see UPW "Are there any other health issues that may affect ability to work?" page
@@ -607,7 +607,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Health issues
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Health issues" link is marked as "COMPLETED"
+    Then I see the "Health issues" link is marked as "Completed"
     #  Action/Enter Offender's "GP Details"
     And I see the UPW "task-list" page
     And I click on the "GP Details" link
@@ -634,7 +634,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for GP details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "GP Details" link is marked as "COMPLETED"
+    Then I see the "GP Details" link is marked as "Completed"
     #  Action/Enter Offender's "Travel" information
     When I click on the "Travel" link
     And I see UPW "Travel information" page
@@ -648,7 +648,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Travel information
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Travel" link is marked as "COMPLETED"
+    Then I see the "Travel" link is marked as "Completed"
     #  Action/Enter Offender's "Caring commitments" details
     When I click on the "Caring commitments" link
     And I see UPW "Are there carer commitments?" page
@@ -660,7 +660,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Caring commitments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Caring commitments" link is marked as "COMPLETED"
+    Then I see the "Caring commitments" link is marked as "Completed"
     #  Action/Enter Offender's "Employment, education and skills" information
     And I click on the "Employment, education and skills" link
     When I see UPW "Employment, education and skills" page
@@ -675,7 +675,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Employment, education and skills
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Employment, education and skills" link is marked as "COMPLETED"
+    Then I see the "Employment, education and skills" link is marked as "Completed"
     #  Action/Enter Offender's "Training & employment opportunities" information
     And I click on the "Training & employment opportunities" link
     When I see UPW "Training & employment opportunities" page
@@ -687,7 +687,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Training & employment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Training & employment opportunities" link is marked as "COMPLETED"
+    Then I see the "Training & employment opportunities" link is marked as "Completed"
     #  Action/Enter Offender's "Intensive working" details
     When I click on the "Intensive working" link
     And I see UPW "Intensive working" page
@@ -702,7 +702,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Intensive working
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Intensive working" link is marked as "COMPLETED"
+    Then I see the "Intensive working" link is marked as "Completed"
     #  Action/Enter Offender's "Availability" for Community Payback work
     When I click on the "Availability" link
     And I see UPW "Availability for Community Payback work" page
@@ -716,7 +716,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Availability
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Availability" link is marked as "COMPLETED"
+    Then I see the "Availability" link is marked as "Completed"
     #  Action/Enter Offender's "Equipment" requirements
     When I click on the "Choose equipment sizes" link
     And I see UPW "Choose equipment sizes" page
@@ -730,7 +730,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I select "Yes" for Mark this section as complete? for Equipment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Choose equipment sizes" link is marked as "COMPLETED"
+    Then I see the "Choose equipment sizes" link is marked as "Completed"
     And I click on the "Completed assessment" link
     And I click on back link
     And I click on Submit Button

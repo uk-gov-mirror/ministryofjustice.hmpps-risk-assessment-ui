@@ -57,7 +57,7 @@
         <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
         <div class="govuk-form-group {% if errors['individual_availability'] %}govuk-form-group--error{% endif %}">
           <fieldset class="govuk-fieldset" aria-describedby="individual_availability-legend {% if errors['individual_availability'] %} individual_availability{% endif %}">
-            <legend id="individual_availability-legend" class="govuk-fieldset__legend individual_availability govuk-label--m">
+            <legend id="individual_availability-legend" class="govuk-label govuk-label--m individual_availability">
               {{ questions['individual_availability'].questionText }}
             </legend>
             <table class="govuk-table upw-availability-table">

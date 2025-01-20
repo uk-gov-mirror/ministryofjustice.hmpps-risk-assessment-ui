@@ -28,7 +28,7 @@ Feature: Verify the UPW Risk of harm in the community page
 #    And I select "Yes" for Mark this section as complete? for Risk of Harm Community
 #    And I click on the "Save" button
 #    And I see the UPW "task-list" page
-#    And I see the "Risk of harm in the community" link is marked as "COMPLETED"
+#    And I see the "Risk of harm in the community" link is marked as "Completed"
 #
 #  #  NO Option for All the Questions and enter details
 #  Scenario: Verify that the user can select all Options as "No" on the "Risk of harm in the community" Page
@@ -48,7 +48,7 @@ Feature: Verify the UPW Risk of harm in the community page
 #    And I select "Yes" for Mark this section as complete? for Risk of Harm Community
 #    And I click on the "Save" button
 #    And I see the UPW "task-list" page
-#    And I see the "Risk of harm in the community" link is marked as "COMPLETED"
+#    And I see the "Risk of harm in the community" link is marked as "Completed"
 #
 # #  Combination of YES & NO Option for the Questions and enter details when YES
 #  Scenario: Verify that the user can select combination of Yes & NO as answers on the "Risk of harm in the community" Page
@@ -68,7 +68,7 @@ Feature: Verify the UPW Risk of harm in the community page
 #    And I select "Yes" for Mark this section as complete? for Risk of Harm Community
 #    And I click on the "Save" button
 #    And I see the UPW "task-list" page
-#    And I see the "Risk of harm in the community" link is marked as "COMPLETED"
+#    And I see the "Risk of harm in the community" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     And I see UPW "Risk of harm in the community" page
@@ -130,7 +130,7 @@ Feature: Verify the UPW Risk of harm in the community page
       | Additional risk assessment information relevant to Community Payback? | Yes           | Give Details              | Entering Text related to Additional information  |
     And I click on back link
     And I see the UPW "task-list" page
-    Then I see the "Risk of harm in the community" link is marked as "INCOMPLETE"
+    Then I see the "Risk of harm in the community" link is marked as "Incomplete"
     And I click on the "Risk of harm in the community" link
     And I verify that the Risk of harm related radio buttons are cleared
 
@@ -150,7 +150,7 @@ Feature: Verify the UPW Risk of harm in the community page
     And I select "No, I'll come back later" for Mark this section as complete? for Risk of harm in the community
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Risk of harm in the community" link is marked as "INCOMPLETE"
+    And I see the "Risk of harm in the community" link is marked as "Incomplete"
     And I click on the "Risk of harm in the community" link
     And I verify that the Risk of harm related related radio buttons are still selected & unselected
       | Question Name                                                         | Select Option |

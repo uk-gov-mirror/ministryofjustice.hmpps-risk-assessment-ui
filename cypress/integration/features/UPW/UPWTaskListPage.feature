@@ -14,27 +14,27 @@ Feature: Verify the UPW Task List page
     Then I verify the following links are available & working on the "Task List page"
       | Link Name                           | Status     | Page to be displayed on clicking the Link                          |
       #  Individual's details Section
-      | Individual's details                | INCOMPLETE | Individual's details                                               |
+      | Individual's details                | Incomplete | Individual's details                                               |
       # Diversity information Section
-      | Gender information                  | INCOMPLETE | Gender information                                                 |
-      | Cultural and religious adjustments  | INCOMPLETE | Are adjustments required for cultural or religious reasons?        |
-      # | Placement preferences               | INCOMPLETE | Does the individual have any placement preferences?                |
+      | Gender information                  | Incomplete | Gender information                                                 |
+      | Cultural and religious adjustments  | Incomplete | Are adjustments required for cultural or religious reasons?        |
+      # | Placement preferences               | Incomplete | Does the individual have any placement preferences?                |
       # Risk information Section
-      | Risk of harm in the community       | INCOMPLETE | Risk of harm in the community                                      |
-      | Managing risk                       | INCOMPLETE | Managing risk                                                      |
+      | Risk of harm in the community       | Incomplete | Risk of harm in the community                                      |
+      | Managing risk                       | Incomplete | Managing risk                                                      |
       # Placement restrictions due to health and other needs Section
-      | Disabilities and mental health      | INCOMPLETE | Disabilities and mental health                                     |
-      | Health issues                       | INCOMPLETE | Are there any other health issues that may affect ability to work? |
-      | GP Details                          | INCOMPLETE | GP Details                                                         |
-      | Travel                              | INCOMPLETE | Travel information                                                 |
-      | Caring commitments                  | INCOMPLETE | Are there carer commitments?                                       |
+      | Disabilities and mental health      | Incomplete | Disabilities and mental health                                     |
+      | Health issues                       | Incomplete | Are there any other health issues that may affect ability to work? |
+      | GP Details                          | Incomplete | GP Details                                                         |
+      | Travel                              | Incomplete | Travel information                                                 |
+      | Caring commitments                  | Incomplete | Are there carer commitments?                                       |
       # Employment, education and skills information Section
-      | Employment, education and skills    | INCOMPLETE | Employment, education and skills                                   |
-      | Training & employment opportunities | INCOMPLETE | Training & employment opportunities                                |
+      | Employment, education and skills    | Incomplete | Employment, education and skills                                   |
+      | Training & employment opportunities | Incomplete | Training & employment opportunities                                |
       # Placement details Section
-      | Intensive working                   | INCOMPLETE | Intensive working                                                  |
-      | Availability                        | INCOMPLETE | Availability for Community Payback work                            |
-      | Choose equipment sizes              | INCOMPLETE | Choose equipment sizes                                             |
+      | Intensive working                   | Incomplete | Intensive working                                                  |
+      | Availability                        | Incomplete | Availability for Community Payback work                            |
+      | Choose equipment sizes              | Incomplete | Choose equipment sizes                                             |
     And I verify the "Preview" Section on the task list page
       | Task list name       | Status              |
       | Completed assessment | Cannot view PDF yet |

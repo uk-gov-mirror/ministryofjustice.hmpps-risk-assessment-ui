@@ -22,7 +22,7 @@ Feature: Verify the Intensive working page
     And I select "Yes" for Mark this section as complete? for Intensive working
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Intensive working" link is marked as "COMPLETED"
+    Then I see the "Intensive working" link is marked as "Completed"
 
   #  NO Option for the Questions
   Scenario: Verify that the user can select NO on the "Intensive working" Page and mark the section as completed
@@ -35,7 +35,7 @@ Feature: Verify the Intensive working page
     And I select "Yes" for Mark this section as complete? for Intensive working
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Intensive working" link is marked as "COMPLETED"
+    Then I see the "Intensive working" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     When I see UPW "Intensive working" page
@@ -76,7 +76,7 @@ Feature: Verify the Intensive working page
       | At what point should the individual be expected to reach a 28-hour working week?          | Entering Text related to 28-hour working week |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Intensive working" link is marked as "INCOMPLETE"
+    And I see the "Intensive working" link is marked as "Incomplete"
     And I click on the "Intensive working" link
     Then I verify that the Intensive working related radio buttons are cleared
 
@@ -91,7 +91,7 @@ Feature: Verify the Intensive working page
     And I select "No, I'll come back later" for Mark this section as complete? for Intensive working
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Intensive working" link is marked as "INCOMPLETE"
+    And I see the "Intensive working" link is marked as "Incomplete"
     And I click on the "Intensive working" link
     Then I verify that the Intensive working related radio buttons are still selected & unselected
       | Question Name                                                                             | Text to be verified in Details                |

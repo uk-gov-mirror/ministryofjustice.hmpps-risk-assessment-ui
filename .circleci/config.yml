@@ -45,6 +45,7 @@ jobs:
           command: npm run lint
       - run:
           command: |
+            npm run clean
             npm run build
       - persist_to_workspace:
           root: .
@@ -103,7 +104,7 @@ jobs:
           command: if test -d cypress/snapshots/diff; then exit 1; fi
       - run:
           name: Store container logs
-          command: make save-logs OUTPUT_LOGS_DIR=~/docker-logs PROJECT_NAME="hmpps-risk-assessment-ui-test"
+          command: make save-logs OUTPUT_LOGS_DIR=~/docker-logs PROJECT_NAME="community-payback-assessment-test"
           when: on_fail
       - store_test_results:
           path: test_results

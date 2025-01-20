@@ -3,7 +3,6 @@ const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
 const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor')
 // eslint-disable-next-line import/no-unresolved
 const { createEsbuildPlugin } = require('@badeball/cypress-cucumber-preprocessor/esbuild')
-const { lighthouse, pa11y, prepareAudit } = require('cypress-audit')
 const { configureVisualRegression } = require('cypress-visual-regression')
 
 const viewportWidth = 1740
@@ -39,7 +38,6 @@ module.exports = defineConfig({
           options.args.push('--force-device-scale-factor=1')
           options.args.push('--incognito')
         }
-        prepareAudit(options)
         return options
       })
 
@@ -55,14 +53,6 @@ module.exports = defineConfig({
       )
 
       on('task', {
-        lighthouse: lighthouse((lighthouseReport) => {
-          // eslint-disable-next-line no-console
-          console.log(lighthouseReport)
-        }),
-        pa11y: pa11y((pa11yReport) => {
-          // eslint-disable-next-line no-console
-          console.log(pa11yReport)
-        }),
         log(message) {
           // eslint-disable-next-line no-console
           console.log(message)

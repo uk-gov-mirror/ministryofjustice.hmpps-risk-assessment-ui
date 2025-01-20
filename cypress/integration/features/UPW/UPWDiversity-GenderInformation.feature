@@ -59,7 +59,7 @@ Feature: Verify the Gender information page
       | Do they consider themselves to be transgender or have a transgender history?         | Yes           |                                     |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Gender information" link is marked as "INCOMPLETE"
+    And I see the "Gender information" link is marked as "Incomplete"
     And I click on the "Gender information" link
     Then I verify that the Gender information related radio buttons are cleared
 
@@ -74,7 +74,7 @@ Feature: Verify the Gender information page
     And I select "No, I'll come back later" for Mark this section as complete? for Gender information
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Gender information" link is marked as "INCOMPLETE"
+    And I see the "Gender information" link is marked as "Incomplete"
     And I click on the "Gender information" link
     Then I verify that the Gender information related radio buttons are still selected & unselected
       | Question Name                                                                        | Select Option |
@@ -95,5 +95,5 @@ Feature: Verify the Gender information page
     And I select "Yes" for Mark this section as complete? for Gender information
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Gender information" link is marked as "COMPLETED"
+    Then I see the "Gender information" link is marked as "Completed"
     And I see that "Placement preferences" link is not available

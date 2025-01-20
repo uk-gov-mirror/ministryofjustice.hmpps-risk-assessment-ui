@@ -20,7 +20,7 @@ Feature: Verify the Disabilities and mental health page
     And I select "Yes" for Mark this section as complete? for Disabilities and mental health
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Disabilities and mental health" link is marked as "COMPLETED"
+    Then I see the "Disabilities and mental health" link is marked as "Completed"
 
 #  ARN-742 UPW Task list pages - Disabilities and mental health - Clicking on "Back" Link is not clearing the values on the Disabilities and mental health Page
   Scenario: Verify that all the Disabilities and mental health related values are cleared when the user navigates to Task List Page by clicking "Back" link
@@ -31,7 +31,7 @@ Feature: Verify the Disabilities and mental health page
       | Do any one of the above affect the individual's ability to engage with Community Payback?                          | yes           | Entering Text related to the disability            |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Disabilities and mental health" link is marked as "INCOMPLETE"
+    And I see the "Disabilities and mental health" link is marked as "Incomplete"
     And I click on the "Disabilities and mental health" link
     And I see UPW "Disabilities and mental health" page
     Then I verify that the Disabilities and mental health related radio buttons are cleared
@@ -45,7 +45,7 @@ Feature: Verify the Disabilities and mental health page
     And I select "No, I'll come back later" for Mark this section as complete? for Disabilities and mental health
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Disabilities and mental health" link is marked as "INCOMPLETE"
+    And I see the "Disabilities and mental health" link is marked as "Incomplete"
     And I click on the "Disabilities and mental health" link
     And I see UPW "Disabilities and mental health" page
     Then I verify that the Disabilities and mental health related radio buttons are still selected & unselected

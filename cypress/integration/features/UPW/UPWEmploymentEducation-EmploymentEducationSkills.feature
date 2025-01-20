@@ -23,7 +23,7 @@ Feature: Verify the Employment, education and skills page
     And I select "Yes" for Mark this section as complete? for Employment, education and skills
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Employment, education and skills" link is marked as "COMPLETED"
+    Then I see the "Employment, education and skills" link is marked as "Completed"
 
   #  YES Option for All the Questions and enter details - Part-time education or employment
   Scenario: Verify that the user can select and answers on the "Employment, education and skills" Page and mark the section as completed - Part-time education or employment
@@ -39,7 +39,7 @@ Feature: Verify the Employment, education and skills page
     And I select "Yes" for Mark this section as complete? for Employment, education and skills
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Employment, education and skills" link is marked as "COMPLETED"
+    Then I see the "Employment, education and skills" link is marked as "Completed"
 
  #  NO Option for the Questions
   Scenario: Verify that the user can select combination of Yes & NO as answers on the "Employment, education and skills" Page
@@ -54,7 +54,7 @@ Feature: Verify the Employment, education and skills page
     And I select "Yes" for Mark this section as complete? for Employment, education and skills
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Employment, education and skills" link is marked as "COMPLETED"
+    Then I see the "Employment, education and skills" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     When I see UPW "Employment, education and skills" page
@@ -95,7 +95,7 @@ Feature: Verify the Employment, education and skills page
       | Does the individual have future work plans that could be supported through a Community Payback placement?       | Yes                               | Entering Text related to future work plans    |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Employment, education and skills" link is marked as "INCOMPLETE"
+    And I see the "Employment, education and skills" link is marked as "Incomplete"
     And I click on the "Employment, education and skills" link
     Then I verify that the Employment, education and skills related radio buttons are cleared
 
@@ -110,7 +110,7 @@ Feature: Verify the Employment, education and skills page
     And I select "No, I'll come back later" for Mark this section as complete? for Employment, education and skills
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Employment, education and skills" link is marked as "INCOMPLETE"
+    Then I see the "Employment, education and skills" link is marked as "Incomplete"
     And I click on the "Employment, education and skills" link
     Then I verify that the Employment, education related related radio buttons are still selected & unselected
       | Question Name                                                                                                   | Select Option                     |

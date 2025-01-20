@@ -73,7 +73,7 @@ Given('I login and navigate to UPW Task list page for cloned assessment', () => 
 When('I verify the following links are available & working on the {string}', (pageName, dataTable) => {
   const pages = dataTable.hashes()
   pages.forEach((page) => {
-    cy.get(TaskListPage.sectionTag).should('contain.text', page.Status.toLowerCase())
+    cy.get(TaskListPage.sectionTag).should('contain.text', page.Status)
     cy.get(TaskListPage.sectionLink).contains(page['Link Name']).click()
     cy.get(Common.pageHeader).should('contain.text', page['Page to be displayed on clicking the Link'])
     cy.get(TaskListPage.backLink).click()
@@ -98,7 +98,7 @@ Then('I see UPW {string} page', (pageHeader) => {
 
 When('I see the {string} link is marked as {string}', (linkName, status) => {
   cy.get('li').contains(linkName).as('task')
-  cy.get('@task').get('li').should('contain.text', status.toLowerCase())
+  cy.get('@task').get('li').should('contain.text', status)
 })
 
 When('I click on Submit Button', () => {

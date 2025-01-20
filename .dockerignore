@@ -4,7 +4,6 @@ README.md
 node_modules
 npm-debug.log
 .env*
-README.md
 *.iml
 .idea/
 .gitignore
@@ -14,3 +13,11 @@ tests
 scss-report.txt
 eslint-report.html
 test-report.html
+wiremock
+hmpps-auth-proxy
+scripts
+test-helpers
+cypress
+__mocks__
+volume
+.vscode

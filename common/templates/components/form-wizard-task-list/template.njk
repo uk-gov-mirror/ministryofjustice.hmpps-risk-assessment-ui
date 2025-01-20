@@ -20,31 +20,31 @@
         </span>
         {%- if item.status == 'COMPLETE' %}
         {{ govukTag({
-          text: "completed",
+          text: "Completed",
           classes: 'govuk-tag task-list__tag'
         }) }}
         {% endif -%}
         {%- if item.status == 'INCOMPLETE' %}
         {{ govukTag({
-          text: "incomplete",
+          text: "Incomplete",
           classes: 'govuk-tag govuk-tag--grey task-list__tag'
         }) }}
         {% endif -%}
         {%- if item.status == 'NOT_STARTED' %}
         {{ govukTag({
-          text: "not started yet",
+          text: "Not started yet",
           classes: 'govuk-tag govuk-tag--grey task-list__tag'
         }) }}
         {% endif -%}
         {%- if item.status == 'IN_PROGRESS' %}
           {{ govukTag({
-            text: "in progress",
+            text: "In progress",
             classes: 'govuk-tag govuk-tag--blue task-list__tag'
           }) }}
         {% endif -%}
         {%- if item.status == 'CANNOT_START' %}
           {{ govukTag({
-            text: "cannot start yet",
+            text: "Cannot start yet",
             classes: 'govuk-tag govuk-tag--red task-list__tag'
           }) }}
         {% endif -%}

@@ -28,7 +28,6 @@
  * Browser authentication
  */
 
-import 'cypress-audit/commands'
 import 'cypress-wait-until'
 
 Cypress.Commands.add('login', () => {

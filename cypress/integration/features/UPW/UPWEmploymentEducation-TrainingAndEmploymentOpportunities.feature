@@ -20,7 +20,7 @@ Feature: Verify the Training & employment opportunities page
     And I select "Yes" for Mark this section as complete? for Training & employment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Training & employment opportunities" link is marked as "COMPLETED"
+    Then I see the "Training & employment opportunities" link is marked as "Completed"
 
   #  NO Option for the Questions
   Scenario: Verify that the user can select NO on the "Training & employment opportunities" Page and mark the section as completed
@@ -33,7 +33,7 @@ Feature: Verify the Training & employment opportunities page
     And I select "Yes" for Mark this section as complete? for Training & employment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Training & employment opportunities" link is marked as "COMPLETED"
+    Then I see the "Training & employment opportunities" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     When I see UPW "Training & employment opportunities" page
@@ -68,7 +68,7 @@ Feature: Verify the Training & employment opportunities page
       | Does the individual agree to use the maximum entitlement of their hours on this activity? | Yes           |                                             |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Training & employment opportunities" link is marked as "INCOMPLETE"
+    And I see the "Training & employment opportunities" link is marked as "Incomplete"
     And I click on the "Training & employment opportunities" link
     Then I verify that the Training & employment related radio buttons are cleared
 
@@ -81,7 +81,7 @@ Feature: Verify the Training & employment opportunities page
     And I select "No, I'll come back later" for Mark this section as complete? for Training & employment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Training & employment opportunities" link is marked as "INCOMPLETE"
+    And I see the "Training & employment opportunities" link is marked as "Incomplete"
     And I click on the "Training & employment opportunities" link
     Then I verify that the Training & employment related radio buttons are still selected & unselected
       | Question Name                                                                             | Select Option |

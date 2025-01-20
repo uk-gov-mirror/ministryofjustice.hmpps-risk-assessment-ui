@@ -21,7 +21,7 @@ Feature: Verify the Equipment page
     And I select "Yes" for Mark this section as complete? for Equipment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Choose equipment sizes" link is marked as "COMPLETED"
+    Then I see the "Choose equipment sizes" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     When I see UPW "Choose equipment sizes" page
@@ -43,7 +43,7 @@ Feature: Verify the Equipment page
       | Footwear                            | Size 8        |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Choose equipment sizes" link is marked as "INCOMPLETE"
+    And I see the "Choose equipment sizes" link is marked as "Incomplete"
     And I click on the "Choose equipment sizes" link
     Then I verify that the Equipment related radio buttons are cleared
 
@@ -57,7 +57,7 @@ Feature: Verify the Equipment page
     And I select "No, I'll come back later" for Mark this section as complete? for Equipment
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Choose equipment sizes" link is marked as "INCOMPLETE"
+    Then I see the "Choose equipment sizes" link is marked as "Incomplete"
     And I click on the "Choose equipment sizes" link
     Then I verify that the Equipment related radio buttons are still selected & unselected
       | Question Name                       | Select Option |

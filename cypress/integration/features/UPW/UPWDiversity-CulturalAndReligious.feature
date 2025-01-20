@@ -17,7 +17,7 @@ Feature: Verify the Cultural or religious adjustments page
     And I select "Yes" for Mark this section as complete? for Culture And Religious Adjustments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Cultural and religious adjustments" link is marked as "COMPLETED"
+    And I see the "Cultural and religious adjustments" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     When I see UPW "Are adjustments required for cultural or religious reasons?" page
@@ -37,7 +37,7 @@ Feature: Verify the Cultural or religious adjustments page
     Then I select the "Yes" radio Button for culture and religious adjustments
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Cultural and religious adjustments" link is marked as "INCOMPLETE"
+    And I see the "Cultural and religious adjustments" link is marked as "Incomplete"
     And I click on the "Cultural and religious adjustments" link
     And I verify that the culture and religious related radio buttons are cleared
 
@@ -48,7 +48,7 @@ Feature: Verify the Cultural or religious adjustments page
     And I select "No, I'll come back later" for Mark this section as complete? for Culture And Religious Adjustments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Cultural and religious adjustments" link is marked as "INCOMPLETE"
+    Then I see the "Cultural and religious adjustments" link is marked as "Incomplete"
     And I click on the "Cultural and religious adjustments" link
     And I verify that the Culture and religious related radio button is still selected
 
@@ -59,11 +59,11 @@ Feature: Verify the Cultural or religious adjustments page
     And I select "Yes" for Mark this section as complete? for Culture And Religious Adjustments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Cultural and religious adjustments" link is marked as "COMPLETED"
+    Then I see the "Cultural and religious adjustments" link is marked as "Completed"
     And I see the UPW "task-list" page
     And I click on the "Cultural and religious adjustments" link
     And I see UPW "Are adjustments required for cultural or religious reasons?" page
     And I select "No, I'll come back later" for Mark this section as complete? for Culture And Religious Adjustments
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Cultural and religious adjustments" link is marked as "INCOMPLETE"
+    And I see the "Cultural and religious adjustments" link is marked as "Incomplete"

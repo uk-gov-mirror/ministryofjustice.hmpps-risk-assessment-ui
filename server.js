@@ -5,7 +5,6 @@ const crypto = require('crypto')
 // Npm dependencies
 const appInsights = require('applicationinsights')
 const express = require('express')
-const favicon = require('serve-favicon')
 const cookieParser = require('cookie-parser')
 const { json, urlencoded } = require('body-parser')
 const loggingMiddleware = require('morgan')
@@ -65,7 +64,7 @@ const allGateKeeperPages = /^\/(?!health$).*/
 
 // Define app views
 const APP_VIEWS = [
-  join(__dirname, 'node_modules/govuk-frontend/'),
+  join(__dirname, 'node_modules/govuk-frontend/dist'),
   join(__dirname, 'node_modules/@ministryofjustice/frontend/'),
   __dirname,
 ]
@@ -125,7 +124,7 @@ async function initialiseGlobalMiddleware(app) {
       crossOriginEmbedderPolicy: true,
     }),
   )
-  app.use(favicon(join(__dirname, 'public/images/', 'favicon.ico')))
+  // app.use(favicon(join(__dirname, 'public/images/', 'favicon.ico')))
   app.use(compression())
   app.use(staticify.middleware)
 
@@ -275,11 +274,12 @@ function initialiseTemplateEngine(app) {
 }
 
 function initialisePublic(app) {
-  app.use('/javascripts', _static(join(__dirname, '/public/assets/javascripts'), publicCaching))
+  app.use('/assets', _static(join(__dirname, '/node_modules/@ministryofjustice/frontend/moj/assets')))
+  app.use('/assets', _static(join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
+  app.use('/javascripts', _static(join(__dirname, '/public/javascripts'), publicCaching))
   app.use('/images', _static(join(__dirname, '/public/images'), publicCaching))
-  app.use('/stylesheets', _static(join(__dirname, '/public/assets/stylesheets'), publicCaching))
-  app.use('/public', _static(join(__dirname, '/public')))
-  app.use('/', _static(join(__dirname, '/node_modules/govuk-frontend/')))
+  app.use('/stylesheets', _static(join(__dirname, '/public/stylesheets'), publicCaching))
+  app.use('/downloads', _static(join(__dirname, '/public/downloads'), publicCaching))
 }
 
 function initialiseRoutes(app) {
@@ -301,10 +301,10 @@ async function initialise() {
   app.disable('x-powered-by')
   initialiseApplicationInsights()
   initialiseProxy(app)
+  initialisePublic(app)
   await initialiseGlobalMiddleware(app)
   initialiseTemplateEngine(app)
   initialiseRoutes(app)
-  initialisePublic(app)
   return app
 }
 

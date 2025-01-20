@@ -25,7 +25,7 @@ Feature: Verify the Managing risk page
     And I select "Yes" for Mark this section as complete? for Managing Risk
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Managing risk" link is marked as "COMPLETED"
+    Then I see the "Managing risk" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     When I see UPW "Managing risk" page
@@ -84,7 +84,7 @@ Feature: Verify the Managing risk page
       | Alcohol or drug issues with health and safety impact? 				  | Yes           | Entering Text related to health and safety impact  |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Managing risk" link is marked as "INCOMPLETE"
+    And I see the "Managing risk" link is marked as "Incomplete"
     And I click on the "Managing risk" link
     Then I verify that the Managing risk related radio buttons are cleared
 
@@ -103,7 +103,7 @@ Feature: Verify the Managing risk page
     And I select "No, I'll come back later" for Mark this section as complete? for Managing Risk
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Managing risk" link is marked as "INCOMPLETE"
+    And I see the "Managing risk" link is marked as "Incomplete"
     And I click on the "Managing risk" link
     Then I verify that the Managing risk related radio buttons are still selected & unselected
       | Question Name                                                         | Select Option |

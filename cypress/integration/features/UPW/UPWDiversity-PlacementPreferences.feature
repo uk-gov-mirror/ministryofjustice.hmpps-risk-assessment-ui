@@ -19,7 +19,7 @@ Feature: Verify the Placement Preferences page
     And I select "Yes" for Mark this section as complete?
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Placement preferences" link is marked as "COMPLETED"
+    Then I see the "Placement preferences" link is marked as "Completed"
     Examples:
       | Placement Preference Type |
       | Individual                |
@@ -45,7 +45,7 @@ Feature: Verify the Placement Preferences page
     And I say my placement preference is "Individual"
     And I click on back link
     Then I see the UPW "task-list" page
-    And I see the "Placement preferences" link is marked as "INCOMPLETE"
+    And I see the "Placement preferences" link is marked as "Incomplete"
     And I click on the "Placement preferences" link
     And I verify that the placement preferences related radio buttons are cleared
 
@@ -61,7 +61,7 @@ Feature: Verify the Placement Preferences page
     And I select "No, I'll come back later" for Mark this section as complete?
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Placement preferences" link is marked as "INCOMPLETE"
+    And I see the "Placement preferences" link is marked as "Incomplete"
     And I click on the "Placement preferences" link
     And I verify that the placement preferences related radio button is still selected
     And I verify that the "Individual" Check Box is still selected
@@ -74,11 +74,11 @@ Feature: Verify the Placement Preferences page
     And I select "Yes" for Mark this section as complete?
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Placement preferences" link is marked as "COMPLETED"
+    And I see the "Placement preferences" link is marked as "Completed"
     And I see the UPW "task-list" page
     And I click on the "Placement preferences" link
     And I see UPW "Does the individual have any placement preferences?" page
     And I select "No, I'll come back later" for Mark this section as complete?
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Placement preferences" link is marked as "INCOMPLETE"
+    And I see the "Placement preferences" link is marked as "Incomplete"

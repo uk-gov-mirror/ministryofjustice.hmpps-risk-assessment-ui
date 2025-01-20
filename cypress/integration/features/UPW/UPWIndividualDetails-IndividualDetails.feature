@@ -45,7 +45,7 @@ Feature: Verify the Individuals details page
     And I select "Yes" for Mark this section as complete? for Individuals details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Individual's details" link is marked as "COMPLETED"
+    And I see the "Individual's details" link is marked as "Completed"
 
   Scenario: Try to continue without entering any text for contact details and verify the error messages
     When I see UPW "Individual's details" page
@@ -94,7 +94,7 @@ Feature: Verify the Individuals details page
     And I select "Yes" for Mark this section as complete? for Individuals details
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Individual's details" link is marked as "COMPLETED"
+    And I see the "Individual's details" link is marked as "Completed"
 
   Scenario: Try to continue without entering any text for Emergency contact details and verify the error messages - "Emergency contact" page
     When I see UPW "Individual's details" page

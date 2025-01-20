@@ -1,10 +1,10 @@
 {% extends "common/templates/layout.njk" %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
 {% from "common/templates/components/question/macro.njk" import renderQuestion %}
 {% from "common/templates/components/question/template.njk" import getQuestionText %}
 {% from "common/templates/components/question/template.njk" import getQuestionAnswer %}
-{%- from "node_modules/govuk-frontend/govuk/components/summary-list/macro.njk" import govukSummaryList -%}
 {% from "common/templates/components/widgets/macro.njk" import widgets %}
 
 {% set backLink = 'task-list' %}

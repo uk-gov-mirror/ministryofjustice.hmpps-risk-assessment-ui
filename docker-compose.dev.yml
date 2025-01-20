@@ -1,0 +1,26 @@
+services:
+  ui:
+    image: quay.io/hmpps/hmpps-risk-assessment-ui:local
+    command: npm run start:dev
+    build:
+      target: development
+    volumes:
+      - ./app:/app/app
+      - ./common:/app/common
+      - ./cypress:/app/cypress
+      - ./test-helpers:/app/test-helpers
+      - ./.eslintcache:/app/.eslintcache
+      - ./.eslintignore:/app/.eslintignore
+      - ./.eslintrc.json:/app/.eslintrc.json
+      - ./.prettierignore:/app/.prettierignore
+      - ./.prettierrc:/app/.prettierrc
+      - ./.stylelintcache:/app/.stylelintcache
+      - ./.stylelintrc.json:/app/.stylelintrc.json
+      - ./.stylelintrc.yml:/app/.stylelintrc.yml
+      - ./audit-ci.json:/app/audit-ci.json
+      - ./cypress.config.js:/app/cypress.config.js
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./server.js:/app/server.js
+      - ./start.js:/app/start.js
+      - ./tsconfig.json:/app/tsconfig.json

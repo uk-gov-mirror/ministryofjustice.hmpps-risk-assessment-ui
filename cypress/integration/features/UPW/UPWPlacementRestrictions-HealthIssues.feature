@@ -22,7 +22,7 @@ Feature: Verify the Health issues page
     And I select "Yes" for Mark this section as complete? for Health issues
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    Then I see the "Health issues" link is marked as "COMPLETED"
+    Then I see the "Health issues" link is marked as "Completed"
 
   Scenario: Try to continue without selecting any of the options and verify the error messages
     When I see UPW "Are there any other health issues that may affect ability to work?" page
@@ -66,7 +66,7 @@ Feature: Verify the Health issues page
       | Any other health issues?                                     | Yes           | Entering Text related to Health issues                |
     And I click on back link
     And I see the UPW "task-list" page
-    And I see the "Health issues" link is marked as "INCOMPLETE"
+    And I see the "Health issues" link is marked as "Incomplete"
     And I click on the "Health issues" link
     Then I verify that the Health issues related radio buttons are cleared
 
@@ -82,7 +82,7 @@ Feature: Verify the Health issues page
     And I select "No, I'll come back later" for Mark this section as complete? for Health issues
     And I click on the "Save" button
     And I see the UPW "task-list" page
-    And I see the "Health issues" link is marked as "INCOMPLETE"
+    And I see the "Health issues" link is marked as "Incomplete"
     And I click on the "Health issues" link
     Then I verify that the Health issues related radio buttons are still selected & unselected
       | Question Name                                                | Select Option |
