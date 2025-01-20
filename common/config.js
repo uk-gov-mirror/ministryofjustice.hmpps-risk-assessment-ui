@@ -19,6 +19,7 @@ function get(name, fallback, options = {}) {
 }
 
 module.exports = {
+  isProduction: production,
   apis: {
     hmppsAssessments: {
       url: get('HMPPS_ASSESSMENT_API_URL', 'http://localhost:9191', true),

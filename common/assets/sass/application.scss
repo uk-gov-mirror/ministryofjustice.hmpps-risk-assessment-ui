@@ -8,10 +8,6 @@ $govuk-breakpoints: (
 
 @import "govuk/index";
 @import "moj/all";
-/* stylelint-disable scss/at-import-partial-extension */
-@import "accessible-autocomplete/dist/accessible-autocomplete.min";
-/* stylelint-enable scss/at-import-partial-extension */
-@import "common/assets/sass/components/accessible-autocomplete";
 @import "common/assets/sass/components/cookie-message";
 @import "common/assets/sass/components/task-list";
 @import "common/assets/sass/components/form-wizard-task-list";

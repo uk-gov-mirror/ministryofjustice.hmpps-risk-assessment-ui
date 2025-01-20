@@ -2,7 +2,6 @@
 const { initAll, Radios } = require('govuk-frontend')
 
 window.initAll = initAll
-window.accessibleAutocomplete = require('accessible-autocomplete')
 
 function nodeListForEach(nodes, callback) {
   if (window.NodeList.prototype.forEach) {

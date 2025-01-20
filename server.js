@@ -19,7 +19,6 @@ const { RedisStore } = require('connect-redis')
 // Local dependencies
 // eslint-disable-next-line import/no-extraneous-dependencies
 const argv = require('minimist')(process.argv.slice(2))
-const staticify = require('staticify')(join(__dirname, 'public'))
 const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filters/all')()
 const logger = require('./common/logging/logger')
 const router = require('./app/router')
@@ -50,6 +49,7 @@ const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('./common/util
 const { hasBothModernSlaveryFlags } = require('./app/upw/controllers/common.utils')
 const { isModernSlaveryVictim } = require('./app/upw/controllers/common.utils')
 const { isModernSlaveryPerpetrator } = require('./app/upw/controllers/common.utils')
+const buildInfo = require('./build-info.json')
 
 // Global constants
 const { static: _static } = express
@@ -58,8 +58,6 @@ const oneYear = 86400000 * 365
 const publicCaching = { maxAge: oneYear }
 const PORT = process.env.PORT || 3000
 const { NODE_ENV } = process.env
-const CSS_PATH = staticify.getVersionedPath('/stylesheets/application.min.css')
-const JAVASCRIPT_PATH = staticify.getVersionedPath('/javascripts/application.js')
 const allGateKeeperPages = /^\/(?!health$).*/
 
 // Define app views
@@ -93,7 +91,6 @@ function initialiseApplicationInsights() {
 }
 
 async function initialiseGlobalMiddleware(app) {
-  app.set('settings', { getVersionedPath: staticify.getVersionedPath })
   app.use((_req, res, next) => {
     res.locals.cspNonce = crypto.randomBytes(16).toString('hex')
     next()
@@ -124,9 +121,7 @@ async function initialiseGlobalMiddleware(app) {
       crossOriginEmbedderPolicy: true,
     }),
   )
-  // app.use(favicon(join(__dirname, 'public/images/', 'favicon.ico')))
   app.use(compression())
-  app.use(staticify.middleware)
 
   if (process.env.DISABLE_REQUEST_LOGGING !== 'true') {
     app.use(
@@ -261,16 +256,16 @@ function initialiseTemplateEngine(app) {
   // Set view engine
   app.set('view engine', 'njk')
 
-  // Version static assets on production for better caching
-  // if it's not production we want to re-evaluate the assets on each file change
-  nunjucksEnvironment.addGlobal(
-    'css_path',
-    NODE_ENV === 'production' ? CSS_PATH : staticify.getVersionedPath('/stylesheets/application.min.css'),
-  )
-  nunjucksEnvironment.addGlobal(
-    'js_path',
-    NODE_ENV === 'production' ? JAVASCRIPT_PATH : staticify.getVersionedPath('/javascripts/application.js'),
-  )
+  if (config.isProduction) {
+    // eslint-disable-next-line no-param-reassign
+    app.locals.appVersion = buildInfo?.buildNumber || Date.now().toString()
+  } else {
+    app.use((_req, _res, next) => {
+      // eslint-disable-next-line no-param-reassign
+      app.locals.appVersion = Date.now().toString()
+      next()
+    })
+  }
 }
 
 function initialisePublic(app) {
@@ -323,4 +318,4 @@ if (argv.i) {
   start()
 }
 
-module.exports = { start, getApp: initialise, staticify }
+module.exports = { start, getApp: initialise }
