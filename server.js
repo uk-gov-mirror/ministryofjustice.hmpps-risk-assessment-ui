@@ -14,7 +14,7 @@ const dateFilter = require('nunjucks-date-filter')
 const session = require('express-session')
 const helmet = require('helmet')
 const passport = require('passport')
-const RedisStore = require('connect-redis').default
+const { RedisStore } = require('connect-redis')
 
 // Local dependencies
 // eslint-disable-next-line import/no-extraneous-dependencies
