@@ -66,6 +66,11 @@
     "watch:sass": "nodemon -e scss -x \"npm run build:css\"",
     "record-build-info": "node ./bin/record-build-info"
   },
+  "overrides": {
+    "cypress-axe": {
+      "cypress": "^14.0.0"
+    }
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.289.0",
     "@aws-sdk/client-sns": "^3.289.0",
@@ -114,7 +119,7 @@
     "@babel/helper-compilation-targets": "^7.14.5",
     "@babel/plugin-proposal-optional-chaining": "^7.14.5",
     "@babel/preset-env": "^7.14.7",
-    "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
     "@types/luxon": "^3.0.0",
     "audit-ci": "^7.0.0",
@@ -123,12 +128,12 @@
     "chokidar": "^3.5.3",
     "clean-css-cli": "^5.3.0",
     "concat": "^1.0.3",
-    "cypress": "^13.17.0",
+    "cypress": "^14.0.0",
     "cypress-axe": "^1.5.0",
     "cypress-circleci-reporter": "^0.3.0",
     "cypress-multi-reporters": "^2.0.0",
     "cypress-plugin-tab": "^1.0.5",
-    "cypress-terminal-report": "^5.3.12",
+    "cypress-terminal-report": "^7.1.0",
     "cypress-visual-regression": "^5.2.2",
     "cypress-wait-until": "^1.7.2",
     "envfile": "^7.0.0",
