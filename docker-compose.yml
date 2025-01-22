@@ -30,7 +30,7 @@ services:
     networks:
       - hmpps
     depends_on:
-      - wiremock
+      - delius
       - auth-db
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://hmpps-auth:9090/auth/health" ]
@@ -41,39 +41,8 @@ services:
       - SPRING_PROFILES_ACTIVE=dev,delius,local-postgres
       - APPLICATION_AUTHENTICATION_UI_ALLOWLIST=0.0.0.0/0
       - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY=DEBUG
-      - DELIUS_ENDPOINT_URL=http://wiremock:8080/delius
-      - MANAGE_USERS_API_ENDPOINT_URL=http://hmpps-manage-users-api:8080
+      - DELIUS_ENDPOINT_URL=http://delius:8080
       - SPRING_DATASOURCE_URL=jdbc:postgresql://auth-db:5432/auth-db
-
-  hmpps-external-users-api:
-    image: quay.io/hmpps/hmpps-external-users-api:latest
-    depends_on:
-      - hmpps-auth
-      - auth-db
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://hmpps-external-users-api:8080/health/ping" ]
-      interval: 5s
-      retries: 60
-    environment:
-      - SERVER_PORT=8080
-      - SPRING_PROFILES_ACTIVE=dev,local-postgres
-      - API_BASE_URL_OAUTH=http://hmpps-auth:9090/auth
-      - SPRING_R2DBC_URL=r2dbc:postgresql://auth-db:5432/auth-db?sslmode=prefer
-      - SPRING_FLYWAY_URL=jdbc:postgresql://auth-db:5432/auth-db?sslmode=prefer
-
-  hmpps-manage-users-api:
-    image: quay.io/hmpps/hmpps-manage-users-api:latest
-    depends_on:
-      - hmpps-auth
-      - hmpps-external-users-api
-      - wiremock
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://hmpps-manage-users-api:8080/health/ping" ]
-      interval: 5s
-      retries: 60
-    environment:
-      - SERVER_PORT=8080
-      - SPRING_PROFILES_ACTIVE=dev,local-docker
 
   gotenberg:
     image: thecodingmachine/gotenberg:7
@@ -102,12 +71,32 @@ services:
       timeout: 10s
       retries: 50
 
-  wiremock:
+  arns-api:
     image: rodolpheche/wiremock
     networks:
       - hmpps
     volumes:
-      - ./wiremock:/home/wiremock
+      - ./wiremock-arns-api:/home/wiremock
+    command:
+      - -verbose
+      - -global-response-templating
+
+  integrations-api:
+    image: rodolpheche/wiremock
+    networks:
+      - hmpps
+    volumes:
+      - ./wiremock-integrations-api:/home/wiremock
+    command:
+      - -verbose
+      - -global-response-templating
+
+  delius:
+    image: rodolpheche/wiremock
+    networks:
+      - hmpps
+    volumes:
+      - ./wiremock-delius:/home/wiremock
     command:
       - -verbose
       - -global-response-templating
@@ -122,7 +111,8 @@ services:
       - postgres
       - localstack
       - redis
-      - wiremock
+      - arns-api
+      - integrations-api
     healthcheck:
       test: ["CMD", "curl", "-f", "http://api:8080/health"]
       interval: 5s
@@ -139,10 +129,10 @@ services:
       - SPRING_DATA_REDIS_HOST=redis
       - SPRING_DATA_REDIS_SSL_ENABLED=false
       - HMPPS_SQS_USE_WEB_TOKEN=false
-      - ASSESS_RISKS_AND_NEEDS_API_BASE_URL=http://wiremock:8080/
+      - ASSESS_RISKS_AND_NEEDS_API_BASE_URL=http://arns-api:8080
       - ASSESS_RISKS_AND_NEEDS_API_ID=${API_CLIENT_CREDENTIALS_ID:-hmpps-community-payback-api-client}
       - ASSESS_RISKS_AND_NEEDS_API_CLIENT_SECRET=${API_CLIENT_CREDENTIALS_SECRET:-clientsecret}
-      - DELIUS_INTEGRATION_BASE_URL=http://wiremock:8080
+      - DELIUS_INTEGRATION_BASE_URL=http://integrations-api:8080
       - DELIUS_INTEGRATION_CLIENT_ID=${API_CLIENT_CREDENTIALS_ID:-hmpps-community-payback-api-client}
       - DELIUS_INTEGRATION_CLIENT_SECRET=${API_CLIENT_CREDENTIALS_SECRET:-clientsecret}
 

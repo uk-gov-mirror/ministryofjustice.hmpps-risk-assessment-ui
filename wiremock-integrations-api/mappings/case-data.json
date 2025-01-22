@@ -11,7 +11,7 @@
           "Content-Type": "application/json"
         },
         "status": 200,
-        "bodyFileName": "case-details/X463280.json",
+        "bodyFileName": "case-data/X463280.json",
         "transformers": ["response-template"]
       }
     },
@@ -26,7 +26,7 @@
           "Content-Type": "application/json"
         },
         "status": 200,
-        "bodyFileName": "case-details/X371443.json",
+        "bodyFileName": "case-data/X371443.json",
         "transformers": ["response-template"]
       }
     },
@@ -41,7 +41,7 @@
           "Content-Type": "application/json"
         },
         "status": 200,
-        "bodyFileName": "case-details/generic-full.json",
+        "bodyFileName": "case-data/generic-full.json",
         "transformers": ["response-template"]
       }
     },
@@ -55,7 +55,7 @@
           "Content-Type": "application/json"
         },
         "status": 200,
-        "bodyFileName": "case-details/generic.json",
+        "bodyFileName": "case-data/generic.json",
         "transformers": ["response-template"]
       }
     }

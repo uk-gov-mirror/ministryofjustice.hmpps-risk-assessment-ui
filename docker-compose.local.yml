@@ -15,10 +15,6 @@ services:
     ports:
       - "9090:9090"
 
-  hmpps-external-users-api:
-    ports:
-      - "8088:8080"
-
   gotenberg:
     ports:
       - "9099:3000"
@@ -27,9 +23,17 @@ services:
     ports:
       - "4566:4566"
 
-  wiremock:
+  arns-api:
     ports:
       - "9080:8080"
+
+  delius:
+    ports:
+      - "9081:8080"
+
+  integrations-api:
+    ports:
+      - "9082:8080"
 
   api:
     ports:

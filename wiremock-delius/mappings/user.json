@@ -2,7 +2,7 @@
   "mappings": [
     {
       "request": {
-        "urlPattern": "/delius/user/bernard.beaks",
+        "urlPattern": "/user/bernard.beaks",
         "method": "GET"
       },
       "response": {
@@ -23,21 +23,7 @@
     },
     {
       "request": {
-        "urlPattern": "/delius/authenticate",
-        "method": "POST",
-        "bodyPatterns": [
-          {
-            "equalToJson": "{\"username\":\"BERNARD.BEAKS\",\"password\":\"secret\"}"
-          }
-        ]
-      },
-      "response": {
-        "status": 200
-      }
-    },
-    {
-      "request": {
-        "urlPattern": "/delius/user?email=.*",
+        "urlPattern": "/user?email=.*",
         "method": "GET"
       },
       "response": {
@@ -56,15 +42,6 @@
         "headers": {
           "Content-Type": "application/json"
         }
-      }
-    },
-    {
-      "request": {
-        "urlPattern": "/delius/health.*",
-        "method": "GET"
-      },
-      "response": {
-        "status": 200
       }
     }
   ]

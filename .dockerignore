@@ -13,7 +13,9 @@ tests
 scss-report.txt
 eslint-report.html
 test-report.html
-wiremock
+wiremock-arns-api
+wiremock-integrations-api
+wiremock-delius
 hmpps-auth-proxy
 scripts
 test-helpers
