@@ -8,7 +8,7 @@ jest.mock('../data/healthcheck', () => ({
   serviceCheckFactory: jest.fn(),
 }))
 
-describe.only('service healthcheck', () => {
+describe('service healthcheck', () => {
   const healthyCheck = { name: 'healthyCheck', config: { url: 'healthy' } }
   const unhealthyCheck = { name: 'unhealthyCheck', config: { url: 'unhealthy' } }
   let healthcheckService

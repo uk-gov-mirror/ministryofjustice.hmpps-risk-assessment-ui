@@ -17,7 +17,6 @@ const passport = require('passport')
 const { RedisStore } = require('connect-redis')
 
 // Local dependencies
-// eslint-disable-next-line import/no-extraneous-dependencies
 const argv = require('minimist')(process.argv.slice(2))
 const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filters/all')()
 const logger = require('./common/logging/logger')
@@ -133,7 +132,7 @@ async function initialiseGlobalMiddleware(app) {
   }
 
   app.use((req, res, next) => {
-    res.locals.asset_path = '/public/' // eslint-disable-line camelcase
+    res.locals.asset_path = '/public/'
     res.locals.showDetailedErrors = process.env.SHOW_DETAILED_ERRORS === 'true'
     res.locals.showRequestIdOnErrorPage = process.env.SHOW_REQUEST_ID_ON_ERROR_PAGE === 'true'
     noCache(res)

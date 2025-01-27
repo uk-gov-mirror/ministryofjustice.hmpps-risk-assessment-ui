@@ -1,6 +1,6 @@
 if ('webkitSpeechRecognition' in window) {
   // Initialize webkitSpeechRecognition
-  // eslint-disable-next-line no-undef, new-cap
+  // eslint-disable-next-line new-cap
   const speechRecognition = new window.webkitSpeechRecognition()
 
   // String for the Final Transcript
@@ -30,7 +30,6 @@ if ('webkitSpeechRecognition' in window) {
     let interimTranscript = ''
 
     // Loop through the results from the speech recognition object.
-    // eslint-disable-next-line no-plusplus
     for (let i = event.resultIndex; i < event.results.length; i++) {
       // If the result item is Final, add it to Final Transcript, Else add it to Interim transcript
       if (event.results[i].isFinal) {

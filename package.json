@@ -25,34 +25,17 @@
       "js"
     ]
   },
-  "babel": {
-    "plugins": [
-      "@babel/plugin-proposal-optional-chaining"
-    ],
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          },
-          "useBuiltIns": "entry",
-          "corejs": 3
-        }
-      ]
-    ]
-  },
   "scripts": {
     "build": "npm run build:copy && npm run build:css && npm run build:js",
     "clean": "rimraf public && mkdir public",
     "build:copy": "npm run copy-assets",
     "build:css": "npm run compile-sass && npm run cssmin",
     "build:js": "npm run browserify && npm run babel && npm run concat",
-    "browserify": "browserify -o public/javascripts/browsered.js common/browsered/*.js",
+    "browserify": "browserify -o public/javascripts/browsered.js assets/javascripts/browsered/*.js",
     "babel": "babel -o public/javascripts/browsered.js public/javascripts/browsered.js",
     "concat": "concat -o public/javascripts/application.js public/javascripts/browsered.js && rm public/javascripts/browsered.js",
-    "copy-assets": "ncp common/assets/downloads/ public/downloads/ --filter=.* && ncp common/assets/javascripts/ public/javascripts/ --filter=.* && ncp common/assets/images/ public/images/ --filter=.*",
-    "compile-sass": "sass --quiet-deps --no-source-map --load-path=node_modules --load-path=node_modules/govuk-frontend/dist --load-path=node_modules/@ministryofjustice/frontend --load-path=. ./common/assets/sass:./public/stylesheets --style compressed",
+    "copy-assets": "ncp assets/javascripts/ public/javascripts/ --filter=.* && ncp assets/images/ public/images/ --filter=.*",
+    "compile-sass": "sass --quiet-deps --no-source-map --load-path=node_modules --load-path=node_modules/govuk-frontend/dist --load-path=node_modules/@ministryofjustice/frontend --load-path=. ./assets/sass:./public/stylesheets --style compressed",
     "cssmin": "cleancss -o public/stylesheets/application.min.css public/stylesheets/application.css",
     "security_audit": "npm audit",
     "start": "node ./start.js",
@@ -117,10 +100,9 @@
     "@babel/cli": "^7.15.7",
     "@babel/core": "^7.18.5",
     "@babel/helper-compilation-targets": "^7.14.5",
-    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
-    "@babel/preset-env": "^7.14.7",
     "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
+    "@ministryofjustice/eslint-config-hmpps": "^0.0.1-beta.2",
     "@types/luxon": "^3.0.0",
     "audit-ci": "^7.0.0",
     "browserify": "^17.0.0",
@@ -137,13 +119,6 @@
     "cypress-visual-regression": "^5.2.2",
     "cypress-wait-until": "^3.0.0",
     "envfile": "^7.0.0",
-    "eslint": "^8.18.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^10.0.0",
-    "eslint-plugin-cypress": "^3.6.0",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-no-only-tests": "^3.3.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "jest": "^29.0.0",
     "lint-staged": "^15.0.0",
     "mocha-junit-reporter": "^2.2.1",
@@ -176,10 +151,10 @@
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": false,
-    "step_definitions": "cypress/support/step_definitions/",
+    "stepDefinitions": ["integration_tests/support/step_definitions/**/*.{js,ts}"],
     "cucumberJson": {
       "generate": true,
-      "outputFolder": "cypress/reports/cucumber-json",
+      "outputFolder": "integration_tests/reports/cucumber-json",
       "filePrefix": "",
       "fileSuffix": ".cucumber"
     }

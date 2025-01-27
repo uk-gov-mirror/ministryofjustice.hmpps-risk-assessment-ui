@@ -8,15 +8,15 @@ $govuk-breakpoints: (
 
 @import "govuk/index";
 @import "moj/all";
-@import "common/assets/sass/components/cookie-message";
-@import "common/assets/sass/components/task-list";
-@import "common/assets/sass/components/form-wizard-task-list";
-@import "common/assets/sass/components/predictor-scores";
-@import "common/assets/sass/components/header-bar";
-@import "common/assets/sass/pages";
-@import "common/assets/sass/upw-pages";
-@import "common/assets/sass/upw-pdf-template";
-@import "common/assets/sass/widgets";
+@import "assets/sass/components/cookie-message";
+@import "assets/sass/components/task-list";
+@import "assets/sass/components/form-wizard-task-list";
+@import "assets/sass/components/predictor-scores";
+@import "assets/sass/components/header-bar";
+@import "assets/sass/pages";
+@import "assets/sass/upw-pages";
+@import "assets/sass/upw-pdf-template";
+@import "assets/sass/widgets";
 
 $white-transparent: rgb(255 255 255 / 25%);
 

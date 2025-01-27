@@ -65,12 +65,12 @@ govuk_modules/
 public/
 
 # Cypress
-cypress/reports/
-cypress/logs/
-cypress/screenshots/
-cypress/snapshots/diff/
-cypress/videos/
-cypress/downloads/
+integration_tests/reports/
+integration_tests/logs/
+integration_tests/screenshots/
+integration_tests/snapshots/diff/
+integration_tests/videos/
+integration_tests/downloads/
 
 .DS_Store
 .idea/

@@ -7,11 +7,11 @@ services:
     volumes:
       - ./app:/app/app
       - ./common:/app/common
-      - ./cypress:/app/cypress
+      - ./assets:/app/assets
+      - ./integration_tests:/app/integration_tests
       - ./test-helpers:/app/test-helpers
       - ./.eslintcache:/app/.eslintcache
       - ./.eslintignore:/app/.eslintignore
-      - ./.eslintrc.json:/app/.eslintrc.json
       - ./.prettierignore:/app/.prettierignore
       - ./.prettierrc:/app/.prettierrc
       - ./.stylelintcache:/app/.stylelintcache
@@ -19,6 +19,7 @@ services:
       - ./.stylelintrc.yml:/app/.stylelintrc.yml
       - ./audit-ci.json:/app/audit-ci.json
       - ./cypress.config.js:/app/cypress.config.js
+      - ./eslint.config.mjs:/app/eslint.config.mjs
       - ./package.json:/app/package.json
       - ./package-lock.json:/app/package-lock.json
       - ./server.js:/app/server.js

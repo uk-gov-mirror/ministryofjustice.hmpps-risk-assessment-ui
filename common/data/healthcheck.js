@@ -1,4 +1,3 @@
-/* eslint-disable prefer-promise-reject-errors */
 const superagent = require('superagent')
 const Agent = require('agentkeepalive')
 const { HttpsAgent } = require('agentkeepalive')

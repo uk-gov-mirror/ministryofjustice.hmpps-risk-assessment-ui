@@ -1,3 +1,3 @@
-common/assets/javascripts/*.min.js
-common/assets/javascripts/app-insights.js
+assets/javascripts/*.min.js
+assets/javascripts/app-insights.js
 public/*

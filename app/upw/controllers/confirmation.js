@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const nunjucks = require('nunjucks')
 const SaveAndContinue = require('./saveAndContinue')
 const logger = require('../../../common/logging/logger')

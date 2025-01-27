@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 const SaveAndContinue = require('./saveAndContinue')
 const { closeAssessment } = require('../../../common/data/hmppsAssessmentApi')
 

@@ -1,7 +1,6 @@
 const { defineConfig } = require('cypress')
 const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
 const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor')
-// eslint-disable-next-line import/no-unresolved
 const { createEsbuildPlugin } = require('@badeball/cypress-cucumber-preprocessor/esbuild')
 const { configureVisualRegression } = require('cypress-visual-regression')
 
@@ -19,8 +18,8 @@ module.exports = defineConfig({
   responseTimeout: 50000,
   viewportWidth,
   viewportHeight,
-  screenshotsFolder: 'cypress/screenshots',
-  videosFolder: 'cypress/videos',
+  screenshotsFolder: 'integration_tests/screenshots',
+  videosFolder: 'integration_tests/videos',
   reporter: 'cypress-multi-reporters',
   reporterOptions: {
     reporterEnabled: 'spec, cypress-circleci-reporter',
@@ -29,6 +28,7 @@ module.exports = defineConfig({
   e2e: {
     testIsolation: true,
     specPattern: '**/*.feature',
+    supportFile: 'integration_tests/support/index.js',
     excludeSpecPattern: ['**/__snapshots__/*', '**/__image_snapshots__/*'],
     async setupNodeEvents(on, config) {
       on('before:browser:launch', (browser, launchOptions) => {
