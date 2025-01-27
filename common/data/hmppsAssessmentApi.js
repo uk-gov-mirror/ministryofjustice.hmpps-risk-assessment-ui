@@ -1,7 +1,7 @@
 const superagent = require('superagent')
 const logger = require('../logging/logger')
 const { getCorrelationId } = require('../utils/util')
-const { ServerError } = require('../utils/errors')
+const { ServerError, ForbiddenError } = require('../utils/errors')
 const {
   apis: {
     hmppsAssessments: { timeout, url },
@@ -145,8 +145,12 @@ const action = async (request, authorisationToken) => {
   } catch (error) {
     logError(error)
     const { status, response } = error
-    if (status === 400 || status === 403 || status === 422 || (request.method !== 'POST' && status === 404)) {
+    if (status === 400 || status === 422 || (request.method !== 'POST' && status === 404)) {
       return [false, response.body]
+    }
+
+    if (status === 403) {
+      throw new ForbiddenError()
     }
 
     if (status >= 500) {

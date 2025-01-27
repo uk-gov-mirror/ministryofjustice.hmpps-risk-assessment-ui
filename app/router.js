@@ -19,6 +19,7 @@ const logger = require('../common/logging/logger')
 const { verifyAssessment } = require('./startAssessment/get.controller')
 const { getCorrelationId } = require('../common/utils/util')
 const { downloadUpwPdf } = require('./upw/controllers/api')
+const { ForbiddenError } = require('../common/utils/errors')
 
 // Export
 module.exports = (app) => {
@@ -62,7 +63,16 @@ module.exports = (app) => {
   app.use((error, req, res, next) => {
     logger.info(`Unhandled exception received - ${error.message} ${error.stack}`)
     res.locals.correlationId = getCorrelationId()
-    res.render('app/error', {
+
+    if (error instanceof ForbiddenError) {
+      return res.render('app/error', {
+        heading: 'We are unable to continue',
+        subHeading: 'You do not have permission',
+        error,
+      })
+    }
+
+    return res.render('app/error', {
       subHeading: 'Something unexpected happened',
       error,
     })

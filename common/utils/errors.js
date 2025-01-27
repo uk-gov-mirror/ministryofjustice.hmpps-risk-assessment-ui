@@ -26,7 +26,21 @@ class ServerError extends Error {
   }
 }
 
+class ForbiddenError extends Error {
+  constructor(message, ...params) {
+    super(...params)
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ForbiddenError)
+    }
+
+    this.name = 'ForbiddenError'
+    this.message = message || 'Forbidden'
+  }
+}
+
 module.exports = {
   AuthenticationError,
   ServerError,
+  ForbiddenError,
 }
