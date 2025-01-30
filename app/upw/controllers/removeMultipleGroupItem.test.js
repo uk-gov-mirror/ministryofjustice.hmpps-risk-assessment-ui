@@ -32,7 +32,7 @@ describe('removeMultipleGroupItem (UPW)', () => {
 
   beforeEach(() => {
     req = {
-      params: [],
+      params: {},
       user,
       body: {},
       sessionModel: {
@@ -82,7 +82,7 @@ describe('removeMultipleGroupItem (UPW)', () => {
     })
 
     res.locals.multipleGroupName = 'my_multiple_group'
-    req.params = [1]
+    req.params = { index: 1 }
 
     getAnswers.mockResolvedValue({
       answers: {

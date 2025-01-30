@@ -1,5 +1,5 @@
 const passport = require('passport')
-const xss = require('xss-clean')
+const { sanitise } = require('../common/middleware/sanitise')
 
 const addUserToLocals = require('../common/middleware/add-user-information')
 
@@ -24,7 +24,7 @@ const { ForbiddenError } = require('../common/utils/errors')
 // Export
 module.exports = (app) => {
   app.get('/health', (req, res, next) => {
-    res.status(200).send({
+    res.status(200).json({
       healthy: true,
     })
   })
@@ -55,7 +55,7 @@ module.exports = (app) => {
 
   app.use(checkUserIsAuthenticated(), checkForTokenRefresh, addUserToLocals)
 
-  app.post('*', xss())
+  app.use('*splat', sanitise())
 
   app.get(['/start-assessment', '/assessment-from-delius'], verifyAssessment)
   app.use('/upw', upwWorkflow)
@@ -78,7 +78,7 @@ module.exports = (app) => {
     })
   })
 
-  app.get('*', (req, res) =>
+  app.get('*splat', (req, res) =>
     res.status(404).render('app/error', {
       subHeading: "We're unable to find the page you're looking for",
     }),

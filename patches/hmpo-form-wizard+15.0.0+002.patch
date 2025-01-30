@@ -1,0 +1,28 @@
+diff --git a/node_modules/hmpo-form-wizard/lib/wizard.js b/node_modules/hmpo-form-wizard/lib/wizard.js
+index a601592..a448baf 100644
+--- a/node_modules/hmpo-form-wizard/lib/wizard.js
++++ b/node_modules/hmpo-form-wizard/lib/wizard.js
+@@ -31,7 +31,8 @@ let wizard = function (steps, fields, wizardOptions) {
+             editable: false,
+             editSuffix: '/edit',
+             editBackStep: 'confirm',
+-            allFields: fields
++            allFields: fields,
++            preControllerMiddleware: (_req, _res, next) => next()
+         }, wizardOptions, options);
+ 
+         // convert field list to field definitions
+@@ -58,11 +59,12 @@ let wizard = function (steps, fields, wizardOptions) {
+ 
+         // add the controller router to the wizard router at the step path
+         app.all(route + options.params + options.editSuffix,
++            options.preControllerMiddleware,
+             controller.editing.bind(controller),
+             handler
+         );
+ 
+-        app.all(route + options.params, handler);
++        app.all(route + options.params, options.preControllerMiddleware, handler);
+ 
+     });
+ 

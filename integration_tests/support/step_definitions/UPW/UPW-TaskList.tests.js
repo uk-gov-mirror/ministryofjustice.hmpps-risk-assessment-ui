@@ -1,5 +1,4 @@
 const { Given, When, Then } = require('@badeball/cypress-cucumber-preprocessor')
-const querystring = require('querystring')
 const ArnHomePage = require('../../../integration/pages/homePage/ARNHomePage')
 const urls = require('../../../fixtures/urls.json')
 const AreaSelectionPage = require('../../../integration/pages/areaSelection/areaSelectionPage')
@@ -8,11 +7,11 @@ const TaskListPage = require('../../../integration/pages/upwPages/taskList/taskL
 
 Given('I login and navigate to UPW Task list page with CRN {string}', (crn) => {
   ArnHomePage.signIn(crn)
-  const params = querystring.encode({
+  const params = new URLSearchParams({
     crn,
     assessmentType: 'UPW',
     eventId: 1,
-  })
+  }).toString()
   cy.visit(`${urls.startAssessment}?${params}`)
   AreaSelectionPage.startAssessmentButton().click()
 })
@@ -22,11 +21,11 @@ Given('I login and navigate to UPW Task list page with dataDriven CRN', () => {
   ArnHomePage.signIn(mycrn)
   cy.wrap(mycrn).as('crn')
   cy.log(`CRN -> ${mycrn}`)
-  const params = querystring.encode({
+  const params = new URLSearchParams({
     crn: mycrn,
     assessmentType: 'UPW',
     eventId: 1,
-  })
+  }).toString()
   cy.visit(`${urls.startAssessment}?${params}`)
   AreaSelectionPage.startAssessmentButton().click()
 })
@@ -36,11 +35,11 @@ Given('I login and navigate to UPW Task list page with full dataDriven CRN', () 
   ArnHomePage.signIn(mycrn)
   cy.wrap(mycrn).as('crn')
   cy.log(`CRN -> ${mycrn}`)
-  const params = querystring.encode({
+  const params = new URLSearchParams({
     crn: mycrn,
     assessmentType: 'UPW',
     eventId: 1,
-  })
+  }).toString()
   cy.visit(`${urls.startAssessment}?${params}`)
   AreaSelectionPage.startAssessmentButton().click()
 })
@@ -49,22 +48,22 @@ Given('I login and navigate to UPW Task list page with dataDriven CRN by injecti
   const mycrn = Common.getLocalCrn()
   ArnHomePage.signIn(mycrn)
   cy.log(`CRN -> ${mycrn}`)
-  const params = querystring.encode({
+  const params = new URLSearchParams({
     crn: mycrn,
     assessmentType: 'UPW',
     eventId: 1,
-  })
+  }).toString()
   cy.visit(`${urls.startAssessment}?${params}`).injectAxe()
   AreaSelectionPage.startAssessmentButton().click()
 })
 
 Given('I login and navigate to UPW Task list page for cloned assessment', () => {
   cy.get('@crn').then((crn) => {
-    const params = querystring.encode({
+    const params = new URLSearchParams({
       crn,
       assessmentType: 'UPW',
       eventId: 1,
-    })
+    }).toString()
     cy.visit(`${urls.startAssessment}?${params}`)
     AreaSelectionPage.startAssessmentButton().click()
   })

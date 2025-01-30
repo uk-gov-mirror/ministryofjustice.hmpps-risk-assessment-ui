@@ -6,7 +6,7 @@ const { CACHE } = require('../../../common/utils/constants')
 
 class removeItemSaveAndContinue extends saveAndContinue {
   async locals(req, res, next) {
-    const itemToDelete = req.params[0]
+    const itemToDelete = req.params.index
     const { multipleGroupName } = res.locals
 
     if (!itemToDelete || !multipleGroupName) {

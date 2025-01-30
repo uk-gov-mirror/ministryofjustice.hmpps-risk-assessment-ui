@@ -63,7 +63,7 @@ module.exports = {
       'contact_email_addresses',
     ],
   },
-  '/edit-emergency-contact/*': {
+  '/edit-emergency-contact/:index': {
     pageTitle: 'Emergency contact details',
     controller: editEmergencyContactsSaveAndContinue,
     template: `${__dirname}/templates/individuals-details/edit-emergency-contact-details.njk`,
@@ -76,7 +76,7 @@ module.exports = {
       'emergency_contact_mobile_phone_number',
     ],
   },
-  '/remove-emergency-contact/*': {
+  '/remove-emergency-contact/:index': {
     pageTitle: 'Remove emergency contact',
     controller: removeEmergencyContactsSaveAndContinue,
     next: 'individuals-details',
@@ -242,7 +242,7 @@ module.exports = {
     next: 'task-list#gp-details',
     fields: ['gp_details_complete', 'gp_details_declined'],
   },
-  '/edit-gp-details/*': {
+  '/edit-gp-details/:index': {
     pageTitle: 'Details of GP',
     controller: editGpDetailsSaveAndContinue,
     template: `${__dirname}/templates/placement-restrictions/edit-gp-details.njk`,
@@ -262,7 +262,7 @@ module.exports = {
       'gp_phone_number',
     ],
   },
-  '/remove-gp-details/*': {
+  '/remove-gp-details/:index': {
     pageTitle: 'Remove GP details',
     controller: removeGpDetailsSaveAndContinue,
     next: 'gp-details',
