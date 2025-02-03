@@ -22,7 +22,7 @@ services:
     depends_on:
       - delius
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://hmpps-auth:9090/auth/health" ]
+      test: ["CMD", "curl", "-f", "http://hmpps-auth:9090/auth/health"]
       interval: 5s
       retries: 60
     environment:
@@ -54,7 +54,7 @@ services:
       - "./scripts/localstack/init:/etc/localstack/init/ready.d"
       - "./scripts/localstack/wait:/scripts/wait"
     healthcheck:
-      test: [ "CMD", "bash", "/scripts/wait/healthcheck.sh" ]
+      test: ["CMD", "bash", "/scripts/wait/healthcheck.sh"]
       interval: 5s
       timeout: 10s
       retries: 50
@@ -133,7 +133,13 @@ services:
     networks:
       - hmpps
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://community-payback-assessment-ui:3000/health"]
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://community-payback-assessment-ui:3000/health",
+        ]
       interval: 5s
       retries: 60
     environment:
@@ -150,8 +156,8 @@ services:
       - SHOW_REQUEST_ID_ON_ERROR_PAGE=true
       - USE_LOCALSTACK=true
       - SHOW_NOTIFICATION=false
-      - NOTIFICATION_HEADER=
-      - NOTIFICATION_BODY=
+      - NOTIFICATION_HEADER=""
+      - NOTIFICATION_BODY=""
       - AWS_ENDPOINT_URL=http://localstack:4566
       - AWS_ACCESS_KEY_ID=local
       - AWS_SECRET_ACCESS_KEY=local

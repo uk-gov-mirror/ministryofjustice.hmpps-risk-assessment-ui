@@ -255,6 +255,9 @@ function initialiseTemplateEngine(app) {
   // Set view engine
   app.set('view engine', 'njk')
 
+  // eslint-disable-next-line no-param-reassign
+  app.locals.cssPath = '/stylesheets/application.min.css'
+
   if (config.isProduction) {
     // eslint-disable-next-line no-param-reassign
     app.locals.appVersion = buildInfo?.buildNumber || Date.now().toString()
@@ -262,8 +265,6 @@ function initialiseTemplateEngine(app) {
     app.use((_req, _res, next) => {
       // eslint-disable-next-line no-param-reassign
       app.locals.appVersion = Date.now().toString()
-      // eslint-disable-next-line no-param-reassign
-      app.locals.cssPath = '/stylesheets/application.min.css'
       next()
     })
   }
