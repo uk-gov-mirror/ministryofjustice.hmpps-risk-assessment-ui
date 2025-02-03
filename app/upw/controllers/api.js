@@ -62,7 +62,7 @@ const streamDocumentResponse = (res, document) => {
 const generatePdf = (res) => async (templateData) => {
   const rendered = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
     ...templateData,
-    css_path: 'application.min.css',
+    cssPath: 'application.min.css',
   })
 
   const response = await convertHtmlToPdf(rendered)

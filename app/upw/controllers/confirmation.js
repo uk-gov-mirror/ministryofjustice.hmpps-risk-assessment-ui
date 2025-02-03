@@ -12,7 +12,7 @@ const generateDocument = async (req, res) => {
   const renderedHtml = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
     ...res.locals,
     notification: { isVisible: false },
-    css_path: 'application.min.css',
+    cssPath: 'application.min.css',
   })
 
   const episodeId = req.session?.assessment?.episodeUuid

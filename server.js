@@ -262,6 +262,8 @@ function initialiseTemplateEngine(app) {
     app.use((_req, _res, next) => {
       // eslint-disable-next-line no-param-reassign
       app.locals.appVersion = Date.now().toString()
+      // eslint-disable-next-line no-param-reassign
+      app.locals.cssPath = '/stylesheets/application.min.css'
       next()
     })
   }
