@@ -16,13 +16,14 @@ class S3 {
     this.bucketName = config.aws.s3.bucketName
   }
 
-  async upload(key, file) {
+  async upload(key, file, type) {
     return this.client
       .send(
         new PutObjectCommand({
           Bucket: this.bucketName,
           Key: key,
           Body: file,
+          ContentType: type,
         }),
       )
       .then(() => {

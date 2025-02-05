@@ -9,6 +9,8 @@ services:
     environment:
       CYPRESS_BASE_URL: http://community-payback-assessment-ui:3000
       CYPRESS_AUTH_URL: http://hmpps-auth:9090/auth/oauth/token?grant_type=client_credentials&username=foobar
+      CYPRESS_LOCALSTACK_HOSTNAME: localstack
+      CYPRESS_ARNS_API_URL: http://arns-api:8080
 
 volumes:
   test_results:

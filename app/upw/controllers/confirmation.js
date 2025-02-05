@@ -24,12 +24,12 @@ const generateDocument = async (req, res) => {
     throw new Error('Failed to generate the PDF')
   }
 
-  return { key: createDocumentId(episodeId), file: pdfConvertResponse.body }
+  return { key: createDocumentId(episodeId), file: pdfConvertResponse.body, type: 'application/pdf' }
 }
 
-const uploadDocument = async ({ key, file }) => {
+const uploadDocument = async ({ key, file, type }) => {
   const s3 = new S3()
-  const s3UploadResponse = await s3.upload(key, file)
+  const s3UploadResponse = await s3.upload(key, file, type)
 
   if (!s3UploadResponse.ok) {
     throw new Error('Failed to upload the PDF')

@@ -23,39 +23,3 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-
-/**
- * Browser authentication
- */
-
-import 'cypress-wait-until'
-
-Cypress.Commands.add('login', () => {
-  cy.visit('/', {
-    auth: {
-      username: Cypress.env('username'),
-      password: Cypress.env('password'),
-    },
-  })
-})
-
-/**
- * Ignore uncaught exceptions
- * https://docs.cypress.io/api/events/catalog-of-events#App-Events
- */
-
-Cypress.Commands.add('ignoreUncaughtException', () => {
-  Cypress.on('uncaught:exception', () => {
-    // returning false here prevents Cypress from
-    // failing the test
-    return false
-  })
-})
-
-Cypress.Commands.add('findSummaryElementWithText', (text) => {
-  cy.get(`ul.govuk-error-summary__list li:contains(${text})`)
-})
-
-Cypress.Commands.add('findPageErrorElementWithText', (text) => {
-  cy.get(`p.govuk-error-message:contains(${text})`)
-})

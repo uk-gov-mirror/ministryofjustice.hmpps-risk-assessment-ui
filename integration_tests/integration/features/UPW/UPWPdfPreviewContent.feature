@@ -7,14 +7,14 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
   Scenario: Verify the End2End application flow of UPW and verify the content on the pdf previw page
     Given I login and navigate to UPW Task list page with full dataDriven CRN
     And I see the UPW "task-list" page
-    And I check the visual regression for "task-list"
+    And I check "task-list" for visual regression
     #  Action/Enter Offender's "Individual details"
     When I click on the "Individual's details" link
     And I see UPW "Individual's details" page
     And I verify that "No, I'll come back later" is Default state on Individuals details page
     And I click "Change" link for changing Contact details
     And I see UPW "Contact details" page
-    And I check the visual regression for "contact-details"
+    And I check "contact-details" for visual regression
     Then I enter the details on the "Contact details" page as follows
       | Field Name    | Text to be entered     |
       | Building name | New Offender Building  |
@@ -43,7 +43,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
       | Email         | test@test.com          |
     And I click "Add contact" button for Emergency contact details
     And I see UPW "Emergency contact" page
-    And I check the visual regression for "emergency-contact"
+    And I check "emergency-contact" for visual regression
     Then I enter the details on the "Emergency contact details" page as follows
       | Field Name                     | Text to be entered |
       | First name                     | Charles            |
@@ -60,7 +60,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
       | Relationship to the individual | Friend                 |
       | Mobile number                  | 020123456789           |
       | Phone number                   | 02142785462            |
-    And I check the visual regression for "individuals-details"
+    And I check "individuals-details" for visual regression
     And I click on "Remove" link against the "Emergency Contact 1" on the Individual details
     And I select "Yes" for Mark this section as complete? for Individuals details
     And I click on the "Save" button
@@ -69,7 +69,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Gender information"
     When I click on the "Gender information" link
     And I see UPW "Gender information" page
-    And I check the visual regression for "gender-information"
+    And I check "gender-information" for visual regression
     And I see that "No, I'll come back later" is Default state on Gender information page
     And I select the Options and enter the details on the "Gender information" page as follows
       | Question Name                                                                                                                                                   | Select Option | Text to be entered in Give Details  |
@@ -85,7 +85,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Cultural and religious adjustments"
     When I click on the "Cultural and religious adjustments" link
     And I see UPW "Are adjustments required for cultural or religious reasons?" page
-    And I check the visual regression for "cultural-religious-adjustments"
+    And I check "cultural-religious-adjustments" for visual regression
     And I verify that "No, I'll come back later" is Default state on Cultural and religious page
     And I select the "Yes" radio Button for culture and religious adjustments
     And I enter details for culture and religious adjustments as "Test Culture details"
@@ -96,7 +96,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Placement preferences"
     When I click on the "Placement preferences" link
     And I see UPW "Does the individual have any placement preferences?" page
-    And I check the visual regression for "placement-preferences"
+    And I check "placement-preferences" for visual regression
     And I verify that "No, I'll come back later" is Default state on Placement preferences page
     And I select the "Yes" radio Button for placement preferences
     And I say my placement preference is "Individual"
@@ -107,7 +107,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Risk of harm in the community" information
     When I click on the "Risk of harm in the community" link
     And I see UPW "Risk of harm in the community" page
-    And I check the visual regression for "risk-of-harm-in-the-community"
+    And I check "risk-of-harm-in-the-community" for visual regression
     And I see "Risk of harm in the community" in page title
     And I verify that "No, I'll come back later" is Default state on Risk of harm in the community page
     And I select the Options and enter the details on the "Risk of harm in the community" page as follows
@@ -128,7 +128,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Managing risk" details
     When I click on the "Managing risk" link
     And I see UPW "Managing risk" page
-    And I check the visual regression for "managing-risk"
+    And I check "managing-risk" for visual regression
     And I see that "No, I'll come back later" is Default state on Managing risk page
     And I select the Options and enter the details on the "Managing Risk" page as follows
       | Question Name                                                          | Select Option | Text to be entered in Give Details                 |
@@ -147,7 +147,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Disabilities and mental health" details
     When I click on the "Disabilities and mental health" link
     And I see UPW "Disabilities and mental health" page
-    And I check the visual regression for "disabilities-and-mental-health"
+    And I check "disabilities-and-mental-health" for visual regression
     And I see that "No, I'll come back later" is Default state on Disabilities and mental health page
     And I select the Options and enter the details on the "Disabilities and mental health" page as follows
       | Question Name                                                                                                      | Select Option | Text to be entered in Give Details                 |
@@ -160,7 +160,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's existing "Health issues"
     When I click on the "Health issues" link
     And I see UPW "Are there any other health issues that may affect ability to work?" page
-    And I check the visual regression for "other-health-issues"
+    And I check "other-health-issues" for visual regression
     And I see that "No, I’ll come back later" is Default state on Health issues page
     And I select the Options and enter the details on the "Health issues" page as follows
       | Question Name                                                | Select Option | Text to be entered in Give Details                    |
@@ -180,7 +180,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I verify that "No, I'll come back later" is Default state on GP details page
     And I click "Add contact" button for GP details
     And I see UPW "Details of GP" page
-    And I check the visual regression for "details-of-gp"
+    And I check "details-of-gp" for visual regression
     And I enter the details on the "GP details" page as follows
       | Field Name       | Text to be entered         |
       | Name             | Charles Doctor             |
@@ -206,7 +206,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
       | Address          | South Yorkshire            |
       | Address          | S3 1HY                     |
       | Phone number     | 02142785462                |
-    And I check the visual regression for "gp-details"
+    And I check "gp-details" for visual regression
     And I select "Yes" for Mark this section as complete? for GP details
     And I click on the "Save" button
     And I see the UPW "task-list" page
@@ -214,7 +214,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Travel" information
     When I click on the "Travel" link
     And I see UPW "Travel information" page
-    And I check the visual regression for "travel-information"
+    And I check "travel-information" for visual regression
     And I see that "No, I'll come back later" is Default state on Travel information page
     And I select the Options and enter the details on the "Travel information" page as follows
       | Question Name                                                                | Select Option | Text to be entered in Give Details         |
@@ -229,7 +229,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Caring commitments" details
     When I click on the "Caring commitments" link
     And I see UPW "Are there carer commitments?" page
-    And I check the visual regression for "carer-commitments"
+    And I check "carer-commitments" for visual regression
     And I see that "No, I'll come back later" is Default state on Caring commitments page
     And I enter Additional information as "Additional caring commitments" for Caring commitments
     And I select "Yes" for Mark this section as complete? for Caring commitments
@@ -239,7 +239,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Employment, education and skills" information
     And I click on the "Employment, education and skills" link
     When I see UPW "Employment, education and skills" page
-    And I check the visual regression for "employment-education-and-skills"
+    And I check "employment-education-and-skills" for visual regression
     And I see "Employment, education and skills" in page title
     And I verify that "No, I'll come back later" is Default state on Employment, education and skills page
     And I select the Options and enter the details on the "Employment, education and skills" page as follows
@@ -255,7 +255,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Training & employment opportunities" information
     And I click on the "Training & employment opportunities" link
     When I see UPW "Training & employment opportunities" page
-    And I check the visual regression for "training-and-employment-opportunities"
+    And I check "training-and-employment-opportunities" for visual regression
     And I see that "No, I'll come back later" is Default state on Training & employment page
     And I select the Options and enter the details on the "Training & employment" page as follows
       | Question Name                                                                             | Select Option | Text to be entered in Give Details                                           |
@@ -268,7 +268,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Intensive working" details
     When I click on the "Intensive working" link
     And I see UPW "Intensive working" page
-    And I check the visual regression for "intensive-working"
+    And I check "intensive-working" for visual regression
     And I see that "No, I'll come back later" is Default state on Intensive working page
     And I select "Yes" for "Is the individual eligible for intensive working?" Intensive working question
     And I enter the details on the "Intensive working" page as follows
@@ -283,7 +283,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Availability" for Community Payback work
     When I click on the "Availability" link
     And I see UPW "Availability for Community Payback work" page
-    And I check the visual regression for "availability-for-community-payback-work"
+    And I check "availability-for-community-payback-work" for visual regression
     And I see that "No, I'll come back later" is Default state on Availability page
     And I select the Availability CheckBoxes as follows
       | Availability | Monday      | Tuesday       | Wednesday   | Thursday      | Friday      | Saturday      | Sunday      |
@@ -298,7 +298,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     #  Action/Enter Offender's "Equipment" requirements
     When I click on the "Choose equipment sizes" link
     And I see UPW "Choose equipment sizes" page
-    And I check the visual regression for "choose-equipment-sizes"
+    And I check "choose-equipment-sizes" for visual regression
     And I see "Choose equipment sizes" in page title
     And I verify that "No, I'll come back later" is Default state on Equipment page
     And I select the Options and enter the details on the "Equipment" page as follows
@@ -311,7 +311,7 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I see the UPW "task-list" page
     Then I see the "Choose equipment sizes" link is marked as "Completed"
     #   PDF preview, confirm declaration & generate output pdf
-    And I check the visual regression for "task-list-complete"
+    And I check "task-list-complete" for visual regression
     And I click on the "Completed assessment" link
     And I see output "pdf-preview" Page
     And I verify the "Offence details" Section for offence and dates on the pdf-preview page as follows
@@ -465,13 +465,13 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
       | Male or female clothing required? | Male                  |
       | Waterproof clothing size          | Large                 |
       | Footwear size (UK)                | Size 10               |
-    And I check the visual regression for "pdf-preview"
+    And I check "pdf-preview" for visual regression
     And I click on back link
     And I click on Submit Button
     And I see the "You have completed the Community Payback assessment" page
-    And I check the visual regression for "assessment-complete"
-    # And I download the UPW output pdf
-    # TODO: check PDF in S3
+    And I check "assessment-complete" for visual regression
+    And I view the generated PDF
+    And I check "pdf" for visual regression, ignoring minor differences
 
 #  Scenario: Verify the values are correctly cloned for a cloned assessment
     Given I login and navigate to UPW Task list page for cloned assessment
@@ -735,5 +735,3 @@ Feature: Verify the content on the Pdf Preview page matches the values entered/s
     And I click on back link
     And I click on Submit Button
     And I see the "You have completed the Community Payback assessment" page
-#    And I download the UPW output pdf
-    # TODO: check PDF in S3

@@ -49,6 +49,8 @@ services:
       - DEFAULT_REGION=eu-west-2
       - AWS_DEFAULT_REGION=eu-west-2
       - USE_SSL=false
+    depends_on:
+      - arns-api
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "./scripts/localstack/init:/etc/localstack/init/ready.d"
@@ -60,7 +62,7 @@ services:
       retries: 50
 
   arns-api:
-    image: rodolpheche/wiremock
+    image: wiremock/wiremock
     networks:
       - hmpps
     volumes:
@@ -70,7 +72,7 @@ services:
       - -global-response-templating
 
   integrations-api:
-    image: rodolpheche/wiremock
+    image: wiremock/wiremock
     networks:
       - hmpps
     volumes:
@@ -80,7 +82,7 @@ services:
       - -global-response-templating
 
   delius:
-    image: rodolpheche/wiremock
+    image: wiremock/wiremock
     networks:
       - hmpps
     volumes:

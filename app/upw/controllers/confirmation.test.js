@@ -115,7 +115,7 @@ describe('ConfirmationController', () => {
       await controller.render(req, res, next)
 
       expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
-      expect(S3.prototype.upload).toHaveBeenCalledWith('documents/foo-document.pdf', file)
+      expect(S3.prototype.upload).toHaveBeenCalledWith('documents/foo-document.pdf', file, 'application/pdf')
       expect(SNS.prototype.publishJson).toHaveBeenCalled()
       expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode).toHaveBeenCalledWith(
         assessmentUuid,
