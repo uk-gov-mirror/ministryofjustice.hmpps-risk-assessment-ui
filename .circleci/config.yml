@@ -155,13 +155,8 @@ workflows:
           publish_latest_tag: true
           context: hmpps-common-vars
           requires:
-            - build
             - test
-            - build_docker
             - e2e_test
-            - helm_lint_dev
-            - helm_lint_preprod
-            - helm_lint_prod
           filters:
             branches:
               only:
@@ -184,7 +179,6 @@ workflows:
             - helm_lint_preprod
             - helm_lint_prod
             - test
-            - build_docker
             - e2e_test
       - request-preprod-approval:
           type: approval
