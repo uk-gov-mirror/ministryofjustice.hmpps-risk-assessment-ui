@@ -175,11 +175,10 @@ workflows:
               only:
                 - main
           requires:
+            - publish_docker
             - helm_lint_dev
             - helm_lint_preprod
             - helm_lint_prod
-            - test
-            - e2e_test
       - request-preprod-approval:
           type: approval
           requires:
