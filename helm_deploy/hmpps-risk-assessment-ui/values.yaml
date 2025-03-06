@@ -6,7 +6,7 @@ generic-service:
   serviceAccountName: hmpps-assessments-service-account
 
   image:
-    repository: quay.io/hmpps/hmpps-risk-assessment-ui
+    repository: ghcr.io/ministryofjustice/hmpps-risk-assessment-ui
     tag: app_version # override at deployment time
     port: 3000
 

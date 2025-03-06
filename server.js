@@ -124,7 +124,7 @@ async function initialiseGlobalMiddleware(app) {
 
   if (process.env.DISABLE_REQUEST_LOGGING !== 'true') {
     app.use(
-      /\/((?!images|public|stylesheets|javascripts).)*/,
+      /\/((?!images|dist|stylesheets|javascripts).)*/,
       loggingMiddleware(
         ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" - total time :response-time ms',
       ),
@@ -132,7 +132,7 @@ async function initialiseGlobalMiddleware(app) {
   }
 
   app.use((req, res, next) => {
-    res.locals.asset_path = '/public/'
+    res.locals.asset_path = '/dist/'
     res.locals.showDetailedErrors = process.env.SHOW_DETAILED_ERRORS === 'true'
     res.locals.showRequestIdOnErrorPage = process.env.SHOW_REQUEST_ID_ON_ERROR_PAGE === 'true'
     noCache(res)
@@ -273,10 +273,10 @@ function initialiseTemplateEngine(app) {
 function initialisePublic(app) {
   app.use('/assets', _static(join(__dirname, '/node_modules/@ministryofjustice/frontend/moj/assets')))
   app.use('/assets', _static(join(__dirname, '/node_modules/govuk-frontend/dist/govuk/assets')))
-  app.use('/javascripts', _static(join(__dirname, '/public/javascripts'), publicCaching))
-  app.use('/images', _static(join(__dirname, '/public/images'), publicCaching))
-  app.use('/stylesheets', _static(join(__dirname, '/public/stylesheets'), publicCaching))
-  app.use('/downloads', _static(join(__dirname, '/public/downloads'), publicCaching))
+  app.use('/javascripts', _static(join(__dirname, '/dist/javascripts'), publicCaching))
+  app.use('/images', _static(join(__dirname, '/dist/images'), publicCaching))
+  app.use('/stylesheets', _static(join(__dirname, '/dist/stylesheets'), publicCaching))
+  app.use('/downloads', _static(join(__dirname, '/dist/downloads'), publicCaching))
 }
 
 function initialiseRoutes(app) {

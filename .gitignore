@@ -63,6 +63,7 @@ typings/
 # App specific
 govuk_modules/
 public/
+dist/
 
 # Cypress
 integration_tests/reports/
@@ -71,6 +72,7 @@ integration_tests/screenshots/
 integration_tests/snapshots/diff/
 integration_tests/videos/
 integration_tests/downloads/
+timings.json
 
 .DS_Store
 .idea/

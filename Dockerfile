@@ -18,9 +18,8 @@ ENV BUILD_NUMBER=${BUILD_NUMBER}
 ENV GIT_REF=${GIT_REF}
 COPY . .
 RUN apk add --no-cache python3 build-base linux-headers
-RUN rm -rf public node_modules
+RUN rm -rf dist node_modules
 RUN CYPRESS_INSTALL_BINARY=0 npm ci --no-audit --include=dev
-RUN npm run clean
 RUN npm run build
 RUN npm run record-build-info
 
@@ -33,7 +32,7 @@ FROM base AS production
 COPY --from=build --chown=appuser:appgroup /app/package.json /app/package-lock.json ./
 COPY --from=build --chown=appuser:appgroup /app/build-info.json ./build-info.json
 COPY --from=build --chown=appuser:appgroup /app/node_modules ./node_modules
-COPY --from=build --chown=appuser:appgroup /app/public ./public
+COPY --from=build --chown=appuser:appgroup /app/dist ./dist
 COPY --from=build --chown=appuser:appgroup /app/app ./app
 COPY --from=build --chown=appuser:appgroup /app/common ./common
 COPY --from=build --chown=appuser:appgroup /app/server.js /app/start.js ./
