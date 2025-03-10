@@ -92,7 +92,7 @@ services:
       - -global-response-templating
 
   api:
-    image: quay.io/hmpps/hmpps-assessments-api:${API_IMAGE_TAG:-latest}
+    image: ghcr.io/ministryofjustice/hmpps-assessments-api:${API_IMAGE_TAG:-latest}
     restart: always
     networks:
       - hmpps
