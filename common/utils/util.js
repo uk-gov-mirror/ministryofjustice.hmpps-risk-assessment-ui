@@ -138,7 +138,6 @@ const processReplacements = (input, replacementDetails) => {
 }
 
 const getOrdinalIndicator = (number) => {
-  // eslint-disable-next-line no-undef
   const englishOrdinalRules = new Intl.PluralRules('en', { type: 'ordinal' })
   const suffixes = {
     one: 'st',

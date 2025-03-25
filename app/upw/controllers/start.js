@@ -74,7 +74,7 @@ class StartUnpaidWork extends BaseController {
       req.session.save()
 
       super.saveValues(req, res, next)
-    } catch (e) {
+    } catch {
       next(new Error('Failed to create assessment'))
     }
   }

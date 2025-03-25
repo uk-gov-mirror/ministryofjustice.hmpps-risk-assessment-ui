@@ -160,7 +160,7 @@ class SaveAndContinue extends BaseController {
       try {
         const journeyName = request.form?.options?.journeyName || ''
         return await getQuestionsForAssessmentType(journeyName, request.user?.token)
-      } catch (e) {
+      } catch {
         return []
       }
     }

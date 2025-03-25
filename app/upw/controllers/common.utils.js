@@ -52,7 +52,7 @@ const getRegistrations = async (crn, eventId, user) => {
       mappa: formatMappaResponse(response.mappa),
       flags: response.flags.filter(({ description }) => whereStringNotNull(description)),
     }
-  } catch (error) {
+  } catch {
     logger.info(`Failed to fetch registrations for CRN ${crn}`)
     return { mappa: null, flags: null }
   }
@@ -82,7 +82,7 @@ const getRoshRiskSummary = async (crn, user) => {
         lastUpdated: prettyDate(response.assessedOn),
       },
     }
-  } catch (error) {
+  } catch {
     logger.info(`Failed to fetch ROSH risk summary for CRN ${crn}`)
     return { roshRiskSummary: null }
   }
