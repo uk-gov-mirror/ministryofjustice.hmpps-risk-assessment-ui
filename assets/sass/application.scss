@@ -1,13 +1,14 @@
 $govuk-global-styles: true;
-$govuk-page-width: 1220px;
+$moj-page-width: 1220px;
+$govuk-page-width: $moj-page-width;
 $govuk-breakpoints: (
   mobile: 390px,
   tablet: 1024px,
   desktop: 1024px,
 );
 
-@import "govuk/index";
-@import "moj/all";
+@import "govuk-frontend/dist/govuk/all";
+@import "@ministryofjustice/frontend/moj/all";
 @import "assets/sass/components/cookie-message";
 @import "assets/sass/components/task-list";
 @import "assets/sass/components/form-wizard-task-list";
