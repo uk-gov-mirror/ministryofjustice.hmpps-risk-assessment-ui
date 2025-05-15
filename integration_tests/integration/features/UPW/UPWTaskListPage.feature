@@ -18,11 +18,12 @@ Feature: Verify the UPW Task List page
       # Diversity information Section
       | Gender information                  | Incomplete | Gender information                                                 |
       | Cultural and religious adjustments  | Incomplete | Are adjustments required for cultural or religious reasons?        |
+      | Other adjustments                   | Incomplete | Other adjustments                                                  |
       # | Placement preferences               | Incomplete | Does the individual have any placement preferences?                |
       # Risk information Section
       | Risk of harm in the community       | Incomplete | Risk of harm in the community                                      |
       | Managing risk                       | Incomplete | Managing risk                                                      |
-      # Placement restrictions due to health and other needs Section
+      # Placement restrictions due to health and other needs Section                
       | Disabilities and mental health      | Incomplete | Disabilities and mental health                                     |
       | Health issues                       | Incomplete | Are there any other health issues that may affect ability to work? |
       | GP Details                          | Incomplete | GP Details                                                         |

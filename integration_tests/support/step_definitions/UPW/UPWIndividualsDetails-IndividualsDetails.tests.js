@@ -4,14 +4,6 @@ const EditContactDetailsPage = require('../../../integration/pages/upwPages/indi
 const EditEmergencyContactDetailsPage = require('../../../integration/pages/upwPages/individualsDetails/EditEmergencyContactDetailsPage')
 const Common = require('../../../integration/pages/upwPages/common/common')
 
-When('I verify that {string} is Default state on Individuals details page', () => {
-  cy.get(IndividualsDetailsPage.iWillComeBackLaterRBtn).should('have.attr', 'type', 'radio').should('be.checked')
-})
-
-When('I select {string} for Mark this section as complete? for Individuals details', (option) => {
-  IndividualsDetailsPage.selectIndvdlDetailsSectionComplete(option)
-})
-
 Then('I click on {string} link against the {string} on the Individual details', (option, emergencyContact) => {
   if (option === 'Remove') {
     IndividualsDetailsPage.clickRemoveEmergncyContact(emergencyContact)
@@ -35,33 +27,12 @@ When('I click {string} link for changing Contact details', () => {
   IndividualsDetailsPage.clickChangeContactDetails()
 })
 
-When('I see {string} sub heading', (emrgncyContact) => {
-  cy.get('.upw-read-only__header').should('contain.text', emrgncyContact)
-})
-
-When('I see that {string} sub heading is not available', (emrgncyContact) => {
-  cy.get('.upw-read-only__header').should('not.contain.text', emrgncyContact)
-})
-
 When('I click {string} button for Emergency contact details', () => {
   IndividualsDetailsPage.clickAddEmergncyContactDetails()
 })
 
 When('I say Individual declined to give an emergency contact', () => {
   IndividualsDetailsPage.clickEmergncyContactDecline()
-})
-
-When('I enter the details on the "Contact details" page as follows', (dataTable) => {
-  EditContactDetailsPage.enterContactAddrBldngName(dataTable.hashes()[0]['Text to be entered'])
-  EditContactDetailsPage.enterContactAddrHouseNr(dataTable.hashes()[1]['Text to be entered'])
-  EditContactDetailsPage.enterContactAddrStreet(dataTable.hashes()[2]['Text to be entered'])
-  EditContactDetailsPage.enterContactAddrDistrict(dataTable.hashes()[3]['Text to be entered'])
-  EditContactDetailsPage.enterContactAddrTownCity(dataTable.hashes()[4]['Text to be entered'])
-  EditContactDetailsPage.enterContactAddrCounty(dataTable.hashes()[5]['Text to be entered'])
-  EditContactDetailsPage.enterContactAddrPostCode(dataTable.hashes()[6]['Text to be entered'])
-  EditContactDetailsPage.enterContactPhoneNumber(dataTable.hashes()[7]['Text to be entered'])
-  EditContactDetailsPage.enterContactMobileNumber(dataTable.hashes()[8]['Text to be entered'])
-  EditContactDetailsPage.enterContactEmailAddress(dataTable.hashes()[9]['Text to be entered'])
 })
 
 When('I verify the details on the "Individuals details" page as follows', (dataTable) => {
@@ -171,14 +142,6 @@ Then('I see the following Summary and Field error messages for Contact details',
   )
 })
 
-When('I enter the details on the "Emergency contact details" page as follows', (dataTable) => {
-  EditEmergencyContactDetailsPage.enterEmergencyContactFirstName(dataTable.hashes()[0]['Text to be entered'])
-  EditEmergencyContactDetailsPage.enterEmergencyContactFamilyName(dataTable.hashes()[1]['Text to be entered'])
-  EditEmergencyContactDetailsPage.enterEmergencyContactRelationship(dataTable.hashes()[2]['Text to be entered'])
-  EditEmergencyContactDetailsPage.enterEmergencyContactPhone(dataTable.hashes()[3]['Text to be entered'])
-  EditEmergencyContactDetailsPage.enterEmergencyContactMobile(dataTable.hashes()[4]['Text to be entered'])
-})
-
 When('I verify the Emergency details on the "Individuals details" page as follows', (dataTable) => {
   cy.get(IndividualsDetailsPage.emergencyContactDetailsName).should(
     'contain.text',
@@ -200,10 +163,6 @@ When('I verify the Emergency details on the "Individuals details" page as follow
     'contain.text',
     dataTable.hashes()[4]['Text to be Verified'],
   )
-})
-
-Then('I click the {string} button on Contact details', () => {
-  EditContactDetailsPage.clickSaveContactDetails()
 })
 
 Then('I see the following Summary and Field error messages for Emergency contact details', (dataTable) => {
@@ -247,33 +206,6 @@ Then('I see the following Summary and Field error messages for Emergency contact
     'contain.text',
     dataTable.hashes()[4]['Field Error Messages'],
   )
-})
-
-When('I change the Contact details & Emergency contact details and Save', () => {
-  IndividualsDetailsPage.clickChangeContactDetails()
-  cy.get(Common.pageHeader).should('contain.text', 'Contact details')
-  EditContactDetailsPage.enterContactAddrBldngName('New Offender Building')
-  EditContactDetailsPage.enterContactAddrHouseNr('1')
-  EditContactDetailsPage.enterContactAddrStreet("MAIN Offender's Street")
-  EditContactDetailsPage.enterContactAddrDistrict('Sheffield')
-  EditContactDetailsPage.enterContactAddrTownCity('Sheffield')
-  EditContactDetailsPage.enterContactAddrCounty('South Yorkshire')
-  EditContactDetailsPage.enterContactAddrPostCode('S3 1HY')
-  EditContactDetailsPage.enterContactPhoneNumber('02142785462')
-  EditContactDetailsPage.enterContactMobileNumber('07123456789')
-  EditContactDetailsPage.enterContactEmailAddress('test@test.com')
-  EditContactDetailsPage.clickSaveContactDetails()
-  cy.get(Common.pageHeader).should('contain.text', "Individual's details")
-  IndividualsDetailsPage.clickAddEmergncyContactDetails()
-  cy.get(Common.pageHeader).should('contain.text', 'Emergency contact')
-  EditEmergencyContactDetailsPage.enterEmergencyContactFirstName('Charles')
-  EditEmergencyContactDetailsPage.enterEmergencyContactFamilyName('Europe')
-  EditEmergencyContactDetailsPage.enterEmergencyContactRelationship('Friend')
-  EditEmergencyContactDetailsPage.enterEmergencyContactPhone('02142785462')
-  EditEmergencyContactDetailsPage.enterEmergencyContactMobile('020123456789')
-  EditContactDetailsPage.clickSaveContactDetails()
-  IndividualsDetailsPage.selectIndvdlDetailsSectionComplete('Yes')
-  Common.clickSaveBtn()
 })
 
 When('I verify the {string} Section for contact info as follows', (sectionName, dataTable) => {

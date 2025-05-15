@@ -3,14 +3,6 @@ const IndividualsDetailsPage = require('../../../integration/pages/upwPages/indi
 const Availability = require('../../../integration/pages/upwPages/placementDetails/availabilityPage')
 const Common = require('../../../integration/pages/upwPages/common/common')
 
-When('I see that {string} is Default state on Availability page', () => {
-  cy.get(Availability.iWillComeBackLaterRBtn).should('be.checked')
-})
-
-When('I select {string} for Mark this section as complete? for Availability', (option) => {
-  Availability.selectAvailabilitySectionComplete(option)
-})
-
 When('I select the Availability CheckBoxes as follows', (dataTable) => {
   Availability.selectMondayAvailabilityStatus(dataTable.hashes()[0].Monday)
   Availability.selectTuesdayAvailabilityStatus(dataTable.hashes()[1].Tuesday)
@@ -19,10 +11,6 @@ When('I select the Availability CheckBoxes as follows', (dataTable) => {
   Availability.selectFridayAvailabilityStatus(dataTable.hashes()[0].Friday)
   Availability.selectSaturdayAvailabilityStatus(dataTable.hashes()[1].Saturday)
   Availability.selectSundayAvailabilityStatus(dataTable.hashes()[2].Sunday)
-})
-
-Then('I enter {string} in the Additional availability information', (details) => {
-  Availability.enterAvailabilityInfoDetails(details)
 })
 
 Then('I verify that all the Availability related Check Boxes are selected', () => {
@@ -106,8 +94,4 @@ When('I verify the Availability Section as follows', () => {
   cy.get(Availability.sundayMorningAvlbltyCheckBox).should('not.be.checked')
   cy.get(Availability.sundayAfternoonAvlbltyCheckBox).should('not.be.checked')
   cy.get(Availability.sundayEveningAvlbltyCheckBox).should('be.checked')
-})
-
-Then('I verify the text {string} in the Additional availability information', (details) => {
-  cy.get(Availability.availabilityInfoTextBox).should('contain', details)
 })

@@ -11,9 +11,9 @@ Feature: Verify the Caring commitments page
 
   Scenario: Verify that the user can select and answers on the "Caring commitments" Page and mark the section as completed
     When I see UPW "Are there carer commitments?" page
-    And I see that "No, I'll come back later" is Default state on Caring commitments page
+    And I check that "No, I’ll come back later" is selected for "Mark caring commitments section as complete?"
     And I enter Additional information as "Additional caring commitments" for Caring commitments
-    And I select "Yes" for Mark this section as complete? for Caring commitments
+    And I select "Yes" for the question "Mark caring commitments section as complete?"
     And I click on the "Save" button
     And I see the UPW "task-list" page
     Then I see the "Caring commitments" link is marked as "Completed"
@@ -32,7 +32,7 @@ Feature: Verify the Caring commitments page
   Scenario: Verify that user that user can navigate to Task List page on clicking "No, I’ll come back later" button and selected/enter values are saved
     When I see UPW "Are there carer commitments?" page
     And I enter Additional information as "Additional caring commitments" for Caring commitments
-    And I select "No, I'll come back later" for Mark this section as complete? for Caring commitments
+    And I select "No, I’ll come back later" for the question "Mark caring commitments section as complete?"
     And I click on the "Save" button
     And I see the UPW "task-list" page
     And I see the "Caring commitments" link is marked as "Incomplete"

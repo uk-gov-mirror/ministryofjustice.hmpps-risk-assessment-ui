@@ -1,4 +1,4 @@
-{% extends "common/templates/layout.njk" %}
+{% extends "common/templates/pdf-layout.njk" %}
 {% from "app/upw/templates/pdf-preview-and-declaration/components/pdf-template/macro.njk" import renderPdfTemplate %}
 
 {% set backLink = 'task-list#pdf-preview' %}
@@ -15,7 +15,7 @@
 {{ super() }}
 
 {{ renderPdfTemplate(assessment, answers, persistedAnswers, widgetData, userFullName, {
-    imageAssetPath: "/assets/images/"
+    imageAssetPath: "/images/"
 }) }}
 
 {% endblock %}

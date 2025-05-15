@@ -10,7 +10,11 @@
     <strong>{{ heading }}</strong>
   </p>
   {% if description %}
-    <p>{{ description }}</p>
+    {% if "<p>" in description %}
+      {{ description | safe }}
+    {% else %}
+      <p>{{ description | safe }}</p>
+    {% endif %}
   {% endif %}
 {%- endmacro -%}
 
@@ -91,7 +95,7 @@
 {%- endmacro -%}
 
 <div class="govuk-body upw-pdf">
-  <div class="upw-pdf-header">
+  {# <div class="upw-pdf-header">
     <div class="upw-pdf-header__left">
 
       {{ renderMojCrest('#000000', 60) }}
@@ -102,20 +106,20 @@
     <div class="upw-pdf-header__right">
       <span class="govuk-tag upw-pdf-header__right-tag">Official Sensitive</span>
     </div>
-  </div>
+  </div> #}
 
   <div class='govuk-grid-row upw-pdf-title-page'>
     <div class='govuk-grid-column-two-thirds'>
 
       <div class='title-page-logos'>
-        <img class="upw-pdf-title__mojlogo" src="{{ options.imageAssetPath }}MOJ_logo_large.png" height='95'/>
+        <img class="upw-pdf-title__mojlogo" src="{{ options.imageAssetPath }}HMPPS_Lesser_Arms_Stacked_Black.png" height='95'/>
         <img src="{{ options.imageAssetPath }}community-payback-logo.jpg" height='95'/>
       </div>
 
       <div class='upw-pdf-title-page__body page-break-after'>
 
-        <p class='upw-pdf-title__strapline'>Her Majesty’s Prison & Probation Service</p>
-        <h1 class='upw-pdf-title'>Community payback assessment</h1>
+        <p class='upw-pdf-title__strapline'>His Majesty’s Prison & Probation Service</p>
+        <h1 class='upw-pdf-title'>Community Payback Assessment</h1>
         <div class='upw-pdf-title__divider'></div>
         <div class='upw-pdf__details'>
           <p>Prepared by:
@@ -259,17 +263,18 @@
   </div>
   <div class='upw-avoid-break'>
     <h2 id="heading_risk_of_harm" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Risk of harm in the community</h2>
+
     <div id="rosh-widget">
       {{ roshWidget(widgets.roshRiskSummary) }}
     </div>
-  </div>
-  <div class='upw-avoid-break'>
+
     {{ renderTable({
       rows: [
           { id: "flags-widget", heading: "Delius risk flags (registers)", data: renderRiskFlags(widgets.flags) },
           {
             id: "history_sexual_offending",
-            heading: "History of sexual offending?", 
+            heading: "History of sexual offending?",
+            description: "When allocating a person who has a current or previous conviction for a sexual offence to a project, consideration must be given to avoiding any contact with children or vulnerable people. Where necessary, staff should be aware of the nature of the convictions and arrangements for the individual’s safety in the event of any disclosure about these offences.",
             data: renderValue(
               answers["history_sexual_offending"],
               answers["history_sexual_offending_details"],
@@ -278,7 +283,8 @@
           },
           {
             id: "poses_risk_to_children",
-            heading: "Individual poses a risk to children?", 
+            heading: "Individual poses a risk to children?",
+            description: "Does this individual have a conviction, or is there any evidence to indicate that they pose a risk of harm to children? Community Payback work should not include direct personal care or supervision of a child or vulnerable adult. If Community Payback work takes place on premises to which (a) the public do not have access and (b) children or vulnerable adults are present, then before a placement can be considered there must be a clear record on the case management system that the individual is not barred from working with children or vulnerable adults.",
             data: renderValue(
               answers["poses_risk_to_children"],
               answers["poses_risk_to_children_details"],
@@ -287,7 +293,8 @@
           },
           {
             id: "violent_offences",
-            heading: "Violent offences?", 
+            heading: "Violent offences?",
+            description: "In order to manage the dynamics of the group, supervisors will need to know if an individual has a history of violence or using weapons. Please check their previous convictions and any other known information.",
             data: renderValue(
               answers["violent_offences"],
               answers["violent_offences_details"],
@@ -296,7 +303,8 @@
           },
           {
             id: "acquisitive_offending",
-            heading: "History of acquisitive offending?", 
+            heading: "History of acquisitive offending?",
+            description: "Placement coordinators need to limit opportunities for further offending when placing an individual on a project. Please detail any recent history of theft or fraudulent offending.",
             data: renderValue(
               answers["acquisitive_offending"],
               answers["acquisitive_offending_details"],
@@ -305,7 +313,8 @@
           },
           {
             id: "sgo_identifier",
-            heading: "Has the individual been involved in serious group offending (SGO)?", 
+            heading: "Has the individual been involved in serious group offending (SGO)?",
+            description: '<p class="govuk-body">Is there any intelligence or evidence of this individual:</p><ul class="govuk-list govuk-list--bullet"><li>identifying or associating with a known gang or group and their location</li><li>being in contact with people related to the gang or group that they identify with</li><li>being in contact with people who associate with rival gangs or groups</li><li>being present in areas considered to be frequented by other street gangs or groups</li></ul>',
             data: renderValue(
                 answers["sgo_identifier"],
                 answers["sgo_identifier_details"],
@@ -314,7 +323,8 @@
           },
           {
             id: "control_issues",
-            heading: "Control issues or disruptive behaviour?", 
+            heading: "Control issues or disruptive behaviour?",
+            description: "Please record any evidence of the individual having a history of problems with authority or offending when in groups etc Please document any history of conduct issues whilst in custody.",
             data: renderValue(
               answers["control_issues"],
               answers["control_issues_details"],
@@ -324,10 +334,20 @@
           {
             id: "history_of_hate_based_behaviour",
             heading: "History of hate-based attitudes or behaviours?",
-            description: "For example, homophobic or racially motivated",
+            description: "Please record any evidence of homophobic, transphobic, religion, gender or racially motivated behaviour.",
             data: renderValue(
               answers["history_of_hate_based_behaviour"],
               answers["history_of_hate_based_behaviour_details"],
+              "Yes"
+            )
+          },
+          {
+            id: "risks_history_of_offending_against_vulnerable_adults",
+            heading: "History of offending against vulnerable adults?",
+            description: "For example, domestic abuse or offences involving breach of trust",
+            data: renderValue(
+              answers["risks_history_of_offending_against_vulnerable_adults"],
+              answers["risks_history_of_offending_against_vulnerable_adults_yes_details"],
               "Yes"
             )
           },
@@ -344,6 +364,7 @@
           {
             id: "additional_rosh_info",
             heading: "Additional risk assessment information?",
+            description: "Including any information relating to the individuals own needs or vulnerabilities.",
             data: renderValue(
               answers["additional_rosh_info"],
               answers["additional_rosh_info_details"],
@@ -357,15 +378,60 @@
     <h2 id="heading_management_of_risk" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Management of risk</h2>
 
     {%- set mappaDataRows = [ 
-      { id: "mappa_nominal", heading: "MAPPA nominal?", data: renderValue("No") },
-      { id: "location_exclusion_criteria", heading: "Location restricted by victim exclusion criteria?", data: renderValue( answers["location_exclusion_criteria"], answers["location_exclusion_criteria_details"], "Yes" ) },
-      { id: "restricted_placement", heading: "Close supervision or restricted placement recommended?", data: renderValue( answers["restricted_placement"], answers["restricted_placement_details"], "Yes" ) },
-      { id: "no_female_supervisor", heading: "Recommend not to place with female supervisor?", data: renderValue( answers["no_female_supervisor"], answers["no_female_supervisor_details"], "Yes" ) },
-      { id: "no_male_supervisor", heading: "Recommend not to place with male supervisor?", data: renderValue( answers["no_male_supervisor"], answers["no_male_supervisor_details"], "Yes" ) },
-      { id: "restrictive_orders", heading: "Restrictive orders?", data: renderValue( answers["restrictive_orders"], answers["restrictive_orders_details"], "Yes" ) },
-      { id: "risk_management_issues_individual", heading: "Are there any risk management issues for an individual placement?", data: renderValue( answers["risk_management_issues_individual"], answers["risk_management_issues_individual_details"], "Yes" ) },
-      { id: "risk_management_issues_supervised_group", heading: "Are there any risk management issues if working in a supervised group?", data: renderValue( answers["risk_management_issues_supervised_group"], answers["risk_management_issues_supervised_group_details"], "Yes" ) },
-      { id: "alcohol_drug_issues", heading: "Alcohol or drug issues with health and safety impact?", data: renderValue( answers["alcohol_drug_issues"], answers["alcohol_drug_issues_details"], "Yes" ) } 
+      { 
+        id: "mappa_nominal",
+        heading: "MAPPA nominal?",
+        description: "If the person is subject to Multi-Agency Public Protection Arrangements, please outline level and category.",
+        data: renderValue("No")
+      },
+      { 
+        id: "location_exclusion_criteria",
+        heading: "Location restricted by victim exclusion criteria?",
+        description: "Please detail any limitations on where the individual can undertake Community Payback work.",
+        data: renderValue( answers["location_exclusion_criteria"], answers["location_exclusion_criteria_details"], "Yes" )
+      },
+      { 
+        id: "restricted_placement",
+        heading: "Close supervision or restricted placement recommended?",
+        description: "Say whether there are any reasons for the individual to be made subject to more stringent supervision on Community Payback.",
+        data: renderValue( answers["restricted_placement"], answers["restricted_placement_details"], "Yes" )
+      },
+      { 
+        id: "no_female_supervisor",
+        heading: "Recommend not to place with female supervisor?",
+        description: "Please outline reasons why this would not be suitable.",
+        data: renderValue( answers["no_female_supervisor"], answers["no_female_supervisor_details"], "Yes" ) 
+      },
+      { 
+        id: "no_male_supervisor",
+        heading: "Recommend not to place with male supervisor?",
+        description: "Please outline reasons why this would not be suitable.",
+        data: renderValue( answers["no_male_supervisor"],  answers["no_male_supervisor_details"], "Yes" ) 
+      },
+      { 
+        id: "restrictive_orders",
+        heading: "Restrictive orders?",
+        description: "Is the individual subject to a curfew or prohibited from undertaking any activity etc? Eg Non- Molestation Order, Sexual Harm Prevention Orders.",
+        data: renderValue( answers["restrictive_orders"], answers["restrictive_orders_details"], "Yes" ) 
+      },
+      {
+        id: "risk_management_issues_individual",
+        heading: "Are there any risk management issues for an individual placement?",
+        description: "Individual placements are often in charity shops or other smaller organisations meaning the person will not be supervised by a member of probation staff. Give any reasons why this person should not work on a partner supervised placement or individual placement.",
+        data: renderValue( answers["risk_management_issues_individual"], answers["risk_management_issues_individual_details"], "Yes" )
+      },
+      {
+        id: "risk_management_issues_supervised_group",
+        heading: "Are there any risk management issues if working in a supervised group?",
+        description: "To help manage the dynamics of the group it's helpful to avoid placing co-defendants, family members or anti-social peers on the same project. Please identify any person the individual should not be placed with.",
+        data: renderValue( answers["risk_management_issues_supervised_group"], answers["risk_management_issues_supervised_group_details"], "Yes" )
+      },
+      {
+        id: "alcohol_drug_issues",
+        heading: "Alcohol or drug issues with health and safety impact?",
+        description: "Consider the risks if individuals who have a drug or alcohol dependency are required to use tools or machinery. It is important to make the Supervisor aware of any issues.",
+        data: renderValue( answers["alcohol_drug_issues"], answers["alcohol_drug_issues_details"], "Yes" )
+      } 
     ] -%}
     {%- if widgets.mappa.isNominal != null %}
       <div id="mappa-widget">
@@ -373,8 +439,7 @@
         {% set mappaDataRows = mappaDataRows | shiftArray %}
       </div>
     {% endif %}
-  </div>
-  <div class='upw-avoid-break'>
+    
     {{ renderTable({ rows: mappaDataRows }) }}
   </div>
   
@@ -466,11 +531,48 @@
         {
           id: "cultural_religious_adjustment",
           heading: "Are adjustments required for cultural or religious reasons?",
+          description: '<p class="govuk-body">Outline nature of persons faith and check with them around possible adjustments such as prayer breaks or time off for significant festivals.</p><ul class="govuk-list govuk-list--bullet"><li>What is the persons faith/ belief</li><li>Does individuals’ faith and belief have any festivals that will affect attendance?</li><li>How will this effect attendance? Are there any adjustments required on groups to support the individual</li></ul>',
           data: renderValue(
               answers["cultural_religious_adjustment"],
               answers["cultural_religious_adjustment_details"],
               "Yes"
           )
+        },
+        { 
+          id: "diversity_information_trauma",
+          heading: "Trauma",
+          description: 'It is important to outline any history of trauma the individual might have experienced. This can be considered in placement they are allocated to and support the project supervisor in taking a trauma informed approach',
+          data: renderValue(persistedAnswers["diversity_information_trauma"]) 
+        },
+        { 
+          id: "diversity_information_gender",
+          heading: "Gender",
+          description: "If the individual is female please outline if they would prefer, if possible, to be placed in a single gender group or individual placement.",
+          data: renderValue(persistedAnswers["diversity_information_gender"])
+        },
+        { 
+          id: "diversity_information_neurodiversity",
+          heading: "Neurodiversity",
+          description: "Does the individual have an identified Neurodivergent condition eg Autism Spectrum Disorder, Attention Deficit Hyperactivity Disorder, Developmental Co-ordination Disorder, Dyslexia. Are any adjustments that need to be considered?",
+          data: renderValue(persistedAnswers["diversity_information_neurodiversity"])
+        },
+        { 
+          id: "diversity_information_mobility",
+          heading: "Transport/Mobility",
+          description: "Is the individual able to report directly to site? Do they have access to their own transport? Is the person able to access public transport that would allow them to travel to the project prior to the start time?",
+          data: renderValue(persistedAnswers["diversity_information_mobility"])
+        },
+        { 
+          id: "diversity_information_maturity_assessment",
+          heading: "Maturity Assessment",
+          description: '<p class="govuk-body">If aged between 18-25 has the Maturity Assessment been completed?</p><p class="govuk-body">Please Enter the Score:</p><p class="govuk-body">Maturity Assessment should be completed on all individuals aged 18-25 prior to completing unpaid work:</p>',
+          data: renderValue(persistedAnswers["diversity_information_maturity_assessment"])
+        },
+        { 
+          id: "diversity_information_maturity",
+          heading: "Maturity",
+          description: "If assessed as low maturity what action needs to be taken to support engagement/compliance with the UPW Requirement?",
+          data: renderValue(persistedAnswers["diversity_information_maturity"])
         },
         {
           id: "placement_preferences",
@@ -491,11 +593,11 @@
     {% if disabilities and provisions %}
       {{ renderCurrentDisabilities(disabilities, { tableClass: "upw-pdf-table", captionClass: "govuk-table__caption--m" }) }}
       {{ renderCurrentProvisions(provisions, { tableClass: "upw-pdf-table", captionClass: "govuk-table__caption--m" }) }}
-    {% else %}
-      {%- set disabilitiesCaptionHeading = "Disabilities and mental health" -%}
+    {% else %}    
+      {%- set disabilitiesCaptionHeading = "Health Conditions (Physical and Mental), disability and other needs" -%}
+        {%- set disabilitiesCaptionSubheading = "Discuss with individual any diagnosed health or other conditions that might require an adjustment. Consider whether this is a recognised disability and whether the person on probation considers themselves disabled as part of notes. Outline adjustments or considerations that might need to be considered as part of placement in notes section." -%}
 
       {% if persistedAnswers["active_disabilities"] %}
-        {%- set disabilitiesCaptionSubheading = "Disabilities, conditions and adjustments" -%}
         {% if persistedAnswers["active_disabilities"].length %}
           <table id="active_disabilities" class="upw-pdf-table">
             <caption id="caption_active_disabilities">
@@ -805,7 +907,7 @@
       {% endif %}
     </div>
     <div class='upw-avoid-break'>
-      <h2 id="heading_employment_education_skills" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education and skills</h2>
+      <h2 id="heading_employment_education_skills" class="govuk-heading-l govuk-!-margin-bottom-4 govuk-!-margin-top-9">Employment, Education, and skills</h2>
 
       {%- if persistedAnswers["employment_education"] == "FULLTIME_EDUCATION_EMPLOYMENT" -%}
         {%- set employmentDetails = answers["employment_education_details_fulltime"] -%}
@@ -823,7 +925,8 @@
         rows: [
           {
             id: "employment_education",
-            heading: "Employment or education?",
+            heading: "Is the individual in employment or education?",
+            description: "It is important to request evidence to verify this.",
             data: renderValue(answers["employment_education"])
           },
           {
@@ -874,9 +977,20 @@
           {
             id: "education_training_need",
             heading: "Does the individual have an education, training or employment-related need?",
+            description: "Does the individual have an education, training or employment-related need? What types of courses would be applicable?",
             data: renderValue(
               answers["education_training_need"],
               answers["education_training_need_details"],
+              "Yes"
+            ) 
+          },
+          {
+            id: "training_and_employment_factors_preventing",
+            heading: "Is there any reason that would prevent the individual from completing the 3 mandatory Community Campus Courses online? Or any other online learning?",
+            description: "<p class=govuk-body>This could be as result of restrictive conditions such as a Sexual Harm Prevention Order or Serious Crim Prevention Order that prevents internet access.</p><p class=govuk-body>It also could be due to having insufficient internet access or lack of literacy issues.</p>",
+            data: renderValue(
+              answers["training_and_employment_factors_preventing"],
+              answers["training_and_employment_factors_preventing_yes_details"],
               "Yes"
             ) 
           },
@@ -920,29 +1034,29 @@
               )
             },
             {
-              id: "recommended_hours_start_order",
-              heading: "Recommended hours per week in addition to statutory minimum, at the start of the order",
-              condition: eligibleForIntensiveWorking,
-              data: renderValue(recommendedHoursStartOrder)
+              id: "availability_intensive_working_no_details",
+              heading: "If person on probation is unemployed, are they available to work intensively? (Up to a maximum 28 Hours a week)",
+              condition: persistedAnswers["availability_intensive_working"] == "NO",
+              data: renderValue(answers["availability_intensive_working_no_details"])
             },
             {
-              id: "recommended_hours_start_order",
-              heading: "Recommended hours per week in addition to statutory minimum, at the midpoint of the order",
-              condition: eligibleForIntensiveWorking,
-              data: renderValue(recommendedHoursMidpointOrder)
+              id: "availability_availability_weekdays_no_details",
+              heading: "If person on probation is unemployed, are they available to work Mon-Fri?",
+              condition: persistedAnswers["availability_availability_weekdays"] == "NO",
+              data: renderValue(answers["availability_availability_weekdays_no_details"])
             },
             {
-              id: "twenty_eight_hours_working_week_details",
-              heading: "At what point should the individual be expected to reach a 28-hour working week?",
-              condition: eligibleForIntensiveWorking,
-              data: renderValue(answers["twenty_eight_hours_working_week_details"])
+              id: "availability_want_to_considered_for_intensive_working_yes_details",
+              heading: "If the person on probation is employed, do they want to be considered for intensive working?",
+              condition: persistedAnswers["availability_want_to_considered_for_intensive_working"] == "YES",
+              data: renderValue(answers["availability_want_to_considered_for_intensive_working_yes_details"])
             }
           ]
         }) }}
       {%- endif -%}
     </div>
     <div class='upw-avoid-break'>
-      <h3 id="heading_availability" class="govuk-heading-m">Availability for Community Payback</h3>
+      <h3 id="heading_availability" class="govuk-heading-m">Availability for Community Payback/ Intensive Working Assessment</h3>
 
       {% macro ifAnswerHasValue(answer, value, text) %}
         {% if answer and value in answer %}
@@ -1003,6 +1117,33 @@
             id: "individual_availability_details",
             heading: "Additional availability information",
             data: renderValue(answers["individual_availability_details"])
+          },
+          {
+            id: "availability_intensive_working",
+            heading: "If person on probation is unemployed, are they available to work intensively? (Up to a maximum 28 Hours a week)",
+            data: renderValue(
+              answers["availability_intensive_working"],
+              answers["availability_intensive_working_no_details"],
+              "No"
+            ) 
+          },
+          {
+            id: "availability_availability_weekdays",
+            heading: "If person on probation is unemployed, are they available to work Mon-Fri?",
+            data: renderValue(
+              answers["availability_availability_weekdays"],
+              answers["availability_availability_weekdays_no_details"],
+              "No"
+            ) 
+          },
+          {
+            id: "availability_want_to_considered_for_intensive_working",
+            heading: "If the person on probation is employed, do they want to be considered for intensive working?",
+            data: renderValue(
+              answers["availability_want_to_considered_for_intensive_working"],
+              answers["availability_want_to_considered_for_intensive_working_yes_details"],
+              "Yes"
+            ) 
           }
         ]
       }) }}
@@ -1099,7 +1240,7 @@
       <hr class="upw-section-break--bold">
     </div>
 
-    <p class="upw-pdf-footer">Strictly NO unauthorised disclosure without following the approved disclosure process. Handle as per Government Security Classifications. The information contained in this document remains the property of HMPPS. Dispose of as <strong>OFFICIAL SENSITIVE</strong> waste.</p>
+    {# <p class="upw-pdf-footer">Strictly NO unauthorised disclosure without following the approved disclosure process. Handle as per Government Security Classifications. The information contained in this document remains the property of HMPPS. Dispose of as <strong>OFFICIAL SENSITIVE</strong> waste.</p> #}
 
   </div>
 </div>

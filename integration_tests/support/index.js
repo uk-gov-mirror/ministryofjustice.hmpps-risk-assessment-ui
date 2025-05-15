@@ -33,6 +33,7 @@ Cypress.Commands.overwrite('compareSnapshot', (originalFn, ...args) => {
           setTimeout(() => {
             // hide the CRN
             $app.find('.key-details-bar__other-details > dd:first-of-type, tr#crn > td > p').html('XXXXXX')
+            $app.find('head').append(`<style>.govuk-link:visited { color: #1d70b8; }</style>`)
             resolve()
             // add a very small delay to wait for the elements to be there, but you should
             // make sure your test already handles this

@@ -195,6 +195,12 @@ const fields = {
       },
     ],
   },
+  diversity_information_trauma: {},
+  diversity_information_gender: {},
+  diversity_information_neurodiversity: {},
+  diversity_information_mobility: {},
+  diversity_information_maturity_assessment: {},
+  diversity_information_maturity: {},
   placement_preference: requireYesOrNo,
   placement_preferences: {
     dependent: { field: 'placement_preference', value: 'YES' },
@@ -316,6 +322,23 @@ const fields = {
       {
         type: 'required',
         message: 'Enter details of the hate-based attitudes or behaviours',
+      },
+    ],
+  },
+  risks_history_of_offending_against_vulnerable_adults: {
+    validate: [
+      {
+        type: 'required',
+        message: 'Does the individual have a history of offending against vulnerable adults? Select yes or no',
+      },
+    ],
+  },
+  risks_history_of_offending_against_vulnerable_adults_yes_details: {
+    dependent: { field: 'risks_history_of_offending_against_vulnerable_adults', value: 'YES' },
+    validate: [
+      {
+        type: 'required',
+        message: 'Enter details of history of offending against vulnerable adults',
       },
     ],
   },
@@ -720,6 +743,11 @@ const fields = {
     dependent: { field: 'education_training_need', value: 'YES' },
     ...requireEnterDetails,
   },
+  training_and_employment_factors_preventing: requireYesOrNo,
+  training_and_employment_factors_preventing_yes_details: {
+    dependent: { field: 'training_and_employment_factors_preventing', value: 'YES' },
+    ...requireEnterDetails,
+  },
   individual_commitment: {
     dependent: { field: 'education_training_need', value: 'YES' },
     ...requireYesOrNo,
@@ -796,6 +824,21 @@ const fields = {
     ],
   },
   individual_availability_details: {},
+  availability_intensive_working: requireYesOrNo,
+  availability_intensive_working_no_details: {
+    dependent: { field: 'availability_intensive_working', value: 'NO' },
+    ...requireEnterDetails,
+  },
+  availability_availability_weekdays: requireYesOrNo,
+  availability_availability_weekdays_no_details: {
+    dependent: { field: 'availability_availability_weekdays', value: 'NO' },
+    ...requireEnterDetails,
+  },
+  availability_want_to_considered_for_intensive_working: requireYesOrNo,
+  availability_want_to_considered_for_intensive_working_yes_details: {
+    dependent: { field: 'availability_want_to_considered_for_intensive_working', value: 'YES' },
+    ...requireEnterDetails,
+  },
   male_female_clothing: requireSelectOption,
   waterproof_clothing: requireSelectOption,
   footwear_size: requireSelectOption,
@@ -868,6 +911,7 @@ const fields = {
   individual_availability_complete: requireSelectOption,
   equipment_complete: requireSelectOption,
   additional_information_complete: requireSelectOption,
+  other_adjustments_complete: requireSelectOption,
 }
 
 module.exports = {

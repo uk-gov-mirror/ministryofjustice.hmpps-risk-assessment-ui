@@ -1,0 +1,101 @@
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+{% from 'moj/components/header/macro.njk' import mojHeader %}
+
+{% extends "govuk/template.njk" %}
+
+{% block bodyStart %}
+  {% include "common/templates/includes/scripts.njk" %}
+{% endblock %}
+
+{# default title - can override in pages #}
+{% block pageTitle %}
+  Assess Risks and Needs
+{% endblock %}
+
+{% block headIcons %}
+  <link rel="apple-touch-icon" href="{{ assetPath | default('') }}{{ assetPath | default('/assets') }}/images/govuk-apple-touch-icon.png">
+  <link rel="icon" sizes="48x48" href="{{ assetPath | default('') }}/assets/images/favicon.ico">
+  <link rel="icon" sizes="any" href="{{ assetPath | default('') }}/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="mask-icon" href="{{ assetPath | default('') }}/assets/images/govuk-icon-mask.svg" color="#0b0c0c">
+  <link rel="apple-touch-icon" href="{{ assetPath | default('') }}/assets/images/govuk-icon-180.png">
+  <link rel="manifest" href="{{ assetPath | default('') }}/assets/manifest.json">
+{% endblock %}
+
+{% block head %}
+  {% include "common/templates/includes/head.njk" %}
+
+  <script nonce="{{ cspNonce }}">
+    var applicationInsightsInstrumentationKey = '{{ applicationInsightsInstrumentationKey }}';
+  </script>
+  <script nonce="{{ cspNonce }}">
+    var applicationInsightsRoleName = '{{ applicationInsightsRoleName }}';
+  </script>
+  <script src='/javascripts/app-insights.js' type='text/javascript'></script>
+{% endblock %}
+
+{% block content %}
+  {% if notification.isVisible %}
+    {% set html %}
+      {% if notification.header %}
+        <p class="govuk-notification-banner__heading">
+          {{ notification.header }}
+        </p>
+      {% endif %}
+      <p class="govuk-body">{{ notification.body }}</p>
+    {% endset %}
+
+    {{ govukNotificationBanner({
+      html: html
+    }) }}
+  {% endif %}
+    {% if assessment.subject %}
+      {% set subjectName = assessment.subject.name %}
+    {% elif offenderDetails %}
+      {% set subjectName = offenderDetails.name %}
+    {% endif %}
+
+    <aside class="key-details-bar" aria-label="Individuals key details">
+      <div class="key-details-bar__top-block moj-context-header">
+          <h2 class="key-details-bar__name">{{ subjectName }}</h2>
+        <hr class="key-details-bar__section-break govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      </div>
+    </aside>
+{% endblock %}
+
+{% block footer %}
+
+  <div class="govuk-!-display-none-print arn-white-background">
+    <div class="govuk-width-container">
+      {% include "../templates/components/feedbackBanner/feedbackBanner.njk" %}
+    </div>
+  </div>
+
+  {{ govukFooter({
+    meta: {
+      items: [
+        {
+          href: "/UPW/privacy",
+          text: "Privacy"
+        },
+        {
+          href: "/UPW/cookies",
+          text: "Cookies"
+        },
+        {
+          href: "/UPW/accessibility-statement",
+          text: "Accessibility statement"
+        }
+      ]
+    }
+  }) }}
+{% endblock %}
+
+{% block bodyEnd %}
+  <script nonce="{{ cspNonce }}">
+    window.initAll()
+    window.outOfLineConditionalRadios()
+  </script>
+{% endblock %}

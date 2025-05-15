@@ -130,9 +130,11 @@
             </table>
           </fieldset>
         </div>
-
-        {#            {{ renderQuestion(questions['individual_availability'], errors) }} #}
+        
         {{ renderQuestion(questions['individual_availability_details'], errors) }}
+        {{ renderQuestion(questions['availability_intensive_working'], errors) }}
+        {{ renderQuestion(questions['availability_availability_weekdays'], errors) }}
+        {{ renderQuestion(questions['availability_want_to_considered_for_intensive_working'], errors) }}
 
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
         {{ renderQuestion(questions['individual_availability_complete'], errors) }}

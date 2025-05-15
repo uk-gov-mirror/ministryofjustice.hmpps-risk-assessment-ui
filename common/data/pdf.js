@@ -22,7 +22,11 @@ const convertHtmlToPdf = async (renderedHtml) => {
       .attach('files', Buffer.from(renderedHtml), 'index.html')
       .attach('files', fs.readFileSync('dist/stylesheets/application.min.css'), 'application.min.css')
       .attach('files', fs.readFileSync('dist/images/community-payback-logo.jpg'), 'community-payback-logo.jpg')
-      .attach('files', fs.readFileSync('dist/images/MOJ_logo_large.png'), 'MOJ_logo_large.png')
+      .attach(
+        'files',
+        fs.readFileSync('dist/images/HMPPS_Lesser_Arms_Stacked_Black.png'),
+        'HMPPS_Lesser_Arms_Stacked_Black.png',
+      )
       .responseType('blob')
 
     if (headerHtml) request.attach('files', Buffer.from(headerHtml), 'header.html')

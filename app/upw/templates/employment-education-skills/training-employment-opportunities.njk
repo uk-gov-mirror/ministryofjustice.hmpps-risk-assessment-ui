@@ -33,6 +33,7 @@
             <input type="hidden" name="x-csrf-token" value="{{ csrfToken }}">
 
             {{ renderQuestion(questions['education_training_need'], errors) }}
+            {{ renderQuestion(questions['training_and_employment_factors_preventing'], errors) }}
 
             <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible upw-complete-break">
             {{ renderQuestion(questions['employment_training_complete'], errors) }}

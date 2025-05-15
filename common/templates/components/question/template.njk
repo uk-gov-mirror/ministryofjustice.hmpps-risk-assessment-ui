@@ -120,7 +120,7 @@
           classes: question.questionCode + labelClasses
         },
         hint: {
-          text: question.helpText
+          html: question.helpText
         },
         errorMessage: errorMessage
       }) }}
@@ -139,7 +139,7 @@
           classes: question.questionCode + labelClasses
         },
         hint: {
-          text: question.helpText
+          html: question.helpText
         },
         errorMessage: errorMessage,
         classes: options.classes
@@ -156,7 +156,7 @@
         </p>
         {% endif %}
         <div id="{{question.questionCode}}-hint" class="govuk-hint">
-          {{ question.helpText }}
+          {{ question.helpText | safe }}
         </div>
         <textarea class="govuk-textarea govuk-js-character-count" id="{{ question.questionCode }}" name="{{ question.questionCode }}" rows="5" aria-describedby="{{ question.questionCode }}-info {{ question.questionCode }}-hint{% if errorMessage %} {{ question.questionCode }}-error{% endif %}" spellcheck="true">
         {%- for line in question.answer | splitLines -%}
@@ -207,7 +207,7 @@
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
-          text: question.helpText
+          html: question.helpText
         }
       }) }}
 
@@ -229,7 +229,7 @@
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
-          text: question.helpText
+          html: question.helpText
         }
       }) }}
 
@@ -249,7 +249,7 @@
         errorMessage: errorMessage,
         isConditional: question.isConditional,
         hint: {
-          text: question.helpText
+          html: question.helpText
         }
       }) }}
 
@@ -276,7 +276,7 @@
           }
         },
         hint: {
-          text: question.helpText
+          html: question.helpText
         },
         items: [
           {

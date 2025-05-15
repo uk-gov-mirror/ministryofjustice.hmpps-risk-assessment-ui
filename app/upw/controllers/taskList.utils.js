@@ -61,6 +61,7 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
           'cultural-and-religious-adjustments',
           'cultural_religious_adjustment_complete',
         ),
+        getTask(answers, baseUrl, steps, 'other-adjustments', 'other_adjustments_complete'),
         getTask(answers, baseUrl, steps, 'placement-preferences', 'placement_preference_complete'),
       ],
     },

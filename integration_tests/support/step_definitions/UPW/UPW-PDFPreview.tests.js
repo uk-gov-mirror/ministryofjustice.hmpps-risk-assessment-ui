@@ -20,7 +20,6 @@ When('I view the generated PDF', () => {
 
 When('I see output {string} Page', (pageName) => {
   cy.url().should('include', pageName)
-  cy.get(':nth-child(3) > .govuk-heading-l').contains('Supervised individual')
 })
 
 When(
@@ -113,10 +112,38 @@ When('I verify the {string} Section for contact info on the pdf-preview page as 
   Common.getText(PdfPreviewPage.email).should('equal', dataTable.hashes()[8]['Details to be verified'])
 })
 
+When('I verify the section {string} is as follows', (sectionName, dataTable) => {
+  cy.contains('h2, h3', sectionName).parent().find('.upw-pdf-table').as('sectionAnswers')
+
+  dataTable.hashes().forEach((row) => {
+    cy.get('@sectionAnswers').contains('tr', row.Question).parent().as('questionRow')
+
+    cy.get('@questionRow').contains('td', row.Answer)
+
+    if (row.Details && row.Details !== '') {
+      cy.get('@questionRow').contains('td', row.Details)
+    }
+  })
+})
+
+When('I verify the {string} table is as follows', (tableName, dataTable) => {
+  cy.contains('caption', tableName).parent().as('sectionAnswers')
+
+  dataTable.hashes().forEach((row) => {
+    cy.get('@sectionAnswers').contains('tr', row.Question).parent().as('questionRow')
+
+    cy.get('@questionRow').contains('td', row.Answer)
+
+    if (row.Details && row.Details !== '') {
+      cy.get('@questionRow').contains('td', row.Details)
+    }
+  })
+})
+
 When('I verify the {string} Section for rosh info on the pdf-preview page as follows', (sectionName, dataTable) => {
   Common.getText(PdfPreviewPage.roshInfoSectionHeading).should('equal', sectionName)
   Common.getText(PdfPreviewPage.historySexualOffendingeFld).should(
-    'equal',
+    'contain',
     dataTable.hashes()[0]['Question name to be verified'],
   )
   Common.getText(PdfPreviewPage.historySexualOffendingOptionAndText).should(
@@ -238,7 +265,7 @@ When(
   (sectionName, dataTable) => {
     Common.getText(PdfPreviewPage.riskMngmntInfoSectionHeading).should('equal', sectionName)
     Common.getText(PdfPreviewPage.mappaNominalFld).should(
-      'equal',
+      'contain',
       dataTable.hashes()[0]['Question name to be verified'],
     )
     Common.getText(PdfPreviewPage.locationExclusionFld).should(

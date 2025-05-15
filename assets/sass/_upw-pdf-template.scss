@@ -89,7 +89,8 @@
   @media print {
     &,
     & p,
-    & span {
+    & span,
+    & li {
       @include govuk-font(14, "regular");
     }
   }

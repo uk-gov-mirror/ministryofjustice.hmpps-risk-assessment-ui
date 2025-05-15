@@ -16,7 +16,9 @@ services:
       - hmpps
 
   hmpps-auth:
-    image: quay.io/hmpps/hmpps-auth:latest
+    # image: quay.io/hmpps/hmpps-auth:latest
+    # TODO: revert this change when fixed, pinning as there are breaking changes that require an authorization server
+    image: quay.io/hmpps/hmpps-auth:2025-05-02.28494.105ac61
     networks:
       - hmpps
     depends_on:
@@ -92,7 +94,9 @@ services:
       - -global-response-templating
 
   api:
-    image: ghcr.io/ministryofjustice/hmpps-assessments-api:${API_IMAGE_TAG:-latest}
+    # TODO: revert this change, pinned to ensure new/updated questions are available for E2E tests
+    # image: ghcr.io/ministryofjustice/hmpps-assessments-api:${API_IMAGE_TAG:-latest}
+    image: ghcr.io/ministryofjustice/hmpps-assessments-api:2025-05-14.3.379683d
     restart: always
     networks:
       - hmpps
