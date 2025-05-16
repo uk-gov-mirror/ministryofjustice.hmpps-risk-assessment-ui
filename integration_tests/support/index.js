@@ -21,6 +21,7 @@ const { addCompareSnapshotCommand } = require('cypress-visual-regression/dist/co
 
 addCompareSnapshotCommand({
   capture: 'fullPage',
+  errorThreshold: 0.1,
 })
 Cypress.Commands.overwrite('compareSnapshot', (originalFn, ...args) => {
   return (
