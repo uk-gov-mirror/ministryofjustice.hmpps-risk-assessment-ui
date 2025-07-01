@@ -24,27 +24,32 @@ addCompareSnapshotCommand({
   errorThreshold: 0.1,
 })
 Cypress.Commands.overwrite('compareSnapshot', (originalFn, ...args) => {
-  return (
-    cy
-      // wait for content to be ready
-      .get('body')
-      // hide ignored elements
-      .then(($app) => {
-        return new Cypress.Promise((resolve) => {
-          setTimeout(() => {
-            // hide the CRN
-            $app.find('.key-details-bar__other-details > dd:first-of-type, tr#crn > td > p').html('XXXXXX')
-            $app.find('head').append(`<style>.govuk-link:visited { color: #1d70b8; }</style>`)
-            resolve()
-            // add a very small delay to wait for the elements to be there, but you should
-            // make sure your test already handles this
-          }, 300)
-        })
+  return cy
+    .document()
+    .then((doc) => {
+      return new Cypress.Promise((resolve) => {
+        setTimeout(() => {
+          // hide the CRN
+          doc.body
+            .querySelectorAll('.key-details-bar__other-details > dd:first-of-type, tr#crn > td > p')
+            .forEach((element) => {
+              const updatedElement = element
+              updatedElement.innerHTML = 'XXXXXX'
+            })
+
+          // override the visited state for links
+          doc.body.querySelectorAll('.govuk-link').forEach((element) => {
+            const updatedElement = element
+            if (!updatedElement.classList.contains('govuk-link--inverse')) {
+              updatedElement.classList.add('govuk-link--no-visited-state')
+            }
+          })
+
+          resolve()
+        }, 300)
       })
-      .then(() => {
-        return originalFn(...args)
-      })
-  )
+    })
+    .then(() => originalFn(...args))
 })
 
 beforeEach(() => {
