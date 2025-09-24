@@ -111,7 +111,7 @@ describe('catchAndReThrowError', () => {
     expect(throwTheError).toThrow()
   })
   it('should concatenate the error message for the new error', () => {
-    expect(throwTheError).toThrowError(`Error: ${initialErrorMessage} ${secondaryErrorMessage}`)
+    expect(throwTheError).toThrow(`Error: ${initialErrorMessage} ${secondaryErrorMessage}`)
   })
 })
 
