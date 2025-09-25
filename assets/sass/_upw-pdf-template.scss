@@ -8,7 +8,7 @@
 
 @media print {
   .page-break-after {
-    page-break-after: always;
+    break-after: always;
   }
 
   .upw-pdf-header,
@@ -65,7 +65,7 @@
 
 @media print {
   .page-break-after {
-    page-break-after: always;
+    break-after: always;
   }
 
   .upw-pdf-header,
