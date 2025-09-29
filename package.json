@@ -52,7 +52,7 @@
   },
   "overrides": {
     "cypress-axe": {
-      "cypress": "^14.0.0"
+      "cypress": "^15.0.0"
     }
   },
   "dependencies": {
@@ -103,7 +103,7 @@
     "@babel/cli": "^7.27.2",
     "@babel/core": "^7.27.3",
     "@babel/helper-compilation-targets": "^7.27.2",
-    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
+    "@badeball/cypress-cucumber-preprocessor": "^23.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
     "@ministryofjustice/eslint-config-hmpps": "^0.0.5",
     "@types/luxon": "^3.6.2",
@@ -112,7 +112,7 @@
     "cheerio": "^1.0.0",
     "chokidar": "^3.6.0",
     "clean-css-cli": "^5.6.3",
-    "cypress": "^14.4.0",
+    "cypress": "^15.0.0",
     "cypress-axe": "^1.6.0",
     "cypress-on-fix": "^1.1.0",
     "cypress-plugin-tab": "^1.0.5",
