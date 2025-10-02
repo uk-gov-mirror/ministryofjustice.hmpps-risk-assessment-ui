@@ -1,11 +1,11 @@
-const { Controller } = require('hmpo-form-wizard')
-const nunjucks = require('nunjucks')
-
-const ConfirmationController = require('./confirmation')
-const pdfConverterClient = require('../../../common/data/pdf')
-const hmppsAssessmentsApiClient = require('../../../common/data/hmppsAssessmentApi')
-const { S3 } = require('../../../common/data/aws/s3')
-const { SNS } = require('../../../common/data/aws/sns')
+import { jest } from '@jest/globals'
+import { Controller } from 'hmpo-form-wizard'
+import { render as _render } from 'nunjucks'
+import ConfirmationController from './confirmation'
+import { convertHtmlToPdf } from '../../../common/data/pdf'
+import { postCompleteAssessmentEpisode } from '../../../common/data/hmppsAssessmentApi'
+import { S3 } from '../../../common/data/aws/s3'
+import { SNS } from '../../../common/data/aws/sns'
 
 jest.mock('nunjucks')
 jest.mock('../../../common/data/pdf')
@@ -93,35 +93,28 @@ describe('ConfirmationController', () => {
       req.form.options.fields = {}
       req.form.options.allFields = {}
       next.mockReset()
-      nunjucks.render.mockReturnValue('RENDERED_TEMPLATE')
-      pdfConverterClient.convertHtmlToPdf.mockReset()
+      _render.mockReturnValue('RENDERED_TEMPLATE')
+      convertHtmlToPdf.mockReset()
       superMethod.mockReset()
       S3.prototype.upload.mockReset()
       SNS.prototype.publishJson.mockReset()
-      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockReset()
+      postCompleteAssessmentEpisode.mockReset()
     })
 
     it('completes the assessment', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
+      convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       SNS.prototype.publishJson.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([
-        true,
-        { ended: '2023-01-01T00:00:00.000000' },
-      ])
+      postCompleteAssessmentEpisode.mockResolvedValue([true, { ended: '2023-01-01T00:00:00.000000' }])
 
       await controller.render(req, res, next)
 
-      expect(pdfConverterClient.convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
+      expect(convertHtmlToPdf).toHaveBeenCalledWith('RENDERED_TEMPLATE')
       expect(S3.prototype.upload).toHaveBeenCalledWith('documents/foo-document.pdf', file, 'application/pdf')
       expect(SNS.prototype.publishJson).toHaveBeenCalled()
-      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode).toHaveBeenCalledWith(
-        assessmentUuid,
-        episodeUuid,
-        user.token,
-      )
+      expect(postCompleteAssessmentEpisode).toHaveBeenCalledWith(assessmentUuid, episodeUuid, user.token)
       expect(req.session.assessment.isComplete).toBe(true)
       expect(superMethod).toHaveBeenCalled()
     })
@@ -129,24 +122,24 @@ describe('ConfirmationController', () => {
     it('if already complete it does not re-complete the assessment', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
+      convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       SNS.prototype.publishJson.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([true])
+      postCompleteAssessmentEpisode.mockResolvedValue([true])
 
       req.session.assessment.isComplete = true
 
       await controller.render(req, res, next)
 
-      expect(pdfConverterClient.convertHtmlToPdf.mock.calls.length).toBe(0)
+      expect(convertHtmlToPdf.mock.calls.length).toBe(0)
       expect(S3.prototype.upload.mock.calls.length).toBe(0)
       expect(SNS.prototype.publishJson.mock.calls.length).toBe(0)
-      expect(hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mock.calls.length).toBe(0)
+      expect(postCompleteAssessmentEpisode.mock.calls.length).toBe(0)
       expect(superMethod).toHaveBeenCalled()
     })
 
     it('passes an error to the error handler when PDF conversion fails', async () => {
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: false })
+      convertHtmlToPdf.mockResolvedValue({ ok: false })
 
       await controller.render(req, res, next)
 
@@ -157,7 +150,7 @@ describe('ConfirmationController', () => {
     it('passes an error to the error handler when PDF upload fails', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
+      convertHtmlToPdf.mockResolvedValue({ ok: true, response: file })
       S3.prototype.upload.mockResolvedValue({ ok: false })
 
       await controller.render(req, res, next)
@@ -169,7 +162,7 @@ describe('ConfirmationController', () => {
     it('passes an error to the error handler when unable to send the notification', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
+      convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       SNS.prototype.publishJson.mockResolvedValue({ ok: false })
 
@@ -182,10 +175,10 @@ describe('ConfirmationController', () => {
     it('displays an error when unable to complete the assessment', async () => {
       const file = createTestFile()
 
-      pdfConverterClient.convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
+      convertHtmlToPdf.mockResolvedValue({ ok: true, body: file })
       S3.prototype.upload.mockResolvedValue({ ok: true, key: `documents/${episodeUuid}}` })
       SNS.prototype.publishJson.mockResolvedValue({ ok: true })
-      hmppsAssessmentsApiClient.postCompleteAssessmentEpisode.mockResolvedValue([false])
+      postCompleteAssessmentEpisode.mockResolvedValue([false])
 
       await controller.render(req, res, next)
 

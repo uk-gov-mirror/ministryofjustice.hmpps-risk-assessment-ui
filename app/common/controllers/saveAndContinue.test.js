@@ -1,8 +1,9 @@
-const { configure } = require('nunjucks')
-const SaveAndContinueController = require('./saveAndContinue')
-const { getAnswers, postAnswers, getQuestionsForAssessmentType } = require('../../../common/data/hmppsAssessmentApi')
-const { processReplacements, encodeHTML, updateJsonValue } = require('../../../common/utils/util')
-const { CACHE } = require('../../../common/utils/constants')
+import { jest } from '@jest/globals'
+import { configure } from 'nunjucks'
+import SaveAndContinueController from './saveAndContinue'
+import { getAnswers, postAnswers, getQuestionsForAssessmentType } from '../../../common/data/hmppsAssessmentApi'
+import { processReplacements, encodeHTML, updateJsonValue } from '../../../common/utils/util'
+import { CACHE } from '../../../common/utils/constants'
 
 const nunjucksEnvironment = configure({}, {})
 nunjucksEnvironment.addFilter('encodeHtml', (str) => encodeHTML(str))

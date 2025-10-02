@@ -1,4 +1,4 @@
-const { splitPredictorScores } = require('./predictors')
+import { splitPredictorScores } from './predictors'
 
 const predictors = [
   {

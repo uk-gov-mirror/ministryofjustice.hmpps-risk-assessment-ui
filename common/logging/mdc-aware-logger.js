@@ -1,8 +1,8 @@
-const _ = require('lodash')
-const { getNamespace } = require('cls-hooked')
-const { clsNamespace } = require('../config')
+import extend from 'lodash/extend'
+import { getNamespace } from 'cls-hooked'
+import { clsNamespace } from '../config'
 
-module.exports = class {
+export default class {
   constructor(logger, MDC) {
     this.logger = logger
     this.MDC = MDC
@@ -43,7 +43,7 @@ module.exports = class {
       return meta
     }
     if (meta) {
-      return _.extend(meta, mdcNamespace.get('MDC'))
+      return extend(meta, mdcNamespace.get('MDC'))
     }
     return mdcNamespace.get('MDC')
   }

@@ -1,4 +1,4 @@
-const upwSaveAndContinue = require('./saveAndContinue')
+const upwSaveAndContinue = require('./saveAndContinue').default
 
 class SaveAndContinue extends upwSaveAndContinue {
   async locals(req, res, next) {

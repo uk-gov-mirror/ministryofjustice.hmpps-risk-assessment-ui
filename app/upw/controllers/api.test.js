@@ -1,10 +1,11 @@
-const nunjucks = require('nunjucks')
-const { downloadUpwPdf } = require('./api')
-const { S3 } = require('../../../common/data/aws/s3')
-const assessmentsApi = require('../../../common/data/hmppsAssessmentApi')
-const { convertHtmlToPdf } = require('../../../common/data/pdf')
-const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
-const { getApiToken } = require('../../../common/data/oauth')
+import { jest } from '@jest/globals'
+import { render } from 'nunjucks'
+import { downloadUpwPdf } from './api'
+import { S3 } from '../../../common/data/aws/s3'
+import { getEpisode, getOffenderData } from '../../../common/data/hmppsAssessmentApi'
+import { convertHtmlToPdf } from '../../../common/data/pdf'
+import { getRegistrations, getRoshRiskSummary } from './common.utils'
+import { getApiToken } from '../../../common/data/oauth'
 
 jest.mock('../../../common/data/aws/s3')
 jest.mock('../../../common/data/hmppsAssessmentApi')
@@ -41,11 +42,11 @@ describe('UPW API', () => {
       res.status.mockReturnValue(res)
       S3.prototype.fetch.mockReset()
       convertHtmlToPdf.mockReset()
-      assessmentsApi.getEpisode.mockReset()
-      assessmentsApi.getOffenderData.mockReset()
+      getEpisode.mockReset()
+      getOffenderData.mockReset()
       getRegistrations.mockReset()
       getRoshRiskSummary.mockReset()
-      nunjucks.render.mockReset()
+      render.mockReset()
       getApiToken.mockReset()
       next.mockReset()
       mockS3ResponseBody.pipe.mockReset()
@@ -75,16 +76,16 @@ describe('UPW API', () => {
 
       S3.prototype.fetch.mockResolvedValue({ ok: false, error: { name: 'NotFound', statusCode: 404 } })
       getApiToken.mockResolvedValue('FOO_TOKEN')
-      assessmentsApi.getEpisode.mockResolvedValue({
+      getEpisode.mockResolvedValue({
         assessmentUuid: 'FOO_ID',
         userFullName: 'Some User',
         offence: {},
         answers: {},
       })
-      assessmentsApi.getOffenderData.mockResolvedValue({ crn: '1234567' })
+      getOffenderData.mockResolvedValue({ crn: '1234567' })
       getRegistrations.mockResolvedValue({})
       getRoshRiskSummary.mockResolvedValue({ roshRiskSummary: {} })
-      nunjucks.render.mockReturnValue('FOO_HTML')
+      render.mockReturnValue('FOO_HTML')
       convertHtmlToPdf.mockResolvedValue({ ok: true, body: 'FOO_PDF' })
 
       await downloadUpwPdf(req, res)
@@ -99,16 +100,16 @@ describe('UPW API', () => {
 
       S3.prototype.fetch.mockResolvedValue({ ok: false, error: { name: 'NotFound', statusCode: 404 } })
       getApiToken.mockResolvedValue('FOO_TOKEN')
-      assessmentsApi.getEpisode.mockResolvedValue({
+      getEpisode.mockResolvedValue({
         assessmentUuid: 'FOO_ID',
         userFullName: 'Some User',
         offence: {},
         answers: {},
       })
-      assessmentsApi.getOffenderData.mockResolvedValue({ crn: '1234567' })
+      getOffenderData.mockResolvedValue({ crn: '1234567' })
       getRegistrations.mockResolvedValue({})
       getRoshRiskSummary.mockResolvedValue({ roshRiskSummary: {} })
-      nunjucks.render.mockReturnValue('FOO_HTML')
+      render.mockReturnValue('FOO_HTML')
       convertHtmlToPdf.mockResolvedValue({ ok: false })
 
       await downloadUpwPdf(req, res)

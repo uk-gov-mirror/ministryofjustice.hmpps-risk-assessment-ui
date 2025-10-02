@@ -1,17 +1,19 @@
-const superagent = require('superagent')
-const logger = require('../logging/logger')
+import superagent from 'superagent'
+import logger from '../logging/logger'
+import * as config from '../config'
+import { get as _get, set } from './redis'
+import { SIXTY_SECONDS, CACHE } from '../utils/constants'
+import { AuthenticationError } from '../utils/errors'
+
 const {
   apiClientId,
   apiClientSecret,
   apis: {
     oauth: { timeout, url },
   },
-} = require('../config')
-const redis = require('./redis')
-const { SIXTY_SECONDS, CACHE } = require('../utils/constants')
-const { AuthenticationError } = require('../utils/errors')
+} = config
 
-const checkTokenIsActive = async (token) => {
+export const checkTokenIsActive = async (token) => {
   return superagent
     .post(`${url}/token/verify`)
     .auth(token, { type: 'bearer' })
@@ -22,7 +24,7 @@ const checkTokenIsActive = async (token) => {
     })
 }
 
-const getUserEmail = async (token) => {
+export const getUserEmail = async (token) => {
   return superagent
     .get(`${url}/api/me/email`)
     .auth(token, { type: 'bearer' })
@@ -36,10 +38,10 @@ const getUserEmail = async (token) => {
     })
 }
 
-const getApiToken = async () => {
+export const getApiToken = async () => {
   logger.info('Getting API bearer token')
   try {
-    const cachedToken = await redis.get(CACHE.API_TOKEN)
+    const cachedToken = await _get(CACHE.API_TOKEN)
 
     if (cachedToken) {
       return cachedToken
@@ -54,7 +56,7 @@ const getApiToken = async () => {
       .timeout(timeout)
       .then((response) => {
         const { access_token: token, expires_in: expiresIn } = response.body
-        redis.set(CACHE.API_TOKEN, token, 'EX', expiresIn - SIXTY_SECONDS)
+        set(CACHE.API_TOKEN, token, 'EX', expiresIn - SIXTY_SECONDS)
         return token
       })
   } catch (error) {
@@ -71,10 +73,4 @@ const logError = (error) => {
     text: error.response?.text,
   })
   throw error
-}
-
-module.exports = {
-  getApiToken,
-  getUserEmail,
-  checkTokenIsActive,
 }

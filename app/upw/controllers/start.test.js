@@ -1,12 +1,11 @@
-const { Controller } = require('hmpo-form-wizard')
-
-const StartUnpaidWork = require('./start')
+import { jest } from '@jest/globals'
+import { Controller } from 'hmpo-form-wizard'
+import StartUnpaidWork from './start'
+import { startAssessment, getCurrentEpisode } from '../../../common/data/hmppsAssessmentApi'
 
 const controller = new StartUnpaidWork({
   route: 'test-route',
 })
-
-const { startAssessment, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi')
 
 jest.mock('../../../common/data/hmppsAssessmentApi', () => ({
   getCurrentEpisode: jest.fn(),

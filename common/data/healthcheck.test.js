@@ -1,5 +1,5 @@
-const nock = require('nock')
-const { serviceCheckFactory } = require('./healthcheck')
+import nock, { abortPendingRequests, cleanAll } from 'nock'
+import { serviceCheckFactory } from './healthcheck'
 
 describe('data service healthcheck', () => {
   const mockService = {
@@ -18,8 +18,8 @@ describe('data service healthcheck', () => {
   })
 
   afterEach(() => {
-    nock.abortPendingRequests()
-    nock.cleanAll()
+    abortPendingRequests()
+    cleanAll()
   })
 
   describe('check healthy', () => {

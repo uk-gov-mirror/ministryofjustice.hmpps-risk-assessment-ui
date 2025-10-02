@@ -1,31 +1,31 @@
-const async = require('async')
-const { getNamespace } = require('cls-hooked')
-const { DateTime } = require('luxon')
-const { v4: uuid } = require('uuid')
-const { logger } = require('../logging/logger')
-const { clsNamespace } = require('../config')
+import { v4 as uuid } from 'uuid'
+import { eachSeries } from 'async'
+import { getNamespace } from 'cls-hooked'
+import { DateTime } from 'luxon'
+import logger from '../logging/logger'
+import { clsNamespace } from '../config'
 
-const getYearMonthFromDate = (isoString) => {
+export const getYearMonthFromDate = (isoString) => {
   const date = DateTime.fromISO(isoString, { zone: 'utc' }).setLocale('en-GB').setZone('Europe/London')
   const { month } = date
   const monthName = date.monthLong
   return { month, monthName, year: date.year }
 }
 
-const isEmptyObject = (obj) => {
+export const isEmptyObject = (obj) => {
   if (obj === undefined || obj === null) return true
   return !Object.keys(obj).length
 }
 
-const countWords = (str) => {
+export const countWords = (str) => {
   return str.replace(/-/gi, ' ').trim().split(/\s+/).length
 }
 
-const removeUrlLevels = (url, levels) => {
+export const removeUrlLevels = (url, levels) => {
   return !levels || !url ? url : url.split('/').slice(0, -levels).join('/')
 }
 
-const sortObject = (key, order = 'asc') => {
+export const sortObject = (key, order = 'asc') => {
   return function innerSort(a, b) {
     // eslint-disable-next-line no-prototype-builtins
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
@@ -46,7 +46,7 @@ const sortObject = (key, order = 'asc') => {
   }
 }
 
-const groupBy = (list, keyGetter) => {
+export const groupBy = (list, keyGetter) => {
   const sortedObject = {}
   list.forEach((item) => {
     const key = keyGetter(item)
@@ -60,13 +60,13 @@ const groupBy = (list, keyGetter) => {
   return sortedObject
 }
 
-const catchAndReThrowError = (msg, error) => {
+export const catchAndReThrowError = (msg, error) => {
   const newError = new Error(`${msg} ${error}`)
   logger.error(newError)
   throw newError
 }
 
-const isValidDate = (day, month, year) => {
+export const isValidDate = (day, month, year) => {
   try {
     const date = DateTime.local(year, month, day, { locale: 'en-GB' })
 
@@ -77,11 +77,11 @@ const isValidDate = (day, month, year) => {
   }
 }
 
-const getCorrelationId = () => getNamespace(clsNamespace).get('MDC')?.correlationId || uuid()
+export const getCorrelationId = () => getNamespace(clsNamespace).get('MDC')?.correlationId || uuid()
 
-const updateMDC = (mdcDataKey, mdc) => getNamespace(clsNamespace).set(mdcDataKey, mdc)
+export const updateMDC = (mdcDataKey, mdc) => getNamespace(clsNamespace).set(mdcDataKey, mdc)
 
-const encodeHTML = (str) => {
+export const encodeHTML = (str) => {
   if (!str) {
     return ''
   }
@@ -89,7 +89,7 @@ const encodeHTML = (str) => {
 }
 
 // used in nunjucks templates which doesn't support directly setting json values
-const updateJsonValue = (jsonObj, key, value, createNewObject = false) => {
+export const updateJsonValue = (jsonObj, key, value, createNewObject = false) => {
   if (!jsonObj && createNewObject) {
     // eslint-disable-next-line no-param-reassign
     jsonObj = {}
@@ -105,13 +105,13 @@ const updateJsonValue = (jsonObj, key, value, createNewObject = false) => {
   return jsonObj
 }
 
-const doReplace = (input, target, replacement) => {
+export const doReplace = (input, target, replacement) => {
   return input.split(target).join(replacement)
 }
 
 // This function executes middleware in series
-const dynamicMiddleware = async (validators, req, res, next) => {
-  async.eachSeries(
+export const dynamicMiddleware = async (validators, req, res, next) => {
+  eachSeries(
     validators,
     (middleware, doneMiddleware) => {
       middleware.bind(null, req, res, doneMiddleware)()
@@ -126,7 +126,7 @@ const dynamicMiddleware = async (validators, req, res, next) => {
   )
 }
 
-const processReplacements = (input, replacementDetails) => {
+export const processReplacements = (input, replacementDetails) => {
   let newInput = JSON.stringify(input)
 
   // replace name
@@ -137,7 +137,7 @@ const processReplacements = (input, replacementDetails) => {
   return JSON.parse(newInput)
 }
 
-const getOrdinalIndicator = (number) => {
+export const getOrdinalIndicator = (number) => {
   const englishOrdinalRules = new Intl.PluralRules('en', { type: 'ordinal' })
   const suffixes = {
     one: 'st',
@@ -149,25 +149,25 @@ const getOrdinalIndicator = (number) => {
   return suffixes[ordinalCategory]
 }
 
-const formatDateWith = (pattern) => (isoString) => {
+export const formatDateWith = (pattern) => (isoString) => {
   const parsedDate = DateTime.fromISO(isoString, { zone: 'utc' }).setLocale('en-GB').setZone('Europe/London')
   // This is a current workaround due to Luxon not supporting ordinal indicators
   const updatedPattern = pattern.replace('d ', `d'${getOrdinalIndicator(parsedDate.day)}' `)
   return parsedDate.isValid ? parsedDate.toFormat(updatedPattern) : null
 }
 
-const prettyDate = formatDateWith('d MMMM y')
-const prettyDateAndTime = formatDateWith('cccc d MMMM y H:mm')
-const todayPretty = (today = new Date()) => {
+export const prettyDate = formatDateWith('d MMMM y')
+export const prettyDateAndTime = formatDateWith('cccc d MMMM y H:mm')
+export const todayPretty = (today = new Date()) => {
   prettyDate(today.toISOString())
 }
 
-const ageFrom = (dateOfBirth, today = DateTime.local().startOf('day')) => {
+export const ageFrom = (dateOfBirth, today = DateTime.local().startOf('day')) => {
   const parsedDate = DateTime.fromISO(dateOfBirth, { zone: 'utc' }).setLocale('en-GB').startOf('day')
   return parsedDate.isValid ? Math.floor(Math.abs(parsedDate.diff(today).as('years'))) : null
 }
 
-const clearAnswers = (questions) => {
+export const clearAnswers = (questions) => {
   const pageQuestions = Object.keys(questions)
   pageQuestions.forEach((question) => {
     // eslint-disable-next-line no-param-reassign
@@ -176,7 +176,7 @@ const clearAnswers = (questions) => {
   return questions
 }
 
-const getErrorMessageFor = (user, reason) => {
+export const getErrorMessageFor = (user, reason) => {
   if (reason === 'OASYS_PERMISSION') {
     return 'You do not have permission to create this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
   }
@@ -191,7 +191,7 @@ const getErrorMessageFor = (user, reason) => {
   return 'Something went wrong' // Unhandled exception
 }
 
-const disabilityCodeToDescription = (code) => {
+export const disabilityCodeToDescription = (code) => {
   const lookup = {
     DY: 'Dyslexia',
     VI: 'Visual condition',
@@ -210,11 +210,11 @@ const disabilityCodeToDescription = (code) => {
   return lookup[code]
 }
 
-const splitLines = (str) => (str ? str.split('\r\n') : [])
+export const splitLines = (str) => (str ? str.split('\r\n') : [])
 
-const createDocumentId = (episodeId) => `documents/${episodeId}.pdf`
+export const createDocumentId = (episodeId) => `documents/${episodeId}.pdf`
 
-const groupTypesSubtypes =
+export const groupTypesSubtypes =
   (subTypeKey) =>
   (entries = []) => {
     const groupedDisabilities = entries.reduce((acc, entry) => {
@@ -235,35 +235,5 @@ const groupTypesSubtypes =
     return Object.values(groupedDisabilities)
   }
 
-const groupDisabilities = groupTypesSubtypes('condition')
-const groupProvisions = groupTypesSubtypes('category')
-
-module.exports = {
-  getYearMonthFromDate,
-  isEmptyObject,
-  countWords,
-  removeUrlLevels,
-  sortObject,
-  groupBy,
-  isValidDate,
-  catchAndReThrowError,
-  getCorrelationId,
-  updateMDC,
-  encodeHTML,
-  dynamicMiddleware,
-  processReplacements,
-  doReplace,
-  updateJsonValue,
-  prettyDate,
-  prettyDateAndTime,
-  ageFrom,
-  clearAnswers,
-  getErrorMessageFor,
-  formatDateWith,
-  disabilityCodeToDescription,
-  splitLines,
-  todayPretty,
-  createDocumentId,
-  groupDisabilities,
-  groupProvisions,
-}
+export const groupDisabilities = groupTypesSubtypes('condition')
+export const groupProvisions = groupTypesSubtypes('category')

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-const upwSaveAndContinue = require('./saveAndContinue')
-const { customValidationsEditContactDetails } = require('../fields')
+const upwSaveAndContinue = require('./saveAndContinue').default
+const { customValidationsEditContactDetails } = require('../fields').default
 
 class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {

@@ -1,9 +1,9 @@
-const BaseController = require('../../common/controllers/baseController')
+const BaseController = require('../../common/controllers/baseController').default
 const { trackEvent } = require('../../../common/logging/app-insights')
-const { EVENTS } = require('../../../common/utils/constants')
-const { startAssessment, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi')
-const logger = require('../../../common/logging/logger')
-const { getErrorMessageFor, ageFrom } = require('../../../common/utils/util')
+const { EVENTS } = require('../../../common/utils/constants').default
+const { startAssessment, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi').default
+const logger = require('../../../common/logging/logger').default
+const { getErrorMessageFor, ageFrom } = require('../../../common/utils/util').default
 
 const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode = 'UPW') => {
   logger.info(`Creating ${assessmentSchemaCode} assessment for CRN: ${crn}`)

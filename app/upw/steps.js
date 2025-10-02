@@ -1,19 +1,19 @@
 const StartUpwAssessment = require('./controllers/start')
-const TaskList = require('./controllers/taskList')
-const SaveAndContinue = require('./controllers/saveAndContinue')
+const TaskList = require('./controllers/taskList').default
+const SaveAndContinue = require('./controllers/saveAndContinue').default
 const individualsDetailsSaveAndContinue = require('./controllers/individualsDetailsSaveAndContinue')
 const editEmergencyContactsSaveAndContinue = require('./controllers/editEmergencyContactsSaveAndContinue')
 const removeEmergencyContactsSaveAndContinue = require('./controllers/removeEmergencyContactsSaveAndContinue')
 const gpDetailsSaveAndContinue = require('./controllers/gpDetailsSaveAndContinue')
 const editGpDetailsSaveAndContinue = require('./controllers/editGpDetailsSaveAndContinue')
 const removeGpDetailsSaveAndContinue = require('./controllers/removeGpDetailsSaveAndContinue')
-const Confirmation = require('./controllers/confirmation')
-const CloseAssessment = require('./controllers/closeAssessment')
+const Confirmation = require('./controllers/confirmation').default
+const CloseAssessment = require('./controllers/closeAssessment').default
 const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
 const PreviewPdf = require('./controllers/previewPdf')
 const CaringCommitmentsController = require('./controllers/carerCommitment')
-const { ModernDaySlaveryPerpetrator } = require('./controllers/modernDaySlaveryPerpetrator')
-const { ModernDaySlaveryVictim } = require('./controllers/modernDaySlaveryVictim')
+const { ModernDaySlaveryPerpetrator } = require('./controllers/modernDaySlaveryPerpetrator').default
+const { ModernDaySlaveryVictim } = require('./controllers/modernDaySlaveryVictim').default
 
 module.exports = {
   '/start': {

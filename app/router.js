@@ -1,7 +1,7 @@
 const passport = require('passport')
 const { sanitise } = require('../common/middleware/sanitise')
 
-const addUserToLocals = require('../common/middleware/add-user-information')
+const addUserToLocals = require('../common/middleware/add-user-information').default
 
 const {
   checkUserIsAuthenticated,
@@ -11,15 +11,15 @@ const {
   requestIsAuthenticated,
   apiErrorHandler,
   clientHasRole,
-} = require('../common/middleware/auth')
+} = require('../common/middleware/auth').default
 
 const upwWorkflow = require('./upw')
 
-const logger = require('../common/logging/logger')
-const { verifyAssessment } = require('./startAssessment/get.controller')
-const { getCorrelationId } = require('../common/utils/util')
-const { downloadUpwPdf } = require('./upw/controllers/api')
-const { ForbiddenError } = require('../common/utils/errors')
+const logger = require('../common/logging/logger').default
+const { verifyAssessment } = require('./startAssessment/get.controller').default
+const { getCorrelationId } = require('../common/utils/util').default
+const { downloadUpwPdf } = require('./upw/controllers/api').default
+const { ForbiddenError } = require('../common/utils/errors').default
 
 // Export
 module.exports = (app) => {

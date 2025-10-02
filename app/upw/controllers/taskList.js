@@ -1,9 +1,9 @@
-const BaseController = require('../../common/controllers/baseController')
-const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
-const { getTaskList } = require('./taskList.utils')
-const { getAnswers } = require('../../../common/data/hmppsAssessmentApi')
-const { logger } = require('../../../common/logging/logger')
-const { CACHE } = require('../../../common/utils/constants')
+import BaseController from '../../common/controllers/baseController'
+import { getRegistrations, getRoshRiskSummary } from './common.utils'
+import { getTaskList } from './taskList.utils'
+import { getAnswers } from '../../../common/data/hmppsAssessmentApi'
+import logger from '../../../common/logging/logger'
+import { CACHE } from '../../../common/utils/constants'
 
 class TaskList extends BaseController {
   async locals(req, res, next) {
@@ -46,4 +46,4 @@ class TaskList extends BaseController {
   }
 }
 
-module.exports = TaskList
+export default TaskList

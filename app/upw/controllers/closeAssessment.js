@@ -1,5 +1,5 @@
-const SaveAndContinue = require('./saveAndContinue')
-const { closeAssessment } = require('../../../common/data/hmppsAssessmentApi')
+import SaveAndContinue from './saveAndContinue'
+import { closeAssessment } from '../../../common/data/hmppsAssessmentApi'
 
 class CloseAssessment extends SaveAndContinue {
   async render(req, res, next) {
@@ -24,4 +24,4 @@ class CloseAssessment extends SaveAndContinue {
   }
 }
 
-module.exports = CloseAssessment
+export default CloseAssessment

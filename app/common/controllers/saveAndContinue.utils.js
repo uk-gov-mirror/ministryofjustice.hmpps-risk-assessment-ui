@@ -1,10 +1,10 @@
-const nunjucks = require('nunjucks')
-const { SECTION_INCOMPLETE, SECTION_COMPLETE } = require('../../../common/utils/constants')
+import nunjucks from 'nunjucks'
+import { SECTION_INCOMPLETE, SECTION_COMPLETE } from '../../../common/utils/constants'
 
 const hasAnswerIn = (v) => Array.isArray(v) && v.length > 0
 const hasAnswer = (v) => v && v.length > 0
 
-const getErrorMessage = (reason) => {
+export const getErrorMessage = (reason) => {
   if (reason === 'OASYS_PERMISSION') {
     return 'You do not have permission to update this type of assessment. Speak to your manager and ask them to request a change to your level of authorisation.'
   }
@@ -12,7 +12,7 @@ const getErrorMessage = (reason) => {
   return 'Something went wrong'
 }
 
-const pageValidationErrorsFrom = (validationErrors, serverErrors = []) => {
+export const pageValidationErrorsFrom = (validationErrors, serverErrors = []) => {
   const errors = Object.values(validationErrors).reduce(
     (otherErrors, currentError) => ({
       validationErrors: { ...otherErrors.validationErrors, [currentError.key]: { text: currentError.message } },
@@ -38,7 +38,7 @@ const pageValidationErrorsFrom = (validationErrors, serverErrors = []) => {
   }
 }
 
-const withAnswersFrom =
+export const withAnswersFrom =
   (previousAnswers, submittedAnswers) =>
   ([fieldName, fieldProperties]) => {
     const someValueFrom = (answer) => (hasAnswerIn(answer) ? answer : [])
@@ -147,24 +147,24 @@ const fieldFrom = (localField, questionDto = {}) => {
   return combinedSchema
 }
 
-const keysByQuestionCode = (otherQuestions, currentQuestion) => ({
+export const keysByQuestionCode = (otherQuestions, currentQuestion) => ({
   ...otherQuestions,
   [currentQuestion.questionCode]: currentQuestion,
 })
 
-const answersByQuestionCode = (otherQuestions, currentQuestion) => ({
+export const answersByQuestionCode = (otherQuestions, currentQuestion) => ({
   ...otherQuestions,
   [currentQuestion.questionCode]: currentQuestion.answer,
 })
 
-const combinedLocalFieldsWith =
+export const combinedLocalFieldsWith =
   (remoteQuestions) =>
   (otherFields, [questionCode, localQuestion]) => ({
     ...otherFields,
     [questionCode]: fieldFrom(localQuestion, remoteQuestions[questionCode]),
   })
 
-const combineDateFields = (formValues = {}) => {
+export const combineDateFields = (formValues = {}) => {
   const dateFieldPattern = /-(day|month|year)$/
   const whereDateField = (key) => dateFieldPattern.test(key)
 
@@ -195,7 +195,7 @@ const combineDateFields = (formValues = {}) => {
   return nonDateFieldNames.reduce(answersFrom(formValues), combinedDateFields)
 }
 
-const answerDtoFrom = (formValues) =>
+export const answerDtoFrom = (formValues) =>
   Object.keys(formValues).reduce((otherFields, fieldName) => {
     const answer = formValues[fieldName] !== '' ? formValues[fieldName] : []
     const answerAsArray = Array.isArray(answer) ? answer : [answer]
@@ -259,7 +259,7 @@ const renderConditionalQuestion = (
   return { ...questionDto, answerDtos }
 }
 
-const compileConditionalQuestions = (questions, errors) => {
+export const compileConditionalQuestions = (questions, errors) => {
   const inlineConditionalQuestions = questions.filter(
     (question) => question.dependent && !question.dependent.displayOutOfLine,
   )
@@ -309,16 +309,4 @@ const compileConditionalQuestions = (questions, errors) => {
     },
     [...questions],
   )
-}
-
-module.exports = {
-  compileConditionalQuestions,
-  getErrorMessage,
-  pageValidationErrorsFrom,
-  withAnswersFrom,
-  keysByQuestionCode,
-  combineDateFields,
-  combinedLocalFieldsWith,
-  answerDtoFrom,
-  answersByQuestionCode,
 }

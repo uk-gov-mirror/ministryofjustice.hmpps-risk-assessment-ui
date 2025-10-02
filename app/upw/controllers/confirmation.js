@@ -1,15 +1,15 @@
-const nunjucks = require('nunjucks')
-const SaveAndContinue = require('./saveAndContinue')
-const logger = require('../../../common/logging/logger')
-const { postCompleteAssessmentEpisode } = require('../../../common/data/hmppsAssessmentApi')
-const { convertHtmlToPdf } = require('../../../common/data/pdf')
-const { S3 } = require('../../../common/data/aws/s3')
-const { SNS } = require('../../../common/data/aws/sns')
-const { createDocumentId } = require('../../../common/utils/util')
-const { upwComplete } = require('../../../common/data/sns-messages')
+import { render as _render } from 'nunjucks'
+import SaveAndContinue from './saveAndContinue'
+import logger from '../../../common/logging/logger'
+import { postCompleteAssessmentEpisode } from '../../../common/data/hmppsAssessmentApi'
+import { convertHtmlToPdf } from '../../../common/data/pdf'
+import { S3 } from '../../../common/data/aws/s3'
+import { SNS } from '../../../common/data/aws/sns'
+import { createDocumentId } from '../../../common/utils/util'
+import { upwComplete } from '../../../common/data/sns-messages'
 
 const generateDocument = async (req, res) => {
-  const renderedHtml = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
+  const renderedHtml = _render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
     ...res.locals,
     notification: { isVisible: false },
     cssPath: 'application.min.css',
@@ -92,4 +92,4 @@ class Confirmation extends SaveAndContinue {
   }
 }
 
-module.exports = Confirmation
+export default Confirmation

@@ -1,14 +1,12 @@
-const redis = require('redis')
-const config = require('../config')
-const logger = require('../logging/logger')
+import { createClient } from 'redis'
+import { redis as _redis } from '../config'
+import logger from '../logging/logger'
 
-const url = config.redis.tls_enabled
-  ? `rediss://${config.redis.host}:${config.redis.port}`
-  : `redis://${config.redis.host}:${config.redis.port}`
+const url = _redis.tls_enabled ? `rediss://${_redis.host}:${_redis.port}` : `redis://${_redis.host}:${_redis.port}`
 
-const redisClient = redis.createClient({
+const redisClient = createClient({
   url,
-  password: config.redis.password,
+  password: _redis.password,
   // legacyMode: true,
   socket: {
     reconnectStrategy: (attempts) => {
@@ -29,8 +27,6 @@ const setAsync = async (...args) => {
   await redisClient.set(...args)
 }
 
-module.exports = {
-  client: redisClient,
-  get: getAsync,
-  set: setAsync,
-}
+export const client = redisClient
+export const get = getAsync
+export const set = setAsync

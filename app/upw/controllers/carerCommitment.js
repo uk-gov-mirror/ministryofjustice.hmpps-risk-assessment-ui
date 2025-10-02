@@ -1,6 +1,6 @@
-const upwSaveAndContinue = require('./saveAndContinue')
-const { customValidationsCaringCommitments } = require('../fields')
-const { CACHE } = require('../../../common/utils/constants')
+const upwSaveAndContinue = require('./saveAndContinue').default
+const { customValidationsCaringCommitments } = require('../fields').default
+const { CACHE } = require('../../../common/utils/constants').default
 
 class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {

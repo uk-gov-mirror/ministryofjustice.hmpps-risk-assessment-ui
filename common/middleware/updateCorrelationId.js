@@ -1,9 +1,10 @@
 // checks if there is a keycloak request id in the headers and uses that for correlation ID if found
-const { getNamespace } = require('cls-hooked')
-const { clsNamespace } = require('../config')
-const { updateMDC } = require('../utils/util')
+import { getNamespace } from 'cls-hooked'
+import { clsNamespace } from '../config'
+import { updateMDC } from '../utils/util'
 
-const updateCorrelationId = ({ headers: { 'x-request-id': correlationId } }, res, next) => {
+// eslint-disable-next-line import/prefer-default-export
+export const updateCorrelationId = ({ headers: { 'x-request-id': correlationId } }, res, next) => {
   if (correlationId) {
     const mdcNamespace = getNamespace(clsNamespace)
     const mdc = mdcNamespace.get('MDC')
@@ -13,5 +14,3 @@ const updateCorrelationId = ({ headers: { 'x-request-id': correlationId } }, res
 
   next()
 }
-
-module.exports = { updateCorrelationId }

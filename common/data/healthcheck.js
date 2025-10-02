@@ -1,9 +1,9 @@
-const superagent = require('superagent')
-const Agent = require('agentkeepalive')
-const { HttpsAgent } = require('agentkeepalive')
-const logger = require('../logging/logger')
+import superagent from 'superagent'
+import Agent, { HttpsAgent } from 'agentkeepalive'
+import logger from '../logging/logger'
 
-const serviceCheckFactory = (name, { url, agent }) => {
+// eslint-disable-next-line import/prefer-default-export
+export const serviceCheckFactory = (name, { url, agent }) => {
   const keepaliveAgent = url.startsWith('https') ? new HttpsAgent(agent) : new Agent(agent)
 
   return () =>
@@ -32,5 +32,3 @@ const serviceCheckFactory = (name, { url, agent }) => {
         })
     })
 }
-
-module.exports = { serviceCheckFactory }

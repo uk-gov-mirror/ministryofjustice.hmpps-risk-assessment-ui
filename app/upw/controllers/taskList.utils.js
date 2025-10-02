@@ -1,10 +1,7 @@
-const { speechToTextEnabled } = require('../../../common/config')
-const logger = require('../../../common/logging/logger')
-const { SECTION_COMPLETE } = require('../../../common/utils/constants')
-
-const { hasBothModernSlaveryFlags } = require('./common.utils')
-const { isModernSlaveryVictim } = require('./common.utils')
-const { isModernSlaveryPerpetrator } = require('./common.utils')
+import { speechToTextEnabled } from '../../../common/config'
+import logger from '../../../common/logging/logger'
+import { SECTION_COMPLETE } from '../../../common/utils/constants'
+import { hasBothModernSlaveryFlags, isModernSlaveryVictim, isModernSlaveryPerpetrator } from './common.utils'
 
 const checkAllTasksAreComplete = (sections) => {
   return sections.every((section) => {
@@ -17,7 +14,7 @@ const getPdfPreviewStatus = (tasks) => {
   return checkAllTasksAreComplete(tasks) ? 'VIEW_PDF' : 'CANNOT_VIEW_PDF'
 }
 
-const getPdfPreviewTask = (baseUrl, steps, taskName, otherSections) => {
+export const getPdfPreviewTask = (baseUrl, steps, taskName, otherSections) => {
   return {
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}`,
@@ -27,7 +24,7 @@ const getPdfPreviewTask = (baseUrl, steps, taskName, otherSections) => {
   }
 }
 
-const getTask = (answers, baseUrl, steps, taskName, completionField, active = true) => {
+export const getTask = (answers, baseUrl, steps, taskName, completionField, active = true) => {
   return {
     text: steps[`/${taskName}`]?.pageTitle || 'Unknown Task',
     href: `${baseUrl}/${taskName}` || '#',
@@ -37,10 +34,10 @@ const getTask = (answers, baseUrl, steps, taskName, completionField, active = tr
   }
 }
 
-const hasRiskFlags = (flags = [], requiredCodes = []) =>
+export const hasRiskFlags = (flags = [], requiredCodes = []) =>
   flags.filter(({ code }) => requiredCodes.includes(code)).length > 0
 
-const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => {
+export const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => {
   const tasks = [
     {
       heading: {
@@ -162,11 +159,4 @@ const getTaskList = (baseUrl = '', steps = {}, answers = {}, riskFlags = []) => 
   const allSections = [...tasks, pdfPreview]
 
   return { sections: allSections, allowedToSubmit: checkAllTasksAreComplete(tasks) }
-}
-
-module.exports = {
-  getPdfPreviewTask,
-  getTask,
-  getTaskList,
-  hasRiskFlags,
 }

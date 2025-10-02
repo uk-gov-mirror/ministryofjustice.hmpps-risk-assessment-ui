@@ -1,4 +1,4 @@
-const {
+import {
   range,
   notInFuture,
   validDate,
@@ -9,7 +9,7 @@ const {
   noSpace,
   onePresent,
   characterCount,
-} = require('./validators')
+} from './validators'
 
 describe('checks numbers are in range', () => {
   it('is in the range', () => {

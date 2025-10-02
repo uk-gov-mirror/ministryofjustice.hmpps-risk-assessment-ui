@@ -1,5 +1,5 @@
-const { customValidationsCaringCommitments } = require('./fields')
-const { noSpace } = require('../../common/middleware/form-wizard-validators/validators')
+import { customValidationsCaringCommitments } from './fields'
+import { noSpace } from '../../common/middleware/form-wizard-validators/validators'
 
 describe('customValidationsCaringCommitments', () => {
   let fields

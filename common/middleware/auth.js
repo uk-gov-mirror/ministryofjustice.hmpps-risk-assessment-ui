@@ -1,22 +1,24 @@
-const passport = require('passport')
-const { Strategy } = require('passport-oauth2')
-const refresh = require('passport-oauth2-refresh')
-const { jwtDecode } = require('jwt-decode')
-const jwksRsa = require('jwks-rsa')
-const { expressjwt: jwt } = require('express-jwt')
-const { DateTime } = require('luxon')
-const { checkTokenIsActive } = require('../data/oauth')
-const { cacheUserDetails, getCachedUserDetails } = require('../data/userDetailsCache')
-const config = require('../config')
-const logger = require('../logging/logger')
-const User = require('../models/user')
-const { SIXTY_SECONDS } = require('../utils/constants')
+import { serializeUser, deserializeUser, authenticate, use } from 'passport'
+import { Strategy } from 'passport-oauth2'
+import { requestNewAccessToken, use as _use } from 'passport-oauth2-refresh'
+import { jwtDecode } from 'jwt-decode'
+import { expressJwtSecret } from 'jwks-rsa'
+import { expressjwt as jwt } from 'express-jwt'
+import { DateTime } from 'luxon'
+import { checkTokenIsActive } from '../data/oauth'
+import { cacheUserDetails, getCachedUserDetails } from '../data/userDetailsCache'
+import * as config from '../config'
+import logger from '../logging/logger'
+import { from } from '../models/user'
+import { SIXTY_SECONDS } from '../utils/constants'
+
+const { apis: _apis, authClientId: _authClientId, domain: _domain, authClientSecret: _authClientSecret } = config
 
 const getAndCacheUserDetails = async (user) => {
   return cacheUserDetails(jwtDecode(user.token))
 }
 
-passport.serializeUser(async (req, user, done) => {
+serializeUser(async (req, user, done) => {
   try {
     await getAndCacheUserDetails(user)
     done(null, user.getSession())
@@ -25,9 +27,9 @@ passport.serializeUser(async (req, user, done) => {
   }
 })
 
-passport.deserializeUser(async (req, serializedUser, done) => {
+deserializeUser(async (req, serializedUser, done) => {
   try {
-    const user = User.from(serializedUser)
+    const user = from(serializedUser)
     const serializedDetails = await getCachedUserDetails(user.id)
 
     const details = serializedDetails !== null ? serializedDetails : await getAndCacheUserDetails(user)
@@ -39,7 +41,7 @@ passport.deserializeUser(async (req, serializedUser, done) => {
   }
 })
 
-const tokenVerifier = async (req, enabled = config.apis.oauth.verifyToken) => {
+export const tokenVerifier = async (req, enabled = _apis.oauth.verifyToken) => {
   const { user, verified } = req
 
   if (!enabled) {
@@ -57,7 +59,7 @@ const tokenVerifier = async (req, enabled = config.apis.oauth.verifyToken) => {
   return result
 }
 
-const checkUserIsAuthenticated = (verifyToken = tokenVerifier) => {
+export const checkUserIsAuthenticated = (verifyToken = tokenVerifier) => {
   return async (req, res, next) => {
     if (req.isAuthenticated() && (await verifyToken(req))) {
       return next()
@@ -68,13 +70,13 @@ const checkUserIsAuthenticated = (verifyToken = tokenVerifier) => {
   }
 }
 
-const userHasExpiredToken = (tokenExpiryTime, nowInSeconds = Date.now()) => tokenExpiryTime <= nowInSeconds
+export const userHasExpiredToken = (tokenExpiryTime, nowInSeconds = Date.now()) => tokenExpiryTime <= nowInSeconds
 
-const checkForTokenRefresh = (req, res, next) => {
+export const checkForTokenRefresh = (req, res, next) => {
   const { user } = req
   if (user && userHasExpiredToken(user.tokenExpiryTime)) {
     logger.info(`Token expiring for user: ${user.username} - attempting refresh`)
-    return refresh.requestNewAccessToken('oauth2', user.refreshToken, (err, token, refreshToken) => {
+    return requestNewAccessToken('oauth2', user.refreshToken, (err, token, refreshToken) => {
       if (err) {
         logger.error(`Failed to refresh token for user: ${user.username} with error: ${err}`)
         return next(err)
@@ -98,17 +100,17 @@ const checkForTokenRefresh = (req, res, next) => {
   return next()
 }
 
-const handleLoginCallback = () => {
+export const handleLoginCallback = () => {
   return (req, res, next) => {
-    passport.authenticate('oauth2', {
+    authenticate('oauth2', {
       successReturnToOrRedirect: req.session.returnUrl || '/',
       failureRedirect: '/login',
     })(req, res, next)
   }
 }
 
-const handleLogout = () => {
-  const logoutUrl = `${config.apis.oauth.url}/logout?client_id=${config.authClientId}&redirect_uri=${config.domain}`
+export const handleLogout = () => {
+  const logoutUrl = `${_apis.oauth.url}/logout?client_id=${_authClientId}&redirect_uri=${_domain}`
 
   return (req, res, next) => {
     if (req.user) {
@@ -129,15 +131,15 @@ const handleLogout = () => {
   }
 }
 
-const generateBasicAuthToken = (clientId, clientSecret) => {
+export const generateBasicAuthToken = (clientId, clientSecret) => {
   const clientCredentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
   return `Basic ${clientCredentials}`
 }
 
-const initializeAuth = () => {
+export const initializeAuth = () => {
   const { authClientId, authClientSecret, apis, domain } = config
 
-  if (!config.authClientId || !config.authClientSecret || !domain || !config.apis?.oauth?.url) {
+  if (!_authClientId || !_authClientSecret || !domain || !_apis?.oauth?.url) {
     throw new Error('Configuration missing for Auth')
   }
 
@@ -156,7 +158,7 @@ const initializeAuth = () => {
       // Token expiry = 1hr, Refresh token = 12hr
       done(
         null,
-        User.from({
+        from({
           id: params.user_id,
           token,
           refreshToken,
@@ -169,24 +171,28 @@ const initializeAuth = () => {
     },
   )
 
-  passport.use(strategy)
-  refresh.use(strategy)
+  use(strategy)
+  _use(strategy)
 }
 
-const clientIsAuthenticated = () => {
+export const init = initializeAuth
+
+export const clientIsAuthenticated = () => {
   return jwt({
-    secret: jwksRsa.expressJwtSecret({
+    secret: expressJwtSecret({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: `${config.apis.oauth.url}/.well-known/jwks.json`,
+      jwksUri: `${_apis.oauth.url}/.well-known/jwks.json`,
     }),
-    issuer: `${config.apis.oauth.url}/issuer`,
+    issuer: `${_apis.oauth.url}/issuer`,
     algorithms: ['RS256'],
   })
 }
 
-const clientHasRole = (role) => (req, res, next) => {
+export const requestIsAuthenticated = clientIsAuthenticated
+
+export const clientHasRole = (role) => (req, res, next) => {
   const roles = req.auth?.authorities || []
 
   if (!roles.includes(role)) {
@@ -197,7 +203,7 @@ const clientHasRole = (role) => (req, res, next) => {
   return next()
 }
 
-const apiErrorHandler = (err, req, res, next) => {
+export const apiErrorHandler = (err, req, res, next) => {
   if (err) {
     if (err.name === 'UnauthorizedError') {
       logger.info(`Invalid token: ${err.code}`)
@@ -208,18 +214,4 @@ const apiErrorHandler = (err, req, res, next) => {
   }
 
   return next()
-}
-
-module.exports = {
-  checkUserIsAuthenticated,
-  checkForTokenRefresh,
-  handleLoginCallback,
-  handleLogout,
-  init: initializeAuth,
-  generateBasicAuthToken,
-  userHasExpiredToken,
-  tokenVerifier,
-  requestIsAuthenticated: clientIsAuthenticated,
-  clientHasRole,
-  apiErrorHandler,
 }

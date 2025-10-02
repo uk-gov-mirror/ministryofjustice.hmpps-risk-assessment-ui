@@ -1,8 +1,8 @@
-const saveAndContinue = require('../../common/controllers/saveAndContinue')
-const { getErrorMessage } = require('../../common/controllers/saveAndContinue.utils')
-const { postAnswers, getAnswers } = require('../../../common/data/hmppsAssessmentApi')
-const { logger } = require('../../../common/logging/mdc-aware-logger')
-const { CACHE } = require('../../../common/utils/constants')
+import saveAndContinue from '../../common/controllers/saveAndContinue'
+import { getErrorMessage } from '../../common/controllers/saveAndContinue.utils'
+import { postAnswers, getAnswers } from '../../../common/data/hmppsAssessmentApi'
+import logger from '../../../common/logging/mdc-aware-logger'
+import { CACHE } from '../../../common/utils/constants'
 
 class removeItemSaveAndContinue extends saveAndContinue {
   async locals(req, res, next) {
@@ -56,4 +56,4 @@ class removeItemSaveAndContinue extends saveAndContinue {
   }
 }
 
-module.exports = removeItemSaveAndContinue
+export default removeItemSaveAndContinue

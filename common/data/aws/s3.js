@@ -1,19 +1,19 @@
-const { S3: S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3')
-const config = require('../../config')
-const logger = require('../../logging/logger')
+import { S3 as S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3'
+import { aws } from '../../config'
+import logger from '../../logging/logger'
 
-class S3 {
+export class S3 {
   constructor() {
     const options = {
       region: 'eu-west-2',
     }
 
-    if (config.aws.useLocalStack) {
+    if (aws.useLocalStack) {
       options.forcePathStyle = true
     }
 
     this.client = new S3Client(options)
-    this.bucketName = config.aws.s3.bucketName
+    this.bucketName = aws.s3.bucketName
   }
 
   async upload(key, file, type) {
@@ -53,8 +53,4 @@ class S3 {
         return { ok: false, error }
       })
   }
-}
-
-module.exports = {
-  S3,
 }

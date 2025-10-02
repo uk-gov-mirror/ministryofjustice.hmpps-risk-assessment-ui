@@ -87,7 +87,7 @@ const fieldsToRemove = [
   'emergency_contact_mobile_phone_number',
 ]
 
-const createMultiplesFields = (answers) => {
+export const createMultiplesFields = (answers) => {
   const getExistingEntriesFor = orEmptyWith(answers)
   return {
     ...answers,
@@ -130,13 +130,6 @@ const safeDelete = (fields) => (answers) => {
   return updatedAnswers
 }
 
-const migrateGpDetails = migrateFieldsUsing(gpDetailsMigration)
-const migrateEmergencyContacts = migrateFieldsUsing(emergencyContactsMigration)
-const removeOldFields = safeDelete(fieldsToRemove)
-
-module.exports = {
-  createMultiplesFields,
-  migrateGpDetails,
-  migrateEmergencyContacts,
-  removeOldFields,
-}
+export const migrateGpDetails = migrateFieldsUsing(gpDetailsMigration)
+export const migrateEmergencyContacts = migrateFieldsUsing(emergencyContactsMigration)
+export const removeOldFields = safeDelete(fieldsToRemove)

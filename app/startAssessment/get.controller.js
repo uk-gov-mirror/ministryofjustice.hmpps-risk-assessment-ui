@@ -1,6 +1,6 @@
-const { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } = require('../../common/data/hmppsAssessmentApi')
-const logger = require('../../common/logging/logger')
-const { getErrorMessageFor, prettyDate, ageFrom } = require('../../common/utils/util')
+import { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } from '../../common/data/hmppsAssessmentApi'
+import logger from '../../common/logging/logger'
+import { getErrorMessageFor, prettyDate, ageFrom } from '../../common/utils/util'
 
 const validateAssessmentType = (assessmentType) => {
   if (!assessmentType) {
@@ -35,7 +35,7 @@ const getSubjectDetailsFor = (offender) => ({
   age: ageFrom(offender?.dateOfBirth),
 })
 
-const verifyAssessment = async (req, res, next) => {
+export const verifyAssessment = async (req, res, next) => {
   const { crn, eventId = 1, assessmentType } = req.query
 
   try {
@@ -68,8 +68,4 @@ const verifyAssessment = async (req, res, next) => {
   } catch (e) {
     return next(e)
   }
-}
-
-module.exports = {
-  verifyAssessment,
 }

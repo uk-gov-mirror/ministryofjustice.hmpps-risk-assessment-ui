@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const wizard = require('hmpo-form-wizard')
 const steps = require('./steps')
-const { fields } = require('./fields')
+const { fields } = require('./fields').default
 const config = require('./upw_config')
 const { sanitise } = require('../../common/middleware/sanitise')
 

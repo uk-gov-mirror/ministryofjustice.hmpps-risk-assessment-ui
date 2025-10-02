@@ -1,4 +1,13 @@
-const nock = require('nock')
+import nock, { cleanAll } from 'nock'
+import { getCorrelationId } from '../utils/util'
+import { getOffenderData, postAnswers, getAnswers } from './hmppsAssessmentApi'
+import * as config from '../config'
+
+const {
+  apis: {
+    hmppsAssessments: { url },
+  },
+} = config
 
 const userDetails = {
   isActive: true,
@@ -9,20 +18,10 @@ const userDetails = {
   areaName: 'Hertfordshire',
 }
 
-const { getCorrelationId } = require('../utils/util')
-
 jest.mock('../utils/util')
 jest.mock('./userDetailsCache', () => ({
   getCachedUserDetails: jest.fn(() => userDetails),
 }))
-
-const {
-  apis: {
-    hmppsAssessments: { url },
-  },
-} = require('../config')
-const { getOffenderData, postAnswers, getAnswers } = require('./hmppsAssessmentApi')
-
 jest.mock('./hmppsAssessmentApi', () => ({
   ...jest.requireActual('./hmppsAssessmentApi'),
   postAnswers: jest.fn(),
@@ -34,7 +33,7 @@ describe('hmppsAssessmentApi', () => {
     getCorrelationId.mockReturnValue('mocked-correlation-id')
   })
   afterEach(() => {
-    nock.cleanAll()
+    cleanAll()
     jest.resetAllMocks()
   })
   let mockedEndpoint

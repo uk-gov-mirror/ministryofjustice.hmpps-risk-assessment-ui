@@ -1,4 +1,4 @@
-const BaseController = require('./baseController')
+import BaseController from './baseController'
 
 let req
 const user = { token: 'mytoken', id: '1' }

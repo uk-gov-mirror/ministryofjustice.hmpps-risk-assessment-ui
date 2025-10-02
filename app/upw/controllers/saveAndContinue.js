@@ -1,13 +1,13 @@
-const { trackEvent } = require('../../../common/logging/app-insights')
-const BaseSaveAndContinue = require('../../common/controllers/saveAndContinue')
-const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
-const { EVENTS, SECTION_COMPLETE, CACHE } = require('../../../common/utils/constants')
-const {
+import { trackEvent } from '../../../common/logging/app-insights'
+import BaseSaveAndContinue from '../../common/controllers/saveAndContinue'
+import { getRegistrations, getRoshRiskSummary } from './common.utils'
+import { EVENTS, SECTION_COMPLETE, CACHE } from '../../../common/utils/constants'
+import {
   createMultiplesFields,
   migrateGpDetails,
   migrateEmergencyContacts,
   removeOldFields,
-} = require('./saveAndContinue.utils')
+} from './saveAndContinue.utils'
 
 const invalidateSectionCompleteAnswers = (answers, fields) => {
   return Object.entries(answers)
@@ -75,4 +75,4 @@ class SaveAndContinue extends BaseSaveAndContinue {
   }
 }
 
-module.exports = SaveAndContinue
+export default SaveAndContinue

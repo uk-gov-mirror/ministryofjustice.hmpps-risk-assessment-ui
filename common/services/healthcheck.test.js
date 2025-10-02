@@ -1,5 +1,6 @@
-const healthcheck = require('./healthcheck')
-const { serviceCheckFactory } = require('../data/healthcheck')
+import { jest } from '@jest/globals'
+import healthcheck from './healthcheck'
+import { serviceCheckFactory } from '../data/healthcheck'
 
 jest.mock('../../build-info.json', () => {
   return { buildNumber: '1978-01-01.404', gitRef: '101' }

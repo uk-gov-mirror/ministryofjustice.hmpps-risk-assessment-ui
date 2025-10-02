@@ -1,5 +1,5 @@
-const { DateTime } = require('luxon')
-const {
+import { DateTime } from 'luxon'
+import {
   countWords,
   isEmptyObject,
   removeUrlLevels,
@@ -14,7 +14,7 @@ const {
   updateJsonValue,
   groupDisabilities,
   groupProvisions,
-} = require('./util')
+} from './util'
 
 const inputText = "There is a green hill far away - and I shouldn't tell you that really"
 

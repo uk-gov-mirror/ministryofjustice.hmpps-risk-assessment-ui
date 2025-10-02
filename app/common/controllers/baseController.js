@@ -1,5 +1,5 @@
-const { Controller } = require('hmpo-form-wizard')
-const { notification } = require('../../../common/config')
+import { Controller } from 'hmpo-form-wizard'
+import { notification } from '../../../common/config'
 
 class BaseController extends Controller {
   configure(req, res, next) {
@@ -25,4 +25,4 @@ class BaseController extends Controller {
   }
 }
 
-module.exports = BaseController
+export default BaseController

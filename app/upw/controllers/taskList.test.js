@@ -1,7 +1,8 @@
-const TaskList = require('./taskList')
-const { getTaskList } = require('./taskList.utils')
-const { getAnswers } = require('../../../common/data/hmppsAssessmentApi')
-const { CACHE } = require('../../../common/utils/constants')
+import { jest } from '@jest/globals'
+import TaskList from './taskList'
+import { getTaskList } from './taskList.utils'
+import { getAnswers } from '../../../common/data/hmppsAssessmentApi'
+import { CACHE } from '../../../common/utils/constants'
 
 jest.mock('./taskList.utils')
 jest.mock('../../../common/data/hmppsAssessmentApi')

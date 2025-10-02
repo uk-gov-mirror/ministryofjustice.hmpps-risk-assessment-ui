@@ -1,4 +1,4 @@
-const { serviceCheckFactory } = require('../data/healthcheck')
+import { serviceCheckFactory } from '../data/healthcheck'
 
 const service = (name, config) => {
   const check = serviceCheckFactory(name, config)
@@ -8,7 +8,7 @@ const service = (name, config) => {
       .catch((err) => ({ name, status: 'ERROR', message: err }))
 }
 
-module.exports = (...services) => {
+export default (...services) => {
   const checks = services.map(({ name, config }) => service(name, config))
 
   return (callback) =>

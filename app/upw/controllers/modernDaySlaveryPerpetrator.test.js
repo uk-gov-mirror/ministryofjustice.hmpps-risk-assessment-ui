@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/extensions
-const { migrateModernSlaveryAnswers } = require('./modernDaySlaveryPerpetrator.js')
+import { migrateModernSlaveryAnswers } from './modernDaySlaveryPerpetrator'
 
 describe('it returns previous answers of modern day slavery if present', () => {
   it('it returns previous modern day slavery answers when present', () => {

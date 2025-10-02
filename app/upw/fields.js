@@ -1,13 +1,12 @@
-const {
-  range,
-  noSpace,
-  onePresent,
-  characterCount,
-} = require('../../common/middleware/form-wizard-validators/validators')
+import { range, noSpace, onePresent, characterCount } from '../../common/middleware/form-wizard-validators/validators'
 
 const characterLimit = 250
 
-const customValidationsEditEmergencyContact = (fields, emergencyContactPhoneNumber, emergencyContactMobileNumber) => {
+export const customValidationsEditEmergencyContact = (
+  fields,
+  emergencyContactPhoneNumber,
+  emergencyContactMobileNumber,
+) => {
   fields.emergency_contact_phone_number?.validate.push({
     fn: onePresent,
     arguments: [emergencyContactMobileNumber],
@@ -22,7 +21,7 @@ const customValidationsEditEmergencyContact = (fields, emergencyContactPhoneNumb
   return fields
 }
 
-const customValidationsEditContactDetails = (
+export const customValidationsEditContactDetails = (
   fields,
   contactPhoneNumber,
   contactMobileNumber,
@@ -53,7 +52,7 @@ const customValidationsEditContactDetails = (
   return fields
 }
 
-const customValidationsCaringCommitments = (fields, newCaringCommitmentsData) => {
+export const customValidationsCaringCommitments = (fields, newCaringCommitmentsData) => {
   if (!newCaringCommitmentsData) {
     fields.caring_commitments?.validate.push(...requireYesOrNo.validate)
     fields.caring_commitments_details?.validate.push(...requireEnterDetails.validate)
@@ -95,7 +94,7 @@ const requireEnterDetails = {
 
 const readOnly = { readOnly: true }
 
-const fields = {
+export const fields = {
   first_name_aliases: {
     answerType: 'textarea',
   },
@@ -912,11 +911,4 @@ const fields = {
   equipment_complete: requireSelectOption,
   additional_information_complete: requireSelectOption,
   other_adjustments_complete: requireSelectOption,
-}
-
-module.exports = {
-  fields,
-  customValidationsEditEmergencyContact,
-  customValidationsEditContactDetails,
-  customValidationsCaringCommitments,
 }

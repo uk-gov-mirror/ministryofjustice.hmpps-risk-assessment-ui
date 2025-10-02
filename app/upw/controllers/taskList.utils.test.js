@@ -1,4 +1,4 @@
-const { getPdfPreviewTask, getTask, getTaskList } = require('./taskList.utils')
+import { getPdfPreviewTask, getTask, getTaskList } from './taskList.utils'
 
 describe('taskList.util', () => {
   describe('getPdfPreviewTask', () => {

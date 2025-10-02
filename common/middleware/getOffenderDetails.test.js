@@ -1,9 +1,11 @@
-const getOffenderDetails = require('./getOffenderDetails')
-const { getOffenderData } = require('../data/hmppsAssessmentApi')
+import { jest } from '@jest/globals'
+import getOffenderDetails from './getOffenderDetails'
+import { getOffenderData } from '../data/hmppsAssessmentApi'
+import * as config from '../config'
 
 const {
   dev: { devAssessmentId },
-} = require('../config')
+} = config
 
 jest.mock('../data/hmppsAssessmentApi')
 

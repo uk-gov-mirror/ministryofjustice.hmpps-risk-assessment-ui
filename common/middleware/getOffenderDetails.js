@@ -1,7 +1,7 @@
-const logger = require('../logging/logger')
-const { getOffenderData } = require('../data/hmppsAssessmentApi')
+import logger from '../logging/logger'
+import { getOffenderData } from '../data/hmppsAssessmentApi'
 
-module.exports = async ({ params: { assessmentId }, user }, res, next) => {
+export default async ({ params: { assessmentId }, user }, res, next) => {
   try {
     const { name, pnc = null, crn = null, dob, age } = await getOffenderData(assessmentId, user?.token)
     if (!name) throw new Error('Required offender details could not be found')

@@ -1,4 +1,4 @@
-const { DateTime } = require('luxon')
+import { DateTime } from 'luxon'
 
 const formatDate = (isoString) => {
   const datePart = 'd MMM y'
@@ -17,7 +17,8 @@ const displayPredictorLevels = {
 
 const displayPredictorTypes = { RSR: 'RSR', OSPC: 'OSP/C', OSPI: 'OSP/I' }
 
-const splitPredictorScores = (predictorScores) => {
+// eslint-disable-next-line import/prefer-default-export
+export const splitPredictorScores = (predictorScores) => {
   const formattedScores = predictorScores.reduce((acc, scores) => {
     return Object.entries(scores.scores).reduce((acc1, [type, { level, score, date }]) => {
       const updated = { ...acc1, date: formatDate(date) }
@@ -35,5 +36,3 @@ const splitPredictorScores = (predictorScores) => {
     historical: [], // TODO: 👈 Add some code to do these
   }
 }
-
-module.exports = { splitPredictorScores }

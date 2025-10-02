@@ -1,17 +1,17 @@
-const bodyParser = require('body-parser')
-const express = require('express')
-const request = require('supertest')
-const { sanitise } = require('./sanitise')
+import { urlencoded, json } from 'body-parser'
+import express, { Router } from 'express'
+import request from 'supertest'
+import { sanitise } from './sanitise'
 
 describe('sanitise.js', () => {
   const app = express()
-  app.use(bodyParser.urlencoded({ extended: true }))
-  app.use(bodyParser.json())
+  app.use(urlencoded({ extended: true }))
+  app.use(json())
   app.use(sanitise())
 
   const spy = jest.fn()
 
-  const paramsRouter = express.Router()
+  const paramsRouter = Router()
 
   paramsRouter.post('/:test', sanitise(), (req, res) => {
     spy(req.params)

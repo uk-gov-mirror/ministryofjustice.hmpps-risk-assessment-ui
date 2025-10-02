@@ -1,10 +1,10 @@
-const lodash = require('lodash')
-const BaseController = require('./baseController')
-const { SECTION_INCOMPLETE, CACHE } = require('../../../common/utils/constants')
-const { getAnswers, postAnswers, getQuestionsForAssessmentType } = require('../../../common/data/hmppsAssessmentApi')
-const logger = require('../../../common/logging/logger')
-const { processReplacements } = require('../../../common/utils/util')
-const {
+import { isEqual } from 'lodash'
+import BaseController from './baseController'
+import { SECTION_INCOMPLETE, CACHE } from '../../../common/utils/constants'
+import { getAnswers, postAnswers, getQuestionsForAssessmentType } from '../../../common/data/hmppsAssessmentApi'
+import logger from '../../../common/logging/logger'
+import { processReplacements } from '../../../common/utils/util'
+import {
   compileConditionalQuestions,
   getErrorMessage,
   pageValidationErrorsFrom,
@@ -14,10 +14,10 @@ const {
   combinedLocalFieldsWith,
   answerDtoFrom,
   answersByQuestionCode,
-} = require('./saveAndContinue.utils')
+} from './saveAndContinue.utils'
 
 const postUpdateIfMigrated = async (originalAnswers, migratedAnswers, assessmentUuid, episodeUuid, user) => {
-  if (!lodash.isEqual(originalAnswers, migratedAnswers)) {
+  if (!isEqual(originalAnswers, migratedAnswers)) {
     logger.info(`Saving updated answer structure for assessment ${assessmentUuid}, episode ${episodeUuid}`)
     try {
       await postAnswers(assessmentUuid, episodeUuid, { answers: migratedAnswers }, user?.token)
@@ -301,4 +301,4 @@ class SaveAndContinue extends BaseController {
   }
 }
 
-module.exports = SaveAndContinue
+export default SaveAndContinue

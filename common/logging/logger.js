@@ -1,17 +1,9 @@
-const winston = require('winston')
-let { loggingLevel, env } = require('../config')
-const MDCAwareLogger = require('./mdc-aware-logger')
-
-if (!loggingLevel) {
-  loggingLevel = 'info'
-}
-if (!env) {
-  env = 'development'
-}
+import { transports as _transports, createLogger, addColors } from 'winston'
+import { loggingLevel, isProduction } from '../config'
+import MDCAwareLogger from './mdc-aware-logger'
 
 const loggingTransports = []
 const exceptionTransports = []
-const notProd = env !== 'production'
 const colors = {
   info: 'green',
   email: 'magenta',
@@ -19,8 +11,8 @@ const colors = {
   error: 'red',
 }
 
-const consoleLog = new winston.transports.Console({
-  json: notProd !== true,
+const consoleLog = new _transports.Console({
+  json: isProduction,
   timestamp: true,
   colorize: true,
   level: loggingLevel.toLowerCase(),
@@ -29,8 +21,8 @@ const consoleLog = new winston.transports.Console({
 loggingTransports.push(consoleLog)
 
 exceptionTransports.push(
-  new winston.transports.Console({
-    json: notProd !== true,
+  new _transports.Console({
+    json: isProduction,
     logstash: true,
     timestamp: true,
     colorize: true,
@@ -46,13 +38,13 @@ const transports = {
   exitOnError: true,
 }
 
-if (notProd) {
+if (!isProduction) {
   delete transports.exceptionHandlers
 }
 
 // eslint-disable-next-line new-cap
-const logger = new winston.createLogger(transports)
+const logger = new createLogger(transports)
 
-winston.addColors(colors)
+addColors(colors)
 
-module.exports = new MDCAwareLogger(logger)
+export default new MDCAwareLogger(logger)

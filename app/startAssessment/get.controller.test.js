@@ -1,5 +1,6 @@
-const { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } = require('../../common/data/hmppsAssessmentApi')
-const { verifyAssessment } = require('./get.controller')
+import { jest } from '@jest/globals'
+import { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } from '../../common/data/hmppsAssessmentApi'
+import { verifyAssessment } from './get.controller'
 
 jest.mock('../../common/data/hmppsAssessmentApi', () => ({
   getCurrentEpisodeForCrn: jest.fn(),

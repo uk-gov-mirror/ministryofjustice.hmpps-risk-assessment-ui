@@ -1,33 +1,36 @@
 // Node.js core dependencies
-const { join } = require('path')
-const crypto = require('crypto')
+import { join } from 'path'
+import { randomBytes } from 'crypto'
 
 // Npm dependencies
-const appInsights = require('applicationinsights')
-const express = require('express')
-const cookieParser = require('cookie-parser')
-const { json, urlencoded } = require('body-parser')
-const loggingMiddleware = require('morgan')
-const compression = require('compression')
-const { configure } = require('nunjucks')
-const dateFilter = require('nunjucks-date-filter')
-const session = require('express-session')
-const helmet = require('helmet')
-const passport = require('passport')
-const { RedisStore } = require('connect-redis')
-
-// Local dependencies
-const argv = require('minimist')(process.argv.slice(2))
-const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filters/all')()
-const logger = require('./common/logging/logger')
-const router = require('./app/router')
-const noCache = require('./common/utils/no-cache')
-const { mdcSetup } = require('./common/logging/logger-mdc')
-const { updateCorrelationId } = require('./common/middleware/updateCorrelationId')
-const { applicationInsights } = require('./common/config')
-const {
+import { setup, DistributedTracingModes, defaultClient } from 'applicationinsights'
+import express from 'express'
+import cookieParser from 'cookie-parser'
+import { json, urlencoded } from 'body-parser'
+import loggingMiddleware from 'morgan'
+import compression from 'compression'
+import { configure } from 'nunjucks'
+import dateFilter from 'nunjucks-date-filter'
+import session from 'express-session'
+import helmet from 'helmet'
+import passport, { initialize, session as _session } from 'passport'
+import { RedisStore } from 'connect-redis'
+import logger from './common/logging/logger'
+import router from './app/router'
+import noCache from './common/utils/no-cache'
+import { mdcSetup } from './common/logging/logger-mdc'
+import { updateCorrelationId } from './common/middleware/updateCorrelationId'
+import {
+  applicationInsights,
+  apis,
+  displayMaintenancePage,
+  maintenancePageText,
+  sessionSecret,
+  https,
+  isProduction,
+} from './common/config'
+import {
   encodeHTML,
-  extractLink,
   doReplace,
   updateJsonValue,
   prettyDate,
@@ -39,16 +42,21 @@ const {
   todayPretty,
   groupDisabilities,
   groupProvisions,
-} = require('./common/utils/util')
-const config = require('./common/config')
-const auth = require('./common/middleware/auth')
-const redis = require('./common/data/redis')
-const { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } = require('./common/utils/constants')
+} from './common/utils/util'
+import { init } from './common/middleware/auth'
+import { client as _client } from './common/data/redis'
+import { REFRESH_TOKEN_LIFETIME_SECONDS, SIXTY_SECONDS } from './common/utils/constants'
 
-const { hasBothModernSlaveryFlags } = require('./app/upw/controllers/common.utils')
-const { isModernSlaveryVictim } = require('./app/upw/controllers/common.utils')
-const { isModernSlaveryPerpetrator } = require('./app/upw/controllers/common.utils')
-const buildInfo = require('./build-info.json')
+import {
+  hasBothModernSlaveryFlags,
+  isModernSlaveryVictim,
+  isModernSlaveryPerpetrator,
+} from './app/upw/controllers/common.utils'
+import { buildNumber } from './build-info.json'
+
+// Local dependencies
+const argv = require('minimist')(process.argv.slice(2))
+const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filters/all')()
 
 // Global constants
 const { static: _static } = express
@@ -77,21 +85,20 @@ function initialiseApplicationInsights() {
     return
   }
 
-  appInsights
-    .setup()
-    .setDistributedTracingMode(appInsights.DistributedTracingModes.AI_AND_W3C)
+  setup()
+    .setDistributedTracingMode(DistributedTracingModes.AI_AND_W3C)
     .setInternalLogging(applicationInsights.internalLogging, true)
     .start()
 
   const roleName = process.env.npm_package_name
-  appInsights.defaultClient.context.tags['ai.cloud.role'] = roleName
+  defaultClient.context.tags['ai.cloud.role'] = roleName
 
   logger.info(`Application Insights enabled with role name '${roleName}'`)
 }
 
 async function initialiseGlobalMiddleware(app) {
   app.use((_req, res, next) => {
-    res.locals.cspNonce = crypto.randomBytes(16).toString('hex')
+    res.locals.cspNonce = randomBytes(16).toString('hex')
     next()
   })
   app.use(
@@ -114,7 +121,7 @@ async function initialiseGlobalMiddleware(app) {
           ],
           styleSrc: ["'self'", (_req, res) => `'nonce-${res.locals.cspNonce}'`],
           fontSrc: ["'self'"],
-          formAction: [`'self' ${config.apis.oauth.url}`],
+          formAction: [`'self' ${apis.oauth.url}`],
         },
       },
       crossOriginEmbedderPolicy: true,
@@ -139,10 +146,10 @@ async function initialiseGlobalMiddleware(app) {
     next()
   })
 
-  if (config.displayMaintenancePage && config.maintenancePageText) {
+  if (displayMaintenancePage && maintenancePageText) {
     logger.info('Maintenance page enabled')
     app.get('*splat', (req, res) => {
-      res.locals.maintenancePageText = config.maintenancePageText
+      res.locals.maintenancePageText = maintenancePageText
       return res.render('common/templates/maintenance-page.njk')
     })
   }
@@ -156,14 +163,14 @@ async function initialiseGlobalMiddleware(app) {
 
   app.use(cookieParser())
 
-  await redis.client.connect()
+  await _client.connect()
 
   app.use(
     session({
-      store: new RedisStore({ client: redis.client }),
-      secret: config.sessionSecret,
+      store: new RedisStore({ client: _client }),
+      secret: sessionSecret,
       cookie: {
-        secure: config.https,
+        secure: https,
         sameSite: 'lax',
         maxAge: (REFRESH_TOKEN_LIFETIME_SECONDS - SIXTY_SECONDS) * 1000,
       },
@@ -173,9 +180,9 @@ async function initialiseGlobalMiddleware(app) {
     }),
   )
 
-  auth.init(passport)
-  app.use(passport.initialize())
-  app.use(passport.session())
+  init(passport)
+  app.use(initialize())
+  app.use(_session())
 
   // add instrumentation key to app so it can be picked up in front end templates
   // eslint-disable-next-line no-param-reassign
@@ -236,7 +243,6 @@ function initialiseTemplateEngine(app) {
   // that might cause security issues otherwise
   nunjucksEnvironment.addFilter('encodeHtml', (str) => encodeHTML(str))
   nunjucksEnvironment.addFilter('splitLines', splitLines)
-  nunjucksEnvironment.addFilter('extractLink', (str) => extractLink(str))
   nunjucksEnvironment.addFilter('doReplace', (str, target, replacement) => doReplace(str, target, replacement))
 
   // typeof for array, using native JS Array.isArray()
@@ -258,9 +264,9 @@ function initialiseTemplateEngine(app) {
   // eslint-disable-next-line no-param-reassign
   app.locals.cssPath = '/stylesheets/application.min.css'
 
-  if (config.isProduction) {
+  if (isProduction) {
     // eslint-disable-next-line no-param-reassign
-    app.locals.appVersion = buildInfo?.buildNumber || Date.now().toString()
+    app.locals.appVersion = buildNumber || Date.now().toString()
   } else {
     app.use((_req, _res, next) => {
       // eslint-disable-next-line no-param-reassign
@@ -320,4 +326,4 @@ if (argv.i) {
   start()
 }
 
-module.exports = { start, getApp: initialise }
+export default { start, getApp: initialise }

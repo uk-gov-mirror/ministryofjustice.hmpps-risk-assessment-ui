@@ -1,9 +1,9 @@
-const {
+import {
   createMultiplesFields,
   migrateGpDetails,
   migrateEmergencyContacts,
   removeOldFields,
-} = require('./saveAndContinue.utils')
+} from './saveAndContinue.utils'
 
 describe('gpDetails.utils.js', () => {
   describe('createMultiplesFields', () => {

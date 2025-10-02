@@ -1,6 +1,6 @@
-const SaveAndContinue = require('./saveAndContinue')
+import SaveAndContinue from './saveAndContinue'
 
-const migrateModernSlaveryAnswers = (answers = {}) => {
+export const migrateModernSlaveryAnswers = (answers = {}) => {
   return {
     ...answers,
     modern_day_slavery_risks_victim: answers.modern_day_slavery_risks,
@@ -10,16 +10,11 @@ const migrateModernSlaveryAnswers = (answers = {}) => {
   }
 }
 
-class ModernDaySlaveryVictim extends SaveAndContinue {
+export class ModernDaySlaveryVictim extends SaveAndContinue {
   constructor(...args) {
     super(...args)
 
     // Apply migrations where fields have changed and cleanup unused ones
     this.getAnswerModifiers = [migrateModernSlaveryAnswers]
   }
-}
-
-module.exports = {
-  ModernDaySlaveryVictim,
-  migrateModernSlaveryAnswers,
 }

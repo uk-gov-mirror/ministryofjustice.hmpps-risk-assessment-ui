@@ -1,5 +1,4 @@
-// Local dependencies
-const addUserInformation = require('./add-user-information')
+import addUserInformation from './add-user-information'
 
 describe('Put keycloak header information into session', () => {
   let req

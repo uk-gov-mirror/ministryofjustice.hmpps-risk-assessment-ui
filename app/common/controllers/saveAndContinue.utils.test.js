@@ -1,4 +1,4 @@
-const { withAnswersFrom } = require('./saveAndContinue.utils')
+import { withAnswersFrom } from './saveAndContinue.utils'
 
 const fields = [
   ['text-area-field', { questionCode: 'text-area-field', answerType: 'textarea' }],

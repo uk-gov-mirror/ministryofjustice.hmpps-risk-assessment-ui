@@ -1,14 +1,13 @@
-const nunjucks = require('nunjucks')
-const { S3 } = require('../../../common/data/aws/s3')
-const { getOffenderData, getEpisode } = require('../../../common/data/hmppsAssessmentApi')
-const { getApiToken } = require('../../../common/data/oauth')
-const { createDocumentId } = require('../../../common/utils/util')
-const { withAnswersFrom, answersByQuestionCode } = require('../../common/controllers/saveAndContinue.utils')
-const { fields } = require('../fields')
-const { getRegistrations, getRoshRiskSummary } = require('./common.utils')
-
-const { convertHtmlToPdf } = require('../../../common/data/pdf')
-const { logger } = require('../../../common/logging/logger')
+import { render } from 'nunjucks'
+import { S3 } from '../../../common/data/aws/s3'
+import { getOffenderData, getEpisode } from '../../../common/data/hmppsAssessmentApi'
+import { getApiToken } from '../../../common/data/oauth'
+import { createDocumentId } from '../../../common/utils/util'
+import { withAnswersFrom, answersByQuestionCode } from '../../common/controllers/saveAndContinue.utils'
+import { fields } from '../fields'
+import { getRegistrations, getRoshRiskSummary } from './common.utils'
+import { convertHtmlToPdf } from '../../../common/data/pdf'
+import logger from '../../../common/logging/logger'
 
 const fetchWidgetData = async (crn, eventId, token) => {
   const deliusRegistrations = await getRegistrations(crn, eventId, { token })
@@ -60,7 +59,7 @@ const streamDocumentResponse = (res, document) => {
 }
 
 const generatePdf = (res) => async (templateData) => {
-  const rendered = nunjucks.render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
+  const rendered = render('app/upw/templates/pdf-preview-and-declaration/pdf.njk', {
     ...templateData,
     cssPath: 'application.min.css',
   })
@@ -74,7 +73,8 @@ const generatePdf = (res) => async (templateData) => {
   return res.status(500).send()
 }
 
-const downloadUpwPdf = async (req, res, next) => {
+// eslint-disable-next-line import/prefer-default-export
+export const downloadUpwPdf = async (req, res, next) => {
   try {
     const { episodeId } = req.params
     logger.info(`Fetching PDF for episode: ${episodeId}`)
@@ -99,8 +99,4 @@ const downloadUpwPdf = async (req, res, next) => {
   } catch (e) {
     return next(e)
   }
-}
-
-module.exports = {
-  downloadUpwPdf,
 }

@@ -1,4 +1,4 @@
-const SaveAndContinue = require('./saveAndContinue')
+const SaveAndContinue = require('./saveAndContinue').default
 
 class PreviewPdf extends SaveAndContinue {}
 

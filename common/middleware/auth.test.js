@@ -1,13 +1,23 @@
-const refresh = require('passport-oauth2-refresh')
-const passport = require('passport')
-const { jwtDecode } = require('jwt-decode')
-const { UnauthorizedError } = require('express-jwt')
-const auth = require('./auth')
-const { checkTokenIsActive, getUserEmail, getApiToken } = require('../data/oauth')
-const { cacheUserDetails, getCachedUserDetails, getAndCacheUserDetails } = require('../data/userDetailsCache')
-const User = require('../models/user')
-const authUser = require('./testSupportFiles/user_token.json')
-const { clientHasRole, apiErrorHandler } = require('./auth')
+import { jest } from '@jest/globals'
+import { requestNewAccessToken } from 'passport-oauth2-refresh'
+import { authenticate, serializeUser, deserializeUser } from 'passport'
+import { jwtDecode } from 'jwt-decode'
+import { UnauthorizedError } from 'express-jwt'
+import {
+  tokenVerifier as _tokenVerifier,
+  checkUserIsAuthenticated as _checkUserIsAuthenticated,
+  userHasExpiredToken,
+  checkForTokenRefresh,
+  handleLoginCallback as _handleLoginCallback,
+  handleLogout as _handleLogout,
+  generateBasicAuthToken,
+  clientHasRole,
+  apiErrorHandler,
+} from './auth'
+import { checkTokenIsActive, getUserEmail, getApiToken } from '../data/oauth'
+import { cacheUserDetails, getCachedUserDetails, getAndCacheUserDetails } from '../data/userDetailsCache'
+import { from } from '../models/user'
+import authUser from './testSupportFiles/user_token.json'
 
 jest.mock('passport-oauth2-refresh')
 jest.mock('passport')
@@ -34,7 +44,7 @@ describe('Auth', () => {
 
   describe('tokenVerifier', () => {
     const baseRequest = {
-      user: User.from({
+      user: from({
         token: 'TOKEN',
       }),
     }
@@ -44,13 +54,13 @@ describe('Auth', () => {
     it('returns true if the token is active', async () => {
       const req = { ...baseRequest }
       checkTokenIsActive.mockResolvedValue(true)
-      const result = await auth.tokenVerifier(req, true)
+      const result = await _tokenVerifier(req, true)
       expect(result).toBe(true)
     })
 
     it('returns true if the token has already been verified', async () => {
       const req = { ...baseRequest, verified: true }
-      const result = await auth.tokenVerifier(req, true)
+      const result = await _tokenVerifier(req, true)
       expect(result).toBe(true)
       expect(checkTokenIsActive).not.toHaveBeenCalled()
     })
@@ -58,13 +68,13 @@ describe('Auth', () => {
     it('returns false if the token is inactive', async () => {
       const req = { ...baseRequest }
       checkTokenIsActive.mockResolvedValue(false)
-      const result = await auth.tokenVerifier(req, true)
+      const result = await _tokenVerifier(req, true)
       expect(result).toBe(false)
     })
 
     it('returns true if verification is turned off in configuration', async () => {
       const req = { ...baseRequest }
-      const result = await auth.tokenVerifier(req, false)
+      const result = await _tokenVerifier(req, false)
       expect(result).toBe(true)
       expect(checkTokenIsActive).not.toHaveBeenCalled()
     })
@@ -81,7 +91,7 @@ describe('Auth', () => {
     }
     const next = jest.fn()
     const tokenVerifier = jest.fn()
-    const checkUserIsAuthenticated = auth.checkUserIsAuthenticated(tokenVerifier)
+    const checkUserIsAuthenticated = _checkUserIsAuthenticated(tokenVerifier)
 
     beforeEach(() => {
       req.isAuthenticated.mockReset()
@@ -126,7 +136,7 @@ describe('Auth', () => {
       const now = Date.now()
       const expiry = now - 60
 
-      const isExpired = auth.userHasExpiredToken(expiry, now)
+      const isExpired = userHasExpiredToken(expiry, now)
 
       expect(isExpired).toBe(true)
     })
@@ -135,7 +145,7 @@ describe('Auth', () => {
       const now = Date.now()
       const expiry = now
 
-      const isExpired = auth.userHasExpiredToken(expiry, now)
+      const isExpired = userHasExpiredToken(expiry, now)
 
       expect(isExpired).toBe(true)
     })
@@ -144,7 +154,7 @@ describe('Auth', () => {
       const now = Date.now()
       const expiry = now + 60
 
-      const isExpired = auth.userHasExpiredToken(expiry, now)
+      const isExpired = userHasExpiredToken(expiry, now)
 
       expect(isExpired).toBe(false)
     })
@@ -156,7 +166,7 @@ describe('Auth', () => {
 
     beforeEach(() => {
       next.mockReset()
-      refresh.requestNewAccessToken.mockReset()
+      requestNewAccessToken.mockReset()
       jest.useFakeTimers()
     })
 
@@ -169,7 +179,7 @@ describe('Auth', () => {
       const expiry = now - 60
 
       const req = {
-        user: User.from({
+        user: from({
           username: 'Test User',
           refreshToken: 'REFRESH_TOKEN',
           tokenExpiryTime: expiry,
@@ -181,13 +191,13 @@ describe('Auth', () => {
         },
       }
 
-      refresh.requestNewAccessToken.mockImplementation((strategy, refreshToken, cb) => {
+      requestNewAccessToken.mockImplementation((strategy, refreshToken, cb) => {
         expect(strategy).toEqual('oauth2')
         expect(refreshToken).toEqual('REFRESH_TOKEN')
         cb(null, 'ACCESS_TOKEN', 'NEW_REFRESH_TOKEN')
       })
 
-      auth.checkForTokenRefresh(req, res, () => {
+      checkForTokenRefresh(req, res, () => {
         expect(req.user.refreshToken).toEqual('NEW_REFRESH_TOKEN')
         expect(req.session.save).toHaveBeenCalled()
 
@@ -200,26 +210,26 @@ describe('Auth', () => {
       const expiry = now + 60
 
       const req = {
-        user: User.from({
+        user: from({
           tokenExpiryTime: expiry,
         }),
       }
 
-      auth.checkForTokenRefresh(req, res, next)
-      expect(refresh.requestNewAccessToken).not.toHaveBeenCalled()
+      checkForTokenRefresh(req, res, next)
+      expect(requestNewAccessToken).not.toHaveBeenCalled()
       expect(next).toHaveBeenCalled()
     })
 
     it('does nothing when there is no user', () => {
       const req = {}
-      auth.checkForTokenRefresh(req, res, next)
-      expect(refresh.requestNewAccessToken).not.toHaveBeenCalled()
+      checkForTokenRefresh(req, res, next)
+      expect(requestNewAccessToken).not.toHaveBeenCalled()
       expect(next).toHaveBeenCalled()
     })
   })
 
   describe('handleLoginCallback', () => {
-    const handleLoginCallback = auth.handleLoginCallback()
+    const handleLoginCallback = _handleLoginCallback()
     const req = {
       session: {
         returnUrl: '/',
@@ -229,12 +239,12 @@ describe('Auth', () => {
     const next = jest.fn()
 
     const mockPassportAuthenticateMiddleware = jest.fn()
-    passport.authenticate.mockImplementation(() => mockPassportAuthenticateMiddleware)
+    authenticate.mockImplementation(() => mockPassportAuthenticateMiddleware)
 
     it('calls the passport authenticate middleware', () => {
       handleLoginCallback(req, res, next)
 
-      expect(passport.authenticate).toHaveBeenCalledWith('oauth2', {
+      expect(authenticate).toHaveBeenCalledWith('oauth2', {
         successReturnToOrRedirect: req.session.returnUrl,
         failureRedirect: '/login',
       })
@@ -244,7 +254,7 @@ describe('Auth', () => {
   })
 
   describe('handleLogout', () => {
-    const handleLogout = auth.handleLogout()
+    const handleLogout = _handleLogout()
     const baseRequest = {
       logout: jest.fn(),
       session: {
@@ -264,7 +274,7 @@ describe('Auth', () => {
     })
 
     it('logs the user out and redirects if signed in', () => {
-      const req = { ...baseRequest, user: User.from({ username: 'Test User' }) }
+      const req = { ...baseRequest, user: from({ username: 'Test User' }) }
 
       handleLogout(req, res)
 
@@ -285,7 +295,7 @@ describe('Auth', () => {
 
   describe('generateBasicAuthToken', () => {
     it('generates a basic auth token', () => {
-      const authToken = auth.generateBasicAuthToken('clientId', 'clientSecret')
+      const authToken = generateBasicAuthToken('clientId', 'clientSecret')
       expect(authToken).toEqual('Basic Y2xpZW50SWQ6Y2xpZW50U2VjcmV0')
     })
   })
@@ -293,15 +303,15 @@ describe('Auth', () => {
   describe('serializer', () => {
     it('sets the user serializer', async () => {
       const req = {}
-      expect(passport.serializeUser).toHaveBeenCalledTimes(1)
-      const [serializer] = passport.serializeUser.mock.calls[0]
+      expect(serializeUser).toHaveBeenCalledTimes(1)
+      const [serializer] = serializeUser.mock.calls[0]
       expect(typeof serializer).toBe('function')
 
       getUserEmail.mockResolvedValue('foo@bar.baz')
       getApiToken.mockResolvedValue('BAR_TOKEN')
       const callback = jest.fn()
 
-      await serializer(req, User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
+      await serializer(req, from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
 
       // Persist the user token to the session
       expect(callback).toHaveBeenCalledWith(null, { id: 1, token: 'FOO_TOKEN' })
@@ -310,13 +320,13 @@ describe('Auth', () => {
     it('does not get OASys details for standalone assessments', async () => {
       const req = {}
 
-      expect(passport.serializeUser).toHaveBeenCalledTimes(1)
-      const [serializer] = passport.serializeUser.mock.calls[0]
+      expect(serializeUser).toHaveBeenCalledTimes(1)
+      const [serializer] = serializeUser.mock.calls[0]
       expect(typeof serializer).toBe('function')
 
       const callback = jest.fn()
 
-      await serializer(req, User.from(authUser), callback)
+      await serializer(req, from(authUser), callback)
 
       const userDetails = jwtDecode(authUser)
       expect(cacheUserDetails).toHaveBeenCalledWith(userDetails)
@@ -327,8 +337,8 @@ describe('Auth', () => {
 
     it('does not fetch the user email if it already exists', async () => {
       const req = {}
-      expect(passport.serializeUser).toHaveBeenCalledTimes(1)
-      const [serializer] = passport.serializeUser.mock.calls[0]
+      expect(serializeUser).toHaveBeenCalledTimes(1)
+      const [serializer] = serializeUser.mock.calls[0]
       expect(typeof serializer).toBe('function')
 
       getUserEmail.mockResolvedValue('foo@bar.baz')
@@ -336,7 +346,7 @@ describe('Auth', () => {
 
       await serializer(
         req,
-        User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }).withDetails({ email: 'foo@bar.baz' }),
+        from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }).withDetails({ email: 'foo@bar.baz' }),
         callback,
       )
 
@@ -345,14 +355,14 @@ describe('Auth', () => {
 
     it('passes errors to the callback', async () => {
       const req = {}
-      expect(passport.serializeUser).toHaveBeenCalledTimes(1)
-      const [serializer] = passport.serializeUser.mock.calls[0]
+      expect(serializeUser).toHaveBeenCalledTimes(1)
+      const [serializer] = serializeUser.mock.calls[0]
       expect(typeof serializer).toBe('function')
 
       cacheUserDetails.mockRejectedValue('💥')
       const callback = jest.fn()
 
-      await serializer(req, User.from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
+      await serializer(req, from({ id: 1, token: 'FOO_TOKEN', username: 'Foo' }), callback)
 
       expect(callback).toHaveBeenCalledWith('💥')
     })
@@ -361,8 +371,8 @@ describe('Auth', () => {
   describe('deserializer', () => {
     it('sets the passport deserializer', async () => {
       const req = {}
-      expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
-      const [deserializer] = passport.deserializeUser.mock.calls[0]
+      expect(deserializeUser).toHaveBeenCalledTimes(1)
+      const [deserializer] = deserializeUser.mock.calls[0]
       expect(typeof deserializer).toBe('function')
 
       getCachedUserDetails.mockResolvedValue(
@@ -377,7 +387,7 @@ describe('Auth', () => {
 
       await deserializer(
         req,
-        User.from({
+        from({
           id: 1,
           token: 'FOO_TOKEN',
           username: 'FBAR',
@@ -404,14 +414,14 @@ describe('Auth', () => {
 
     it('passes errors to the callback', async () => {
       const req = {}
-      expect(passport.deserializeUser).toHaveBeenCalledTimes(1)
-      const [deserializer] = passport.deserializeUser.mock.calls[0]
+      expect(deserializeUser).toHaveBeenCalledTimes(1)
+      const [deserializer] = deserializeUser.mock.calls[0]
       expect(typeof deserializer).toBe('function')
 
       getCachedUserDetails.mockRejectedValue('💥')
       const callback = jest.fn()
 
-      await deserializer(req, User.from({ id: 1, token: 'FOO_TOKEN' }), callback)
+      await deserializer(req, from({ id: 1, token: 'FOO_TOKEN' }), callback)
 
       expect(callback).toHaveBeenCalledWith('💥')
     })

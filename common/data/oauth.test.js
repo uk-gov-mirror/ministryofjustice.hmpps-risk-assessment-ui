@@ -1,7 +1,8 @@
-const nock = require('nock')
-const { AuthenticationError } = require('../utils/errors')
-const { getApiToken, getUserEmail, checkTokenIsActive } = require('./oauth')
-const redis = require('./redis')
+import { jest } from '@jest/globals'
+import nock, { abortPendingRequests, cleanAll } from 'nock'
+import { AuthenticationError } from '../utils/errors'
+import { getApiToken, getUserEmail, checkTokenIsActive } from './oauth'
+import { get as _get } from './redis'
 
 jest.mock('../config', () => ({
   applicationInsights: { disabled: true },
@@ -25,8 +26,8 @@ describe('Oauth', () => {
   })
 
   afterEach(() => {
-    nock.abortPendingRequests()
-    nock.cleanAll()
+    abortPendingRequests()
+    cleanAll()
   })
 
   describe('checkTokenIsActive', () => {
@@ -73,7 +74,7 @@ describe('Oauth', () => {
         .matchHeader('authorization', 'Basic Zm9vOmJhcg==')
         .reply(200, { access_token: 'FOO_TOKEN', expires_in: 12345 })
 
-      redis.get.mockResolvedValue('CACHED_TOKEN')
+      _get.mockResolvedValue('CACHED_TOKEN')
 
       const token = await getApiToken()
       expect(token).toEqual('CACHED_TOKEN')
@@ -85,7 +86,7 @@ describe('Oauth', () => {
         .matchHeader('authorization', 'Basic Zm9vOmJhcg==')
         .reply(200, { access_token: 'FOO_TOKEN', expires_in: 12345 })
 
-      redis.get.mockResolvedValue()
+      _get.mockResolvedValue()
 
       const token = await getApiToken()
       expect(token).toEqual('FOO_TOKEN')

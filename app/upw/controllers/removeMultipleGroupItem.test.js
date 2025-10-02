@@ -1,6 +1,7 @@
-const DeleteItemController = require('./removeMultipleGroupItem')
-const { getAnswers, postAnswers } = require('../../../common/data/hmppsAssessmentApi')
-const { CACHE } = require('../../../common/utils/constants')
+import { jest } from '@jest/globals'
+import DeleteItemController from './removeMultipleGroupItem'
+import { getAnswers, postAnswers } from '../../../common/data/hmppsAssessmentApi'
+import { CACHE } from '../../../common/utils/constants'
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 

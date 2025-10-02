@@ -50,4 +50,4 @@ const headerHtml = `
     </div>
 <div style="${dividerStyle}"></div>`
 
-module.exports = { headerHtml, footerHtml, pdfOptions }
+export default { headerHtml, footerHtml, pdfOptions }

@@ -1,4 +1,4 @@
-const deleteSaveAndContinue = require('./removeMultipleGroupItem')
+const deleteSaveAndContinue = require('./removeMultipleGroupItem').default
 
 class SaveAndContinue extends deleteSaveAndContinue {
   async locals(req, res, next) {

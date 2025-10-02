@@ -1,30 +1,33 @@
-const superagent = require('superagent')
-const fs = require('fs')
+import superagent from 'superagent'
+import { readFileSync } from 'fs'
+import * as config from '../config'
+import logger from '../logging/logger'
+import printPdfHeaderFooter from '../../app/upw/templates/pdf-preview-and-declaration/components/print-pdf-header-footer'
 
 const {
   headerHtml,
   footerHtml,
   pdfOptions: { marginTop, marginRight, marginBottom, marginLeft },
-} = require('../../app/upw/templates/pdf-preview-and-declaration/components/print-pdf-header-footer')
+} = printPdfHeaderFooter
 
 const {
   apis: {
     pdfConverter: { url },
   },
-} = require('../config')
-const logger = require('../logging/logger')
+} = config
 
-const convertHtmlToPdf = async (renderedHtml) => {
+// eslint-disable-next-line import/prefer-default-export
+export const convertHtmlToPdf = async (renderedHtml) => {
   try {
     const request = superagent
       .post(url)
       .accept('application/json')
       .attach('files', Buffer.from(renderedHtml), 'index.html')
-      .attach('files', fs.readFileSync('dist/stylesheets/application.min.css'), 'application.min.css')
-      .attach('files', fs.readFileSync('dist/images/community-payback-logo.jpg'), 'community-payback-logo.jpg')
+      .attach('files', readFileSync('dist/stylesheets/application.min.css'), 'application.min.css')
+      .attach('files', readFileSync('dist/images/community-payback-logo.jpg'), 'community-payback-logo.jpg')
       .attach(
         'files',
-        fs.readFileSync('dist/images/HMPPS_Lesser_Arms_Stacked_Black.png'),
+        readFileSync('dist/images/HMPPS_Lesser_Arms_Stacked_Black.png'),
         'HMPPS_Lesser_Arms_Stacked_Black.png',
       )
       .responseType('blob')
@@ -46,8 +49,4 @@ const convertHtmlToPdf = async (renderedHtml) => {
     logger.error(`Failed to convert HTML to PDF, status: ${status}`)
     return { ok: false, response, status }
   }
-}
-
-module.exports = {
-  convertHtmlToPdf,
 }

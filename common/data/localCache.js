@@ -1,6 +1,6 @@
-const { logger } = require('../logging/logger')
-const { REFRESH_TOKEN_LIFETIME_SECONDS } = require('../utils/constants')
-const redis = require('./redis')
+import logger from '../logging/logger'
+import { REFRESH_TOKEN_LIFETIME_SECONDS } from '../utils/constants'
+import { get, set } from './redis'
 
 const LOCAL_CACHE = 'localCache'
 
@@ -17,23 +17,15 @@ const applyBackendBusinessRules = (answers) => {
 }
 
 // Simple mock for how the backend API handles answer updates
-const mockPostAnswers = async (updatedAnswers) => {
+// eslint-disable-next-line import/prefer-default-export
+export const mockPostAnswers = async (updatedAnswers) => {
   try {
-    const previousAnswers = (await redis.get(LOCAL_CACHE)) || '{}'
+    const previousAnswers = (await get(LOCAL_CACHE)) || '{}'
     const answers = { ...JSON.parse(previousAnswers), ...updatedAnswers.answers }
-    await redis.set(
-      LOCAL_CACHE,
-      JSON.stringify(applyBackendBusinessRules(answers)),
-      'EX',
-      REFRESH_TOKEN_LIFETIME_SECONDS,
-    )
+    await set(LOCAL_CACHE, JSON.stringify(applyBackendBusinessRules(answers)), 'EX', REFRESH_TOKEN_LIFETIME_SECONDS)
     return [true, { answers }]
   } catch (e) {
     logger.info(e)
     return [false, { status: 500 }]
   }
-}
-
-module.exports = {
-  mockPostAnswers,
 }

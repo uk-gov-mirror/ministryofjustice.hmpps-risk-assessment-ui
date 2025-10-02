@@ -1,5 +1,5 @@
 // eslint-disable-next-line max-classes-per-file
-class AuthenticationError extends Error {
+export class AuthenticationError extends Error {
   constructor(message, ...params) {
     super(...params)
 
@@ -13,7 +13,7 @@ class AuthenticationError extends Error {
   }
 }
 
-class ServerError extends Error {
+export class ServerError extends Error {
   constructor(message, ...params) {
     super(...params)
 
@@ -26,7 +26,7 @@ class ServerError extends Error {
   }
 }
 
-class ForbiddenError extends Error {
+export class ForbiddenError extends Error {
   constructor(message, ...params) {
     super(...params)
 
@@ -37,10 +37,4 @@ class ForbiddenError extends Error {
     this.name = 'ForbiddenError'
     this.message = message || 'Forbidden'
   }
-}
-
-module.exports = {
-  AuthenticationError,
-  ServerError,
-  ForbiddenError,
 }

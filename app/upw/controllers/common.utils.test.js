@@ -1,11 +1,12 @@
-const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
-const {
+import { jest } from '@jest/globals'
+import { getRegistrationsForCrn, getRoshRiskSummaryForCrn } from '../../../common/data/hmppsAssessmentApi'
+import {
   getRegistrations,
   getRoshRiskSummary,
   isModernSlaveryVictim,
   isModernSlaveryPerpetrator,
   hasBothModernSlaveryFlags,
-} = require('./common.utils')
+} from './common.utils'
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 

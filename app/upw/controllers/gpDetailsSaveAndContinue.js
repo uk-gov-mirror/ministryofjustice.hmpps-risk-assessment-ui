@@ -1,5 +1,5 @@
-const { CACHE } = require('../../../common/utils/constants')
-const upwSaveAndContinue = require('./saveAndContinue')
+const { CACHE } = require('../../../common/utils/constants').default
+const upwSaveAndContinue = require('./saveAndContinue').default
 
 const checkGpDetails = function range(gpDetailsDeclined, gpDetails, gpDetailsComplete) {
   if (gpDetailsComplete !== 'YES') return true

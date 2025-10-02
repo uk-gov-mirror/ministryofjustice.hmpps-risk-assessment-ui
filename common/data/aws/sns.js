@@ -1,6 +1,6 @@
 const { SNS: SNSClient, PublishCommand } = require('@aws-sdk/client-sns')
 const config = require('../../config')
-const logger = require('../../logging/logger')
+const logger = require('../../logging/logger').default
 
 class SNS {
   constructor() {

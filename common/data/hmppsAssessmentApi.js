@@ -1,62 +1,64 @@
-const superagent = require('superagent')
-const logger = require('../logging/logger')
-const { getCorrelationId } = require('../utils/util')
-const { ServerError, ForbiddenError } = require('../utils/errors')
+import superagent from 'superagent'
+import logger from '../logging/logger'
+import { getCorrelationId } from '../utils/util'
+import { ServerError, ForbiddenError } from '../utils/errors'
+import * as config from '../config'
+import { mockPostAnswers } from './localCache'
+
 const {
   apis: {
     hmppsAssessments: { timeout, url },
   },
   dev: { useLocalCache },
-} = require('../config')
-const { mockPostAnswers } = require('./localCache')
+} = config
 
-const getOffenderAndOffenceDetails = (crn, eventId, authorisationToken) => {
+export const getOffenderAndOffenceDetails = (crn, eventId, authorisationToken) => {
   const path = `${url}/offender/crn/${crn}/eventId/${eventId}`
 
   return getData(path, authorisationToken)
 }
 
-const startAssessment = (assessmentDto, authorisationToken) => {
+export const startAssessment = (assessmentDto, authorisationToken) => {
   const path = `${url}/assessments`
   return postData(path, authorisationToken, assessmentDto)
 }
 
-const getOffenderData = (uuid, authorisationToken) => {
+export const getOffenderData = (uuid, authorisationToken) => {
   const path = `${url}/assessments/${uuid}/subject`
   return getData(path, authorisationToken)
 }
 
-const getQuestionsForAssessmentType = (assessmentCode, authorisationToken) => {
+export const getQuestionsForAssessmentType = (assessmentCode, authorisationToken) => {
   const path = `${url}/assessments/${assessmentCode}/questions`
   return getData(path, authorisationToken)
 }
 
-const getAnswers = (assessmentId, episodeId, authorisationToken) => {
+export const getAnswers = (assessmentId, episodeId, authorisationToken) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}`
   return getData(path, authorisationToken)
 }
 
-const getEpisode = (episodeId, authorisationToken) => {
+export const getEpisode = (episodeId, authorisationToken) => {
   const path = `${url}/episode/${episodeId}`
   return getData(path, authorisationToken)
 }
 
-const getCurrentEpisode = (assessmentId, authorisationToken) => {
+export const getCurrentEpisode = (assessmentId, authorisationToken) => {
   const path = `${url}/assessments/${assessmentId}/episodes/current`
   return getData(path, authorisationToken)
 }
 
-const getCurrentEpisodeForCrn = (crn, authorisationToken) => {
+export const getCurrentEpisodeForCrn = (crn, authorisationToken) => {
   const path = `${url}/assessments/subject/${crn}/episodes/current`
   return getData(path, authorisationToken)
 }
 
-const postCompleteAssessmentEpisode = (assessmentId, episodeId, authorisationToken) => {
+export const postCompleteAssessmentEpisode = (assessmentId, episodeId, authorisationToken) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/complete`
   return postData(path, authorisationToken)
 }
 
-const postAnswers = (assessmentId, episodeId, answers, authorisationToken) => {
+export const postAnswers = (assessmentId, episodeId, answers, authorisationToken) => {
   if (useLocalCache) {
     return mockPostAnswers(answers)
   }
@@ -66,14 +68,14 @@ const postAnswers = (assessmentId, episodeId, answers, authorisationToken) => {
   return postData(path, authorisationToken, answers)
 }
 
-const closeAssessment = (assessmentId, episodeId, user) => {
+export const closeAssessment = (assessmentId, episodeId, user) => {
   const path = `${url}/assessments/${assessmentId}/episodes/${episodeId}/close`
 
   logger.info(`Calling hmppsAssessments API with GET: ${path}`)
   return action(superagent.get(path), user?.token)
 }
 
-const getRegistrationsForCrn = async (crn, eventId, authorisationToken) => {
+export const getRegistrationsForCrn = async (crn, eventId, authorisationToken) => {
   const endpoint = `${url}/assessments/${crn}/event/${eventId}/registrations`
 
   logger.info(`Calling hmppsAssessments API with GET: ${endpoint}`)
@@ -92,7 +94,7 @@ const getRegistrationsForCrn = async (crn, eventId, authorisationToken) => {
   }
 }
 
-const getRoshRiskSummaryForCrn = async (crn, user) => {
+export const getRoshRiskSummaryForCrn = async (crn, user) => {
   const endpoint = `${url}/assessments/${crn}/ROSH/summary`
 
   if (user.token === undefined) {
@@ -169,20 +171,4 @@ const logError = (error) => {
     url: error.response?.req?.url,
     text: error.response?.text,
   })
-}
-
-module.exports = {
-  startAssessment,
-  getOffenderData,
-  getAnswers,
-  getEpisode,
-  postAnswers,
-  getQuestionsForAssessmentType,
-  getCurrentEpisode,
-  getCurrentEpisodeForCrn,
-  getRegistrationsForCrn,
-  getRoshRiskSummaryForCrn,
-  closeAssessment,
-  getOffenderAndOffenceDetails,
-  postCompleteAssessmentEpisode,
 }

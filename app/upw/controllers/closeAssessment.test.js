@@ -1,7 +1,7 @@
-const { Controller } = require('hmpo-form-wizard')
-
-const CloseAssessmentController = require('./closeAssessment')
-const hmppsAssessmentsApiClient = require('../../../common/data/hmppsAssessmentApi')
+import { jest } from '@jest/globals'
+import { Controller } from 'hmpo-form-wizard'
+import CloseAssessmentController from './closeAssessment'
+import { closeAssessment } from '../../../common/data/hmppsAssessmentApi'
 
 jest.mock('../../../common/data/hmppsAssessmentApi')
 jest.mock('../../../common/utils/util', () => ({
@@ -81,22 +81,22 @@ describe('CloseAssessmentController', () => {
       req.form.options.fields = {}
       req.form.options.allFields = {}
       next.mockReset()
-      hmppsAssessmentsApiClient.closeAssessment.mockReset()
+      closeAssessment.mockReset()
       superMethod.mockReset()
       req.session.save.mockReset()
     })
 
     it('closes an assessment', async () => {
-      hmppsAssessmentsApiClient.closeAssessment.mockResolvedValue([true])
+      closeAssessment.mockResolvedValue([true])
 
       await controller.render(req, res, next)
 
-      expect(hmppsAssessmentsApiClient.closeAssessment).toHaveBeenCalledWith(assessmentUuid, episodeUuid, user)
+      expect(closeAssessment).toHaveBeenCalledWith(assessmentUuid, episodeUuid, user)
       expect(superMethod).toHaveBeenCalled()
     })
 
     it('removes the assessment from session', async () => {
-      hmppsAssessmentsApiClient.closeAssessment.mockResolvedValue([true])
+      closeAssessment.mockResolvedValue([true])
 
       await controller.render(req, res, next)
 
@@ -106,7 +106,7 @@ describe('CloseAssessmentController', () => {
     })
 
     it('passes an error to the error handler when unable to close the assessment', async () => {
-      hmppsAssessmentsApiClient.closeAssessment.mockResolvedValue([false])
+      closeAssessment.mockResolvedValue([false])
 
       await controller.render(req, res, next)
 

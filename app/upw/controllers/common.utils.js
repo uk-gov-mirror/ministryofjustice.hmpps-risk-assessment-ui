@@ -1,6 +1,6 @@
-const { getRegistrationsForCrn, getRoshRiskSummaryForCrn } = require('../../../common/data/hmppsAssessmentApi')
-const logger = require('../../../common/logging/logger')
-const { prettyDate } = require('../../../common/utils/util')
+import { getRegistrationsForCrn, getRoshRiskSummaryForCrn } from '../../../common/data/hmppsAssessmentApi'
+import logger from '../../../common/logging/logger'
+import { prettyDate } from '../../../common/utils/util'
 
 const whereStringNotNull = (s) => s !== null
 
@@ -30,7 +30,7 @@ const formatMappaResponse = (mappaResponse = {}) => ({
   lastUpdated: prettyDate(mappaResponse?.startDate),
 })
 
-const getRegistrations = async (crn, eventId, user) => {
+export const getRegistrations = async (crn, eventId, user) => {
   try {
     const { response, status } = await getRegistrationsForCrn(crn, eventId, user?.token)
 
@@ -58,7 +58,7 @@ const getRegistrations = async (crn, eventId, user) => {
   }
 }
 
-const getRoshRiskSummary = async (crn, user) => {
+export const getRoshRiskSummary = async (crn, user) => {
   try {
     const { response, status } = await getRoshRiskSummaryForCrn(crn, user)
 
@@ -91,15 +91,7 @@ const getRoshRiskSummary = async (crn, user) => {
 const hasRiskFlags = (flags = [], requiredCodes = []) =>
   flags.filter(({ code }) => requiredCodes.includes(code)).length > 0
 
-const hasBothModernSlaveryFlags = (riskFlags) =>
+export const hasBothModernSlaveryFlags = (riskFlags) =>
   isModernSlaveryPerpetrator(riskFlags) && isModernSlaveryVictim(riskFlags)
-const isModernSlaveryVictim = (riskFlags) => hasRiskFlags(riskFlags, ['MSV'])
-const isModernSlaveryPerpetrator = (riskFlags) => hasRiskFlags(riskFlags, ['MSP'])
-
-module.exports = {
-  getRegistrations,
-  getRoshRiskSummary,
-  hasBothModernSlaveryFlags,
-  isModernSlaveryVictim,
-  isModernSlaveryPerpetrator,
-}
+export const isModernSlaveryVictim = (riskFlags) => hasRiskFlags(riskFlags, ['MSV'])
+export const isModernSlaveryPerpetrator = (riskFlags) => hasRiskFlags(riskFlags, ['MSP'])
