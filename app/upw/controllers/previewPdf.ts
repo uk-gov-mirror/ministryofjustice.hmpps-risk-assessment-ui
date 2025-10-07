@@ -1,5 +1,3 @@
-const SaveAndContinue = require('./saveAndContinue').default
+import SaveAndContinue from './saveAndContinue'
 
-class PreviewPdf extends SaveAndContinue {}
-
-module.exports = PreviewPdf
+export default class PreviewPdf extends SaveAndContinue {}

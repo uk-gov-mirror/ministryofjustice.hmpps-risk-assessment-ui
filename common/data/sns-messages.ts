@@ -1,7 +1,7 @@
-const { DateTime } = require('luxon')
-const config = require('../config')
+import { DateTime } from 'luxon'
+import config from '../config'
 
-const upwComplete = (episodeUuid, crn, eventId) => ({
+export const upwComplete = (episodeUuid, crn, eventId) => ({
   eventType: 'unpaid-work.assessment.completed',
   version: '2',
   description: 'UPW Assessment Completed',
@@ -20,7 +20,3 @@ const upwComplete = (episodeUuid, crn, eventId) => ({
     ],
   },
 })
-
-module.exports = {
-  upwComplete,
-}

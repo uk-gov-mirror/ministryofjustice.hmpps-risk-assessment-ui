@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import nock from 'nock'
 import { getCorrelationId } from '../utils/util'
 import { getOffenderData, postAnswers, getAnswers } from './hmppsAssessmentApi'

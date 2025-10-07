@@ -1,9 +1,9 @@
-const passport = require('passport')
-const { sanitise } = require('../common/middleware/sanitise')
+import passport from 'passport'
+import { sanitise } from '../common/middleware/sanitise'
 
-const addUserToLocals = require('../common/middleware/add-user-information').default
+import addUserToLocals from '../common/middleware/add-user-information'
 
-const {
+import {
   checkUserIsAuthenticated,
   handleLoginCallback,
   handleLogout,
@@ -11,18 +11,17 @@ const {
   requestIsAuthenticated,
   apiErrorHandler,
   clientHasRole,
-} = require('../common/middleware/auth').default
+} from '../common/middleware/auth'
 
-const upwWorkflow = require('./upw')
+import upwWorkflow from './upw'
 
-const logger = require('../common/logging/logger').default
-const { verifyAssessment } = require('./startAssessment/get.controller').default
-const { getCorrelationId } = require('../common/utils/util').default
-const { downloadUpwPdf } = require('./upw/controllers/api').default
-const { ForbiddenError } = require('../common/utils/errors').default
+import logger from '../common/logging/logger'
+import { verifyAssessment } from './startAssessment/get.controller'
+import { getCorrelationId } from '../common/utils/util'
+import { downloadUpwPdf } from './upw/controllers/api'
+import { ForbiddenError } from '../common/utils/errors'
 
-// Export
-module.exports = (app) => {
+export default function setupRouter(app) {
   app.get('/health', (req, res, next) => {
     res.status(200).json({
       healthy: true,
@@ -58,7 +57,7 @@ module.exports = (app) => {
   app.use('*splat', sanitise())
 
   app.get(['/start-assessment', '/assessment-from-delius'], verifyAssessment)
-  app.use('/upw', upwWorkflow)
+  app.use('/upw', upwWorkflow())
 
   app.use((error, req, res, next) => {
     logger.info(`Unhandled exception received - ${error.message} ${error.stack}`)

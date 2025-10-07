@@ -8,7 +8,7 @@ import {
   yearsBetweenGreaterThan,
   noSpace,
   onePresent,
-  characterCount,
+  characterCountValidator,
 } from './validators'
 
 describe('checks numbers are in range', () => {
@@ -117,9 +117,9 @@ describe('checks if at least one of the values is present', () => {
   })
 })
 
-describe('characterCount', () => {
+describe('characterCountValidator', () => {
   it('validates the character count', () => {
-    const validator = characterCount(5)
+    const validator = characterCountValidator(5)
     expect(validator('123456')).toEqual(false)
     expect(validator('12345')).toEqual(true)
     expect(validator('1234')).toEqual(true)

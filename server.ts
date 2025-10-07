@@ -15,6 +15,8 @@ import session from 'express-session'
 import helmet from 'helmet'
 import passport from 'passport'
 import { RedisStore } from 'connect-redis'
+import minimist from 'minimist'
+import mojFiltersAll from '@ministryofjustice/frontend/moj/filters/all'
 import logger from './common/logging/logger'
 import router from './app/router'
 import noCache from './common/utils/no-cache'
@@ -55,8 +57,9 @@ import {
 import { buildNumber } from './build-info.json'
 
 // Local dependencies
-const argv = require('minimist')(process.argv.slice(2))
-const { mojDate } = require('./node_modules/@ministryofjustice/frontend/moj/filters/all')()
+
+const argv = minimist(process.argv.slice(2))
+const { mojDate } = mojFiltersAll()
 
 // Global constants
 const { static: _static } = express

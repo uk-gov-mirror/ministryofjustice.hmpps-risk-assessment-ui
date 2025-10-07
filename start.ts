@@ -1,11 +1,9 @@
 // Always load Application Insights before anything else (Needs to be before Winston for log collection to work)
-require('applicationinsights')
-
-const throng = require('throng')
-const { readFileSync, unlink, writeFileSync } = require('fs')
-const { join } = require('path')
-const logger = require('./common/logging/logger').default
-const { start: _start } = require('./server').default
+import throng from 'throng'
+import { readFileSync, unlink, writeFileSync } from 'fs'
+import { join } from 'path'
+import logger from './common/logging/logger'
+import { start as _start } from './server'
 
 const pidFile = join(__dirname, '/.start.pid')
 const fileOptions = { encoding: 'utf-8' }

@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import healthcheck from './healthcheck'
 import { serviceCheckFactory } from '../data/healthcheck'
 

@@ -1,8 +1,8 @@
-const upwSaveAndContinue = require('./saveAndContinue').default
-const { customValidationsCaringCommitments } = require('../fields').default
-const { CACHE } = require('../../../common/utils/constants').default
+import upwSaveAndContinue from './saveAndContinue'
+import { customValidationsCaringCommitments } from '../fields'
+import { CACHE } from '../../../common/utils/constants'
 
-class SaveAndContinue extends upwSaveAndContinue {
+export default class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // eslint-disable-next-line camelcase
     const { active_carer_commitments } = req.sessionModel.get(CACHE.PERSISTED_ANSWERS) || {}
@@ -12,5 +12,3 @@ class SaveAndContinue extends upwSaveAndContinue {
     super.validateFields(req, res, next)
   }
 }
-
-module.exports = SaveAndContinue

@@ -1,4 +1,4 @@
-const logger = require('../logging/logger').default
+import logger from '../logging/logger'
 
 const logRequestStart = (context) => {
   logger.debug(`Calling ${context.service}  ${context.description}-`, {

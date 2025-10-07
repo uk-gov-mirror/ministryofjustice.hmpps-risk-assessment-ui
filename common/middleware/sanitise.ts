@@ -1,4 +1,4 @@
-const sanitizeHtml = require('sanitize-html')
+import { sanitizeHtml } from 'sanitize-html'
 
 function hasOwn(object, key) {
   const keys = Reflect.ownKeys(object).filter((item) => typeof item !== 'symbol')
@@ -79,6 +79,6 @@ function middleware(options = {}) {
   }
 }
 
-module.exports = {
+export default {
   sanitise: middleware,
 }

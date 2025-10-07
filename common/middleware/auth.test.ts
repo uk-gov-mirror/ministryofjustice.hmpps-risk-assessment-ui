@@ -1,5 +1,3 @@
-import { jest } from '@jest/globals'
-
 import { UnauthorizedError } from 'express-jwt'
 import {
   tokenVerifier as _tokenVerifier,

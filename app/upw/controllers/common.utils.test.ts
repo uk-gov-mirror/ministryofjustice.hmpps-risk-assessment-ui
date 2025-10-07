@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { getRegistrationsForCrn, getRoshRiskSummaryForCrn } from '../../../common/data/hmppsAssessmentApi'
 import {
   getRegistrations,

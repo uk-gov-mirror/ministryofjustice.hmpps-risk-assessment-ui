@@ -1,11 +1,9 @@
-const deleteSaveAndContinue = require('./removeMultipleGroupItem').default
+import deleteSaveAndContinue from './removeMultipleGroupItem'
 
-class SaveAndContinue extends deleteSaveAndContinue {
+export default class SaveAndContinue extends deleteSaveAndContinue {
   async locals(req, res, next) {
     res.locals.multipleGroupName = 'emergency_contact_details'
 
     await super.locals(req, res, next)
   }
 }
-
-module.exports = SaveAndContinue

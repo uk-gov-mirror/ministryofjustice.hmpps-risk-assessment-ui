@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import DeleteItemController from './removeMultipleGroupItem'
 import { getAnswers, postAnswers } from '../../../common/data/hmppsAssessmentApi'
 import { CACHE } from '../../../common/utils/constants'

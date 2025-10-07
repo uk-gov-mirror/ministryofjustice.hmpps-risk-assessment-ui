@@ -1,6 +1,6 @@
-const appInsights = require('applicationinsights')
+import appInsights from 'applicationinsights'
 
-const trackEvent = (eventName, req = {}, customProperties = {}) => {
+export const trackEvent = (eventName, req = {}, customProperties = {}) => {
   const assessmentInfo = req.session?.assessment
 
   const client = appInsights.defaultClient
@@ -15,5 +15,3 @@ const trackEvent = (eventName, req = {}, customProperties = {}) => {
     client.trackEvent({ name: eventName, properties: { ...eventProperties } })
   }
 }
-
-module.exports = { trackEvent }

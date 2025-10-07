@@ -3,7 +3,6 @@ import { getNamespace } from 'cls-hooked'
 import { clsNamespace } from '../config'
 import { updateMDC } from '../utils/util'
 
-// eslint-disable-next-line import/prefer-default-export
 export const updateCorrelationId = ({ headers: { 'x-request-id': correlationId } }, res, next) => {
   if (correlationId) {
     const mdcNamespace = getNamespace(clsNamespace)

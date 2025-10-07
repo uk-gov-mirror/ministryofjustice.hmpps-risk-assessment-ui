@@ -1,8 +1,8 @@
-const { SNS: SNSClient, PublishCommand } = require('@aws-sdk/client-sns')
-const config = require('../../config')
-const logger = require('../../logging/logger').default
+import { SNS as SNSClient, PublishCommand } from '@aws-sdk/client-sns'
+import config from '../../config'
+import logger from '../../logging/logger'
 
-class SNS {
+export default class SNS {
   constructor() {
     const options = {
       region: 'eu-west-2',
@@ -35,8 +35,4 @@ class SNS {
         return { ok: false, error }
       })
   }
-}
-
-module.exports = {
-  SNS,
 }

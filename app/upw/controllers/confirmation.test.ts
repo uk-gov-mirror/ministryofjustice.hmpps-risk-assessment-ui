@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { Controller } from 'hmpo-form-wizard'
 import { render as _render } from 'nunjucks'
 import ConfirmationController from './confirmation'

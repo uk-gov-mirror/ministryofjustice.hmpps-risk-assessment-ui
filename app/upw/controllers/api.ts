@@ -73,7 +73,6 @@ const generatePdf = (res) => async (templateData) => {
   return res.status(500).send()
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const downloadUpwPdf = async (req, res, next) => {
   try {
     const { episodeId } = req.params

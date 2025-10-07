@@ -1,4 +1,9 @@
-import { range, noSpace, onePresent, characterCount } from '../../common/middleware/form-wizard-validators/validators'
+import {
+  range,
+  noSpace,
+  onePresent,
+  characterCountValidator,
+} from '../../common/middleware/form-wizard-validators/validators'
 
 const characterLimit = 250
 
@@ -894,7 +899,7 @@ export const fields = {
   additional_information: {
     validate: [
       {
-        fn: characterCount(characterLimit),
+        fn: characterCountValidator(characterLimit),
         message: `[Additional information must be ${characterLimit} characters or less]`,
       },
     ],

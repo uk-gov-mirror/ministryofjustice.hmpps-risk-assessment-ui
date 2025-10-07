@@ -1,21 +1,21 @@
-const StartUpwAssessment = require('./controllers/start')
-const TaskList = require('./controllers/taskList').default
-const SaveAndContinue = require('./controllers/saveAndContinue').default
-const individualsDetailsSaveAndContinue = require('./controllers/individualsDetailsSaveAndContinue')
-const editEmergencyContactsSaveAndContinue = require('./controllers/editEmergencyContactsSaveAndContinue')
-const removeEmergencyContactsSaveAndContinue = require('./controllers/removeEmergencyContactsSaveAndContinue')
-const gpDetailsSaveAndContinue = require('./controllers/gpDetailsSaveAndContinue')
-const editGpDetailsSaveAndContinue = require('./controllers/editGpDetailsSaveAndContinue')
-const removeGpDetailsSaveAndContinue = require('./controllers/removeGpDetailsSaveAndContinue')
-const Confirmation = require('./controllers/confirmation').default
-const CloseAssessment = require('./controllers/closeAssessment').default
-const editContactDetailsSaveAndContinue = require('./controllers/editContactDetailsSaveAndContinue')
-const PreviewPdf = require('./controllers/previewPdf')
-const CaringCommitmentsController = require('./controllers/carerCommitment')
-const { ModernDaySlaveryPerpetrator } = require('./controllers/modernDaySlaveryPerpetrator').default
-const { ModernDaySlaveryVictim } = require('./controllers/modernDaySlaveryVictim').default
+import StartUpwAssessment from './controllers/start'
+import TaskList from './controllers/taskList'
+import SaveAndContinue from './controllers/saveAndContinue'
+import individualsDetailsSaveAndContinue from './controllers/individualsDetailsSaveAndContinue'
+import editEmergencyContactsSaveAndContinue from './controllers/editEmergencyContactsSaveAndContinue'
+import removeEmergencyContactsSaveAndContinue from './controllers/removeEmergencyContactsSaveAndContinue'
+import gpDetailsSaveAndContinue from './controllers/gpDetailsSaveAndContinue'
+import editGpDetailsSaveAndContinue from './controllers/editGpDetailsSaveAndContinue'
+import removeGpDetailsSaveAndContinue from './controllers/removeGpDetailsSaveAndContinue'
+import Confirmation from './controllers/confirmation'
+import CloseAssessment from './controllers/closeAssessment'
+import editContactDetailsSaveAndContinue from './controllers/editContactDetailsSaveAndContinue'
+import PreviewPdf from './controllers/previewPdf'
+import CaringCommitmentsController from './controllers/carerCommitment'
+import { ModernDaySlaveryPerpetrator } from './controllers/modernDaySlaveryPerpetrator'
+import { ModernDaySlaveryVictim } from './controllers/modernDaySlaveryVictim'
 
-module.exports = {
+export default {
   '/start': {
     pageTitle: 'Complete and download the Community payback assessment',
     controller: StartUpwAssessment,

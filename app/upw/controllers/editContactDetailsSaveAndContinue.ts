@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-const upwSaveAndContinue = require('./saveAndContinue').default
-const { customValidationsEditContactDetails } = require('../fields').default
+import upwSaveAndContinue from './saveAndContinue'
+import { customValidationsEditContactDetails } from '../fields'
 
-class SaveAndContinue extends upwSaveAndContinue {
+export default class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // getting the value of the fields we are interested in
     const {
@@ -23,5 +23,3 @@ class SaveAndContinue extends upwSaveAndContinue {
     super.validateFields(req, res, next)
   }
 }
-
-module.exports = SaveAndContinue

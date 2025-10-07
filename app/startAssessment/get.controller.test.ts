@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { getCurrentEpisodeForCrn, getOffenderAndOffenceDetails } from '../../common/data/hmppsAssessmentApi'
 import { verifyAssessment } from './get.controller'
 

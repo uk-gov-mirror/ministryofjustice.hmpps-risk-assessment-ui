@@ -15,7 +15,7 @@ const invalidateSectionCompleteAnswers = (answers, fields) => {
     .reduce((a, [key, value]) => ({ ...a, [key]: value }), {})
 }
 
-class SaveAndContinue extends BaseSaveAndContinue {
+export default class SaveAndContinue extends BaseSaveAndContinue {
   constructor(...args) {
     super(...args)
 
@@ -74,5 +74,3 @@ class SaveAndContinue extends BaseSaveAndContinue {
     super.successHandler(req, res, next)
   }
 }
-
-export default SaveAndContinue

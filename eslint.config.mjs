@@ -10,4 +10,9 @@ export default [
     ],
     extraPathsAllowingDevDependencies: ['cypress.config.js'],
   }),
+  {
+    rules: {
+      'import/prefer-default-export': 'off',
+    },
+  },
 ]

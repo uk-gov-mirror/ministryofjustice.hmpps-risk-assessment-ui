@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { configure } from 'nunjucks'
 import SaveAndContinueController from './saveAndContinue'
 import { getAnswers, postAnswers, getQuestionsForAssessmentType } from '../../../common/data/hmppsAssessmentApi'

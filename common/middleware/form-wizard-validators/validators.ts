@@ -52,8 +52,7 @@ export const noSpace = function noSpace(value) {
   return value.trim().length > 0
 }
 
-// eslint-disable-next-line func-names
-export const characterCount = function (characterLimit) {
+export const characterCountValidator = (characterLimit) => {
   return function characterCount(value) {
     return value.length <= characterLimit
   }

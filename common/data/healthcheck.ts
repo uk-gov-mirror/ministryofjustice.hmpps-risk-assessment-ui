@@ -2,7 +2,6 @@ import superagent from 'superagent'
 import Agent, { HttpsAgent } from 'agentkeepalive'
 import logger from '../logging/logger'
 
-// eslint-disable-next-line import/prefer-default-export
 export const serviceCheckFactory = (name, { url, agent }) => {
   const keepaliveAgent = url.startsWith('https') ? new HttpsAgent(agent) : new Agent(agent)
 

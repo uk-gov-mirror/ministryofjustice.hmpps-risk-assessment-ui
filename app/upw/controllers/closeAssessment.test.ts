@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { Controller } from 'hmpo-form-wizard'
 import CloseAssessmentController from './closeAssessment'
 import { closeAssessment } from '../../../common/data/hmppsAssessmentApi'

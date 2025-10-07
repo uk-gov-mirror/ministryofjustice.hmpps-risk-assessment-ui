@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import TaskList from './taskList'
 import { getTaskList } from './taskList.utils'
 import { getAnswers } from '../../../common/data/hmppsAssessmentApi'

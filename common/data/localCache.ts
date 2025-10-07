@@ -17,7 +17,6 @@ const applyBackendBusinessRules = (answers) => {
 }
 
 // Simple mock for how the backend API handles answer updates
-// eslint-disable-next-line import/prefer-default-export
 export const mockPostAnswers = async (updatedAnswers) => {
   try {
     const previousAnswers = (await get(LOCAL_CACHE)) || '{}'

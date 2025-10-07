@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import getOffenderDetails from './getOffenderDetails'
 import { getOffenderData } from '../data/hmppsAssessmentApi'
 import * as config from '../config'

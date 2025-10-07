@@ -1,6 +1,6 @@
-const upwSaveAndContinue = require('./saveAndContinue').default
+import upwSaveAndContinue from './saveAndContinue'
 
-class SaveAndContinue extends upwSaveAndContinue {
+export default class SaveAndContinue extends upwSaveAndContinue {
   async locals(req, res, next) {
     const contactToEdit = req.params.index
     res.locals.questionGroupCode = 'gp_details'
@@ -26,5 +26,3 @@ class SaveAndContinue extends upwSaveAndContinue {
     await super.saveValues(req, res, next)
   }
 }
-
-module.exports = SaveAndContinue

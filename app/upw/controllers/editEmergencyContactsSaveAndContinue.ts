@@ -1,7 +1,7 @@
-const upwSaveAndContinue = require('./saveAndContinue').default
-const { customValidationsEditEmergencyContact } = require('../fields').default
+import upwSaveAndContinue from './saveAndContinue'
+import { customValidationsEditEmergencyContact } from '../fields'
 
-class SaveAndContinue extends upwSaveAndContinue {
+export default class SaveAndContinue extends upwSaveAndContinue {
   async locals(req, res, next) {
     const contactToEdit = req.params.index
     res.locals.questionGroupCode = 'emergency_contact_details'
@@ -41,5 +41,3 @@ class SaveAndContinue extends upwSaveAndContinue {
     await super.saveValues(req, res, next)
   }
 }
-
-module.exports = SaveAndContinue

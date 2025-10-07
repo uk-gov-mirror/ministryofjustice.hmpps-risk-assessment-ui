@@ -1,5 +1,6 @@
-const { CACHE } = require('../../../common/utils/constants').default
-const upwSaveAndContinue = require('./saveAndContinue').default
+import { CACHE } from '../../../common/utils/constants'
+
+import upwSaveAndContinue from './saveAndContinue'
 
 const checkGpDetails = function range(gpDetailsDeclined, gpDetails, gpDetailsComplete) {
   if (gpDetailsComplete !== 'YES') return true
@@ -18,7 +19,7 @@ const customValidationsGpDetails = (fields, gpDetails, gpDetailsComplete) => {
   return fields
 }
 
-class SaveAndContinue extends upwSaveAndContinue {
+export default class SaveAndContinue extends upwSaveAndContinue {
   async validateFields(req, res, next) {
     // make changes to sessionModel fields to add in context specific validations
     // eslint-disable-next-line camelcase
@@ -32,5 +33,3 @@ class SaveAndContinue extends upwSaveAndContinue {
     super.validateFields(req, res, next)
   }
 }
-
-module.exports = SaveAndContinue

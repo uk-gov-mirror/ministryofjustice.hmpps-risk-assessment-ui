@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { jwtDecode } from 'jwt-decode'
 import { getCachedUserDetails, cacheUserDetails } from './userDetailsCache'
 import { get as _get, set as _set } from './redis'

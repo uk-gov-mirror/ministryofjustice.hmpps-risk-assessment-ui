@@ -16,7 +16,6 @@ const {
   },
 } = config
 
-// eslint-disable-next-line import/prefer-default-export
 export const convertHtmlToPdf = async (renderedHtml) => {
   try {
     const request = superagent
