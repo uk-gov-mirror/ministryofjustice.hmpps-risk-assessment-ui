@@ -1,5 +1,4 @@
-import { jest } from '@jest/globals'
-import { render } from 'nunjucks'
+import nunjucks from 'nunjucks'
 import { downloadUpwPdf } from './api'
 import { S3 } from '../../../common/data/aws/s3'
 import { getEpisode, getOffenderData } from '../../../common/data/hmppsAssessmentApi'
@@ -46,7 +45,7 @@ describe('UPW API', () => {
       getOffenderData.mockReset()
       getRegistrations.mockReset()
       getRoshRiskSummary.mockReset()
-      render.mockReset()
+      nunjucks.render.mockReset()
       getApiToken.mockReset()
       next.mockReset()
       mockS3ResponseBody.pipe.mockReset()
@@ -85,7 +84,7 @@ describe('UPW API', () => {
       getOffenderData.mockResolvedValue({ crn: '1234567' })
       getRegistrations.mockResolvedValue({})
       getRoshRiskSummary.mockResolvedValue({ roshRiskSummary: {} })
-      render.mockReturnValue('FOO_HTML')
+      nunjucks.render.mockReturnValue('FOO_HTML')
       convertHtmlToPdf.mockResolvedValue({ ok: true, body: 'FOO_PDF' })
 
       await downloadUpwPdf(req, res)
@@ -109,7 +108,7 @@ describe('UPW API', () => {
       getOffenderData.mockResolvedValue({ crn: '1234567' })
       getRegistrations.mockResolvedValue({})
       getRoshRiskSummary.mockResolvedValue({ roshRiskSummary: {} })
-      render.mockReturnValue('FOO_HTML')
+      nunjucks.render.mockReturnValue('FOO_HTML')
       convertHtmlToPdf.mockResolvedValue({ ok: false })
 
       await downloadUpwPdf(req, res)

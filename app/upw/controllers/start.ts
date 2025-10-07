@@ -1,9 +1,9 @@
-const BaseController = require('../../common/controllers/baseController').default
-const { trackEvent } = require('../../../common/logging/app-insights')
-const { EVENTS } = require('../../../common/utils/constants').default
-const { startAssessment, getCurrentEpisode } = require('../../../common/data/hmppsAssessmentApi').default
-const logger = require('../../../common/logging/logger').default
-const { getErrorMessageFor, ageFrom } = require('../../../common/utils/util').default
+import BaseController from '../../common/controllers/baseController'
+import { trackEvent } from '../../../common/logging/app-insights'
+import { EVENTS } from '../../../common/utils/constants'
+import { startAssessment, getCurrentEpisode } from '../../../common/data/hmppsAssessmentApi'
+import logger from '../../../common/logging/logger'
+import { getErrorMessageFor, ageFrom } from '../../../common/utils/util'
 
 const createAssessment = (user, crn, deliusEventId = '0', assessmentSchemaCode = 'UPW') => {
   logger.info(`Creating ${assessmentSchemaCode} assessment for CRN: ${crn}`)
@@ -22,7 +22,7 @@ const getSubjectDetailsFor = (assessment) => ({
   age: ageFrom(assessment?.subject?.dateOfBirth),
 })
 
-class StartUnpaidWork extends BaseController {
+export default class StartUnpaidWork extends BaseController {
   locals(req, res, next) {
     trackEvent(EVENTS.ARN_SESSION_STARTED, req)
 
@@ -79,5 +79,3 @@ class StartUnpaidWork extends BaseController {
     }
   }
 }
-
-module.exports = StartUnpaidWork

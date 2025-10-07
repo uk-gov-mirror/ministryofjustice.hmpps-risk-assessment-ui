@@ -1,4 +1,5 @@
-import nock, { cleanAll } from 'nock'
+import { jest } from '@jest/globals'
+import nock from 'nock'
 import { getCorrelationId } from '../utils/util'
 import { getOffenderData, postAnswers, getAnswers } from './hmppsAssessmentApi'
 import * as config from '../config'
@@ -33,7 +34,7 @@ describe('hmppsAssessmentApi', () => {
     getCorrelationId.mockReturnValue('mocked-correlation-id')
   })
   afterEach(() => {
-    cleanAll()
+    nock.cleanAll()
     jest.resetAllMocks()
   })
   let mockedEndpoint

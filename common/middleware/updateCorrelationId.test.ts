@@ -1,27 +1,21 @@
-import { jest } from '@jest/globals'
 import { getNamespace } from 'cls-hooked'
 import { updateCorrelationId } from './updateCorrelationId'
 import { updateMDC } from '../utils/util'
 
-jest.mock('../utils/util.js', () => ({
-  updateMDC: jest.fn(),
-}))
-
+jest.mock('../utils/util')
 jest.mock('cls-hooked')
+
+const mockedGetNamespace = jest.mocked(getNamespace)
+const mockedUpdateMDC = jest.mocked(updateMDC)
 
 describe('Set correlation ID to value of x-request-id if it is present', () => {
   let req
   let res
+
   beforeEach(() => {
-    req = {
-      headers: {
-        'x-auth-token': 'THX1138',
-      },
-    }
-    getNamespace.mockImplementation(() => ({
-      get: jest.fn(() => {
-        return { correlationId: 'existingId' }
-      }),
+    req = { headers: { 'x-auth-token': 'THX1138' } }
+    mockedGetNamespace.mockImplementation(() => ({
+      get: jest.fn(() => ({ correlationId: 'existingId' })),
       set: jest.fn(),
     }))
   })
@@ -32,13 +26,14 @@ describe('Set correlation ID to value of x-request-id if it is present', () => {
 
   test('should not change correlation ID', (done) => {
     updateCorrelationId(req, res, done)
-    expect(getNamespace).not.toHaveBeenCalled()
+    expect(mockedGetNamespace).not.toHaveBeenCalled()
   })
 
   test('should update correlation ID', (done) => {
     req.headers['x-request-id'] = 'NCC-1701'
     updateCorrelationId(req, res, done)
-    expect(getNamespace).toHaveBeenCalled()
-    expect(updateMDC).toHaveBeenCalledWith('MDC', { correlationId: 'NCC-1701' })
+
+    expect(mockedGetNamespace).toHaveBeenCalled()
+    expect(mockedUpdateMDC).toHaveBeenCalledWith('MDC', { correlationId: 'NCC-1701' })
   })
 })

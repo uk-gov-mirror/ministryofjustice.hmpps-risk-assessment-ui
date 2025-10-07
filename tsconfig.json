@@ -1,11 +1,30 @@
 {
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "compileOnSave": true,
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ES2018",
+    "outDir": "./dist",
     "sourceMap": true,
+    "noEmit": false,
+    "strict": false,
     "allowJs": true,
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "isolatedModules": true,
+    "typeRoots": ["./app/@types", "./node_modules/@types"],
   },
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules",
+    "assets/**/*.js",
+    "integration_tests",
+    "dist",
+    "cypress",
+    "cypress.config.ts",
+    "esbuild",
+    "coverage",
+    "eslint.config.mjs"
+  ],
+  "include": ["**/*.js", "**/*.ts"]
 }

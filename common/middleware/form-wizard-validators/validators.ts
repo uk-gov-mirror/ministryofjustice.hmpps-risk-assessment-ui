@@ -54,7 +54,6 @@ export const noSpace = function noSpace(value) {
 
 // eslint-disable-next-line func-names
 export const characterCount = function (characterLimit) {
-  // eslint-disable-next-line no-shadow
   return function characterCount(value) {
     return value.length <= characterLimit
   }

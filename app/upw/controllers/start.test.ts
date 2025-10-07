@@ -1,4 +1,3 @@
-import { jest } from '@jest/globals'
 import { Controller } from 'hmpo-form-wizard'
 import StartUnpaidWork from './start'
 import { startAssessment, getCurrentEpisode } from '../../../common/data/hmppsAssessmentApi'

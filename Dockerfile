@@ -35,7 +35,7 @@ COPY --from=build --chown=appuser:appgroup /app/node_modules ./node_modules
 COPY --from=build --chown=appuser:appgroup /app/dist ./dist
 COPY --from=build --chown=appuser:appgroup /app/app ./app
 COPY --from=build --chown=appuser:appgroup /app/common ./common
-COPY --from=build --chown=appuser:appgroup /app/server.js /app/start.js ./
+COPY --from=build --chown=appuser:appgroup /app/server.js /app/start.ts ./
 RUN npm prune --no-audit --omit=dev
 EXPOSE 3000 3001
 ENV NODE_ENV='production'

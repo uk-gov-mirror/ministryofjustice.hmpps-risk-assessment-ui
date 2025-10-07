@@ -13,7 +13,7 @@ import { configure } from 'nunjucks'
 import dateFilter from 'nunjucks-date-filter'
 import session from 'express-session'
 import helmet from 'helmet'
-import passport, { initialize, session as _session } from 'passport'
+import passport from 'passport'
 import { RedisStore } from 'connect-redis'
 import logger from './common/logging/logger'
 import router from './app/router'
@@ -181,8 +181,8 @@ async function initialiseGlobalMiddleware(app) {
   )
 
   init(passport)
-  app.use(initialize())
-  app.use(_session())
+  app.use(passport.initialize())
+  app.use(passport.session())
 
   // add instrumentation key to app so it can be picked up in front end templates
   // eslint-disable-next-line no-param-reassign

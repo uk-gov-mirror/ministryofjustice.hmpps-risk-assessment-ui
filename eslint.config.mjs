@@ -10,20 +10,4 @@ export default [
     ],
     extraPathsAllowingDevDependencies: ['cypress.config.js'],
   }),
-  {
-    languageOptions: {
-      parserOptions: {
-        sourceType: 'module',
-        ecmaVersion: 2020,
-      },
-    },
-    rules: {
-      'no-plusplus': [
-        'error',
-        {
-          allowForLoopAfterthoughts: true,
-        },
-      ],
-    },
-  },
 ]

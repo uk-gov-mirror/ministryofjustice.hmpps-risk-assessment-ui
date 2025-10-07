@@ -64,6 +64,7 @@ typings/
 govuk_modules/
 public/
 dist/
+test_results/
 
 # Cypress
 integration_tests/reports/

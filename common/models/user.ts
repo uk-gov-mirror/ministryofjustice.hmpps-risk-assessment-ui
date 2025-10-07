@@ -1,4 +1,4 @@
-class User {
+export default class User {
   static from(other = {}) {
     const user = new User()
     user.id = other.id
@@ -39,5 +39,3 @@ class User {
     }
   }
 }
-
-module.exports = User

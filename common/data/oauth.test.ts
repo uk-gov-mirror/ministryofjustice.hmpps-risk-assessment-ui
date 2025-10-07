@@ -1,5 +1,4 @@
-import { jest } from '@jest/globals'
-import nock, { abortPendingRequests, cleanAll } from 'nock'
+import nock from 'nock'
 import { AuthenticationError } from '../utils/errors'
 import { getApiToken, getUserEmail, checkTokenIsActive } from './oauth'
 import { get as _get } from './redis'
@@ -11,6 +10,7 @@ jest.mock('../config', () => ({
   apis: {
     oauth: { timeout: 10000, url: 'http://hmpps-auth.mock' },
   },
+  loggingLevel: 'INFO',
 }))
 
 jest.mock('../data/redis', () => ({
@@ -26,8 +26,8 @@ describe('Oauth', () => {
   })
 
   afterEach(() => {
-    abortPendingRequests()
-    cleanAll()
+    nock.abortPendingRequests()
+    nock.cleanAll()
   })
 
   describe('checkTokenIsActive', () => {

@@ -1,4 +1,4 @@
-import nock, { abortPendingRequests, cleanAll } from 'nock'
+import nock from 'nock'
 import { serviceCheckFactory } from './healthcheck'
 
 describe('data service healthcheck', () => {
@@ -18,8 +18,8 @@ describe('data service healthcheck', () => {
   })
 
   afterEach(() => {
-    abortPendingRequests()
-    cleanAll()
+    nock.abortPendingRequests()
+    nock.cleanAll()
   })
 
   describe('check healthy', () => {

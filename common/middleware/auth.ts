@@ -1,6 +1,6 @@
-import { serializeUser, deserializeUser, authenticate, use } from 'passport'
+import passport from 'passport'
 import { Strategy } from 'passport-oauth2'
-import { requestNewAccessToken, use as _use } from 'passport-oauth2-refresh'
+import refresh from 'passport-oauth2-refresh'
 import { jwtDecode } from 'jwt-decode'
 import { expressJwtSecret } from 'jwks-rsa'
 import { expressjwt as jwt } from 'express-jwt'
@@ -9,7 +9,7 @@ import { checkTokenIsActive } from '../data/oauth'
 import { cacheUserDetails, getCachedUserDetails } from '../data/userDetailsCache'
 import * as config from '../config'
 import logger from '../logging/logger'
-import { from } from '../models/user'
+import User from '../models/user'
 import { SIXTY_SECONDS } from '../utils/constants'
 
 const { apis: _apis, authClientId: _authClientId, domain: _domain, authClientSecret: _authClientSecret } = config
@@ -18,7 +18,7 @@ const getAndCacheUserDetails = async (user) => {
   return cacheUserDetails(jwtDecode(user.token))
 }
 
-serializeUser(async (req, user, done) => {
+passport.serializeUser(async (req, user, done) => {
   try {
     await getAndCacheUserDetails(user)
     done(null, user.getSession())
@@ -27,9 +27,9 @@ serializeUser(async (req, user, done) => {
   }
 })
 
-deserializeUser(async (req, serializedUser, done) => {
+passport.deserializeUser(async (req, serializedUser, done) => {
   try {
-    const user = from(serializedUser)
+    const user = User.from(serializedUser)
     const serializedDetails = await getCachedUserDetails(user.id)
 
     const details = serializedDetails !== null ? serializedDetails : await getAndCacheUserDetails(user)
@@ -76,7 +76,7 @@ export const checkForTokenRefresh = (req, res, next) => {
   const { user } = req
   if (user && userHasExpiredToken(user.tokenExpiryTime)) {
     logger.info(`Token expiring for user: ${user.username} - attempting refresh`)
-    return requestNewAccessToken('oauth2', user.refreshToken, (err, token, refreshToken) => {
+    return refresh.requestNewAccessToken('oauth2', user.refreshToken, (err, token, refreshToken) => {
       if (err) {
         logger.error(`Failed to refresh token for user: ${user.username} with error: ${err}`)
         return next(err)
@@ -102,7 +102,7 @@ export const checkForTokenRefresh = (req, res, next) => {
 
 export const handleLoginCallback = () => {
   return (req, res, next) => {
-    authenticate('oauth2', {
+    passport.authenticate('oauth2', {
       successReturnToOrRedirect: req.session.returnUrl || '/',
       failureRedirect: '/login',
     })(req, res, next)
@@ -158,7 +158,7 @@ export const initializeAuth = () => {
       // Token expiry = 1hr, Refresh token = 12hr
       done(
         null,
-        from({
+        User.from({
           id: params.user_id,
           token,
           refreshToken,
@@ -171,8 +171,8 @@ export const initializeAuth = () => {
     },
   )
 
-  use(strategy)
-  _use(strategy)
+  passport.use(strategy)
+  refresh.use(strategy)
 }
 
 export const init = initializeAuth

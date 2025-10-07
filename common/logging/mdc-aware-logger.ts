@@ -36,7 +36,6 @@ export default class {
     this.logger.log(level, msg, this.withMDC(meta))
   }
 
-  // eslint-disable-next-line class-methods-use-this
   withMDC(meta) {
     const mdcNamespace = getNamespace(clsNamespace)
     if (!mdcNamespace) {
