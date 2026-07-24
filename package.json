@@ -101,7 +101,7 @@
     "@babel/helper-compilation-targets": "^7.27.2",
     "@badeball/cypress-cucumber-preprocessor": "^24.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
-    "@ministryofjustice/eslint-config-hmpps": "^0.0.5",
+    "@ministryofjustice/eslint-config-hmpps": "^1.0.0",
     "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.3",
     "@types/luxon": "^3.6.2",
     "audit-ci": "^7.1.0",
